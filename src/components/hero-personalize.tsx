@@ -39,8 +39,22 @@ const SUBJECTS: PickerOption[] = [
 ]
 
 const SUBJECT_STRANDS: Record<string, string[]> = {
-  Math: ["Probability", "Data Literacy", "Financial Literacy"],
-  Science: ["Earth and Space Systems", "Life Systems", "Matter and Energy"],
+  Math: [
+    "Algebra",
+    "Number",
+    "Spatial Sense",
+    "Data Literacy",
+    "Probability",
+    "Financial Literacy",
+    "Math: Cross-Strand",
+  ],
+  Science: [
+    "Earth and Space Systems",
+    "Life Systems",
+    "Matter and Energy",
+    "Science: Cross-Strand",
+    "STEM Skills and Connections",
+  ],
   Language: ["Media Literacy", "Writing", "Reading", "Oral Communication"],
   "Social Studies": ["Heritage and Identity", "People and Environments", "Power and Governance"],
 }
