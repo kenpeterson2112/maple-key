@@ -1,0 +1,1107 @@
+{
+  "version": 1,
+  "last_run": "2026-05-21T06:05:00.146536+00:00",
+  "resources": {
+    "https://www.mathies.ca/activities.php": {
+      "index": 0,
+      "title": "Mathies Data Tools",
+      "url": "https://www.mathies.ca/activities.php",
+      "content_hash": "732f70bfd6ab28e6",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.mathsisfun.com/data/": {
+      "index": 1,
+      "title": "Math is Fun: Data and Graphs",
+      "url": "https://www.mathsisfun.com/data/",
+      "content_hash": "1b788129231bc3eb",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.nelson.com/mathfocus": {
+      "index": 2,
+      "title": "Nelson Math Focus: Data Management Unit",
+      "url": "https://www.nelson.com/mathfocus",
+      "content_hash": "2329f6011086c166",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.edu.gov.mb.ca/k12/cur/math/resources.html": {
+      "index": 3,
+      "title": "Manitoba Math Connections: Data Management",
+      "url": "https://www.edu.gov.mb.ca/k12/cur/math/resources.html",
+      "content_hash": "c44f29eb3b667a66",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.polypad.org/probability": {
+      "index": 4,
+      "title": "Polypad: Probability Manipulatives",
+      "url": "https://www.polypad.org/probability",
+      "content_hash": "e9832aec372d8f61",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.turtlediary.com/games/probability.html": {
+      "index": 5,
+      "title": "Turtle Diary: Probability Games for Kids",
+      "url": "https://www.turtlediary.com/games/probability.html",
+      "content_hash": "5cfed492bd40f4b1",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.probabilitygames.org/": {
+      "index": 6,
+      "title": "Probability Games Collection",
+      "url": "https://www.probabilitygames.org/",
+      "content_hash": "848b17ea2320131c",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://youtu.be/BA2xWdAdy3s?si=T6C_FufCPBIJ6O51": {
+      "index": 7,
+      "title": "Wacky Number Songs - Probability",
+      "url": "https://youtu.be/BA2xWdAdy3s?si=T6C_FufCPBIJ6O51",
+      "content_hash": "5d30b9f6bd79d481",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://youtu.be/lYXDQ5-I7Qk?si=3-l1J63Y4xFBxnSH": {
+      "index": 8,
+      "title": "Certain, likely, equally likely, unlikely or impossible",
+      "url": "https://youtu.be/lYXDQ5-I7Qk?si=3-l1J63Y4xFBxnSH",
+      "content_hash": "8e0416ad93998d80",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.mentorcanada.ca/financial-mentorship": {
+      "index": 9,
+      "title": "Junior Achievement: Economics for Success",
+      "url": "https://www.mentorcanada.ca/financial-mentorship",
+      "content_hash": "d3075b58a8fe9367",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.mymoney.gov/education/students": {
+      "index": 10,
+      "title": "Making Cents: Youth Financial Education",
+      "url": "https://www.mymoney.gov/education/students",
+      "content_hash": "408f9289a6b6ebd7",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.coast.capital/community/financial-literacy": {
+      "index": 11,
+      "title": "Coast Capital: Money Skills for Students",
+      "url": "https://www.coast.capital/community/financial-literacy",
+      "content_hash": "29e73c4a76e09ce0",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.thelearningexchange.ca/projects/financial-literacy/": {
+      "index": 12,
+      "title": "The Learning Exchange: Money Matters",
+      "url": "https://www.thelearningexchange.ca/projects/financial-literacy/",
+      "content_hash": "0635629799bdb649",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.consumered.ca/teachers": {
+      "index": 13,
+      "title": "Consumer Ed: Smart Shopping Skills",
+      "url": "https://www.consumered.ca/teachers",
+      "content_hash": "6c7850a9aa92204c",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.tourguys.ca/school-tours/downtown-toronto-school-tour": {
+      "index": 14,
+      "title": "Downtown Toronto Tours (Bay Street)",
+      "url": "https://www.tourguys.ca/school-tours/downtown-toronto-school-tour",
+      "content_hash": "40bfec5d0e09676f",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.readwritethink.org/classroom-resources/lesson-plans": {
+      "index": 15,
+      "title": "ReadWriteThink: Literacy Lesson Plans",
+      "url": "https://www.readwritethink.org/classroom-resources/lesson-plans",
+      "content_hash": "c5e88b5e5555a35c",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://newsela.com/": {
+      "index": 16,
+      "title": "Newsela: Leveled Current Events",
+      "url": "https://newsela.com/",
+      "content_hash": "c054805a0f331efc",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.storyboardthat.com/education": {
+      "index": 17,
+      "title": "Storyboard That: Visual Storytelling",
+      "url": "https://www.storyboardthat.com/education",
+      "content_hash": "3bc56c46370c03c2",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.vocabulary.com/": {
+      "index": 18,
+      "title": "Vocabulary.com: Adaptive Word Learning",
+      "url": "https://www.vocabulary.com/",
+      "content_hash": "d5034b8a23a5a84c",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.scholastic.ca/education/story-starters/": {
+      "index": 19,
+      "title": "Scholastic Story Starters",
+      "url": "https://www.scholastic.ca/education/story-starters/",
+      "content_hash": "abebe4ac3cb9dae0",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.literacyshed.com/": {
+      "index": 20,
+      "title": "The Literacy Shed: Visual Writing Prompts",
+      "url": "https://www.literacyshed.com/",
+      "content_hash": "98244f0300dd928b",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.storyjumper.com/": {
+      "index": 21,
+      "title": "StoryJumper: Digital Book Creator",
+      "url": "https://www.storyjumper.com/",
+      "content_hash": "9803c219b2444933",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.epic.com/": {
+      "index": 22,
+      "title": "Epic!: Digital Library for Students",
+      "url": "https://www.epic.com/",
+      "content_hash": "904ba9013a4e5f8a",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.scienceworld.ca/resources/activities": {
+      "index": 23,
+      "title": "Science World: Data Collection Activities",
+      "url": "https://www.scienceworld.ca/resources/activities",
+      "content_hash": "7182b74499a862c1",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.ontariosciencecentre.ca/teachers/resources": {
+      "index": 24,
+      "title": "Ontario Science Centre: Data Detectives",
+      "url": "https://www.ontariosciencecentre.ca/teachers/resources",
+      "content_hash": "55b0649b348ed4be",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.bchydro.com/powersmart/educational-programs.html": {
+      "index": 25,
+      "title": "BC Hydro: Energy Data Analysis",
+      "url": "https://www.bchydro.com/powersmart/educational-programs.html",
+      "content_hash": "a186d2f7c1a53a70",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://climate.nasa.gov/explore/interactives": {
+      "index": 26,
+      "title": "NASA Climate Data Visualizations",
+      "url": "https://climate.nasa.gov/explore/interactives",
+      "content_hash": "a753c215e5b661b1",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://spaceplace.nasa.gov/menu/solar-system/": {
+      "index": 27,
+      "title": "NASA Space Place: Solar System",
+      "url": "https://spaceplace.nasa.gov/menu/solar-system/",
+      "content_hash": "f657d2bb701c3fc5",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.switchzoo.com/": {
+      "index": 28,
+      "title": "Switch Zoo: Animal Adaptations",
+      "url": "https://www.switchzoo.com/",
+      "content_hash": "8a786a84d89ff142",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.thecanadianencyclopedia.ca/en/collection/indigenous-peoples": {
+      "index": 29,
+      "title": "Canadian Encyclopedia: Indigenous Peoples",
+      "url": "https://www.thecanadianencyclopedia.ca/en/collection/indigenous-peoples",
+      "content_hash": "69f8e1d746727072",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.parl.ca/education/": {
+      "index": 30,
+      "title": "Parliament of Canada: Educational Resources",
+      "url": "https://www.parl.ca/education/",
+      "content_hash": "610714c2a461dfd6",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.thelearningpartnership.ca/what-we-do/student-programs/my-canada-project": {
+      "index": 31,
+      "title": "My Canada Project",
+      "url": "https://www.thelearningpartnership.ca/what-we-do/student-programs/my-canada-project",
+      "content_hash": "520395415c741a8a",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.worldgeography.games/": {
+      "index": 32,
+      "title": "World Geography Games",
+      "url": "https://www.worldgeography.games/",
+      "content_hash": "263cb54c10b4ea12",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.noredink.com/": {
+      "index": 33,
+      "title": "NoRedInk: Grammar and Writing Practice",
+      "url": "https://www.noredink.com/",
+      "content_hash": "5b9bd297b660de7e",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.writingfix.com/": {
+      "index": 34,
+      "title": "WritingFix: Creative Writing Prompts",
+      "url": "https://www.writingfix.com/",
+      "content_hash": "17824a8330838ee4",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.tweentribune.com/": {
+      "index": 35,
+      "title": "Tween Tribune: Student News",
+      "url": "https://www.tweentribune.com/",
+      "content_hash": "59e5456b9171ccb7",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.flipgrid.com/": {
+      "index": 36,
+      "title": "Flip: Video Discussion Platform",
+      "url": "https://www.flipgrid.com/",
+      "content_hash": "baaa2c8b9d5a8153",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.mediasmartscanada.ca/": {
+      "index": 37,
+      "title": "MediaSmarts: Digital and Media Literacy",
+      "url": "https://www.mediasmartscanada.ca/",
+      "content_hash": "24d0232faba48df6",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://ingeniumcanada.org/scitech/education": {
+      "index": 38,
+      "title": "Ingenium: Science and Data Discovery",
+      "url": "https://ingeniumcanada.org/scitech/education",
+      "content_hash": "bb294e0b7d179481",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.worldwildlife.org/teaching-resources/toolkits/data": {
+      "index": 39,
+      "title": "WWF: Wildlife Population Data",
+      "url": "https://www.worldwildlife.org/teaching-resources/toolkits/data",
+      "content_hash": "19416a672c56c1e0",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.letstalkscience.ca/educational-resources/stem-in-context/data": {
+      "index": 40,
+      "title": "Let's Talk Science: Data in STEM Careers",
+      "url": "https://www.letstalkscience.ca/educational-resources/stem-in-context/data",
+      "content_hash": "9da56526c8c859f3",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.exploratorium.edu/snacks/subject/life-sciences": {
+      "index": 41,
+      "title": "Exploratorium: Life Sciences Experiments",
+      "url": "https://www.exploratorium.edu/snacks/subject/life-sciences",
+      "content_hash": "f49008dc0c2b6944",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.chemicalsafetyfacts.org/chemistry-resources-teachers/": {
+      "index": 42,
+      "title": "Chemistry in Everyday Life",
+      "url": "https://www.chemicalsafetyfacts.org/chemistry-resources-teachers/",
+      "content_hash": "44c13f69a125a57f",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.inaturalist.org/pages/teacher-guide": {
+      "index": 43,
+      "title": "iNaturalist: Citizen Science for Classrooms",
+      "url": "https://www.inaturalist.org/pages/teacher-guide",
+      "content_hash": "9b94dcd13b279027",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.historymuseum.ca/learn/": {
+      "index": 44,
+      "title": "Canadian Museum of History: Learning Resources",
+      "url": "https://www.historymuseum.ca/learn/",
+      "content_hash": "9f5085b2406be630",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://indigenouspeoplesatlasofcanada.ca/": {
+      "index": 45,
+      "title": "Indigenous Peoples Atlas of Canada",
+      "url": "https://indigenouspeoplesatlasofcanada.ca/",
+      "content_hash": "0d261d65adb100f2",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.rcaanc-cirnac.gc.ca/eng/1100100013785/1529102490303": {
+      "index": 46,
+      "title": "Crown-Indigenous Relations: Treaties",
+      "url": "https://www.rcaanc-cirnac.gc.ca/eng/1100100013785/1529102490303",
+      "content_hash": "6bf817c6e9232739",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.glenbow.org/education/": {
+      "index": 47,
+      "title": "Glenbow Museum: Western Canadian History",
+      "url": "https://www.glenbow.org/education/",
+      "content_hash": "d180ce14a68013d2",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.poetryfoundation.org/learn": {
+      "index": 48,
+      "title": "Poetry Foundation: Poetry for Students",
+      "url": "https://www.poetryfoundation.org/learn",
+      "content_hash": "223dd071b06745ba",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.bbc.co.uk/bitesize/subjects/english": {
+      "index": 49,
+      "title": "BBC Bitesize: English Skills",
+      "url": "https://www.bbc.co.uk/bitesize/subjects/english",
+      "content_hash": "93497100e7d33bda",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.quill.org/": {
+      "index": 50,
+      "title": "Quill: Writing and Grammar Tools",
+      "url": "https://www.quill.org/",
+      "content_hash": "34af4b269e3268c3",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.canva.com/education/": {
+      "index": 51,
+      "title": "Canva for Education: Visual Communication",
+      "url": "https://www.canva.com/education/",
+      "content_hash": "833744b985655d83",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.writersinelectronicresidence.ca/": {
+      "index": 52,
+      "title": "Writers in Electronic Residence",
+      "url": "https://www.writersinelectronicresidence.ca/",
+      "content_hash": "3beb6a2afc372660",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.nationalgeographic.org/education/resource-library/?q=data": {
+      "index": 53,
+      "title": "National Geographic: Data in the Real World",
+      "url": "https://www.nationalgeographic.org/education/resource-library/?q=data",
+      "content_hash": "10caa01e6b126a67",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.amnh.org/explore/ology/earth": {
+      "index": 54,
+      "title": "AMNH OLogy: Earth Science",
+      "url": "https://www.amnh.org/explore/ology/earth",
+      "content_hash": "7fab1d5f3e01cad1",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://phet.colorado.edu/en/simulations/filter?subjects=physics": {
+      "index": 55,
+      "title": "PhET Physics Simulations",
+      "url": "https://phet.colorado.edu/en/simulations/filter?subjects=physics",
+      "content_hash": "691e0774676f835e",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.earthlearningidea.com/": {
+      "index": 56,
+      "title": "Earth Learning Idea: Geology Activities",
+      "url": "https://www.earthlearningidea.com/",
+      "content_hash": "873d7d94232ec694",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://education.nationalgeographic.org/": {
+      "index": 57,
+      "title": "National Geographic Education: Geography",
+      "url": "https://education.nationalgeographic.org/",
+      "content_hash": "27f47381cea1a481",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.warmuseum.ca/learn/": {
+      "index": 58,
+      "title": "Canadian War Museum: Education Programs",
+      "url": "https://www.warmuseum.ca/learn/",
+      "content_hash": "d0e9509e3785f0a1",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.bac-lac.gc.ca/eng/discover/immigration/Pages/introduction.aspx": {
+      "index": 59,
+      "title": "Library and Archives Canada: Immigration History",
+      "url": "https://www.bac-lac.gc.ca/eng/discover/immigration/Pages/introduction.aspx",
+      "content_hash": "816b8a0f59ac7187",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.pier21.ca/education": {
+      "index": 60,
+      "title": "Canadian Museum of Immigration: Pier 21",
+      "url": "https://www.pier21.ca/education",
+      "content_hash": "c97d657f2fd54de5",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.ourcommons.ca/About/ProcedureAndPractice3rdEdition/": {
+      "index": 61,
+      "title": "How Parliament Works: Student Guide",
+      "url": "https://www.ourcommons.ca/About/ProcedureAndPractice3rdEdition/",
+      "content_hash": "e061baa25182d399",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.statcan.gc.ca/en/wtc/data-literacy": {
+      "index": 62,
+      "title": "Data Literacy Training",
+      "url": "https://www.statcan.gc.ca/en/wtc/data-literacy",
+      "content_hash": "6a62c25b90d337b8",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.khanacademy.org/math/statistics-probability/probability-library": {
+      "index": 63,
+      "title": "Basic Probability",
+      "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+      "content_hash": "57fca552fec1801d",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.ourfirsthome.ca/students": {
+      "index": 64,
+      "title": "Our First Home: Understanding Housing Costs",
+      "url": "https://www.ourfirsthome.ca/students",
+      "content_hash": "336106a60b25c048",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.genome.gov/genetics-glossary": {
+      "index": 65,
+      "title": "Genetics and Probability: Punnett Squares",
+      "url": "https://www.genome.gov/genetics-glossary",
+      "content_hash": "e9ecb777540d3b65",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.biointeractive.org/classroom-resources": {
+      "index": 66,
+      "title": "HHMI BioInteractive: Ecology Resources",
+      "url": "https://www.biointeractive.org/classroom-resources",
+      "content_hash": "ae12bc87e7184331",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://learn.genetics.utah.edu/": {
+      "index": 67,
+      "title": "Learn.Genetics: Cell Biology and DNA",
+      "url": "https://learn.genetics.utah.edu/",
+      "content_hash": "e0b675afb3bf7a80",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.activelylearn.com/": {
+      "index": 68,
+      "title": "Actively Learn: Interactive Reading",
+      "url": "https://www.activelylearn.com/",
+      "content_hash": "f457c6a2918f021a",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.cbc.ca/books/canadareads": {
+      "index": 69,
+      "title": "Canada Reads: Canadian Literature",
+      "url": "https://www.cbc.ca/books/canadareads",
+      "content_hash": "fa2181020f2f8ee2",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.civix.ca/": {
+      "index": 70,
+      "title": "CIVIX: Student Vote and Civic Education",
+      "url": "https://www.civix.ca/",
+      "content_hash": "a1893068e56b71da",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.facing-history.org/resource-library": {
+      "index": 71,
+      "title": "Facing History: Human Rights Education",
+      "url": "https://www.facing-history.org/resource-library",
+      "content_hash": "d069b1c2ecf5b3eb",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.elections.ca/content.aspx?section=vot&dir=yth&document=index&lang=e": {
+      "index": 72,
+      "title": "Elections Canada: Youth Resources",
+      "url": "https://www.elections.ca/content.aspx?section=vot&dir=yth&document=index&lang=e",
+      "content_hash": "ad44062a6c7756b1",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.virtualtrc.ca/": {
+      "index": 73,
+      "title": "Virtual Truth and Reconciliation",
+      "url": "https://www.virtualtrc.ca/",
+      "content_hash": "3f32460266b6b2c6",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.amnesty.ca/human-rights-education/": {
+      "index": 74,
+      "title": "Amnesty International: Human Rights Education",
+      "url": "https://www.amnesty.ca/human-rights-education/",
+      "content_hash": "3d0c462a60cd6685",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.theconstitution.ca/": {
+      "index": 75,
+      "title": "Constitution Act Education Resources",
+      "url": "https://www.theconstitution.ca/",
+      "content_hash": "51294e4c03a5ad40",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.desmos.com/classroom/activities": {
+      "index": 76,
+      "title": "Desmos Classroom Activities: Statistics",
+      "url": "https://www.desmos.com/classroom/activities",
+      "content_hash": "9558333490ac0f39",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.royalbcmuseum.bc.ca/visit/exhibitions/learning-resources": {
+      "index": 77,
+      "title": "Royal BC Museum: Data in History",
+      "url": "https://www.royalbcmuseum.bc.ca/visit/exhibitions/learning-resources",
+      "content_hash": "8b9702560ce23f58",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www150.statcan.gc.ca/n1/edu/index-eng.htm": {
+      "index": 78,
+      "title": "Statistics Canada: Learning Resources",
+      "url": "https://www150.statcan.gc.ca/n1/edu/index-eng.htm",
+      "content_hash": "302ce35631dfaae0",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.gapminder.org/dollar-street": {
+      "index": 79,
+      "title": "Gapminder: Dollar Street",
+      "url": "https://www.gapminder.org/dollar-street",
+      "content_hash": "6392d0632c976718",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.openmiddle.com/category/statistics-probability/": {
+      "index": 80,
+      "title": "Open Middle: Statistics and Probability Challenges",
+      "url": "https://www.openmiddle.com/category/statistics-probability/",
+      "content_hash": "e3a9a139d5ed125b",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.cira.ca/en/resources-for-teachers/digital-literacy/": {
+      "index": 81,
+      "title": "CIRA: Data Privacy for Students",
+      "url": "https://www.cira.ca/en/resources-for-teachers/digital-literacy/",
+      "content_hash": "f7d342c9f676dd06",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.commonlit.org/en/texts?genre=Informational&subject=Math": {
+      "index": 82,
+      "title": "CommonLit: Data Stories",
+      "url": "https://www.commonlit.org/en/texts?genre=Informational&subject=Math",
+      "content_hash": "768788877338ca44",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.learnalberta.ca/content/mejhm/": {
+      "index": 83,
+      "title": "Alberta Math Interactives: Probability",
+      "url": "https://www.learnalberta.ca/content/mejhm/",
+      "content_hash": "ea97ebb21882b402",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.explorelearning.com/gizmos/probability": {
+      "index": 84,
+      "title": "ExploreLearning Gizmos: Probability Labs",
+      "url": "https://www.explorelearning.com/gizmos/probability",
+      "content_hash": "45a0212c03ec47c7",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://nrich.maths.org/probability": {
+      "index": 85,
+      "title": "NRICH: Probability Problems and Puzzles",
+      "url": "https://nrich.maths.org/probability",
+      "content_hash": "2d6a1308d95261e2",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.virtualnerd.com/probability": {
+      "index": 86,
+      "title": "Virtual Nerd: Probability Video Tutorials",
+      "url": "https://www.virtualnerd.com/probability",
+      "content_hash": "ad18c378b6e5038c",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.shodor.org/interactivate/activities/probability/": {
+      "index": 87,
+      "title": "Interactivate: Probability Explorations",
+      "url": "https://www.shodor.org/interactivate/activities/probability/",
+      "content_hash": "d6be9fc3e4624802",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.mint.com/budgeting-resources": {
+      "index": 88,
+      "title": "Mint: Budgeting Basics for Beginners",
+      "url": "https://www.mint.com/budgeting-resources",
+      "content_hash": "2dc158a7f4828eb9",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.afoa.ca/financial-literacy-indigenous-youth": {
+      "index": 89,
+      "title": "AFOA: Financial Literacy for Indigenous Youth",
+      "url": "https://www.afoa.ca/financial-literacy-indigenous-youth",
+      "content_hash": "c8c616ed5f56e89a",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.atb.com/company/community/financial-literacy/": {
+      "index": 90,
+      "title": "ATB Financial: Money Management for Youth",
+      "url": "https://www.atb.com/company/community/financial-literacy/",
+      "content_hash": "ef8fa7ef0c622309",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.connexus.ca/financial-empowerment": {
+      "index": 91,
+      "title": "Connexus: Financial Empowerment Program",
+      "url": "https://www.connexus.ca/financial-empowerment",
+      "content_hash": "14bbbc44805ef6c5",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.everfi.com/courses/financial-literacy": {
+      "index": 92,
+      "title": "EVERFI: Financial Literacy Modules",
+      "url": "https://www.everfi.com/courses/financial-literacy",
+      "content_hash": "c392f31bbff32bf7",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.smarterthancash.org/resources-students": {
+      "index": 93,
+      "title": "Smarter Than Cash: Digital Money",
+      "url": "https://www.smarterthancash.org/resources-students",
+      "content_hash": "e39350d9ccefa40e",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.scotiabank.com/ca/en/personal/advice-plus/features/articles/financial-literacy.html": {
+      "index": 94,
+      "title": "Scotiabank: Financial Literacy Hub",
+      "url": "https://www.scotiabank.com/ca/en/personal/advice-plus/features/articles/financial-literacy.html",
+      "content_hash": "4b2083a885bdd8f8",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.cibc.com/en/special-offers/financial-literacy.html": {
+      "index": 95,
+      "title": "CIBC: Financial Literacy for Youth",
+      "url": "https://www.cibc.com/en/special-offers/financial-literacy.html",
+      "content_hash": "c0999862ecfef4c6",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.prodigygame.com/main-en/": {
+      "index": 96,
+      "title": "Prodigy Math: Probability Adventures",
+      "url": "https://www.prodigygame.com/main-en/",
+      "content_hash": "452eec893685a92d",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.lovetoknow.com/parenting/kids/probability-games-kids": {
+      "index": 97,
+      "title": "Hands-On Probability Games for Kids",
+      "url": "https://www.lovetoknow.com/parenting/kids/probability-games-kids",
+      "content_hash": "26ffefbd7a2da54e",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.mathplayground.com/probability_games.html": {
+      "index": 98,
+      "title": "Math Playground: Probability Games",
+      "url": "https://www.mathplayground.com/probability_games.html",
+      "content_hash": "6807ef080b3b9b11",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.splashlearn.com/math/probability-games": {
+      "index": 99,
+      "title": "SplashLearn: Probability Games",
+      "url": "https://www.splashlearn.com/math/probability-games",
+      "content_hash": "9f60d8c19f2ea95b",
+      "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    }
+  },
+  "last_run_count": 100
+}
