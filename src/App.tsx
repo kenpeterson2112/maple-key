@@ -15,8 +15,8 @@ type Space = "home" | "resources" | "lessonplanner" | "assessment"
 
 const SPACE_VARIANTS: Record<Exclude<Space, "home">, { initial: object; animate: object; exit: object }> = {
   resources:     { initial: { y: "100%" }, animate: { y: 0 }, exit: { y: "100%" } },
-  lessonplanner: { initial: { x: "100%" }, animate: { x: 0 }, exit: { x: "100%" } },
-  assessment:    { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
+  lessonplanner: { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
+  assessment:    { initial: { x: "100%" },  animate: { x: 0 }, exit: { x: "100%"  } },
 }
 
 const SPRING = { type: "spring", stiffness: 280, damping: 32 }
