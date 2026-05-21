@@ -98,9 +98,9 @@ export default function HeroPersonalize({
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mx-auto max-w-[1500px] px-4 md:px-6 py-3 md:py-4"
+        className="relative mx-auto max-w-[1500px] px-4 md:px-6 py-2 md:py-3"
       >
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-2xl md:text-3xl font-semibold tracking-tight text-[#2C2C2C] leading-tight">
+        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 md:gap-x-2 text-lg md:text-2xl font-semibold tracking-tight text-[#2C2C2C] leading-tight">
           <span>I teach</span>
           <InlinePicker
             value={primaryGrade}
@@ -136,7 +136,9 @@ export default function HeroPersonalize({
               />
             </>
           )}
-          <ResultsCounter count={resultCount} />
+          <span className="w-full md:w-auto mt-0.5 md:mt-0">
+            <ResultsCounter count={resultCount} />
+          </span>
         </div>
 
         <div className="mt-2 flex flex-wrap items-center gap-2.5">
