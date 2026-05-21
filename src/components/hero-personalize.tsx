@@ -136,11 +136,10 @@ export default function HeroPersonalize({
               />
             </>
           )}
+          <ResultsCounter count={resultCount} />
         </div>
 
         <div className="mt-2 flex flex-wrap items-center gap-2.5">
-          <ResultsCounter count={resultCount} />
-
           <AnimatePresence>
             {inferred && (
               <motion.button

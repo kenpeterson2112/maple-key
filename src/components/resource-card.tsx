@@ -307,7 +307,7 @@ export default function CompactResourceCard({ resource }) {
           </div>
         </div>
 
-        <div className="bg-white px-2 md:px-3 py-2 flex items-center justify-between gap-2">
+        <div className="bg-white px-2 md:px-3 py-1 flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5 md:gap-2">
             {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
               <div className="relative group/curriculumTooltip">
@@ -365,7 +365,7 @@ export default function CompactResourceCard({ resource }) {
           <div className="flex items-center gap-2 md:gap-3">
             <button
               onClick={() => setShowReviewsModal(true)}
-              className="flex items-center gap-1 px-2 py-1 hover:bg-stone-100 rounded-lg transition-colors min-h-[44px]"
+              className="flex items-center gap-1 px-2 py-0.5 hover:bg-stone-100 rounded-lg transition-colors"
               aria-label="View reviews"
             >
               <MessageSquare className="w-4 h-4 text-stone-600" />
@@ -386,7 +386,7 @@ export default function CompactResourceCard({ resource }) {
                 }
               }}
               disabled={!resource.url}
-              className={`py-2 px-3 md:px-4 ${colors.badge} font-semibold rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 text-xs md:text-sm flex items-center justify-center gap-1.5 transform hover:scale-105 min-h-[44px] ${
+              className={`py-1.5 px-3 md:px-4 ${colors.badge} font-semibold rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 text-xs md:text-sm flex items-center justify-center gap-1.5 transform hover:scale-105 ${
                 !resource.url ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
