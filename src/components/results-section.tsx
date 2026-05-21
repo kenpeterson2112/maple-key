@@ -39,6 +39,8 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
   const [searchQuery, setSearchQuery] = useState("")
   const [isSearching, setIsSearching] = useState(false)
   const [showSubmitDialog, setShowSubmitDialog] = useState(false)
+  const [pageSize, setPageSize] = useState<number>(10)
+  const [page, setPage] = useState(1)
 
   const { data, error, isLoading } = useSWR<Resource[]>(withBasePath("/resources.json"), fetcher, {
     refreshInterval: 3600000,
@@ -133,6 +135,16 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
     onCountChange?.(sortedResources.length)
   }, [sortedResources.length, onCountChange])
 
+  // Reset to page 1 whenever the result set changes
+  useEffect(() => {
+    setPage(1)
+  }, [sortedResources.length, searchQuery])
+
+  const totalPages = pageSize === 0 ? 1 : Math.ceil(sortedResources.length / pageSize)
+  const pagedResources = pageSize === 0 ? sortedResources : sortedResources.slice((page - 1) * pageSize, page * pageSize)
+  const showingFrom = sortedResources.length === 0 ? 0 : pageSize === 0 ? 1 : (page - 1) * pageSize + 1
+  const showingTo = pageSize === 0 ? sortedResources.length : Math.min(page * pageSize, sortedResources.length)
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value
     setSearchQuery(query)
@@ -209,6 +221,31 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
       </div>
 
       <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-4">
+        {/* Toolbar: count + per-page selector */}
+        {sortedResources.length > 0 && (
+          <div className="flex items-center justify-between mb-3 text-xs text-[#888]">
+            <span>
+              Showing {showingFrom}–{showingTo} of {sortedResources.length} results
+            </span>
+            <div className="flex items-center gap-1">
+              <span className="mr-1">Per page:</span>
+              {([10, 25, 50, 0] as const).map((size) => (
+                <button
+                  key={size}
+                  onClick={() => { setPageSize(size); setPage(1) }}
+                  className={`px-2 py-0.5 rounded-md border transition-colors ${
+                    pageSize === size
+                      ? "bg-[#FF6B35] border-[#FF6B35] text-white font-semibold"
+                      : "border-[#E8D5C4] text-[#666] hover:bg-[#FAF3E0]"
+                  }`}
+                >
+                  {size === 0 ? "All" : size}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {sortedResources.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -225,16 +262,16 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
           </motion.div>
         ) : (
           <motion.div
-            key={`${filters.province}|${filters.grade}|${filters.subject}|${filters.strand}|${searchQuery}`}
+            key={`${filters.province}|${filters.grade}|${filters.subject}|${filters.strand}|${searchQuery}|${page}`}
             initial="hidden"
             animate="show"
             variants={{
               hidden: {},
-              show: { transition: { staggerChildren: 0.04, delayChildren: 0.05 } },
+              show: { transition: { staggerChildren: pageSize <= 25 ? 0.04 : 0, delayChildren: 0.05 } },
             }}
             className="grid grid-cols-1 gap-3 md:gap-4"
           >
-            {sortedResources.map((resource, i) => (
+            {pagedResources.map((resource, i) => (
               <motion.div
                 key={(resource.url || resource.topic_title || "") + i}
                 variants={{
@@ -246,6 +283,29 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
               </motion.div>
             ))}
           </motion.div>
+        )}
+
+        {/* Pagination controls */}
+        {totalPages > 1 && (
+          <div className="mt-6 flex items-center justify-center gap-2">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className="px-3 py-1.5 rounded-lg border border-[#E8D5C4] text-sm text-[#666] hover:bg-[#FAF3E0] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              ← Prev
+            </button>
+            <span className="text-sm text-[#888]">
+              Page {page} of {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              className="px-3 py-1.5 rounded-lg border border-[#E8D5C4] text-sm text-[#666] hover:bg-[#FAF3E0] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              Next →
+            </button>
+          </div>
         )}
 
         <div className="mt-8 mb-4 flex justify-center">
