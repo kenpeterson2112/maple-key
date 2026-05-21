@@ -212,7 +212,7 @@ export default function CompactResourceCard({ resource }) {
   return (
     <div className="relative">
       <div
-        className={`group rounded-2xl border-2 ${colors.border} ${colors.bg} shadow-sm ${colors.hover} transition-all duration-200 overflow-hidden hover:shadow-xl hover:shadow-[#FF6B35]/10 hover:border-[#FF6B35]/40`}
+        className={`group/card rounded-2xl border-2 ${colors.border} ${colors.bg} shadow-sm ${colors.hover} transition-all duration-200 overflow-hidden hover:shadow-xl hover:shadow-[#FF6B35]/10 hover:border-[#FF6B35]/40`}
       >
         <div className="bg-white p-2 md:p-3 border-b border-[#E8D5C4]">
           <div className="flex items-start justify-between gap-2 mb-2">
