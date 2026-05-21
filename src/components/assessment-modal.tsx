@@ -9,6 +9,7 @@ interface AssessmentModalProps {
   isOpen: boolean
   onClose: () => void
   lesson: LessonMetadata
+  asSpace?: boolean
 }
 
 // Sample formative questions keyed by curriculum code
@@ -74,7 +75,7 @@ const FALLBACK_QUESTIONS = [
 
 type ResponseState = "unanswered" | "understood" | "working-on-it"
 
-export default function AssessmentModal({ isOpen, onClose, lesson }: AssessmentModalProps) {
+export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = false }: AssessmentModalProps) {
   const [responses, setResponses] = useState<Record<string, ResponseState>>({})
 
   if (!isOpen) return null
@@ -88,10 +89,9 @@ export default function AssessmentModal({ isOpen, onClose, lesson }: AssessmentM
   }
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+    <div className={asSpace ? "fixed inset-0 z-[60] bg-white flex flex-col overflow-hidden" : "fixed inset-0 z-[60] flex items-center justify-center p-4"}>
+      {!asSpace && <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />}
+      <div className={asSpace ? "w-full h-full flex flex-col overflow-hidden" : "relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"}>
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8D5C4] bg-[#FAF3E0]">
           <div className="flex items-center gap-3">
