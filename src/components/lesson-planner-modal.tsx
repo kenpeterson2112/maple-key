@@ -34,9 +34,10 @@ interface LessonPlannerModalProps {
   onClose: () => void
   onBack: () => void
   bookmarkedResources: Resource[]
+  asSpace?: boolean
 }
 
-export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarkedResources }: LessonPlannerModalProps) {
+export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarkedResources, asSpace = false }: LessonPlannerModalProps) {
   const [includeAssessmentData, setIncludeAssessmentData] = useState(false)
   const [lessonLength, setLessonLength] = useState("60 minutes")
   const [lessonTemplate, setLessonTemplate] = useState("3-Part Lesson (Minds On, Action, Consolidation)")
@@ -496,12 +497,11 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   }
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center">
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+    <div className={asSpace ? "fixed inset-0 z-[200] overflow-hidden" : "fixed inset-0 z-[200] flex items-center justify-center"}>
+      {!asSpace && <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />}
 
-      {/* Modal */}
-      <div className="relative w-[95vw] h-[90vh] bg-[#FAF3E0] rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+      {/* Content */}
+      <div className={asSpace ? "w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden" : "relative w-[95vw] h-[90vh] bg-[#FAF3E0] rounded-3xl shadow-2xl flex flex-col overflow-hidden"}>
         {/* Header */}
         <div className="flex items-center justify-between px-8 py-5 border-b-2 border-[#E8D5C4] bg-white">
           <div className="flex items-center gap-4">

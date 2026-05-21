@@ -1,5 +1,5 @@
 "use client"
-import { Settings, Bookmark, School, Menu, X, MapPin, ChevronDown, LogIn, SlidersHorizontal } from "lucide-react"
+import { Settings, Bookmark, School, Menu, X, MapPin, ChevronDown, LogIn, SlidersHorizontal, ChevronLeft } from "lucide-react"
 import type { Filters } from "@/lib/types"
 import { useState, useEffect, useRef } from "react"
 import BookmarksModal from "@/components/bookmarks-modal"
@@ -45,6 +45,7 @@ interface SearchHeaderProps {
   setFilters: (filters: Filters) => void
   onOpenMobileFilters?: () => void
   totalActiveFilters?: number
+  onBack?: () => void
 }
 
 export default function SearchHeader({
@@ -52,6 +53,7 @@ export default function SearchHeader({
   setFilters,
   onOpenMobileFilters,
   totalActiveFilters = 0,
+  onBack,
 }: SearchHeaderProps) {
   const { bookmarkedResources } = useBookmarks()
 
@@ -108,7 +110,17 @@ export default function SearchHeader({
         <div ref={containerRef} className="mx-auto max-w-[1500px] px-4 md:px-6 py-2.5">
           {/* Desktop toolbar */}
           <div className="hidden md:flex items-center justify-between gap-4">
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
+              {onBack && (
+                <button
+                  onClick={onBack}
+                  className="flex items-center gap-1 px-2 py-1.5 rounded-xl text-[#8B4513] hover:bg-[#FFE5CC] transition-colors text-sm font-medium"
+                  aria-label="Back to home"
+                >
+                  <ChevronLeft size={18} />
+                  Home
+                </button>
+              )}
               <img
                 src={withBasePath("/Maple_Key_Transp_Background.png")}
                 alt="Maple Key Logo"
@@ -276,13 +288,24 @@ export default function SearchHeader({
 
           {/* Mobile toolbar */}
           <div className="flex md:hidden items-center justify-between">
-            <img
-              src={withBasePath("/Maple_Key_Transp_Background.png")}
-              alt="Maple Key Logo"
-              width={120}
-              height={40}
-              className="h-10 w-auto object-contain"
-            />
+            <div className="flex items-center gap-1">
+              {onBack && (
+                <button
+                  onClick={onBack}
+                  className="flex items-center justify-center w-9 h-9 rounded-xl text-[#8B4513] hover:bg-[#FFE5CC] transition-colors"
+                  aria-label="Back to home"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+              )}
+              <img
+                src={withBasePath("/Maple_Key_Transp_Background.png")}
+                alt="Maple Key Logo"
+                width={120}
+                height={40}
+                className="h-10 w-auto object-contain"
+              />
+            </div>
             <div className="flex items-center gap-1.5">
               <button
                 onClick={onOpenMobileFilters}
