@@ -32,10 +32,10 @@ const GRADES: PickerOption[] = [
 
 const SUBJECTS: PickerOption[] = [
   { value: "", label: "any subject" },
-  { value: "Math", label: "Math" },
-  { value: "Science", label: "Science" },
-  { value: "Language", label: "Language" },
-  { value: "Social Studies", label: "Social Studies" },
+  { value: "Math", label: "Math", color: "#166534" },
+  { value: "Science", label: "Science", color: "#1E40AF" },
+  { value: "Language", label: "Language", color: "#CA8A04" },
+  { value: "Social Studies", label: "Social Studies", color: "#7C3AED" },
 ]
 
 const SUBJECT_STRANDS: Record<string, string[]> = {

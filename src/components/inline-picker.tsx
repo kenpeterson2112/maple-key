@@ -8,6 +8,8 @@ import { useState } from "react"
 export interface PickerOption {
   value: string
   label: string
+  /** Optional dot color (hex) — shown in trigger and dropdown for visual subject coding. */
+  color?: string
 }
 
 interface InlinePickerProps {
@@ -45,7 +47,7 @@ export default function InlinePicker({
           type="button"
           disabled={disabled}
           aria-label={ariaLabel ?? display}
-          className={`group inline-flex items-center gap-1 rounded-lg px-2 py-1 text-2xl md:text-3xl font-semibold tracking-tight transition-colors duration-200 ${
+          className={`group inline-flex items-center gap-1 rounded-lg px-2 py-1 text-lg md:text-2xl font-semibold tracking-tight transition-colors duration-200 ${
             disabled
               ? "cursor-not-allowed text-[#A8998E] opacity-60"
               : selected
@@ -53,6 +55,12 @@ export default function InlinePicker({
                 : "text-[#C65D3B] hover:bg-[#FFE5CC]"
           } underline decoration-[#FF6B35]/35 decoration-1 underline-offset-4 hover:decoration-[#FF6B35]`}
         >
+          {selected?.color && (
+            <span
+              className="inline-block w-2.5 h-2.5 rounded-full flex-shrink-0"
+              style={{ backgroundColor: selected.color }}
+            />
+          )}
           <span>{display}</span>
           <ChevronDown
             size={20}
@@ -88,7 +96,15 @@ export default function InlinePicker({
                             : "text-[#2C2C2C] hover:bg-[#FFF5ED]"
                         }`}
                       >
-                        <span>{opt.label}</span>
+                        <span className="flex items-center gap-2">
+                          {opt.color && (
+                            <span
+                              className="inline-block w-2.5 h-2.5 rounded-full flex-shrink-0"
+                              style={{ backgroundColor: opt.color }}
+                            />
+                          )}
+                          {opt.label}
+                        </span>
                         {isSelected && <Check size={16} className="text-[#FF6B35]" strokeWidth={3} />}
                       </button>
                     )
