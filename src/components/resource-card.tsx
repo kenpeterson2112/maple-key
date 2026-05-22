@@ -143,23 +143,31 @@ export default function CompactResourceCard({ resource }) {
     <div className="relative">
       <div className={`group/card rounded-2xl border-2 ${theme.border} ${theme.bg} shadow-sm transition-all duration-200 overflow-hidden hover:shadow-lg hover:shadow-black/5 hover:border-[#FF6B35]/40`}>
 
-        {/* ── Header: grade · subject · strand ── */}
+        {/* ── Header: grade · subject · strand + publisher · $ · bookmark ── */}
         <div className="bg-white px-3 py-2.5 border-b border-[#E8D5C4] flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0">
             <div className={`w-1.5 h-4 rounded-full flex-shrink-0 ${theme.dot}`} />
             <p className="text-xs font-semibold text-[#2C2C2C] truncate">{headerLine}</p>
           </div>
-          <button
-            onClick={handleToggleSave}
-            className={`p-1.5 rounded-xl transition-all duration-200 flex-shrink-0 flex items-center justify-center ${
-              isSaved
-                ? "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white shadow-md"
-                : "bg-[#F5F5F5] text-[#A8998E] hover:bg-[#FFE5CC]"
-            }`}
-            aria-label={isSaved ? "Unsave resource" : "Save resource"}
-          >
-            <Bookmark className="w-3.5 h-3.5" fill={isSaved ? "currentColor" : "none"} />
-          </button>
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            {resource.publisher_creator && (
+              <span className="text-[11px] text-[#888] truncate max-w-[90px] hidden sm:inline">{resource.publisher_creator}</span>
+            )}
+            {resource.is_paid && (
+              <span className="text-[#C65D3B] text-xs font-black">$</span>
+            )}
+            <button
+              onClick={handleToggleSave}
+              className={`p-1.5 rounded-xl transition-all duration-200 flex items-center justify-center ${
+                isSaved
+                  ? "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white shadow-md"
+                  : "bg-[#F5F5F5] text-[#A8998E] hover:bg-[#FFE5CC]"
+              }`}
+              aria-label={isSaved ? "Unsave resource" : "Save resource"}
+            >
+              <Bookmark className="w-3.5 h-3.5" fill={isSaved ? "currentColor" : "none"} />
+            </button>
+          </div>
         </div>
 
         {/* ── Body: use-case + title + description ── */}
@@ -178,13 +186,9 @@ export default function CompactResourceCard({ resource }) {
           <p className="text-[11px] text-[#555] leading-relaxed line-clamp-3">{description}</p>
         </div>
 
-        {/* ── Footer: publisher · expectations · accessibility · paid · view ── */}
+        {/* ── Footer: expectations · accessibility · modalities · view ── */}
         <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0">
-            <span className="text-[11px] text-[#888] truncate max-w-[110px]">
-              {resource.publisher_creator || "Unknown"}
-            </span>
-
             {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
               <div className="relative group/curriculumTooltip">
                 <div className="flex items-center gap-0.5 cursor-help">
@@ -221,9 +225,17 @@ export default function CompactResourceCard({ resource }) {
               title={accessLevel.label}
             />
 
-            {resource.is_paid && (
-              <span className="text-[#C65D3B] text-xs font-black">$</span>
-            )}
+            {(resource.modality ? resource.modality.split(",").map((m) => m.trim()) : []).map((type, i) => {
+              const { Icon, color } = getPrimaryIcon(type)
+              return (
+                <div key={i} className="relative group/modalityTip flex-shrink-0">
+                  <Icon className="w-3.5 h-3.5" style={{ color }} />
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 opacity-0 group-hover/modalityTip:opacity-100 transition-opacity pointer-events-none z-[100] whitespace-nowrap">
+                    <div className="bg-[#2C2C2C] text-white text-[10px] rounded-lg px-2 py-1 shadow-xl">{type}</div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
           <button
