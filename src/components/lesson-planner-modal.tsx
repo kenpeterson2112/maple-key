@@ -17,6 +17,8 @@ import {
   RefreshCw,
   Download,
   Upload,
+  Copy,
+  Check,
   Lightbulb,
   Target,
   MessageCircle,
@@ -63,6 +65,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [latestLesson, setLatestLesson] = useState<LessonMetadata | null>(null)
 
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false)
+  const [copiedState, setCopiedState] = useState<"request" | "prompt" | null>(null)
 
   const importInputRef = useRef<HTMLInputElement>(null)
 
@@ -138,22 +141,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   }
 
   const handleExportRequestJSON = () => {
-    const payload = {
-      resources: bookmarkedResources.map((r) => ({
-        title: r.title,
-        description: r.description,
-        curriculum_expectations: r.curriculum_expectations ?? [],
-        grade: r.grade,
-        subject: r.subject,
-        publisher: r.publisher,
-      })),
-      lessonLength,
-      lessonTemplate,
-      teacherNotes,
-      includeAssessmentData,
-      classroomResources: classroomResourceLabels,
-    }
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" })
+    const blob = new Blob([JSON.stringify(buildRequestPayload(), null, 2)], { type: "application/json" })
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
@@ -194,6 +182,77 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     }
     reader.readAsText(file)
     e.target.value = ""
+  }
+
+  const buildRequestPayload = () => ({
+    resources: bookmarkedResources.map((r) => ({
+      title: r.title,
+      description: r.description,
+      curriculum_expectations: r.curriculum_expectations ?? [],
+      grade: r.grade,
+      subject: r.subject,
+      publisher: r.publisher,
+    })),
+    lessonLength,
+    lessonTemplate,
+    teacherNotes,
+    includeAssessmentData,
+    classroomResources: classroomResourceLabels,
+  })
+
+  const handleCopyRequestJSON = async () => {
+    await navigator.clipboard.writeText(JSON.stringify(buildRequestPayload(), null, 2))
+    setCopiedState("request")
+    setTimeout(() => setCopiedState(null), 2000)
+  }
+
+  const handleCopyFullPrompt = async () => {
+    const grade = bookmarkedResources[0]?.grade ?? "unknown"
+    const subject = bookmarkedResources[0]?.subject ?? "unknown"
+    const allCodes = [...new Set(bookmarkedResources.flatMap((r) => r.curriculum_expectations ?? []))]
+    const resourceList = bookmarkedResources
+      .map(
+        (r, i) =>
+          `Resource ${i + 1}: "${r.title}"\n  Description: ${r.description}\n  Publisher: ${r.publisher ?? "unknown"}\n  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
+      )
+      .join("\n\n")
+
+    const classroomLine =
+      classroomResourceLabels.length > 0
+        ? `Classroom resources available: ${classroomResourceLabels.join(", ")}`
+        : ""
+
+    const systemPrompt = `You are an experienced Ontario elementary school teacher and curriculum expert. You create clear, practical, standards-aligned lesson plans for Canadian classrooms. You always respond with valid JSON only — no markdown fences, no extra text.`
+
+    const userPrompt = `Create a ${lessonLength} lesson plan for Grade ${grade} ${subject} using the following bookmarked resources.
+
+Template: ${lessonTemplate}
+${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
+${classroomLine}
+${includeAssessmentData ? "Include targeted differentiation strategies based on recent assessment data." : ""}
+
+Resources to incorporate:
+${resourceList}
+
+Ontario curriculum codes available: ${allCodes.join(", ")}
+
+Return a JSON object with exactly these fields (all values are plain text strings, no markdown):
+{
+  "title": "Creative lesson title",
+  "curriculumCodesCovered": ["code1", "code2"],
+  "mindsOnContent": "Hook/activation activity description (2-4 sentences)",
+  "mindsOnDifferentiation": "Differentiation strategies for Minds On phase",
+  "actionContent": "Main learning activity description with any stations or tasks",
+  "actionDifferentiation": "Differentiation strategies for Action phase",
+  "consolidationContent": "Closing/consolidation activity description",
+  "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
+  "materialsContent": "Materials list and preparation steps"
+}`
+
+    const fullPrompt = `[SYSTEM]\n${systemPrompt}\n\n[USER]\n${userPrompt}`
+    await navigator.clipboard.writeText(fullPrompt)
+    setCopiedState("prompt")
+    setTimeout(() => setCopiedState(null), 2000)
   }
 
   const lessonMinutes = Number.parseInt(lessonLength) || 60
@@ -1209,13 +1268,27 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
                     </p>
                   </div>
                   {generateError === "API_BALANCE_LOW" && (
-                    <div className="flex gap-2 mt-3">
+                    <div className="flex flex-wrap gap-2 mt-3">
                       <button
                         onClick={handleExportRequestJSON}
                         className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
                       >
                         <Download size={13} />
-                        Export request JSON
+                        Download request JSON
+                      </button>
+                      <button
+                        onClick={handleCopyRequestJSON}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                      >
+                        {copiedState === "request" ? <Check size={13} /> : <Copy size={13} />}
+                        {copiedState === "request" ? "Copied!" : "Copy request JSON"}
+                      </button>
+                      <button
+                        onClick={handleCopyFullPrompt}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                      >
+                        {copiedState === "prompt" ? <Check size={13} /> : <Copy size={13} />}
+                        {copiedState === "prompt" ? "Copied!" : "Copy prompt for LLM"}
                       </button>
                       <button
                         onClick={() => importInputRef.current?.click()}
