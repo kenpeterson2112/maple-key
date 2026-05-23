@@ -22,12 +22,14 @@ import {
   ClipboardList,
   Pencil,
   MessageSquareText,
+  School,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
 import { logLesson, getLatestLesson } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import AssessmentModal from "@/components/assessment-modal"
+import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
 
 interface LessonPlannerModalProps {
   isOpen: boolean
@@ -61,6 +63,9 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
 
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false)
 
+  const classroomResourceIds = getClassroomResources()
+  const classroomResourceLabels = getClassroomResourceLabels(classroomResourceIds)
+
   if (!isOpen) return null
 
   const uniqueStrands = new Set(bookmarkedResources.flatMap((r) => r.strand || []))
@@ -86,6 +91,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           lessonTemplate,
           teacherNotes,
           includeAssessmentData,
+          classroomResources: classroomResourceLabels,
         }),
       })
       if (!res.ok) {
@@ -1080,6 +1086,26 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
                     </div>
                   </div>
                 </div>
+
+                {classroomResourceLabels.length > 0 && (
+                  <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <School size={18} className="text-[#8B4513]" />
+                      <h3 className="text-sm font-semibold text-[#2C2C2C]">Your Classroom Resources</h3>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {classroomResourceLabels.map((label) => (
+                        <span
+                          key={label}
+                          className="inline-block px-2.5 py-1 bg-[#FFF6EC] border border-[#E8D5C4] rounded-full text-xs text-[#8B4513] font-medium"
+                        >
+                          {label}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-xs text-[#888] mt-2">These will inform your lesson plan. Update them in Settings.</p>
+                  </div>
+                )}
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
