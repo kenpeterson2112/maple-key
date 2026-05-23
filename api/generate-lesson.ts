@@ -16,6 +16,7 @@ interface GenerateRequest {
   lessonTemplate: string
   teacherNotes: string
   includeAssessmentData: boolean
+  classroomResources?: string[]
 }
 
 interface LessonPlanResponse {
@@ -36,7 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" })
   }
 
-  const { resources, lessonLength, lessonTemplate, teacherNotes, includeAssessmentData } =
+  const { resources, lessonLength, lessonTemplate, teacherNotes, includeAssessmentData, classroomResources } =
     req.body as GenerateRequest
 
   if (!resources || resources.length === 0) {
@@ -59,10 +60,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const systemPrompt = `You are an experienced Ontario elementary school teacher and curriculum expert. You create clear, practical, standards-aligned lesson plans for Canadian classrooms. You always respond with valid JSON only — no markdown fences, no extra text.`
 
+  const classroomResourcesLine =
+    classroomResources && classroomResources.length > 0
+      ? `Classroom resources available: ${classroomResources.join(", ")}`
+      : ""
+
   const userPrompt = `Create a ${lessonLength} lesson plan for Grade ${grade} ${subject} using the following bookmarked resources.
 
 Template: ${lessonTemplate}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
+${classroomResourcesLine}
 ${includeAssessmentData ? "Include targeted differentiation strategies based on recent assessment data." : ""}
 
 Resources to incorporate:
