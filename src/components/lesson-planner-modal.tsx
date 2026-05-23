@@ -86,12 +86,12 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           resources: bookmarkedResources.map((r) => ({
-            title: r.title,
+            title: (r as any).topic_title,
             description: r.description,
             curriculum_expectations: r.curriculum_expectations ?? [],
-            grade: r.grade,
+            grade: (r as any).grade_level,
             subject: r.subject,
-            publisher: r.publisher,
+            publisher: (r as any).publisher_creator,
           })),
           lessonLength,
           lessonTemplate,
@@ -119,7 +119,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setMaterialsContent(data.materialsContent ?? "")
       const logged = logLesson({
         title: data.title ?? "",
-        grade: bookmarkedResources[0]?.grade ?? "",
+        grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),
@@ -168,7 +168,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
         setMaterialsContent(data.materialsContent ?? "")
         const logged = logLesson({
           title: data.title ?? "",
-          grade: bookmarkedResources[0]?.grade ?? "",
+          grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
           subject: bookmarkedResources[0]?.subject ?? "",
           curriculumCodesCovered: data.curriculumCodesCovered ?? [],
           resourceIds: bookmarkedResources.map((r) => r.id),
@@ -186,12 +186,12 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
 
   const buildRequestPayload = () => ({
     resources: bookmarkedResources.map((r) => ({
-      title: r.title,
+      title: (r as any).topic_title,
       description: r.description,
       curriculum_expectations: r.curriculum_expectations ?? [],
-      grade: r.grade,
+      grade: (r as any).grade_level,
       subject: r.subject,
-      publisher: r.publisher,
+      publisher: (r as any).publisher_creator,
     })),
     lessonLength,
     lessonTemplate,
@@ -207,13 +207,13 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   }
 
   const handleCopyFullPrompt = async () => {
-    const grade = bookmarkedResources[0]?.grade ?? "unknown"
+    const grade = String((bookmarkedResources[0] as any)?.grade_level ?? "unknown")
     const subject = bookmarkedResources[0]?.subject ?? "unknown"
     const allCodes = [...new Set(bookmarkedResources.flatMap((r) => r.curriculum_expectations ?? []))]
     const resourceList = bookmarkedResources
       .map(
         (r, i) =>
-          `Resource ${i + 1}: "${r.title}"\n  Description: ${r.description}\n  Publisher: ${r.publisher ?? "unknown"}\n  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
+          `Resource ${i + 1}: "${(r as any).topic_title}"\n  Description: ${r.description}\n  Publisher: ${(r as any).publisher_creator ?? "unknown"}\n  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
       )
       .join("\n\n")
 
