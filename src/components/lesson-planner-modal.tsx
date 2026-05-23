@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import {
   ArrowLeft,
   Sparkles,
@@ -16,6 +16,7 @@ import {
   CheckCircle,
   RefreshCw,
   Download,
+  Upload,
   Lightbulb,
   Target,
   MessageCircle,
@@ -62,6 +63,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [latestLesson, setLatestLesson] = useState<LessonMetadata | null>(null)
 
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false)
+
+  const importInputRef = useRef<HTMLInputElement>(null)
 
   const classroomResourceIds = getClassroomResources()
   const classroomResourceLabels = getClassroomResourceLabels(classroomResourceIds)
@@ -132,6 +135,65 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const handleRegenerate = () => {
     setLessonGenerated(false)
     callGenerateLesson()
+  }
+
+  const handleExportRequestJSON = () => {
+    const payload = {
+      resources: bookmarkedResources.map((r) => ({
+        title: r.title,
+        description: r.description,
+        curriculum_expectations: r.curriculum_expectations ?? [],
+        grade: r.grade,
+        subject: r.subject,
+        publisher: r.publisher,
+      })),
+      lessonLength,
+      lessonTemplate,
+      teacherNotes,
+      includeAssessmentData,
+      classroomResources: classroomResourceLabels,
+    }
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "lesson-request.json"
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const handleImportResponseJSON = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = (evt) => {
+      try {
+        const data = JSON.parse(evt.target?.result as string)
+        setLessonTitle(data.title ?? "")
+        setCoveredCodes(data.curriculumCodesCovered ?? [])
+        setMindsOnContent(data.mindsOnContent ?? "")
+        setMindsOnDifferentiation(data.mindsOnDifferentiation ?? "")
+        setActionContent(data.actionContent ?? "")
+        setActionDifferentiation(data.actionDifferentiation ?? "")
+        setConsolidationContent(data.consolidationContent ?? "")
+        setConsolidationAssessment(data.consolidationAssessment ?? "")
+        setMaterialsContent(data.materialsContent ?? "")
+        const logged = logLesson({
+          title: data.title ?? "",
+          grade: bookmarkedResources[0]?.grade ?? "",
+          subject: bookmarkedResources[0]?.subject ?? "",
+          curriculumCodesCovered: data.curriculumCodesCovered ?? [],
+          resourceIds: bookmarkedResources.map((r) => r.id),
+        })
+        setLatestLesson(logged)
+        setLessonGenerated(true)
+        setGenerateError(null)
+      } catch {
+        setGenerateError("Invalid JSON file — check the format and try again.")
+      }
+    }
+    reader.readAsText(file)
+    e.target.value = ""
   }
 
   const lessonMinutes = Number.parseInt(lessonLength) || 60
@@ -1137,13 +1199,40 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
             <div className="max-w-3xl mx-auto space-y-3">
               {generateError && (
-                <div className={`flex items-start gap-2 rounded-lg px-4 py-3 border ${generateError === "API_BALANCE_LOW" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
-                  <AlertTriangle size={16} className={`flex-shrink-0 mt-0.5 ${generateError === "API_BALANCE_LOW" ? "text-amber-500" : "text-red-500"}`} />
-                  <p className={`text-sm ${generateError === "API_BALANCE_LOW" ? "text-amber-800" : "text-red-700"}`}>
-                    {generateError === "API_BALANCE_LOW"
-                      ? "The AI service is temporarily unavailable while we top up our API credits. Please try again shortly — we're working on it!"
-                      : generateError}
-                  </p>
+                <div className={`rounded-lg px-4 py-3 border ${generateError === "API_BALANCE_LOW" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
+                  <div className="flex items-start gap-2">
+                    <AlertTriangle size={16} className={`flex-shrink-0 mt-0.5 ${generateError === "API_BALANCE_LOW" ? "text-amber-500" : "text-red-500"}`} />
+                    <p className={`text-sm ${generateError === "API_BALANCE_LOW" ? "text-amber-800" : "text-red-700"}`}>
+                      {generateError === "API_BALANCE_LOW"
+                        ? "The AI service is temporarily unavailable while we top up our API credits. Please try again shortly — we're working on it!"
+                        : generateError}
+                    </p>
+                  </div>
+                  {generateError === "API_BALANCE_LOW" && (
+                    <div className="flex gap-2 mt-3">
+                      <button
+                        onClick={handleExportRequestJSON}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                      >
+                        <Download size={13} />
+                        Export request JSON
+                      </button>
+                      <button
+                        onClick={() => importInputRef.current?.click()}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                      >
+                        <Upload size={13} />
+                        Import response JSON
+                      </button>
+                      <input
+                        ref={importInputRef}
+                        type="file"
+                        accept=".json,application/json"
+                        onChange={handleImportResponseJSON}
+                        className="hidden"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
               <button
