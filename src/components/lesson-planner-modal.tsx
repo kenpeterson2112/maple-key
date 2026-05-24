@@ -66,6 +66,9 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
 
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false)
   const [copiedState, setCopiedState] = useState<"request" | "prompt" | null>(null)
+  const [showPastePanel, setShowPastePanel] = useState(false)
+  const [pasteText, setPasteText] = useState("")
+  const [pasteError, setPasteError] = useState<string | null>(null)
 
   const importInputRef = useRef<HTMLInputElement>(null)
 
@@ -150,38 +153,50 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     URL.revokeObjectURL(url)
   }
 
+  const applyResponseJSON = (jsonText: string, onError: (msg: string) => void) => {
+    try {
+      const data = JSON.parse(jsonText)
+      setLessonTitle(data.title ?? "")
+      setCoveredCodes(data.curriculumCodesCovered ?? [])
+      setMindsOnContent(data.mindsOnContent ?? "")
+      setMindsOnDifferentiation(data.mindsOnDifferentiation ?? "")
+      setActionContent(data.actionContent ?? "")
+      setActionDifferentiation(data.actionDifferentiation ?? "")
+      setConsolidationContent(data.consolidationContent ?? "")
+      setConsolidationAssessment(data.consolidationAssessment ?? "")
+      setMaterialsContent(data.materialsContent ?? "")
+      const logged = logLesson({
+        title: data.title ?? "",
+        grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
+        subject: bookmarkedResources[0]?.subject ?? "",
+        curriculumCodesCovered: data.curriculumCodesCovered ?? [],
+        resourceIds: bookmarkedResources.map((r) => r.id),
+      })
+      setLatestLesson(logged)
+      setLessonGenerated(true)
+      setGenerateError(null)
+      setShowPastePanel(false)
+      setPasteText("")
+      setPasteError(null)
+    } catch {
+      onError("Invalid JSON — check the format and try again.")
+    }
+  }
+
   const handleImportResponseJSON = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
     const reader = new FileReader()
-    reader.onload = (evt) => {
-      try {
-        const data = JSON.parse(evt.target?.result as string)
-        setLessonTitle(data.title ?? "")
-        setCoveredCodes(data.curriculumCodesCovered ?? [])
-        setMindsOnContent(data.mindsOnContent ?? "")
-        setMindsOnDifferentiation(data.mindsOnDifferentiation ?? "")
-        setActionContent(data.actionContent ?? "")
-        setActionDifferentiation(data.actionDifferentiation ?? "")
-        setConsolidationContent(data.consolidationContent ?? "")
-        setConsolidationAssessment(data.consolidationAssessment ?? "")
-        setMaterialsContent(data.materialsContent ?? "")
-        const logged = logLesson({
-          title: data.title ?? "",
-          grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
-          subject: bookmarkedResources[0]?.subject ?? "",
-          curriculumCodesCovered: data.curriculumCodesCovered ?? [],
-          resourceIds: bookmarkedResources.map((r) => r.id),
-        })
-        setLatestLesson(logged)
-        setLessonGenerated(true)
-        setGenerateError(null)
-      } catch {
-        setGenerateError("Invalid JSON file — check the format and try again.")
-      }
-    }
+    reader.onload = (evt) => applyResponseJSON(
+      evt.target?.result as string,
+      (msg) => setGenerateError(msg),
+    )
     reader.readAsText(file)
     e.target.value = ""
+  }
+
+  const handlePasteLoad = () => {
+    applyResponseJSON(pasteText, (msg) => setPasteError(msg))
   }
 
   const buildRequestPayload = () => ({
@@ -1268,42 +1283,72 @@ Return a JSON object with exactly these fields (all values are plain text string
                     </p>
                   </div>
                   {generateError === "API_BALANCE_LOW" && (
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      <button
-                        onClick={handleExportRequestJSON}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                      >
-                        <Download size={13} />
-                        Download request JSON
-                      </button>
-                      <button
-                        onClick={handleCopyRequestJSON}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                      >
-                        {copiedState === "request" ? <Check size={13} /> : <Copy size={13} />}
-                        {copiedState === "request" ? "Copied!" : "Copy request JSON"}
-                      </button>
-                      <button
-                        onClick={handleCopyFullPrompt}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                      >
-                        {copiedState === "prompt" ? <Check size={13} /> : <Copy size={13} />}
-                        {copiedState === "prompt" ? "Copied!" : "Copy prompt for LLM"}
-                      </button>
-                      <button
-                        onClick={() => importInputRef.current?.click()}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                      >
-                        <Upload size={13} />
-                        Import response JSON
-                      </button>
-                      <input
-                        ref={importInputRef}
-                        type="file"
-                        accept=".json,application/json"
-                        onChange={handleImportResponseJSON}
-                        className="hidden"
-                      />
+                    <div className="mt-3 space-y-2">
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          onClick={handleExportRequestJSON}
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                        >
+                          <Download size={13} />
+                          Download request JSON
+                        </button>
+                        <button
+                          onClick={handleCopyRequestJSON}
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                        >
+                          {copiedState === "request" ? <Check size={13} /> : <Copy size={13} />}
+                          {copiedState === "request" ? "Copied!" : "Copy request JSON"}
+                        </button>
+                        <button
+                          onClick={handleCopyFullPrompt}
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                        >
+                          {copiedState === "prompt" ? <Check size={13} /> : <Copy size={13} />}
+                          {copiedState === "prompt" ? "Copied!" : "Copy prompt for LLM"}
+                        </button>
+                        <button
+                          onClick={() => { setShowPastePanel((v) => !v); setPasteError(null) }}
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                        >
+                          <ClipboardList size={13} />
+                          Paste response JSON
+                        </button>
+                        <button
+                          onClick={() => importInputRef.current?.click()}
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+                        >
+                          <Upload size={13} />
+                          Import file
+                        </button>
+                        <input
+                          ref={importInputRef}
+                          type="file"
+                          accept=".json,application/json"
+                          onChange={handleImportResponseJSON}
+                          className="hidden"
+                        />
+                      </div>
+                      {showPastePanel && (
+                        <div className="space-y-2">
+                          <textarea
+                            value={pasteText}
+                            onChange={(e) => { setPasteText(e.target.value); setPasteError(null) }}
+                            rows={6}
+                            placeholder={'Paste the JSON response from the LLM here, e.g.:\n{\n  "title": "...",\n  "mindsOnContent": "...",\n  ...\n}'}
+                            className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-white text-xs font-mono text-[#444] focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                          />
+                          {pasteError && (
+                            <p className="text-xs text-red-600">{pasteError}</p>
+                          )}
+                          <button
+                            onClick={handlePasteLoad}
+                            disabled={!pasteText.trim()}
+                            className="px-4 py-1.5 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 text-white text-xs font-medium rounded-lg transition-colors"
+                          >
+                            Load lesson
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
