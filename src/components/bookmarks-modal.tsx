@@ -92,7 +92,7 @@ export default function BookmarksModal({ isOpen, onClose }: BookmarksModalProps)
                 ${resource.publisher_creator || "Unknown Publisher"}${resource.year_published ? ` • ${resource.year_published}` : ""}
               </div>
               <div class="tags">
-                ${resource.grade_level ? `<span class="tag">Grade ${String(resource.grade_level).split(",")[0].trim()}</span>` : ""}
+                ${resource.grade_level?.length ? `<span class="tag">Grade ${resource.grade_level[0]}</span>` : ""}
                 ${resource.subject ? `<span class="tag">${resource.subject}</span>` : ""}
                 ${resource.strand?.[0] ? `<span class="tag">${resource.strand[0]}</span>` : ""}
               </div>
@@ -285,12 +285,8 @@ export default function BookmarksModal({ isOpen, onClose }: BookmarksModalProps)
           ) : (
             <div className="space-y-3 max-w-5xl mx-auto">
               {bookmarkedResources.map((resource, index) => {
-                const gradeLevel = resource.grade_level ? String(resource.grade_level) : "6"
-                const grades = gradeLevel.split(",").map((g) => g.trim())
-                const displayGrade = grades[0]
-                const resourceTypes = resource.modality
-                  ? resource.modality.split(",").map((m: string) => m.trim())
-                  : ["Online"]
+                const displayGrade = resource.grade_level?.[0] ? String(resource.grade_level[0]) : "6"
+                const resourceTypes = resource.modality?.length ? resource.modality : ["Online"]
 
                 return (
                   <div

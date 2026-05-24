@@ -682,8 +682,8 @@ Return a JSON object with exactly these fields (all values are plain text string
                         {lessonTitle}
                       </h3>
                       <p className="text-sm text-[#666] mt-1">
-                        {bookmarkedResources[0]?.grade ? `Grade ${bookmarkedResources[0].grade}` : ""}
-                        {bookmarkedResources[0]?.grade && " • "}
+                        {bookmarkedResources[0]?.grade_level?.[0] ? `Grade ${bookmarkedResources[0].grade_level[0]}` : ""}
+                        {bookmarkedResources[0]?.grade_level?.[0] && " • "}
                         {lessonLength} • {lessonTemplate.split(" (")[0]}
                       </p>
                       {coveredCodes.length > 0 && (

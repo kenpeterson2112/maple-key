@@ -1,23 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-
-interface Resource {
-  id?: string
-  topic_title?: string
-  subject?: string
-  grade_level?: string | number
-  strand?: string[]
-  modality?: string
-  publisher_creator?: string
-  year_published?: number
-  description?: string
-  url?: string
-  province?: string
-  accessibility?: string[]
-  curriculum_expectations?: string[]
-  is_paid?: boolean
-}
+import type { Resource } from "@/lib/types"
 
 interface BookmarksContextType {
   bookmarkedResources: Resource[]

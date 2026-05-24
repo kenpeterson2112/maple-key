@@ -1,0 +1,37 @@
+Normalization Report
+============================================================
+Generated: 2026-05-24 03:44 UTC
+
+Input records:              1491
+Output records:             1491
+
+Records with original id:   1491
+Records assigned auto-id:   0
+
+grade_level changed:        1491
+modality changed:           1491
+accessibility changed:      0
+contributor names normed:   1491
+
+With curriculum codes:      105
+Without curriculum codes:   1386
+
+Grade band breakdown:
+  intermediate     94
+  multi            1395
+  senior           2
+
+Subject breakdown:
+  Math                 1095
+  Science              199
+  Social Studies       177
+  Language             20
+
+Jurisdiction breakdown:
+  ontario                  1463
+  alberta                  11
+  british_columbia         11
+  manitoba                 2
+  quebec                   2
+  nova_scotia              1
+  saskatchewan             1

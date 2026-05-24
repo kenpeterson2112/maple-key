@@ -53,7 +53,7 @@ function getPrimaryIcon(modality: string) {
 
 // ── Use-case label ─────────────────────────────────────────────────────────
 function getUseCaseLabel(resource): string {
-  const m = (resource.modality ?? "").toLowerCase()
+  const m = (Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? "")).toLowerCase()
   const text = `${(resource.description ?? "").toLowerCase()} ${(resource.topic_title ?? "").toLowerCase()}`
   const codes = resource.curriculum_expectations?.length ?? 0
 
@@ -118,12 +118,12 @@ export default function CompactResourceCard({ resource }) {
   }
 
   const subject = resource.subject || "Math"
-  const gradeLevel = resource.grade_level ? String(resource.grade_level) : ""
-  const grades = gradeLevel.split(",").map((g) => g.trim())
-  const displayGrade = grades[0]
+  const grades = (resource.grade_level || []).map(String)
+  const displayGrade = grades[0] || ""
 
   const theme = getSubjectTheme(subject)
-  const { Icon: ModalityIcon, color: iconColor } = getPrimaryIcon(resource.modality ?? "")
+  const modalityStr = Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? "")
+  const { Icon: ModalityIcon, color: iconColor } = getPrimaryIcon(modalityStr)
   const useCaseLabel = getUseCaseLabel(resource)
   const accessLevel = getAccessibilityStyle(resource.accessibility)
 
@@ -225,7 +225,7 @@ export default function CompactResourceCard({ resource }) {
               title={accessLevel.label}
             />
 
-            {(resource.modality ? resource.modality.split(",").map((m) => m.trim()) : []).map((type, i) => {
+            {(resource.modality || []).map((type, i) => {
               const { Icon, color } = getPrimaryIcon(type)
               return (
                 <div key={i} className="relative group/modalityTip flex-shrink-0">
