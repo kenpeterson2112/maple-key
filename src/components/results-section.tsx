@@ -168,7 +168,7 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
 
   return (
     <div className="flex h-full w-full flex-col">
-      {/* Search-within bar (the global count lives in the hero) */}
+      {/* Search-within bar + toolbar (sticky, never scrolls) */}
       <div className="flex-shrink-0 px-3 md:px-6 pt-3 md:pt-4 pb-2">
         <div className="relative w-full max-w-md">
           <div className="relative flex items-center rounded-xl border border-[#E8D5C4] bg-white px-3 py-2 shadow-sm transition-colors focus-within:border-[#FF6B35]">
@@ -199,12 +199,10 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
             </p>
           )}
         </div>
-      </div>
 
-      <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-4">
         {/* Toolbar: count + per-page selector */}
         {sortedResources.length > 0 && (
-          <div className="flex items-center justify-between mb-3 text-xs text-[#888]">
+          <div className="flex items-center justify-between mt-2 text-xs text-[#888]">
             <span>
               Showing {showingFrom}–{showingTo} of {sortedResources.length} results
             </span>
@@ -226,7 +224,9 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
             </div>
           </div>
         )}
+      </div>
 
+      <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-4">
         {sortedResources.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
