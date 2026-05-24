@@ -9,6 +9,7 @@ export interface LessonMetadata {
   subject: string
   curriculumCodesCovered: string[]
   resourceIds: string[]
+  lessonContent?: { mindsOn: string; action: string; consolidation: string }
 }
 
 export function logLesson(meta: Omit<LessonMetadata, "id" | "timestamp">): LessonMetadata {

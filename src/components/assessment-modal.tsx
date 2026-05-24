@@ -1,9 +1,26 @@
 "use client"
 
-import { useState } from "react"
-import { X, CheckCircle, HelpCircle, ChevronRight, Sparkles } from "lucide-react"
+import { useEffect, useMemo, useState } from "react"
+import { X, CheckCircle, XCircle, HelpCircle, Sparkles, Loader2, Info, BarChart3 } from "lucide-react"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
+import {
+  sanitizeQuestions,
+  bandFor,
+  type AssessmentQuestion,
+  type MultipleChoiceQuestion,
+  type TrueFalseQuestion,
+  type Band,
+} from "@/lib/assessment-types"
+import { getCachedQuestions, cacheQuestions } from "@/lib/assessment-questions-cache"
+import {
+  recordAttempt,
+  getLessonTally,
+  getAllTallies,
+  aggregateLesson,
+  aggregateAll,
+} from "@/lib/assessment-results"
+import ClassDashboard from "@/components/class-dashboard"
 
 interface AssessmentModalProps {
   isOpen: boolean
@@ -12,60 +29,21 @@ interface AssessmentModalProps {
   asSpace?: boolean
 }
 
-// Sample formative questions keyed by curriculum code
+// Static fallback bank — used only when lesson-specific questions can't be generated.
 const SAMPLE_QUESTIONS: Record<string, string[]> = {
-  "D1.1": [
-    "Give an example of discrete data and continuous data from real life. How are they different?",
-    "Could the number of cars in a parking lot be continuous data? Explain your thinking.",
-  ],
-  "D1.2": [
-    "You want to find out the favourite sports of students in your school. Would you use a sample or a full census? Why?",
-    "Why might organizing data into intervals be helpful when collecting information from a large group?",
-  ],
-  "D1.3": [
-    "When would a broken-line graph be a better choice than a bar graph? Give an example.",
-    "What information must every graph include to be considered complete and accurate?",
-  ],
-  "D1.4": [
-    "What makes an infographic different from a simple table of data?",
-    "How would you decide which type of graph to include in an infographic about school lunch preferences?",
-  ],
-  "D1.5": [
-    "The range of a data set is 15. What does that tell you? What doesn't it tell you?",
-    "Two classes both have a mean score of 72. Does that mean the classes performed the same? Explain.",
-  ],
-  "D1.6": [
-    "How can the scale on a graph be changed to make data look misleading?",
-    "A graph shows sales went up 300%. What questions should you ask before trusting that claim?",
-  ],
-  "D2.1": [
-    "Express the probability of flipping heads as a fraction, decimal, and percent.",
-    "If the probability of rain tomorrow is 0.7, what is the probability it will NOT rain?",
-  ],
-  "D2.2": [
-    "If you flip a coin and roll a die, are those two independent events? How do you know?",
-    "The theoretical probability of rolling a 3 is 1/6. If you rolled the die 30 times and got a 3 only 2 times, does that mean something is wrong? Explain.",
-  ],
-  "F1.1": [
-    "What is one advantage and one disadvantage of paying with a debit card instead of cash?",
-    "In what situation might someone choose to use a cheque instead of e-transfer?",
-  ],
-  "F1.2": [
-    "What is the difference between an earning goal and a saving goal? Give an example of each.",
-    "What are two concrete steps someone could take to reach a savings goal of $500?",
-  ],
-  "F1.3": [
-    "Name two things that could make it harder to reach a financial goal. How might you plan around them?",
-    "How could peer pressure affect someone's ability to save money?",
-  ],
-  "F1.4": [
-    "If you borrow $100 at 5% interest per year, how much do you owe after one year?",
-    "Why might a bank charge a higher interest rate for a loan than for a savings account?",
-  ],
-  "F1.5": [
-    "What is the difference between lending and donating? When might each make sense?",
-    "Give an example of a barter trade. What are the challenges of bartering compared to using money?",
-  ],
+  "D1.1": ["Give an example of discrete data and continuous data from real life. How are they different?"],
+  "D1.2": ["You want to find out the favourite sports of students in your school. Would you use a sample or a full census? Why?"],
+  "D1.3": ["When would a broken-line graph be a better choice than a bar graph? Give an example."],
+  "D1.4": ["What makes an infographic different from a simple table of data?"],
+  "D1.5": ["The range of a data set is 15. What does that tell you? What doesn't it tell you?"],
+  "D1.6": ["How can the scale on a graph be changed to make data look misleading?"],
+  "D2.1": ["Express the probability of flipping heads as a fraction, decimal, and percent."],
+  "D2.2": ["If you flip a coin and roll a die, are those two independent events? How do you know?"],
+  "F1.1": ["What is one advantage and one disadvantage of paying with a debit card instead of cash?"],
+  "F1.2": ["What is the difference between an earning goal and a saving goal? Give an example of each."],
+  "F1.3": ["Name two things that could make it harder to reach a financial goal. How might you plan around them?"],
+  "F1.4": ["If you borrow $100 at 5% interest per year, how much do you owe after one year?"],
+  "F1.5": ["What is the difference between lending and donating? When might each make sense?"],
 }
 
 const FALLBACK_QUESTIONS = [
@@ -74,24 +52,182 @@ const FALLBACK_QUESTIONS = [
 ]
 
 type ResponseState = "unanswered" | "understood" | "working-on-it"
+type Phase = "loading" | "administer" | "dashboard"
+type Answer = { selectedIndex?: number; selectedBool?: boolean }
+type FallbackItem = { key: string; code: string | null; prompt: string }
+
+function buildFallback(codes: string[]): FallbackItem[] {
+  if (codes.length === 0) {
+    return FALLBACK_QUESTIONS.map((q, i) => ({ key: `fallback_${i}`, code: null, prompt: q }))
+  }
+  return codes.map((code) => ({ key: code, code, prompt: (SAMPLE_QUESTIONS[code] ?? FALLBACK_QUESTIONS)[0] }))
+}
 
 export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = false }: AssessmentModalProps) {
-  const [responses, setResponses] = useState<Record<string, ResponseState>>({})
+  const [phase, setPhase] = useState<Phase>("loading")
+  const [questions, setQuestions] = useState<AssessmentQuestion[]>([])
+  const [fallback, setFallback] = useState<FallbackItem[]>([])
+  const [answers, setAnswers] = useState<Record<string, Answer>>({})
+  const [selfRatings, setSelfRatings] = useState<Record<string, ResponseState>>({})
+  const [recordedCount, setRecordedCount] = useState(0)
+  const [dashView, setDashView] = useState<"lesson" | "all">("lesson")
+
+  useEffect(() => {
+    if (!isOpen) return
+    let ignore = false
+    const codes = (lesson.curriculumCodesCovered ?? []).filter((c) => CURRICULUM_DESCRIPTIONS[c])
+
+    const useFallback = () => {
+      if (ignore) return
+      setFallback(buildFallback(codes))
+      setQuestions([])
+      setPhase("administer")
+    }
+
+    const load = async () => {
+      // Dev-only seam: inject mock questions via localStorage to test the graded flow without the API.
+      if (import.meta.env.DEV) {
+        try {
+          const mock = localStorage.getItem("maplekey_assessment_mock")
+          if (mock) {
+            const qs = sanitizeQuestions(JSON.parse(mock))
+            if (qs.length && !ignore) {
+              setQuestions(qs)
+              setPhase("administer")
+              return
+            }
+          }
+        } catch {
+          // ignore bad mock
+        }
+      }
+
+      const cached = getCachedQuestions(lesson.id)
+      if (cached && cached.length) {
+        if (!ignore) {
+          setQuestions(cached)
+          setPhase("administer")
+        }
+        return
+      }
+
+      if (codes.length === 0) {
+        useFallback()
+        return
+      }
+
+      if (!ignore) setPhase("loading")
+      try {
+        const res = await fetch("/api/generate-assessment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: lesson.title,
+            grade: lesson.grade,
+            subject: lesson.subject,
+            expectations: codes.map((c) => ({ code: c, description: CURRICULUM_DESCRIPTIONS[c] })),
+            lessonContent: lesson.lessonContent,
+          }),
+        })
+        const data = await res.json().catch(() => ({}))
+        const qs = sanitizeQuestions(data?.questions ?? data)
+        if (ignore) return
+        if (qs.length) {
+          cacheQuestions(lesson.id, qs)
+          setQuestions(qs)
+          setPhase("administer")
+        } else {
+          useFallback()
+        }
+      } catch {
+        useFallback()
+      }
+    }
+
+    setAnswers({})
+    setSelfRatings({})
+    setRecordedCount(0)
+    setDashView("lesson")
+    load()
+    return () => {
+      ignore = true
+    }
+  }, [isOpen, lesson.id])
+
+  const dashboardData = useMemo(() => {
+    if (phase !== "dashboard") return null
+    return dashView === "lesson" ? aggregateLesson(getLessonTally(lesson.id)) : aggregateAll(getAllTallies())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, dashView, recordedCount, lesson.id])
 
   if (!isOpen) return null
 
-  const codes = lesson.curriculumCodesCovered.filter((c) => CURRICULUM_DESCRIPTIONS[c])
-  const responded = Object.values(responses).filter((v) => v !== "unanswered").length
-  const total = codes.length
+  const isGraded = questions.length > 0
+  const totalCount = isGraded ? questions.length : fallback.length
+  const answeredCount = isGraded
+    ? questions.filter((q) => answers[q.id] !== undefined).length
+    : fallback.filter((f) => (selfRatings[f.key] ?? "unanswered") !== "unanswered").length
+  const canRecord = totalCount > 0 && answeredCount === totalCount
 
-  const setResponse = (key: string, state: ResponseState) => {
-    setResponses((prev) => ({ ...prev, [key]: state }))
+  const answerMC = (id: string, index: number) =>
+    setAnswers((p) => (p[id] ? p : { ...p, [id]: { selectedIndex: index } }))
+  const answerTF = (id: string, value: boolean) =>
+    setAnswers((p) => (p[id] ? p : { ...p, [id]: { selectedBool: value } }))
+  const setSelfRating = (key: string, state: ResponseState) => setSelfRatings((p) => ({ ...p, [key]: state }))
+
+  const computePerCodeBand = (): Record<string, Band> => {
+    const result: Record<string, Band> = {}
+    if (isGraded) {
+      const byCode: Record<string, { correct: number; total: number }> = {}
+      for (const q of questions) {
+        if (!q.code) continue
+        const a = answers[q.id]
+        const correct = q.type === "multiple-choice" ? a?.selectedIndex === q.correctIndex : a?.selectedBool === q.correct
+        const agg = (byCode[q.code] ??= { correct: 0, total: 0 })
+        agg.total += 1
+        if (correct) agg.correct += 1
+      }
+      for (const [code, { correct, total }] of Object.entries(byCode)) result[code] = bandFor(correct, total)
+    } else {
+      for (const f of fallback) {
+        if (!f.code) continue
+        const r = selfRatings[f.key]
+        if (!r || r === "unanswered") continue
+        result[f.code] = r === "understood" ? "strong" : "needsSupport"
+      }
+    }
+    return result
+  }
+
+  const handleRecord = () => {
+    recordAttempt(lesson, computePerCodeBand())
+    setRecordedCount((n) => n + 1)
+    setAnswers({})
+    setSelfRatings({})
+  }
+
+  const goAdminister = () => {
+    setAnswers({})
+    setSelfRatings({})
+    setPhase("administer")
   }
 
   return (
-    <div className={asSpace ? "fixed inset-0 z-[60] bg-white flex flex-col overflow-hidden" : "fixed inset-0 z-[60] flex items-center justify-center p-4"}>
+    <div
+      className={
+        asSpace
+          ? "fixed inset-0 z-[60] bg-white flex flex-col overflow-hidden"
+          : "fixed inset-0 z-[60] flex items-center justify-center p-4"
+      }
+    >
       {!asSpace && <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />}
-      <div className={asSpace ? "w-full h-full flex flex-col overflow-hidden" : "relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"}>
+      <div
+        className={
+          asSpace
+            ? "w-full h-full flex flex-col overflow-hidden"
+            : "relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
+        }
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8D5C4] bg-[#FAF3E0]">
           <div className="flex items-center gap-3">
@@ -103,93 +239,259 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
               <p className="text-xs text-[#888] leading-tight">{lesson.title}</p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-[#E8D5C4] rounded-lg transition-colors text-[#666]"
-          >
+          <button onClick={onClose} className="p-2 hover:bg-[#E8D5C4] rounded-lg transition-colors text-[#666]">
             <X size={18} />
           </button>
         </div>
 
-        {/* Progress bar */}
+        {/* Progress bar (administer only) */}
         <div className="h-1 bg-stone-100">
-          <div
-            className="h-full bg-amber-400 transition-all duration-500"
-            style={{ width: total > 0 ? `${(responded / total) * 100}%` : "0%" }}
-          />
+          {phase === "administer" && (
+            <div
+              className="h-full bg-amber-400 transition-all duration-500"
+              style={{ width: totalCount > 0 ? `${(answeredCount / totalCount) * 100}%` : "0%" }}
+            />
+          )}
         </div>
 
         {/* Body */}
         <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
-          <p className="text-sm text-[#666]">
-            Based on today's lesson, check your understanding of each expectation below.
-          </p>
-
-          {codes.length === 0 ? (
-            <div className="space-y-4">
-              {FALLBACK_QUESTIONS.map((q, i) => (
-                <QuestionCard
-                  key={i}
-                  code={null}
-                  description={null}
-                  question={q}
-                  state={responses[`fallback_${i}`] ?? "unanswered"}
-                  onRespond={(s) => setResponse(`fallback_${i}`, s)}
-                />
-              ))}
+          {phase === "loading" && (
+            <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
+              <Loader2 size={28} className="animate-spin text-amber-500" />
+              <p className="text-sm font-medium text-[#2C2C2C]">Building your quick check…</p>
+              <p className="text-xs text-[#888]">Tailoring questions to this lesson.</p>
             </div>
-          ) : (
-            codes.map((code) => {
-              const questions = SAMPLE_QUESTIONS[code] ?? FALLBACK_QUESTIONS
-              const question = questions[0]
-              return (
-                <QuestionCard
-                  key={code}
-                  code={code}
-                  description={CURRICULUM_DESCRIPTIONS[code]}
-                  question={question}
-                  state={responses[code] ?? "unanswered"}
-                  onRespond={(s) => setResponse(code, s)}
-                />
-              )
-            })
           )}
 
-          {/* Coming soon notice */}
-          <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50 p-4 text-center">
-            <ChevronRight size={16} className="inline text-amber-500 mr-1" />
-            <span className="text-xs text-amber-700 font-medium">
-              Adaptive follow-up questions based on your responses are coming soon.
-            </span>
-          </div>
+          {phase === "administer" && (
+            <>
+              <p className="text-sm text-[#666]">
+                {isGraded
+                  ? "Answer each question to see instant feedback, then record this student's results to the class totals."
+                  : "Reflect on each expectation, then record this student's results to the class totals."}
+              </p>
+
+              {isGraded
+                ? questions.map((q) =>
+                    q.type === "multiple-choice" ? (
+                      <MultipleChoiceCard key={q.id} q={q} answer={answers[q.id]} onAnswer={(i) => answerMC(q.id, i)} />
+                    ) : (
+                      <TrueFalseCard key={q.id} q={q} answer={answers[q.id]} onAnswer={(v) => answerTF(q.id, v)} />
+                    ),
+                  )
+                : fallback.map((f) => (
+                    <SelfRatingCard
+                      key={f.key}
+                      code={f.code}
+                      question={f.prompt}
+                      state={selfRatings[f.key] ?? "unanswered"}
+                      onRespond={(s) => setSelfRating(f.key, s)}
+                    />
+                  ))}
+            </>
+          )}
+
+          {phase === "dashboard" && dashboardData && (
+            <>
+              <div className="flex items-center gap-2">
+                <BarChart3 size={16} className="text-amber-600" />
+                <span className="text-sm font-semibold text-[#2C2C2C]">Class results</span>
+              </div>
+              <div className="inline-flex rounded-lg border border-[#E8D5C4] bg-white p-0.5 text-xs font-medium">
+                <button
+                  onClick={() => setDashView("lesson")}
+                  className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "lesson" ? "bg-[#FF6B35] text-white" : "text-[#666] hover:bg-[#FAF3E0]"}`}
+                >
+                  This lesson
+                </button>
+                <button
+                  onClick={() => setDashView("all")}
+                  className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "all" ? "bg-[#FF6B35] text-white" : "text-[#666] hover:bg-[#FAF3E0]"}`}
+                >
+                  All lessons
+                </button>
+              </div>
+              <ClassDashboard data={dashboardData} />
+            </>
+          )}
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-[#E8D5C4] bg-[#FAF3E0] flex items-center justify-between">
-          <span className="text-sm text-[#888]">
-            {responded} of {total} expectations checked
-          </span>
-          <button
-            onClick={onClose}
-            className="px-5 py-2 bg-[#FF6B35] hover:bg-[#e55a2a] text-white font-semibold text-sm rounded-xl transition-colors"
-          >
-            Done
-          </button>
+        <div className="px-6 py-4 border-t border-[#E8D5C4] bg-[#FAF3E0] flex items-center justify-between gap-3">
+          {phase === "dashboard" ? (
+            <>
+              <span className="text-sm text-[#888]">
+                {dashboardData ? `${dashboardData.attempts} recorded` : ""}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={goAdminister}
+                  className="px-4 py-2 rounded-xl border border-[#E8D5C4] text-[#666] font-semibold text-sm hover:bg-white transition-colors"
+                >
+                  Record more
+                </button>
+                <button
+                  onClick={onClose}
+                  className="px-5 py-2 bg-[#FF6B35] hover:bg-[#e55a2a] text-white font-semibold text-sm rounded-xl transition-colors"
+                >
+                  Done
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <span className="text-sm text-[#888]">
+                {answeredCount} of {totalCount} answered
+                {recordedCount > 0 && ` · ${recordedCount} recorded`}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setPhase("dashboard")}
+                  disabled={phase === "loading"}
+                  className="px-4 py-2 rounded-xl border border-[#E8D5C4] text-[#666] font-semibold text-sm hover:bg-white transition-colors disabled:opacity-50"
+                >
+                  View class results
+                </button>
+                <button
+                  onClick={handleRecord}
+                  disabled={!canRecord}
+                  className="px-5 py-2 bg-[#FF6B35] hover:bg-[#e55a2a] text-white font-semibold text-sm rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Record &amp; next student
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-interface QuestionCardProps {
+function CodeHeader({ code }: { code: string | null }) {
+  if (!code) return null
+  return (
+    <div className="flex items-center gap-2 mb-2">
+      <span className="text-xs font-bold bg-stone-100 text-stone-700 px-2 py-0.5 rounded-full">{code}</span>
+      <span className="text-xs text-[#888] line-clamp-1">{CURRICULUM_DESCRIPTIONS[code]}</span>
+    </div>
+  )
+}
+
+function Prompt({ text }: { text: string }) {
+  return (
+    <div className="flex items-start gap-2 mb-3">
+      <HelpCircle size={16} className="text-[#A8998E] flex-shrink-0 mt-0.5" />
+      <p className="text-sm text-[#2C2C2C]">{text}</p>
+    </div>
+  )
+}
+
+function Explanation({ text }: { text: string }) {
+  return (
+    <div className="mt-3 flex items-start gap-2 rounded-lg bg-stone-50 border border-stone-200 px-3 py-2">
+      <Info size={14} className="text-stone-400 flex-shrink-0 mt-0.5" />
+      <p className="text-xs text-[#666]">{text}</p>
+    </div>
+  )
+}
+
+function MultipleChoiceCard({
+  q,
+  answer,
+  onAnswer,
+}: {
+  q: MultipleChoiceQuestion
+  answer?: Answer
+  onAnswer: (i: number) => void
+}) {
+  const answered = answer?.selectedIndex !== undefined
+  return (
+    <div className="rounded-xl border-2 border-[#E8D5C4] bg-white p-4">
+      <CodeHeader code={q.code} />
+      <Prompt text={q.prompt} />
+      <div className="space-y-2">
+        {q.options.map((opt, i) => {
+          const isSelected = answer?.selectedIndex === i
+          const isCorrect = i === q.correctIndex
+          let cls = "border-[#E8D5C4] bg-white hover:bg-[#FAF3E0] text-[#2C2C2C]"
+          if (answered) {
+            if (isCorrect) cls = "border-emerald-400 bg-emerald-50 text-emerald-800"
+            else if (isSelected) cls = "border-red-300 bg-red-50 text-red-700"
+            else cls = "border-[#E8D5C4] bg-white text-[#999]"
+          }
+          return (
+            <button
+              key={i}
+              disabled={answered}
+              onClick={() => onAnswer(i)}
+              className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-sm transition-colors ${cls} ${answered ? "cursor-default" : ""}`}
+            >
+              <span className="flex-1">{opt}</span>
+              {answered && isCorrect && <CheckCircle size={15} className="text-emerald-500 flex-shrink-0" />}
+              {answered && isSelected && !isCorrect && <XCircle size={15} className="text-red-400 flex-shrink-0" />}
+            </button>
+          )
+        })}
+      </div>
+      {answered && q.explanation && <Explanation text={q.explanation} />}
+    </div>
+  )
+}
+
+function TrueFalseCard({
+  q,
+  answer,
+  onAnswer,
+}: {
+  q: TrueFalseQuestion
+  answer?: Answer
+  onAnswer: (v: boolean) => void
+}) {
+  const answered = answer?.selectedBool !== undefined
+  return (
+    <div className="rounded-xl border-2 border-[#E8D5C4] bg-white p-4">
+      <CodeHeader code={q.code} />
+      <Prompt text={q.prompt} />
+      <div className="flex gap-2">
+        {[true, false].map((val) => {
+          const isSelected = answer?.selectedBool === val
+          const isCorrect = val === q.correct
+          let cls = "border-[#E8D5C4] bg-white hover:bg-[#FAF3E0] text-[#2C2C2C]"
+          if (answered) {
+            if (isCorrect) cls = "border-emerald-400 bg-emerald-50 text-emerald-800"
+            else if (isSelected) cls = "border-red-300 bg-red-50 text-red-700"
+            else cls = "border-[#E8D5C4] bg-white text-[#999]"
+          }
+          return (
+            <button
+              key={String(val)}
+              disabled={answered}
+              onClick={() => onAnswer(val)}
+              className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${cls} ${answered ? "cursor-default" : ""}`}
+            >
+              {val ? "True" : "False"}
+            </button>
+          )
+        })}
+      </div>
+      {answered && q.explanation && <Explanation text={q.explanation} />}
+    </div>
+  )
+}
+
+function SelfRatingCard({
+  code,
+  question,
+  state,
+  onRespond,
+}: {
   code: string | null
-  description: string | null
   question: string
   state: ResponseState
   onRespond: (s: ResponseState) => void
-}
-
-function QuestionCard({ code, description, question, state, onRespond }: QuestionCardProps) {
+}) {
   return (
     <div
       className={`rounded-xl border-2 p-4 transition-colors ${
@@ -200,16 +502,8 @@ function QuestionCard({ code, description, question, state, onRespond }: Questio
             : "border-[#E8D5C4] bg-white"
       }`}
     >
-      {code && (
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs font-bold bg-stone-100 text-stone-700 px-2 py-0.5 rounded-full">{code}</span>
-          <span className="text-xs text-[#888] line-clamp-1">{description}</span>
-        </div>
-      )}
-      <div className="flex items-start gap-2 mb-3">
-        <HelpCircle size={16} className="text-[#A8998E] flex-shrink-0 mt-0.5" />
-        <p className="text-sm text-[#2C2C2C]">{question}</p>
-      </div>
+      <CodeHeader code={code} />
+      <Prompt text={question} />
       <div className="flex gap-2">
         <button
           onClick={() => onRespond(state === "understood" ? "unanswered" : "understood")}
