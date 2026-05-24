@@ -1,21 +1,48 @@
+export interface ResourceAlignment {
+  jurisdiction: string
+  grade: number | "K" | "PreK" | null
+  subject: string | null
+  strand: string | null
+  expectation_code: string | null
+  expectation_description: string | null
+  alignment_strength: "primary" | "secondary"
+}
+
+export interface ResourceMetadata {
+  added_at: string | null
+  added_by: string
+  verified: boolean
+  needs_review: boolean
+}
+
 export interface Resource {
-  id: number
-  grade: string
-  subject: string
-  type: string
-  title: string
+  id: string
+  topic_title: string
   description: string
-  rating: number
-  reviews: number
-  province?: string
-  topic?: string
-  url?: string
-  resource_type?: string | string[]
-  accessibility_rating?: string
-  is_paid?: boolean
-  publisher?: string
+  url: string
+  publisher_creator: string
+  // Grade
+  grade_level: (number | "K" | "PreK")[]
+  grade_band: "primary" | "junior" | "intermediate" | "senior" | "multi"
+  // Subject / curriculum
+  subject: string
+  strand: string[]
+  curriculum_expectations: string[]
+  alignments: ResourceAlignment[]
+  // Location
+  province: string
+  jurisdiction: string
+  // Modality / access
+  modality: string[]
+  resource_type: string
+  access_type: "free" | "purchase" | "licensed"
+  is_paid: boolean
+  // Accessibility
+  accessibility: string[]
+  // Publication info
   year_published?: number
-  curriculum_expectations?: string[]
+  // Provenance
+  metadata: ResourceMetadata
 }
 
 export interface Filters {

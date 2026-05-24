@@ -6,26 +6,8 @@ import useSWR from "swr"
 import { motion } from "framer-motion"
 import { Search, X, Plus, Compass } from "lucide-react"
 import ResourceCard from "./resource-card"
-import type { Filters } from "@/lib/types"
+import type { Filters, Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
-
-interface Resource {
-  province: string
-  grade_level: string
-  subject: string
-  curriculum_expectations: string[]
-  modality: string
-  accessibility: string[]
-  publication_year: number[]
-  publisher_creator: string
-  is_paid: boolean
-  topic_title: string
-  url: string
-  strand: string[]
-  description: string
-  submitted_by: string
-  year_published?: number
-}
 
 interface ResultsSectionProps {
   filters: Filters
@@ -42,23 +24,23 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
   const [pageSize, setPageSize] = useState<number>(10)
   const [page, setPage] = useState(1)
 
-  const { data, error, isLoading } = useSWR<Resource[]>(withBasePath("/resources.json"), fetcher, {
+  const { data, error, isLoading } = useSWR<{ resources: Resource[] }>(withBasePath("/resources.json"), fetcher, {
     refreshInterval: 3600000,
     revalidateOnFocus: false,
   })
 
   const filteredResources = useMemo(() => {
-    if (!data || !Array.isArray(data)) return []
+    const resources = data?.resources
+    if (!resources || !Array.isArray(resources)) return []
 
-    return data.filter((resource) => {
+    return resources.filter((resource) => {
       if (filters.province && filters.province !== "" && filters.province !== "Canada") {
         if (resource.province !== filters.province) return false
       }
 
       if (filters.grade && filters.grade !== "") {
         const selectedGrades = filters.grade.split(",").map((g) => g.trim())
-        const gradeLevelStr = String(resource.grade_level || "")
-        const resourceGrades = gradeLevelStr.split(",").map((g) => g.trim())
+        const resourceGrades = (resource.grade_level || []).map(String)
         if (!selectedGrades.some((g) => resourceGrades.includes(g))) return false
       }
 
@@ -72,7 +54,7 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
       }
 
       if (sidebarFilters?.modality && sidebarFilters.modality.length > 0) {
-        const resourceModalities = resource.modality ? resource.modality.split(",").map((m) => m.trim()) : []
+        const resourceModalities = resource.modality || []
         if (!sidebarFilters.modality.some((m) => resourceModalities.includes(m))) return false
       }
 
@@ -107,11 +89,10 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
         resource.topic_title,
         resource.description,
         resource.publisher_creator,
-        resource.submitted_by,
         resource.subject,
         resource.province,
-        resource.modality,
         resource.url,
+        ...(resource.modality || []),
         ...(resource.strand || []),
         ...(resource.curriculum_expectations || []),
         ...(resource.accessibility || []),

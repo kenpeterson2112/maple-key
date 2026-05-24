@@ -8,7 +8,7 @@ export interface LessonMetadata {
   grade: string
   subject: string
   curriculumCodesCovered: string[]
-  resourceIds: number[]
+  resourceIds: string[]
 }
 
 export function logLesson(meta: Omit<LessonMetadata, "id" | "timestamp">): LessonMetadata {
