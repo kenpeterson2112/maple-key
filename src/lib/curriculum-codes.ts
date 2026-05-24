@@ -28,3 +28,26 @@ export const CURRICULUM_DESCRIPTIONS: { [key: string]: string } = {
   "F1.5":
     "describe trading, lending, borrowing, and donating as different ways to distribute financial and other resources among individuals and organizations",
 }
+
+// Overall expectations group the specific expectations above (D1.x → D1, etc.).
+export const OVERALL_EXPECTATIONS: { [key: string]: string } = {
+  D1: "Data Literacy",
+  D2: "Probability",
+  F1: "Financial Literacy",
+}
+
+export function overallCodeOf(code: string): string {
+  return code.split(".")[0]
+}
+
+export function overallLabel(overall: string): string {
+  return OVERALL_EXPECTATIONS[overall] ?? overall
+}
+
+export function groupByOverall(codes: string[]): Record<string, string[]> {
+  const out: Record<string, string[]> = {}
+  for (const code of codes) {
+    ;(out[overallCodeOf(code)] ??= []).push(code)
+  }
+  return out
+}

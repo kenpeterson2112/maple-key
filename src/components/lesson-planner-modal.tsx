@@ -126,6 +126,11 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),
+        lessonContent: {
+          mindsOn: (data.mindsOnContent ?? "").slice(0, 600),
+          action: (data.actionContent ?? "").slice(0, 600),
+          consolidation: (data.consolidationContent ?? "").slice(0, 600),
+        },
       })
       setLatestLesson(logged)
       setLessonGenerated(true)
@@ -171,6 +176,11 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),
+        lessonContent: {
+          mindsOn: (data.mindsOnContent ?? "").slice(0, 600),
+          action: (data.actionContent ?? "").slice(0, 600),
+          consolidation: (data.consolidationContent ?? "").slice(0, 600),
+        },
       })
       setLatestLesson(logged)
       setLessonGenerated(true)
