@@ -168,9 +168,9 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
 
   return (
     <div className="flex h-full w-full flex-col">
-      {/* Search-within bar + toolbar (sticky, never scrolls) */}
-      <div className="flex-shrink-0 px-3 md:px-6 pt-3 md:pt-4 pb-2">
-        <div className="relative w-full max-w-md">
+      {/* Search bar + count + per-page dropdown — all on one sticky row */}
+      <div className="flex-shrink-0 px-3 md:px-6 pt-3 md:pt-4 pb-2 flex items-center gap-3">
+        <div className="relative flex-1 min-w-0 max-w-md">
           <div className="relative flex items-center rounded-xl border border-[#E8D5C4] bg-white px-3 py-2 shadow-sm transition-colors focus-within:border-[#FF6B35]">
             <Search size={16} className="mr-2 flex-shrink-0 text-[#A8998E]" />
             <input
@@ -194,33 +194,30 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
             )}
           </div>
           {searchQuery.length > 0 && searchQuery.length < 3 && (
-            <p className="absolute left-0 top-full mt-1 rounded border border-[#E8D5C4] bg-white px-2 py-0.5 text-xs text-[#A8998E] shadow-sm">
+            <p className="absolute left-0 top-full mt-1 rounded border border-[#E8D5C4] bg-white px-2 py-0.5 text-xs text-[#A8998E] shadow-sm z-10">
               Type at least 3 characters to search
             </p>
           )}
         </div>
 
-        {/* Toolbar: count + per-page selector */}
         {sortedResources.length > 0 && (
-          <div className="flex items-center justify-between mt-2 text-xs text-[#888]">
-            <span>
+          <div className="flex flex-shrink-0 items-center gap-2 text-xs text-[#888]">
+            <span className="hidden sm:inline whitespace-nowrap">
               Showing {showingFrom}–{showingTo} of {sortedResources.length} results
             </span>
-            <div className="flex items-center gap-1">
-              <span className="mr-1">Per page:</span>
-              {([10, 25, 50, 0] as const).map((size) => (
-                <button
-                  key={size}
-                  onClick={() => { setPageSize(size); setPage(1) }}
-                  className={`px-2 py-0.5 rounded-md border transition-colors ${
-                    pageSize === size
-                      ? "bg-[#FF6B35] border-[#FF6B35] text-white font-semibold"
-                      : "border-[#E8D5C4] text-[#666] hover:bg-[#FAF3E0]"
-                  }`}
-                >
-                  {size === 0 ? "All" : size}
-                </button>
-              ))}
+            <span className="sm:hidden whitespace-nowrap">{sortedResources.length} results</span>
+            <div className="flex items-center gap-1.5">
+              <span className="whitespace-nowrap">Per page:</span>
+              <select
+                value={pageSize}
+                onChange={(e) => { setPageSize(Number(e.target.value)); setPage(1) }}
+                className="rounded-lg border border-[#E8D5C4] bg-white px-2 py-1 text-xs text-[#666] cursor-pointer hover:border-[#FF6B35]/50 transition-colors"
+              >
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={0}>All</option>
+              </select>
             </div>
           </div>
         )}
