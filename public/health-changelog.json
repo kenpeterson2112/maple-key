@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "last_run": "2026-05-21T06:05:00.146536+00:00",
+  "last_run": "2026-05-24T06:09:25.629551+00:00",
   "resources": {
     "https://www.mathies.ca/activities.php": {
       "index": 0,
@@ -1097,6 +1097,1106 @@
       "url": "https://www.splashlearn.com/math/probability-games",
       "content_hash": "9f60d8c19f2ea95b",
       "last_checked": "2026-05-21T06:05:00.146536+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.coolmathgames.com/probability": {
+      "index": 100,
+      "title": "Coolmath Games: Probability Games",
+      "url": "https://www.coolmathgames.com/probability",
+      "content_hash": "7ea00b4b29754200",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.kidsmoneyfarm.com/": {
+      "index": 101,
+      "title": "Kids Money Farm: Financial Literacy Games",
+      "url": "https://www.kidsmoneyfarm.com/",
+      "content_hash": "25c6850cdfffd325",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://betterlesson.com/browse/math/statistics-probability": {
+      "index": 102,
+      "title": "BetterLesson: Statistics and Probability Unit",
+      "url": "https://betterlesson.com/browse/math/statistics-probability",
+      "content_hash": "b05da43a52991a3f",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.pearsoncanadaschool.com/index.cfm?locator=PS3dLi": {
+      "index": 103,
+      "title": "Pearson Financial Literacy Workbook Series",
+      "url": "https://www.pearsoncanadaschool.com/index.cfm?locator=PS3dLi",
+      "content_hash": "231dc8a9ea8fae61",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.ourworldindata.org/teaching": {
+      "index": 104,
+      "title": "Our World in Data: Global Data Explorer",
+      "url": "https://www.ourworldindata.org/teaching",
+      "content_hash": "957ffcd2ecefaad5",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.oise.utoronto.ca/mathresources": {
+      "index": 105,
+      "title": "OISE: Mathematical Modeling with Data",
+      "url": "https://www.oise.utoronto.ca/mathresources",
+      "content_hash": "f0aef53a02afe48b",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.cbc.ca/news/canada/data": {
+      "index": 106,
+      "title": "CBC News: Data Journalism Stories",
+      "url": "https://www.cbc.ca/news/canada/data",
+      "content_hash": "7a87a2a20bf77a7a",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.fivethirtyeight.com/interactives/": {
+      "index": 107,
+      "title": "FiveThirtyEight: Probability in Sports and Politics",
+      "url": "https://www.fivethirtyeight.com/interactives/",
+      "content_hash": "4431ec3d573e4c48",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.moneysense.ca/save/budgeting/budget-for-teens/": {
+      "index": 108,
+      "title": "MoneySense: Budgeting for Teens",
+      "url": "https://www.moneysense.ca/save/budgeting/budget-for-teens/",
+      "content_hash": "5d50e8da96efb947",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.rbcfuturelaunch.com/resources": {
+      "index": 109,
+      "title": "RBC Future Launch: Money Basics",
+      "url": "https://www.rbcfuturelaunch.com/resources",
+      "content_hash": "8ea84add6e33a7bd",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.investorseducation.ca/student-resources": {
+      "index": 110,
+      "title": "Investor Education: Stock Market Basics",
+      "url": "https://www.investorseducation.ca/student-resources",
+      "content_hash": "7f503d1cf156876b",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.theglobeandmail.com/investing/education-centre/": {
+      "index": 111,
+      "title": "Globe and Mail: Student Investor Challenge",
+      "url": "https://www.theglobeandmail.com/investing/education-centre/",
+      "content_hash": "8d33466225bac873",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.creditcanada.com/financial-literacy-for-youth": {
+      "index": 112,
+      "title": "Credit Canada: Youth Financial Wellness",
+      "url": "https://www.creditcanada.com/financial-literacy-for-youth",
+      "content_hash": "d7f9f1b07ac5660b",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.wealthsimple.com/en-ca/magazine/money-101": {
+      "index": 113,
+      "title": "Wealthsimple: Money 101 for Young Canadians",
+      "url": "https://www.wealthsimple.com/en-ca/magazine/money-101",
+      "content_hash": "d456c024e0425edf",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://a.co/d/2oXDXTS": {
+      "index": 114,
+      "title": "Data Literacy for Kids 2023",
+      "url": "https://a.co/d/2oXDXTS",
+      "content_hash": "bea692a0d86d1bf7",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.maneuveringthemiddle.com/teaching-probability/": {
+      "index": 115,
+      "title": "Theoretical and Experimental Probability Stations Activity",
+      "url": "https://www.maneuveringthemiddle.com/teaching-probability/",
+      "content_hash": "da1a912ece393010",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.ymcagta.org/youth-programs/pfic": {
+      "index": 116,
+      "title": "YMCA: Personal Finance: I'm In Charge",
+      "url": "https://www.ymcagta.org/youth-programs/pfic",
+      "content_hash": "afcc5e926ce61680",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.geniuslearning.ca/": {
+      "index": 117,
+      "title": "Financial Literacy Workshops with Genius Learning Lab",
+      "url": "https://www.geniuslearning.ca/",
+      "content_hash": "e61dac51f1826059",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.vaughanpl.info/programs/view/2683": {
+      "index": 118,
+      "title": "Financial Literacy Workshop",
+      "url": "https://www.vaughanpl.info/programs/view/2683",
+      "content_hash": "cf9ad99161d045b8",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://moneyschoolcanada.com/index.html": {
+      "index": 119,
+      "title": "Money School Canada Workshops - Financial Literacy",
+      "url": "https://moneyschoolcanada.com/index.html",
+      "content_hash": "108082d4a5b2de18",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://youtu.be/0iRbD5rM5qc?si=pxO0y-LHqsia8wt4": {
+      "index": 120,
+      "title": "Financial Literacy for Kids",
+      "url": "https://youtu.be/0iRbD5rM5qc?si=pxO0y-LHqsia8wt4",
+      "content_hash": "3f10b21dc37a2cad",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.codingal.com/coding-for-kids/blog/5-fun-and-interactive-data-science-projects-for-kids/": {
+      "index": 121,
+      "title": "5 Fun and Interactive Data Science Experiments for Kids",
+      "url": "https://www.codingal.com/coding-for-kids/blog/5-fun-and-interactive-data-science-projects-for-kids/",
+      "content_hash": "5c9a2649f1107d1a",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.teacherspayteachers.com/Product/Probability-Station-Activity-Theoretical-vs-Experimental-1122336": {
+      "index": 122,
+      "title": "Probability Station Activity - Theoretical vs. Experimental",
+      "url": "https://www.teacherspayteachers.com/Product/Probability-Station-Activity-Theoretical-vs-Experimental-1122336",
+      "content_hash": "e6a2eb8dba4113bc",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.alloprof.qc.ca/fr/eleves/bv/mathematiques": {
+      "index": 123,
+      "title": "Alloprof: Mathamatiques - Statistiques et Probabilites",
+      "url": "https://www.alloprof.qc.ca/fr/eleves/bv/mathematiques",
+      "content_hash": "b99c188e386f4fe8",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.wooclap.com/templates/mathematics": {
+      "index": 124,
+      "title": "Wooclap: Real-Time Data Collection",
+      "url": "https://www.wooclap.com/templates/mathematics",
+      "content_hash": "d4871560fa71e25b",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.mentimeter.com/education": {
+      "index": 125,
+      "title": "Mentimeter: Live Data Collection",
+      "url": "https://www.mentimeter.com/education",
+      "content_hash": "75f8ec227ea08a6c",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.ixl.com/math/data-and-graphs": {
+      "index": 126,
+      "title": "IXL: Data and Graphs Practice",
+      "url": "https://www.ixl.com/math/data-and-graphs",
+      "content_hash": "71c84044cc1eee13",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.khanacademy.org/math/statistics-probability/displaying-describing-data": {
+      "index": 127,
+      "title": "Khan Academy: Displaying and Describing Data",
+      "url": "https://www.khanacademy.org/math/statistics-probability/displaying-describing-data",
+      "content_hash": "e9347bc9a3c3249d",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.aspo.utoronto.ca/access-programs/math-fields-trips/": {
+      "index": 128,
+      "title": "Department of Math",
+      "url": "https://www.aspo.utoronto.ca/access-programs/math-fields-trips/",
+      "content_hash": "757676e7aa892c0d",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://a.co/d/1pP7Z4I": {
+      "index": 129,
+      "title": "Drawing Data with Kids: A Screen-Free Journey through the Art of Visualization for Kids",
+      "url": "https://a.co/d/1pP7Z4I",
+      "content_hash": "5bb319d0b38daaee",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://projecthub.arduino.cc/paskino/simple-data-statistics-temperature-7b24cf": {
+      "index": 130,
+      "title": "Code and build a device to collect temperature data",
+      "url": "https://projecthub.arduino.cc/paskino/simple-data-statistics-temperature-7b24cf",
+      "content_hash": "f1caecf9c60b32a6",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.statscan.gc.ca/census-recensement/census-education": {
+      "index": 131,
+      "title": "Statistics Canada: Census at School",
+      "url": "https://www.statscan.gc.ca/census-recensement/census-education",
+      "content_hash": "c09c1a0a9389683e",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "www.bankofcanadamuseum.ca/you-are-the-economy/": {
+      "index": 132,
+      "title": "You are the Economy",
+      "url": "www.bankofcanadamuseum.ca/you-are-the-economy/",
+      "content_hash": "c01fbfe64629c1a7",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: invalid_url"
+      ]
+    },
+    "https://www.youcubed.org/tasks/data-talks/": {
+      "index": 133,
+      "title": "YouCubed: Data Talks",
+      "url": "https://www.youcubed.org/tasks/data-talks/",
+      "content_hash": "96a6e8ef0419b9a9",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.cbc.ca/kidscbc2/the-feed/how-to-spot-fake-news": {
+      "index": 134,
+      "title": "CBC Kids: How to Spot Fake News",
+      "url": "https://www.cbc.ca/kidscbc2/the-feed/how-to-spot-fake-news",
+      "content_hash": "13d06982b5ebd7b1",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.telus.com/en/wise": {
+      "index": 135,
+      "title": "TELUS Wise: Digital Literacy and Data",
+      "url": "https://www.telus.com/en/wise",
+      "content_hash": "3838e72454fe40b3",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://youtu.be/KzfWUEJjG18?si=gSapyK_Mb5KBgx3e": {
+      "index": 136,
+      "title": "Math Antics - Basic Probability",
+      "url": "https://youtu.be/KzfWUEJjG18?si=gSapyK_Mb5KBgx3e",
+      "content_hash": "e8406ad5a9e9dd96",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.geogebra.org/m/probability": {
+      "index": 137,
+      "title": "GeoGebra Probability Simulations",
+      "url": "https://www.geogebra.org/m/probability",
+      "content_hash": "a75b1fd3a1fa8089",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.random.org/dice/": {
+      "index": 138,
+      "title": "Random.org: Virtual Dice and Probability Tools",
+      "url": "https://www.random.org/dice/",
+      "content_hash": "6d5154542d4902e8",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.illuminations.nctm.org/probability": {
+      "index": 139,
+      "title": "NCTM Illuminations: Probability Activities",
+      "url": "https://www.illuminations.nctm.org/probability",
+      "content_hash": "6ed2dd82bb8cb432",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": null,
+      "issues": [
+        "url_error: url_error: [Errno -2] Name or service not known"
+      ]
+    },
+    "https://www.amazon.ca/dp/B07T4VLJ6C?linkCode=gg4&tag=due01-20#": {
+      "index": 140,
+      "title": "Rethink Money for Children and Kids",
+      "url": "https://www.amazon.ca/dp/B07T4VLJ6C?linkCode=gg4&tag=due01-20#",
+      "content_hash": "e2484760a5ebc7e5",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.cba.ca/financial-literacy-for-students": {
+      "index": 141,
+      "title": "Your Money: A Guide for Students",
+      "url": "https://www.cba.ca/financial-literacy-for-students",
+      "content_hash": "7f5a1d9a51ef87cb",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.bmo.com/main/personal/bank-accounts/financial-literacy/": {
+      "index": 142,
+      "title": "BMO: SmartSteps Financial Literacy",
+      "url": "https://www.bmo.com/main/personal/bank-accounts/financial-literacy/",
+      "content_hash": "5e574bde9de818b2",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.servus.ca/community/financial-literacy": {
+      "index": 143,
+      "title": "Servus Credit Union: Money Smarts",
+      "url": "https://www.servus.ca/community/financial-literacy",
+      "content_hash": "0f8e3a1a22086800",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://a.co/d/9Z34oHy": {
+      "index": 144,
+      "title": "The Know-Nonsense Guide to Financial Literacy",
+      "url": "https://a.co/d/9Z34oHy",
+      "content_hash": "cedb89f3f5fbcb1a",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://a.co/d/74W4fBx": {
+      "index": 145,
+      "title": "Financial Literacy and Life Skills for Kids, Age 12 - 13 Workbook",
+      "url": "https://a.co/d/74W4fBx",
+      "content_hash": "e24b3f650ae6fcb3",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.td.com/ca/en/personal-banking/how-to/budgeting/how-to-financial-literacy-for-kids": {
+      "index": 146,
+      "title": "TD Bank's Financial Literacy for Kids Website",
+      "url": "https://www.td.com/ca/en/personal-banking/how-to/budgeting/how-to-financial-literacy-for-kids",
+      "content_hash": "d293516a3ef9c253",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.bcerac.ca/financial-literacy": {
+      "index": 147,
+      "title": "BC Financial Literacy Resources Hub",
+      "url": "https://www.bcerac.ca/financial-literacy",
+      "content_hash": "4ef55a4d48818012",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.practicalmoneyskills.ca/teachers": {
+      "index": 148,
+      "title": "Practical Money Skills Canada",
+      "url": "https://www.practicalmoneyskills.ca/teachers",
+      "content_hash": "269a1b38f29b1d74",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.desjardins.com/ca/co-opme/education-cooperation/financial-education/": {
+      "index": 149,
+      "title": "Desjardins: Financial Education Resources",
+      "url": "https://www.desjardins.com/ca/co-opme/education-cooperation/financial-education/",
+      "content_hash": "83241f7f6316dc04",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://a.co/d/fuQ2wSK": {
+      "index": 150,
+      "title": "Get To Know: Money: A Fun, Visual Guide to How Money Works and How to Look After It",
+      "url": "https://a.co/d/fuQ2wSK",
+      "content_hash": "ca0f333d416fd50c",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://a.co/d/a2iNYKz": {
+      "index": 151,
+      "title": "Essential Guide to Financial Literacy for Kids",
+      "url": "https://a.co/d/a2iNYKz",
+      "content_hash": "6814dd28f53a10e3",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.bankofcanadamuseum.ca/": {
+      "index": 152,
+      "title": "Bank of Canada Museum website",
+      "url": "https://www.bankofcanadamuseum.ca/",
+      "content_hash": "1740f50e2eca5023",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://rates.ca/resources/5-fun-financial-literacy-activities-for-kids": {
+      "index": 153,
+      "title": "5 Fun Financial Literacy Activities For Kids",
+      "url": "https://rates.ca/resources/5-fun-financial-literacy-activities-for-kids",
+      "content_hash": "0400c0c6bd76e1d3",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.canada.ca/en/financial-consumer-agency/services/teaching-children-money.html": {
+      "index": 154,
+      "title": "Teaching Children about Money",
+      "url": "https://www.canada.ca/en/financial-consumer-agency/services/teaching-children-money.html",
+      "content_hash": "c75c0ce5bcaea060",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.moneytimekids.com/for-teachers": {
+      "index": 155,
+      "title": "MoneyTime Kids - Financial Literacy Online",
+      "url": "https://www.moneytimekids.com/for-teachers",
+      "content_hash": "2631cd74f84c91c8",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://a.co/d/gq6AGLG": {
+      "index": 156,
+      "title": "Investing for Kids: How to Save, Invest, and Grow Money",
+      "url": "https://a.co/d/gq6AGLG",
+      "content_hash": "9189ea34b2782193",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://a.co/d/69h14hX": {
+      "index": 157,
+      "title": "Money Skills for Kids",
+      "url": "https://a.co/d/69h14hX",
+      "content_hash": "6013bf9f746d6ee9",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.embark.ca/learning-centre/top-personal-finance-lessons-to-teach-children": {
+      "index": 158,
+      "title": "The Most Important Personal Finance Lessons to Teach Your Children",
+      "url": "https://www.embark.ca/learning-centre/top-personal-finance-lessons-to-teach-children",
+      "content_hash": "d32d20e8648a0191",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.amazon.ca/HIDDEN-FIGURES-Taraji-P-Henson/dp/B01LTI9IYA/ref=asc_df_B01LTI9IYA?mcid=1583a2c9a4e23e25b4cb4819caa2d4e0&tag=googleshopc0c-20&linkCode=df0&hvadid=706729159881&hvpos=&hvnetw=g&hvrand=2034124837730642309&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9000795&hvtargid=pla-493399937683&psc=1&hvocijid=2034124837730642309-B01LTI9IYA-&hvexpln=0&gad_source=1": {
+      "index": 159,
+      "title": "Hidden Figures",
+      "url": "https://www.amazon.ca/HIDDEN-FIGURES-Taraji-P-Henson/dp/B01LTI9IYA/ref=asc_df_B01LTI9IYA?mcid=1583a2c9a4e23e25b4cb4819caa2d4e0&tag=googleshopc0c-20&linkCode=df0&hvadid=706729159881&hvpos=&hvnetw=g&hvrand=2034124837730642309&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9000795&hvtargid=pla-493399937683&psc=1&hvocijid=2034124837730642309-B01LTI9IYA-&hvexpln=0&gad_source=1",
+      "content_hash": "d09ed60a617955ad",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://machinelearningforkids.co.uk/": {
+      "index": 160,
+      "title": "Machine Learning for Kids",
+      "url": "https://machinelearningforkids.co.uk/",
+      "content_hash": "bfa4ded2ea2a905e",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.tvokids.com/school-age/tvokids-teacher-power-hour/videos/experimental-and-theoretical-probability-junior-lesson": {
+      "index": 161,
+      "title": "Experimental and Theoretical Probability",
+      "url": "https://www.tvokids.com/school-age/tvokids-teacher-power-hour/videos/experimental-and-theoretical-probability-junior-lesson",
+      "content_hash": "39f9ca4d3e47a2d8",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://ssc.ca/en/education/resources-elementary-and-secondary-schools": {
+      "index": 162,
+      "title": "Resources for Teaching and Learning about Statistics",
+      "url": "https://ssc.ca/en/education/resources-elementary-and-secondary-schools",
+      "content_hash": "91d6ca65bb4f3aa8",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g7-math/strand-c/c1": {
+      "index": 163,
+      "title": "Ontario Curriculum Portal \u2014 Strand C, Grade 7 (C1: Patterns and Relationships)",
+      "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g7-math/strand-c/c1",
+      "content_hash": "581d1b4785df2227",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g7-math/strand-c/c2": {
+      "index": 164,
+      "title": "Ontario Curriculum Portal \u2014 Strand C, Grade 7 (C2: Equations and Inequalities)",
+      "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g7-math/strand-c/c2",
+      "content_hash": "fdd3723b1bd8299e",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/08f5a14f-576a-4282-af82-096dc302ed10/Algebra_AODA.pdf": {
+      "index": 165,
+      "title": "Ontario Curriculum Grades 1-8 Mathematics 2020",
+      "url": "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/08f5a14f-576a-4282-af82-096dc302ed10/Algebra_AODA.pdf",
+      "content_hash": "15d77c05cf731032",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.khanacademy.org/math/on-seventh-grade-math/on-patterning-algebra": {
+      "index": 166,
+      "title": "Khan Academy - Patterning and Algebra 7th Grade Math (Ontario)",
+      "url": "https://www.khanacademy.org/math/on-seventh-grade-math/on-patterning-algebra",
+      "content_hash": "268e13a3320e9abe",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://teacher.desmos.com/activitybuilder/custom/59053e7beea92c4f782eb9a2": {
+      "index": 167,
+      "title": "Desmos Activities & Amplify Desmos Math",
+      "url": "https://teacher.desmos.com/activitybuilder/custom/59053e7beea92c4f782eb9a2",
+      "content_hash": "6d4ccef0fbc2ab2a",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.geogebra.org/math/patterns": {
+      "index": 168,
+      "title": "GeoGebra - Learn Algebraic Patterns",
+      "url": "https://www.geogebra.org/math/patterns",
+      "content_hash": "df620358be9d3e87",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.geogebra.org/math/algebra": {
+      "index": 169,
+      "title": "GeoGebra - Learn Algebra",
+      "url": "https://www.geogebra.org/math/algebra",
+      "content_hash": "722468058738f01e",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.amplify.com/polypad": {
+      "index": 170,
+      "title": "Polypad (Amplify) \u2014 Virtual Manipulatives",
+      "url": "https://www.amplify.com/polypad",
+      "content_hash": "ea628a0bae7456d1",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://ca.ixl.com/standards/ontario/math/grade-7": {
+      "index": 171,
+      "title": "IXL Ontario Math - Grade 7 Algebra Skills",
+      "url": "https://ca.ixl.com/standards/ontario/math/grade-7",
+      "content_hash": "a9b31ca9761a48a8",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://mathspace.co/textbooks/syllabuses/Syllabus-1077/topics/Topic-20917/": {
+      "index": 172,
+      "title": "Mathspace \u2014 Ontario Grade 7 2021 Edition",
+      "url": "https://mathspace.co/textbooks/syllabuses/Syllabus-1077/topics/Topic-20917/",
+      "content_hash": "61f117ae48ab1382",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.edwin.app/ontario-math": {
+      "index": 173,
+      "title": "Edwin App \u2014 Ontario Math",
+      "url": "https://www.edwin.app/ontario-math",
+      "content_hash": "e97534b24436b356",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://tvolearn.com/pages/grade-7-mathematics-algebra-learning-activity-2": {
+      "index": 174,
+      "title": "TVO Learn \u2014 Grade 7 Mathematics Algebra Learning Activities",
+      "url": "https://tvolearn.com/pages/grade-7-mathematics-algebra-learning-activity-2",
+      "content_hash": "72a56cf586054a19",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://ontariomath.support/?pg=results&type=subject&lang=EN&subject=Algebra": {
+      "index": 175,
+      "title": "OntarioMath.Support \u2014 Algebra Resources",
+      "url": "https://ontariomath.support/?pg=results&type=subject&lang=EN&subject=Algebra",
+      "content_hash": "37f0a00ed3ecf16f",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://courseware.cemc.uwaterloo.ca/27": {
+      "index": 176,
+      "title": "CEMC's Open Courseware - Grades 7 & 8 Mathematics",
+      "url": "https://courseware.cemc.uwaterloo.ca/27",
+      "content_hash": "9a726414a8ae42dc",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://ontariomath.support/?pg=results&type=subject&lang=EN&subject=Coding": {
+      "index": 177,
+      "title": "OntarioMath.Support \u2014 Coding Resources for Algebra",
+      "url": "https://ontariomath.support/?pg=results&type=subject&lang=EN&subject=Coding",
+      "content_hash": "590678f9eaf3a227",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://mycalltoteach.com/products/grade-7-ontario-math-patterns-equations-assessments": {
+      "index": 178,
+      "title": "Grade 7 Ontario Math Assessments | Patterns and Equations | PDF and Google",
+      "url": "https://mycalltoteach.com/products/grade-7-ontario-math-patterns-equations-assessments",
+      "content_hash": "ac1ee289141c2cb2",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://mycalltoteach.com/products/grade-7-ontario-math-patterns-and-equations-pdf-editable-worksheets": {
+      "index": 179,
+      "title": "Grade 7 Ontario Math Worksheets | Patterns & Equations | PDF and Editable Google",
+      "url": "https://mycalltoteach.com/products/grade-7-ontario-math-patterns-and-equations-pdf-editable-worksheets",
+      "content_hash": "82ecc332db6b4b0f",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://mycalltoteach.com/products/grade-7-new-ontario-math-patterns-equations-digital-slides": {
+      "index": 180,
+      "title": "Grade 7 Ontario Math Curriculum | Patterns & Equations | Digital Google Slides",
+      "url": "https://mycalltoteach.com/products/grade-7-new-ontario-math-patterns-equations-digital-slides",
+      "content_hash": "1499fed6a0d6e8ec",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.teacherspayteachers.com/Product/Grade-7-NEW-Ontario-Math-Patterns-Equations-Digital-Slides-7162400": {
+      "index": 181,
+      "title": "Grade 7 Ontario Math Curriculum | Patterns & Equations | Google Slides & Form",
+      "url": "https://www.teacherspayteachers.com/Product/Grade-7-NEW-Ontario-Math-Patterns-Equations-Digital-Slides-7162400",
+      "content_hash": "aa238ac4b6b2044c",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.teacherspayteachers.com/Product/Algebra-Unit-Patterns-C1-Grade-7-Math-unit-2020-Ontario-Curriculum-3487020": {
+      "index": 182,
+      "title": "Grade 7 Ontario Math | PATTERNING | Growing and Shrinking Linear Number Patterns",
+      "url": "https://www.teacherspayteachers.com/Product/Algebra-Unit-Patterns-C1-Grade-7-Math-unit-2020-Ontario-Curriculum-3487020",
+      "content_hash": "2ba3e895bb0b9e0c",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://nrich.maths.org/patterns-and-sequences-age-7-11": {
+      "index": 183,
+      "title": "NRICH \u2014 Patterns and Sequences (Age 7-11)",
+      "url": "https://nrich.maths.org/patterns-and-sequences-age-7-11",
+      "content_hash": "b63e5fd519c7a6e2",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.oise.utoronto.ca/escape-projects/lesson-plans/algebra-patterns-grade-7": {
+      "index": 184,
+      "title": "ESCAPE Projects - Algebra Patterns (Grade 7)",
+      "url": "https://www.oise.utoronto.ca/escape-projects/lesson-plans/algebra-patterns-grade-7",
+      "content_hash": "23a2b4b895ebe69a",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://vlc.ucdsb.ca/c.php?g=217765&p=1438239": {
+      "index": 185,
+      "title": "Upper Canada Virtual Library \u2014 Algebra Grade 7 LibGuide",
+      "url": "https://vlc.ucdsb.ca/c.php?g=217765&p=1438239",
+      "content_hash": "12d79e3e70648e18",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.fishtanklearning.org/curriculum/math/": {
+      "index": 186,
+      "title": "Fishtank Learning \u2014 Grade 7 Mathematics",
+      "url": "https://www.fishtanklearning.org/curriculum/math/",
+      "content_hash": "641be1959db856b4",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://mycalltoteach.com/products/grade-7-math-centres-patterns-and-equations-curriculum": {
+      "index": 187,
+      "title": "Grade 7 Ontario Math Centres | Patterns & Equations",
+      "url": "https://mycalltoteach.com/products/grade-7-math-centres-patterns-and-equations-curriculum",
+      "content_hash": "61993705418d1010",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://tvolearn.com/pages/grade-7-mathematics": {
+      "index": 188,
+      "title": "TVO Learn \u2013 Grade 7 Mathematics (Data & Probability)",
+      "url": "https://tvolearn.com/pages/grade-7-mathematics",
+      "content_hash": "7e15438a30e31e10",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://tvolearn.com/pages/grade-8-mathematics": {
+      "index": 189,
+      "title": "TVO Learn \u2013 Grade 8 Mathematics (Data & Probability)",
+      "url": "https://tvolearn.com/pages/grade-8-mathematics",
+      "content_hash": "117f62f8ed169659",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://courseware.cemc.uwaterloo.ca/27?gid=96": {
+      "index": 190,
+      "title": "CEMC Courseware \u2013 Grades 7 & 8 Mathematics (Probability Unit)",
+      "url": "https://courseware.cemc.uwaterloo.ca/27?gid=96",
+      "content_hash": "2ee08690f9a51cd0",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://ontariomath.support/?pg=results&type=grade&lang=EN": {
+      "index": 191,
+      "title": "OntarioMath.Support \u2013 Curriculum Resource Project",
+      "url": "https://ontariomath.support/?pg=results&type=grade&lang=EN",
+      "content_hash": "0c0b5e2d9b3c150e",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://classroom.amplify.com/collection/5cfea03ef38cad61b964b573": {
+      "index": 192,
+      "title": "Desmos Classroom \u2013 Probability Activities Collection",
+      "url": "https://classroom.amplify.com/collection/5cfea03ef38cad61b964b573",
+      "content_hash": "151156545e06134d",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://teacher.desmos.com/activitybuilder/custom/60329385a392e50d486f1b6c": {
+      "index": 193,
+      "title": "Desmos \u2013 What Are Probabilities? (Grades 7\u20138 Lesson 3)",
+      "url": "https://teacher.desmos.com/activitybuilder/custom/60329385a392e50d486f1b6c",
+      "content_hash": "b2846435fe9283b0",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://mathigon.org/task/tutorial-probability": {
+      "index": 194,
+      "title": "Mathigon Polypad \u2013 Probability & Data Tools",
+      "url": "https://mathigon.org/task/tutorial-probability",
+      "content_hash": "8bacae2d7f4cc9b6",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://phet.colorado.edu/en/simulations/plinko-probability": {
+      "index": 195,
+      "title": "PhET Interactive Simulations \u2013 Plinko Probability",
+      "url": "https://phet.colorado.edu/en/simulations/plinko-probability",
+      "content_hash": "99454c8c0ec63b2b",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://www.geogebra.org/probability": {
+      "index": 196,
+      "title": "GeoGebra \u2013 Probability Calculator and Simulations",
+      "url": "https://www.geogebra.org/probability",
+      "content_hash": "61c0f5d391512181",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://mathspace.co/textbooks/syllabuses/Syllabus-1077/topics/Topic-20923/subtopics/Subtopic-271255/": {
+      "index": 197,
+      "title": "Mathspace \u2013 Ontario Grade 7 Probability Unit",
+      "url": "https://mathspace.co/textbooks/syllabuses/Syllabus-1077/topics/Topic-20923/subtopics/Subtopic-271255/",
+      "content_hash": "0bcd2196cdd19adb",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://mathspace.co/textbooks/syllabuses/Syllabus-1078/topics/Topic-20931/subtopics/Subtopic-271309/": {
+      "index": 198,
+      "title": "Mathspace \u2013 Ontario Grade 8 Probability Unit",
+      "url": "https://mathspace.co/textbooks/syllabuses/Syllabus-1078/topics/Topic-20931/subtopics/Subtopic-271309/",
+      "content_hash": "1f5200d43983b54e",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
+      "last_http_status": 403,
+      "issues": [
+        "http_403"
+      ]
+    },
+    "https://ca.ixl.com/standards/ontario/math/grade-8": {
+      "index": 199,
+      "title": "IXL \u2013 Ontario Grade 8 Probability Skills",
+      "url": "https://ca.ixl.com/standards/ontario/math/grade-8",
+      "content_hash": "15ddb2a1276bcc93",
+      "last_checked": "2026-05-24T06:09:25.629551+00:00",
       "last_http_status": 403,
       "issues": [
         "http_403"

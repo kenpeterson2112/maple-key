@@ -46,10 +46,7 @@ def content_hash(resource: dict) -> str:
 
 
 def resource_key(resource: dict) -> str:
-    """Stable key for a resource — prefer id, else index-based fallback."""
-    if 'id' in resource:
-        return str(resource['id'])
-    # Use URL as fallback key
+    """Changelog key — use URL for backward compatibility with existing entries."""
     return resource.get('url', '')
 
 
@@ -77,7 +74,9 @@ def build_duplicate_maps(data: list) -> tuple[dict, dict]:
         url = r.get('url', '').strip().rstrip('/')
         if url:
             url_map.setdefault(url, []).append(i)
-        title_key = f"{r.get('topic_title','').strip().lower()}|{r.get('subject','').strip().lower()}|{r.get('grade_level','').strip().lower()}"
+        gl = r.get('grade_level', '')
+        gl_str = ','.join(sorted(str(x) for x in gl)) if isinstance(gl, list) else str(gl)
+        title_key = f"{r.get('topic_title','').strip().lower()}|{r.get('subject','').strip().lower()}|{gl_str.strip().lower()}"
         if r.get('topic_title'):
             title_map.setdefault(title_key, []).append(i)
     return url_map, title_map
@@ -137,7 +136,15 @@ def main():
     print(f"Loading resources from {RESOURCES_PATH}")
 
     with open(RESOURCES_PATH) as f:
-        data = json.load(f)
+        raw = json.load(f)
+
+    # Support both flat-list and {"meta":..., "resources":[...]} formats
+    if isinstance(raw, list):
+        meta = None
+        data = raw
+    else:
+        meta = raw.get('meta')
+        data = raw.get('resources', [])
 
     changelog = load_changelog()
     print(f"Total resources: {len(data)}")
@@ -190,7 +197,9 @@ def main():
             results_summary['duplicate_url'].append({'index': i, 'key': key, 'title': title, 'url': url, 'dup_indices': dup_indices})
             print(f"         DUPLICATE URL: also at indices {dup_indices}")
 
-        title_key = f"{r.get('topic_title','').strip().lower()}|{r.get('subject','').strip().lower()}|{r.get('grade_level','').strip().lower()}"
+        gl = r.get('grade_level', '')
+        gl_str = ','.join(sorted(str(x) for x in gl)) if isinstance(gl, list) else str(gl)
+        title_key = f"{r.get('topic_title','').strip().lower()}|{r.get('subject','').strip().lower()}|{gl_str.strip().lower()}"
         if r.get('topic_title') and len(title_map.get(title_key, [])) > 1:
             dup_indices = [x for x in title_map[title_key] if x != i]
             # Only flag if URLs are also different (pure title dup)
@@ -236,7 +245,10 @@ def main():
 
     # --- Save updated resources.json ---
     with open(RESOURCES_PATH, 'w') as f:
-        json.dump(data, f, indent=2)
+        if meta is not None:
+            json.dump({'meta': meta, 'resources': data}, f, indent=2)
+        else:
+            json.dump(data, f, indent=2)
 
     # --- Save updated changelog ---
     changelog['last_run'] = now_iso
