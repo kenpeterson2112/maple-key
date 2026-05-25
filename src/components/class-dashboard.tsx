@@ -5,7 +5,7 @@ import { BAND_META, BAND_ORDER } from "@/lib/assessment-types"
 import type { AggregatedResults, BandCounts } from "@/lib/assessment-results"
 
 function total(counts: BandCounts): number {
-  return counts.strong + counts.needsSupport
+  return counts.strong + (counts.developing ?? 0) + counts.needsSupport
 }
 
 function DistributionBar({ counts }: { counts: BandCounts }) {
@@ -26,8 +26,11 @@ function overallRead(counts: BandCounts): string {
   const t = total(counts)
   if (t === 0) return "Not yet assessed"
   const strongShare = counts.strong / t
-  if (strongShare >= 0.67) return "Most of the class shows a strong grasp"
-  if (strongShare <= 0.33) return "Several students need more support"
+  const needsShare = counts.needsSupport / t
+  const dev = counts.developing ?? 0
+  if (strongShare >= 0.67) return "Most of the class demonstrates a considerable or thorough understanding"
+  if (needsShare >= 0.50) return "Several students demonstrate limited understanding — consider revisiting this concept"
+  if (dev >= counts.strong && dev >= counts.needsSupport) return "Much of the class is developing their understanding"
   return "Mixed understanding across the class"
 }
 
@@ -82,11 +85,14 @@ export default function ClassDashboard({ data }: { data: AggregatedResults }) {
                       <span className="text-xs leading-snug text-[#666]">{CURRICULUM_DESCRIPTIONS[code] ?? code}</span>
                     </div>
                     <DistributionBar counts={counts} />
-                    <p className="mt-1.5 text-xs">
-                      <span className={`font-semibold ${BAND_META.strong.textClass}`}>{counts.strong}</span>
-                      <span className="text-[#888]"> students {BAND_META.strong.phrase} · </span>
-                      <span className={`font-semibold ${BAND_META.needsSupport.textClass}`}>{counts.needsSupport}</span>
-                      <span className="text-[#888]"> {BAND_META.needsSupport.phrase}</span>
+                    <p className="mt-1.5 text-xs leading-relaxed">
+                      {BAND_ORDER.filter((band) => counts[band] > 0).map((band, i, arr) => (
+                        <span key={band}>
+                          <span className={`font-semibold ${BAND_META[band].textClass}`}>{counts[band]}</span>
+                          <span className="text-[#888]"> {counts[band] === 1 ? "student" : "students"} {BAND_META[band].phrase}</span>
+                          {i < arr.length - 1 && <span className="text-[#C8B8AA]"> · </span>}
+                        </span>
+                      ))}
                     </p>
                   </div>
                 ))}

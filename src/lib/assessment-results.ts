@@ -6,6 +6,7 @@ const STORAGE_KEY = "maplekey_assessment_results"
 
 export interface BandCounts {
   strong: number
+  developing: number
   needsSupport: number
 }
 
@@ -43,7 +44,7 @@ function write(store: Store): void {
 }
 
 function emptyCounts(): BandCounts {
-  return { strong: 0, needsSupport: 0 }
+  return { strong: 0, developing: 0, needsSupport: 0 }
 }
 
 export function getLessonTally(lessonId: string): LessonTally | null {
@@ -55,7 +56,8 @@ export function getAllTallies(): LessonTally[] {
 }
 
 // Record one completed quick check as anonymous class totals.
-export function recordAttempt(lesson: LessonMetadata, perCodeBand: Record<string, Band>): void {
+// Pass count > 1 for a group response (same answers, multiple students).
+export function recordAttempt(lesson: LessonMetadata, perCodeBand: Record<string, Band>, count = 1): void {
   const store = read()
   const tally: LessonTally = store[lesson.id] ?? {
     lessonId: lesson.id,
@@ -72,10 +74,10 @@ export function recordAttempt(lesson: LessonMetadata, perCodeBand: Record<string
   tally.subject = lesson.subject
   if (lesson.curriculumCodesCovered?.length) tally.codes = lesson.curriculumCodesCovered
   tally.updatedAt = Date.now()
-  tally.attempts += 1
+  tally.attempts += count
   for (const [code, band] of Object.entries(perCodeBand)) {
     const counts = (tally.byExpectation[code] ??= emptyCounts())
-    counts[band] += 1
+    counts[band] += count
   }
   store[lesson.id] = tally
   write(store)
@@ -103,6 +105,7 @@ export interface AggregatedResults {
 
 function addInto(target: BandCounts, src: BandCounts): void {
   target.strong += src.strong
+  target.developing += (src.developing ?? 0)
   target.needsSupport += src.needsSupport
 }
 

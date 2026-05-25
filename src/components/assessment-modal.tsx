@@ -71,6 +71,18 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
   const [selfRatings, setSelfRatings] = useState<Record<string, ResponseState>>({})
   const [recordedCount, setRecordedCount] = useState(0)
   const [dashView, setDashView] = useState<"lesson" | "all">("lesson")
+  const [showGroupPicker, setShowGroupPicker] = useState(false)
+  const [groupSelection, setGroupSelection] = useState<number | null>(null)
+  const [groupOther, setGroupOther] = useState("")
+
+  const MAX_GROUP_SIZE = 500
+  const getGroupCount = (): number => {
+    if (groupSelection !== null) return groupSelection
+    const n = parseInt(groupOther, 10)
+    return !isNaN(n) && n > 0 ? n : 0
+  }
+  const isGroupCountValid = () => { const n = getGroupCount(); return n >= 1 && n <= MAX_GROUP_SIZE }
+  const resetGroupPicker = () => { setGroupSelection(null); setGroupOther("") }
 
   useEffect(() => {
     if (!isOpen) return
@@ -193,22 +205,26 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         if (!f.code) continue
         const r = selfRatings[f.key]
         if (!r || r === "unanswered") continue
-        result[f.code] = r === "understood" ? "strong" : "needsSupport"
+        result[f.code] = r === "understood" ? "strong" : "developing"
       }
     }
     return result
   }
 
-  const handleRecord = () => {
-    recordAttempt(lesson, computePerCodeBand())
-    setRecordedCount((n) => n + 1)
+  const handleRecord = (count = 1) => {
+    recordAttempt(lesson, computePerCodeBand(), count)
+    setRecordedCount((n) => n + count)
     setAnswers({})
     setSelfRatings({})
+    setShowGroupPicker(false)
+    resetGroupPicker()
   }
 
   const goAdminister = () => {
     setAnswers({})
     setSelfRatings({})
+    setShowGroupPicker(false)
+    resetGroupPicker()
     setPhase("administer")
   }
 
@@ -318,51 +334,115 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-[#E8D5C4] bg-[#FAF3E0] flex items-center justify-between gap-3">
-          {phase === "dashboard" ? (
-            <>
-              <span className="text-sm text-[#888]">
-                {dashboardData ? `${dashboardData.attempts} recorded` : ""}
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={goAdminister}
-                  className="px-4 py-2 rounded-xl border border-[#E8D5C4] text-[#666] font-semibold text-sm hover:bg-white transition-colors"
-                >
-                  Record more
-                </button>
-                <button
-                  onClick={onClose}
-                  className="px-5 py-2 bg-[#FF6B35] hover:bg-[#e55a2a] text-white font-semibold text-sm rounded-xl transition-colors"
-                >
-                  Done
-                </button>
+        <div className="border-t border-[#E8D5C4] bg-[#FAF3E0]">
+          {/* Group response picker — expands when "Group" is active */}
+          {phase === "administer" && showGroupPicker && (
+            <div className="px-6 pt-4 pb-2">
+              <div className="rounded-xl border border-[#E8D5C4] bg-white p-3">
+                <p className="mb-2 text-xs font-semibold text-[#2C2C2C]">
+                  How many students gave these same answers?
+                </p>
+                <div className="flex flex-wrap items-center gap-2">
+                  {[2, 3].map((n) => (
+                    <button
+                      key={n}
+                      onClick={() => { setGroupSelection(n); setGroupOther("") }}
+                      className={`rounded-lg border px-3 py-1.5 text-sm font-semibold transition-colors ${
+                        groupSelection === n && !groupOther
+                          ? "border-[#2C2C2C] bg-[#2C2C2C] text-white"
+                          : "border-[#E8D5C4] text-[#666] hover:bg-[#FAF3E0]"
+                      }`}
+                    >
+                      {n}
+                    </button>
+                  ))}
+                  <input
+                    type="number"
+                    min={1}
+                    max={MAX_GROUP_SIZE}
+                    placeholder={`Other (max ${MAX_GROUP_SIZE})`}
+                    value={groupOther}
+                    onChange={(e) => { setGroupOther(e.target.value); setGroupSelection(null) }}
+                    className="w-36 rounded-lg border border-[#E8D5C4] bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-300"
+                  />
+                </div>
+                <div className="mt-3 flex items-center gap-2">
+                  <button
+                    onClick={() => handleRecord(getGroupCount())}
+                    disabled={!isGroupCountValid()}
+                    className="rounded-lg bg-[#FF6B35] px-4 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#e55a2a] disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    Record {isGroupCountValid() ? getGroupCount() : ""} students
+                  </button>
+                  <button
+                    onClick={() => { setShowGroupPicker(false); resetGroupPicker() }}
+                    className="px-3 py-1.5 text-xs text-[#888] hover:text-[#666]"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-            </>
-          ) : (
-            <>
-              <span className="text-sm text-[#888]">
-                {answeredCount} of {totalCount} answered
-                {recordedCount > 0 && ` · ${recordedCount} recorded`}
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setPhase("dashboard")}
-                  disabled={phase === "loading"}
-                  className="px-4 py-2 rounded-xl border border-[#E8D5C4] text-[#666] font-semibold text-sm hover:bg-white transition-colors disabled:opacity-50"
-                >
-                  View class results
-                </button>
-                <button
-                  onClick={handleRecord}
-                  disabled={!canRecord}
-                  className="px-5 py-2 bg-[#FF6B35] hover:bg-[#e55a2a] text-white font-semibold text-sm rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Record &amp; next student
-                </button>
-              </div>
-            </>
+            </div>
           )}
+
+          {/* Main footer row */}
+          <div className="flex items-center justify-between gap-3 px-6 py-4">
+            {phase === "dashboard" ? (
+              <>
+                <span className="text-sm text-[#888]">
+                  {dashboardData ? `${dashboardData.attempts} ${dashboardData.attempts === 1 ? "response" : "responses"} recorded` : ""}
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={goAdminister}
+                    className="rounded-xl border border-[#E8D5C4] px-4 py-2 text-sm font-semibold text-[#666] transition-colors hover:bg-white"
+                  >
+                    Record more
+                  </button>
+                  <button
+                    onClick={onClose}
+                    className="rounded-xl bg-[#FF6B35] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e55a2a]"
+                  >
+                    Done
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <span className="text-sm text-[#888]">
+                  {answeredCount} of {totalCount} answered
+                  {recordedCount > 0 && ` · ${recordedCount} ${recordedCount === 1 ? "response" : "responses"} recorded`}
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setPhase("dashboard")}
+                    disabled={phase === "loading"}
+                    className="rounded-xl border border-[#E8D5C4] px-4 py-2 text-sm font-semibold text-[#666] transition-colors hover:bg-white disabled:opacity-50"
+                  >
+                    View results
+                  </button>
+                  <button
+                    onClick={() => { setShowGroupPicker((v) => !v); resetGroupPicker() }}
+                    disabled={!canRecord}
+                    className={`rounded-xl border px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                      showGroupPicker
+                        ? "border-[#2C2C2C] bg-[#2C2C2C] text-white"
+                        : "border-[#E8D5C4] text-[#666] hover:bg-white"
+                    }`}
+                  >
+                    Group
+                  </button>
+                  <button
+                    onClick={() => handleRecord(1)}
+                    disabled={!canRecord}
+                    className="rounded-xl bg-[#FF6B35] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e55a2a] disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Record &amp; next
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
