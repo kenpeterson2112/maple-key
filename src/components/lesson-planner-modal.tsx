@@ -32,7 +32,7 @@ import { withBasePath } from "@/lib/base-path"
 import { logLesson, getLatestLesson } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { sanitizeQuestions } from "@/lib/assessment-types"
-import { cacheQuestions } from "@/lib/assessment-questions-cache"
+import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
 import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
 
@@ -85,6 +85,15 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const callGenerateLesson = async () => {
     setIsGenerating(true)
     setGenerateError(null)
+    // Dev mock: set localStorage["maplekey_lesson_mock"] to a saved response JSON to skip the API
+    if (import.meta.env.DEV) {
+      const mockRaw = localStorage.getItem("maplekey_lesson_mock")
+      if (mockRaw) {
+        applyResponseJSON(mockRaw, (msg) => setGenerateError(msg))
+        setIsGenerating(false)
+        return
+      }
+    }
     try {
       const res = await fetch("/api/generate-lesson", {
         method: "POST",
@@ -199,6 +208,29 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     }
   }
 
+  const handleExportResponseJSON = () => {
+    const cached = latestLesson ? getCachedQuestions(latestLesson.id) : null
+    const responseData = {
+      title: lessonTitle,
+      curriculumCodesCovered: coveredCodes,
+      mindsOnContent,
+      mindsOnDifferentiation,
+      actionContent,
+      actionDifferentiation,
+      consolidationContent,
+      consolidationAssessment,
+      materialsContent,
+      ...(cached && cached.length ? { assessmentQuestions: cached } : {}),
+    }
+    const blob = new Blob([JSON.stringify(responseData, null, 2)], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `lesson-${lessonTitle.slice(0, 30).replace(/[^a-z0-9]/gi, "-").toLowerCase() || "response"}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   const handleImportResponseJSON = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -267,7 +299,13 @@ ${resourceList}
 
 Ontario curriculum codes available: ${allCodes.join(", ")}
 
-Return a JSON object with exactly these fields (all values are plain text strings, no markdown):
+You will also write "assessmentQuestions": a short auto-graded formative quick check, anchored in the SPECIFIC content of the lesson you are writing (not generic).
+- If "curriculumCodesCovered" is non-empty: for EACH code in it, write exactly 2 questions — one "multiple-choice" and one "true-false" — and set each question's "code" to that curriculum code.
+- If "curriculumCodesCovered" is empty: identify 3 to 5 key concepts you actually taught and write 1-2 questions per concept (mix of types), setting each "code" to a short 2-4 word concept label (e.g., "Circumference and pi").
+- Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
+- Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions.
+
+Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
   "title": "Creative lesson title",
   "curriculumCodesCovered": ["code1", "code2"],
@@ -277,7 +315,11 @@ Return a JSON object with exactly these fields (all values are plain text string
   "actionDifferentiation": "Differentiation strategies for Action phase",
   "consolidationContent": "Closing/consolidation activity description",
   "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
-  "materialsContent": "Materials list and preparation steps"
+  "materialsContent": "Materials list and preparation steps",
+  "assessmentQuestions": [
+    { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
+    { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+  ]
 }`
 
     const fullPrompt = `[SYSTEM]\n${systemPrompt}\n\n[USER]\n${userPrompt}`
@@ -723,13 +765,21 @@ Return a JSON object with exactly these fields (all values are plain text string
                         </p>
                       )}
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap">
                       <button
                         onClick={handleExportPDF}
                         className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg flex items-center gap-2 transition-colors"
                       >
                         <Download size={16} />
                         Export PDF
+                      </button>
+                      <button
+                        onClick={handleExportResponseJSON}
+                        title="Save the full lesson JSON (including quiz questions) so you can reload it later without using API credits"
+                        className="px-4 py-2 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-medium rounded-lg flex items-center gap-2 transition-colors"
+                      >
+                        <Download size={16} />
+                        Save JSON
                       </button>
                       <button
                         onClick={handleRegenerate}
