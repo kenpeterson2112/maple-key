@@ -42,8 +42,13 @@ export function sanitizeQuestions(raw: unknown): AssessmentQuestion[] {
     const code = isNonEmptyString(item.code) ? item.code : null
     const explanation = isNonEmptyString(item.explanation) ? item.explanation : undefined
 
+    // Normalise type names — models sometimes use underscores, camelCase, or abbreviations.
+    const rawType = typeof item.type === "string" ? item.type.toLowerCase().replace(/[\s_]/g, "-") : ""
+    const ismc = rawType === "multiple-choice" || rawType === "multiplechoice" || rawType === "mc"
+    const istf = rawType === "true-false" || rawType === "truefalse" || rawType === "tf"
+
     let q: AssessmentQuestion | null = null
-    if (item.type === "multiple-choice") {
+    if (ismc) {
       const options = Array.isArray(item.options) ? item.options.filter(isNonEmptyString) : []
       const correctIndex = Number(item.correctIndex)
       if (
@@ -55,9 +60,12 @@ export function sanitizeQuestions(raw: unknown): AssessmentQuestion[] {
       ) {
         q = { id: "", code, type: "multiple-choice", prompt: item.prompt, options, correctIndex, explanation }
       }
-    } else if (item.type === "true-false") {
-      if (typeof item.correct === "boolean") {
-        q = { id: "", code, type: "true-false", prompt: item.prompt, correct: item.correct, explanation }
+    } else if (istf) {
+      // Accept boolean, string "true"/"false", or 1/0.
+      const c = item.correct
+      const correct = typeof c === "boolean" ? c : c === "true" || c === 1 ? true : c === "false" || c === 0 ? false : null
+      if (correct !== null) {
+        q = { id: "", code, type: "true-false", prompt: item.prompt, correct, explanation }
       }
     }
     if (!q) return

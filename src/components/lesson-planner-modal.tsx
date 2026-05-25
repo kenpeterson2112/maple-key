@@ -146,6 +146,11 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setLatestLesson(logged)
       setLessonGenerated(true)
       const bundledQs = sanitizeQuestions(data.assessmentQuestions)
+      if (import.meta.env.DEV) {
+        if (data.assessmentQuestions == null) console.warn("[maplekey] API response had no assessmentQuestions field")
+        else if (!bundledQs.length) console.warn("[maplekey] assessmentQuestions present but all dropped by sanitize:", data.assessmentQuestions)
+        else console.info(`[maplekey] cached ${bundledQs.length} questions for ${logged.id}`)
+      }
       if (bundledQs.length) cacheQuestions(logged.id, bundledQs)
     } catch (err) {
       setGenerateError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
