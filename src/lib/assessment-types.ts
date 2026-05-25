@@ -72,20 +72,38 @@ export function sanitizeQuestions(raw: unknown): AssessmentQuestion[] {
   return out
 }
 
-// ---- Proficiency bands ----
-// Two bands today; adding "developing" is a one-line change here + in bandFor.
-export type Band = "strong" | "needsSupport"
+// ---- Proficiency bands (Growing Success, Ontario Ministry of Education) ----
+// Level 3-4: considerable to thorough understanding → "strong"
+// Level 2:   some understanding                     → "developing"
+// Level 1:   limited understanding                  → "needsSupport"
+export type Band = "strong" | "developing" | "needsSupport"
 
-export const BAND_ORDER: Band[] = ["strong", "needsSupport"]
+export const BAND_ORDER: Band[] = ["strong", "developing", "needsSupport"]
 
 export const BAND_META: Record<Band, { label: string; phrase: string; barClass: string; textClass: string }> = {
-  strong: { label: "Strong grasp", phrase: "show a strong grasp", barClass: "bg-emerald-400", textClass: "text-emerald-700" },
-  needsSupport: { label: "Needs support", phrase: "need more support", barClass: "bg-amber-400", textClass: "text-amber-700" },
+  strong: {
+    label: "Considerable to thorough understanding",
+    phrase: "demonstrate a considerable or thorough understanding",
+    barClass: "bg-emerald-400",
+    textClass: "text-emerald-700",
+  },
+  developing: {
+    label: "Some understanding",
+    phrase: "show some understanding",
+    barClass: "bg-amber-400",
+    textClass: "text-amber-700",
+  },
+  needsSupport: {
+    label: "Limited understanding",
+    phrase: "demonstrate limited understanding and may need more support",
+    barClass: "bg-red-400",
+    textClass: "text-red-600",
+  },
 }
 
-// A student "shows a strong grasp" of an expectation only when they got all of its
-// questions correct; otherwise they need more support.
+// With 2 questions per expectation: 2/2 → strong, 1/2 → developing, 0/2 → needsSupport.
 export function bandFor(correct: number, total: number): Band {
-  if (total <= 0) return "needsSupport"
-  return correct === total ? "strong" : "needsSupport"
+  if (total <= 0 || correct <= 0) return "needsSupport"
+  if (correct === total) return "strong"
+  return "developing"
 }
