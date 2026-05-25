@@ -148,7 +148,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
   try {
     const message = await client.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 4000,
+      max_tokens: 5000,
       messages: [{ role: "user", content: userPrompt }],
       system: [
         {
@@ -170,6 +170,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
     } catch {
       return res.status(500).json({ error: "Claude returned malformed JSON. Please try again." })
     }
+
+    console.log(
+      `[generate-lesson] stop=${message.stop_reason} questions=${lesson.assessmentQuestions?.length ?? 0} codes=${lesson.curriculumCodesCovered?.length ?? 0}`,
+    )
 
     return res.status(200).json(lesson)
   } catch (err) {
