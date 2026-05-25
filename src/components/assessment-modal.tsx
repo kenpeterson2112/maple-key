@@ -12,7 +12,7 @@ import {
   type TrueFalseQuestion,
   type Band,
 } from "@/lib/assessment-types"
-import { getCachedQuestions, cacheQuestions } from "@/lib/assessment-questions-cache"
+import { getCachedQuestions } from "@/lib/assessment-questions-cache"
 import {
   recordAttempt,
   getLessonTally,
@@ -86,84 +86,48 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
 
   useEffect(() => {
     if (!isOpen) return
-    let ignore = false
     const codes = (lesson.curriculumCodesCovered ?? []).filter((c) => CURRICULUM_DESCRIPTIONS[c])
 
-    const useFallback = () => {
-      if (ignore) return
-      setFallback(buildFallback(codes))
-      setQuestions([])
-      setPhase("administer")
-    }
-
-    const load = async () => {
-      // Dev-only seam: inject mock questions via localStorage to test the graded flow without the API.
-      if (import.meta.env.DEV) {
-        try {
-          const mock = localStorage.getItem("maplekey_assessment_mock")
-          if (mock) {
-            const qs = sanitizeQuestions(JSON.parse(mock))
-            if (qs.length && !ignore) {
-              setQuestions(qs)
-              setPhase("administer")
-              return
-            }
-          }
-        } catch {
-          // ignore bad mock
-        }
-      }
-
-      const cached = getCachedQuestions(lesson.id)
-      if (cached && cached.length) {
-        if (!ignore) {
-          setQuestions(cached)
-          setPhase("administer")
-        }
-        return
-      }
-
-      if (codes.length === 0) {
-        useFallback()
-        return
-      }
-
-      if (!ignore) setPhase("loading")
-      try {
-        const res = await fetch("/api/generate-assessment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            title: lesson.title,
-            grade: lesson.grade,
-            subject: lesson.subject,
-            expectations: codes.map((c) => ({ code: c, description: CURRICULUM_DESCRIPTIONS[c] })),
-            lessonContent: lesson.lessonContent,
-          }),
-        })
-        const data = await res.json().catch(() => ({}))
-        const qs = sanitizeQuestions(data?.questions ?? data)
-        if (ignore) return
-        if (qs.length) {
-          cacheQuestions(lesson.id, qs)
-          setQuestions(qs)
-          setPhase("administer")
-        } else {
-          useFallback()
-        }
-      } catch {
-        useFallback()
-      }
-    }
-
+    // Reset per-open state.
     setAnswers({})
     setSelfRatings({})
     setRecordedCount(0)
     setDashView("lesson")
-    load()
-    return () => {
-      ignore = true
+    setShowGroupPicker(false)
+    setGroupSelection(null)
+    setGroupOther("")
+
+    // Dev seam: inject mock questions via localStorage to exercise the graded flow without the API.
+    if (import.meta.env.DEV) {
+      try {
+        const mock = localStorage.getItem("maplekey_assessment_mock")
+        if (mock) {
+          const qs = sanitizeQuestions(JSON.parse(mock))
+          if (qs.length) {
+            setQuestions(qs)
+            setFallback([])
+            setPhase("administer")
+            return
+          }
+        }
+      } catch {
+        // ignore bad mock
+      }
     }
+
+    // Questions are generated together with the lesson and cached at creation time.
+    const cached = getCachedQuestions(lesson.id)
+    if (cached && cached.length) {
+      setQuestions(cached)
+      setFallback([])
+      setPhase("administer")
+      return
+    }
+
+    // No generated questions for this lesson — fall back to reflection prompts.
+    setQuestions([])
+    setFallback(buildFallback(codes))
+    setPhase("administer")
   }, [isOpen, lesson.id])
 
   const dashboardData = useMemo(() => {
@@ -287,6 +251,12 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   ? "Answer each question to see instant feedback, then record this student's results to the class totals."
                   : "Reflect on each expectation, then record this student's results to the class totals."}
               </p>
+
+              {!isGraded && (
+                <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700">
+                  Showing reflection prompts — tailored quiz questions weren't generated for this lesson. Re-generate the lesson with AI to get auto-graded multiple-choice and true/false questions.
+                </p>
+              )}
 
               {isGraded
                 ? questions.map((q) =>
