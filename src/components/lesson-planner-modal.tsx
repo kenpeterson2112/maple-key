@@ -31,6 +31,8 @@ import type { Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
 import { logLesson, getLatestLesson } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
+import { sanitizeQuestions } from "@/lib/assessment-types"
+import { cacheQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
 import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
 
@@ -134,6 +136,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       })
       setLatestLesson(logged)
       setLessonGenerated(true)
+      const bundledQs = sanitizeQuestions(data.assessmentQuestions)
+      if (bundledQs.length) cacheQuestions(logged.id, bundledQs)
     } catch (err) {
       setGenerateError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
     } finally {
@@ -184,6 +188,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       })
       setLatestLesson(logged)
       setLessonGenerated(true)
+      const bundledQs = sanitizeQuestions(data.assessmentQuestions)
+      if (bundledQs.length) cacheQuestions(logged.id, bundledQs)
       setGenerateError(null)
       setShowPastePanel(false)
       setPasteText("")
