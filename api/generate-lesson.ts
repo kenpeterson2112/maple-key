@@ -1,6 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 
+const LESSON_MODEL = "claude-haiku-4-5-20251001"
+
 interface ResourceInput {
   title: string
   description: string
@@ -10,6 +12,12 @@ interface ResourceInput {
   publisher?: string
 }
 
+interface PlanningAnswer {
+  questionId: string
+  questionPrompt: string
+  answer: string
+}
+
 interface GenerateRequest {
   resources: ResourceInput[]
   lessonLength: string
@@ -17,6 +25,7 @@ interface GenerateRequest {
   teacherNotes: string
   includeAssessmentData: boolean
   classroomResources?: string[]
+  planningAnswers?: PlanningAnswer[]
 }
 
 interface MultipleChoiceQuestion {
@@ -40,6 +49,8 @@ type AssessmentQuestion = MultipleChoiceQuestion | TrueFalseQuestion
 
 interface LessonPlanResponse {
   title: string
+  learningGoal: string
+  successCriteria: string[]
   curriculumCodesCovered: string[]
   mindsOnContent: string
   mindsOnDifferentiation: string
@@ -47,27 +58,26 @@ interface LessonPlanResponse {
   actionDifferentiation: string
   consolidationContent: string
   consolidationAssessment: string
-  materialsContent: string
+  materials: {
+    resources: string[]
+    preparation: string[]
+  }
+  excludedResources?: { title: string; reason: string }[]
   assessmentQuestions?: AssessmentQuestion[]
 }
 
-// Loose contextual guidance — the kinds of ideas worth probing per expectation.
-// Used only to steer question generation; questions must still be anchored in the
-// actual lesson content the model writes.
-const QUESTION_GUIDANCE: Record<string, string> = {
-  "D1.1": "telling discrete from continuous data using real-life examples",
-  "D1.2": "choosing a sample vs a census; organizing data into intervals",
-  "D1.3": "picking the right graph (histogram vs broken-line) and what a complete graph needs",
-  "D1.4": "what an infographic adds beyond a plain table",
-  "D1.5": "what range and the measures of central tendency do and don't tell you",
-  "D1.6": "how scale or presentation can make a graph misleading",
-  "D2.1": "expressing probability as a fraction, decimal, and percent; complementary events",
-  "D2.2": "independent events; theoretical vs experimental probability",
-  "F1.1": "advantages/disadvantages of payment methods (cash, debit, cheque, e-transfer)",
-  "F1.2": "earning vs saving goals and steps to reach them",
-  "F1.3": "factors that help or interfere with reaching financial goals",
-  "F1.4": "how interest rates work on loans vs savings",
-  "F1.5": "trading, lending, borrowing, and donating as ways to share resources",
+function extractJson(text: string): string {
+  const trimmed = text.trim()
+  const start = trimmed.indexOf("{")
+  const end = trimmed.lastIndexOf("}")
+  return start >= 0 && end > start ? trimmed.slice(start, end + 1) : trimmed
+}
+
+function collectText(content: Anthropic.ContentBlock[]): string {
+  return content
+    .filter((b): b is Anthropic.TextBlock => b.type === "text")
+    .map((b) => b.text)
+    .join("\n")
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -76,8 +86,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" })
   }
 
-  const { resources, lessonLength, lessonTemplate, teacherNotes, includeAssessmentData, classroomResources } =
-    req.body as GenerateRequest
+  const {
+    resources,
+    lessonLength,
+    lessonTemplate,
+    teacherNotes,
+    includeAssessmentData,
+    classroomResources,
+    planningAnswers,
+  } = req.body as GenerateRequest
 
   if (!resources || resources.length === 0) {
     return res.status(400).json({ error: "At least one resource is required" })
@@ -104,10 +121,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ? `Classroom resources available: ${classroomResources.join(", ")}`
       : ""
 
-  const guidanceLines = allCodes
-    .filter((c) => QUESTION_GUIDANCE[c])
-    .map((c) => `  ${c}: ${QUESTION_GUIDANCE[c]}`)
-    .join("\n")
+  const planningAnswersBlock =
+    planningAnswers && planningAnswers.length > 0
+      ? `The teacher has made these planning decisions — honour them in the lesson:\n${planningAnswers
+          .map((a) => `  [${a.questionId}] ${a.questionPrompt}\n  → ${a.answer}`)
+          .join("\n")}\nTreat each of the above as a binding choice, not a suggestion.`
+      : ""
 
   const userPrompt = `Create a ${lessonLength} lesson plan for Grade ${grade} ${subject} using the following bookmarked resources.
 
@@ -115,22 +134,26 @@ Template: ${lessonTemplate}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomResourcesLine}
 ${includeAssessmentData ? "Include targeted differentiation strategies based on recent assessment data." : ""}
+${planningAnswersBlock}
 
 Resources to incorporate:
 ${resourceList}
 
 Ontario curriculum codes available: ${allCodes.join(", ")}
 
-You will also write "assessmentQuestions": a short auto-graded formative quick check, anchored in the SPECIFIC content of the lesson you are writing (not generic).
+Resource-mismatch rule: If any provided resource does not fit the topic or curriculum codes of this lesson, do NOT use it. List it in "excludedResources" with a one-line reason. "materials.resources" must only contain titles of resources you actually use.
+
+You will also write "assessmentQuestions": a short auto-graded formative quick check anchored in the SPECIFIC content of the lesson you are writing (not generic).
 - If "curriculumCodesCovered" is non-empty: for EACH code in it, write exactly 2 questions — one "multiple-choice" and one "true-false" — and set each question's "code" to that curriculum code.
 - If "curriculumCodesCovered" is empty: identify 3 to 5 key concepts you actually taught and write 1-2 questions per concept (mix of types), setting each "code" to a short 2-4 word concept label (e.g., "Circumference and pi").
 - Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
 - Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions.
-${guidanceLines ? `Contextual guidance for the relevant expectations (angles worth probing — still anchor in this lesson):\n${guidanceLines}` : ""}
 
 Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
   "title": "Creative lesson title",
+  "learningGoal": "One student-facing sentence describing what students will learn today",
+  "successCriteria": ["I can ...", "I can ...", "I can ..."],
   "curriculumCodesCovered": ["code1", "code2"],
   "mindsOnContent": "Hook/activation activity description (2-4 sentences)",
   "mindsOnDifferentiation": "Differentiation strategies for Minds On phase",
@@ -138,16 +161,24 @@ Return a JSON object with exactly these fields (string values are plain text, no
   "actionDifferentiation": "Differentiation strategies for Action phase",
   "consolidationContent": "Closing/consolidation activity description",
   "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
-  "materialsContent": "Materials list and preparation steps",
+  "materials": {
+    "resources": ["Resource title 1", "Resource title 2"],
+    "preparation": ["What to print or photocopy", "What to pre-load or test on devices", "How to set up the room"]
+  },
+  "excludedResources": [
+    { "title": "Resource title", "reason": "One-line reason it was not used" }
+  ],
   "assessmentQuestions": [
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
     { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
-}`
+}
+
+"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.`
 
   try {
     const message = await client.messages.create({
-      model: "claude-haiku-4-5-20251001",
+      model: LESSON_MODEL,
       max_tokens: 5000,
       messages: [{ role: "user", content: userPrompt }],
       system: [
@@ -159,20 +190,17 @@ Return a JSON object with exactly these fields (string values are plain text, no
       ],
     })
 
-    const rawText = message.content[0].type === "text" ? message.content[0].text : ""
-    const start = rawText.indexOf("{")
-    const end = rawText.lastIndexOf("}")
-    const jsonText = start >= 0 && end > start ? rawText.slice(start, end + 1) : rawText
+    const rawText = collectText(message.content)
 
     let lesson: LessonPlanResponse
     try {
-      lesson = JSON.parse(jsonText)
+      lesson = JSON.parse(extractJson(rawText))
     } catch {
       return res.status(500).json({ error: "Claude returned malformed JSON. Please try again." })
     }
 
     console.log(
-      `[generate-lesson] stop=${message.stop_reason} questions=${lesson.assessmentQuestions?.length ?? 0} codes=${lesson.curriculumCodesCovered?.length ?? 0}`,
+      `[generate-lesson] stop=${message.stop_reason} questions=${lesson.assessmentQuestions?.length ?? 0} codes=${lesson.curriculumCodesCovered?.length ?? 0} planningAnswers=${planningAnswers?.length ?? 0} excluded=${lesson.excludedResources?.length ?? 0}`,
     )
 
     return res.status(200).json(lesson)
