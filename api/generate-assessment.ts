@@ -1,6 +1,13 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 
+/**
+ * DEPRECATED ON PRIMARY PATH: Assessment questions are now generated inline
+ * within /api/generate-lesson.ts and cached at lesson creation time. This
+ * endpoint is retained as a fallback for manual question generation in
+ * other contexts but is no longer called by the frontend lesson flow.
+ */
+
 interface ExpectationInput {
   code: string
   description: string
