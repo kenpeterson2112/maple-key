@@ -37,6 +37,20 @@ import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-c
 import AssessmentModal from "@/components/assessment-modal"
 import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
 
+interface PlanningQuestion {
+  id: string
+  prompt: string
+  rationale: string
+  answerFormat: "single-select" | "this-that-both" | "multi-select"
+  options: string[]
+}
+
+interface PlanningAnswer {
+  questionId: string
+  questionPrompt: string
+  answer: string
+}
+
 interface LessonPlannerModalProps {
   isOpen: boolean
   onClose: () => void
@@ -67,6 +81,17 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [consolidationContent, setConsolidationContent] = useState(fc?.consolidationContent ?? lesson?.lessonContent?.consolidation ?? "")
   const [consolidationAssessment, setConsolidationAssessment] = useState(fc?.consolidationAssessment ?? "")
   const [materialsContent, setMaterialsContent] = useState(fc?.materialsContent ?? "")
+  const [learningGoal, setLearningGoal] = useState(fc?.learningGoal ?? "")
+  const [successCriteria, setSuccessCriteria] = useState<string[]>(fc?.successCriteria ?? [])
+  const [materialsResources, setMaterialsResources] = useState<string[]>(fc?.materials?.resources ?? [])
+  const [materialsPreparation, setMaterialsPreparation] = useState<string[]>(fc?.materials?.preparation ?? [])
+  const [excludedResources, setExcludedResources] = useState<{ title: string; reason: string }[]>(fc?.excludedResources ?? [])
+
+  // Two-call flow state
+  const [showQuestionsStep, setShowQuestionsStep] = useState(false)
+  const [planningQuestions, setPlanningQuestions] = useState<PlanningQuestion[]>([])
+  const [questionSelections, setQuestionSelections] = useState<Record<string, string[]>>({})
+
   const [generateError, setGenerateError] = useState<string | null>(null)
   const [showAssessment, setShowAssessment] = useState(false)
   const [latestLesson, setLatestLesson] = useState<LessonMetadata | null>(lesson)
@@ -93,9 +118,10 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const uniqueStrands = new Set(bookmarkedResources.flatMap((r) => r.strand || []))
   const showWarning = bookmarkedResources.length > 5 || uniqueStrands.size > 2
 
-  const callGenerateLesson = async () => {
+  const callGenerateLesson = async (planningAnswers: PlanningAnswer[] = []) => {
     setIsGenerating(true)
     setGenerateError(null)
+    setShowQuestionsStep(false)
     // Dev mock: set localStorage["maplekey_lesson_mock"] to a saved response JSON to skip the API
     if (import.meta.env.DEV) {
       const mockRaw = localStorage.getItem("maplekey_lesson_mock")
@@ -123,6 +149,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           teacherNotes,
           includeAssessmentData,
           classroomResources: classroomResourceLabels,
+          ...(planningAnswers.length > 0 ? { planningAnswers } : {}),
         }),
       })
       if (!res.ok) {
@@ -142,6 +169,11 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setConsolidationContent(data.consolidationContent ?? "")
       setConsolidationAssessment(data.consolidationAssessment ?? "")
       setMaterialsContent(data.materialsContent ?? "")
+      setLearningGoal(data.learningGoal ?? "")
+      setSuccessCriteria(data.successCriteria ?? [])
+      setMaterialsResources(data.materials?.resources ?? [])
+      setMaterialsPreparation(data.materials?.preparation ?? [])
+      setExcludedResources(data.excludedResources ?? [])
       const logged = logLesson({
         title: data.title ?? "",
         grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
@@ -163,7 +195,10 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           actionDifferentiation: data.actionDifferentiation ?? "",
           consolidationContent: data.consolidationContent ?? "",
           consolidationAssessment: data.consolidationAssessment ?? "",
-          materialsContent: data.materialsContent ?? "",
+          learningGoal: data.learningGoal ?? "",
+          successCriteria: data.successCriteria ?? [],
+          materials: data.materials ?? { resources: [], preparation: [] },
+          excludedResources: data.excludedResources ?? [],
         },
       })
       setLatestLesson(logged)
@@ -183,7 +218,55 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     }
   }
 
-  const handleGenerate = () => callGenerateLesson()
+  const handleGenerate = async () => {
+    setIsGenerating(true)
+    setGenerateError(null)
+
+    // Dev mock short-circuit: skip questions step entirely
+    if (import.meta.env.DEV) {
+      const mockRaw = localStorage.getItem("maplekey_lesson_mock")
+      if (mockRaw) {
+        applyResponseJSON(mockRaw, (msg) => setGenerateError(msg))
+        setIsGenerating(false)
+        return
+      }
+    }
+
+    try {
+      const qRes = await fetch("/api/generate-questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(buildRequestPayload()),
+      })
+      if (qRes.ok) {
+        const qData = await qRes.json()
+        if (qData.status === "ok" && Array.isArray(qData.questions) && qData.questions.length > 0) {
+          setPlanningQuestions(qData.questions)
+          setQuestionSelections({})
+          setIsGenerating(false)
+          setShowQuestionsStep(true)
+          return
+        }
+      }
+    } catch {
+      // generate-questions failed — degrade gracefully, fall through to direct lesson generation
+    }
+
+    // Degraded or failed: generate lesson directly with no planning answers
+    await callGenerateLesson([])
+  }
+
+  const handleQuestionsSubmit = () => {
+    const answers: PlanningAnswer[] = planningQuestions.map((q) => {
+      const selected = questionSelections[q.id] ?? []
+      return {
+        questionId: q.id,
+        questionPrompt: q.prompt,
+        answer: selected.join(", "),
+      }
+    })
+    callGenerateLesson(answers)
+  }
 
   const handleRegenerate = () => {
     setLessonGenerated(false)
@@ -212,6 +295,11 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setConsolidationContent(data.consolidationContent ?? "")
       setConsolidationAssessment(data.consolidationAssessment ?? "")
       setMaterialsContent(data.materialsContent ?? "")
+      setLearningGoal(data.learningGoal ?? "")
+      setSuccessCriteria(data.successCriteria ?? [])
+      setMaterialsResources(data.materials?.resources ?? [])
+      setMaterialsPreparation(data.materials?.preparation ?? [])
+      setExcludedResources(data.excludedResources ?? [])
       const logged = logLesson({
         title: data.title ?? "",
         grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
@@ -233,7 +321,10 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           actionDifferentiation: data.actionDifferentiation ?? "",
           consolidationContent: data.consolidationContent ?? "",
           consolidationAssessment: data.consolidationAssessment ?? "",
-          materialsContent: data.materialsContent ?? "",
+          learningGoal: data.learningGoal ?? "",
+          successCriteria: data.successCriteria ?? [],
+          materials: data.materials ?? { resources: [], preparation: [] },
+          excludedResources: data.excludedResources ?? [],
         },
       })
       setLatestLesson(logged)
@@ -254,6 +345,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     const cached = latestLesson ? getCachedQuestions(latestLesson.id) : null
     const responseData = {
       title: lessonTitle,
+      learningGoal,
+      successCriteria,
       curriculumCodesCovered: coveredCodes,
       mindsOnContent,
       mindsOnDifferentiation,
@@ -261,7 +354,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       actionDifferentiation,
       consolidationContent,
       consolidationAssessment,
-      materialsContent,
+      materials: { resources: materialsResources, preparation: materialsPreparation },
+      ...(excludedResources.length ? { excludedResources } : {}),
       ...(cached && cached.length ? { assessmentQuestions: cached } : {}),
     }
     const blob = new Blob([JSON.stringify(responseData, null, 2)], { type: "application/json" })
@@ -350,6 +444,8 @@ You will also write "assessmentQuestions": a short auto-graded formative quick c
 Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
   "title": "Creative lesson title",
+  "learningGoal": "One student-facing sentence describing what students will learn today",
+  "successCriteria": ["I can ...", "I can ...", "I can ..."],
   "curriculumCodesCovered": ["code1", "code2"],
   "mindsOnContent": "Hook/activation activity description (2-4 sentences)",
   "mindsOnDifferentiation": "Differentiation strategies for Minds On phase",
@@ -357,7 +453,11 @@ Return a JSON object with exactly these fields (string values are plain text, no
   "actionDifferentiation": "Differentiation strategies for Action phase",
   "consolidationContent": "Closing/consolidation activity description",
   "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
-  "materialsContent": "Materials list and preparation steps",
+  "materials": {
+    "resources": ["Resource title 1", "Resource title 2"],
+    "preparation": ["What to print or photocopy", "What to pre-load or test on devices"]
+  },
+  "excludedResources": [],
   "assessmentQuestions": [
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
     { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
@@ -656,12 +756,13 @@ Return a JSON object with exactly these fields (string values are plain text, no
           <p class="text-xs font-semibold text-stone-700 mb-2">Preparation</p>
           <ul class="text-sm text-[#444] space-y-2">
             ${
-              materialsContent
-                .split("\n")
-                .filter(Boolean)
+              (materialsPreparation.length > 0
+                ? materialsPreparation
+                : materialsContent.split("\n").filter(Boolean)
+              )
                 .map(
                   (item, index) =>
-                    `<li key=${index} className="flex items-start gap-2"><span className="text-stone-400 flex-shrink-0">${index + 1}.</span><span>${item}</span></li>`,
+                    `<li><span>${index + 1}.</span><span>${item}</span></li>`,
                 )
                 .join("") || "<li>No preparation steps listed</li>"
             }
@@ -782,7 +883,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
         <div className="flex-1 overflow-y-auto p-6">
           <div className="max-w-3xl mx-auto space-y-6">
             {lessonGenerated ? (
-              <>
+              <>{/* lesson view below */}
                 {/* SUCCESS BANNER */}
                 <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 flex items-center gap-3">
                   <CheckCircle size={24} className="text-emerald-600 flex-shrink-0" />
@@ -836,6 +937,45 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   </div>
                 </div>
 
+                {/* LEARNING GOAL & SUCCESS CRITERIA */}
+                {(learningGoal || successCriteria.length > 0) && (
+                  <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                    {learningGoal && (
+                      <div className={successCriteria.length > 0 ? "mb-4" : ""}>
+                        <p className="text-xs font-semibold text-[#8B4513] uppercase tracking-wide mb-1">Learning Goal</p>
+                        <p className="text-sm text-[#2C2C2C] leading-relaxed">{learningGoal}</p>
+                      </div>
+                    )}
+                    {successCriteria.length > 0 && (
+                      <div>
+                        <p className="text-xs font-semibold text-[#8B4513] uppercase tracking-wide mb-2">Success Criteria</p>
+                        <ul className="space-y-1.5">
+                          {successCriteria.map((sc, i) => (
+                            <li key={i} className="flex items-start gap-2 text-sm text-[#444]">
+                              <CheckCircle size={14} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span>{sc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* EXCLUDED RESOURCES NOTICE */}
+                {excludedResources.length > 0 && (
+                  <div className="bg-stone-50 border border-stone-200 rounded-lg px-4 py-3">
+                    <p className="text-xs font-semibold text-stone-600 mb-2">Resources not used in this lesson</p>
+                    <ul className="space-y-1">
+                      {excludedResources.map((ex, i) => (
+                        <li key={i} className="text-xs text-stone-600">
+                          <span className="font-medium">{ex.title}:</span> {ex.reason}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {/* MATERIALS & PREPARATION SECTION - Moved above Minds On */}
                 <div className="bg-white rounded-xl border-l-4 border-stone-400 shadow-sm overflow-hidden">
                   <div className="p-5">
@@ -860,16 +1000,16 @@ Return a JSON object with exactly these fields (string values are plain text, no
                             Resources (auto-generated from bookmarks)
                           </p>
                           <p className="text-sm text-[#444] bg-stone-50 p-2 rounded-lg">
-                            {resources.map((r) => r.topic_title).join(", ")}
+                            {(materialsResources.length > 0 ? materialsResources : resources.map((r) => r.topic_title)).join(", ")}
                           </p>
                         </div>
                         <div>
                           <p className="text-xs font-medium text-stone-600 mb-2">
-                            Preparation & Materials (one per line)
+                            Preparation steps (one per line)
                           </p>
                           <textarea
-                            value={materialsContent}
-                            onChange={(e) => setMaterialsContent(e.target.value)}
+                            value={materialsPreparation.join("\n")}
+                            onChange={(e) => setMaterialsPreparation(e.target.value.split("\n"))}
                             rows={6}
                             className="w-full px-3 py-2 border-2 border-stone-300 rounded-lg bg-white text-sm focus:outline-none focus:border-stone-500 transition-colors resize-none"
                           />
@@ -887,10 +1027,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         <div className="w-1/4 bg-stone-50 border border-stone-200 rounded-lg p-3">
                           <p className="text-xs font-semibold text-stone-700 mb-2">Resources</p>
                           <ul className="text-xs text-[#444] space-y-1.5">
-                            {resources.map((resource, index) => (
+                            {(materialsResources.length > 0 ? materialsResources.map((t) => ({ topic_title: t })) : resources).map((r, index) => (
                               <li key={index} className="flex items-start gap-1.5">
                                 <span className="text-stone-400 flex-shrink-0">•</span>
-                                <span>{resource.topic_title}</span>
+                                <span>{r.topic_title}</span>
                               </li>
                             ))}
                           </ul>
@@ -900,15 +1040,15 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         <div className="flex-1 bg-stone-50 border border-stone-200 rounded-lg p-3">
                           <p className="text-xs font-semibold text-stone-700 mb-2">Preparation</p>
                           <ul className="text-sm text-[#444] space-y-2">
-                            {materialsContent
-                              .split("\n")
-                              .filter(Boolean)
-                              .map((item, index) => (
-                                <li key={index} className="flex items-start gap-2">
-                                  <span className="text-stone-400 flex-shrink-0">{index + 1}.</span>
-                                  <span>{item}</span>
-                                </li>
-                              ))}
+                            {(materialsPreparation.length > 0
+                              ? materialsPreparation
+                              : materialsContent.split("\n").filter(Boolean)
+                            ).map((item, index) => (
+                              <li key={index} className="flex items-start gap-2">
+                                <span className="text-stone-400 flex-shrink-0">{index + 1}.</span>
+                                <span>{item}</span>
+                              </li>
+                            ))}
                           </ul>
                         </div>
                       </div>
@@ -1159,6 +1299,85 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 {/* Spacer for bottom */}
                 <div className="h-6" />
               </>
+            ) : showQuestionsStep ? (
+              <>
+                {/* PLANNING QUESTIONS STEP */}
+                <div className="bg-violet-50 border border-violet-200 rounded-lg p-4">
+                  <p className="text-violet-900 font-medium">A few quick questions to personalize your lesson</p>
+                  <p className="text-sm text-violet-700 mt-1">Your answers will shape how the lesson is structured.</p>
+                </div>
+
+                {planningQuestions.map((q) => (
+                  <div key={q.id} className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                    <p className="font-medium text-[#2C2C2C] mb-1">{q.prompt}</p>
+                    <p className="text-xs text-[#888] mb-4">{q.rationale}</p>
+
+                    {q.answerFormat === "single-select" && (
+                      <div className="flex flex-wrap gap-2">
+                        {q.options.map((opt) => (
+                          <button
+                            key={opt}
+                            onClick={() => setQuestionSelections((prev) => ({ ...prev, [q.id]: [opt] }))}
+                            className={`px-4 py-2 rounded-lg text-sm border-2 transition-colors ${
+                              questionSelections[q.id]?.[0] === opt
+                                ? "bg-violet-600 border-violet-600 text-white"
+                                : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
+                            }`}
+                          >
+                            {opt}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {q.answerFormat === "multi-select" && (
+                      <div className="flex flex-wrap gap-2">
+                        {q.options.map((opt) => {
+                          const selected = questionSelections[q.id]?.includes(opt) ?? false
+                          return (
+                            <button
+                              key={opt}
+                              onClick={() => {
+                                const current = questionSelections[q.id] ?? []
+                                setQuestionSelections((prev) => ({
+                                  ...prev,
+                                  [q.id]: selected ? current.filter((o) => o !== opt) : [...current, opt],
+                                }))
+                              }}
+                              className={`px-4 py-2 rounded-lg text-sm border-2 transition-colors ${
+                                selected
+                                  ? "bg-violet-600 border-violet-600 text-white"
+                                  : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
+                              }`}
+                            >
+                              {opt}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    )}
+
+                    {q.answerFormat === "this-that-both" && (
+                      <div className="flex flex-wrap gap-2">
+                        {[...q.options, "Both"].map((opt) => (
+                          <button
+                            key={opt}
+                            onClick={() => setQuestionSelections((prev) => ({ ...prev, [q.id]: [opt] }))}
+                            className={`px-4 py-2 rounded-lg text-sm border-2 transition-colors ${
+                              questionSelections[q.id]?.[0] === opt
+                                ? "bg-violet-600 border-violet-600 text-white"
+                                : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
+                            }`}
+                          >
+                            {opt}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                <div className="h-6" />
+              </>
             ) : (
               <>
                 {/* District Notice */}
@@ -1379,7 +1598,21 @@ Return a JSON object with exactly these fields (string values are plain text, no
           </div>
         </div>
 
-        {!lessonGenerated && (
+        {!lessonGenerated && showQuestionsStep && (
+          <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
+            <div className="max-w-3xl mx-auto">
+              <button
+                onClick={handleQuestionsSubmit}
+                className="w-full py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200"
+              >
+                <Sparkles size={20} />
+                Generate Lesson Plan
+              </button>
+            </div>
+          </div>
+        )}
+
+        {!lessonGenerated && !showQuestionsStep && (
           <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
             <div className="max-w-3xl mx-auto space-y-3">
               {generateError && (
