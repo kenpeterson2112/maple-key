@@ -10,7 +10,12 @@ export interface LessonFullContent {
   actionDifferentiation: string
   consolidationContent: string
   consolidationAssessment: string
-  materialsContent: string
+  /** Kept optional so lessons saved before the schema change still load. */
+  materialsContent?: string
+  learningGoal?: string
+  successCriteria?: string[]
+  materials?: { resources: string[]; preparation: string[] }
+  excludedResources?: { title: string; reason: string }[]
 }
 
 export interface LessonMetadata {
