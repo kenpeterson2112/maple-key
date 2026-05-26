@@ -1,8 +1,9 @@
 "use client"
 
-import { Sparkles, Settings, Bookmark, ArrowRight } from "lucide-react"
+import { Sparkles, Settings, Bookmark, ArrowRight, ArrowDown } from "lucide-react"
 import { useBookmarks } from "@/lib/bookmarks-context"
-import { getLatestLesson } from "@/lib/lesson-metadata"
+import { getLatestLesson, getLessonLog } from "@/lib/lesson-metadata"
+import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { withBasePath } from "@/lib/base-path"
 import LessonOverviewCard from "./lesson-overview-card"
 import type { Filters } from "@/lib/types"
@@ -11,8 +12,9 @@ interface HomeScreenProps {
   filters: Filters
   resultCount: number
   onOpenResources: () => void
-  onOpenLessonPlanner: () => void
+  onOpenLessonPlanner: (lesson?: LessonMetadata | null) => void
   onOpenAssessment: () => void
+  onOpenLessons: () => void
   onOpenSettings: () => void
 }
 
@@ -21,10 +23,12 @@ export default function HomeScreen({
   onOpenResources,
   onOpenLessonPlanner,
   onOpenAssessment,
+  onOpenLessons,
   onOpenSettings,
 }: HomeScreenProps) {
   const { bookmarkedResources } = useBookmarks()
   const latestLesson = getLatestLesson()
+  const lessonCount = getLessonLog().length
 
   return (
     <div className="flex flex-col h-full bg-[#FAF3E0] overflow-y-auto">
@@ -33,31 +37,42 @@ export default function HomeScreen({
         <img
           src={withBasePath("/Maple_Key_Transp_Background.png")}
           alt="Maple Key"
-          className="h-10 w-auto object-contain"
+          className="h-10 md:h-20 w-auto object-contain"
         />
         <button
           onClick={onOpenSettings}
-          className="flex items-center justify-center w-9 h-9 rounded-xl text-[#8B4513] hover:bg-[#FFE5CC] transition-colors"
+          className="flex items-center justify-center w-9 h-9 md:w-16 md:h-16 rounded-xl text-[#8B4513] hover:bg-[#FFE5CC] transition-colors"
           aria-label="Settings"
         >
-          <Settings size={20} />
+          <Settings className="w-5 h-5 md:w-10 md:h-10" />
         </button>
       </header>
 
       <div className="flex-1 px-5 py-6 space-y-6 max-w-2xl mx-auto w-full">
         {/* Most recent lesson — detailed overview */}
         <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-wider text-[#A8998E]">Most recent lesson</p>
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#A8998E]">Most recent lesson</p>
+            {lessonCount > 0 && (
+              <button
+                onClick={onOpenLessons}
+                className="flex items-center gap-1 text-xs font-semibold text-[#C65D3B] hover:text-[#FF6B35] transition-colors"
+              >
+                View all ({lessonCount})
+                <ArrowRight size={13} />
+              </button>
+            )}
+          </div>
           {latestLesson ? (
             <LessonOverviewCard
               lesson={latestLesson}
               bookmarkedResources={bookmarkedResources}
-              onOpen={onOpenLessonPlanner}
+              onOpen={() => onOpenLessonPlanner(latestLesson)}
               onOpenAssessment={onOpenAssessment}
             />
           ) : (
             <button
-              onClick={onOpenLessonPlanner}
+              onClick={() => onOpenLessonPlanner(null)}
               className="w-full rounded-2xl bg-violet-50 border-2 border-violet-200 px-5 py-8 flex flex-col items-center gap-3 shadow-sm active:scale-[0.99] transition-transform text-center"
             >
               <div className="w-12 h-12 rounded-2xl bg-violet-100 flex items-center justify-center">
@@ -111,7 +126,7 @@ export default function HomeScreen({
               </p>
             </div>
           </div>
-          <ArrowRight size={24} className="text-white/70 flex-shrink-0" />
+          <ArrowDown size={24} className="text-white/70 flex-shrink-0" />
         </button>
       </div>
     </div>

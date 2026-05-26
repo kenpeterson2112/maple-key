@@ -29,8 +29,9 @@ import {
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
-import { logLesson, getLatestLesson } from "@/lib/lesson-metadata"
+import { logLesson } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
+import { useBookmarks } from "@/lib/bookmarks-context"
 import { sanitizeQuestions } from "@/lib/assessment-types"
 import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
@@ -42,29 +43,39 @@ interface LessonPlannerModalProps {
   onBack: () => void
   bookmarkedResources: Resource[]
   asSpace?: boolean
+  lesson?: LessonMetadata | null
 }
 
-export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarkedResources, asSpace = false }: LessonPlannerModalProps) {
+export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarkedResources, asSpace = false, lesson = null }: LessonPlannerModalProps) {
+  const { clearBookmarks } = useBookmarks()
+  const fc = lesson?.fullContent
+
   const [includeAssessmentData, setIncludeAssessmentData] = useState(false)
-  const [lessonLength, setLessonLength] = useState("60 minutes")
-  const [lessonTemplate, setLessonTemplate] = useState("3-Part Lesson (Minds On, Action, Consolidation)")
+  const [lessonLength, setLessonLength] = useState(lesson?.lessonLength ?? "60 minutes")
+  const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? "3-Part Lesson (Minds On, Action, Consolidation)")
   const [teacherNotes, setTeacherNotes] = useState("")
   const [isGenerating, setIsGenerating] = useState(false)
-  const [lessonGenerated, setLessonGenerated] = useState(false)
+  const [lessonGenerated, setLessonGenerated] = useState(!!lesson)
 
   const [editingSection, setEditingSection] = useState<string | null>(null)
-  const [lessonTitle, setLessonTitle] = useState("")
-  const [coveredCodes, setCoveredCodes] = useState<string[]>([])
-  const [mindsOnContent, setMindsOnContent] = useState("")
-  const [mindsOnDifferentiation, setMindsOnDifferentiation] = useState("")
-  const [actionContent, setActionContent] = useState("")
-  const [actionDifferentiation, setActionDifferentiation] = useState("")
-  const [consolidationContent, setConsolidationContent] = useState("")
-  const [consolidationAssessment, setConsolidationAssessment] = useState("")
-  const [materialsContent, setMaterialsContent] = useState("")
+  const [lessonTitle, setLessonTitle] = useState(lesson?.title ?? "")
+  const [coveredCodes, setCoveredCodes] = useState<string[]>(lesson?.curriculumCodesCovered ?? [])
+  const [mindsOnContent, setMindsOnContent] = useState(fc?.mindsOnContent ?? lesson?.lessonContent?.mindsOn ?? "")
+  const [mindsOnDifferentiation, setMindsOnDifferentiation] = useState(fc?.mindsOnDifferentiation ?? "")
+  const [actionContent, setActionContent] = useState(fc?.actionContent ?? lesson?.lessonContent?.action ?? "")
+  const [actionDifferentiation, setActionDifferentiation] = useState(fc?.actionDifferentiation ?? "")
+  const [consolidationContent, setConsolidationContent] = useState(fc?.consolidationContent ?? lesson?.lessonContent?.consolidation ?? "")
+  const [consolidationAssessment, setConsolidationAssessment] = useState(fc?.consolidationAssessment ?? "")
+  const [materialsContent, setMaterialsContent] = useState(fc?.materialsContent ?? "")
   const [generateError, setGenerateError] = useState<string | null>(null)
   const [showAssessment, setShowAssessment] = useState(false)
-  const [latestLesson, setLatestLesson] = useState<LessonMetadata | null>(null)
+  const [latestLesson, setLatestLesson] = useState<LessonMetadata | null>(lesson)
+
+  // Resources shown in the generated view come from the saved lesson snapshot
+  // when reopening a stored lesson; otherwise from live bookmarks.
+  const activeLesson = lesson ?? latestLesson
+  const resources: Resource[] =
+    activeLesson?.resources && activeLesson.resources.length > 0 ? activeLesson.resources : bookmarkedResources
 
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false)
   const [copiedState, setCopiedState] = useState<"request" | "prompt" | null>(null)
@@ -137,14 +148,27 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),
+        resources: bookmarkedResources,
+        lessonLength,
+        lessonTemplate,
         lessonContent: {
           mindsOn: (data.mindsOnContent ?? "").slice(0, 600),
           action: (data.actionContent ?? "").slice(0, 600),
           consolidation: (data.consolidationContent ?? "").slice(0, 600),
         },
+        fullContent: {
+          mindsOnContent: data.mindsOnContent ?? "",
+          mindsOnDifferentiation: data.mindsOnDifferentiation ?? "",
+          actionContent: data.actionContent ?? "",
+          actionDifferentiation: data.actionDifferentiation ?? "",
+          consolidationContent: data.consolidationContent ?? "",
+          consolidationAssessment: data.consolidationAssessment ?? "",
+          materialsContent: data.materialsContent ?? "",
+        },
       })
       setLatestLesson(logged)
       setLessonGenerated(true)
+      clearBookmarks()
       const bundledQs = sanitizeQuestions(data.assessmentQuestions)
       if (import.meta.env.DEV) {
         if (data.assessmentQuestions == null) console.warn("[maplekey] API response had no assessmentQuestions field")
@@ -194,14 +218,27 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),
+        resources: bookmarkedResources,
+        lessonLength,
+        lessonTemplate,
         lessonContent: {
           mindsOn: (data.mindsOnContent ?? "").slice(0, 600),
           action: (data.actionContent ?? "").slice(0, 600),
           consolidation: (data.consolidationContent ?? "").slice(0, 600),
         },
+        fullContent: {
+          mindsOnContent: data.mindsOnContent ?? "",
+          mindsOnDifferentiation: data.mindsOnDifferentiation ?? "",
+          actionContent: data.actionContent ?? "",
+          actionDifferentiation: data.actionDifferentiation ?? "",
+          consolidationContent: data.consolidationContent ?? "",
+          consolidationAssessment: data.consolidationAssessment ?? "",
+          materialsContent: data.materialsContent ?? "",
+        },
       })
       setLatestLesson(logged)
       setLessonGenerated(true)
+      clearBookmarks()
       const bundledQs = sanitizeQuestions(data.assessmentQuestions)
       if (bundledQs.length) cacheQuestions(logged.id, bundledQs)
       setGenerateError(null)
@@ -352,20 +389,20 @@ Return a JSON object with exactly these fields (string values are plain text, no
     })
 
     const gradeSubject =
-      bookmarkedResources.length > 0
-        ? `Grade ${bookmarkedResources[0].grade_level} ${bookmarkedResources[0].subject}`
+      resources.length > 0
+        ? `Grade ${resources[0].grade_level} ${resources[0].subject}`
         : "Grade 6 Math"
 
     const curriculumCodes =
       coveredCodes.length > 0
         ? coveredCodes.join(", ")
-        : bookmarkedResources
+        : resources
             .flatMap((r) => r.curriculum_expectations || [])
             .filter((v, i, a) => a.indexOf(v) === i)
             .slice(0, 3)
             .join(", ") || "N/A"
 
-    const resourcesList = bookmarkedResources.map((r) => `<li>${r.topic_title} - ${r.publisher_creator}</li>`).join("")
+    const resourcesList = resources.map((r) => `<li>${r.topic_title} - ${r.publisher_creator}</li>`).join("")
 
     const htmlContent = `
 <!DOCTYPE html>
@@ -727,7 +764,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 </h2>
               </div>
               <p className="text-sm text-[#666] mt-1">
-                {bookmarkedResources.length} resource{bookmarkedResources.length !== 1 ? "s" : ""} selected
+                {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
               </p>
             </div>
           </div>
@@ -760,8 +797,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         {lessonTitle}
                       </h3>
                       <p className="text-sm text-[#666] mt-1">
-                        {bookmarkedResources[0]?.grade_level?.[0] ? `Grade ${bookmarkedResources[0].grade_level[0]}` : ""}
-                        {bookmarkedResources[0]?.grade_level?.[0] && " • "}
+                        {resources[0]?.grade_level?.[0] ? `Grade ${resources[0].grade_level[0]}` : ""}
+                        {resources[0]?.grade_level?.[0] && " • "}
                         {lessonLength} • {lessonTemplate.split(" (")[0]}
                       </p>
                       {coveredCodes.length > 0 && (
@@ -786,13 +823,15 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         <Download size={16} />
                         Save JSON
                       </button>
-                      <button
-                        onClick={handleRegenerate}
-                        className="px-4 py-2 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-medium rounded-lg flex items-center gap-2 transition-colors"
-                      >
-                        <RefreshCw size={16} />
-                        Regenerate
-                      </button>
+                      {bookmarkedResources.length > 0 && (
+                        <button
+                          onClick={handleRegenerate}
+                          className="px-4 py-2 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-medium rounded-lg flex items-center gap-2 transition-colors"
+                        >
+                          <RefreshCw size={16} />
+                          Regenerate
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -821,7 +860,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                             Resources (auto-generated from bookmarks)
                           </p>
                           <p className="text-sm text-[#444] bg-stone-50 p-2 rounded-lg">
-                            {bookmarkedResources.map((r) => r.topic_title).join(", ")}
+                            {resources.map((r) => r.topic_title).join(", ")}
                           </p>
                         </div>
                         <div>
@@ -848,7 +887,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         <div className="w-1/4 bg-stone-50 border border-stone-200 rounded-lg p-3">
                           <p className="text-xs font-semibold text-stone-700 mb-2">Resources</p>
                           <ul className="text-xs text-[#444] space-y-1.5">
-                            {bookmarkedResources.map((resource, index) => (
+                            {resources.map((resource, index) => (
                               <li key={index} className="flex items-start gap-1.5">
                                 <span className="text-stone-400 flex-shrink-0">•</span>
                                 <span>{resource.topic_title}</span>
@@ -970,7 +1009,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         <div className="bg-stone-50 border border-stone-200 rounded-lg p-3">
                           <p className="text-xs font-medium text-stone-700 mb-2">Resources Used</p>
                           <div className="space-y-1">
-                            {bookmarkedResources.slice(0, 3).map((resource) => (
+                            {resources.slice(0, 3).map((resource) => (
                               <a
                                 key={resource.url}
                                 href={resource.url}
@@ -1005,7 +1044,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         <div className="mt-4 bg-stone-50 border border-stone-200 rounded-lg p-3">
                           <p className="text-xs font-medium text-stone-700 mb-2">Resources Used</p>
                           <div className="space-y-1">
-                            {bookmarkedResources.slice(0, 3).map((resource) => (
+                            {resources.slice(0, 3).map((resource) => (
                               <a
                                 key={resource.url}
                                 href={resource.url}

@@ -9,6 +9,7 @@ interface BookmarksContextType {
   removeBookmark: (resourceId: string) => void
   isBookmarked: (resourceId: string) => boolean
   reorderBookmarks: (startIndex: number, endIndex: number) => void
+  clearBookmarks: () => void
 }
 
 const BookmarksContext = createContext<BookmarksContextType | undefined>(undefined)
@@ -59,9 +60,11 @@ export function BookmarksProvider({ children }: { children: ReactNode }) {
     })
   }
 
+  const clearBookmarks = () => setBookmarkedResources([])
+
   return (
     <BookmarksContext.Provider
-      value={{ bookmarkedResources, addBookmark, removeBookmark, isBookmarked, reorderBookmarks }}
+      value={{ bookmarkedResources, addBookmark, removeBookmark, isBookmarked, reorderBookmarks, clearBookmarks }}
     >
       {children}
     </BookmarksContext.Provider>

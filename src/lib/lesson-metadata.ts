@@ -1,5 +1,17 @@
+import type { Resource } from "./types"
+
 const STORAGE_KEY = "maplekey_lesson_log"
 const MAX_ENTRIES = 20
+
+export interface LessonFullContent {
+  mindsOnContent: string
+  mindsOnDifferentiation: string
+  actionContent: string
+  actionDifferentiation: string
+  consolidationContent: string
+  consolidationAssessment: string
+  materialsContent: string
+}
 
 export interface LessonMetadata {
   id: string
@@ -10,6 +22,10 @@ export interface LessonMetadata {
   curriculumCodesCovered: string[]
   resourceIds: string[]
   lessonContent?: { mindsOn: string; action: string; consolidation: string }
+  lessonLength?: string
+  lessonTemplate?: string
+  fullContent?: LessonFullContent
+  resources?: Resource[]
 }
 
 export function logLesson(meta: Omit<LessonMetadata, "id" | "timestamp">): LessonMetadata {

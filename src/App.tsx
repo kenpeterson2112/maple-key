@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import HomeScreen from "@/components/home-screen"
 import ResourcesSpace from "@/components/resources-space"
 import LessonPlannerModal from "@/components/lesson-planner-modal"
+import LessonsLibrary from "@/components/lessons-library"
 import AssessmentModal from "@/components/assessment-modal"
 import SettingsModal from "@/components/settings-modal"
 import type { Filters } from "@/lib/types"
@@ -11,12 +12,13 @@ import { getLatestLesson } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
 
-type Space = "home" | "resources" | "lessonplanner" | "assessment"
+type Space = "home" | "resources" | "lessonplanner" | "assessment" | "lessons"
 
 const SPACE_VARIANTS: Record<Exclude<Space, "home">, { initial: object; animate: object; exit: object }> = {
   resources:     { initial: { y: "100%" }, animate: { y: 0 }, exit: { y: "100%" } },
   lessonplanner: { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
   assessment:    { initial: { x: "100%" },  animate: { x: 0 }, exit: { x: "100%"  } },
+  lessons:       { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
 }
 
 const SPRING = { type: "spring", stiffness: 280, damping: 32 }
@@ -46,6 +48,7 @@ export default function App() {
   const [activeSpace, setActiveSpace] = useState<Space>("home")
   const [showSettings, setShowSettings] = useState(false)
   const [assessmentLesson, setAssessmentLesson] = useState<LessonMetadata | null>(null)
+  const [plannerLesson, setPlannerLesson] = useState<LessonMetadata | null>(null)
 
   const { bookmarkedResources } = useBookmarks()
 
@@ -98,6 +101,16 @@ export default function App() {
     setActiveSpace("assessment")
   }
 
+  const handleOpenLessonPlanner = (lesson?: LessonMetadata | null) => {
+    setPlannerLesson(lesson ?? null)
+    setActiveSpace("lessonplanner")
+  }
+
+  const handleOpenLessonFromLibrary = (lesson: LessonMetadata) => {
+    setPlannerLesson(lesson)
+    setActiveSpace("lessonplanner")
+  }
+
   const goHome = () => setActiveSpace("home")
 
   return (
@@ -107,8 +120,9 @@ export default function App() {
         filters={filters}
         resultCount={resultCount}
         onOpenResources={() => setActiveSpace("resources")}
-        onOpenLessonPlanner={() => setActiveSpace("lessonplanner")}
+        onOpenLessonPlanner={handleOpenLessonPlanner}
         onOpenAssessment={handleOpenAssessment}
+        onOpenLessons={() => setActiveSpace("lessons")}
         onOpenSettings={() => setShowSettings(true)}
       />
 
@@ -142,10 +156,15 @@ export default function App() {
               <LessonPlannerModal
                 isOpen
                 asSpace
+                lesson={plannerLesson}
                 bookmarkedResources={bookmarkedResources}
                 onClose={goHome}
                 onBack={goHome}
               />
+            )}
+
+            {activeSpace === "lessons" && (
+              <LessonsLibrary onBack={goHome} onOpenLesson={handleOpenLessonFromLibrary} />
             )}
 
             {activeSpace === "assessment" && assessmentLesson && (
