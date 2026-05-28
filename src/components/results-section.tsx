@@ -40,7 +40,9 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
 
       if (filters.grade && filters.grade !== "") {
         const selectedGrades = filters.grade.split(",").map((g) => g.trim())
-        const resourceGrades = (resource.grade_level || []).map(String)
+        const resourceGrades = (resource.grade_level || []).map((g) =>
+          String(g).replace(/[\[\]]/g, "").trim(),
+        )
         if (!selectedGrades.some((g) => resourceGrades.includes(g))) return false
       }
 
