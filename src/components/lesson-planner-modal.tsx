@@ -36,6 +36,7 @@ import { sanitizeQuestions } from "@/lib/assessment-types"
 import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
 import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
+import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
 
 interface PlanningQuestion {
   id: string
@@ -68,6 +69,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [lessonLength, setLessonLength] = useState(lesson?.lessonLength ?? "60 minutes")
   const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? "3-Part Lesson (Minds On, Action, Consolidation)")
   const [teacherNotes, setTeacherNotes] = useState("")
+  const [userMaterials, setUserMaterials] = useState<UserMaterial[]>([])
   const [isGenerating, setIsGenerating] = useState(false)
   const [lessonGenerated, setLessonGenerated] = useState(!!lesson)
 
@@ -1498,6 +1500,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     ))}
                   </div>
                 </div>
+
+                <UserMaterialsSection materials={userMaterials} onChange={setUserMaterials} />
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
