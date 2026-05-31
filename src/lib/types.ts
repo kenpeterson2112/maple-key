@@ -41,6 +41,9 @@ export interface Resource {
   accessibility: string[]
   // Publication info
   year_published?: number
+  // Pedagogical deployment (populated by normalize-resources.py and enrich-usage-notes.py)
+  instructional_modes?: ("whole-class" | "small-group" | "individual" | "station-rotation")[]
+  usage_notes?: string
   // Provenance
   metadata: ResourceMetadata
 }

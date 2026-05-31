@@ -218,6 +218,44 @@ def get_resource_type(modalities: list) -> str:
     return "digital"
 
 
+def infer_instructional_modes(modalities: list, resource_type: str, title: str, description: str) -> list:
+    m_lower = {m.lower() for m in modalities}
+    text = (title + " " + description).lower()
+
+    # Experiential — always whole-class
+    if "field trip" in m_lower or "guest speaker" in m_lower:
+        modes = ["whole-class"]
+
+    elif resource_type == "video" or "audio/podcast" in m_lower:
+        modes = ["individual", "whole-class"]
+
+    elif resource_type == "print":
+        modes = ["individual", "small-group"]
+
+    elif resource_type == "interactive":
+        modes = ["individual", "small-group", "whole-class"]
+
+    elif resource_type == "physical":
+        modes = ["small-group", "station-rotation"]
+
+    elif resource_type == "digital":
+        if "books & print media" in m_lower:
+            # Downloadable/printable digital resource
+            modes = ["individual", "small-group"]
+        else:
+            modes = ["individual", "whole-class"]
+
+    else:
+        modes = ["individual", "whole-class"]
+
+    # Station/centre override: if the title or description clearly describes
+    # a station or centre activity, mark it as such regardless of resource_type.
+    if any(kw in text for kw in ("station", "centre", "center", "rotation")):
+        modes = ["small-group", "station-rotation"]
+
+    return sorted(set(modes))
+
+
 # ── Subject helpers ────────────────────────────────────────────────────────────
 
 def normalize_subject_display(subject: str) -> str:
@@ -356,6 +394,12 @@ def normalize_resource(resource: dict, auto_id_counter: int) -> dict:
     # ── Modality ──
     modalities = normalize_modality(resource.get("modality") or "")
     resource_type = get_resource_type(modalities)
+    instructional_modes = infer_instructional_modes(
+        modalities,
+        resource_type,
+        resource.get("topic_title") or "",
+        resource.get("description") or "",
+    )
 
     # ── Access ──
     is_paid = bool(resource.get("is_paid", False))
@@ -405,6 +449,9 @@ def normalize_resource(resource: dict, auto_id_counter: int) -> dict:
         "accessibility": accessibility,
         # Publication info (sparse — only 11% of records have this)
         **({"year_published": resource["year_published"]} if resource.get("year_published") is not None else {}),
+        # Pedagogical deployment context
+        "instructional_modes": instructional_modes,
+        "usage_notes": resource.get("usage_notes") or None,
         # New relational structure
         "alignments": alignments,
         # Provenance
@@ -448,6 +495,7 @@ def run():
         "grade_band_counts": {},
         "subject_counts": {},
         "jurisdiction_counts": {},
+        "instructional_mode_counts": {},
     }
 
     auto_id_counter = 1
@@ -495,6 +543,9 @@ def run():
         jur = normed["jurisdiction"]
         stats["jurisdiction_counts"][jur] = stats["jurisdiction_counts"].get(jur, 0) + 1
 
+        for mode in normed.get("instructional_modes") or []:
+            stats["instructional_mode_counts"][mode] = stats["instructional_mode_counts"].get(mode, 0) + 1
+
         resources.append(normed)
 
     # Build output
@@ -502,7 +553,7 @@ def run():
         "meta": {
             "generated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
             "total_count": len(resources),
-            "schema_version": "2.0",
+            "schema_version": "2.1",
         },
         "resources": resources,
     }
@@ -543,6 +594,9 @@ def run():
     lines += ["", "Jurisdiction breakdown:"]
     for jur, count in sorted(stats["jurisdiction_counts"].items(), key=lambda x: -x[1]):
         lines.append(f"  {jur:<24} {count}")
+    lines += ["", "Instructional modes breakdown:"]
+    for mode, count in sorted(stats["instructional_mode_counts"].items(), key=lambda x: -x[1]):
+        lines.append(f"  {mode:<24} {count}")
 
     report_text = "\n".join(lines) + "\n"
     REPORT.write_text(report_text, encoding="utf-8")

@@ -10,6 +10,8 @@ interface ResourceInput {
   grade: string
   subject: string
   publisher?: string
+  instructional_modes?: string[]
+  usage_notes?: string
 }
 
 interface PlanningAnswer {
@@ -105,16 +107,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const subject = resources[0].subject ?? "unknown"
 
   const resourceList = resources
-    .map(
-      (r, i) =>
-        `Resource ${i + 1}: "${r.title}"
-  Description: ${r.description}
-  Publisher: ${r.publisher ?? "unknown"}
-  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
-    )
+    .map((r, i) => {
+      const lines = [
+        `Resource ${i + 1}: "${r.title}"`,
+        `  Description: ${r.description}`,
+        `  Publisher: ${r.publisher ?? "unknown"}`,
+        `  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
+      ]
+      if (r.instructional_modes?.length) {
+        lines.push(`  Best used as: ${r.instructional_modes.join(", ")}`)
+      }
+      if (r.usage_notes) {
+        lines.push(`  Deployment note: ${r.usage_notes}`)
+      }
+      return lines.join("\n")
+    })
     .join("\n\n")
 
-  const systemPrompt = `You are an experienced Ontario elementary school teacher and curriculum expert. You create clear, practical, standards-aligned lesson plans for Canadian classrooms. You always respond with valid JSON only — no markdown fences, no extra text.`
+  const systemPrompt = `You are an experienced Ontario elementary school teacher and curriculum expert. You create clear, practical, standards-aligned lesson plans for Canadian classrooms. You always respond with valid JSON only — no markdown fences, no extra text.
+
+Instructional structure guidance: Each resource may include a "Best used as" field and a "Deployment note" — use these to inform how you structure the lesson. Station rotation and centre-based learning are excellent, well-established strategies; choose them when resources list "station-rotation" in "Best used as", when the teacher's notes or template suggest it, or when multiple hands-on materials are naturally suited to it. For flexible resources (interactive tools, digital content, video), match the approach to the context — whole-class discussion, individual exploration, or partner work may serve the lesson better than stations. Let the resources and teacher intent guide the structure, not a default habit.`
 
   const classroomResourcesLine =
     classroomResources && classroomResources.length > 0

@@ -145,6 +145,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
             grade: (r as any).grade_level,
             subject: r.subject,
             publisher: (r as any).publisher_creator,
+            instructional_modes: r.instructional_modes,
+            usage_notes: r.usage_notes,
           })),
           lessonLength,
           lessonTemplate,
@@ -393,6 +395,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       grade: (r as any).grade_level,
       subject: r.subject,
       publisher: (r as any).publisher_creator,
+      instructional_modes: r.instructional_modes,
+      usage_notes: r.usage_notes,
     })),
     lessonLength,
     lessonTemplate,
@@ -412,10 +416,21 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     const subject = bookmarkedResources[0]?.subject ?? "unknown"
     const allCodes = [...new Set(bookmarkedResources.flatMap((r) => r.curriculum_expectations ?? []))]
     const resourceList = bookmarkedResources
-      .map(
-        (r, i) =>
-          `Resource ${i + 1}: "${(r as any).topic_title}"\n  Description: ${r.description}\n  Publisher: ${(r as any).publisher_creator ?? "unknown"}\n  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
-      )
+      .map((r, i) => {
+        const lines = [
+          `Resource ${i + 1}: "${(r as any).topic_title}"`,
+          `  Description: ${r.description}`,
+          `  Publisher: ${(r as any).publisher_creator ?? "unknown"}`,
+          `  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
+        ]
+        if (r.instructional_modes?.length) {
+          lines.push(`  Best used as: ${r.instructional_modes.join(", ")}`)
+        }
+        if (r.usage_notes) {
+          lines.push(`  Deployment note: ${r.usage_notes}`)
+        }
+        return lines.join("\n")
+      })
       .join("\n\n")
 
     const classroomLine =
