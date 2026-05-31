@@ -1,6 +1,6 @@
 Normalization Report
 ============================================================
-Generated: 2026-05-24 03:44 UTC
+Generated: 2026-05-31 19:19 UTC
 
 Input records:              1491
 Output records:             1491
@@ -8,7 +8,7 @@ Output records:             1491
 Records with original id:   1491
 Records assigned auto-id:   0
 
-grade_level changed:        1491
+grade_level changed:        910
 modality changed:           1491
 accessibility changed:      0
 contributor names normed:   1491
@@ -17,9 +17,7 @@ With curriculum codes:      105
 Without curriculum codes:   1386
 
 Grade band breakdown:
-  intermediate     94
-  multi            1395
-  senior           2
+  multi            1491
 
 Subject breakdown:
   Math                 1095
@@ -35,3 +33,9 @@ Jurisdiction breakdown:
   quebec                   2
   nova_scotia              1
   saskatchewan             1
+
+Instructional modes breakdown:
+  individual               1409
+  whole-class              1168
+  small-group              768
+  station-rotation         65

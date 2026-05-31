@@ -163,6 +163,8 @@ Return ONLY a JSON array (no prose, no markdown fences). Each element must match
   "is_paid": boolean,
   "curriculum_expectations": [],   // always empty array
   "accessibility": ["No Concerns"],
+  "instructional_modes": [],       // populated by normalize-resources.py
+  "usage_notes": null,             // populated by enrich-usage-notes.py
   "alignments": [                  // one alignment per strand used
     {
       "jurisdiction": string,
@@ -264,6 +266,8 @@ def stamp_resource(resource: dict, next_num: int) -> dict:
     resource.setdefault("curriculum_expectations", [])
     resource.setdefault("accessibility", ["No Concerns"])
     resource.setdefault("alignments", [])
+    resource.setdefault("instructional_modes", [])
+    resource.setdefault("usage_notes", None)
     return resource
 
 

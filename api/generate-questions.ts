@@ -27,6 +27,8 @@ interface ResourceInput {
   grade: string
   subject: string
   publisher?: string
+  instructional_modes?: string[]
+  usage_notes?: string
 }
 
 interface GenerateQuestionsRequest {
@@ -126,13 +128,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const resourceList = resources
     .slice(0, MAX_RESOURCES)
-    .map(
-      (r, i) =>
-        `Resource ${i + 1}: "${r.title}"
-  Description: ${r.description}
-  Publisher: ${r.publisher ?? "unknown"}
-  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
-    )
+    .map((r, i) => {
+      const lines = [
+        `Resource ${i + 1}: "${r.title}"`,
+        `  Description: ${r.description}`,
+        `  Publisher: ${r.publisher ?? "unknown"}`,
+        `  Curriculum codes: ${r.curriculum_expectations?.join(", ") || "not specified"}`,
+      ]
+      if (r.instructional_modes?.length) {
+        lines.push(`  Best used as: ${r.instructional_modes.join(", ")}`)
+      }
+      if (r.usage_notes) {
+        lines.push(`  Deployment note: ${r.usage_notes}`)
+      }
+      return lines.join("\n")
+    })
     .join("\n\n")
 
   const grade = resources[0].grade ?? "unknown"
