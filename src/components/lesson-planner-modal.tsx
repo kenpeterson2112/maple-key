@@ -621,17 +621,22 @@ Return a JSON object with exactly these fields (string values are plain text, no
       border-radius: 10px;
       padding: 14px 16px;
       margin-bottom: 14px;
-      /* Keep short cards together; the browser will still break
-         long cards across pages rather than clipping their content. */
-      page-break-inside: avoid;
-      break-inside: avoid;
+      /* Allow tall cards (e.g. Action with body + Resources + Differentiation)
+         to break across pages instead of forcing a full-page gap above. */
+      orphans: 3;
+      widows: 3;
     }
+    /* Short cards stay together; long ones rely on callout/head atomicity below. */
+    .card.compact { page-break-inside: avoid; break-inside: avoid; }
     .callout { page-break-inside: avoid; break-inside: avoid; }
     .card-head {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-bottom: 6px;
+      /* Keep the title pill glued to the first paragraph below it. */
+      page-break-after: avoid;
+      break-after: avoid;
     }
     .card-title {
       font-size: 13pt;
@@ -764,7 +769,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
   ${
     learningGoal || successCriteria.length > 0
       ? `
-  <div class="card learning">
+  <div class="card compact learning">
     ${
       learningGoal
         ? `<div style="margin-bottom:${successCriteria.length > 0 ? "10px" : "0"};">
@@ -785,7 +790,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
       : ""
   }
 
-  <div class="card materials">
+  <div class="card compact materials">
     <div class="card-head">
       <h2 class="card-title">Materials &amp; Preparation</h2>
     </div>
