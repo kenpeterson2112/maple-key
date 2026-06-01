@@ -565,11 +565,14 @@ Return a JSON object with exactly these fields (string values are plain text, no
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif;
       font-size: 10.5pt;
       line-height: 1.5;
       color: #2C2C2C;
       background: #FFF;
+      font-weight: 400;
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Subtle header */
@@ -618,12 +621,12 @@ Return a JSON object with exactly these fields (string values are plain text, no
       border-radius: 10px;
       padding: 14px 16px;
       margin-bottom: 14px;
+      /* Keep short cards together; the browser will still break
+         long cards across pages rather than clipping their content. */
       page-break-inside: avoid;
       break-inside: avoid;
-      max-height: 5in; /* keep cards under half a page to reduce trailing whitespace */
-      overflow: hidden;
     }
-    .card.tall { max-height: none; } /* opt-out for unusually long sections */
+    .callout { page-break-inside: avoid; break-inside: avoid; }
     .card-head {
       display: flex;
       align-items: center;
