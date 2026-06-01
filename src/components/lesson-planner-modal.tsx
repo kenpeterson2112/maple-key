@@ -28,7 +28,6 @@ import {
   School,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
-import { withBasePath } from "@/lib/base-path"
 import { logLesson } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
@@ -499,16 +498,25 @@ Return a JSON object with exactly these fields (string values are plain text, no
       return
     }
 
+    const esc = (s: unknown) =>
+      String(s ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;")
+
+    const nl2br = (s: string) => esc(s).replace(/\n/g, "<br>")
+
     const currentDate = new Date().toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     })
 
-    const gradeSubject =
-      resources.length > 0
-        ? `Grade ${resources[0].grade_level} ${resources[0].subject}`
-        : "Grade 6 Math"
+    const gradeList = Array.from(new Set(resources.flatMap((r) => r.grade_level || []))).join(", ")
+    const subjectList = Array.from(new Set(resources.map((r) => r.subject).filter(Boolean))).join(", ")
+    const gradeSubject = [gradeList && `Grade ${gradeList}`, subjectList].filter(Boolean).join(" • ") || ""
 
     const curriculumCodes =
       coveredCodes.length > 0
@@ -517,335 +525,347 @@ Return a JSON object with exactly these fields (string values are plain text, no
             .flatMap((r) => r.curriculum_expectations || [])
             .filter((v, i, a) => a.indexOf(v) === i)
             .slice(0, 3)
-            .join(", ") || "N/A"
+            .join(", ") || ""
 
-    const resourcesList = resources.map((r) => `<li>${r.topic_title} - ${r.publisher_creator}</li>`).join("")
+    const resourcesForDisplay =
+      materialsResources.length > 0
+        ? materialsResources.map((t) => ({ topic_title: t }))
+        : resources.map((r) => ({ topic_title: r.topic_title }))
+
+    const preparationSteps =
+      materialsPreparation.length > 0
+        ? materialsPreparation
+        : materialsContent.split("\n").map((s) => s.trim()).filter(Boolean)
+
+    const resourcesListHtml = resourcesForDisplay
+      .map((r) => `<li><span class="bullet">•</span><span>${esc(r.topic_title)}</span></li>`)
+      .join("")
+
+    const preparationHtml = preparationSteps
+      .map((item, i) => `<li><span class="step-num">${i + 1}.</span><span>${esc(item)}</span></li>`)
+      .join("")
+
+    const actionResourcesHtml = resources
+      .slice(0, 3)
+      .map((r) => `<li><span class="bullet">•</span><span>${esc(r.topic_title)}</span></li>`)
+      .join("")
+
+    const successCriteriaHtml = successCriteria
+      .map((sc) => `<li><span class="check">✓</span><span>${esc(sc)}</span></li>`)
+      .join("")
 
     const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesson Plan - ${lessonTitle || "Maple Key Lesson"}</title>
+  <title>${esc(lessonTitle || "Maple Key Lesson")}</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
+    @page { size: Letter; margin: 0.5in; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      font-size: 12pt;
-      line-height: 1.6;
-      color: #1a1a1a;
-      background: white;
-      padding: 0.5in;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.5;
+      color: #2C2C2C;
+      background: #FFF;
     }
-    
+
+    /* Subtle header */
     .header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 2px solid #e5e5e5;
-    }
-    
-    .logo {
-      height: 48px;
-    }
-    
-    .header-right {
-      text-align: right;
-      font-size: 10pt;
-      color: #666;
-    }
-    
-    .lesson-title {
-      font-size: 20pt;
-      font-weight: bold;
-      color: #2c2c2c;
-      margin-bottom: 8px;
-    }
-    
-    .meta-info {
-      display: flex;
-      gap: 24px;
-      margin-bottom: 24px;
-      font-size: 11pt;
-    }
-    
-    .meta-item {
-      display: flex;
       align-items: center;
-      gap: 6px;
-    }
-    
-    .meta-label {
-      font-weight: 600;
-      color: #444;
-    }
-    
-    .section {
-      margin-bottom: 24px;
-      page-break-inside: avoid;
-    }
-    
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
       padding-bottom: 8px;
-      border-bottom: 2px solid;
-    }
-    
-    .section-header.minds-on { border-color: #3b82f6; }
-    .section-header.action { border-color: #10b981; }
-    .section-header.consolidation { border-color: #8b5cf6; }
-    .section-header.materials { border-color: #78716c; }
-    
-    .section-title {
-      font-size: 14pt;
-      font-weight: bold;
-      color: #2c2c2c;
-    }
-    
-    .section-time {
-      font-size: 10pt;
-      color: #666;
-      background: #f5f5f5;
-      padding: 2px 8px;
-      border-radius: 12px;
-    }
-    
-    .section-subtitle {
-      font-size: 9pt;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-    }
-    
-    .section-subtitle.minds-on { color: #3b82f6; }
-    .section-subtitle.action { color: #10b981; }
-    .section-subtitle.consolidation { color: #8b5cf6; }
-    
-    .section-content {
-      font-size: 11pt;
-      color: #444;
-      white-space: pre-wrap;
-    }
-    
-    .differentiation-box {
-      margin-top: 12px;
-      padding: 12px;
-      border: 1px solid #fbbf24;
-      border-radius: 8px;
-      background: #fffbeb;
-    }
-    
-    .differentiation-title {
-      font-size: 10pt;
-      font-weight: 600;
-      color: #92400e;
-      margin-bottom: 4px;
-    }
-    
-    .differentiation-content {
-      font-size: 10pt;
-      color: #78350f;
-    }
-    
-    .assessment-box {
-      margin-top: 12px;
-      padding: 12px;
-      border: 1px solid #8b5cf6;
-      border-radius: 8px;
-      background: #f5f3ff;
-    }
-    
-    .assessment-title {
-      font-size: 10pt;
-      font-weight: 600;
-      color: #5b21b6;
-      margin-bottom: 4px;
-    }
-    
-    .assessment-content {
-      font-size: 10pt;
-      color: #6b21a8;
-    }
-    
-    .resources-box {
-      margin-top: 12px;
-      padding: 12px;
-      border: 1px solid #d4d4d4;
-      border-radius: 8px;
-      background: #fafafa;
-    }
-    
-    .resources-title {
-      font-size: 10pt;
-      font-weight: 600;
-      color: #525252;
-      margin-bottom: 4px;
-    }
-    
-    .resources-list {
-      font-size: 10pt;
-      color: #525252;
-      padding-left: 16px;
-    }
-    
-    .resources-list li {
-      margin-bottom: 4px;
-    }
-    
-    .footer {
-      margin-top: 32px;
-      padding-top: 16px;
-      border-top: 1px solid #e5e5e5;
-      text-align: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #E5E5E5;
       font-size: 9pt;
       color: #888;
     }
-    
+    .header .brand { font-weight: 600; letter-spacing: 0.3px; color: #8B4513; }
+
+    /* Title block */
+    .lesson-title {
+      font-size: 20pt;
+      font-weight: 700;
+      color: #2C2C2C;
+      margin: 0 0 6px 0;
+      line-height: 1.2;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      font-size: 9.5pt;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    .meta .pill {
+      background: #F5F1EC;
+      border: 1px solid #E8D5C4;
+      color: #6B4423;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 9pt;
+    }
+
+    /* Cards */
+    .card {
+      background: #FFF;
+      border: 1px solid #E5E5E5;
+      border-left-width: 4px;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      max-height: 5in; /* keep cards under half a page to reduce trailing whitespace */
+      overflow: hidden;
+    }
+    .card.tall { max-height: none; } /* opt-out for unusually long sections */
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #2C2C2C;
+      margin: 0;
+    }
+    .time-pill {
+      font-size: 8.5pt;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .subtitle {
+      font-size: 8.5pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin: 0 0 8px 0;
+    }
+    .body-text {
+      font-size: 10.5pt;
+      color: #3A3A3A;
+      margin: 0;
+    }
+
+    /* Color variants */
+    .learning  { border-left-color: #E8D5C4; background: #FFFDFB; }
+    .learning .label { color: #8B4513; font-weight: 600; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.5px; }
+    .learning ul { list-style: none; padding: 0; margin: 4px 0 0 0; }
+    .learning li { display: flex; gap: 6px; align-items: flex-start; font-size: 10pt; margin-bottom: 4px; color: #3A3A3A; }
+    .learning .check { color: #10B981; font-weight: 700; }
+
+    .materials { border-left-color: #A8A29E; }
+    .materials .cols { display: flex; gap: 12px; }
+    .materials .col-resources { width: 30%; }
+    .materials .col-prep { flex: 1; }
+    .materials .panel {
+      background: #FAFAF9;
+      border: 1px solid #E7E5E4;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .materials .panel-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #57534E;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin: 0 0 6px 0;
+    }
+    .materials ul { list-style: none; padding: 0; margin: 0; }
+    .materials li { display: flex; gap: 6px; align-items: flex-start; font-size: 9.5pt; color: #3A3A3A; margin-bottom: 4px; }
+    .materials .bullet { color: #A8A29E; }
+    .materials .step-num { color: #A8A29E; min-width: 14px; }
+
+    .minds-on       { border-left-color: #3B82F6; }
+    .minds-on .card-title-icon { color: #2563EB; }
+    .minds-on .time-pill { background: #DBEAFE; color: #1D4ED8; }
+    .minds-on .subtitle  { color: #2563EB; }
+
+    .action          { border-left-color: #10B981; }
+    .action .time-pill { background: #D1FAE5; color: #047857; }
+    .action .subtitle  { color: #059669; }
+
+    .consolidation          { border-left-color: #8B5CF6; }
+    .consolidation .time-pill { background: #EDE9FE; color: #6D28D9; }
+    .consolidation .subtitle  { color: #7C3AED; }
+
+    /* Callout boxes inside cards */
+    .callout {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid;
+      font-size: 9.5pt;
+    }
+    .callout .callout-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 4px;
+    }
+    .callout p { margin: 0; }
+
+    .callout.diff { background: #FFFBEB; border-color: #FDE68A; }
+    .callout.diff .callout-title { color: #92400E; }
+    .callout.diff p { color: #78350F; }
+
+    .callout.resources { background: #FAFAF9; border-color: #E7E5E4; }
+    .callout.resources .callout-title { color: #57534E; }
+    .callout.resources ul { list-style: none; padding: 0; margin: 0; }
+    .callout.resources li { display: flex; gap: 6px; font-size: 9.5pt; color: #44403C; margin-bottom: 2px; }
+    .callout.resources .bullet { color: #A8A29E; }
+
+    .callout.assessment { background: #F5F3FF; border-color: #DDD6FE; }
+    .callout.assessment .callout-title { color: #5B21B6; }
+    .callout.assessment p { color: #6D28D9; }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 8px;
+      border-top: 1px solid #E5E5E5;
+      text-align: center;
+      font-size: 8.5pt;
+      color: #999;
+    }
+
     @media print {
-      body {
-        padding: 0;
-      }
-      
-      .section {
-        page-break-inside: avoid;
-      }
-      
-      .header {
-        page-break-after: avoid;
-      }
+      .card { box-shadow: none; }
+      a { color: inherit; text-decoration: none; }
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <img src="${withBasePath("/Maple_Key_Transp_Background.png")}" alt="Maple Key" class="logo" onerror="this.style.display='none'">
-    <div class="header-right">
-      <div>Generated: ${currentDate}</div>
-      <div>Maple Key Lesson Planner</div>
-    </div>
+    <span class="brand">Maple Key</span>
+    <span>${esc(currentDate)}</span>
   </div>
-  
-  <h1 class="lesson-title">Data Detectives: Exploring Space Through Numbers</h1>
-  
-  <div class="meta-info">
-    <div class="meta-item">
-      <span class="meta-label">Grade/Subject:</span>
-      <span>${gradeSubject}</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Duration:</span>
-      <span>${lessonLength}</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Curriculum:</span>
-      <span>${curriculumCodes}</span>
-    </div>
-  </div>
-  
-  <!-- MATERIALS & PREPARATION SECTION -->
-  <div class="section">
-    <div class="section-header materials">
-      <span class="section-title">Materials & Preparation</span>
-    </div>
-    <div class="section-content">
-      <div class="flex gap-4">
-        {/* Left box - Resources (1/4 width) */}
-        <div class="w-1/4 bg-stone-50 border border-stone-200 rounded-lg p-3">
-          <p class="text-xs font-semibold text-stone-700 mb-2">Resources</p>
-          <ul class="text-xs text-[#444] space-y-1.5">
-            ${resourcesList.length > 0 ? resourcesList : "<li>No resources selected</li>"}
-          </ul>
-        </div>
 
-        {/* Right box - Preparation steps (3/4 width) */}
-        <div class="flex-1 bg-stone-50 border border-stone-200 rounded-lg p-3">
-          <p class="text-xs font-semibold text-stone-700 mb-2">Preparation</p>
-          <ul class="text-sm text-[#444] space-y-2">
-            ${
-              (materialsPreparation.length > 0
-                ? materialsPreparation
-                : materialsContent.split("\n").filter(Boolean)
-              )
-                .map(
-                  (item, index) =>
-                    `<li><span>${index + 1}.</span><span>${item}</span></li>`,
-                )
-                .join("") || "<li>No preparation steps listed</li>"
-            }
-          </ul>
+  <h1 class="lesson-title">${esc(lessonTitle || "Untitled Lesson")}</h1>
+  <div class="meta">
+    ${gradeSubject ? `<span class="pill">${esc(gradeSubject)}</span>` : ""}
+    <span class="pill">${esc(lessonLength)}</span>
+    <span class="pill">${esc(lessonTemplate.split("(")[0].trim() || "3-Part Lesson")}</span>
+    ${curriculumCodes ? `<span class="pill">${esc(curriculumCodes)}</span>` : ""}
+  </div>
+
+  ${
+    learningGoal || successCriteria.length > 0
+      ? `
+  <div class="card learning">
+    ${
+      learningGoal
+        ? `<div style="margin-bottom:${successCriteria.length > 0 ? "10px" : "0"};">
+             <div class="label">Learning Goal</div>
+             <p class="body-text" style="margin-top:4px;">${nl2br(learningGoal)}</p>
+           </div>`
+        : ""
+    }
+    ${
+      successCriteria.length > 0
+        ? `<div>
+             <div class="label">Success Criteria</div>
+             <ul>${successCriteriaHtml}</ul>
+           </div>`
+        : ""
+    }
+  </div>`
+      : ""
+  }
+
+  <div class="card materials">
+    <div class="card-head">
+      <h2 class="card-title">Materials &amp; Preparation</h2>
+    </div>
+    <div class="cols">
+      <div class="col-resources">
+        <div class="panel">
+          <div class="panel-title">Resources</div>
+          <ul>${resourcesListHtml || "<li><span>No resources selected</span></li>"}</ul>
+        </div>
+      </div>
+      <div class="col-prep">
+        <div class="panel">
+          <div class="panel-title">Preparation</div>
+          <ul>${preparationHtml || "<li><span>No preparation steps listed</span></li>"}</ul>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Minds On Section -->
-  <div class="section">
-    <div class="section-header minds-on">
-      <span class="section-title">Minds On</span>
-      <span class="section-time">${mindsOnTime} minutes</span>
+
+  <div class="card minds-on">
+    <div class="card-head">
+      <h2 class="card-title">Minds On</h2>
+      <span class="time-pill">${mindsOnTime} minutes</span>
     </div>
-    <div class="section-subtitle minds-on">Activating Prior Knowledge</div>
-    <div class="section-content">${mindsOnContent}</div>
-    <div class="differentiation-box">
-      <div class="differentiation-title">Differentiation</div>
-      <div class="differentiation-content">${mindsOnDifferentiation}</div>
-    </div>
+    <div class="subtitle">Activating Prior Knowledge</div>
+    <p class="body-text">${nl2br(mindsOnContent)}</p>
+    ${
+      mindsOnDifferentiation
+        ? `<div class="callout diff">
+             <div class="callout-title">Differentiation</div>
+             <p>${nl2br(mindsOnDifferentiation)}</p>
+           </div>`
+        : ""
+    }
   </div>
-  
-  <!-- Action Section -->
-  <div class="section">
-    <div class="section-header action">
-      <span class="section-title">Action</span>
-      <span class="section-time">${actionTime} minutes</span>
+
+  <div class="card action">
+    <div class="card-head">
+      <h2 class="card-title">Action</h2>
+      <span class="time-pill">${actionTime} minutes</span>
     </div>
-    <div class="section-subtitle action">Exploring & Applying</div>
-    <div class="section-content">${actionContent}</div>
-    <div class="resources-box">
-      <div class="resources-title">Resources Used</div>
-      <ul class="resources-list">
-        ${resourcesList || "<li>No resources selected</li>"}
-      </ul>
-    </div>
-    <div class="differentiation-box">
-      <div class="differentiation-title">Differentiation</div>
-      <div class="differentiation-content">${actionDifferentiation}</div>
-    </div>
+    <div class="subtitle">Exploring &amp; Applying</div>
+    <p class="body-text">${nl2br(actionContent)}</p>
+    ${
+      actionResourcesHtml
+        ? `<div class="callout resources">
+             <div class="callout-title">Resources Used</div>
+             <ul>${actionResourcesHtml}</ul>
+           </div>`
+        : ""
+    }
+    ${
+      actionDifferentiation
+        ? `<div class="callout diff">
+             <div class="callout-title">Differentiation</div>
+             <p>${nl2br(actionDifferentiation)}</p>
+           </div>`
+        : ""
+    }
   </div>
-  
-  <!-- Consolidation Section -->
-  <div class="section">
-    <div class="section-header consolidation">
-      <span class="section-title">Consolidation</span>
-      <span class="section-time">${consolidationTime} minutes</span>
+
+  <div class="card consolidation">
+    <div class="card-head">
+      <h2 class="card-title">Consolidation</h2>
+      <span class="time-pill">${consolidationTime} minutes</span>
     </div>
-    <div class="section-subtitle consolidation">Reflecting & Connecting</div>
-    <div class="section-content">${consolidationContent}</div>
-    <div class="assessment-box">
-      <div class="assessment-title">Assessment Note</div>
-      <div class="assessment-content">${consolidationAssessment}</div>
-    </div>
+    <div class="subtitle">Reflecting &amp; Connecting</div>
+    <p class="body-text">${nl2br(consolidationContent)}</p>
+    ${
+      consolidationAssessment
+        ? `<div class="callout assessment">
+             <div class="callout-title">Assessment Note</div>
+             <p>${nl2br(consolidationAssessment)}</p>
+           </div>`
+        : ""
+    }
   </div>
-  
-  <div class="footer">
-    Generated by Maple Key • ${currentDate} • maplekey.ca
-  </div>
-  
+
+  <div class="footer">Maple Key • maplekey.ca</div>
+
   <script>
     window.onload = function() {
-      setTimeout(function() {
-        window.print();
-      }, 500);
+      setTimeout(function() { window.print(); }, 350);
     };
   </script>
 </body>
