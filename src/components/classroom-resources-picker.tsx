@@ -67,7 +67,11 @@ export default function ClassroomResourcesPicker({ selected, onChange }: Classro
                       isSelected ? styles.chipSelected : `bg-white ${styles.chip}`
                     }`}
                   >
-                    {isSelected && <Check size={11} strokeWidth={3} />}
+                    <Check
+                      size={11}
+                      strokeWidth={3}
+                      className={isSelected ? "opacity-100" : "opacity-0"}
+                    />
                     {opt.label}
                   </button>
                 )
