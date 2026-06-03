@@ -24,6 +24,7 @@ export interface TemplateSectionDef {
 export interface LessonTemplateDef {
   id: TemplateId
   name: string
+  displayName: string
   shortName: string
   description: string
   apiKey: string
@@ -34,6 +35,7 @@ export const LESSON_TEMPLATES: LessonTemplateDef[] = [
   {
     id: "3-part",
     name: "3-Part Lesson",
+    displayName: "3-Part Lesson",
     shortName: "3-Part",
     description: "Ontario's classic: activate prior knowledge, explore & apply, then consolidate.",
     apiKey: "3-Part Lesson",
@@ -58,6 +60,7 @@ export const LESSON_TEMPLATES: LessonTemplateDef[] = [
   {
     id: "5e",
     name: "5E Model",
+    displayName: "Inquiry Lesson",
     shortName: "5E",
     description: "Inquiry-rich constructivist cycle with strong evidence base for student-led discovery.",
     apiKey: "5E Model",
@@ -92,6 +95,7 @@ export const LESSON_TEMPLATES: LessonTemplateDef[] = [
   {
     id: "hunter",
     name: "Madeline Hunter",
+    displayName: "Direct Instruction",
     shortName: "Hunter",
     description: "Structured direct instruction cycle. Clear and beginner-friendly for new skill introduction.",
     apiKey: "Madeline Hunter",
@@ -103,8 +107,13 @@ export const LESSON_TEMPLATES: LessonTemplateDef[] = [
       },
       {
         id: "directInstruction", label: "Direct Instruction", subtitle: "Input & Modeling",
-        timeWeight: 0.25, calloutLabel: "Differentiation", calloutIsAssessment: false,
+        timeWeight: 0.20, calloutLabel: "Differentiation", calloutIsAssessment: false,
         colors: { border: "border-blue-500", accent: "text-blue-600", pillBg: "bg-blue-100", pillText: "text-blue-700", hoverBg: "hover:bg-blue-50", focusBorder: "focus:border-blue-500", doneBg: "bg-blue-500", doneHover: "hover:bg-blue-600" },
+      },
+      {
+        id: "checkForUnderstanding", label: "Check for Understanding", subtitle: "Gauge & Adjust",
+        timeWeight: 0.10, calloutLabel: "Differentiation", calloutIsAssessment: false,
+        colors: { border: "border-yellow-500", accent: "text-yellow-600", pillBg: "bg-yellow-100", pillText: "text-yellow-700", hoverBg: "hover:bg-yellow-50", focusBorder: "focus:border-yellow-500", doneBg: "bg-yellow-500", doneHover: "hover:bg-yellow-600" },
       },
       {
         id: "guidedPractice", label: "Guided Practice", subtitle: "We Do Together",
@@ -113,11 +122,11 @@ export const LESSON_TEMPLATES: LessonTemplateDef[] = [
       },
       {
         id: "independentPractice", label: "Independent Practice", subtitle: "You Do",
-        timeWeight: 0.30, calloutLabel: "Differentiation", calloutIsAssessment: false,
+        timeWeight: 0.25, calloutLabel: "Differentiation", calloutIsAssessment: false,
         colors: { border: "border-green-500", accent: "text-green-600", pillBg: "bg-green-100", pillText: "text-green-700", hoverBg: "hover:bg-green-50", focusBorder: "focus:border-green-500", doneBg: "bg-green-500", doneHover: "hover:bg-green-600" },
       },
       {
-        id: "closure", label: "Closure", subtitle: "Wrap Up & Check Understanding",
+        id: "closure", label: "Closure", subtitle: "Wrap Up & Reflect",
         timeWeight: 0.10, calloutLabel: "Assessment Note", calloutIsAssessment: true,
         colors: { border: "border-slate-500", accent: "text-slate-600", pillBg: "bg-slate-100", pillText: "text-slate-700", hoverBg: "hover:bg-slate-50", focusBorder: "focus:border-slate-500", doneBg: "bg-slate-500", doneHover: "hover:bg-slate-600" },
       },
@@ -126,6 +135,7 @@ export const LESSON_TEMPLATES: LessonTemplateDef[] = [
   {
     id: "claass",
     name: "CLAASS",
+    displayName: "Engagement Lesson",
     shortName: "CLAASS",
     description: "Engagement-centered: connects through active, collaborative, inquiry-driven phases.",
     apiKey: "CLAASS",

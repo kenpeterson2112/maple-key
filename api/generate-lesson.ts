@@ -101,9 +101,10 @@ const TEMPLATE_SECTIONS: Record<string, Array<{ id: string; label: string; subti
   "Madeline Hunter": [
     { id: "anticipatorySet", label: "Anticipatory Set", subtitle: "Hook & motivation", calloutLabel: "Differentiation" },
     { id: "directInstruction", label: "Direct Instruction", subtitle: "Input & modeling", calloutLabel: "Differentiation" },
+    { id: "checkForUnderstanding", label: "Check for Understanding", subtitle: "Gauge & adjust", calloutLabel: "Differentiation" },
     { id: "guidedPractice", label: "Guided Practice", subtitle: "We do together", calloutLabel: "Differentiation" },
     { id: "independentPractice", label: "Independent Practice", subtitle: "You do", calloutLabel: "Differentiation" },
-    { id: "closure", label: "Closure", subtitle: "Wrap up & check understanding", calloutLabel: "Assessment Note" },
+    { id: "closure", label: "Closure", subtitle: "Wrap up & reflect", calloutLabel: "Assessment Note" },
   ],
   "CLAASS": [
     { id: "connect", label: "Connect", subtitle: "Activate prior knowledge", calloutLabel: "Differentiation" },
@@ -117,7 +118,7 @@ const TEMPLATE_SECTIONS: Record<string, Array<{ id: string; label: string; subti
 
 const TEMPLATE_GUIDANCE: Record<string, string> = {
   "5E Model": `5E Model phase guidance: Engage — hook question, surprising demo, or short video to spark curiosity and surface prior knowledge; Explore — student-led hands-on investigation with minimal teacher input, students discover patterns; Explain — teacher formalizes concepts after exploration using direct instruction, connects student findings to vocabulary/theory; Elaborate — students apply concepts to a new context or problem, extending understanding; Evaluate — formative check, exit ticket, or self-reflection anchored in lesson objectives.`,
-  "Madeline Hunter": `Madeline Hunter phase guidance: Anticipatory Set — brief hook that activates prior knowledge and motivates, states the objective; Direct Instruction — explicit teacher input with think-alouds and modeling, checking for understanding throughout; Guided Practice — whole-class or small-group practice with teacher support, immediate corrective feedback; Independent Practice — individual student work to consolidate and automate the skill; Closure — summarize key learning, preview next steps, check for understanding.`,
+  "Madeline Hunter": `Madeline Hunter phase guidance: Anticipatory Set — brief hook that activates prior knowledge and motivates, states the objective; Direct Instruction — explicit teacher input with think-alouds and modeling (I Do); Check for Understanding — brief formative pause after modeling to gauge comprehension before releasing students (e.g., thumbs up/down, mini whiteboard, cold-call check), teacher adjusts pacing based on results; Guided Practice — whole-class or small-group practice with teacher support, immediate corrective feedback (We Do); Independent Practice — individual student work to consolidate and automate the skill (You Do); Closure — summarize key learning, preview next steps, exit ticket or reflection.`,
   "CLAASS": `CLAASS phase guidance: Connect — link to student lived experience and prior knowledge with a relevant real-world hook; Launch — teacher introduces the core concept, question, or challenge; Activate — students engage actively with content through a structured collaborative activity; Apply — students practice in authentic contexts, applying concepts to real problems; Share — structured peer sharing, discussion, or gallery walk to consolidate through social learning; Synthesize — individual reflection, writing, or exit task that connects today's learning to broader understanding.`,
 }
 
