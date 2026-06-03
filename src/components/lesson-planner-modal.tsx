@@ -1898,7 +1898,12 @@ Return a JSON object with exactly these fields (string values are plain text, no
                                   <CheckCircle size={14} className="text-[#FF6B35]" />
                                 </div>
                               )}
-                              <p className="font-semibold text-[#2C2C2C] text-sm mb-1 pr-5">{tmpl.name}</p>
+                              <div className="flex items-baseline gap-2 mb-1 pr-5">
+                                <p className="font-semibold text-[#2C2C2C] text-sm">{tmpl.displayName}</p>
+                                {tmpl.displayName !== tmpl.name && (
+                                  <span className="text-[10px] text-[#aaa] font-medium">{tmpl.name}</span>
+                                )}
+                              </div>
                               <p className="text-xs text-[#888] leading-snug mb-2.5">{tmpl.description}</p>
                               <div className="flex flex-wrap gap-1">
                                 {tmpl.sections.map((s) => (
