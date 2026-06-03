@@ -66,6 +66,7 @@ interface LessonPlanResponse {
   }
   excludedResources?: { title: string; reason: string }[]
   assessmentQuestions?: AssessmentQuestion[]
+  sections?: Array<{ id: string; label: string; subtitle: string; content: string; callout?: string }>
 }
 
 function extractJson(text: string): string {
@@ -80,6 +81,37 @@ function collectText(content: Anthropic.ContentBlock[]): string {
     .filter((b): b is Anthropic.TextBlock => b.type === "text")
     .map((b) => b.text)
     .join("\n")
+}
+
+const TEMPLATE_SECTIONS: Record<string, Array<{ id: string; label: string; subtitle: string; calloutLabel: string }>> = {
+  "5E Model": [
+    { id: "engage", label: "Engage", subtitle: "Spark curiosity", calloutLabel: "Differentiation" },
+    { id: "explore", label: "Explore", subtitle: "Investigate & discover", calloutLabel: "Differentiation" },
+    { id: "explain", label: "Explain", subtitle: "Connect to concepts", calloutLabel: "Differentiation" },
+    { id: "elaborate", label: "Elaborate", subtitle: "Deepen & extend", calloutLabel: "Differentiation" },
+    { id: "evaluate", label: "Evaluate", subtitle: "Reflect & assess", calloutLabel: "Assessment Note" },
+  ],
+  "Madeline Hunter": [
+    { id: "anticipatorySet", label: "Anticipatory Set", subtitle: "Hook & motivation", calloutLabel: "Differentiation" },
+    { id: "directInstruction", label: "Direct Instruction", subtitle: "Input & modeling", calloutLabel: "Differentiation" },
+    { id: "guidedPractice", label: "Guided Practice", subtitle: "We do together", calloutLabel: "Differentiation" },
+    { id: "independentPractice", label: "Independent Practice", subtitle: "You do", calloutLabel: "Differentiation" },
+    { id: "closure", label: "Closure", subtitle: "Wrap up & check understanding", calloutLabel: "Assessment Note" },
+  ],
+  "CLAASS": [
+    { id: "connect", label: "Connect", subtitle: "Activate prior knowledge", calloutLabel: "Differentiation" },
+    { id: "launch", label: "Launch", subtitle: "Introduce the concept", calloutLabel: "Differentiation" },
+    { id: "activate", label: "Activate", subtitle: "Engage with content", calloutLabel: "Differentiation" },
+    { id: "apply", label: "Apply", subtitle: "Practice & deepen", calloutLabel: "Differentiation" },
+    { id: "share", label: "Share", subtitle: "Collaborate & discuss", calloutLabel: "Differentiation" },
+    { id: "synthesize", label: "Synthesize", subtitle: "Reflect & consolidate", calloutLabel: "Assessment Note" },
+  ],
+}
+
+const TEMPLATE_GUIDANCE: Record<string, string> = {
+  "5E Model": `5E Model phase guidance: Engage — hook question, surprising demo, or short video to spark curiosity and surface prior knowledge; Explore — student-led hands-on investigation with minimal teacher input, students discover patterns; Explain — teacher formalizes concepts after exploration using direct instruction, connects student findings to vocabulary/theory; Elaborate — students apply concepts to a new context or problem, extending understanding; Evaluate — formative check, exit ticket, or self-reflection anchored in lesson objectives.`,
+  "Madeline Hunter": `Madeline Hunter phase guidance: Anticipatory Set — brief hook that activates prior knowledge and motivates, states the objective; Direct Instruction — explicit teacher input with think-alouds and modeling, checking for understanding throughout; Guided Practice — whole-class or small-group practice with teacher support, immediate corrective feedback; Independent Practice — individual student work to consolidate and automate the skill; Closure — summarize key learning, preview next steps, check for understanding.`,
+  "CLAASS": `CLAASS phase guidance: Connect — link to student lived experience and prior knowledge with a relevant real-world hook; Launch — teacher introduces the core concept, question, or challenge; Activate — students engage actively with content through a structured collaborative activity; Apply — students practice in authentic contexts, applying concepts to real problems; Share — structured peer sharing, discussion, or gallery walk to consolidate through social learning; Synthesize — individual reflection, writing, or exit task that connects today's learning to broader understanding.`,
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
