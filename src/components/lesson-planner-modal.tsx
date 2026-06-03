@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import {
   ArrowLeft,
   Sparkles,
@@ -92,6 +92,9 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [showQuestionsStep, setShowQuestionsStep] = useState(false)
   const [planningQuestions, setPlanningQuestions] = useState<PlanningQuestion[]>([])
   const [questionSelections, setQuestionSelections] = useState<Record<string, string[]>>({})
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [openResponseValues, setOpenResponseValues] = useState<Record<string, string>>({})
+  const [showingOpenResponse, setShowingOpenResponse] = useState<Record<string, boolean>>({})
 
   const [generateError, setGenerateError] = useState<string | null>(null)
   const [showAssessment, setShowAssessment] = useState(false)
@@ -110,6 +113,19 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [pasteError, setPasteError] = useState<string | null>(null)
 
   const importInputRef = useRef<HTMLInputElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (showQuestionsStep) {
+      setCurrentQuestionIndex(0)
+      setOpenResponseValues({})
+      setShowingOpenResponse({})
+    }
+  }, [showQuestionsStep])
+
+  useEffect(() => {
+    scrollContainerRef.current?.scrollTo({ top: 0, behavior: "smooth" })
+  }, [currentQuestionIndex, showQuestionsStep])
 
   const classroomResourceIds = getClassroomResources()
   const classroomResourceLabels = getClassroomResourceLabels(classroomResourceIds)
@@ -269,6 +285,28 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       }
     })
     callGenerateLesson(answers)
+  }
+
+  const advanceQuestion = (qId: string, selectedOpts?: string[]) => {
+    const finalSelections = { ...questionSelections }
+    if (selectedOpts !== undefined) {
+      finalSelections[qId] = selectedOpts
+    } else if (showingOpenResponse[qId] && openResponseValues[qId]?.trim()) {
+      finalSelections[qId] = [openResponseValues[qId].trim()]
+    }
+    setQuestionSelections(finalSelections)
+
+    if (currentQuestionIndex < planningQuestions.length - 1) {
+      setCurrentQuestionIndex((i) => i + 1)
+    } else {
+      const answers: PlanningAnswer[] = planningQuestions.map((q) => ({
+        questionId: q.id,
+        questionPrompt: q.prompt,
+        answer: (finalSelections[q.id] ?? []).join(", "),
+      }))
+      setShowQuestionsStep(false)
+      callGenerateLesson(answers)
+    }
   }
 
   const handleRegenerate = () => {
@@ -925,7 +963,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-6">
           <div className="max-w-3xl mx-auto space-y-6">
             {lessonGenerated ? (
               <>{/* lesson view below */}
@@ -1346,81 +1384,153 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             ) : showQuestionsStep ? (
               <>
-                {/* PLANNING QUESTIONS STEP */}
-                <div className="bg-violet-50 border border-violet-200 rounded-lg p-4">
-                  <p className="text-violet-900 font-medium">A few quick questions to personalize your lesson</p>
-                  <p className="text-sm text-violet-700 mt-1">Your answers will shape how the lesson is structured.</p>
-                </div>
+                {/* PLANNING QUESTIONS STEP — one question at a time */}
+                {(() => {
+                  const q = planningQuestions[currentQuestionIndex]
+                  if (!q) return null
+                  const isLastQuestion = currentQuestionIndex === planningQuestions.length - 1
+                  const selections = questionSelections[q.id] ?? []
+                  const openText = openResponseValues[q.id] ?? ""
+                  const isOpenActive = showingOpenResponse[q.id] ?? false
+                  const hasAnswer = selections.length > 0 || (isOpenActive && openText.trim().length > 0)
+                  const opts = q.answerFormat === "this-that-both" ? [...q.options, "Both"] : q.options
 
-                {planningQuestions.map((q) => (
-                  <div key={q.id} className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                    <p className="font-medium text-[#2C2C2C] mb-1">{q.prompt}</p>
-                    <p className="text-xs text-[#888] mb-4">{q.rationale}</p>
+                  const handleSelect = (opt: string) => {
+                    setQuestionSelections((prev) => ({ ...prev, [q.id]: [opt] }))
+                    setShowingOpenResponse((prev) => ({ ...prev, [q.id]: false }))
+                    setTimeout(() => advanceQuestion(q.id, [opt]), 250)
+                  }
 
-                    {q.answerFormat === "single-select" && (
-                      <div className="flex flex-wrap gap-2">
-                        {q.options.map((opt) => (
-                          <button
-                            key={opt}
-                            onClick={() => setQuestionSelections((prev) => ({ ...prev, [q.id]: [opt] }))}
-                            className={`px-4 py-2 rounded-lg text-sm border-2 transition-colors ${
-                              questionSelections[q.id]?.[0] === opt
-                                ? "bg-violet-600 border-violet-600 text-white"
-                                : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
-                            }`}
-                          >
-                            {opt}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                  const handleMultiToggle = (opt: string) => {
+                    const cur = questionSelections[q.id] ?? []
+                    setShowingOpenResponse((prev) => ({ ...prev, [q.id]: false }))
+                    setQuestionSelections((prev) => ({
+                      ...prev,
+                      [q.id]: cur.includes(opt) ? cur.filter((o) => o !== opt) : [...cur, opt],
+                    }))
+                  }
 
-                    {q.answerFormat === "multi-select" && (
-                      <div className="flex flex-wrap gap-2">
-                        {q.options.map((opt) => {
-                          const selected = questionSelections[q.id]?.includes(opt) ?? false
-                          return (
+                  return (
+                    <>
+                      {/* Progress indicator */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          {currentQuestionIndex > 0 && (
                             <button
-                              key={opt}
-                              onClick={() => {
-                                const current = questionSelections[q.id] ?? []
-                                setQuestionSelections((prev) => ({
-                                  ...prev,
-                                  [q.id]: selected ? current.filter((o) => o !== opt) : [...current, opt],
-                                }))
-                              }}
-                              className={`px-4 py-2 rounded-lg text-sm border-2 transition-colors ${
-                                selected
-                                  ? "bg-violet-600 border-violet-600 text-white"
-                                  : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
-                              }`}
+                              onClick={() => setCurrentQuestionIndex((i) => i - 1)}
+                              className="text-sm text-violet-600 hover:text-violet-800 font-medium transition-colors"
                             >
-                              {opt}
+                              ← Back
                             </button>
-                          )
-                        })}
+                          )}
+                          <p className="text-sm font-medium text-violet-700">
+                            Question {currentQuestionIndex + 1} of {planningQuestions.length}
+                          </p>
+                        </div>
+                        <div className="flex gap-1.5">
+                          {planningQuestions.map((_, i) => (
+                            <div
+                              key={i}
+                              className={`h-1.5 w-6 rounded-full transition-colors ${
+                                i < currentQuestionIndex
+                                  ? "bg-violet-400"
+                                  : i === currentQuestionIndex
+                                  ? "bg-violet-600"
+                                  : "bg-gray-200"
+                              }`}
+                            />
+                          ))}
+                        </div>
                       </div>
-                    )}
 
-                    {q.answerFormat === "this-that-both" && (
-                      <div className="flex flex-wrap gap-2">
-                        {[...q.options, "Both"].map((opt) => (
-                          <button
-                            key={opt}
-                            onClick={() => setQuestionSelections((prev) => ({ ...prev, [q.id]: [opt] }))}
-                            className={`px-4 py-2 rounded-lg text-sm border-2 transition-colors ${
-                              questionSelections[q.id]?.[0] === opt
-                                ? "bg-violet-600 border-violet-600 text-white"
-                                : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
-                            }`}
-                          >
-                            {opt}
-                          </button>
-                        ))}
+                      {/* Question card */}
+                      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                        <p className="font-medium text-[#2C2C2C] mb-1">{q.prompt}</p>
+                        <p className="text-xs text-[#888] mb-4">{q.rationale}</p>
+
+                        <div className="flex flex-col gap-2">
+                          {opts.map((opt, i) => {
+                            const isSelected =
+                              q.answerFormat === "multi-select" ? selections.includes(opt) : selections[0] === opt
+                            const isRecommended = i === 0
+
+                            return (
+                              <button
+                                key={opt}
+                                onClick={() =>
+                                  q.answerFormat === "multi-select" ? handleMultiToggle(opt) : handleSelect(opt)
+                                }
+                                className={`w-full text-left px-4 py-3 rounded-lg text-sm border-2 transition-colors flex items-center justify-between gap-2 ${
+                                  isSelected
+                                    ? "bg-violet-600 border-violet-600 text-white"
+                                    : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
+                                }`}
+                              >
+                                <span>{opt}</span>
+                                {isRecommended && (
+                                  <span
+                                    className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${
+                                      isSelected ? "bg-white/20 text-white" : "bg-violet-100 text-violet-700"
+                                    }`}
+                                  >
+                                    Recommended
+                                  </span>
+                                )}
+                              </button>
+                            )
+                          })}
+
+                          {/* Open response option */}
+                          {isOpenActive ? (
+                            <div className="border-2 border-violet-400 rounded-lg p-3 bg-violet-50">
+                              <p className="text-xs font-medium text-violet-700 mb-2">Your answer:</p>
+                              <input
+                                autoFocus
+                                type="text"
+                                value={openText}
+                                onChange={(e) =>
+                                  setOpenResponseValues((prev) => ({ ...prev, [q.id]: e.target.value }))
+                                }
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter" && openText.trim()) advanceQuestion(q.id)
+                                }}
+                                placeholder="Type your own answer..."
+                                className="w-full px-3 py-2 border border-violet-300 rounded-lg bg-white text-sm focus:outline-none focus:border-violet-500"
+                              />
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => {
+                                setQuestionSelections((prev) => ({ ...prev, [q.id]: [] }))
+                                setShowingOpenResponse((prev) => ({ ...prev, [q.id]: true }))
+                              }}
+                              className="w-full text-left px-4 py-3 rounded-lg text-sm border-2 border-dashed border-[#E8D5C4] text-[#888] hover:border-violet-400 hover:text-violet-600 transition-colors"
+                            >
+                              Other (write your own)…
+                            </button>
+                          )}
+
+                          {/* Continue / Generate button for multi-select and open response */}
+                          {(q.answerFormat === "multi-select" || isOpenActive) && hasAnswer && (
+                            <button
+                              onClick={() => advanceQuestion(q.id)}
+                              className="mt-2 w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+                            >
+                              {isLastQuestion ? (
+                                <>
+                                  <Sparkles size={16} />
+                                  Generate Lesson Plan
+                                </>
+                              ) : (
+                                "Continue →"
+                              )}
+                            </button>
+                          )}
+                        </div>
                       </div>
-                    )}
-                  </div>
-                ))}
+                    </>
+                  )
+                })()}
                 <div className="h-6" />
               </>
             ) : (
@@ -1650,10 +1760,9 @@ Return a JSON object with exactly these fields (string values are plain text, no
             <div className="max-w-3xl mx-auto">
               <button
                 onClick={handleQuestionsSubmit}
-                className="w-full py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200"
+                className="w-full py-2 text-sm text-[#888] hover:text-violet-700 transition-colors"
               >
-                <Sparkles size={20} />
-                Generate Lesson Plan
+                Skip questions &amp; generate now
               </button>
             </div>
           </div>
