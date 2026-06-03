@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { X, CheckCircle, XCircle, HelpCircle, Sparkles, Loader2, Info, BarChart3 } from "lucide-react"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
@@ -74,6 +74,10 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
   const [showGroupPicker, setShowGroupPicker] = useState(false)
   const [groupSelection, setGroupSelection] = useState<number | null>(null)
   const [groupOther, setGroupOther] = useState("")
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+
+  const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const scrollBodyRef = useRef<HTMLDivElement>(null)
 
   const MAX_GROUP_SIZE = 500
   const getGroupCount = (): number => {
@@ -96,6 +100,8 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
     setShowGroupPicker(false)
     setGroupSelection(null)
     setGroupOther("")
+    setCurrentQuestionIndex(0)
+    if (advanceTimeoutRef.current) clearTimeout(advanceTimeoutRef.current)
 
     // Dev seam: inject mock questions via localStorage to exercise the graded flow without the API.
     if (import.meta.env.DEV) {
@@ -136,6 +142,10 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, dashView, recordedCount, lesson.id])
 
+  useEffect(() => {
+    scrollBodyRef.current?.scrollTo({ top: 0, behavior: "smooth" })
+  }, [currentQuestionIndex])
+
   if (!isOpen) return null
 
   const isGraded = questions.length > 0
@@ -145,10 +155,27 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
     : fallback.filter((f) => (selfRatings[f.key] ?? "unanswered") !== "unanswered").length
   const canRecord = totalCount > 0 && answeredCount === totalCount
 
-  const answerMC = (id: string, index: number) =>
+  const advanceQuestion = () => {
+    if (advanceTimeoutRef.current) clearTimeout(advanceTimeoutRef.current)
+    setCurrentQuestionIndex((i) => i + 1)
+  }
+
+  const handleBack = () => {
+    if (advanceTimeoutRef.current) {
+      clearTimeout(advanceTimeoutRef.current)
+      advanceTimeoutRef.current = null
+    }
+    setCurrentQuestionIndex((i) => Math.max(0, i - 1))
+  }
+
+  const answerMC = (id: string, index: number) => {
     setAnswers((p) => (p[id] ? p : { ...p, [id]: { selectedIndex: index } }))
-  const answerTF = (id: string, value: boolean) =>
+    advanceTimeoutRef.current = setTimeout(() => setCurrentQuestionIndex((i) => i + 1), 1400)
+  }
+  const answerTF = (id: string, value: boolean) => {
     setAnswers((p) => (p[id] ? p : { ...p, [id]: { selectedBool: value } }))
+    advanceTimeoutRef.current = setTimeout(() => setCurrentQuestionIndex((i) => i + 1), 1400)
+  }
   const setSelfRating = (key: string, state: ResponseState) => setSelfRatings((p) => ({ ...p, [key]: state }))
 
   const computePerCodeBand = (): Record<string, Band> => {
@@ -235,7 +262,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
+        <div ref={scrollBodyRef} className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
           {phase === "loading" && (
             <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
               <Loader2 size={28} className="animate-spin text-amber-500" />
@@ -246,35 +273,98 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
 
           {phase === "administer" && (
             <>
-              <p className="text-sm text-[#666]">
-                {isGraded
-                  ? "Answer each question to see instant feedback, then record this student's results to the class totals."
-                  : "Reflect on each expectation, then record this student's results to the class totals."}
-              </p>
+              {currentQuestionIndex >= totalCount ? (
+                /* All questions answered — prompt to record */
+                <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
+                    <CheckCircle size={24} className="text-emerald-600" />
+                  </div>
+                  <p className="font-semibold text-[#2C2C2C]">All done!</p>
+                  <p className="text-sm text-[#888]">Use the button below to record this student's results.</p>
+                  <button
+                    onClick={handleBack}
+                    className="text-xs text-amber-600 hover:text-amber-800 font-medium transition-colors"
+                  >
+                    ← Review answers
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {/* Info banner — only on first question */}
+                  {currentQuestionIndex === 0 && !isGraded && (
+                    <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700">
+                      Showing reflection prompts — tailored quiz questions weren't generated for this lesson. Re-generate the lesson with AI to get auto-graded questions.
+                    </p>
+                  )}
 
-              {!isGraded && (
-                <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700">
-                  Showing reflection prompts — tailored quiz questions weren't generated for this lesson. Re-generate the lesson with AI to get auto-graded multiple-choice and true/false questions.
-                </p>
-              )}
+                  {/* Progress indicator */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      {currentQuestionIndex > 0 && (
+                        <button
+                          onClick={handleBack}
+                          className="text-xs text-[#888] hover:text-amber-700 font-medium transition-colors"
+                        >
+                          ← Back
+                        </button>
+                      )}
+                      <span className="text-xs text-[#888]">
+                        Question {currentQuestionIndex + 1} of {totalCount}
+                      </span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      {Array.from({ length: totalCount }).map((_, i) => {
+                        const isAnswered = isGraded
+                          ? answers[questions[i]?.id] !== undefined
+                          : (selfRatings[fallback[i]?.key] ?? "unanswered") !== "unanswered"
+                        return (
+                          <div
+                            key={i}
+                            className={`h-1.5 w-4 rounded-full transition-colors ${
+                              i === currentQuestionIndex
+                                ? "bg-amber-600"
+                                : isAnswered
+                                ? "bg-amber-400"
+                                : "bg-stone-200"
+                            }`}
+                          />
+                        )
+                      })}
+                    </div>
+                  </div>
 
-              {isGraded
-                ? questions.map((q) =>
-                    q.type === "multiple-choice" ? (
-                      <MultipleChoiceCard key={q.id} q={q} answer={answers[q.id]} onAnswer={(i) => answerMC(q.id, i)} />
-                    ) : (
-                      <TrueFalseCard key={q.id} q={q} answer={answers[q.id]} onAnswer={(v) => answerTF(q.id, v)} />
-                    ),
-                  )
-                : fallback.map((f) => (
+                  {/* Current question */}
+                  {isGraded ? (
+                    (() => {
+                      const q = questions[currentQuestionIndex]
+                      return q.type === "multiple-choice" ? (
+                        <MultipleChoiceCard
+                          key={q.id}
+                          q={q}
+                          answer={answers[q.id]}
+                          onAnswer={(i) => answerMC(q.id, i)}
+                        />
+                      ) : (
+                        <TrueFalseCard
+                          key={q.id}
+                          q={q}
+                          answer={answers[q.id]}
+                          onAnswer={(v) => answerTF(q.id, v)}
+                        />
+                      )
+                    })()
+                  ) : (
                     <SelfRatingCard
-                      key={f.key}
-                      code={f.code}
-                      question={f.prompt}
-                      state={selfRatings[f.key] ?? "unanswered"}
-                      onRespond={(s) => setSelfRating(f.key, s)}
+                      key={fallback[currentQuestionIndex].key}
+                      code={fallback[currentQuestionIndex].code}
+                      question={fallback[currentQuestionIndex].prompt}
+                      state={selfRatings[fallback[currentQuestionIndex].key] ?? "unanswered"}
+                      onRespond={(s) => setSelfRating(fallback[currentQuestionIndex].key, s)}
+                      onAdvance={advanceQuestion}
                     />
-                  ))}
+                  )}
+                </>
+              )}
             </>
           )}
 
@@ -536,11 +626,13 @@ function SelfRatingCard({
   question,
   state,
   onRespond,
+  onAdvance,
 }: {
   code: string | null
   question: string
   state: ResponseState
   onRespond: (s: ResponseState) => void
+  onAdvance: () => void
 }) {
   return (
     <div
@@ -577,6 +669,14 @@ function SelfRatingCard({
           Still working on it
         </button>
       </div>
+      {state !== "unanswered" && (
+        <button
+          onClick={onAdvance}
+          className="mt-3 w-full py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors"
+        >
+          Next →
+        </button>
+      )}
     </div>
   )
 }
