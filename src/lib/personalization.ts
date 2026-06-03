@@ -88,3 +88,23 @@ export function clearPrefs(): void {
     // ignore
   }
 }
+
+const ONBOARDING_KEY = "maplekey_onboarded"
+
+export function isOnboarded(): boolean {
+  if (typeof window === "undefined") return true
+  try {
+    return window.localStorage.getItem(ONBOARDING_KEY) === "true"
+  } catch {
+    return true
+  }
+}
+
+export function setOnboarded(): void {
+  if (typeof window === "undefined") return
+  try {
+    window.localStorage.setItem(ONBOARDING_KEY, "true")
+  } catch {
+    // ignore
+  }
+}

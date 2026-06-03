@@ -1,21 +1,26 @@
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import HomeScreen from "@/components/home-screen"
 import ResourcesSpace from "@/components/resources-space"
 import LessonPlannerModal from "@/components/lesson-planner-modal"
 import LessonsLibrary from "@/components/lessons-library"
 import AssessmentModal from "@/components/assessment-modal"
 import SettingsModal from "@/components/settings-modal"
+import OnboardingModal from "@/components/onboarding-modal"
 import type { Filters } from "@/lib/types"
-import { clearPrefs, getPrefs, inferProvinceFromTimeZone, setPrefs } from "@/lib/personalization"
-import { getLatestLesson } from "@/lib/lesson-metadata"
+import {
+  clearPrefs,
+  getPrefs,
+  inferProvinceFromTimeZone,
+  isOnboarded,
+  setPrefs,
+} from "@/lib/personalization"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
 
-type Space = "home" | "resources" | "lessonplanner" | "assessment" | "lessons"
+type Space = "resources" | "lessonplanner" | "assessment" | "lessons"
+type OverlaySpace = Exclude<Space, "resources">
 
-const SPACE_VARIANTS: Record<Exclude<Space, "home">, { initial: object; animate: object; exit: object }> = {
-  resources:     { initial: { y: "100%" }, animate: { y: 0 }, exit: { y: "100%" } },
+const SPACE_VARIANTS: Record<OverlaySpace, { initial: object; animate: object; exit: object }> = {
   lessonplanner: { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
   assessment:    { initial: { x: "100%" },  animate: { x: 0 }, exit: { x: "100%"  } },
   lessons:       { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
@@ -45,8 +50,9 @@ export default function App() {
   })
   const [resultCount, setResultCount] = useState(0)
 
-  const [activeSpace, setActiveSpace] = useState<Space>("home")
+  const [activeSpace, setActiveSpace] = useState<Space>("resources")
   const [showSettings, setShowSettings] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false)
   const [assessmentLesson, setAssessmentLesson] = useState<LessonMetadata | null>(null)
   const [plannerLesson, setPlannerLesson] = useState<LessonMetadata | null>(null)
 
@@ -63,6 +69,7 @@ export default function App() {
     })
     setInferred(prefs.inferred)
     setHydrated(true)
+    if (!isOnboarded()) setShowOnboarding(true)
   }, [])
 
   useEffect(() => {
@@ -96,39 +103,39 @@ export default function App() {
     (filters.strand ? 1 : 0) +
     Object.values(sidebarFilters).reduce((sum, arr) => sum + arr.length, 0)
 
-  const handleOpenAssessment = () => {
-    setAssessmentLesson(getLatestLesson())
-    setActiveSpace("assessment")
-  }
+  const goResources = () => setActiveSpace("resources")
 
-  const handleOpenLessonPlanner = (lesson?: LessonMetadata | null) => {
-    setPlannerLesson(lesson ?? null)
-    setActiveSpace("lessonplanner")
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false)
+    const prefs = getPrefs()
+    setFilters((f) => ({
+      ...f,
+      province: prefs.province,
+      grade: prefs.grade,
+      subject: prefs.subject,
+      strand: prefs.strand,
+    }))
+    setInferred(false)
   }
-
-  const handleOpenLessonFromLibrary = (lesson: LessonMetadata) => {
-    setPlannerLesson(lesson)
-    setActiveSpace("lessonplanner")
-  }
-
-  const goHome = () => setActiveSpace("home")
 
   return (
     <div className="fixed inset-0 bg-[#FAF3E0] overflow-hidden">
-      {/* Home screen — always mounted behind spaces */}
-      <HomeScreen
+      {/* Resources discovery page — always-on landing layer */}
+      <ResourcesSpace
         filters={filters}
+        setFilters={setFilters}
+        sidebarFilters={sidebarFilters}
+        onSidebarFilterChange={handleSidebarFilterChange}
         resultCount={resultCount}
-        onOpenResources={() => setActiveSpace("resources")}
-        onOpenLessonPlanner={handleOpenLessonPlanner}
-        onOpenAssessment={handleOpenAssessment}
-        onOpenLessons={() => setActiveSpace("lessons")}
-        onOpenSettings={() => setShowSettings(true)}
+        onCountChange={setResultCount}
+        inferred={inferred}
+        onReset={handleResetInferred}
+        totalActiveFilters={totalActiveFilters}
       />
 
-      {/* Spaces — slide in over home */}
+      {/* Overlay spaces — slide in over resources */}
       <AnimatePresence>
-        {activeSpace !== "home" && (
+        {activeSpace !== "resources" && (
           <motion.div
             key={activeSpace}
             className="fixed inset-0 z-10"
@@ -137,34 +144,19 @@ export default function App() {
             exit={SPACE_VARIANTS[activeSpace].exit}
             transition={SPRING}
           >
-            {activeSpace === "resources" && (
-              <ResourcesSpace
-                filters={filters}
-                setFilters={setFilters}
-                sidebarFilters={sidebarFilters}
-                onSidebarFilterChange={handleSidebarFilterChange}
-                resultCount={resultCount}
-                onCountChange={setResultCount}
-                inferred={inferred}
-                onReset={handleResetInferred}
-                totalActiveFilters={totalActiveFilters}
-                onBack={goHome}
-              />
-            )}
-
             {activeSpace === "lessonplanner" && (
               <LessonPlannerModal
                 isOpen
                 asSpace
                 lesson={plannerLesson}
                 bookmarkedResources={bookmarkedResources}
-                onClose={goHome}
-                onBack={goHome}
+                onClose={goResources}
+                onBack={goResources}
               />
             )}
 
             {activeSpace === "lessons" && (
-              <LessonsLibrary onBack={goHome} onOpenLesson={handleOpenLessonFromLibrary} />
+              <LessonsLibrary onBack={goResources} onOpenLesson={(lesson) => { setPlannerLesson(lesson); setActiveSpace("lessonplanner") }} />
             )}
 
             {activeSpace === "assessment" && assessmentLesson && (
@@ -172,7 +164,7 @@ export default function App() {
                 isOpen
                 asSpace
                 lesson={assessmentLesson}
-                onClose={goHome}
+                onClose={goResources}
               />
             )}
 
@@ -186,7 +178,7 @@ export default function App() {
                 >
                   Open Lesson Planner
                 </button>
-                <button onClick={goHome} className="text-sm text-[#888] underline">Back to home</button>
+                <button onClick={goResources} className="text-sm text-[#888] underline">Back to resources</button>
               </div>
             )}
           </motion.div>
@@ -195,6 +187,9 @@ export default function App() {
 
       {/* Settings panel — slides down from top, overlays everything */}
       <SettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />
+
+      {/* First-visit onboarding */}
+      <OnboardingModal open={showOnboarding} onComplete={handleOnboardingComplete} />
     </div>
   )
 }

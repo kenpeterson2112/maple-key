@@ -19,7 +19,7 @@ interface ResourcesSpaceProps {
   inferred: boolean
   onReset: () => void
   totalActiveFilters: number
-  onBack: () => void
+  onBack?: () => void
 }
 
 export default function ResourcesSpace({
