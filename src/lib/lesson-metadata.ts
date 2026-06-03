@@ -11,6 +11,18 @@ export interface TemplateSection {
   callout?: string
 }
 
+export type ArtifactSection = "mindsOn" | "action" | "consolidation" | "materials"
+export type ArtifactStatus = "unset" | "have" | "will-make" | "help-me"
+
+export interface LessonArtifact {
+  name: string
+  purpose: string
+  section: ArtifactSection
+  status: ArtifactStatus
+  /** Teacher's edits to the generic organizer, if they used "Help me make one". */
+  organizer?: { fields: Record<string, string> }
+}
+
 export interface LessonFullContent {
   mindsOnContent: string
   mindsOnDifferentiation: string
@@ -25,6 +37,7 @@ export interface LessonFullContent {
   materials?: { resources: string[]; preparation: string[] }
   excludedResources?: { title: string; reason: string }[]
   sections?: TemplateSection[]
+  artifacts?: LessonArtifact[]
 }
 
 export interface LessonMetadata {
@@ -56,6 +69,30 @@ export function logLesson(meta: Omit<LessonMetadata, "id" | "timestamp">): Lesso
     // Storage quota exceeded — silently skip
   }
   return entry
+}
+
+/**
+ * Patch a saved lesson's fullContent in localStorage. Used for edits that
+ * should round-trip when reopening a lesson (e.g. artifact triage decisions).
+ */
+export function updateLessonFullContent(
+  id: string,
+  patch: Partial<LessonFullContent>,
+): void {
+  const log = getLessonLog()
+  const idx = log.findIndex((l) => l.id === id)
+  if (idx === -1) return
+  const current = log[idx]
+  const next: LessonMetadata = {
+    ...current,
+    fullContent: { ...(current.fullContent ?? ({} as LessonFullContent)), ...patch },
+  }
+  const updated = [...log.slice(0, idx), next, ...log.slice(idx + 1)]
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
+  } catch {
+    // quota
+  }
 }
 
 export function getLessonLog(): LessonMetadata[] {

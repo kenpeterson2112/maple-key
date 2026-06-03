@@ -28,8 +28,16 @@ import {
   School,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
-import { logLesson } from "@/lib/lesson-metadata"
-import type { LessonMetadata } from "@/lib/lesson-metadata"
+import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
+import type { LessonMetadata, LessonArtifact, ArtifactStatus } from "@/lib/lesson-metadata"
+import ArtifactsSection from "@/components/artifacts-section"
+import ArtifactOrganizerModal from "@/components/artifact-organizer-modal"
+import {
+  openPrintWindow,
+  escapeHtml,
+  nl2br as nl2brHtml,
+  PRINT_ON_LOAD_SCRIPT,
+} from "@/lib/print-html"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { sanitizeQuestions } from "@/lib/assessment-types"
 import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
@@ -88,6 +96,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [materialsResources, setMaterialsResources] = useState<string[]>(fc?.materials?.resources ?? [])
   const [materialsPreparation, setMaterialsPreparation] = useState<string[]>(fc?.materials?.preparation ?? [])
   const [excludedResources, setExcludedResources] = useState<{ title: string; reason: string }[]>(fc?.excludedResources ?? [])
+  const [artifacts, setArtifacts] = useState<LessonArtifact[]>(fc?.artifacts ?? [])
+  const [organizerArtifactIndex, setOrganizerArtifactIndex] = useState<number | null>(null)
 
   // Two-call flow state
   const [showQuestionsStep, setShowQuestionsStep] = useState(false)
@@ -198,6 +208,19 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       if (Array.isArray(data.sections) && data.sections.length > 0) {
         setTemplateSections(data.sections)
       }
+      const incomingArtifacts: LessonArtifact[] = (data.artifacts ?? [])
+        .map((a: any) => ({
+          name: String(a?.name ?? "").trim(),
+          purpose: String(a?.purpose ?? "").trim(),
+          section: (["mindsOn", "action", "consolidation", "materials"].includes(a?.section)
+            ? a.section
+            : "materials") as LessonArtifact["section"],
+          status: (["unset", "have", "will-make", "help-me"].includes(a?.status)
+            ? a.status
+            : "unset") as ArtifactStatus,
+        }))
+        .filter((a: LessonArtifact) => a.name.length > 0)
+      setArtifacts(incomingArtifacts)
       const logged = logLesson({
         title: data.title ?? "",
         grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
@@ -224,6 +247,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           materials: data.materials ?? { resources: [], preparation: [] },
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
+          artifacts: incomingArtifacts,
         },
       })
       setLatestLesson(logged)
@@ -350,6 +374,19 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       if (Array.isArray(data.sections) && data.sections.length > 0) {
         setTemplateSections(data.sections)
       }
+      const incomingArtifacts: LessonArtifact[] = (data.artifacts ?? [])
+        .map((a: any) => ({
+          name: String(a?.name ?? "").trim(),
+          purpose: String(a?.purpose ?? "").trim(),
+          section: (["mindsOn", "action", "consolidation", "materials"].includes(a?.section)
+            ? a.section
+            : "materials") as LessonArtifact["section"],
+          status: (["unset", "have", "will-make", "help-me"].includes(a?.status)
+            ? a.status
+            : "unset") as ArtifactStatus,
+        }))
+        .filter((a: LessonArtifact) => a.name.length > 0)
+      setArtifacts(incomingArtifacts)
       const logged = logLesson({
         title: data.title ?? "",
         grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
@@ -376,6 +413,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           materials: data.materials ?? { resources: [], preparation: [] },
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
+          artifacts: incomingArtifacts,
         },
       })
       setLatestLesson(logged)
@@ -543,6 +581,22 @@ Return a JSON object with exactly these fields (string values are plain text, no
     setTimeout(() => setCopiedState(null), 2000)
   }
 
+  const persistArtifacts = (next: LessonArtifact[]) => {
+    setArtifacts(next)
+    const id = activeLesson?.id
+    if (id) updateLessonFullContent(id, { artifacts: next })
+  }
+
+  const handleArtifactStatusChange = (index: number, status: ArtifactStatus) => {
+    persistArtifacts(artifacts.map((a, i) => (i === index ? { ...a, status } : a)))
+  }
+
+  const handleSaveOrganizerFields = (index: number, fields: Record<string, string>) => {
+    persistArtifacts(
+      artifacts.map((a, i) => (i === index ? { ...a, organizer: { fields } } : a)),
+    )
+  }
+
   const lessonMinutes = Number.parseInt(lessonLength) || 60
   const mindsOnTime = Math.round(lessonMinutes * 0.17)
   const actionTime = Math.round(lessonMinutes * 0.58)
@@ -551,21 +605,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
   const isThreePart = resolveTemplateId(lessonTemplate) === "3-part"
 
   const handleExportPDF = () => {
-    const printWindow = window.open("", "_blank")
-    if (!printWindow) {
-      alert("Please allow popups to export the lesson plan")
-      return
-    }
-
-    const esc = (s: unknown) =>
-      String(s ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;")
-
-    const nl2br = (s: string) => esc(s).replace(/\n/g, "<br>")
+    const esc = escapeHtml
+    const nl2br = nl2brHtml
 
     const currentDate = new Date().toLocaleDateString("en-US", {
       year: "numeric",
@@ -974,18 +1015,14 @@ Return a JSON object with exactly these fields (string values are plain text, no
   ` : templateSectionsHtml}
 
   <div class="footer">Maple Key • maplekey.ca</div>
-
-  <script>
-    window.onload = function() {
-      setTimeout(function() { window.print(); }, 350);
-    };
-  </script>
+  ${PRINT_ON_LOAD_SCRIPT}
 </body>
 </html>
     `
 
-    printWindow.document.write(htmlContent)
-    printWindow.document.close()
+    if (!openPrintWindow(htmlContent)) {
+      alert("Please allow popups to export the lesson plan")
+    }
   }
 
   return (
@@ -1204,6 +1241,15 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     )}
                   </div>
                 </div>
+
+                {/* CLASSROOM ARTIFACTS - triage what the teacher will bring/build */}
+                {artifacts.length > 0 && (
+                  <ArtifactsSection
+                    artifacts={artifacts}
+                    onStatusChange={handleArtifactStatusChange}
+                    onOpenOrganizer={(i) => setOrganizerArtifactIndex(i)}
+                  />
+                )}
 
                 {isThreePart && (<>
                 {/* SECTION A - MINDS ON */}
@@ -2042,6 +2088,15 @@ Return a JSON object with exactly these fields (string values are plain text, no
           isOpen={showAssessment}
           onClose={() => setShowAssessment(false)}
           lesson={latestLesson}
+        />
+      )}
+
+      {organizerArtifactIndex !== null && artifacts[organizerArtifactIndex] && (
+        <ArtifactOrganizerModal
+          artifact={artifacts[organizerArtifactIndex]}
+          lessonTitle={lessonTitle}
+          onClose={() => setOrganizerArtifactIndex(null)}
+          onSave={(fields) => handleSaveOrganizerFields(organizerArtifactIndex, fields)}
         />
       )}
 
