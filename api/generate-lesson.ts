@@ -49,6 +49,12 @@ interface TrueFalseQuestion {
 
 type AssessmentQuestion = MultipleChoiceQuestion | TrueFalseQuestion
 
+interface LessonArtifact {
+  name: string
+  purpose: string
+  section: "mindsOn" | "action" | "consolidation" | "materials"
+}
+
 interface LessonPlanResponse {
   title: string
   learningGoal: string
@@ -64,6 +70,7 @@ interface LessonPlanResponse {
     resources: string[]
     preparation: string[]
   }
+  artifacts?: LessonArtifact[]
   excludedResources?: { title: string; reason: string }[]
   assessmentQuestions?: AssessmentQuestion[]
 }
@@ -177,6 +184,9 @@ Return a JSON object with exactly these fields (string values are plain text, no
     "resources": ["Resource title 1", "Resource title 2"],
     "preparation": ["What to print or photocopy", "What to pre-load or test on devices", "How to set up the room"]
   },
+  "artifacts": [
+    { "name": "Guided capture sheet", "purpose": "Students record observations during the museum exploration", "section": "action" }
+  ],
   "excludedResources": [
     { "title": "Resource title", "reason": "One-line reason it was not used" }
   ],
@@ -186,7 +196,9 @@ Return a JSON object with exactly these fields (string values are plain text, no
   ]
 }
 
-"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.`
+"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.
+
+"artifacts" must list every concrete classroom artifact the teacher will need to produce or bring — examples: guided capture sheet, exit ticket, sticky-note reflection template, T-chart, observation sheet, workbook activity, reflection prompt handout. One entry per artifact. Use the artifact's most natural short name in "name". In "purpose", write one short phrase describing what students do with it. In "section", indicate which lesson section ("mindsOn", "action", "consolidation", "materials") it's used in. Do NOT list pre-existing bookmarked resources (those go in "materials.resources"); only list artifacts the teacher must produce or supply themselves. If the lesson genuinely needs no artifacts, return an empty array.`
 
   try {
     const message = await client.messages.create({
