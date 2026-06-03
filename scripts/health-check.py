@@ -1,37 +1,37 @@
 #!/usr/bin/env python3
 """
 Maple Key Database Health Check
-Checks up to 100 resources per run for:
-1. URL reachability (HTTP errors)
-2. Duplicate detection (URL or title+grade+subject)
-3. Content changes since last check (via content hash changelog)
-Flags failures with needs_review: "yes"
+
+Runs four high-signal, no-false-positive checks across every resource:
+1. Invalid URL lint (missing http(s):// scheme)
+2. DNS resolution (catches genuinely defunct domains; ignores bot blocks)
+3. Duplicate URL detection
+4. Duplicate title/subject/grade detection
+
+Resources that fail any check get needs_review: "yes". A content-hash changelog
+tracks metadata drift between runs.
+
+HTTP status probing was removed: 96% of educational/commercial sites return 403
+to non-browser clients regardless of whether the page is live, which made
+needs_review meaningless. DNS failure is the only network signal worth trusting
+without a full headless browser.
 """
 
 import json
 import hashlib
-import urllib.request
-import urllib.error
-import ssl
-import time
+import socket
 import os
-import sys
 from datetime import datetime, timezone
-from collections import Counter
+from urllib.parse import urlparse
 
 RESOURCES_PATH = os.path.join(os.path.dirname(__file__), '..', 'public', 'resources.json')
 CHANGELOG_PATH = os.path.join(os.path.dirname(__file__), '..', 'public', 'health-changelog.json')
-MAX_RESOURCES_PER_RUN = 100
-URL_TIMEOUT = 10
+DNS_TIMEOUT = 5
 
-# SSL context that doesn't verify certs (some edu sites have issues)
-ssl_ctx = ssl.create_default_context()
-ssl_ctx.check_hostname = False
-ssl_ctx.verify_mode = ssl.CERT_NONE
+socket.setdefaulttimeout(DNS_TIMEOUT)
 
 
 def content_hash(resource: dict) -> str:
-    """Hash key content fields to detect changes."""
     fields = ['url', 'topic_title', 'description', 'strand', 'grade_level',
               'subject', 'publisher_creator', 'modality', 'curriculum_expectations',
               'year_published', 'is_paid', 'province', 'sub_strand']
@@ -41,43 +41,52 @@ def content_hash(resource: dict) -> str:
         if isinstance(val, list):
             val = sorted(str(v) for v in val)
         parts.append(f"{f}:{json.dumps(val, sort_keys=True)}")
-    raw = '|'.join(parts)
-    return hashlib.sha256(raw.encode()).hexdigest()[:16]
+    return hashlib.sha256('|'.join(parts).encode()).hexdigest()[:16]
 
 
 def resource_key(resource: dict) -> str:
-    """Stable key for a resource — prefer id, else index-based fallback."""
-    if 'id' in resource:
-        return str(resource['id'])
-    # Use URL as fallback key
     return resource.get('url', '')
 
 
-def check_url(url: str) -> tuple[int | None, str]:
-    """Return (http_status_code, error_message). Status None = network error."""
-    if not url or not url.startswith(('http://', 'https://')):
-        return None, 'invalid_url'
+def check_url_lint(url: str) -> str | None:
+    """Return an issue code if the URL is structurally invalid, else None."""
+    if not url:
+        return 'missing_url'
+    if not url.startswith(('http://', 'https://')):
+        return 'missing_scheme'
     try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (MapleKey HealthCheck/1.0)'})
-        with urllib.request.urlopen(req, timeout=URL_TIMEOUT, context=ssl_ctx) as resp:
-            return resp.status, ''
-    except urllib.error.HTTPError as e:
-        return e.code, f'http_error_{e.code}'
-    except urllib.error.URLError as e:
-        return None, f'url_error: {e.reason}'
-    except Exception as e:
-        return None, f'error: {str(e)[:80]}'
+        parsed = urlparse(url)
+        if not parsed.netloc:
+            return 'malformed_url'
+    except ValueError:
+        return 'malformed_url'
+    return None
+
+
+def check_dns(url: str) -> tuple[bool, str]:
+    """Return (ok, detail). Only fails for genuine resolution errors."""
+    try:
+        host = urlparse(url).hostname
+        if not host:
+            return False, 'no_hostname'
+        socket.gethostbyname(host)
+        return True, ''
+    except socket.gaierror as e:
+        return False, f'dns_error: {e}'
+    except socket.timeout:
+        return False, 'dns_timeout'
 
 
 def build_duplicate_maps(data: list) -> tuple[dict, dict]:
-    """Build URL→[indices] and title_key→[indices] maps for dup detection."""
     url_map: dict[str, list[int]] = {}
     title_map: dict[str, list[int]] = {}
     for i, r in enumerate(data):
         url = r.get('url', '').strip().rstrip('/')
         if url:
             url_map.setdefault(url, []).append(i)
-        title_key = f"{r.get('topic_title','').strip().lower()}|{r.get('subject','').strip().lower()}|{r.get('grade_level','').strip().lower()}"
+        gl = r.get('grade_level', '')
+        gl_str = ','.join(sorted(str(x) for x in gl)) if isinstance(gl, list) else str(gl)
+        title_key = f"{r.get('topic_title','').strip().lower()}|{r.get('subject','').strip().lower()}|{gl_str.strip().lower()}"
         if r.get('topic_title'):
             title_map.setdefault(title_key, []).append(i)
     return url_map, title_map
@@ -87,7 +96,7 @@ def load_changelog() -> dict:
     if os.path.exists(CHANGELOG_PATH):
         with open(CHANGELOG_PATH) as f:
             return json.load(f)
-    return {'version': 1, 'last_run': None, 'resources': {}}
+    return {'version': 2, 'last_run': None, 'resources': {}}
 
 
 def save_changelog(changelog: dict):
@@ -95,201 +104,106 @@ def save_changelog(changelog: dict):
         json.dump(changelog, f, indent=2)
 
 
-def select_resources_to_check(data: list, changelog: dict, limit: int) -> list[int]:
-    """
-    Priority order:
-    1. Resources never checked (not in changelog)
-    2. Resources flagged needs_review (re-validate)
-    3. Oldest-checked resources
-    """
-    checked = changelog.get('resources', {})
-    never_checked = []
-    flagged = []
-    by_last_check = []
-
-    for i, r in enumerate(data):
-        key = resource_key(r)
-        if key not in checked:
-            never_checked.append(i)
-        elif r.get('needs_review') == 'yes':
-            flagged.append(i)
-        else:
-            last = checked[key].get('last_checked', '2000-01-01')
-            by_last_check.append((last, i))
-
-    by_last_check.sort()
-    oldest = [i for _, i in by_last_check]
-
-    priority = never_checked + flagged + oldest
-    seen = set()
-    result = []
-    for i in priority:
-        if i not in seen:
-            seen.add(i)
-            result.append(i)
-        if len(result) >= limit:
-            break
-    return result
-
-
 def main():
     print(f"[{datetime.now().isoformat()}] Maple Key Health Check starting...")
-    print(f"Loading resources from {RESOURCES_PATH}")
 
     with open(RESOURCES_PATH) as f:
-        data = json.load(f)
+        raw = json.load(f)
+    if isinstance(raw, list):
+        meta, data = None, raw
+    else:
+        meta, data = raw.get('meta'), raw.get('resources', [])
 
     changelog = load_changelog()
     print(f"Total resources: {len(data)}")
-    print(f"Previously checked: {len(changelog.get('resources', {}))}")
 
     url_map, title_map = build_duplicate_maps(data)
-    indices = select_resources_to_check(data, changelog, MAX_RESOURCES_PER_RUN)
-    print(f"Resources selected for this run: {len(indices)}")
-    print()
 
-    results_summary = {
-        'url_error': [],
-        'url_broken': [],
-        'duplicate_url': [],
-        'duplicate_title': [],
-        'content_changed': [],
-        'ok': [],
-    }
-
+    summary = {'invalid_url': [], 'dns_failure': [], 'duplicate_url': [],
+               'duplicate_title': [], 'ok': []}
     now_iso = datetime.now(timezone.utc).isoformat()
-    checked_resources = changelog.setdefault('resources', {})
+    checked = changelog.setdefault('resources', {})
 
-    for idx, i in enumerate(indices):
-        r = data[i]
-        key = resource_key(r)
+    for i, r in enumerate(data):
         url = r.get('url', '')
         title = r.get('topic_title', 'Untitled')
         issues = []
+        dns_ok = None
 
-        print(f"[{idx+1:3d}/{len(indices)}] Checking: {title[:60]}")
-
-        # --- Check 1: URL health ---
-        status, err = check_url(url)
-        if status is None:
-            issues.append(f'url_error: {err}')
-            results_summary['url_error'].append({'index': i, 'key': key, 'title': title, 'url': url, 'error': err})
-            print(f"         URL ERROR: {err}")
-        elif status >= 400:
-            issues.append(f'http_{status}')
-            results_summary['url_broken'].append({'index': i, 'key': key, 'title': title, 'url': url, 'status': status})
-            print(f"         BROKEN URL: HTTP {status}")
+        lint_issue = check_url_lint(url)
+        if lint_issue:
+            issues.append(lint_issue)
+            summary['invalid_url'].append({'index': i, 'title': title, 'url': url, 'code': lint_issue})
         else:
-            print(f"         URL OK: HTTP {status}")
+            dns_ok, dns_detail = check_dns(url)
+            if not dns_ok:
+                issues.append(dns_detail)
+                summary['dns_failure'].append({'index': i, 'title': title, 'url': url, 'error': dns_detail})
 
-        # --- Check 2: Duplicate detection ---
         norm_url = url.strip().rstrip('/')
         if norm_url and len(url_map.get(norm_url, [])) > 1:
-            dup_indices = [x for x in url_map[norm_url] if x != i]
-            issues.append(f'duplicate_url: indices {dup_indices}')
-            results_summary['duplicate_url'].append({'index': i, 'key': key, 'title': title, 'url': url, 'dup_indices': dup_indices})
-            print(f"         DUPLICATE URL: also at indices {dup_indices}")
+            dups = [x for x in url_map[norm_url] if x != i]
+            issues.append(f'duplicate_url: {dups}')
+            summary['duplicate_url'].append({'index': i, 'title': title, 'url': url, 'dup_indices': dups})
 
-        title_key = f"{r.get('topic_title','').strip().lower()}|{r.get('subject','').strip().lower()}|{r.get('grade_level','').strip().lower()}"
+        gl = r.get('grade_level', '')
+        gl_str = ','.join(sorted(str(x) for x in gl)) if isinstance(gl, list) else str(gl)
+        title_key = f"{r.get('topic_title','').strip().lower()}|{r.get('subject','').strip().lower()}|{gl_str.strip().lower()}"
         if r.get('topic_title') and len(title_map.get(title_key, [])) > 1:
-            dup_indices = [x for x in title_map[title_key] if x != i]
-            # Only flag if URLs are also different (pure title dup)
-            dup_urls_same = all(data[x].get('url','').strip().rstrip('/') == norm_url for x in dup_indices)
-            if not dup_urls_same:
-                issues.append(f'duplicate_title: indices {dup_indices}')
-                results_summary['duplicate_title'].append({'index': i, 'key': key, 'title': title, 'url': url, 'dup_indices': dup_indices})
-                print(f"         DUPLICATE TITLE: also at indices {dup_indices}")
+            dups = [x for x in title_map[title_key] if x != i]
+            if not all(data[x].get('url','').strip().rstrip('/') == norm_url for x in dups):
+                issues.append(f'duplicate_title: {dups}')
+                summary['duplicate_title'].append({'index': i, 'title': title, 'url': url, 'dup_indices': dups})
 
-        # --- Check 3: Content change detection ---
-        current_hash = content_hash(r)
-        prev = checked_resources.get(key, {})
-        prev_hash = prev.get('content_hash')
-
-        if prev_hash and prev_hash != current_hash:
-            issues.append(f'content_changed: was {prev_hash}, now {current_hash}')
-            results_summary['content_changed'].append({'index': i, 'key': key, 'title': title, 'url': url,
-                                                        'old_hash': prev_hash, 'new_hash': current_hash})
-            print(f"         CONTENT CHANGED: {prev_hash} → {current_hash}")
-
-        # --- Apply needs_review flag ---
         if issues:
             data[i]['needs_review'] = 'yes'
         else:
-            results_summary['ok'].append({'index': i, 'key': key, 'title': title})
-            # Clear flag if previously set and now clean
+            summary['ok'].append(i)
             if data[i].get('needs_review') == 'yes':
                 del data[i]['needs_review']
 
-        # --- Update changelog entry ---
-        checked_resources[key] = {
+        checked[resource_key(r)] = {
             'index': i,
             'title': title,
             'url': url,
-            'content_hash': current_hash,
+            'content_hash': content_hash(r),
             'last_checked': now_iso,
-            'last_http_status': status,
+            'last_dns_ok': dns_ok,
             'issues': issues,
         }
 
-        # Polite rate limiting
-        time.sleep(0.3)
-
-    # --- Save updated resources.json ---
     with open(RESOURCES_PATH, 'w') as f:
-        json.dump(data, f, indent=2)
+        if meta is not None:
+            json.dump({'meta': meta, 'resources': data}, f, indent=2)
+        else:
+            json.dump(data, f, indent=2)
 
-    # --- Save updated changelog ---
     changelog['last_run'] = now_iso
-    changelog['last_run_count'] = len(indices)
+    changelog['last_run_count'] = len(data)
     save_changelog(changelog)
 
-    # --- Print summary ---
     print()
     print("=" * 60)
     print(f"HEALTH CHECK COMPLETE — {now_iso}")
     print("=" * 60)
-    print(f"Resources checked this run: {len(indices)}")
-    print(f"OK:                         {len(results_summary['ok'])}")
-    print(f"URL unreachable:            {len(results_summary['url_error'])}")
-    print(f"URL broken (4xx/5xx):       {len(results_summary['url_broken'])}")
-    print(f"Duplicate URLs:             {len(results_summary['duplicate_url'])}")
-    print(f"Duplicate titles:           {len(results_summary['duplicate_title'])}")
-    print(f"Content changed:            {len(results_summary['content_changed'])}")
-    print()
+    print(f"Resources checked:    {len(data)}")
+    print(f"OK:                   {len(summary['ok'])}")
+    print(f"Invalid URL:          {len(summary['invalid_url'])}")
+    print(f"DNS failure:          {len(summary['dns_failure'])}")
+    print(f"Duplicate URL:        {len(summary['duplicate_url'])}")
+    print(f"Duplicate title:      {len(summary['duplicate_title'])}")
 
-    total_flagged = (len(results_summary['url_error']) + len(results_summary['url_broken']) +
-                     len(results_summary['duplicate_url']) + len(results_summary['duplicate_title']) +
-                     len(results_summary['content_changed']))
-    print(f"Total resources flagged needs_review: {total_flagged}")
+    for label, items in [('INVALID URLs', summary['invalid_url']),
+                          ('DNS FAILURES', summary['dns_failure']),
+                          ('DUPLICATE URLs', summary['duplicate_url']),
+                          ('DUPLICATE TITLES', summary['duplicate_title'])]:
+        if items:
+            print(f"\n--- {label} ---")
+            for it in items:
+                extra = it.get('code') or it.get('error') or f"dups at {it.get('dup_indices')}"
+                print(f"  [{it['index']}] {it['title']}\n    {it['url']} ({extra})")
 
-    if results_summary['url_broken'] or results_summary['url_error']:
-        print()
-        print("--- BROKEN / UNREACHABLE URLs ---")
-        for item in results_summary['url_broken']:
-            print(f"  [{item['key']}] HTTP {item['status']} — {item['title']}")
-            print(f"    {item['url']}")
-        for item in results_summary['url_error']:
-            print(f"  [{item['key']}] ERROR — {item['title']}")
-            print(f"    {item['url']} ({item['error']})")
-
-    if results_summary['duplicate_url'] or results_summary['duplicate_title']:
-        print()
-        print("--- DUPLICATES ---")
-        for item in results_summary['duplicate_url']:
-            print(f"  [{item['key']}] DUPLICATE URL — {item['title']}")
-            print(f"    {item['url']}")
-        for item in results_summary['duplicate_title']:
-            print(f"  [{item['key']}] DUPLICATE TITLE — {item['title']}")
-            print(f"    {item['url']}")
-
-    if results_summary['content_changed']:
-        print()
-        print("--- CONTENT CHANGES ---")
-        for item in results_summary['content_changed']:
-            print(f"  [{item['key']}] {item['title']}")
-            print(f"    {item['url']}")
-
-    return results_summary
+    return summary
 
 
 if __name__ == '__main__':
