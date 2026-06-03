@@ -35,6 +35,7 @@ import { sanitizeQuestions } from "@/lib/assessment-types"
 import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
 import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
+import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
 import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
 
 interface PlanningQuestion {
@@ -66,7 +67,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
 
   const [includeAssessmentData, setIncludeAssessmentData] = useState(false)
   const [lessonLength, setLessonLength] = useState(lesson?.lessonLength ?? "60 minutes")
-  const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? "3-Part Lesson (Minds On, Action, Consolidation)")
+  const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? "3-Part Lesson")
   const [teacherNotes, setTeacherNotes] = useState("")
   const [userMaterials, setUserMaterials] = useState<UserMaterial[]>([])
   const [isGenerating, setIsGenerating] = useState(false)
@@ -92,6 +93,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [showQuestionsStep, setShowQuestionsStep] = useState(false)
   const [planningQuestions, setPlanningQuestions] = useState<PlanningQuestion[]>([])
   const [questionSelections, setQuestionSelections] = useState<Record<string, string[]>>({})
+  const [templateSections, setTemplateSections] = useState<TemplateSection[]>(fc?.sections ?? [])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [openResponseValues, setOpenResponseValues] = useState<Record<string, string>>({})
   const [showingOpenResponse, setShowingOpenResponse] = useState<Record<string, boolean>>({})
@@ -193,6 +195,9 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setMaterialsResources(data.materials?.resources ?? [])
       setMaterialsPreparation(data.materials?.preparation ?? [])
       setExcludedResources(data.excludedResources ?? [])
+      if (Array.isArray(data.sections) && data.sections.length > 0) {
+        setTemplateSections(data.sections)
+      }
       const logged = logLesson({
         title: data.title ?? "",
         grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
@@ -203,9 +208,9 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
         lessonLength,
         lessonTemplate,
         lessonContent: {
-          mindsOn: (data.mindsOnContent ?? "").slice(0, 600),
-          action: (data.actionContent ?? "").slice(0, 600),
-          consolidation: (data.consolidationContent ?? "").slice(0, 600),
+          mindsOn: (data.mindsOnContent ?? data.sections?.[0]?.content ?? "").slice(0, 600),
+          action: (data.actionContent ?? data.sections?.[1]?.content ?? "").slice(0, 600),
+          consolidation: (data.consolidationContent ?? data.sections?.[data.sections?.length - 1]?.content ?? "").slice(0, 600),
         },
         fullContent: {
           mindsOnContent: data.mindsOnContent ?? "",
@@ -218,6 +223,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           successCriteria: data.successCriteria ?? [],
           materials: data.materials ?? { resources: [], preparation: [] },
           excludedResources: data.excludedResources ?? [],
+          sections: data.sections ?? [],
         },
       })
       setLatestLesson(logged)
@@ -341,6 +347,9 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setMaterialsResources(data.materials?.resources ?? [])
       setMaterialsPreparation(data.materials?.preparation ?? [])
       setExcludedResources(data.excludedResources ?? [])
+      if (Array.isArray(data.sections) && data.sections.length > 0) {
+        setTemplateSections(data.sections)
+      }
       const logged = logLesson({
         title: data.title ?? "",
         grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
@@ -351,9 +360,9 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
         lessonLength,
         lessonTemplate,
         lessonContent: {
-          mindsOn: (data.mindsOnContent ?? "").slice(0, 600),
-          action: (data.actionContent ?? "").slice(0, 600),
-          consolidation: (data.consolidationContent ?? "").slice(0, 600),
+          mindsOn: (data.mindsOnContent ?? data.sections?.[0]?.content ?? "").slice(0, 600),
+          action: (data.actionContent ?? data.sections?.[1]?.content ?? "").slice(0, 600),
+          consolidation: (data.consolidationContent ?? data.sections?.[data.sections?.length - 1]?.content ?? "").slice(0, 600),
         },
         fullContent: {
           mindsOnContent: data.mindsOnContent ?? "",
@@ -366,6 +375,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           successCriteria: data.successCriteria ?? [],
           materials: data.materials ?? { resources: [], preparation: [] },
           excludedResources: data.excludedResources ?? [],
+          sections: data.sections ?? [],
         },
       })
       setLatestLesson(logged)
@@ -384,7 +394,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
 
   const handleExportResponseJSON = () => {
     const cached = latestLesson ? getCachedQuestions(latestLesson.id) : null
-    const responseData = {
+    const responseData = isThreePart ? {
       title: lessonTitle,
       learningGoal,
       successCriteria,
@@ -395,6 +405,15 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       actionDifferentiation,
       consolidationContent,
       consolidationAssessment,
+      materials: { resources: materialsResources, preparation: materialsPreparation },
+      ...(excludedResources.length ? { excludedResources } : {}),
+      ...(cached && cached.length ? { assessmentQuestions: cached } : {}),
+    } : {
+      title: lessonTitle,
+      learningGoal,
+      successCriteria,
+      curriculumCodesCovered: coveredCodes,
+      sections: templateSections,
       materials: { resources: materialsResources, preparation: materialsPreparation },
       ...(excludedResources.length ? { excludedResources } : {}),
       ...(cached && cached.length ? { assessmentQuestions: cached } : {}),
@@ -528,6 +547,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
   const mindsOnTime = Math.round(lessonMinutes * 0.17)
   const actionTime = Math.round(lessonMinutes * 0.58)
   const consolidationTime = Math.round(lessonMinutes * 0.25)
+  const templateDef = getTemplate(lessonTemplate)
+  const isThreePart = resolveTemplateId(lessonTemplate) === "3-part"
 
   const handleExportPDF = () => {
     const printWindow = window.open("", "_blank")
@@ -591,6 +612,49 @@ Return a JSON object with exactly these fields (string values are plain text, no
     const successCriteriaHtml = successCriteria
       .map((sc) => `<li><span class="check">✓</span><span>${esc(sc)}</span></li>`)
       .join("")
+
+    // PDF colors for non-3-Part section IDs
+    const PDF_SECTION_COLORS: Record<string, { border: string; text: string; pillBg: string; pillText: string }> = {
+      engage:             { border: "#F59E0B", text: "#D97706", pillBg: "#FEF3C7", pillText: "#92400E" },
+      explore:            { border: "#14B8A6", text: "#0D9488", pillBg: "#CCFBF1", pillText: "#0F766E" },
+      explain:            { border: "#0EA5E9", text: "#0284C7", pillBg: "#E0F2FE", pillText: "#075985" },
+      elaborate:          { border: "#10B981", text: "#059669", pillBg: "#D1FAE5", pillText: "#047857" },
+      evaluate:           { border: "#8B5CF6", text: "#7C3AED", pillBg: "#EDE9FE", pillText: "#6D28D9" },
+      anticipatorySet:    { border: "#F97316", text: "#EA580C", pillBg: "#FFEDD5", pillText: "#9A3412" },
+      directInstruction:  { border: "#3B82F6", text: "#2563EB", pillBg: "#DBEAFE", pillText: "#1D4ED8" },
+      guidedPractice:     { border: "#06B6D4", text: "#0891B2", pillBg: "#CFFAFE", pillText: "#155E75" },
+      independentPractice:{ border: "#22C55E", text: "#16A34A", pillBg: "#DCFCE7", pillText: "#166534" },
+      closure:            { border: "#64748B", text: "#475569", pillBg: "#F1F5F9", pillText: "#334155" },
+      connect:            { border: "#A855F7", text: "#9333EA", pillBg: "#F3E8FF", pillText: "#7E22CE" },
+      launch:             { border: "#6366F1", text: "#4F46E5", pillBg: "#E0E7FF", pillText: "#3730A3" },
+      activate:           { border: "#14B8A6", text: "#0D9488", pillBg: "#CCFBF1", pillText: "#0F766E" },
+      apply:              { border: "#22C55E", text: "#16A34A", pillBg: "#DCFCE7", pillText: "#166534" },
+      share:              { border: "#F97316", text: "#EA580C", pillBg: "#FFEDD5", pillText: "#9A3412" },
+      synthesize:         { border: "#F43F5E", text: "#E11D48", pillBg: "#FFE4E6", pillText: "#9F1239" },
+    }
+
+    const templateSectionsHtml = !isThreePart && templateSections.length > 0
+      ? templateSections.map((section) => {
+          const sectionDef = templateDef.sections.find((s) => s.id === section.id)
+          const colors = PDF_SECTION_COLORS[section.id] ?? { border: "#E8D5C4", text: "#666", pillBg: "#F5F1EC", pillText: "#6B4423" }
+          const sectionTime = sectionDef ? Math.round(lessonMinutes * sectionDef.timeWeight) : 0
+          const calloutIsAssessment = sectionDef?.calloutIsAssessment ?? false
+          const calloutLabel = sectionDef?.calloutLabel ?? "Notes"
+          return `
+  <div class="card" style="border-left-color: ${colors.border};">
+    <div class="card-head">
+      <h2 class="card-title">${esc(section.label)}</h2>
+      ${sectionTime > 0 ? `<span class="time-pill" style="background:${colors.pillBg}; color:${colors.pillText};">${sectionTime} min</span>` : ""}
+    </div>
+    <div class="subtitle" style="color:${colors.text};">${esc(section.subtitle)}</div>
+    <p class="body-text">${nl2br(section.content)}</p>
+    ${section.callout ? `<div class="callout ${calloutIsAssessment ? "assessment" : "diff"}">
+      <div class="callout-title">${esc(calloutLabel)}</div>
+      <p>${nl2br(section.callout)}</p>
+    </div>` : ""}
+  </div>`
+        }).join("\n")
+      : ""
 
     const htmlContent = `
 <!DOCTYPE html>
@@ -848,6 +912,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
     </div>
   </div>
 
+  ${isThreePart ? `
   <div class="card minds-on">
     <div class="card-head">
       <h2 class="card-title">Minds On</h2>
@@ -906,6 +971,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
         : ""
     }
   </div>
+  ` : templateSectionsHtml}
 
   <div class="footer">Maple Key • maplekey.ca</div>
 
@@ -1139,6 +1205,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   </div>
                 </div>
 
+                {isThreePart && (<>
                 {/* SECTION A - MINDS ON */}
                 <div className="bg-white rounded-xl border-l-4 border-blue-500 shadow-sm overflow-hidden">
                   <div className="p-5">
@@ -1347,6 +1414,85 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     )}
                   </div>
                 </div>
+                </>)}
+
+                {/* TEMPLATE SECTIONS (non-3-Part templates) */}
+                {!isThreePart && templateSections.map((section) => {
+                  const sectionDef = templateDef.sections.find((s) => s.id === section.id)
+                  if (!sectionDef) return null
+                  const sectionTime = Math.round(lessonMinutes * sectionDef.timeWeight)
+                  const editKey = `section-${section.id}`
+                  return (
+                    <div key={section.id} className={`bg-white rounded-xl border-l-4 ${sectionDef.colors.border} shadow-sm overflow-hidden`}>
+                      <div className="p-5">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-3">
+                            <h4 className={`text-lg font-semibold text-[#2C2C2C]`}>{section.label}</h4>
+                            <span className={`text-xs ${sectionDef.colors.pillBg} ${sectionDef.colors.pillText} px-2 py-1 rounded-full font-medium`}>
+                              {sectionTime} minutes
+                            </span>
+                          </div>
+                          <button
+                            onClick={() => setEditingSection(editingSection === editKey ? null : editKey)}
+                            className={`p-1.5 ${sectionDef.colors.hoverBg} rounded-lg transition-colors`}
+                            aria-label={`Edit ${section.label} section`}
+                          >
+                            <Pencil size={16} className={sectionDef.colors.accent} />
+                          </button>
+                        </div>
+                        <p className={`text-xs ${sectionDef.colors.accent} font-medium uppercase tracking-wide mb-3`}>
+                          {section.subtitle}
+                        </p>
+
+                        {editingSection === editKey ? (
+                          <div className="space-y-3">
+                            <textarea
+                              value={section.content}
+                              onChange={(e) => setTemplateSections((prev) =>
+                                prev.map((s) => s.id === section.id ? { ...s, content: e.target.value } : s)
+                              )}
+                              rows={5}
+                              className={`w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none ${sectionDef.colors.focusBorder} transition-colors resize-none`}
+                            />
+                            <div className={`${sectionDef.calloutIsAssessment ? "bg-violet-50 border border-violet-200" : "bg-amber-50 border border-amber-200"} rounded-lg p-3`}>
+                              <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-violet-800" : "text-amber-800"} mb-2`}>
+                                {sectionDef.calloutLabel}
+                              </p>
+                              <textarea
+                                value={section.callout ?? ""}
+                                onChange={(e) => setTemplateSections((prev) =>
+                                  prev.map((s) => s.id === section.id ? { ...s, callout: e.target.value } : s)
+                                )}
+                                rows={2}
+                                className={`w-full px-3 py-2 border ${sectionDef.calloutIsAssessment ? "border-violet-300" : "border-amber-300"} rounded-lg bg-white text-xs focus:outline-none transition-colors resize-none`}
+                              />
+                            </div>
+                            <button
+                              onClick={() => setEditingSection(null)}
+                              className={`px-3 py-1.5 ${sectionDef.colors.doneBg} ${sectionDef.colors.doneHover} text-white text-xs font-medium rounded-lg transition-colors`}
+                            >
+                              Done Editing
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <p className="text-sm text-[#444] leading-relaxed">{section.content}</p>
+                            {section.callout && (
+                              <div className={`mt-4 ${sectionDef.calloutIsAssessment ? "bg-violet-50 border border-violet-200" : "bg-amber-50 border border-amber-200"} rounded-lg p-3`}>
+                                <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-violet-800" : "text-amber-800"} mb-1`}>
+                                  {sectionDef.calloutLabel}
+                                </p>
+                                <p className={`text-xs ${sectionDef.calloutIsAssessment ? "text-violet-700" : "text-amber-700"}`}>
+                                  {section.callout}
+                                </p>
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-6 text-center">
                   <MessageSquareText size={32} className="text-[#A8998E] mx-auto mb-3" />
@@ -1662,8 +1808,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     <h3 className="text-lg font-semibold text-[#2C2C2C]">Lesson Configuration</h3>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
-                    {/* Lesson Length Dropdown */}
+                  <div className="space-y-4">
+                    {/* Lesson Length */}
                     <div>
                       <label className="flex items-center gap-2 text-sm font-medium text-[#2C2C2C] mb-2">
                         <Clock size={16} className="text-[#8B4513]" />
@@ -1682,29 +1828,46 @@ Return a JSON object with exactly these fields (string values are plain text, no
                       </select>
                     </div>
 
-                    {/* Lesson Template Dropdown */}
+                    {/* Lesson Template Card Picker */}
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-medium text-[#2C2C2C] mb-2">
+                      <label className="flex items-center gap-2 text-sm font-medium text-[#2C2C2C] mb-3">
                         <Layout size={16} className="text-[#8B4513]" />
                         Lesson Template
                       </label>
-                      <select
-                        value={lessonTemplate}
-                        onChange={(e) => setLessonTemplate(e.target.value)}
-                        className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors"
-                      >
-                        <option value="3-Part Lesson (Minds On, Action, Consolidation)">
-                          3-Part Lesson (Minds On, Action, Consolidation)
-                        </option>
-                        <option value="5E Model (Engage, Explore, Explain, Elaborate, Evaluate)">
-                          5E Model (Engage, Explore, Explain, Elaborate, Evaluate)
-                        </option>
-                        <option value="Direct Instruction (I Do, We Do, You Do)">
-                          Direct Instruction (I Do, We Do, You Do)
-                        </option>
-                        <option value="Inquiry-Based Learning">Inquiry-Based Learning</option>
-                        <option value="Workshop Model">Workshop Model</option>
-                      </select>
+                      <div className="grid grid-cols-2 gap-3">
+                        {LESSON_TEMPLATES.map((tmpl) => {
+                          const isSelected = resolveTemplateId(lessonTemplate) === tmpl.id
+                          return (
+                            <button
+                              key={tmpl.id}
+                              onClick={() => setLessonTemplate(tmpl.apiKey)}
+                              className={`relative text-left p-3.5 rounded-xl border-2 transition-all ${
+                                isSelected
+                                  ? "border-[#FF6B35] bg-[#FFF6EC]"
+                                  : "border-[#E8D5C4] bg-white hover:border-[#FF6B35]/50 hover:bg-[#FFFAF5]"
+                              }`}
+                            >
+                              {isSelected && (
+                                <div className="absolute top-2.5 right-2.5">
+                                  <CheckCircle size={14} className="text-[#FF6B35]" />
+                                </div>
+                              )}
+                              <p className="font-semibold text-[#2C2C2C] text-sm mb-1 pr-5">{tmpl.name}</p>
+                              <p className="text-xs text-[#888] leading-snug mb-2.5">{tmpl.description}</p>
+                              <div className="flex flex-wrap gap-1">
+                                {tmpl.sections.map((s) => (
+                                  <span
+                                    key={s.id}
+                                    className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${s.colors.pillBg} ${s.colors.pillText}`}
+                                  >
+                                    {s.label}
+                                  </span>
+                                ))}
+                              </div>
+                            </button>
+                          )
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -172,9 +172,24 @@ Instructional structure guidance: Each resource may include a "Best used as" fie
           .join("\n")}\nTreat each of the above as a binding choice, not a suggestion.`
       : ""
 
+  const templateSections = TEMPLATE_SECTIONS[lessonTemplate]
+  const isThreePart = !templateSections
+
+  const templateGuidance = TEMPLATE_GUIDANCE[lessonTemplate] ?? ""
+
+  const sectionsSchema = templateSections
+    ? templateSections
+        .map(
+          (s) =>
+            `  { "id": "${s.id}", "label": "${s.label}", "subtitle": "${s.subtitle}", "content": "...", "callout": "${s.calloutLabel} strategies or notes for this phase" }`,
+        )
+        .join(",\n")
+    : ""
+
   const userPrompt = `Create a ${lessonLength} lesson plan for Grade ${grade} ${subject} using the following bookmarked resources.
 
 Template: ${lessonTemplate}
+${templateGuidance}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomResourcesLine}
 ${includeAssessmentData ? "Include targeted differentiation strategies based on recent assessment data." : ""}
@@ -193,7 +208,7 @@ You will also write "assessmentQuestions": a short auto-graded formative quick c
 - Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
 - Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions.
 
-Return a JSON object with exactly these fields (string values are plain text, no markdown):
+${isThreePart ? `Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
   "title": "Creative lesson title",
   "learningGoal": "One student-facing sentence describing what students will learn today",
@@ -216,7 +231,27 @@ Return a JSON object with exactly these fields (string values are plain text, no
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
     { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
-}
+}` : `Return a JSON object with exactly these fields (string values are plain text, no markdown):
+{
+  "title": "Creative lesson title",
+  "learningGoal": "One student-facing sentence describing what students will learn today",
+  "successCriteria": ["I can ...", "I can ...", "I can ..."],
+  "curriculumCodesCovered": ["code1", "code2"],
+  "sections": [
+${sectionsSchema}
+  ],
+  "materials": {
+    "resources": ["Resource title 1", "Resource title 2"],
+    "preparation": ["What to print or photocopy", "What to pre-load or test on devices", "How to set up the room"]
+  },
+  "excludedResources": [
+    { "title": "Resource title", "reason": "One-line reason it was not used" }
+  ],
+  "assessmentQuestions": [
+    { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
+    { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+  ]
+}`}
 
 "successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.`
 
