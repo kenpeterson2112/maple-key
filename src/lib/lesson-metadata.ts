@@ -3,6 +3,14 @@ import type { Resource } from "./types"
 const STORAGE_KEY = "maplekey_lesson_log"
 const MAX_ENTRIES = 20
 
+export interface TemplateSection {
+  id: string
+  label: string
+  subtitle: string
+  content: string
+  callout?: string
+}
+
 export type ArtifactSection = "mindsOn" | "action" | "consolidation" | "materials"
 export type ArtifactStatus = "unset" | "have" | "will-make" | "help-me"
 
@@ -28,6 +36,7 @@ export interface LessonFullContent {
   successCriteria?: string[]
   materials?: { resources: string[]; preparation: string[] }
   excludedResources?: { title: string; reason: string }[]
+  sections?: TemplateSection[]
   artifacts?: LessonArtifact[]
 }
 

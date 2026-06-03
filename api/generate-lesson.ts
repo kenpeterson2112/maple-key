@@ -73,6 +73,7 @@ interface LessonPlanResponse {
   artifacts?: LessonArtifact[]
   excludedResources?: { title: string; reason: string }[]
   assessmentQuestions?: AssessmentQuestion[]
+  sections?: Array<{ id: string; label: string; subtitle: string; content: string; callout?: string }>
 }
 
 function extractJson(text: string): string {
@@ -87,6 +88,37 @@ function collectText(content: Anthropic.ContentBlock[]): string {
     .filter((b): b is Anthropic.TextBlock => b.type === "text")
     .map((b) => b.text)
     .join("\n")
+}
+
+const TEMPLATE_SECTIONS: Record<string, Array<{ id: string; label: string; subtitle: string; calloutLabel: string }>> = {
+  "5E Model": [
+    { id: "engage", label: "Engage", subtitle: "Spark curiosity", calloutLabel: "Differentiation" },
+    { id: "explore", label: "Explore", subtitle: "Investigate & discover", calloutLabel: "Differentiation" },
+    { id: "explain", label: "Explain", subtitle: "Connect to concepts", calloutLabel: "Differentiation" },
+    { id: "elaborate", label: "Elaborate", subtitle: "Deepen & extend", calloutLabel: "Differentiation" },
+    { id: "evaluate", label: "Evaluate", subtitle: "Reflect & assess", calloutLabel: "Assessment Note" },
+  ],
+  "Madeline Hunter": [
+    { id: "anticipatorySet", label: "Anticipatory Set", subtitle: "Hook & motivation", calloutLabel: "Differentiation" },
+    { id: "directInstruction", label: "Direct Instruction", subtitle: "Input & modeling", calloutLabel: "Differentiation" },
+    { id: "guidedPractice", label: "Guided Practice", subtitle: "We do together", calloutLabel: "Differentiation" },
+    { id: "independentPractice", label: "Independent Practice", subtitle: "You do", calloutLabel: "Differentiation" },
+    { id: "closure", label: "Closure", subtitle: "Wrap up & check understanding", calloutLabel: "Assessment Note" },
+  ],
+  "CLAASS": [
+    { id: "connect", label: "Connect", subtitle: "Activate prior knowledge", calloutLabel: "Differentiation" },
+    { id: "launch", label: "Launch", subtitle: "Introduce the concept", calloutLabel: "Differentiation" },
+    { id: "activate", label: "Activate", subtitle: "Engage with content", calloutLabel: "Differentiation" },
+    { id: "apply", label: "Apply", subtitle: "Practice & deepen", calloutLabel: "Differentiation" },
+    { id: "share", label: "Share", subtitle: "Collaborate & discuss", calloutLabel: "Differentiation" },
+    { id: "synthesize", label: "Synthesize", subtitle: "Reflect & consolidate", calloutLabel: "Assessment Note" },
+  ],
+}
+
+const TEMPLATE_GUIDANCE: Record<string, string> = {
+  "5E Model": `5E Model phase guidance: Engage — hook question, surprising demo, or short video to spark curiosity and surface prior knowledge; Explore — student-led hands-on investigation with minimal teacher input, students discover patterns; Explain — teacher formalizes concepts after exploration using direct instruction, connects student findings to vocabulary/theory; Elaborate — students apply concepts to a new context or problem, extending understanding; Evaluate — formative check, exit ticket, or self-reflection anchored in lesson objectives.`,
+  "Madeline Hunter": `Madeline Hunter phase guidance: Anticipatory Set — brief hook that activates prior knowledge and motivates, states the objective; Direct Instruction — explicit teacher input with think-alouds and modeling, checking for understanding throughout; Guided Practice — whole-class or small-group practice with teacher support, immediate corrective feedback; Independent Practice — individual student work to consolidate and automate the skill; Closure — summarize key learning, preview next steps, check for understanding.`,
+  "CLAASS": `CLAASS phase guidance: Connect — link to student lived experience and prior knowledge with a relevant real-world hook; Launch — teacher introduces the core concept, question, or challenge; Activate — students engage actively with content through a structured collaborative activity; Apply — students practice in authentic contexts, applying concepts to real problems; Share — structured peer sharing, discussion, or gallery walk to consolidate through social learning; Synthesize — individual reflection, writing, or exit task that connects today's learning to broader understanding.`,
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -147,9 +179,24 @@ Instructional structure guidance: Each resource may include a "Best used as" fie
           .join("\n")}\nTreat each of the above as a binding choice, not a suggestion.`
       : ""
 
+  const templateSections = TEMPLATE_SECTIONS[lessonTemplate]
+  const isThreePart = !templateSections
+
+  const templateGuidance = TEMPLATE_GUIDANCE[lessonTemplate] ?? ""
+
+  const sectionsSchema = templateSections
+    ? templateSections
+        .map(
+          (s) =>
+            `  { "id": "${s.id}", "label": "${s.label}", "subtitle": "${s.subtitle}", "content": "...", "callout": "${s.calloutLabel} strategies or notes for this phase" }`,
+        )
+        .join(",\n")
+    : ""
+
   const userPrompt = `Create a ${lessonLength} lesson plan for Grade ${grade} ${subject} using the following bookmarked resources.
 
 Template: ${lessonTemplate}
+${templateGuidance}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomResourcesLine}
 ${includeAssessmentData ? "Include targeted differentiation strategies based on recent assessment data." : ""}
@@ -168,7 +215,7 @@ You will also write "assessmentQuestions": a short auto-graded formative quick c
 - Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
 - Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions.
 
-Return a JSON object with exactly these fields (string values are plain text, no markdown):
+${isThreePart ? `Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
   "title": "Creative lesson title",
   "learningGoal": "One student-facing sentence describing what students will learn today",
@@ -194,7 +241,27 @@ Return a JSON object with exactly these fields (string values are plain text, no
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
     { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
-}
+}` : `Return a JSON object with exactly these fields (string values are plain text, no markdown):
+{
+  "title": "Creative lesson title",
+  "learningGoal": "One student-facing sentence describing what students will learn today",
+  "successCriteria": ["I can ...", "I can ...", "I can ..."],
+  "curriculumCodesCovered": ["code1", "code2"],
+  "sections": [
+${sectionsSchema}
+  ],
+  "materials": {
+    "resources": ["Resource title 1", "Resource title 2"],
+    "preparation": ["What to print or photocopy", "What to pre-load or test on devices", "How to set up the room"]
+  },
+  "excludedResources": [
+    { "title": "Resource title", "reason": "One-line reason it was not used" }
+  ],
+  "assessmentQuestions": [
+    { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
+    { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+  ]
+}`}
 
 "successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.
 
