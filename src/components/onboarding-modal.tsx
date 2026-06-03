@@ -117,7 +117,11 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
                         }`}
                       >
                         <span>{p.name}</span>
-                        {selected && <Check size={16} strokeWidth={3} />}
+                        <Check
+                          size={16}
+                          strokeWidth={3}
+                          className={selected ? "opacity-100 shrink-0" : "opacity-0 shrink-0"}
+                        />
                       </button>
                     )
                   })}
