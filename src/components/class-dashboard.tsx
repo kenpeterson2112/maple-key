@@ -34,9 +34,15 @@ function overallRead(counts: BandCounts): string {
   return "Mixed understanding across the class"
 }
 
-export default function ClassDashboard({ data }: { data: AggregatedResults }) {
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({})
+export default function ClassDashboard({
+  data,
+  caption,
+}: {
+  data: AggregatedResults
+  caption?: string
+}) {
   const overalls = Object.values(data.overall).sort((a, b) => a.overall.localeCompare(b.overall))
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
 
   if (!data.hasData || overalls.length === 0) {
     return (
@@ -50,13 +56,16 @@ export default function ClassDashboard({ data }: { data: AggregatedResults }) {
 
   return (
     <div className="space-y-3">
+      {caption && (
+        <p className="text-xs font-medium text-[#666]">{caption}</p>
+      )}
       {overalls.map((agg) => {
-        const isOpen = expanded[agg.overall] ?? false
+        const isOpen = !collapsed[agg.overall]
         const specifics = Object.entries(agg.specifics).sort((a, b) => a[0].localeCompare(b[0]))
         return (
           <div key={agg.overall} className="overflow-hidden rounded-xl border border-[#E8D5C4] bg-white">
             <button
-              onClick={() => setExpanded((p) => ({ ...p, [agg.overall]: !isOpen }))}
+              onClick={() => setCollapsed((p) => ({ ...p, [agg.overall]: isOpen }))}
               className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-[#FAF3E0]"
             >
               {isOpen ? (
