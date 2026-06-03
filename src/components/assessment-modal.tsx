@@ -207,13 +207,16 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
     setRecordedCount((n) => n + count)
     setAnswers({})
     setSelfRatings({})
+    setCurrentQuestionIndex(0)
     setShowGroupPicker(false)
     resetGroupPicker()
+    setPhase("dashboard")
   }
 
   const goAdminister = () => {
     setAnswers({})
     setSelfRatings({})
+    setCurrentQuestionIndex(0)
     setShowGroupPicker(false)
     resetGroupPicker()
     setPhase("administer")
@@ -454,16 +457,16 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                 </span>
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={goAdminister}
+                    onClick={onClose}
                     className="rounded-xl border border-[#E8D5C4] px-4 py-2 text-sm font-semibold text-[#666] transition-colors hover:bg-white"
                   >
-                    Record more
+                    Done
                   </button>
                   <button
-                    onClick={onClose}
+                    onClick={goAdminister}
                     className="rounded-xl bg-[#FF6B35] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e55a2a]"
                   >
-                    Done
+                    Record another student
                   </button>
                 </div>
               </>
