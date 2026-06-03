@@ -43,6 +43,9 @@ import { sanitizeQuestions } from "@/lib/assessment-types"
 import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
 import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
+import { getProgressForCodes, type BandCounts } from "@/lib/assessment-results"
+import { BAND_META, BAND_ORDER } from "@/lib/assessment-types"
+import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
 import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
 
@@ -139,6 +142,21 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: "smooth" })
   }, [currentQuestionIndex, showQuestionsStep])
 
+  const bookmarkedCodes = Array.from(
+    new Set(bookmarkedResources.flatMap((r) => r.curriculum_expectations ?? [])),
+  )
+  const classProgress: Record<string, BandCounts> =
+    bookmarkedCodes.length > 0 ? getProgressForCodes(bookmarkedCodes) : {}
+  const hasClassProgress = Object.values(classProgress).some(
+    (c) => c.strong + c.developing + c.needsSupport > 0,
+  )
+
+  useEffect(() => {
+    setIncludeAssessmentData(hasClassProgress)
+    // Only re-run when the underlying availability flips. Codes string compare is sufficient.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasClassProgress])
+
   const classroomResourceIds = getClassroomResources()
   const classroomResourceLabels = getClassroomResourceLabels(classroomResourceIds)
 
@@ -181,6 +199,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           includeAssessmentData,
           classroomResources: classroomResourceLabels,
           ...(planningAnswers.length > 0 ? { planningAnswers } : {}),
+          ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
         }),
       })
       if (!res.ok) {
@@ -497,6 +516,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     teacherNotes,
     includeAssessmentData,
     classroomResources: classroomResourceLabels,
+    ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
   })
 
   const handleCopyRequestJSON = async () => {
@@ -1745,67 +1765,60 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     <span className="text-xs bg-stone-200 text-stone-600 px-2 py-0.5 rounded-full">Optional</span>
                   </div>
 
-                  <label className="flex items-start gap-3 cursor-pointer">
+                  <label className={`flex items-start gap-3 ${hasClassProgress ? "cursor-pointer" : "cursor-not-allowed opacity-60"}`}>
                     <input
                       type="checkbox"
                       checked={includeAssessmentData}
+                      disabled={!hasClassProgress}
                       onChange={(e) => setIncludeAssessmentData(e.target.checked)}
                       className="mt-1 w-4 h-4 rounded border-stone-300 text-orange-500 focus:ring-orange-500"
                     />
                     <div>
                       <span className="text-sm font-medium text-[#2C2C2C]">Include recent assessment data</span>
                       <p className="text-xs text-[#666] mt-0.5">
-                        Personalize the lesson based on student readiness levels
+                        {hasClassProgress
+                          ? `Found ${Object.values(classProgress).reduce((sum, c) => sum + c.strong + c.developing + c.needsSupport, 0)} responses across ${Object.keys(classProgress).length} of these expectations — used to target differentiation.`
+                          : "No prior quick check responses for these expectations yet."}
                       </p>
                     </div>
                   </label>
 
-                  {includeAssessmentData && (
-                    <div className="mt-4 bg-stone-50 rounded-lg p-4 border border-stone-200">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm font-medium text-[#2C2C2C]">Grade 6 - Ms. Thompson</span>
-                        <span className="text-xs text-[#666]">January 15, 2025</span>
-                      </div>
-                      <p className="text-xs text-[#666] mb-3">
-                        Recent assessment: Data Literacy & Probability (D1.1, D2.1, D2.2)
-                      </p>
-
-                      {/* Progress bar */}
-                      <div className="h-4 rounded-full overflow-hidden flex mb-2">
-                        <div className="bg-emerald-500 h-full" style={{ width: "33%" }} />
-                        <div className="bg-yellow-400 h-full" style={{ width: "25%" }} />
-                        <div className="bg-orange-400 h-full" style={{ width: "29%" }} />
-                        <div className="bg-red-400 h-full" style={{ width: "13%" }} />
-                      </div>
-
-                      {/* Legend */}
-                      <div className="flex flex-wrap gap-4 text-xs">
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                          <span className="text-[#666]">Ready (8)</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                          <span className="text-[#666]">Almost (6)</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-3 h-3 rounded-full bg-orange-400" />
-                          <span className="text-[#666]">Support (7)</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-3 h-3 rounded-full bg-red-400" />
-                          <span className="text-[#666]">Intervention (3)</span>
-                        </div>
-                      </div>
-
-                      <div className="mt-3 pt-3 border-t border-stone-200">
-                        <p className="text-xs font-medium text-[#2C2C2C] mb-1">Common Misconceptions Identified:</p>
-                        <ul className="text-xs text-[#666] space-y-0.5">
-                          <li>• Difficulty reading and interpreting multi-variable graphs</li>
-                          <li>• Confusing theoretical vs experimental probability</li>
-                          <li>• Struggling to identify bias in data collection methods</li>
-                        </ul>
-                      </div>
+                  {includeAssessmentData && hasClassProgress && (
+                    <div className="mt-4 bg-stone-50 rounded-lg p-4 border border-stone-200 space-y-3">
+                      {Object.entries(classProgress)
+                        .filter(([, c]) => c.strong + c.developing + c.needsSupport > 0)
+                        .sort(([a], [b]) => a.localeCompare(b))
+                        .map(([code, counts]) => {
+                          const t = counts.strong + counts.developing + counts.needsSupport
+                          return (
+                            <div key={code}>
+                              <div className="flex items-start gap-2 mb-1.5">
+                                <span className="flex-shrink-0 rounded-full bg-white border border-stone-200 px-1.5 py-0.5 text-[11px] font-bold text-stone-700">
+                                  {code}
+                                </span>
+                                <span className="text-xs leading-snug text-[#666]">
+                                  {CURRICULUM_DESCRIPTIONS[code] ?? code}
+                                </span>
+                              </div>
+                              <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-stone-200">
+                                {BAND_ORDER.map((band) => {
+                                  const v = counts[band]
+                                  if (v === 0) return null
+                                  return <div key={band} className={BAND_META[band].barClass} style={{ width: `${(v / t) * 100}%` }} />
+                                })}
+                              </div>
+                              <p className="mt-1 text-[11px] leading-relaxed">
+                                {BAND_ORDER.filter((band) => counts[band] > 0).map((band, i, arr) => (
+                                  <span key={band}>
+                                    <span className={`font-semibold ${BAND_META[band].textClass}`}>{counts[band]}</span>
+                                    <span className="text-[#888]"> {BAND_META[band].phrase}</span>
+                                    {i < arr.length - 1 && <span className="text-[#C8B8AA]"> · </span>}
+                                  </span>
+                                ))}
+                              </p>
+                            </div>
+                          )
+                        })}
                     </div>
                   )}
                 </div>

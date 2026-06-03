@@ -138,3 +138,18 @@ export function aggregateAll(tallies: LessonTally[]): AggregatedResults {
   }
   return { overall: rollUp(merged), attempts, hasData: Object.keys(merged).length > 0 }
 }
+
+// Sum recorded band counts per code for the given expectation codes.
+// Returned object only contains entries for codes with at least one recorded response.
+export function getProgressForCodes(codes: string[]): Record<string, BandCounts> {
+  if (codes.length === 0) return {}
+  const wanted = new Set(codes)
+  const out: Record<string, BandCounts> = {}
+  for (const t of Object.values(read())) {
+    for (const [code, counts] of Object.entries(t.byExpectation)) {
+      if (!wanted.has(code)) continue
+      addInto((out[code] ??= emptyCounts()), counts)
+    }
+  }
+  return out
+}
