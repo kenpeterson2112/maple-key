@@ -20,6 +20,12 @@ interface PlanningAnswer {
   answer: string
 }
 
+interface BandCounts {
+  strong: number
+  developing: number
+  needsSupport: number
+}
+
 interface GenerateRequest {
   resources: ResourceInput[]
   lessonLength: string
@@ -28,6 +34,18 @@ interface GenerateRequest {
   includeAssessmentData: boolean
   classroomResources?: string[]
   planningAnswers?: PlanningAnswer[]
+  classProgress?: Record<string, BandCounts>
+}
+
+function formatClassProgress(progress: Record<string, BandCounts>): string {
+  const lines = Object.entries(progress)
+    .filter(([, c]) => c.strong + c.developing + c.needsSupport > 0)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([code, c]) => `  ${code}: ${c.strong} strong, ${c.developing} developing, ${c.needsSupport} needs support`)
+  if (lines.length === 0) return ""
+  return `Recent class assessment data (use to target differentiation, do not restate verbatim):
+${lines.join("\n")}
+Calibrate Minds On activation, Action scaffolding, and Consolidation depth accordingly. Where the class is mostly "needs support" on a code, build in extra modelling and concrete examples. Where they are mostly "strong", offer extension prompts.`
 }
 
 interface MultipleChoiceQuestion {
@@ -136,6 +154,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     includeAssessmentData,
     classroomResources,
     planningAnswers,
+    classProgress,
   } = req.body as GenerateRequest
 
   if (!resources || resources.length === 0) {
@@ -173,6 +192,9 @@ Instructional structure guidance: Each resource may include a "Best used as" fie
       ? `Classroom resources available: ${classroomResources.join(", ")}`
       : ""
 
+  const classProgressBlock =
+    includeAssessmentData && classProgress ? formatClassProgress(classProgress) : ""
+
   const planningAnswersBlock =
     planningAnswers && planningAnswers.length > 0
       ? `The teacher has made these planning decisions — honour them in the lesson:\n${planningAnswers
@@ -200,7 +222,7 @@ Template: ${lessonTemplate}
 ${templateGuidance}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomResourcesLine}
-${includeAssessmentData ? "Include targeted differentiation strategies based on recent assessment data." : ""}
+${classProgressBlock}
 ${planningAnswersBlock}
 
 Resources to incorporate:
