@@ -6,6 +6,7 @@ import LessonsLibrary from "@/components/lessons-library"
 import AssessmentModal from "@/components/assessment-modal"
 import SettingsModal from "@/components/settings-modal"
 import OnboardingModal from "@/components/onboarding-modal"
+import ClassInsightsSpace from "@/components/class-insights-space"
 import type { Filters } from "@/lib/types"
 import {
   clearPrefs,
@@ -17,13 +18,14 @@ import {
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
 
-type Space = "resources" | "lessonplanner" | "assessment" | "lessons"
+type Space = "resources" | "lessonplanner" | "assessment" | "lessons" | "insights"
 type OverlaySpace = Exclude<Space, "resources">
 
 const SPACE_VARIANTS: Record<OverlaySpace, { initial: object; animate: object; exit: object }> = {
   lessonplanner: { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
   assessment:    { initial: { x: "100%" },  animate: { x: 0 }, exit: { x: "100%"  } },
   lessons:       { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
+  insights:      { initial: { y: "100%" }, animate: { y: 0 }, exit: { y: "100%" } },
 }
 
 const SPRING = { type: "spring", stiffness: 280, damping: 32 }
@@ -131,6 +133,7 @@ export default function App() {
         inferred={inferred}
         onReset={handleResetInferred}
         totalActiveFilters={totalActiveFilters}
+        onOpenInsights={() => setActiveSpace("insights")}
       />
 
       {/* Overlay spaces — slide in over resources */}
@@ -180,6 +183,10 @@ export default function App() {
                 </button>
                 <button onClick={goResources} className="text-sm text-[#888] underline">Back to resources</button>
               </div>
+            )}
+
+            {activeSpace === "insights" && (
+              <ClassInsightsSpace onBack={goResources} />
             )}
           </motion.div>
         )}

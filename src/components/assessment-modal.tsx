@@ -138,9 +138,18 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
 
   const dashboardData = useMemo(() => {
     if (phase !== "dashboard") return null
-    return dashView === "lesson" ? aggregateLesson(getLessonTally(lesson.id)) : aggregateAll(getAllTallies())
+    if (dashView === "lesson") return aggregateLesson(getLessonTally(lesson.id))
+    const scoped = getAllTallies().filter((t) => t.grade === lesson.grade && t.subject === lesson.subject)
+    return aggregateAll(scoped)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, dashView, recordedCount, lesson.id])
+  }, [phase, dashView, recordedCount, lesson.id, lesson.grade, lesson.subject])
+
+  const dashboardCaption = useMemo(() => {
+    if (!dashboardData) return undefined
+    const responses = `${dashboardData.attempts} ${dashboardData.attempts === 1 ? "response" : "responses"}`
+    if (dashView === "lesson") return `This lesson · ${responses}`
+    return `Grade ${lesson.grade} ${lesson.subject} · ${responses}`
+  }, [dashView, dashboardData, lesson.grade, lesson.subject])
 
   useEffect(() => {
     scrollBodyRef.current?.scrollTo({ top: 0, behavior: "smooth" })
@@ -388,10 +397,10 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   onClick={() => setDashView("all")}
                   className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "all" ? "bg-[#FF6B35] text-white" : "text-[#666] hover:bg-[#FAF3E0]"}`}
                 >
-                  All lessons
+                  Grade {lesson.grade} {lesson.subject}
                 </button>
               </div>
-              <ClassDashboard data={dashboardData} />
+              <ClassDashboard data={dashboardData} caption={dashboardCaption} />
             </>
           )}
         </div>

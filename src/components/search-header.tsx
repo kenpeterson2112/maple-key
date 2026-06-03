@@ -1,5 +1,5 @@
 "use client"
-import { Settings, Bookmark, School, Menu, X, MapPin, ChevronDown, LogIn, SlidersHorizontal, ChevronLeft } from "lucide-react"
+import { Settings, Bookmark, School, Menu, X, MapPin, ChevronDown, LogIn, SlidersHorizontal, ChevronLeft, BarChart3 } from "lucide-react"
 import type { Filters } from "@/lib/types"
 import { useState, useEffect, useRef } from "react"
 import BookmarksModal from "@/components/bookmarks-modal"
@@ -46,6 +46,7 @@ interface SearchHeaderProps {
   onOpenMobileFilters?: () => void
   totalActiveFilters?: number
   onBack?: () => void
+  onOpenInsights?: () => void
 }
 
 export default function SearchHeader({
@@ -54,6 +55,7 @@ export default function SearchHeader({
   onOpenMobileFilters,
   totalActiveFilters = 0,
   onBack,
+  onOpenInsights,
 }: SearchHeaderProps) {
   const { bookmarkedResources } = useBookmarks()
 
@@ -254,6 +256,17 @@ export default function SearchHeader({
                 )}
               </button>
 
+              {/* Class Insights */}
+              {onOpenInsights && (
+                <button
+                  onClick={onOpenInsights}
+                  className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#FFE5CC]"
+                  title="Class Insights"
+                >
+                  <BarChart3 size={20} className="text-[#8B4513]" />
+                </button>
+              )}
+
               {/* Settings */}
               <button
                 onClick={() => setIsSettingsModalOpen(true)}
@@ -371,6 +384,19 @@ export default function SearchHeader({
                     </button>
                   ))}
                 </div>
+
+                {onOpenInsights && (
+                  <button
+                    onClick={() => {
+                      onOpenInsights()
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className="mt-3 flex w-full items-center gap-2 rounded-lg bg-[#FFF5ED] px-3 py-2 text-sm font-semibold text-[#8B4513]"
+                  >
+                    <BarChart3 size={16} />
+                    Class Insights
+                  </button>
+                )}
 
                 <button
                   onClick={() => {
