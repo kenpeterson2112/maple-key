@@ -22,16 +22,9 @@ import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
 
 type Space = "resources" | "lessonplanner" | "assessment" | "lessons" | "insights"
-type OverlaySpace = Exclude<Space, "resources">
-
-const SPACE_VARIANTS: Record<OverlaySpace, { initial: object; animate: object; exit: object }> = {
-  lessonplanner: { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
-  assessment:    { initial: { x: "100%" },  animate: { x: 0 }, exit: { x: "100%"  } },
-  lessons:       { initial: { x: "-100%" }, animate: { x: 0 }, exit: { x: "-100%" } },
-  insights:      { initial: { y: "100%" }, animate: { y: 0 }, exit: { y: "100%" } },
-}
-
-const SPRING = { type: "spring", stiffness: 280, damping: 32 }
+// All overlay spaces cross-fade in/out — quick and direction-neutral
+const FADE_VARIANTS = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
+const FADE_TRANSITION = { duration: 0.15, ease: "easeOut" } as const
 
 const EMPTY_FILTERS: Filters = {
   province: "",
@@ -159,10 +152,10 @@ export default function App() {
             <motion.div
               key={activeSpace}
               className="absolute inset-0 z-10"
-              initial={SPACE_VARIANTS[activeSpace].initial}
-              animate={SPACE_VARIANTS[activeSpace].animate}
-              exit={SPACE_VARIANTS[activeSpace].exit}
-              transition={SPRING}
+              initial={FADE_VARIANTS.initial}
+              animate={FADE_VARIANTS.animate}
+              exit={FADE_VARIANTS.exit}
+              transition={FADE_TRANSITION}
             >
               {activeSpace === "lessonplanner" && (
                 <LessonPlannerModal
