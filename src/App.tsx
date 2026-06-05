@@ -8,6 +8,7 @@ import SettingsModal from "@/components/settings-modal"
 import OnboardingModal from "@/components/onboarding-modal"
 import ResourceOnboardingModal from "@/components/resource-onboarding-modal"
 import ClassInsightsSpace from "@/components/class-insights-space"
+import TopNav, { type TopNavSpace } from "@/components/top-nav"
 import type { Filters } from "@/lib/types"
 import {
   clearPrefs,
@@ -129,77 +130,85 @@ export default function App() {
     if (!isResourceTourSeen()) setShowResourceTour(true)
   }
 
+  const topNavSpace: TopNavSpace | null =
+    activeSpace === "resources" || activeSpace === "lessons" || activeSpace === "insights"
+      ? activeSpace
+      : null
+
   return (
-    <div className="fixed inset-0 bg-[#FAF3E0] overflow-hidden">
-      {/* Resources discovery page — always-on landing layer */}
-      <ResourcesSpace
-        filters={filters}
-        setFilters={setFilters}
-        sidebarFilters={sidebarFilters}
-        onSidebarFilterChange={handleSidebarFilterChange}
-        resultCount={resultCount}
-        onCountChange={setResultCount}
-        inferred={inferred}
-        onReset={handleResetInferred}
-        totalActiveFilters={totalActiveFilters}
-        onOpenInsights={() => setActiveSpace("insights")}
-      />
+    <div className="fixed inset-0 bg-[#FAF3E0] overflow-hidden flex flex-col">
+      <TopNav activeSpace={topNavSpace} onChangeSpace={(s) => setActiveSpace(s)} />
 
-      {/* Overlay spaces — slide in over resources */}
-      <AnimatePresence>
-        {activeSpace !== "resources" && (
-          <motion.div
-            key={activeSpace}
-            className="fixed inset-0 z-10"
-            initial={SPACE_VARIANTS[activeSpace].initial}
-            animate={SPACE_VARIANTS[activeSpace].animate}
-            exit={SPACE_VARIANTS[activeSpace].exit}
-            transition={SPRING}
-          >
-            {activeSpace === "lessonplanner" && (
-              <LessonPlannerModal
-                isOpen
-                asSpace
-                lesson={plannerLesson}
-                bookmarkedResources={bookmarkedResources}
-                onClose={goResources}
-                onBack={goResources}
-              />
-            )}
+      <div className="relative flex-1 min-h-0 overflow-hidden">
+        {/* Resources discovery page — always-on landing layer */}
+        <ResourcesSpace
+          filters={filters}
+          setFilters={setFilters}
+          sidebarFilters={sidebarFilters}
+          onSidebarFilterChange={handleSidebarFilterChange}
+          resultCount={resultCount}
+          onCountChange={setResultCount}
+          inferred={inferred}
+          onReset={handleResetInferred}
+          totalActiveFilters={totalActiveFilters}
+        />
 
-            {activeSpace === "lessons" && (
-              <LessonsLibrary onBack={goResources} onOpenLesson={(lesson) => { setPlannerLesson(lesson); setActiveSpace("lessonplanner") }} />
-            )}
+        {/* Overlay spaces — slide in over resources */}
+        <AnimatePresence>
+          {activeSpace !== "resources" && (
+            <motion.div
+              key={activeSpace}
+              className="absolute inset-0 z-10"
+              initial={SPACE_VARIANTS[activeSpace].initial}
+              animate={SPACE_VARIANTS[activeSpace].animate}
+              exit={SPACE_VARIANTS[activeSpace].exit}
+              transition={SPRING}
+            >
+              {activeSpace === "lessonplanner" && (
+                <LessonPlannerModal
+                  isOpen
+                  asSpace
+                  lesson={plannerLesson}
+                  bookmarkedResources={bookmarkedResources}
+                  onClose={goResources}
+                  onBack={goResources}
+                />
+              )}
 
-            {activeSpace === "assessment" && assessmentLesson && (
-              <AssessmentModal
-                isOpen
-                asSpace
-                lesson={assessmentLesson}
-                onClose={goResources}
-              />
-            )}
+              {activeSpace === "lessons" && (
+                <LessonsLibrary onOpenLesson={(lesson) => { setPlannerLesson(lesson); setActiveSpace("lessonplanner") }} />
+              )}
 
-            {activeSpace === "assessment" && !assessmentLesson && (
-              <div className="fixed inset-0 z-[60] bg-white flex flex-col items-center justify-center gap-4 p-8 text-center">
-                <p className="text-lg font-semibold text-[#2C2C2C]">No lesson plan yet</p>
-                <p className="text-sm text-[#888]">Generate a lesson plan first to unlock quick checks.</p>
-                <button
-                  onClick={() => setActiveSpace("lessonplanner")}
-                  className="px-5 py-2.5 bg-[#FF6B35] text-white font-semibold rounded-xl text-sm hover:bg-[#E85A24] transition-colors"
-                >
-                  Open Lesson Planner
-                </button>
-                <button onClick={goResources} className="text-sm text-[#888] underline">Back to resources</button>
-              </div>
-            )}
+              {activeSpace === "assessment" && assessmentLesson && (
+                <AssessmentModal
+                  isOpen
+                  asSpace
+                  lesson={assessmentLesson}
+                  onClose={goResources}
+                />
+              )}
 
-            {activeSpace === "insights" && (
-              <ClassInsightsSpace onBack={goResources} />
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {activeSpace === "assessment" && !assessmentLesson && (
+                <div className="absolute inset-0 z-[60] bg-white flex flex-col items-center justify-center gap-4 p-8 text-center">
+                  <p className="text-lg font-semibold text-[#2C2C2C]">No lesson plan yet</p>
+                  <p className="text-sm text-[#888]">Generate a lesson plan first to unlock quick checks.</p>
+                  <button
+                    onClick={() => setActiveSpace("lessonplanner")}
+                    className="px-5 py-2.5 bg-[#FF6B35] text-white font-semibold rounded-xl text-sm hover:bg-[#E85A24] transition-colors"
+                  >
+                    Open Lesson Planner
+                  </button>
+                  <button onClick={goResources} className="text-sm text-[#888] underline">Back to resources</button>
+                </div>
+              )}
+
+              {activeSpace === "insights" && (
+                <ClassInsightsSpace />
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Settings panel — slides down from top, overlays everything */}
       <SettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />

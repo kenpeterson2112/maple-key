@@ -1,13 +1,12 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ArrowLeft, Sparkles, Calendar, Check, BookOpen, ClipboardCheck, ArrowRight } from "lucide-react"
+import { Sparkles, Calendar, Check, BookOpen, ClipboardCheck, ArrowRight } from "lucide-react"
 import { getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { getLessonTally } from "@/lib/assessment-results"
 
 interface LessonsLibraryProps {
-  onBack: () => void
   onOpenLesson: (lesson: LessonMetadata) => void
 }
 
@@ -17,7 +16,7 @@ function formatDate(timestamp: number): string {
   return new Date(timestamp).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })
 }
 
-export default function LessonsLibrary({ onBack, onOpenLesson }: LessonsLibraryProps) {
+export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
   const lessons = useMemo(() => getLessonLog(), [])
   const [subject, setSubject] = useState<string>("All")
   const [sort, setSort] = useState<SortKey>("newest")
@@ -39,19 +38,10 @@ export default function LessonsLibrary({ onBack, onOpenLesson }: LessonsLibraryP
 
   return (
     <div className="w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center gap-4 px-6 md:px-8 py-5 border-b-2 border-[#E8D5C4] bg-white">
-        <button
-          onClick={onBack}
-          className="p-2 hover:bg-[#FFE5CC] rounded-full transition-all duration-200"
-          aria-label="Back to home"
-        >
-          <ArrowLeft size={24} className="text-[#8B4513]" />
-        </button>
-        <div className="flex items-center gap-2">
-          <Sparkles size={24} className="text-violet-600" />
-          <h2 className="text-2xl font-bold text-[#2C2C2C]">All Lessons</h2>
-        </div>
+      {/* Title strip */}
+      <div className="flex items-center gap-2 px-6 md:px-8 py-4 border-b border-[#E8D5C4] bg-white">
+        <Sparkles size={22} className="text-violet-600" />
+        <h2 className="text-xl font-bold text-[#2C2C2C]">All Lessons</h2>
       </div>
 
       {/* Controls */}
