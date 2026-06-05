@@ -19,8 +19,6 @@ interface ResourcesSpaceProps {
   inferred: boolean
   onReset: () => void
   totalActiveFilters: number
-  onBack?: () => void
-  onOpenInsights?: () => void
 }
 
 export default function ResourcesSpace({
@@ -33,8 +31,6 @@ export default function ResourcesSpace({
   inferred,
   onReset,
   totalActiveFilters,
-  onBack,
-  onOpenInsights,
 }: ResourcesSpaceProps) {
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
 
@@ -45,8 +41,6 @@ export default function ResourcesSpace({
         setFilters={setFilters}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
-        onBack={onBack}
-        onOpenInsights={onOpenInsights}
       />
 
       <HeroPersonalize

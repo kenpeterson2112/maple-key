@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ChevronLeft, BarChart3, BookOpen } from "lucide-react"
+import { BarChart3, BookOpen } from "lucide-react"
 import {
   getAllTallies,
   aggregateAll,
@@ -35,11 +35,7 @@ function uniqueSorted(values: string[]): string[] {
   )
 }
 
-interface ClassInsightsSpaceProps {
-  onBack: () => void
-}
-
-export default function ClassInsightsSpace({ onBack }: ClassInsightsSpaceProps) {
+export default function ClassInsightsSpace() {
   const tallies = useMemo<LessonTally[]>(() => getAllTallies(), [])
 
   const allGrades = useMemo(() => uniqueSorted(tallies.map(t => t.grade)), [tallies])
@@ -75,20 +71,11 @@ export default function ClassInsightsSpace({ onBack }: ClassInsightsSpaceProps) 
   if (tallies.length === 0) {
     return (
       <div className="flex flex-col h-full bg-[#FAF3E0]">
-        <header className="flex items-center gap-3 border-b border-[#E8D5C4] bg-white px-6 py-3">
-          <button
-            onClick={onBack}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-[#8B4513] hover:bg-[#FFE5CC] transition-colors"
-            aria-label="Back"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
-              <BarChart3 size={18} className="text-amber-600" />
-            </div>
-            <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
+        <header className="flex items-center gap-2 border-b border-[#E8D5C4] bg-white px-6 py-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
+            <BarChart3 size={18} className="text-amber-600" />
           </div>
+          <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
         </header>
         <div className="flex flex-col items-center justify-center gap-4 flex-1 text-center px-6">
           <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center">
@@ -100,12 +87,6 @@ export default function ClassInsightsSpace({ onBack }: ClassInsightsSpaceProps) 
               Plan a lesson, run the quick check, and record student responses — aggregated results will appear here.
             </p>
           </div>
-          <button
-            onClick={onBack}
-            className="rounded-xl bg-[#FF6B35] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#e55a2a] transition-colors"
-          >
-            Plan a lesson
-          </button>
         </div>
       </div>
     )
@@ -117,13 +98,6 @@ export default function ClassInsightsSpace({ onBack }: ClassInsightsSpaceProps) 
       {/* Header with inline grade/subject filter pills */}
       <header className="flex-shrink-0 border-b border-[#E8D5C4] bg-white px-6 py-3">
         <div className="flex items-center gap-3 flex-wrap">
-          <button
-            onClick={onBack}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
-            aria-label="Back"
-          >
-            <ChevronLeft size={20} />
-          </button>
           <div className="flex items-center gap-2 flex-shrink-0">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
               <BarChart3 size={18} className="text-amber-600" />
