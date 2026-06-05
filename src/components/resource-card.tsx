@@ -14,6 +14,7 @@ import {
   Mic,
 } from "lucide-react"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
+import { normalizeGrades } from "@/lib/utils"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useState } from "react"
 import ReviewsModal from "./reviews-modal"
@@ -126,7 +127,7 @@ export default function CompactResourceCard({ resource, codeReadiness }: { resou
   }
 
   const subject = resource.subject || "Math"
-  const grades = (resource.grade_level || []).map(String)
+  const grades = normalizeGrades(resource.grade_level)
   const displayGrade = grades[0] || ""
 
   const theme = getSubjectTheme(subject)
