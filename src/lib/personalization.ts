@@ -108,3 +108,23 @@ export function setOnboarded(): void {
     // ignore
   }
 }
+
+const RESOURCE_TOUR_KEY = "maplekey_resource_tour_seen"
+
+export function isResourceTourSeen(): boolean {
+  if (typeof window === "undefined") return true
+  try {
+    return window.localStorage.getItem(RESOURCE_TOUR_KEY) === "true"
+  } catch {
+    return true
+  }
+}
+
+export function setResourceTourSeen(): void {
+  if (typeof window === "undefined") return
+  try {
+    window.localStorage.setItem(RESOURCE_TOUR_KEY, "true")
+  } catch {
+    // ignore
+  }
+}

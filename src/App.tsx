@@ -6,6 +6,7 @@ import LessonsLibrary from "@/components/lessons-library"
 import AssessmentModal from "@/components/assessment-modal"
 import SettingsModal from "@/components/settings-modal"
 import OnboardingModal from "@/components/onboarding-modal"
+import ResourceOnboardingModal from "@/components/resource-onboarding-modal"
 import ClassInsightsSpace from "@/components/class-insights-space"
 import type { Filters } from "@/lib/types"
 import {
@@ -13,6 +14,7 @@ import {
   getPrefs,
   inferProvinceFromTimeZone,
   isOnboarded,
+  isResourceTourSeen,
   setPrefs,
 } from "@/lib/personalization"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
@@ -55,6 +57,7 @@ export default function App() {
   const [activeSpace, setActiveSpace] = useState<Space>("resources")
   const [showSettings, setShowSettings] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
+  const [showResourceTour, setShowResourceTour] = useState(false)
   const [assessmentLesson, setAssessmentLesson] = useState<LessonMetadata | null>(null)
   const [plannerLesson, setPlannerLesson] = useState<LessonMetadata | null>(null)
 
@@ -71,7 +74,11 @@ export default function App() {
     })
     setInferred(prefs.inferred)
     setHydrated(true)
-    if (!isOnboarded()) setShowOnboarding(true)
+    if (!isOnboarded()) {
+      setShowOnboarding(true)
+    } else if (!isResourceTourSeen()) {
+      setShowResourceTour(true)
+    }
   }, [])
 
   useEffect(() => {
@@ -118,6 +125,7 @@ export default function App() {
       strand: prefs.strand,
     }))
     setInferred(false)
+    if (!isResourceTourSeen()) setShowResourceTour(true)
   }
 
   return (
@@ -197,6 +205,9 @@ export default function App() {
 
       {/* First-visit onboarding */}
       <OnboardingModal open={showOnboarding} onComplete={handleOnboardingComplete} />
+
+      {/* Resource page tour — shown after province + materials are set */}
+      <ResourceOnboardingModal open={showResourceTour} onClose={() => setShowResourceTour(false)} />
     </div>
   )
 }
