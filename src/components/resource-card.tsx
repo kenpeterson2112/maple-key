@@ -18,6 +18,14 @@ import { useBookmarks } from "@/lib/bookmarks-context"
 import { useState } from "react"
 import ReviewsModal from "./reviews-modal"
 import { withBasePath } from "@/lib/base-path"
+import type { ReadinessLevel } from "@/lib/assessment-results"
+
+const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; label: string }> = {
+  poor: { dot: "#B45309", text: "#92400E", label: "Needs Support" },
+  okay: { dot: "#D97706", text: "#92400E", label: "Developing" },
+  good: { dot: "#16A34A", text: "#15803D", label: "Strong" },
+  great: { dot: "#166534", text: "#14532D", label: "Excelling" },
+}
 
 // ── Subject-based card theme ───────────────────────────────────────────────
 function getSubjectTheme(subject: string) {
@@ -105,7 +113,7 @@ function getAccessibilityStyle(accessibilityArray) {
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
-export default function CompactResourceCard({ resource }) {
+export default function CompactResourceCard({ resource, codeReadiness }: { resource: Record<string, unknown>; codeReadiness?: Record<string, ReadinessLevel> }) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
   const [showReviewsModal, setShowReviewsModal] = useState(false)
 
@@ -185,6 +193,34 @@ export default function CompactResourceCard({ resource }) {
 
           <p className="text-[11px] text-[#555] leading-relaxed line-clamp-3">{description}</p>
         </div>
+
+        {/* ── Readiness strip: colored expectation pills when assessment data exists ── */}
+        {codeReadiness && (() => {
+          const codes: string[] = (resource.curriculum_expectations as string[]) || []
+          const codesWithData = codes.filter(c => codeReadiness[c])
+          if (codesWithData.length === 0) return null
+          return (
+            <div className="px-3 pt-2 pb-1.5 border-t border-[#E8D5C4] flex flex-wrap gap-1.5 bg-white/60">
+              {codesWithData.map(code => {
+                const level = codeReadiness[code]
+                const style = READINESS_STYLES[level]
+                return (
+                  <div
+                    key={code}
+                    className="relative group/readinessTip flex items-center gap-1 px-2 py-0.5 rounded-full border"
+                    style={{ borderColor: style.dot + "40", backgroundColor: style.dot + "15" }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: style.dot }} />
+                    <span className="text-[10px] font-semibold" style={{ color: style.text }}>{code}</span>
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 opacity-0 group-hover/readinessTip:opacity-100 transition-opacity pointer-events-none z-[100] whitespace-nowrap">
+                      <div className="bg-[#2C2C2C] text-white text-[10px] rounded-lg px-2 py-1 shadow-xl">{style.label}</div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })()}
 
         {/* ── Footer: expectations · accessibility · modalities · view ── */}
         <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-2">

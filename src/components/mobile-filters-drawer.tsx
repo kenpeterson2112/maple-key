@@ -64,6 +64,7 @@ export default function MobileFiltersDrawer({
     modality: true,
     cost: true,
     accessibility: true,
+    readiness: true,
   })
   const [selectedGrades, setSelectedGrades] = useState<string[]>(filters.grade ? filters.grade.split(",") : [])
 
@@ -102,6 +103,14 @@ export default function MobileFiltersDrawer({
     setFilters({ ...filters, strand })
   }
 
+  const READINESS_OPTIONS = [
+    { value: "no-data", label: "No class data yet", dot: "#9CA3AF" },
+    { value: "poor",    label: "Needs Support",      dot: "#B45309" },
+    { value: "okay",    label: "Developing",          dot: "#D97706" },
+    { value: "good",    label: "Strong",              dot: "#16A34A" },
+    { value: "great",   label: "Excelling",           dot: "#166534" },
+  ]
+
   const handleClearAll = () => {
     setFilters({
       province: "",
@@ -115,6 +124,7 @@ export default function MobileFiltersDrawer({
     onSidebarFilterChange("modality", [])
     onSidebarFilterChange("cost", [])
     onSidebarFilterChange("accessibility", [])
+    onSidebarFilterChange("readiness", [])
   }
 
   const totalActiveFilters =
@@ -313,7 +323,7 @@ export default function MobileFiltersDrawer({
 
           {/* Modality, Cost, Accessibility Sections */}
           {Object.entries(filterOptions).map(([groupKey, options]) => (
-            <div key={groupKey} className="mb-4 pb-4 border-b border-[#E8D5C4] last:border-b-0">
+            <div key={groupKey} className="mb-4 pb-4 border-b border-[#E8D5C4]">
               <button
                 onClick={() => toggleGroup(groupKey)}
                 className="flex items-center justify-between w-full mb-3 group min-h-[44px]"
@@ -352,6 +362,43 @@ export default function MobileFiltersDrawer({
               )}
             </div>
           ))}
+
+          {/* Student Readiness Section */}
+          <div className="mb-4 pb-4">
+            <button
+              onClick={() => toggleGroup("readiness")}
+              className="flex items-center justify-between w-full mb-3 group min-h-[44px]"
+              aria-expanded={expandedGroups.readiness}
+              aria-controls="readiness-content"
+            >
+              <h3 className="text-sm font-semibold text-[#8B4513] group-hover:text-[#FF6B35] transition-colors duration-150">
+                Student Readiness
+              </h3>
+              <ChevronDown
+                size={16}
+                className={`text-[#A8998E] transition-transform duration-200 ${expandedGroups.readiness ? "" : "-rotate-90"}`}
+              />
+            </button>
+            {expandedGroups.readiness && (
+              <div id="readiness-content" className="space-y-2">
+                {READINESS_OPTIONS.map(({ value, label, dot }) => (
+                  <label key={value} className="flex items-center gap-3 cursor-pointer group/item min-h-[44px] py-1">
+                    <input
+                      type="checkbox"
+                      checked={sidebarFilters.readiness?.includes(value) || false}
+                      onChange={() => toggleSidebarFilter("readiness", value)}
+                      className="w-5 h-5 rounded-lg border-[#E8D5C4] text-[#FF6B35] bg-white cursor-pointer transition-all duration-150 accent-[#FF6B35]"
+                      aria-label={label}
+                    />
+                    <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: dot }} />
+                    <span className="text-sm text-[#555] group-hover/item:text-[#8B4513] transition-colors duration-150">
+                      {label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         <SheetFooter className="border-t border-[#E8D5C4] p-4 gap-2">

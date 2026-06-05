@@ -153,3 +153,27 @@ export function getProgressForCodes(codes: string[]): Record<string, BandCounts>
   }
   return out
 }
+
+// ---- Readiness levels ----
+export type ReadinessLevel = "poor" | "okay" | "good" | "great"
+
+export function computeReadinessLevel(counts: BandCounts): ReadinessLevel {
+  const total = counts.strong + counts.developing + counts.needsSupport
+  if (total === 0) return "okay" // fallback; callers should gate on hasData first
+  if (counts.strong / total >= 0.8) return "great"
+  if (counts.strong / total >= 0.5) return "good"
+  if (counts.needsSupport / total >= 0.5) return "poor"
+  return "okay"
+}
+
+// Returns a readiness level for each code that has recorded data.
+// Codes with no data are omitted from the result.
+export function getReadinessForCodes(codes: string[]): Record<string, ReadinessLevel> {
+  const progress = getProgressForCodes(codes)
+  const out: Record<string, ReadinessLevel> = {}
+  for (const [code, counts] of Object.entries(progress)) {
+    const total = counts.strong + counts.developing + counts.needsSupport
+    if (total > 0) out[code] = computeReadinessLevel(counts)
+  }
+  return out
+}

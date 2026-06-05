@@ -20,16 +20,33 @@ interface SidebarFiltersProps {
   sidebarFilters?: { [key: string]: string[] }
 }
 
+const GROUP_LABELS: Record<string, string> = {
+  modality: "Modality",
+  cost: "Cost",
+  accessibility: "Accessibility",
+  readiness: "Student Readiness",
+}
+
+const READINESS_OPTIONS = [
+  { value: "no-data", label: "No class data yet", dot: "#9CA3AF" },
+  { value: "poor",    label: "Needs Support",      dot: "#B45309" },
+  { value: "okay",    label: "Developing",          dot: "#D97706" },
+  { value: "good",    label: "Strong",              dot: "#16A34A" },
+  { value: "great",   label: "Excelling",           dot: "#166534" },
+]
+
 export default function SidebarFilters({ onFilterChange, sidebarFilters: externalFilters }: SidebarFiltersProps) {
   const [expandedGroups, setExpandedGroups] = useState<{ [key: string]: boolean }>({
     modality: true,
     cost: true,
     accessibility: true,
+    readiness: true,
   })
   const [internalFilters, setInternalFilters] = useState<{ [key: string]: string[] }>({
     modality: [],
     cost: [],
     accessibility: [],
+    readiness: [],
   })
 
   const selectedFilters = externalFilters || internalFilters
@@ -67,6 +84,7 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
         modality: [],
         cost: [],
         accessibility: [],
+        readiness: [],
       })
     }
 
@@ -74,6 +92,7 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
       onFilterChange("modality", [])
       onFilterChange("cost", [])
       onFilterChange("accessibility", [])
+      onFilterChange("readiness", [])
     }, 0)
   }
 
@@ -172,10 +191,10 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
       </div>
 
       {Object.entries(filterOptions).map(([groupKey, options]) => (
-        <div key={groupKey} className="mb-4 pb-4 border-b border-[#E8D5C4] last:border-b-0">
+        <div key={groupKey} className="mb-4 pb-4 border-b border-[#E8D5C4]">
           <button onClick={() => toggleGroup(groupKey)} className="flex items-center justify-between w-full mb-3 group">
-            <h3 className="text-sm font-semibold text-[#8B4513] capitalize group-hover:text-[#FF6B35] transition-colors duration-150">
-              {groupKey}
+            <h3 className="text-sm font-semibold text-[#8B4513] group-hover:text-[#FF6B35] transition-colors duration-150">
+              {GROUP_LABELS[groupKey] ?? groupKey}
             </h3>
             <ChevronDown
               size={16}
@@ -209,6 +228,37 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
           )}
         </div>
       ))}
+
+      {/* Student Readiness filter */}
+      <div className="mb-4 pb-4">
+        <button onClick={() => toggleGroup("readiness")} className="flex items-center justify-between w-full mb-3 group">
+          <h3 className="text-sm font-semibold text-[#8B4513] group-hover:text-[#FF6B35] transition-colors duration-150">
+            Student Readiness
+          </h3>
+          <ChevronDown
+            size={16}
+            className={`text-[#A8998E] transition-transform duration-200 ${expandedGroups.readiness ? "" : "-rotate-90"}`}
+          />
+        </button>
+        {expandedGroups.readiness && (
+          <div className="space-y-2">
+            {READINESS_OPTIONS.map(({ value, label, dot }) => (
+              <label key={value} className="flex items-center gap-2 cursor-pointer group/item">
+                <input
+                  type="checkbox"
+                  checked={selectedFilters.readiness?.includes(value) || false}
+                  onChange={() => toggleFilter("readiness", value)}
+                  className="w-4 h-4 rounded-lg border-[#E8D5C4] text-[#FF6B35] bg-white cursor-pointer transition-all duration-150 accent-[#FF6B35]"
+                />
+                <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: dot }} />
+                <span className="text-sm text-[#555] group-hover/item:text-[#8B4513] transition-colors duration-150">
+                  {label}
+                </span>
+              </label>
+            ))}
+          </div>
+        )}
+      </div>
     </aside>
   )
 }

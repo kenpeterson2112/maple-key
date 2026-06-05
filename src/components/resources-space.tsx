@@ -12,7 +12,7 @@ import type { Filters } from "@/lib/types"
 interface ResourcesSpaceProps {
   filters: Filters
   setFilters: (filters: Filters) => void
-  sidebarFilters: { modality: string[]; cost: string[]; accessibility: string[] }
+  sidebarFilters: { modality: string[]; cost: string[]; accessibility: string[]; readiness: string[] }
   onSidebarFilterChange: (group: string, items: string[]) => void
   resultCount: number
   onCountChange: (count: number) => void
