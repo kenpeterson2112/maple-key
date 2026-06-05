@@ -47,10 +47,11 @@ export default function App() {
   const [hydrated, setHydrated] = useState(false)
   const skipPersistOnce = useRef(true)
 
-  const [sidebarFilters, setSidebarFilters] = useState<{ modality: string[]; cost: string[]; accessibility: string[] }>({
+  const [sidebarFilters, setSidebarFilters] = useState<{ modality: string[]; cost: string[]; accessibility: string[]; readiness: string[] }>({
     modality: [],
     cost: [],
     accessibility: [],
+    readiness: [],
   })
   const [resultCount, setResultCount] = useState(0)
 

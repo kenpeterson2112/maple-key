@@ -8,10 +8,11 @@ import { Search, X, Plus, Compass } from "lucide-react"
 import ResourceCard from "./resource-card"
 import type { Filters, Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
+import { getReadinessForCodes, type ReadinessLevel } from "@/lib/assessment-results"
 
 interface ResultsSectionProps {
   filters: Filters
-  sidebarFilters?: { modality: string[]; cost: string[]; accessibility: string[] }
+  sidebarFilters?: { modality: string[]; cost: string[]; accessibility: string[]; readiness: string[] }
   onCountChange?: (count: number) => void
 }
 
@@ -28,6 +29,14 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
     refreshInterval: 3600000,
     revalidateOnFocus: false,
   })
+
+  const classReadiness = useMemo((): Record<string, ReadinessLevel> => {
+    const resources = data?.resources
+    if (!resources) return {}
+    const codes = new Set<string>()
+    resources.forEach(r => r.curriculum_expectations?.forEach((c: string) => codes.add(c)))
+    return getReadinessForCodes(Array.from(codes))
+  }, [data])
 
   const filteredResources = useMemo(() => {
     const resources = data?.resources
@@ -79,9 +88,20 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
         if (!hasMatch) return false
       }
 
+      if (sidebarFilters?.readiness && sidebarFilters.readiness.length > 0) {
+        const codes: string[] = resource.curriculum_expectations || []
+        const matches = sidebarFilters.readiness.some((selectedLevel) => {
+          if (selectedLevel === "no-data") {
+            return codes.length === 0 || codes.every(c => !classReadiness[c])
+          }
+          return codes.some(c => classReadiness[c] === selectedLevel)
+        })
+        if (!matches) return false
+      }
+
       return true
     })
-  }, [data, filters, sidebarFilters])
+  }, [data, filters, sidebarFilters, classReadiness])
 
   const keywordFilteredResources = useMemo(() => {
     if (searchQuery.length < 3) return filteredResources
@@ -259,7 +279,7 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
                   show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
                 }}
               >
-                <ResourceCard resource={resource} />
+                <ResourceCard resource={resource} codeReadiness={classReadiness} />
               </motion.div>
             ))}
           </motion.div>
