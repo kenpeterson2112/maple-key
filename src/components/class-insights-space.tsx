@@ -9,6 +9,7 @@ import {
   type BandCounts,
 } from "@/lib/assessment-results"
 import ClassDashboard from "@/components/class-dashboard"
+import DevSeedControl from "@/components/dev/dev-seed-control"
 
 function total(counts: BandCounts): number {
   return counts.strong + (counts.developing ?? 0) + counts.needsSupport
@@ -36,7 +37,10 @@ function uniqueSorted(values: string[]): string[] {
 }
 
 export default function ClassInsightsSpace() {
-  const tallies = useMemo<LessonTally[]>(() => getAllTallies(), [])
+  // Dev-only seeding bumps this to force a re-read of localStorage tallies
+  // (they're otherwise read once on mount).
+  const [reloadNonce, setReloadNonce] = useState(0)
+  const tallies = useMemo<LessonTally[]>(() => getAllTallies(), [reloadNonce])
 
   const allSubjects = useMemo(() => uniqueSorted(tallies.map(t => t.subject)), [tallies])
 
@@ -81,6 +85,11 @@ export default function ClassInsightsSpace() {
             <BarChart3 size={18} className="text-amber-600" />
           </div>
           <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
+          {import.meta.env.DEV && (
+            <div className="ml-auto">
+              <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
+            </div>
+          )}
         </header>
         <div className="flex flex-col items-center justify-center gap-4 flex-1 text-center px-6">
           <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center">
@@ -106,6 +115,11 @@ export default function ClassInsightsSpace() {
           <BarChart3 size={18} className="text-amber-600" />
         </div>
         <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
+        {import.meta.env.DEV && (
+          <div className="ml-auto">
+            <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
+          </div>
+        )}
       </header>
 
       {/* Subject folder tabs + grade sub-tabs */}
