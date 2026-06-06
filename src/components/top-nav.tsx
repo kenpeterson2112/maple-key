@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Bookmark, Search, Sparkles, BarChart3, Settings, LogIn, Menu, X } from "lucide-react"
+import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import BookmarksModal from "@/components/bookmarks-modal"
 import SettingsModal from "@/components/settings-modal"
@@ -53,16 +53,17 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsBookmarksOpen(true)}
-                className="relative flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#FFE5CC]"
-                title="Saved resources"
+                className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
+                  bookmarkedResources.length > 0
+                    ? "bg-[#FF6B35] text-white shadow-sm hover:bg-[#E85A24]"
+                    : "bg-white border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFF5ED]"
+                }`}
+                title="Plan lesson"
               >
-                <Bookmark
-                  size={20}
-                  className={bookmarkedResources.length > 0 ? "text-[#FF6B35]" : "text-[#8B4513]"}
-                  fill={bookmarkedResources.length > 0 ? "currentColor" : "none"}
-                />
+                <Sparkles size={14} />
+                Plan Lesson
                 {bookmarkedResources.length > 0 && (
-                  <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#FF6B35] text-[10px] font-bold text-white">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/25 text-[10px] font-bold">
                     {bookmarkedResources.length >= 10 ? "9+" : bookmarkedResources.length}
                   </span>
                 )}
@@ -113,14 +114,20 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setIsBookmarksOpen(true)}
-                className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#FFE5CC]"
-                title="Saved resources"
+                className={`relative flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
+                  bookmarkedResources.length > 0
+                    ? "bg-[#FF6B35] text-white shadow-sm"
+                    : "bg-white border border-[#E8D5C4] text-[#8B4513]"
+                }`}
+                title="Plan lesson"
               >
-                <Bookmark
-                  size={18}
-                  className={bookmarkedResources.length > 0 ? "text-[#FF6B35]" : "text-[#8B4513]"}
-                  fill={bookmarkedResources.length > 0 ? "currentColor" : "none"}
-                />
+                <Sparkles size={12} />
+                Plan
+                {bookmarkedResources.length > 0 && (
+                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white/25 text-[9px] font-bold">
+                    {bookmarkedResources.length >= 10 ? "9+" : bookmarkedResources.length}
+                  </span>
+                )}
               </button>
               <button
                 onClick={() => setIsMobileMenuOpen((v) => !v)}
