@@ -3,6 +3,33 @@ import type { Band } from "./assessment-types"
 import { overallCodeOf, groupByOverall } from "./curriculum-codes"
 
 const STORAGE_KEY = "maplekey_assessment_results"
+// Parallel "sandbox" store + on/off flag. When sandbox mode is on, every read/write
+// below targets the sandbox key instead of the real one — so the sample-data
+// generator can fill an imaginary dataset and you can flip back to your true data
+// without ever mutating it.
+const SANDBOX_KEY = "maplekey_assessment_results_sandbox"
+const SANDBOX_FLAG = "maplekey_assessment_sandbox"
+
+export function isSandboxMode(): boolean {
+  try {
+    return localStorage.getItem(SANDBOX_FLAG) === "1"
+  } catch {
+    return false
+  }
+}
+
+export function setSandboxMode(on: boolean): void {
+  try {
+    if (on) localStorage.setItem(SANDBOX_FLAG, "1")
+    else localStorage.removeItem(SANDBOX_FLAG)
+  } catch {
+    // ignore
+  }
+}
+
+function activeKey(): string {
+  return isSandboxMode() ? SANDBOX_KEY : STORAGE_KEY
+}
 
 export interface BandCounts {
   strong: number
@@ -28,7 +55,7 @@ type Store = Record<string, LessonTally>
 
 function read(): Store {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(activeKey())
     return raw ? (JSON.parse(raw) as Store) : {}
   } catch {
     return {}
@@ -37,7 +64,7 @@ function read(): Store {
 
 function write(store: Store): void {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(store))
+    localStorage.setItem(activeKey(), JSON.stringify(store))
   } catch {
     // Storage quota exceeded — skip.
   }
@@ -97,6 +124,16 @@ export function seedTallies(tallies: LessonTally[]): void {
   const store = read()
   for (const t of tallies) store[t.lessonId] = t
   write(store)
+}
+
+// Remove every tally in the active store. In sandbox mode this clears only the
+// sandbox — the real data is in a different key and stays untouched.
+export function clearAllResults(): void {
+  try {
+    localStorage.removeItem(activeKey())
+  } catch {
+    // ignore
+  }
 }
 
 // ---- Aggregation for dashboards ----

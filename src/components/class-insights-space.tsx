@@ -5,6 +5,7 @@ import { BarChart3, BookOpen } from "lucide-react"
 import {
   getAllTallies,
   aggregateAll,
+  isSandboxMode,
   type LessonTally,
   type BandCounts,
 } from "@/lib/assessment-results"
@@ -85,6 +86,11 @@ export default function ClassInsightsSpace() {
             <BarChart3 size={18} className="text-amber-600" />
           </div>
           <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
+          {isSandboxMode() && (
+            <span className="rounded-full bg-[#FFE5CC] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#C65D3B]">
+              Sandbox
+            </span>
+          )}
           <div className="ml-auto">
             <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
           </div>
@@ -113,6 +119,11 @@ export default function ClassInsightsSpace() {
           <BarChart3 size={18} className="text-amber-600" />
         </div>
         <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
+        {isSandboxMode() && (
+          <span className="rounded-full bg-[#FFE5CC] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#C65D3B]">
+            Sandbox
+          </span>
+        )}
         <div className="ml-auto">
           <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
         </div>
