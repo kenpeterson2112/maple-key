@@ -6,7 +6,7 @@
 // the team wants the seeding available everywhere. It writes only to the same
 // localStorage the real Quick Check uses, through the `seedTallies` seam.
 
-import { seedTallies, clearLessonTally, getAllTallies, type BandCounts, type LessonTally } from "./assessment-results"
+import { seedTallies, clearLessonTally, clearAllResults, type BandCounts, type LessonTally } from "./assessment-results"
 import type { LessonMetadata } from "./lesson-metadata"
 import { CURRICULUM_DESCRIPTIONS } from "./curriculum-codes"
 
@@ -154,8 +154,9 @@ export function seedGlobal({ quantity, level, spread }: SeedOptions): void {
   seedTallies(tallies)
 }
 
+// The sandbox is entirely synthetic, so a global reset clears the whole active store.
 export function resetGlobal(): void {
-  for (const t of getAllTallies()) if (t.lessonId.startsWith(DEV_PREFIX)) clearLessonTally(t.lessonId)
+  clearAllResults()
 }
 
 // Quick Check modal — seed the one open lesson's expectations.
