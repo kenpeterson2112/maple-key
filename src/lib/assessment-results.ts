@@ -1,6 +1,6 @@
 import type { LessonMetadata } from "./lesson-metadata"
 import type { Band } from "./assessment-types"
-import { overallCodeOf } from "./curriculum-codes"
+import { overallCodeOf, groupByOverall } from "./curriculum-codes"
 
 const STORAGE_KEY = "maplekey_assessment_results"
 
@@ -174,6 +174,36 @@ export function getReadinessForCodes(codes: string[]): Record<string, ReadinessL
   for (const [code, counts] of Object.entries(progress)) {
     const total = counts.strong + counts.developing + counts.needsSupport
     if (total > 0) out[code] = computeReadinessLevel(counts)
+  }
+  return out
+}
+
+export interface OverallReadiness {
+  overall: string // e.g. "D1"
+  level: ReadinessLevel // count-weighted rollup of the children below
+  children: { code: string; level: ReadinessLevel | null }[] // level === null → not assessed
+}
+
+// Group `codes` by their overall expectation (D1.1 → D1) and roll each overall's
+// recorded band counts up into a single count-weighted readiness level — the same
+// semantics as the dashboard rollUp. Pure: reads no storage, only the provided
+// code → counts map. Overalls with no recorded data are omitted.
+export function summarizeReadiness(
+  codes: string[],
+  progress: Record<string, BandCounts>,
+): OverallReadiness[] {
+  const out: OverallReadiness[] = []
+  for (const [overall, childCodes] of Object.entries(groupByOverall(codes))) {
+    const summed = emptyCounts()
+    const children = childCodes.map((code) => {
+      const counts = progress[code]
+      const total = counts ? counts.strong + counts.developing + counts.needsSupport : 0
+      if (total > 0) addInto(summed, counts)
+      return { code, level: total > 0 ? computeReadinessLevel(counts) : null }
+    })
+    const total = summed.strong + summed.developing + summed.needsSupport
+    if (total === 0) continue
+    out.push({ overall, level: computeReadinessLevel(summed), children })
   }
   return out
 }

@@ -9,7 +9,7 @@ import ResourceCard from "./resource-card"
 import type { Filters, Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
 import { normalizeGrades } from "@/lib/utils"
-import { getReadinessForCodes, type ReadinessLevel } from "@/lib/assessment-results"
+import { getReadinessForCodes, getProgressForCodes, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
 
 interface ResultsSectionProps {
   filters: Filters
@@ -37,6 +37,16 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
     const codes = new Set<string>()
     resources.forEach(r => r.curriculum_expectations?.forEach((c: string) => codes.add(c)))
     return getReadinessForCodes(Array.from(codes))
+  }, [data])
+
+  // Raw per-code band counts for the same code set — lets each card roll its own
+  // expectations up to an overall readiness without re-reading storage per render.
+  const classProgress = useMemo((): Record<string, BandCounts> => {
+    const resources = data?.resources
+    if (!resources) return {}
+    const codes = new Set<string>()
+    resources.forEach(r => r.curriculum_expectations?.forEach((c: string) => codes.add(c)))
+    return getProgressForCodes(Array.from(codes))
   }, [data])
 
   const filteredResources = useMemo(() => {
@@ -278,7 +288,7 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
                   show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
                 }}
               >
-                <ResourceCard resource={resource} codeReadiness={classReadiness} />
+                <ResourceCard resource={resource} codeProgress={classProgress} />
               </motion.div>
             ))}
           </motion.div>

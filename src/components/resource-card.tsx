@@ -13,19 +13,106 @@ import {
   Hammer,
   Mic,
 } from "lucide-react"
-import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
+import * as Popover from "@radix-ui/react-popover"
+import { AnimatePresence, motion } from "framer-motion"
+import { CURRICULUM_DESCRIPTIONS, overallLabel } from "@/lib/curriculum-codes"
 import { normalizeGrades } from "@/lib/utils"
 import { useBookmarks } from "@/lib/bookmarks-context"
-import { useState } from "react"
+import { useState, useRef, useMemo } from "react"
 import ReviewsModal from "./reviews-modal"
 import { withBasePath } from "@/lib/base-path"
-import type { ReadinessLevel } from "@/lib/assessment-results"
+import { summarizeReadiness, type OverallReadiness, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
 
 const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; label: string }> = {
   poor: { dot: "#B45309", text: "#92400E", label: "Needs Support" },
   okay: { dot: "#D97706", text: "#92400E", label: "Developing" },
   good: { dot: "#16A34A", text: "#15803D", label: "Strong" },
   great: { dot: "#166534", text: "#14532D", label: "Excelling" },
+}
+
+// One pill per overall expectation (e.g. "D1"), colored by the rolled-up
+// readiness of the children this resource covers. Hover (desktop) or tap
+// (mobile) opens a portaled panel with the per-child color-coded breakdown.
+function OverallReadinessPill({ data }: { data: OverallReadiness }) {
+  const [open, setOpen] = useState(false)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const style = READINESS_STYLES[data.level]
+
+  const openNow = () => {
+    clearTimeout(closeTimer.current)
+    setOpen(true)
+  }
+  // Small delay so moving the cursor from the pill into the panel doesn't flicker it shut.
+  const closeSoon = () => {
+    clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setOpen(false), 80)
+  }
+
+  return (
+    <Popover.Root open={open} onOpenChange={setOpen}>
+      <Popover.Trigger asChild>
+        <button
+          type="button"
+          onMouseEnter={openNow}
+          onMouseLeave={closeSoon}
+          className="flex items-center gap-1 px-2 py-0.5 rounded-full border outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35]/40"
+          style={{ borderColor: style.dot + "40", backgroundColor: style.dot + "15" }}
+          aria-label={`${data.overall} ${overallLabel(data.overall)} — ${style.label}`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: style.dot }} />
+          <span className="text-[10px] font-semibold" style={{ color: style.text }}>{data.overall}</span>
+        </button>
+      </Popover.Trigger>
+      <AnimatePresence>
+        {open && (
+          <Popover.Portal forceMount>
+            <Popover.Content
+              asChild
+              sideOffset={6}
+              align="start"
+              onOpenAutoFocus={(e) => e.preventDefault()}
+              onMouseEnter={openNow}
+              onMouseLeave={closeSoon}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: -4, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -4, scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                className="z-[100] w-64 rounded-2xl border-2 border-[#E8D5C4] bg-white p-3 shadow-xl"
+              >
+                <p className="text-[11px] font-bold text-[#2C2C2C] mb-2">
+                  {data.overall} · {overallLabel(data.overall)}
+                </p>
+                <ul className="space-y-1.5">
+                  {data.children.map((child) => {
+                    const cs = child.level ? READINESS_STYLES[child.level] : null
+                    return (
+                      <li key={child.code} className="flex items-center gap-2">
+                        <span
+                          className="w-2 h-2 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: cs ? cs.dot : "#D4C5B5" }}
+                        />
+                        <span
+                          className="text-[11px] font-semibold flex-shrink-0"
+                          style={{ color: cs ? cs.text : "#A8998E" }}
+                        >
+                          {child.code}
+                        </span>
+                        <span className="text-[10px] text-[#888] ml-auto">
+                          {cs ? cs.label : "Not assessed"}
+                        </span>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </motion.div>
+            </Popover.Content>
+          </Popover.Portal>
+        )}
+      </AnimatePresence>
+    </Popover.Root>
+  )
 }
 
 // ── Subject-based card theme ───────────────────────────────────────────────
@@ -114,7 +201,7 @@ function getAccessibilityStyle(accessibilityArray) {
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
-export default function CompactResourceCard({ resource, codeReadiness }: { resource: Record<string, unknown>; codeReadiness?: Record<string, ReadinessLevel> }) {
+export default function CompactResourceCard({ resource, codeProgress }: { resource: Record<string, unknown>; codeProgress?: Record<string, BandCounts> }) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
   const [showReviewsModal, setShowReviewsModal] = useState(false)
 
@@ -135,6 +222,13 @@ export default function CompactResourceCard({ resource, codeReadiness }: { resou
   const { Icon: ModalityIcon, color: iconColor } = getPrimaryIcon(modalityStr)
   const useCaseLabel = getUseCaseLabel(resource)
   const accessLevel = getAccessibilityStyle(resource.accessibility)
+
+  // Collapse the resource's specific expectations into overalls (D1.1… → D1),
+  // each rolled up to a single readiness level from the class's recorded data.
+  const overallReadiness = useMemo(
+    () => summarizeReadiness((resource.curriculum_expectations as string[]) || [], codeProgress ?? {}),
+    [resource.curriculum_expectations, codeProgress],
+  )
 
   const description =
     resource.description ||
@@ -195,33 +289,14 @@ export default function CompactResourceCard({ resource, codeReadiness }: { resou
           <p className="text-[11px] text-[#555] leading-relaxed line-clamp-3">{description}</p>
         </div>
 
-        {/* ── Readiness strip: colored expectation pills when assessment data exists ── */}
-        {codeReadiness && (() => {
-          const codes: string[] = (resource.curriculum_expectations as string[]) || []
-          const codesWithData = codes.filter(c => codeReadiness[c])
-          if (codesWithData.length === 0) return null
-          return (
-            <div className="px-3 pt-2 pb-1.5 border-t border-[#E8D5C4] flex flex-wrap gap-1.5 bg-white/60">
-              {codesWithData.map(code => {
-                const level = codeReadiness[code]
-                const style = READINESS_STYLES[level]
-                return (
-                  <div
-                    key={code}
-                    className="relative group/readinessTip flex items-center gap-1 px-2 py-0.5 rounded-full border"
-                    style={{ borderColor: style.dot + "40", backgroundColor: style.dot + "15" }}
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: style.dot }} />
-                    <span className="text-[10px] font-semibold" style={{ color: style.text }}>{code}</span>
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 opacity-0 group-hover/readinessTip:opacity-100 transition-opacity pointer-events-none z-[100] whitespace-nowrap">
-                      <div className="bg-[#2C2C2C] text-white text-[10px] rounded-lg px-2 py-1 shadow-xl">{style.label}</div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })()}
+        {/* ── Readiness strip: one pill per overall expectation; hover/tap for child breakdown ── */}
+        {overallReadiness.length > 0 && (
+          <div className="px-3 pt-2 pb-1.5 border-t border-[#E8D5C4] flex flex-wrap gap-1.5 bg-white/60">
+            {overallReadiness.map((o) => (
+              <OverallReadinessPill key={o.overall} data={o} />
+            ))}
+          </div>
+        )}
 
         {/* ── Footer: expectations · accessibility · modalities · view ── */}
         <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-2">
