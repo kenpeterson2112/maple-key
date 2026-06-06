@@ -1,6 +1,5 @@
 "use client"
 import {
-  Bookmark,
   ExternalLink,
   BookOpen,
   Globe,
@@ -260,14 +259,14 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
             )}
             <button
               onClick={handleToggleSave}
-              className={`p-1.5 rounded-xl transition-all duration-200 flex items-center justify-center ${
+              className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-all duration-200 ${
                 isSaved
                   ? "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white shadow-md"
-                  : "bg-[#F5F5F5] text-[#A8998E] hover:bg-[#FFE5CC]"
+                  : "bg-[#F5F5F5] text-[#8B4513] hover:bg-[#FFE5CC]"
               }`}
-              aria-label={isSaved ? "Unsave resource" : "Save resource"}
+              aria-label={isSaved ? "Remove from plan" : "Add to plan"}
             >
-              <Bookmark className="w-3.5 h-3.5" fill={isSaved ? "currentColor" : "none"} />
+              {isSaved ? "Added" : "Add"}
             </button>
           </div>
         </div>
