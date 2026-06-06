@@ -8,6 +8,7 @@ import { Search, X, Plus, Compass } from "lucide-react"
 import ResourceCard from "./resource-card"
 import type { Filters, Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
+import { normalizeGrades } from "@/lib/utils"
 import { getReadinessForCodes, type ReadinessLevel } from "@/lib/assessment-results"
 
 interface ResultsSectionProps {
@@ -49,9 +50,7 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
 
       if (filters.grade && filters.grade !== "") {
         const selectedGrades = filters.grade.split(",").map((g) => g.trim())
-        const resourceGrades = (resource.grade_level || []).map((g) =>
-          String(g).replace(/[\[\]]/g, "").trim(),
-        )
+        const resourceGrades = normalizeGrades(resource.grade_level)
         if (!selectedGrades.some((g) => resourceGrades.includes(g))) return false
       }
 
