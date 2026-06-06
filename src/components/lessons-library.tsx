@@ -5,6 +5,7 @@ import { Sparkles, Calendar, Check, BookOpen, ClipboardCheck, ArrowRight } from 
 import { getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { getLessonTally } from "@/lib/assessment-results"
+import DevSeedControl from "@/components/dev/dev-seed-control"
 
 interface LessonsLibraryProps {
   onOpenLesson: (lesson: LessonMetadata) => void
@@ -18,6 +19,8 @@ function formatDate(timestamp: number): string {
 
 export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
   const lessons = useMemo(() => getLessonLog(), [])
+  // Dev-only seeding bumps this to re-read per-lesson tallies (read inline on render).
+  const [reloadNonce, setReloadNonce] = useState(0)
   const [subject, setSubject] = useState<string>("All")
   const [sort, setSort] = useState<SortKey>("newest")
 
@@ -42,6 +45,11 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
       <div className="flex items-center gap-2 px-6 md:px-8 py-4 border-b border-[#E8D5C4] bg-white">
         <Sparkles size={22} className="text-violet-600" />
         <h2 className="text-xl font-bold text-[#2C2C2C]">All Lessons</h2>
+        {import.meta.env.DEV && (
+          <div className="ml-auto">
+            <DevSeedControl scope={{ kind: "lessons", lessons }} onChanged={() => setReloadNonce((n) => n + 1)} />
+          </div>
+        )}
       </div>
 
       {/* Controls */}
@@ -77,7 +85,7 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
 
       {/* List */}
       <div className="flex-1 overflow-y-auto px-5 md:px-8 py-6">
-        <div className="max-w-3xl mx-auto space-y-3">
+        <div key={reloadNonce} className="max-w-3xl mx-auto space-y-3">
           {visible.length === 0 ? (
             <div className="text-center py-16 text-[#888]">
               <p className="font-semibold text-[#2C2C2C]">No lessons found</p>

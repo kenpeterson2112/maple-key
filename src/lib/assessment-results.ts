@@ -90,6 +90,15 @@ export function clearLessonTally(lessonId: string): void {
   write(store)
 }
 
+// Testing/dev seam: write precomputed tallies straight into the store, overwriting
+// by lessonId. Only called from dev-gated tooling (see src/lib/dev-seed.ts), so it
+// is tree-shaken out of production. Not used by any production code path.
+export function seedTallies(tallies: LessonTally[]): void {
+  const store = read()
+  for (const t of tallies) store[t.lessonId] = t
+  write(store)
+}
+
 // ---- Aggregation for dashboards ----
 export interface OverallAggregate {
   overall: string
