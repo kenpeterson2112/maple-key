@@ -41,11 +41,11 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
           {/* Desktop */}
           <div className="hidden md:flex items-center justify-between gap-4">
             <img
-              src={withBasePath("/Maple_Key_Transp_Background.png")}
+              src={withBasePath("/maple-key-logo.png")}
               alt="Maple Key"
-              width={140}
-              height={48}
-              className="h-12 w-auto object-contain"
+              width={785}
+              height={673}
+              className="h-14 w-auto object-contain"
             />
 
             <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} />
@@ -102,11 +102,11 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
           {/* Mobile */}
           <div className="flex md:hidden items-center justify-between gap-2">
             <img
-              src={withBasePath("/Maple_Key_Transp_Background.png")}
+              src={withBasePath("/maple-key-logo.png")}
               alt="Maple Key"
-              width={120}
-              height={40}
-              className="h-10 w-auto object-contain"
+              width={785}
+              height={673}
+              className="h-11 w-auto object-contain"
             />
 
             <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} compact />

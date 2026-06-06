@@ -35,8 +35,10 @@ export default function HomeScreen({
       {/* Header */}
       <header className="flex items-center justify-between px-5 py-4 border-b border-[#E8D5C4] bg-[#FAF3E0]/90 backdrop-blur-md sticky top-0 z-10">
         <img
-          src={withBasePath("/Maple_Key_Transp_Background.png")}
+          src={withBasePath("/maple-key-logo.png")}
           alt="Maple Key"
+          width={785}
+          height={673}
           className="h-10 md:h-20 w-auto object-contain"
         />
         <button
