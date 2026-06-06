@@ -19,7 +19,7 @@ function formatDate(timestamp: number): string {
 
 export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
   const lessons = useMemo(() => getLessonLog(), [])
-  // Dev-only seeding bumps this to re-read per-lesson tallies (read inline on render).
+  // The sample-data control bumps this to re-read per-lesson tallies (read inline on render).
   const [reloadNonce, setReloadNonce] = useState(0)
   const [subject, setSubject] = useState<string>("All")
   const [sort, setSort] = useState<SortKey>("newest")
@@ -45,11 +45,9 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
       <div className="flex items-center gap-2 px-6 md:px-8 py-4 border-b border-[#E8D5C4] bg-white">
         <Sparkles size={22} className="text-violet-600" />
         <h2 className="text-xl font-bold text-[#2C2C2C]">All Lessons</h2>
-        {import.meta.env.DEV && (
-          <div className="ml-auto">
-            <DevSeedControl scope={{ kind: "lessons", lessons }} onChanged={() => setReloadNonce((n) => n + 1)} />
-          </div>
-        )}
+        <div className="ml-auto">
+          <DevSeedControl scope={{ kind: "lessons", lessons }} onChanged={() => setReloadNonce((n) => n + 1)} />
+        </div>
       </div>
 
       {/* Controls */}

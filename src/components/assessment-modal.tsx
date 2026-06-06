@@ -388,9 +388,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   <BarChart3 size={16} className="text-amber-600" />
                   <span className="text-sm font-semibold text-[#2C2C2C]">Class results</span>
                 </div>
-                {import.meta.env.DEV && (
-                  <DevSeedControl scope={{ kind: "lesson", lesson }} onChanged={() => setRecordedCount((n) => n + 1)} />
-                )}
+                <DevSeedControl scope={{ kind: "lesson", lesson }} onChanged={() => setRecordedCount((n) => n + 1)} />
               </div>
               <div className="inline-flex rounded-lg border border-[#E8D5C4] bg-white p-0.5 text-xs font-medium">
                 <button
