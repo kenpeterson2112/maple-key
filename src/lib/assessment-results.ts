@@ -90,9 +90,9 @@ export function clearLessonTally(lessonId: string): void {
   write(store)
 }
 
-// Testing/dev seam: write precomputed tallies straight into the store, overwriting
-// by lessonId. Only called from dev-gated tooling (see src/lib/dev-seed.ts), so it
-// is tree-shaken out of production. Not used by any production code path.
+// Write precomputed tallies straight into the store, overwriting by lessonId.
+// Used by the sample-data generator (see src/lib/dev-seed.ts), which is currently
+// enabled in all builds. Not part of the normal Quick Check recording path.
 export function seedTallies(tallies: LessonTally[]): void {
   const store = read()
   for (const t of tallies) store[t.lessonId] = t

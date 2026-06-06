@@ -1,9 +1,10 @@
-// DEV / TEST ONLY — synthesizes fake assessment results so the dashboards can be
-// populated for building, testing, and training without running real Quick Checks.
+// Synthesizes fake/sample assessment results so the dashboards can be populated
+// for demos, building, testing, and training without running real Quick Checks.
 //
-// This module is imported only from dev-gated UI (`import.meta.env.DEV`), so Vite
-// tree-shakes it (and the `seedTallies` seam it uses) out of the production build.
-// Never wire any of these into a production code path.
+// NOTE: this is intentionally shipped in production for now — surfaced via the
+// "Dev data" control on the assessment dashboards. There are no real users yet and
+// the team wants the seeding available everywhere. It writes only to the same
+// localStorage the real Quick Check uses, through the `seedTallies` seam.
 
 import { seedTallies, clearLessonTally, getAllTallies, type BandCounts, type LessonTally } from "./assessment-results"
 import type { LessonMetadata } from "./lesson-metadata"

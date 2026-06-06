@@ -1,7 +1,8 @@
 "use client"
 
-// DEV-ONLY control. Rendered only behind `import.meta.env.DEV` guards, so it (and
-// the dev-seed module it pulls in) is tree-shaken from the production build.
+// "Dev data" control — generates fake/sample assessment data into localStorage.
+// Intentionally rendered in all builds (including production) for now; styled as a
+// low-key affordance. See src/lib/dev-seed.ts.
 
 import { useState } from "react"
 import * as Popover from "@radix-ui/react-popover"
