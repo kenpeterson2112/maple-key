@@ -2,7 +2,6 @@
 import {
   Bookmark,
   ExternalLink,
-  Check,
   BookOpen,
   Globe,
   Video,
@@ -15,7 +14,7 @@ import {
 } from "lucide-react"
 import * as Popover from "@radix-ui/react-popover"
 import { AnimatePresence, motion } from "framer-motion"
-import { CURRICULUM_DESCRIPTIONS, overallLabel } from "@/lib/curriculum-codes"
+import { overallLabel } from "@/lib/curriculum-codes"
 import { normalizeGrades } from "@/lib/utils"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useState, useRef, useMemo } from "react"
@@ -289,46 +288,12 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
           <p className="text-[11px] text-[#555] leading-relaxed line-clamp-3">{description}</p>
         </div>
 
-        {/* ── Readiness strip: one pill per overall expectation; hover/tap for child breakdown ── */}
-        {overallReadiness.length > 0 && (
-          <div className="px-3 pt-2 pb-1.5 border-t border-[#E8D5C4] flex flex-wrap gap-1.5 bg-white/60">
+        {/* ── Footer: readiness · accessibility · modalities · view (one condensed row) ── */}
+        <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0 flex-wrap">
             {overallReadiness.map((o) => (
               <OverallReadinessPill key={o.overall} data={o} />
             ))}
-          </div>
-        )}
-
-        {/* ── Footer: expectations · accessibility · modalities · view ── */}
-        <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 min-w-0">
-            {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
-              <div className="relative group/curriculumTooltip">
-                <div className="flex items-center gap-0.5 cursor-help">
-                  <Check className="w-3 h-3 text-emerald-500" strokeWidth={3} />
-                  <span className="text-[11px] font-semibold text-emerald-600">
-                    {resource.curriculum_expectations.length}
-                  </span>
-                </div>
-                <div className="absolute bottom-full left-0 mb-2 w-[90%] min-w-[300px] max-w-[500px] opacity-0 group-hover/curriculumTooltip:opacity-100 transition-opacity pointer-events-none z-[100]">
-                  <div className="bg-[#2C2C2C] text-white text-xs rounded-2xl p-4 shadow-xl max-h-56 overflow-y-auto">
-                    <p className="font-bold mb-2">
-                      Curriculum Expectations ({resource.curriculum_expectations.length})
-                    </p>
-                    <ul className="space-y-1.5">
-                      {resource.curriculum_expectations.map((exp, i) => (
-                        <li key={i} className="text-[11px] leading-relaxed">
-                          {CURRICULUM_DESCRIPTIONS[exp] ? (
-                            <><strong>{exp}:</strong> {CURRICULUM_DESCRIPTIONS[exp]}</>
-                          ) : (
-                            `• ${exp}`
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
 
             <img
               src={withBasePath(accessLevel.icon)}
