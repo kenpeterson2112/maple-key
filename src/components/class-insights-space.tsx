@@ -38,18 +38,26 @@ function uniqueSorted(values: string[]): string[] {
 export default function ClassInsightsSpace() {
   const tallies = useMemo<LessonTally[]>(() => getAllTallies(), [])
 
-  const allGrades = useMemo(() => uniqueSorted(tallies.map(t => t.grade)), [tallies])
   const allSubjects = useMemo(() => uniqueSorted(tallies.map(t => t.subject)), [tallies])
 
-  const [grades, setGrades] = useState<string[]>([])
-  const [subjects, setSubjects] = useState<string[]>([])
+  // Subject is the primary tab; grade is a sub-tab scoped to the active subject.
+  const [activeSubject, setActiveSubject] = useState<string>("")
+  const [activeGrade, setActiveGrade] = useState<string>("") // "" = all grades
+
+  const subject = activeSubject || allSubjects[0] || ""
+
+  // Only the grades that actually appear within the active subject.
+  const subjectGrades = useMemo(
+    () => uniqueSorted(tallies.filter(t => t.subject === subject).map(t => t.grade)),
+    [tallies, subject]
+  )
+
+  // Drop a stale grade selection when it isn't present in the active subject.
+  const grade = activeGrade && subjectGrades.includes(activeGrade) ? activeGrade : ""
 
   const filtered = useMemo(
-    () => tallies.filter(t =>
-      (grades.length === 0 || grades.includes(t.grade)) &&
-      (subjects.length === 0 || subjects.includes(t.subject))
-    ),
-    [tallies, grades, subjects]
+    () => tallies.filter(t => t.subject === subject && (grade === "" || t.grade === grade)),
+    [tallies, subject, grade]
   )
 
   const data = useMemo(() => aggregateAll(filtered), [filtered])
@@ -64,9 +72,6 @@ export default function ClassInsightsSpace() {
     }
     return { attention, developing, strong }
   }, [data])
-
-  const toggle = (list: string[], value: string, setter: (v: string[]) => void) =>
-    setter(list.includes(value) ? list.filter(v => v !== value) : [...list, value])
 
   if (tallies.length === 0) {
     return (
@@ -95,56 +100,60 @@ export default function ClassInsightsSpace() {
   return (
     <div className="flex flex-col h-full bg-[#FAF3E0]">
 
-      {/* Header with inline grade/subject filter pills */}
-      <header className="flex-shrink-0 border-b border-[#E8D5C4] bg-white px-6 py-3">
-        <div className="flex items-center gap-3 flex-wrap">
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
-              <BarChart3 size={18} className="text-amber-600" />
-            </div>
-            <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
-          </div>
+      {/* Header */}
+      <header className="flex-shrink-0 flex items-center gap-2 border-b border-[#E8D5C4] bg-white px-6 py-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
+          <BarChart3 size={18} className="text-amber-600" />
+        </div>
+        <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
+      </header>
 
-          {(allGrades.length > 1 || allSubjects.length > 1) && (
-            <div className="ml-auto flex flex-wrap gap-1.5 items-center">
-              {allGrades.length > 1 && allGrades.map(g => (
-                <button
-                  key={g}
-                  onClick={() => toggle(grades, g, setGrades)}
-                  className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
-                    grades.includes(g)
-                      ? "bg-[#FF6B35] border-[#FF6B35] text-white"
-                      : "bg-white border-[#E8D5C4] text-[#555] hover:border-[#8B4513]"
-                  }`}
-                >
-                  Gr {g}
-                </button>
-              ))}
-              {allSubjects.length > 1 && allSubjects.map(s => (
+      {/* Subject folder tabs + grade sub-tabs */}
+      <div className="flex-shrink-0 bg-[#FAF3E0] px-6 pt-4">
+        <div className="mx-auto max-w-3xl">
+          {/* Subjects — folder tabs */}
+          <div className="flex flex-wrap items-end gap-1 border-b border-[#E8D5C4]">
+            {allSubjects.map((s) => {
+              const isActive = s === subject
+              return (
                 <button
                   key={s}
-                  onClick={() => toggle(subjects, s, setSubjects)}
-                  className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
-                    subjects.includes(s)
-                      ? "bg-[#FF6B35] border-[#FF6B35] text-white"
-                      : "bg-white border-[#E8D5C4] text-[#555] hover:border-[#8B4513]"
-                  }`}
+                  onClick={() => { setActiveSubject(s); setActiveGrade("") }}
+                  className={
+                    isActive
+                      ? "relative -mb-px rounded-t-xl border border-b-0 border-t-2 border-[#E8D5C4] border-t-[#FF6B35] bg-white px-4 py-2.5 text-sm font-bold text-[#2C2C2C] shadow-[0_-1px_4px_rgba(0,0,0,0.04)]"
+                      : "rounded-t-xl border border-transparent px-4 py-2 text-sm font-medium text-[#8B7355] transition-colors hover:bg-white/60 hover:text-[#2C2C2C]"
+                  }
                 >
                   {s}
                 </button>
-              ))}
-              {(grades.length > 0 || subjects.length > 0) && (
-                <button
-                  onClick={() => { setGrades([]); setSubjects([]) }}
-                  className="px-2.5 py-1 rounded-full text-xs text-[#888] hover:text-[#2C2C2C] transition-colors"
-                >
-                  Clear
-                </button>
-              )}
+              )
+            })}
+          </div>
+
+          {/* Grades — sub-tabs, scoped to the active subject */}
+          {subjectGrades.length > 1 && (
+            <div className="flex flex-wrap items-center gap-4 px-1 pt-3">
+              {[{ label: "All grades", value: "" }, ...subjectGrades.map(g => ({ label: `Gr ${g}`, value: g }))].map((opt) => {
+                const isActive = grade === opt.value
+                return (
+                  <button
+                    key={opt.value || "__all"}
+                    onClick={() => setActiveGrade(opt.value)}
+                    className={`relative border-b-2 pb-1.5 text-xs font-semibold transition-colors ${
+                      isActive
+                        ? "border-[#FF6B35] text-[#2C2C2C]"
+                        : "border-transparent text-[#999] hover:text-[#2C2C2C]"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                )
+              })}
             </div>
           )}
         </div>
-      </header>
+      </div>
 
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl px-6 py-6 space-y-6">
@@ -174,8 +183,8 @@ export default function ClassInsightsSpace() {
             <ClassDashboard data={data} />
           ) : (
             <div className="rounded-xl border-2 border-dashed border-[#E8D5C4] bg-white p-8 text-center">
-              <p className="text-sm font-medium text-[#2C2C2C]">No results for these filters</p>
-              <p className="mt-1 text-xs text-[#888]">Try clearing a filter above.</p>
+              <p className="text-sm font-medium text-[#2C2C2C]">No results for this view</p>
+              <p className="mt-1 text-xs text-[#888]">Try another grade or subject tab above.</p>
             </div>
           )}
 
