@@ -32,6 +32,7 @@ import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
 import type { LessonMetadata, LessonArtifact, ArtifactStatus } from "@/lib/lesson-metadata"
 import ArtifactsSection from "@/components/artifacts-section"
 import ArtifactOrganizerModal from "@/components/artifact-organizer-modal"
+import LessonBuildingLoader from "@/components/lesson-building-loader"
 import {
   openPrintWindow,
   escapeHtml,
@@ -1087,6 +1088,9 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
         {/* Content */}
         <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-6">
+          {isGenerating && !lessonGenerated ? (
+            <LessonBuildingLoader />
+          ) : (
           <div className="max-w-3xl mx-auto space-y-6">
             {lessonGenerated ? (
               <>{/* lesson view below */}
@@ -1980,6 +1984,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             )}
           </div>
+          )}
         </div>
 
         {!lessonGenerated && showQuestionsStep && (
@@ -1995,7 +2000,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
           </div>
         )}
 
-        {!lessonGenerated && !showQuestionsStep && (
+        {!lessonGenerated && !showQuestionsStep && !isGenerating && (
           <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
             <div className="max-w-3xl mx-auto space-y-3">
               {generateError && (
