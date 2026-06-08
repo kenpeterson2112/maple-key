@@ -15,6 +15,7 @@ Changes made:
 - Wraps output in {"meta": {...}, "resources": [...]}
 """
 
+import ast
 import json
 import re
 import sys
@@ -122,14 +123,50 @@ def _num_to_grade(n: int):
     return n
 
 
+def _unwrap_repr_string(s: str):
+    """If `s` looks like a Python list repr (e.g. "['6']" or "[6, 7]"), parse it.
+    Returns the parsed list or None if it doesn't look like a list repr."""
+    s = s.strip()
+    if not (s.startswith("[") and s.endswith("]")):
+        return None
+    try:
+        parsed = ast.literal_eval(s)
+    except (ValueError, SyntaxError):
+        return None
+    return parsed if isinstance(parsed, list) else None
+
+
 def normalize_grade_level(grade_str) -> list:
     if not grade_str and grade_str != 0:
         return []
-    # Handle already-normalized array (idempotent re-run)
+    # Handle already-normalized array (idempotent re-run). Recurse into each
+    # element to unwrap any Python-repr strings (e.g. "['6']") that earlier
+    # passes mangled in.
     if isinstance(grade_str, list):
-        return grade_str
+        result = []
+        for item in grade_str:
+            if isinstance(item, str):
+                unwrapped = _unwrap_repr_string(item)
+                if unwrapped is not None:
+                    for inner in unwrapped:
+                        result.extend(normalize_grade_level(inner))
+                    continue
+            result.extend(normalize_grade_level(item))
+        # De-duplicate while preserving order
+        seen = set()
+        deduped = []
+        for g in result:
+            key = (type(g).__name__, g)
+            if key not in seen:
+                seen.add(key)
+                deduped.append(g)
+        return deduped
 
     grade_str = str(grade_str).strip()
+    # Unwrap a single Python-repr-as-string ("['6']", "[6, 7]")
+    unwrapped = _unwrap_repr_string(grade_str)
+    if unwrapped is not None:
+        return normalize_grade_level(unwrapped)
     # Strip trailing symbols like + or *
     grade_str = re.sub(r"[+*]+$", "", grade_str).strip()
 
@@ -384,7 +421,7 @@ def normalize_resource(resource: dict, auto_id_counter: int) -> dict:
         new_id = f"r-{auto_id_counter}"
 
     # ── Grade ──
-    grade_levels = normalize_grade_level(str(resource.get("grade_level") or ""))
+    grade_levels = normalize_grade_level(resource.get("grade_level"))
     grade_band = get_grade_band(grade_levels)
 
     # ── Subject ──
