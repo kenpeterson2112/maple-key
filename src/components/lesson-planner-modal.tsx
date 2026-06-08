@@ -1761,7 +1761,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   </p>
                 </div>
 
-                {/* Student Progress Data Section */}
+                {/* Student Progress Data Section — temporarily hidden; will be re-enabled later */}
+                {false && (
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Users size={20} className="text-[#8B4513]" />
@@ -1826,6 +1827,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     </div>
                   )}
                 </div>
+                )}
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
@@ -1843,6 +1845,20 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     </div>
                   )}
 
+                  {bookmarkedResources.length === 0 ? (
+                    <div className="bg-stone-50 rounded-lg p-6 flex flex-col items-center gap-3 text-center">
+                      <p className="text-sm text-[#666]">
+                        Return to the resource browser if you need to add other resources.
+                      </p>
+                      <button
+                        onClick={onBack}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
+                      >
+                        <ArrowLeft size={16} />
+                        Resource Browser
+                      </button>
+                    </div>
+                  ) : (
                   <div className="bg-stone-50 rounded-lg p-3 space-y-2">
                     {bookmarkedResources.map((resource, index) => (
                       <div
@@ -1861,6 +1877,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                       </div>
                     ))}
                   </div>
+                  )}
                 </div>
 
                 <UserMaterialsSection materials={userMaterials} onChange={setUserMaterials} />
