@@ -19,6 +19,10 @@ on:
         description: 'Print results without writing.'
         required: false
         default: 'false'
+      verbose:
+        description: 'Print the raw Claude response for each batch (debug).'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
@@ -56,6 +60,9 @@ jobs:
           fi
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS+=(--dry-run)
+          fi
+          if [ "${{ github.event.inputs.verbose }}" = "true" ]; then
+            ARGS+=(--verbose)
           fi
           python scripts/assess-curriculum-expectations.py "${ARGS[@]}"
 
