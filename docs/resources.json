@@ -1835,7 +1835,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1886,7 +1890,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1937,7 +1945,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1988,7 +2000,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2615,7 +2631,11 @@
       "resource_type": "physical",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.2",
+        "B1.1"
+      ],
       "accessibility": [
         "Some Concerns"
       ],
@@ -2664,7 +2684,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.2",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2714,7 +2738,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.2",
+        "A2.2",
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2764,7 +2792,11 @@
       "resource_type": "physical",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.2",
+        "B1.2"
+      ],
       "accessibility": [
         "Some Concerns"
       ],
@@ -3290,7 +3322,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.2",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3341,7 +3377,11 @@
       "resource_type": "physical",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.2",
+        "A2.3",
+        "C1.2"
+      ],
       "accessibility": [
         "Some Concerns"
       ],
@@ -3389,7 +3429,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3439,7 +3483,11 @@
       "resource_type": "physical",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.2"
+      ],
       "accessibility": [
         "Some Concerns"
       ],
@@ -3488,7 +3536,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -4046,7 +4098,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -4098,7 +4154,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.2",
+        "B1.2",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -4148,7 +4208,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -4200,7 +4264,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.3",
+        "A2.2",
+        "A3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -4251,7 +4319,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B2.2",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -4301,7 +4373,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61407,7 +61483,10 @@
       "description": "Official Ontario Ministry of Education curriculum document for Social Studies (1-6) and History/Geography (7-8). Provides the complete 2018 expectations for Grade 7 History Strand A including the historical thinking concepts framework.",
       "url": "https://www.edu.gov.on.ca/eng/curriculum/elementary/sshg18curr.pdf",
       "publisher_creator": "Official Curriculum Documents",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -61421,7 +61500,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61470,7 +61553,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61520,7 +61607,12 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61569,7 +61661,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.2",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61602,7 +61698,10 @@
       "description": "Teacher-curated index of every TVO Learn unit aligned to Ontario's Grade 7-8 History and Geography curriculum with quick-jump links to each strand.",
       "url": "https://cubeforteachers.com/post/TVO-Learn-Grade-7-and-8-geography-and-history-resources-fb0uymwbiedj8usn",
       "publisher_creator": "Ontario-Aligned Public Platforms",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -61616,7 +61715,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61665,7 +61769,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61698,7 +61807,10 @@
       "description": "Historica Canada's central education portal with 300+ free learning tools including thematic education guides, classroom-ready Heritage Minutes, and historical thinking activities.",
       "url": "http://education.historicacanada.ca/",
       "publisher_creator": "Heritage Organizations and Encyclopedias",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -61713,7 +61825,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61763,7 +61879,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61796,7 +61916,10 @@
       "description": "Canada's History Society repository of teacher-vetted lesson plans, many directly tagged to the 1713-1800 period in New France, the fur trade, and BNA.",
       "url": "https://www.canadashistory.ca/education/lesson-plans",
       "publisher_creator": "Heritage Organizations and Encyclopedias",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -61810,7 +61933,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61843,7 +61971,10 @@
       "description": "Library and Archives Canada's official teacher resource hub with searchable digitized maps, photos, treaties, and government documents from the 1713-1800 era.",
       "url": "https://library-archives.canada.ca/eng/collection/about-collection/teachers-resources",
       "publisher_creator": "Government Archives and Primary Source Collections",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -61857,7 +61988,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61906,7 +62041,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61955,7 +62095,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62004,7 +62148,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62053,7 +62201,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62102,7 +62254,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62151,7 +62307,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62184,7 +62344,10 @@
       "description": "Free downloadable tiled version of the Indigenous Peoples Atlas of Canada giant floor map, focused on historical treaties, language families, and Indigenous nations whose territories framed New France and early BNA.",
       "url": "https://cangeoeducation.ca/en/resources/tiled-map-indigenous-peoples-atlas-of-canada/",
       "publisher_creator": "Geography & Mapping Resources",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -62198,7 +62361,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.3",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62247,7 +62414,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62297,7 +62468,12 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62346,7 +62522,12 @@
       "resource_type": "print",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62395,7 +62576,12 @@
       "resource_type": "print",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62428,7 +62614,11 @@
       "description": "CBC's flagship 17-episode Canadian history documentary series with downloadable teacher guides, backgrounders, and student worksheets keyed to specific episodes covering the 1713-1800 era.",
       "url": "https://www.cbc.ca/history/downloads5to9.html",
       "publisher_creator": "Multimedia and Broadcast Resources",
-      "grade_level": [],
+      "grade_level": [
+        5,
+        6,
+        7
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -62442,7 +62632,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62492,7 +62686,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62526,7 +62724,11 @@
       "description": "Free black-and-white outline maps and thematic reference maps of Canada and the world produced by Natural Resources Canada — designed explicitly for classroom use.",
       "url": "https://natural-resources.canada.ca/maps-tools-publications/maps/atlas-canada/reference-maps",
       "publisher_creator": "Canadian Government & Authoritative Mapping",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -62540,7 +62742,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62589,7 +62795,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.3",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62640,7 +62850,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62690,7 +62904,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.3",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62724,7 +62942,11 @@
       "description": "Bilingual (English/French) free lesson plans from the Royal Canadian Geographical Society's education arm — searchable by grade and theme; reaches 28,000 educators and 750,000 students annually.",
       "url": "https://cangeoeducation.ca/en/resources/?resource-types=lesson-plans",
       "publisher_creator": "Curriculum-Aligned Canadian Educator Hubs",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -62738,7 +62960,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62787,7 +63013,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62836,7 +63066,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B1.3",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62887,7 +63121,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.3",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62937,7 +63175,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -62970,7 +63212,11 @@
       "description": "Free searchable database of teacher-reviewed sustainability resources matched to Ontario curriculum expectations — filter by grade, subject, and topic for Strand B alignment.",
       "url": "https://resources4rethinking.ca/",
       "publisher_creator": "Climate Change & \"Changing World\" Inquiry Resources",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -62984,7 +63230,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63017,7 +63267,11 @@
       "description": "NASA's child-accessible portal explaining Earth systems, climate, water, weather, plants, and animals through games, articles, and short videos — well suited for differentiated readers.",
       "url": "https://climatekids.nasa.gov/",
       "publisher_creator": "Climate Change & \"Changing World\" Inquiry Resources",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -63032,7 +63286,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63082,7 +63339,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63132,7 +63393,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63181,7 +63446,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63230,7 +63499,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63264,7 +63536,11 @@
       "description": "Free, web-based virtual globe with lesson plans and the Voyager guided-tour feature — students can build their own projects mapping landforms and physical patterns.",
       "url": "https://www.google.com/earth/education/",
       "publisher_creator": "GIS, Mapping & Spatial-Thinking Tools",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -63278,7 +63554,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63327,7 +63607,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63376,7 +63660,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63409,7 +63697,11 @@
       "description": "Searchable PBS hub with curriculum-aligned videos and interactives on weather, climate, biomes, and the water cycle — strong differentiation supports including closed captioning.",
       "url": "https://www.pbslearningmedia.org/subjects/science/earth-and-space-science/weather-and-climate/",
       "publisher_creator": "Multimedia & Film",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -63425,7 +63717,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63459,7 +63754,11 @@
       "description": "Curated Indigenous-perspectives geography resources from Can Geo Education — includes the Indigenous Peoples Atlas of Canada and lesson plans on traditional knowledge of physical patterns.",
       "url": "https://cangeoeducation.ca/en/resources/can-geo-educations-indigenous-resources/",
       "publisher_creator": "Indigenous Perspectives & Land-Based Learning",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -63473,7 +63772,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63506,7 +63808,11 @@
       "description": "Elementary Teachers' Federation of Ontario guide to Indigenous land-based learning — practical activities (medicine walks, tracking, storytelling) that integrate physical-geography instruction with Indigenous knowledges.",
       "url": "https://etfofnmi.ca/wp-content/uploads/2024/03/EWS_Book_LandBased-Learning-FINAL_Oct20_CC.pdf",
       "publisher_creator": "Indigenous Perspectives & Land-Based Learning",
-      "grade_level": [],
+      "grade_level": [
+        3,
+        4,
+        5
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -63520,7 +63826,10 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -63553,7 +63862,11 @@
       "description": "Etuaptmumk/Two-Eyed Seeing framework from Mi'kmaw Elder Albert Marshall — supports teachers in pairing Western geography concepts (climate zones, landforms) with Indigenous knowledges of place.",
       "url": "https://www.2eyedseeing.ca/general-8",
       "publisher_creator": "Indigenous Perspectives & Land-Based Learning",
-      "grade_level": [],
+      "grade_level": [
+        5,
+        6,
+        7
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -63567,7 +63880,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66217,7 +66533,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66266,7 +66586,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66315,7 +66639,12 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66364,7 +66693,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66414,7 +66747,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66465,7 +66801,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66514,7 +66854,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66564,7 +66908,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66615,7 +66963,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66665,7 +67017,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66714,7 +67070,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66764,7 +67124,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.3",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66814,7 +67178,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66864,7 +67232,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66914,7 +67286,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -66963,7 +67339,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -67012,7 +67392,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -67046,7 +67429,11 @@
       "description": "Canadian Geographic Education's classroom companion to the Indigenous Peoples Atlas, with downloadable lesson plans, inquiry activities, and discussion guides aligned to Grade 7-12 social studies and geography expectations.",
       "url": "https://cangeoeducation.ca/en/maps/indigenous-peoples-atlas-of-canada/",
       "publisher_creator": "Indigenous Perspectives on Land and Settlement",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -67060,7 +67447,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -67109,7 +67500,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B3.1",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -67158,7 +67552,10 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B3.1",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -67207,7 +67604,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -67256,7 +67656,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -67305,7 +67708,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B3.1",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -67338,7 +67745,10 @@
       "description": "Population Education middle-school curriculum unit with lessons on population density, urban land use, sustainability, and environmental decision-making — strong support for B1 sustainable-settlement and B3 settlement-trends expectations.",
       "url": "https://populationeducation.org/resource/people-and-the-planet-lessons-for-a-sustainable-future/",
       "publisher_creator": "Sustainable Cities, Population, and Lesson Plans",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -67352,7 +67762,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -77760,7 +78174,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -77809,7 +78226,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -77858,7 +78278,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -77907,7 +78331,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.2",
+        "A2.3",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -77956,7 +78384,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.2",
+        "A2.3",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78005,7 +78437,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.3",
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78038,7 +78475,11 @@
       "description": "Bilingual giant floor map produced with NRCan featuring Canada's forests, freshwater, oil and gas, minerals, and mining; bundled with curriculum-aligned lesson plans for intermediate grades.",
       "url": "https://cangeoeducation.ca/en/maps/natural-resources-canada/",
       "publisher_creator": "Canadian Heritage Organizations & Atlases",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78052,7 +78493,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78085,7 +78530,9 @@
       "description": "Curated, bilingual encyclopedia entries on Canadian natural resources (forests, fisheries, minerals, oil and gas, water) suitable for Grade 7 research and inquiry tasks.",
       "url": "https://www.thecanadianencyclopedia.ca/en/browse/things/nature-geography/natural-resources",
       "publisher_creator": "Canadian Heritage Organizations & Atlases",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78099,7 +78546,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78132,7 +78584,11 @@
       "description": "16-activity guide that brings Indigenous worldviews on land and natural resources into intermediate classrooms; aligned with Canadian curricula and developed with First Nations, Inuit, and Métis partners.",
       "url": "https://education.historicacanada.ca/en/tools/493",
       "publisher_creator": "Canadian Heritage Organizations & Atlases",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78146,7 +78602,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.2",
+        "A2.2",
+        "A2.3",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78179,7 +78640,11 @@
       "description": "Teacher guide that scaffolds the use of Canadian Encyclopedia articles in inquiry-based geography lessons, with prompts that work well for natural-resource investigations.",
       "url": "https://education.historicacanada.ca/en/tools/435",
       "publisher_creator": "Canadian Heritage Organizations & Atlases",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78193,7 +78658,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78226,7 +78695,11 @@
       "description": "Searchable library of Canadian classroom-ready lesson plans, including units on resource stewardship, water, forests, and Indigenous land relationships.",
       "url": "https://www.canadashistory.ca/education/classroom-resources",
       "publisher_creator": "Canadian Heritage Organizations & Atlases",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78240,7 +78713,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.2",
+        "A2.3",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78273,7 +78751,10 @@
       "description": "Government of Canada interactive map portal with thematic atlases on critical minerals, mines, wildfires, energy, and water — ideal for student data-mapping investigations.",
       "url": "https://natural-resources.canada.ca/maps-tools-publications/maps/atlas-canada/interactive-maps",
       "publisher_creator": "Government Archives & Mapping/GIS Tools",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78287,7 +78768,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78321,7 +78806,11 @@
       "description": "Specialized Atlas of Canada interactive layer showing mineral deposits, mines, and processing facilities, useful for case-study mapping in resource-extraction inquiries.",
       "url": "https://atlas.gc.ca/mins/en/index.html",
       "publisher_creator": "Government Archives & Mapping/GIS Tools",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78335,7 +78824,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78369,7 +78862,11 @@
       "description": "Esri Canada lesson hub with ArcGIS activities and StoryMaps on Canadian wildlife and natural resources, including Atlantic fisheries case studies and human-impact analysis.",
       "url": "https://resources.esri.ca/education-and-research/modernizing-geography-with-arcgis-mapping-wildlife-and-natural-resources",
       "publisher_creator": "Government Archives & Mapping/GIS Tools",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78383,7 +78880,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78416,7 +78918,11 @@
       "description": "Bundle of ArcGIS Online activities, datasets, and StoryMaps that map Canada's natural environment and resource sectors, supporting inquiry into resource distribution and use.",
       "url": "https://resources.esri.ca/education-and-research/modernizing-geography-with-arcgis-explore-canada-s-natural-environment",
       "publisher_creator": "Government Archives & Mapping/GIS Tools",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78430,7 +78936,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78463,7 +78973,13 @@
       "description": "Set of 39 classroom-ready earth-science and mining lesson plans with student activity cards, posters, and resource samples; aligned to provincial geography and earth-science curricula.",
       "url": "https://miningmatters.ca/classroom-resource-kits",
       "publisher_creator": "Industry & Sector-Specific Education Programs",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78477,7 +78993,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78510,7 +79030,17 @@
       "description": "Initiative of the Sustainable Forestry Initiative offering K-8 activity guides (\"Explore Your Environment\") that integrate forest literacy, social studies, and SDG-aligned investigations.",
       "url": "https://pltcanada.org/en/education/",
       "publisher_creator": "Industry & Sector-Specific Education Programs",
-      "grade_level": [],
+      "grade_level": [
+        "K",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78524,7 +79054,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78557,7 +79091,17 @@
       "description": "DFO library of K-12 lesson plans on aquatic ecosystems, fisheries stewardship, and sustainability — relevant for natural-resource case studies on water and fish stocks.",
       "url": "https://www.pac.dfo-mpo.gc.ca/education/lesson-lecon-plans-eng.html",
       "publisher_creator": "Industry & Sector-Specific Education Programs",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78571,7 +79115,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78604,7 +79152,9 @@
       "description": "Interactive site introducing wetland ecology, ecosystem services, and conservation, ideal for natural-resource sustainability lessons in the Grade 7 Geography classroom.",
       "url": "https://wetlands-101.ducks.ca/",
       "publisher_creator": "Industry & Sector-Specific Education Programs",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78619,7 +79169,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78653,7 +79207,20 @@
       "description": "DUC live virtual classroom programs (bilingual, grades 1-12) on wetlands, grasslands, climate change, and biodiversity, designed to align with curriculum learning outcomes.",
       "url": "https://www.ducks.ca/our-work/education/online-learning/",
       "publisher_creator": "Industry & Sector-Specific Education Programs",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78667,7 +79234,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78700,7 +79271,20 @@
       "description": "Learning for a Sustainable Future's database of 1,900+ teacher-reviewed, curriculum-aligned resources searchable by Ontario grade and subject, with strong natural-resources coverage.",
       "url": "https://www.resources4rethinking.ca/",
       "publisher_creator": "Sustainability, Energy, and Global Resource Education",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78714,7 +79298,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78747,7 +79336,12 @@
       "description": "Independent, science-based encyclopedia of energy concepts and resources written for student-friendly access; useful reference for energy-resource case studies and inquiry projects.",
       "url": "https://energyeducation.ca/encyclopedia/Main_Page",
       "publisher_creator": "Sustainability, Energy, and Global Resource Education",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78761,7 +79355,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78794,7 +79392,10 @@
       "description": "Free downloadable lesson package designed for Grades 7–8 covering Canadian natural resources, environmental impact, and student action projects in the social studies / geography classroom.",
       "url": "https://cdn.we.org/wp-content/uploads/2017/02/Canadas-Resources-Environment.pdf",
       "publisher_creator": "Sustainability, Energy, and Global Resource Education",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -78809,7 +79410,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78858,7 +79463,9 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78907,7 +79514,9 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -78956,7 +79565,9 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79005,7 +79616,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79054,7 +79668,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79103,7 +79720,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79153,7 +79774,10 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79202,7 +79826,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79251,7 +79880,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79300,7 +79933,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79333,7 +79970,11 @@
       "description": "Hans Rosling's interactive bubble-chart tool plots variables like life expectancy vs. income per capita over time, ideal for scaffolding scatter-graph and choropleth literacy in the Strand C inquiry process.",
       "url": "https://www.gapminder.org/tools/",
       "publisher_creator": "Global data and visualization tools (HDI / GDP / SDGs)",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79348,7 +79989,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.2",
+        "C2.2",
+        "C3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79382,7 +80027,11 @@
       "description": "Official UNDP data center hosting the Human Development Index, Gender Inequality Index, and country-level profiles. Source data for any Strand C choropleth or comparison assignment.",
       "url": "https://hdr.undp.org/data-center",
       "publisher_creator": "Global data and visualization tools (HDI / GDP / SDGs)",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79396,7 +80045,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79429,7 +80082,11 @@
       "description": "Explains how HDI is calculated (life expectancy + education + income) and lets students sort countries by score. Directly supports the strand's \"How do we measure development?\" inquiry.",
       "url": "https://hdr.undp.org/data-center/human-development-index",
       "publisher_creator": "Global data and visualization tools (HDI / GDP / SDGs)",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79443,7 +80100,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79477,7 +80137,11 @@
       "description": "Free access to GDP, poverty, life expectancy, literacy, and other indicators. Grade 8 students can build comparisons and download CSVs for spreadsheet work.",
       "url": "https://data.worldbank.org/",
       "publisher_creator": "Global data and visualization tools (HDI / GDP / SDGs)",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79491,7 +80155,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.2",
+        "C2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79524,7 +80191,10 @@
       "description": "Tracks global poverty headcount and the Gini coefficient by country and over time; useful for inquiry into which regions face the deepest inequality and why.",
       "url": "https://pip.worldbank.org/home",
       "publisher_creator": "Global data and visualization tools (HDI / GDP / SDGs)",
-      "grade_level": [],
+      "grade_level": [
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79538,7 +80208,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79572,7 +80246,10 @@
       "description": "University of Oxford project producing readable, evidence-based briefings on global inequality, accompanied by interactive graphs that can be embedded in student work or used as classroom visuals.",
       "url": "https://ourworldindata.org/economic-inequality",
       "publisher_creator": "Global data and visualization tools (HDI / GDP / SDGs)",
-      "grade_level": [],
+      "grade_level": [
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79586,7 +80263,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79620,7 +80301,10 @@
       "description": "Curated entry point for educators with ready-made slide presentations and teaching notes on global development, education, and health — designed to be pulled directly into Grade 7–8 lessons.",
       "url": "https://ourworldindata.org/teaching",
       "publisher_creator": "Global data and visualization tools (HDI / GDP / SDGs)",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79634,7 +80318,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2",
+        "C2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79667,7 +80355,11 @@
       "description": "Project Everyone's free SDG library, including the Sir Ken Robinson \"Global Goals\" film, and unit plans that map directly to the inequality, poverty, and clean-water SDGs explored in Strand C.",
       "url": "https://worldslargestlesson.globalgoals.org/resources/",
       "publisher_creator": "SDG-aligned global citizenship lesson kits",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79681,7 +80373,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79714,7 +80410,11 @@
       "description": "UN portal of student-friendly explainers and downloadable kits on each SDG; pairs well with the strand's responses-to-global-inequalities expectation.",
       "url": "https://www.un.org/sustainabledevelopment/student-resources/",
       "publisher_creator": "SDG-aligned global citizenship lesson kits",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79728,7 +80428,10 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79761,7 +80464,11 @@
       "description": "UNICEF Canada's K–8 Global Classroom resources cover children's rights, global poverty, and humanitarian issues — Canadian-context lessons that align with the strand's quality-of-life expectations.",
       "url": "https://www.unicef.ca/en/resources-teachers",
       "publisher_creator": "SDG-aligned global citizenship lesson kits",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79775,7 +80482,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79808,7 +80519,10 @@
       "description": "Esri Canada lesson set that uses ArcGIS Online to map SDG indicators and explore global inequality spatially — ideal for the choropleth-mapping skill the strand explicitly asks students to develop.",
       "url": "https://resources.esri.ca/education-and-research/exploring-the-united-nations-global-goals-with-arcgis-online",
       "publisher_creator": "GIS, Canadian sources, and additional inquiry tools",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79822,7 +80536,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.3",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79855,7 +80573,11 @@
       "description": "National Film Board curated collection on poverty (Canadian and global), with classroom guides and discussion questions. Brings primary-source perspective and Canadian context into the strand's responses-to-inequality discussions.",
       "url": "https://www.nfb.ca/subjects/social-issues/poverty/",
       "publisher_creator": "GIS, Canadian sources, and additional inquiry tools",
-      "grade_level": [],
+      "grade_level": [
+        5,
+        6,
+        7
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79869,7 +80591,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.2",
+        "A2.1",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79902,7 +80628,11 @@
       "description": "Free educator study guides covering hunger, sustainable agriculture, and quality of life through case studies of communities Heifer works with — concrete examples of how communities address inequality.",
       "url": "https://www.heifer.org/take-action/get-involved/schools/global-study-guides",
       "publisher_creator": "GIS, Canadian sources, and additional inquiry tools",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -79916,7 +80646,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79965,7 +80699,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -79998,7 +80736,9 @@
       "description": "Provincially curated collection of treaty education materials including Treaty Recognition Week activities, maps, and primary documents directly aligned to the Indigenous content in Grade 8 Strand A.",
       "url": "https://www.ontario.ca/page/treaty-teaching-and-learning-resources",
       "publisher_creator": "Official Curriculum & Government Documents",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80012,7 +80752,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80061,7 +80805,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80110,7 +80858,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80143,7 +80895,9 @@
       "description": "Nelson's curriculum-aligned digital platform with searchable, customizable Social Studies pathways, including Indigenous-authored content, primary sources, and inquiry tools for Strand A.",
       "url": "https://www.edwin.app/social-studies",
       "publisher_creator": "Ontario-Aligned Platforms",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80157,7 +80911,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80206,7 +80964,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80239,7 +81002,10 @@
       "description": "Searchable collection of Heritage Minutes with accompanying critical-thinking deconstruction exercises, ideal for primary-source media analysis activities on figures and events from the 1850-1890 era.",
       "url": "https://education.historicacanada.ca/en/collections/17",
       "publisher_creator": "Heritage & Encyclopedia Resources",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80253,7 +81019,10 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80286,7 +81055,9 @@
       "description": "Education-portal lesson examining Macdonald's role as principle architect of Confederation and the controversies surrounding his legacy, with student activities and discussion prompts.",
       "url": "http://education.historicacanada.ca/en/tools/501",
       "publisher_creator": "Heritage & Encyclopedia Resources",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80300,7 +81071,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80333,7 +81107,10 @@
       "description": "Recreates the 1885 \"Last Spike\" photograph at Craigellachie, BC, as a primary-source analysis activity exploring perspectives on the Canadian Pacific Railway's construction.",
       "url": "http://education.historicacanada.ca/en/tools/253",
       "publisher_creator": "Heritage & Encyclopedia Resources",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80347,7 +81124,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80380,7 +81160,9 @@
       "description": "Lesson tool covering Black migration to Canada West post-1850 Fugitive Slave Act, including settlement, abolitionist newspapers (Mary Ann Shadd), and intersections with Confederation-era society.",
       "url": "http://education.historicacanada.ca/en/tools/86",
       "publisher_creator": "Heritage & Encyclopedia Resources",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80394,7 +81176,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80427,7 +81212,10 @@
       "description": "LAC's themed Confederation portal collecting digitized colonial despatches, BNA Act drafts, founding-figures collections, and a \"Confederation for Kids\" companion site for ages 9-13.",
       "url": "https://www.bac-lac.gc.ca/eng/discover/politics-government/canadian-confederation/Pages/canadian-confederation.aspx",
       "publisher_creator": "Government Archives & Primary Sources",
-      "grade_level": [],
+      "grade_level": [
+        5,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80441,7 +81229,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80490,7 +81281,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80523,7 +81317,10 @@
       "description": "Curated collection of 19th-century Canadian political cartoons, photographs, and posters (1850-present) with critical-thinking prompts — invaluable for A2 perspective-analysis and document-based questions.",
       "url": "https://www.canadianprimarysources.org/primarysources.htm",
       "publisher_creator": "Government Archives & Primary Sources",
-      "grade_level": [],
+      "grade_level": [
+        8,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80537,7 +81334,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80570,7 +81370,10 @@
       "description": "CMH's signature Confederation package featuring digitized artifacts, archival documents, and audio/video clips that intentionally include the voices of women, Indigenous peoples, and other groups often left out of traditional accounts.",
       "url": "https://www.historymuseum.ca/teachers-zone/stories-of-confederation/",
       "publisher_creator": "Museums & Heritage Organizations",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80584,7 +81387,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80617,7 +81423,10 @@
       "description": "Companion classroom activities for the Stories of Confederation package — directly usable lesson sequences with object-based learning and inquiry prompts.",
       "url": "https://www.historymuseum.ca/teachers-zone/stories-of-confederation/activities/",
       "publisher_creator": "Museums & Heritage Organizations",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80631,7 +81440,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80664,7 +81476,9 @@
       "description": "Pier 21's research piece on Underground Railroad immigration (1840-1860), with primary documents and connections to Black settlement in Canada West that shaped pre-Confederation society.",
       "url": "https://pier21.ca/research/immigration-history/immigration-from-united-states-on-underground-railroad",
       "publisher_creator": "Museums & Heritage Organizations",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80678,7 +81492,10 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80711,7 +81528,12 @@
       "description": "NCTR's curated collection of 300+ English and 100+ French residential school education resources — apps, films, lesson plans, and survivor testimonies foundational to A2 Indigenous-perspectives inquiry.",
       "url": "https://nctr.ca/education/teaching-resources/",
       "publisher_creator": "Indigenous Perspectives & Reconciliation",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80725,7 +81547,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80758,7 +81584,12 @@
       "description": "Specialized NCTR sub-collection on residential school history, with age-appropriate framing aligned to the TRC Calls to Action and the Ontario Strand A focus on the Indian Act and assimilation policies.",
       "url": "https://nctr.ca/education/teaching-resources/residential-school-history/",
       "publisher_creator": "Indigenous Perspectives & Reconciliation",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80772,7 +81603,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80821,7 +81656,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3",
+        "A1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80854,7 +81694,13 @@
       "description": "MNO's grade-banded education kit with a sash, Michif workbook, fiddle music, flashcards, and a Métis history timeline — Indigenous-led content directly supporting Riel/Manitoba Act and Métis-perspective inquiry.",
       "url": "https://www.metisnation.org/programs-and-services/education-training/k-12-education-support/k-12-metis-education-kit/",
       "publisher_creator": "Indigenous Perspectives & Reconciliation",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80868,7 +81714,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80901,7 +81751,12 @@
       "description": "Métis-authored lesson plan on Louis Riel and the Red River and North-West Resistances, with primary sources and discussion prompts framed from a Métis perspective.",
       "url": "https://www.metisnation.org/wp-content/uploads/2024/11/Lesson-Plan-RIEL_Louis_Riel.pdf",
       "publisher_creator": "Indigenous Perspectives & Reconciliation",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80916,7 +81771,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80949,7 +81808,11 @@
       "description": "Multi-perspective lesson examining the voices of women, Indigenous peoples, and linguistic minority groups who were excluded from the Confederation negotiations — strong A2 perspective-taking activity.",
       "url": "https://www.canadashistory.ca/education/lesson-plans/confederation-the-unfinished-project",
       "publisher_creator": "Curated Lesson Plans & Educator Resources",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -80964,7 +81827,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -80997,7 +81864,12 @@
       "description": "Lesson exploring the Numbered Treaties through differing Crown and First Nations perspectives at signing, with present-day relevance and primary-source treaty documents.",
       "url": "https://www.canadashistory.ca/education/lesson-plans/the-numbered-treaties",
       "publisher_creator": "Curated Lesson Plans & Educator Resources",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -81011,7 +81883,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81060,7 +81936,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81110,7 +81990,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81159,7 +82043,12 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81208,7 +82097,11 @@
       "resource_type": "print",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81257,7 +82150,12 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81306,7 +82204,12 @@
       "resource_type": "print",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1",
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81355,7 +82258,13 @@
       "resource_type": "print",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81406,7 +82315,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81440,7 +82353,10 @@
       "description": "Interactive decision-making simulations where students experience historical challenges and scenarios. Highly engaging format for understanding cause-and-effect relationships in history.",
       "url": "https://historysimulation.com/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -81454,7 +82370,11 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81488,7 +82408,10 @@
       "description": "Award-winning interactive simulations, self-marking quizzes, and detailed lesson plans. Promotes decision-making and problem-solving through historical scenarios.",
       "url": "https://www.activehistory.co.uk/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -81502,7 +82425,12 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81553,7 +82481,12 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81587,7 +82520,10 @@
       "description": "Detailed blog post with 45+ engaging, cross-curricular lessons and ideas aligned with Ontario 2023 curriculum. Includes free samples and information on modified lessons for diverse learners.",
       "url": "https://www.2peasandadog.com/2023/06/grade-7-8-history-lessons.html",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -81601,7 +82537,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81650,7 +82590,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81683,7 +82627,10 @@
       "description": "Practical accommodated and modified lesson units designed for ESL and diverse learners. Includes simplified texts, accessibility features, and structured lesson plans aligned with Ontario curriculum.",
       "url": "https://www.otffeo.on.ca/en/resources/lesson-plans/grades-7-8-history-geography/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Social Studies",
       "strand": [
@@ -81697,7 +82644,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81746,7 +82697,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81795,7 +82750,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81844,7 +82803,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81893,7 +82856,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.2",
+        "B1.3",
+        "B1.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81942,7 +82909,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -81991,7 +82962,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
