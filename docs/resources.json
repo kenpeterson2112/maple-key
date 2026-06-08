@@ -1098,7 +1098,12 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1149,7 +1154,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1200,7 +1209,11 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1252,7 +1265,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.3",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1303,7 +1319,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1354,7 +1373,10 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1405,7 +1427,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1457,7 +1483,10 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2055,7 +2084,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.3",
+        "B1.4",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2105,7 +2138,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2155,7 +2192,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "B1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2206,7 +2247,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "O1.1",
+        "O1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2257,7 +2301,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2845,7 +2893,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2897,7 +2949,12 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "W1.1",
+        "W2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2948,7 +3005,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "W2.1",
+        "W2.2",
+        "W2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3000,7 +3061,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "W1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3051,7 +3116,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "W1.1",
+        "W1.2",
+        "W3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3996,7 +4065,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -4048,7 +4121,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
