@@ -1507,7 +1507,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D1.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1558,7 +1562,11 @@
       "resource_type": "physical",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D1.4"
+      ],
       "accessibility": [
         "Some Concerns"
       ],
@@ -1608,7 +1616,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D1.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1659,7 +1671,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D1.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1710,7 +1726,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2",
+        "D2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -1761,7 +1781,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2",
+        "C2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2267,7 +2291,11 @@
       "resource_type": "physical",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D1.4"
+      ],
       "accessibility": [
         "Some Concerns"
       ],
@@ -2315,7 +2343,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D1.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2365,7 +2397,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D1.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2415,7 +2451,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2466,7 +2506,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D2.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -2516,7 +2560,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3021,7 +3069,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3072,7 +3124,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2",
+        "C2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3123,7 +3179,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3174,7 +3234,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2",
+        "C2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3713,7 +3777,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3765,7 +3833,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -3817,7 +3889,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -58672,7 +58748,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -58721,7 +58801,13 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1",
+        "B4.1",
+        "B5.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -58754,7 +58840,15 @@
       "description": "Ontario Biodiversity Council overview of where biodiversity, habitat loss, invasive/endangered species, and ecosystem expectations appear across the curriculum. Useful for cross-strand connections and long-range planning.",
       "url": "https://sobr.ca/indicator/biodiversity-elementary-secondary-schools/",
       "publisher_creator": "Official Curriculum Documents",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -58768,7 +58862,12 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B3.1",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -58817,7 +58916,13 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1",
+        "B4.1",
+        "B5.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -58850,7 +58955,18 @@
       "description": "STAO's curated, teacher-vetted library of lesson plans, safety guides, and unit resources for Ontario science. Searchable by grade, strand, and module — strong starting point for any unit.",
       "url": "https://stao.ca/",
       "publisher_creator": "Ontario-Aligned Platforms",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -58864,7 +58980,12 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1",
+        "B4.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -58897,7 +59018,14 @@
       "description": "Free Ontario-focused portal with lesson plans for each grade, long-range plans, coding integration, and webinars for teachers. Ontario-curriculum aligned.",
       "url": "https://scitechontario.ca/",
       "publisher_creator": "Ontario-Aligned Platforms",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -58911,7 +59039,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1",
+        "B4.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -58944,7 +59077,18 @@
       "description": "Curriculum-linked teacher resources from the Ontario Science Centre, including educator-led video presentations, activity instructions using everyday materials, and extension activities.",
       "url": "https://www.ontariosciencecentre.ca/teachers-plus-students/teacher-resources/curriculum-resources",
       "publisher_creator": "Ontario-Aligned Platforms",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -58959,7 +59103,12 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1",
+        "B4.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59008,7 +59157,12 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1",
+        "B4.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59058,7 +59212,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B3.1",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59108,7 +59267,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B3.1",
+        "B3.2",
+        "B4.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59157,7 +59320,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B3.1",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59190,7 +59358,11 @@
       "description": "Free interactive in-school nature education program from TRCA bringing watershed and ecosystem education directly to schools as a half-day experience.",
       "url": "https://trca.ca/programs/watershed-on-wheels/",
       "publisher_creator": "Canadian Science Organizations & Conservation Authorities",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59204,7 +59376,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59237,7 +59413,11 @@
       "description": "Free CWF lesson plans library covering biodiversity, sustainability, ecosystem conservation, and endangered species recovery for Grades 7-12, including the popular Map that Habitat lesson.",
       "url": "https://cwf-fcf.org/en/resources/for-educators/lesson-plans/",
       "publisher_creator": "Canadian Science Organizations & Conservation Authorities",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59251,7 +59431,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59284,7 +59469,11 @@
       "description": "29 free lesson plans plus species fact sheets from the Hinterland Who's Who / CWF partnership, focused on Canadian wildlife and habitats. Strong fit for connecting Strand B content to local Ontario species.",
       "url": "https://www.hww.ca/educators/",
       "publisher_creator": "Canadian Science Organizations & Conservation Authorities",
-      "grade_level": [],
+      "grade_level": [
+        5,
+        6,
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59298,7 +59487,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59331,7 +59524,11 @@
       "description": "Ontario Nature campaign page explaining how Ontario wetlands support biodiversity. Useful for case-study work on local marshes, swamps, bogs, fens, and coastal wetlands and species at risk.",
       "url": "https://ontarionature.org/campaigns/wetlands/wetlands-are-biodiversity-support-systems/",
       "publisher_creator": "Canadian Science Organizations & Conservation Authorities",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59345,7 +59542,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59378,7 +59579,11 @@
       "description": "University of Colorado's PhET simulation lets students model rabbit populations, introduce wolves and food/climate factors, and watch population dynamics. Free, no login.",
       "url": "https://phet.colorado.edu/en/simulation/natural-selection",
       "publisher_creator": "Interactive Simulations & Virtual Manipulatives",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59392,7 +59597,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B3.1",
+        "B3.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59426,7 +59635,10 @@
       "description": "Interactive Forest Ecosystem Gizmo where students manipulate populations of four species and investigate food-web feeding relationships, with line graphs of population change.",
       "url": "https://gizmos.explorelearning.com/find-gizmos/launch-gizmo?resourceId=639",
       "publisher_creator": "Interactive Simulations & Virtual Manipulatives",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59441,7 +59653,11 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59492,7 +59708,10 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59543,7 +59762,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59593,7 +59815,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59644,7 +59870,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59696,7 +59926,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59746,7 +59980,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59795,7 +60033,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59828,7 +60071,10 @@
       "description": "Free Canadian (Resources for Rethinking, an LSF program) lesson on Two-Eyed Seeing (Etuaptmumk) introduced by Mi'kmaq Elders Albert and Murdena Marshall. Students use a Venn diagram to compare Traditional Ecological Knowledge with Western science approaches to ecosystems.",
       "url": "https://resources4rethinking.ca/en/resource/two-eyed-seeing-science-and-traditional-ecological",
       "publisher_creator": "Indigenous Knowledges & Culturally Responsive Resources",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59842,7 +60088,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59875,7 +60125,16 @@
       "description": "The official Ontario Ministry of Education curriculum portal for Grades 1-8 Science and Technology. Provides every Grade 7 Strand C overall and specific expectation, plus teacher prompts and student response samples.",
       "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-science",
       "publisher_creator": "Official Curriculum Documents",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59889,7 +60148,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C2.2",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59938,7 +60202,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C2.2",
+        "C2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -59971,7 +60240,9 @@
       "description": "STAO maintains an Ontario-curriculum-aligned library of vetted lesson plans, safety notes, and inquiry sequences from practising Ontario teachers covering Grade 7 Strand C topics including particle theory, mechanical mixtures, and solutions.",
       "url": "https://stao.ca/resources/",
       "publisher_creator": "Official Curriculum Documents",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -59985,7 +60256,12 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C2.2",
+        "C2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60018,7 +60294,9 @@
       "description": "Ontario-aligned digital learning platform from Nelson Education with curriculum-mapped Grade 7 Science units, embedded particle theory simulations, and inquiry-style activities aligned to Strand C expectations.",
       "url": "https://www.edwin.app/",
       "publisher_creator": "Ontario-Aligned Public Platforms",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -60034,7 +60312,12 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C2.2",
+        "C2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60084,7 +60367,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C2.2",
+        "C2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60117,7 +60405,10 @@
       "description": "PhET's flagship simulation for visualising particle behaviour in solids, liquids, and gases. Students manipulate temperature and pressure to see how particles move, change phase, and explain melting, freezing, and boiling at the molecular level.",
       "url": "https://phet.colorado.edu/en/simulations/states-of-matter",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -60131,7 +60422,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60181,7 +60476,9 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60215,7 +60512,9 @@
       "description": "Watch a solution change colour as solute is added to water; track concentration and saturation in real time. Excellent for the Grade 7 sub-topic on solutions and how mixtures can be characterised quantitatively.",
       "url": "https://phet.colorado.edu/en/simulations/concentration",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -60229,7 +60528,9 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60263,7 +60564,9 @@
       "description": "Zoom in to the molecular level to see how sugar and salt dissolve differently in water. Directly supports the Grade 7 Strand C expectation that students explain dissolving using the particle theory.",
       "url": "https://phet.colorado.edu/en/simulations/sugar-and-salt-solutions",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -60277,7 +60580,9 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60311,7 +60616,9 @@
       "description": "Build simple molecules from individual atoms, then see the resulting compound's name and structure. Helps Grade 7 students see why a pure substance like water (H₂O) is one type of particle while a mixture is two or more pure substances combined physically.",
       "url": "https://phet.colorado.edu/en/simulations/build-a-molecule",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -60325,7 +60632,9 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60375,7 +60684,9 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60425,7 +60736,9 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60474,7 +60787,9 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60507,7 +60822,10 @@
       "description": "Ontario Science Centre's catalogue of in-person and digital programs for Grade 7-8 classes, including chemistry workshops on matter, mixtures, and the environmental impact of everyday substances.",
       "url": "https://www.ontariosciencecentre.ca/school-programs/programs-and-activities",
       "publisher_creator": "Canadian Science Organizations",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -60521,7 +60839,10 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60570,7 +60891,9 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60619,7 +60942,9 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60652,7 +60977,9 @@
       "description": "CK-12's open-licence Flexbook lesson on pure substances and mixtures with embedded video, vocabulary, practice questions, and self-check quizzes — fully classroom-ready and free for student accounts.",
       "url": "https://www.ck12.org/c/chemistry/pure-substances-and-mixtures/",
       "publisher_creator": "Open Educational Resources & Video Libraries",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -60668,7 +60995,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60719,7 +61049,11 @@
       "resource_type": "video",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2",
+        "C2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60752,7 +61086,9 @@
       "description": "PBS LearningMedia's curated Mixtures collection for middle-school physical science. Includes the Compound vs. Mixture and Separating Mixtures segments along with companion teacher guides aligned to Grade 7 expectations.",
       "url": "https://www.pbslearningmedia.org/subjects/science/physical-science/matter-and-interactions/mixtures/",
       "publisher_creator": "Open Educational Resources & Video Libraries",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -60768,7 +61104,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60819,7 +61158,10 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60869,7 +61211,10 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60918,7 +61263,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2",
+        "C2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -60968,7 +61317,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -61018,7 +61370,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64510,7 +64865,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64562,7 +64921,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64612,7 +64975,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64661,7 +65028,12 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64694,7 +65066,10 @@
       "description": "Science Teachers' Association of Ontario library of teacher-vetted Grade 7–8 resources directly aligned to the 2022 Ontario curriculum, including the Grade 8 cells unit.",
       "url": "https://stao.ca/category/gr-7-8-science-tech/",
       "publisher_creator": "Ontario-Aligned Platforms",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -64708,7 +65083,12 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64758,7 +65138,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64808,7 +65192,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64841,7 +65229,10 @@
       "description": "Science North's educator portal aggregating downloadable handouts and lesson PDFs across Ontario's curriculum, including the full Grade 8 Cells offline package.",
       "url": "https://schools.sciencenorth.ca/educator-resources",
       "publisher_creator": "Ontario-Aligned Platforms",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -64856,7 +65247,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64905,7 +65301,12 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64954,7 +65355,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -64987,7 +65392,10 @@
       "description": "Lets students select a sample cell (animal, plant, or bacterium), view it under a virtual microscope, and click each organelle to see close-ups and learn its function. Comes with editable lesson plan and student exploration guide.",
       "url": "https://gizmos.explorelearning.com/find-gizmos/lesson-info?resourceId=450",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65002,7 +65410,11 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65036,7 +65448,10 @@
       "description": "Genetic Science Learning Center's \"Amazing Cells\" hub, with multiple interactives covering organelle function, cell scale, and how cells relate to tissues and organs. Includes a 2-week middle school unit.",
       "url": "https://learn.genetics.utah.edu/content/cells/",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65050,7 +65465,12 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65083,7 +65503,10 @@
       "description": "Drag-the-slider interactive that takes students from a coffee bean down through a skin cell, E. coli, HIV, and a carbon atom. Single most efficient way to teach the orders-of-magnitude concept core to Strand B.",
       "url": "https://learn.genetics.utah.edu/content/cells/scale/",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65097,7 +65520,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65131,7 +65557,10 @@
       "description": "Students hover over a labelled animal cell to identify organelles and watch short animations of each organelle performing its function. Direct B2 alignment.",
       "url": "https://learn.genetics.utah.edu/content/cells/insideacell/",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65145,7 +65574,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65196,7 +65628,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.3",
+        "B2.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65230,7 +65665,10 @@
       "description": "Browser-based 3D viewer of nearly 25,000 individual real human cells from the Allen Institute. Students can rotate, zoom, and adjust contrast on real microscopy data — an authentic enrichment beyond textbook diagrams.",
       "url": "https://www.allencell.org/3d-cell-viewer.html",
       "publisher_creator": "Interactive Simulations and Virtual Labs",
-      "grade_level": [],
+      "grade_level": [
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65244,7 +65682,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65277,7 +65718,10 @@
       "description": "CK-12 FlexBook lesson on cell theory and its history, with embedded videos, formative assessment, and aligned vocabulary. Covers the assessment-impact strand of B1 directly.",
       "url": "https://flexbooks.ck12.org/cbook/ck-12-middle-school-life-science-2.0/section/2.3/primary/lesson/cell-biology-ms-ls/",
       "publisher_creator": "Open Curricula and Textbooks",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65292,7 +65736,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65325,7 +65772,9 @@
       "description": "CK-12 organelle lesson tightly aligned to Grade 8 B2 expectations on organelle function. Includes diagrams, interactive practice items, and vocabulary supports.",
       "url": "https://flexbooks.ck12.org/cbook/ck-12-middle-school-life-science-2.0/section/2.7/primary/lesson/organelles-ms-ls/",
       "publisher_creator": "Open Curricula and Textbooks",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65340,7 +65789,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65373,7 +65825,10 @@
       "description": "Foundational microscopy lesson directly relevant to the technological-tool focus of Strand B and to assessing how cell-biology developments (B1) shaped science and society.",
       "url": "https://flexbooks.ck12.org/cbook/ck-12-middle-school-life-science-2.0/section/1.6/primary/lesson/microscopes-ms-ls/",
       "publisher_creator": "Open Curricula and Textbooks",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65388,7 +65843,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65437,7 +65895,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65470,7 +65932,11 @@
       "description": "PBS LearningMedia's filterable hub of vetted videos and interactives on cells. Filtering to grades 6–8 surfaces a rich set of short, classroom-ready clips and full lesson plans tied to Strand B.",
       "url": "https://www.pbslearningmedia.org/subjects/science/life-science/cells-and-cell-processes/",
       "publisher_creator": "Multimedia, Video, and Engagement Resources",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65486,7 +65952,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2",
+        "B2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65520,7 +65990,9 @@
       "description": "High-engagement Crash Course Biology episode framing the animal cell as a city; covers nucleus, ribosomes, ER, Golgi, mitochondria, and lysosomes. Strong hook for kicking off a Grade 8 cells unit.",
       "url": "https://thecrashcourse.com/courses/eukaryopolis-the-city-of-animal-cells-crash-course-biology-4/",
       "publisher_creator": "Multimedia, Video, and Engagement Resources",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65534,7 +66006,10 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65567,7 +66042,9 @@
       "description": "Free, teacher-friendly handouts that pair with the Amoeba Sisters' popular cell-biology YouTube videos. Includes labelled organelle worksheets and a cell-organelle review table ideal for Grade 8 reinforcement.",
       "url": "https://www.amoebasisters.com/handouts.html",
       "publisher_creator": "Multimedia, Video, and Engagement Resources",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65582,7 +66059,10 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65615,7 +66095,9 @@
       "description": "Long-running cell-biology learning resource with step-through interactive animations of the cell cycle, plant and animal cell anatomy, and printable worksheets. A reliable supplement for the cell-division portion of B2.",
       "url": "https://www.cellsalive.fun/",
       "publisher_creator": "Multimedia, Video, and Engagement Resources",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65629,7 +66111,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B2.1",
+        "B2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -65663,7 +66148,9 @@
       "description": "Free game-based hub with Cell Explorer (organelle ID and function), Cell Defense (membrane structure), and an osmosis game with hypertonic/hypotonic/isotonic scenarios. Strong engagement tool for Grade 8 cells unit consolidation.",
       "url": "https://biomanbio.com/HTML5GamesandLabs/Cellgames/Cells.html",
       "publisher_creator": "Multimedia, Video, and Engagement Resources",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -65677,7 +66164,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71534,7 +72024,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71586,7 +72080,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71638,7 +72136,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "E1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71672,7 +72173,11 @@
       "description": "Ministry resource explaining the engineering design process embedded in Strand A across all grades. Critical for unpacking design challenges in Strand D and beyond.",
       "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/science-technology/context/processes",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -71686,7 +72191,10 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71736,7 +72244,10 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71786,7 +72297,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71819,7 +72334,10 @@
       "description": "Free downloadable resources from Science North, including handouts on what makes structures strong and stable, and elements that lend support and balance.",
       "url": "https://www.sciencenorth.ca/downloadable-resources",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -71834,7 +72352,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71867,7 +72388,11 @@
       "description": "Curated collection of Let's Talk Science lessons explicitly mapped to the Ontario curriculum. Strong support for Strand A engineering design process and structures-related design challenges.",
       "url": "https://letstalkscience.ca/Lessons-ontario-curriculum",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -71881,7 +72406,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "A1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71930,7 +72459,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -71963,7 +72495,11 @@
       "description": "University of Toronto Engineering Outreach's curated database of free online resources mapped directly to Ontario science curriculum expectations, with strong representation in structures and engineering design.",
       "url": "https://outreach.engineering.utoronto.ca/educators/resources/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -71978,7 +72514,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "A1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72028,7 +72568,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2",
+        "D2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72079,7 +72623,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2",
+        "D1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72129,7 +72677,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2",
+        "D2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72162,7 +72714,9 @@
       "description": "University of Colorado PhET simulation exploring forces, energy, and work as objects move on a ramp. Excellent for inclined-plane mechanical advantage investigations in Grade 8 Systems in Action.",
       "url": "https://phet.colorado.edu/en/simulations/the-ramp",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72176,7 +72730,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72210,7 +72767,10 @@
       "description": "PhET simulation for exploring applied force, friction, and motion. Supports Grade 7 Strand D expectations on forces acting on structures and Grade 8 systems analysis.",
       "url": "https://phet.colorado.edu/en/simulations/forces-and-motion-basics",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72224,7 +72784,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.2",
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72258,7 +72821,9 @@
       "description": "PhET simulation exploring balance, torque, and lever mechanics. Direct support for Grade 8 Systems in Action study of levers and mechanical advantage.",
       "url": "https://phet.colorado.edu/en/simulations/balancing-act",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72272,7 +72837,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C2.1",
+        "C2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72322,7 +72890,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C2.1",
+        "C2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72356,7 +72927,10 @@
       "description": "CK-12 simulation showing how objects of different weights balance on a lever. Useful concrete demonstration of mechanical advantage for both grades.",
       "url": "https://interactives.ck12.org/simulations/physics/see-saw/app/index.html",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72370,7 +72944,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72404,7 +72981,9 @@
       "description": "Open educational resource lesson on mechanical advantage with text, diagrams, and embedded simulations. Directly supports Grade 8 calculations and conceptual understanding.",
       "url": "https://flexbooks.ck12.org/cbook/ck-12-middle-school-physical-science-flexbook-2.0/section/13.6/primary/lesson/mechanical-advantage-ms-ps/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72420,7 +72999,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72454,7 +73036,9 @@
       "description": "Khan Academy tutorial introducing the six simple machines with reading material and supporting videos. Foundational content for Grade 8 Systems in Action.",
       "url": "https://www.khanacademy.org/science/physics/discoveries/simple-machines-explorations/a/simple-machines-and-how-to-use-this-tutorial",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72469,7 +73053,10 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72502,7 +73089,9 @@
       "description": "Five-lesson NSF-funded TeachEngineering unit on bridges covering arch, beam, truss, and suspension types with hands-on activities. Excellent for Grade 7 Form and Function.",
       "url": "https://www.teachengineering.org/curricularunits/view/cub_brid_curricularunit",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72516,7 +73105,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72565,7 +73157,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72598,7 +73193,10 @@
       "description": "Standards-aligned introductory lesson on the six simple machines with engineering examples and student investigations. Bridges Grade 7 (forces) and Grade 8 (systems).",
       "url": "https://www.teachengineering.org/lessons/view/cub_simple_lesson01",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72612,7 +73210,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72645,7 +73246,10 @@
       "description": "Curated PBS LearningMedia collection with videos, interactives, and lesson plans on bridges, tension and compression, and shapes used in strong structures.",
       "url": "https://www.pbslearningmedia.org/collection/structures/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72661,7 +73265,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72711,7 +73318,10 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72760,7 +73370,10 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1",
+        "E2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72793,7 +73406,11 @@
       "description": "Ministry-published rationale page summarizing what is new and emphasized in the 2022 Strand E expectations across grades, useful for teachers transitioning from the older curriculum.",
       "url": "https://www.dcp.edu.gov.on.ca/en/sci-tech-key-changes/strand-e",
       "publisher_creator": "Official Curriculum Documents",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72807,7 +73424,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1",
+        "E3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72840,7 +73461,9 @@
       "description": "Official SNC1W expectations page; relevant for Grade 7–8 teachers planning vertical alignment toward de-streamed Grade 9 climate-change and water-sustainability outcomes.",
       "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/secondary-science/courses/snc1w/strands",
       "publisher_creator": "Official Curriculum Documents",
-      "grade_level": [],
+      "grade_level": [
+        9
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -72854,7 +73477,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1",
+        "E3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72903,7 +73530,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1",
+        "E3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -72953,7 +73584,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73003,7 +73637,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1",
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73036,7 +73674,10 @@
       "description": "Canadian Let's Talk Science lesson explaining each stage of the water cycle with hands-on activity ideas; bridges Grade 7 heat concepts with Grade 8 water systems.",
       "url": "https://letstalkscience.ca/educational-resources/lessons/what-water-cycle",
       "publisher_creator": "Canadian Science Organizations",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73050,7 +73691,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73099,7 +73743,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E3.1",
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73132,7 +73779,10 @@
       "description": "Ottawa-based Water Rangers maps its citizen-science water-monitoring activities to Ontario curriculum expectations, including Grade 8 Water Systems, with lesson links and field-data tools.",
       "url": "https://waterrangers.com/curriculum-ontario/",
       "publisher_creator": "Canadian Science Organizations",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73146,7 +73796,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1",
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73179,7 +73833,10 @@
       "description": "Library of free teacher-facing lessons and the Education Test Kit program, enabling students to upload water-quality data to a national open platform and analyze community trends.",
       "url": "https://waterrangers.com/training/educational-resources/",
       "publisher_creator": "Canadian Science Organizations",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73193,7 +73850,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1",
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73226,7 +73887,10 @@
       "description": "Vancouver-based Ocean Wise's bilingual middle-school education kits with lesson plans, activities, and ocean-stewardship resources aligned to Canadian science curricula.",
       "url": "https://ocean.org/learn-explore/education/ocean-wise-education-kits/",
       "publisher_creator": "Canadian Science Organizations",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73240,7 +73904,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "C1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73289,7 +73956,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73339,7 +74009,9 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73389,7 +74061,10 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1",
+        "E2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73439,7 +74114,9 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73473,7 +74150,10 @@
       "description": "Student-friendly NASA explanation of how solar heat and gravity drive the water cycle, with embedded videos and links to extension activities.",
       "url": "https://climatekids.nasa.gov/water-cycle/",
       "publisher_creator": "NASA / NOAA Earth-Systems Education",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73487,7 +74167,9 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73521,7 +74203,9 @@
       "description": "Curated NASA Climate Kids hub featuring articles, videos, and games on climate change drivers (greenhouse effect, ocean heat uptake) suitable for Grade 7 climate-impact assessments.",
       "url": "https://climatekids.nasa.gov/menu/weather-and-climate/Climate/",
       "publisher_creator": "NASA / NOAA Earth-Systems Education",
-      "grade_level": [],
+      "grade_level": [
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73535,7 +74219,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73568,7 +74255,9 @@
       "description": "NASA Global Precipitation Measurement Mission lesson where students build a mini water-cycle model and analyse satellite precipitation imagery; high-quality alignment to Grade 8 E2.",
       "url": "https://gpm.nasa.gov/education/lesson-plans/exploring-water-cycle",
       "publisher_creator": "NASA / NOAA Earth-Systems Education",
-      "grade_level": [],
+      "grade_level": [
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73582,7 +74271,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1",
+        "E2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73615,7 +74307,10 @@
       "description": "NOAA's middle-school weather-and-climate activity library, including the Precipitation Simulator and water-budget murals — directly relevant to Strand E content.",
       "url": "https://scijinks.gov/classroom-activities/",
       "publisher_creator": "NASA / NOAA Earth-Systems Education",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73629,7 +74324,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73678,7 +74376,9 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73711,7 +74411,10 @@
       "description": "Phenomenon-based middle-school unit (anchored in real hailstorm videos) integrating thermal-energy transfer, water cycling, and air-mass interactions — strong complement to both Ontario Strand E grades.",
       "url": "https://openscied.org/instructional-materials/6-3-weather-climate-water-cycling/",
       "publisher_creator": "Open Educational Resources and Sustainability Units",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -73725,7 +74428,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1",
+        "E2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73774,7 +74480,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E2.1",
+        "E2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73823,7 +74532,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73872,7 +74585,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73921,7 +74638,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -73971,7 +74692,10 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74021,7 +74745,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74070,7 +74798,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74119,7 +74851,11 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "F1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74169,7 +74905,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74218,7 +74957,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74268,7 +75011,11 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74319,7 +75066,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74369,7 +75120,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2",
+        "D2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74418,7 +75173,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74468,7 +75227,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74517,7 +75280,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2",
+        "D2.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74566,7 +75333,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2",
+        "D2.4"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74616,7 +75387,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74666,7 +75441,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74715,7 +75494,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74765,7 +75548,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74798,7 +75585,11 @@
       "description": "Community of teachers sharing free lesson plans and resources for earth and space science, reviewed and rated by educators.",
       "url": "https://sharemylesson.com/subject/earth-and-space-science",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -74812,7 +75603,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74845,7 +75640,11 @@
       "description": "Collection of ready-to-use and customizable teaching resources for earth and space topics, including visual aids and student worksheets.",
       "url": "https://www.teachstarter.com/us/learning-area/earth-space-us/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -74860,7 +75659,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74893,7 +75696,11 @@
       "description": "Free PBS educational resources including videos, interactive activities, and lesson plans for earth and space science aligned to curriculum standards.",
       "url": "https://www.pbslearningmedia.org/subjects/science/earth-and-space-science/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -74909,7 +75716,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -74960,7 +75771,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75010,7 +75825,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75059,7 +75878,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75109,7 +75932,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75160,7 +75987,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "B3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75212,7 +76043,11 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75262,7 +76097,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1",
+        "F1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75312,7 +76151,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75361,7 +76204,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75410,7 +76257,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C2.1",
+        "C3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75461,7 +76311,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "C1.1",
+        "C1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75512,7 +76365,11 @@
       "resource_type": "video",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75561,7 +76418,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75610,7 +76471,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75660,7 +76524,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D2.1",
+        "D2.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75710,7 +76577,10 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75759,7 +76629,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75808,7 +76681,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75858,7 +76734,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E1.2",
+        "E1.3"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75907,7 +76787,10 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -75957,7 +76840,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "E1.1",
+        "E1.2"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76006,7 +76892,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76039,7 +76929,20 @@
       "description": "Official Ontario digital curriculum portal providing access to Science and Technology curriculum documents, strand-specific resources, and expectations for Strand A including design thinking, computational thinking, and making connections between STEM and other subject areas.",
       "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/science-technology/context/strands",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76053,7 +76956,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76086,7 +76993,16 @@
       "description": "Ministry of Education document highlighting the key changes to the 2022 curriculum, emphasizing increased focus on STEM skills, engineering design process, and coding in grades 1-8.",
       "url": "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/5c32d234-af5a-49a7-9345-417e9267e186/8ci.%20Sci%20Key%20Changes_Mar%2030.pdf",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76100,7 +77016,11 @@
       "resource_type": "print",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76133,7 +77053,17 @@
       "description": "Comprehensive digital learning platform specifically designed for Ontario Science curriculum. Includes hands-on and minds-on inquiry activities, STEM challenges, coding and engineering design process opportunities integrated throughout units. Supports personalized learning and provides multiple entry points for diverse learners.",
       "url": "https://www.edwin.app/ontario-science",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76148,7 +77078,12 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76199,7 +77134,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76232,7 +77171,17 @@
       "description": "Professional Support and Strategies for Teachers resource library offering curated science and technology teaching materials, lesson plans, and assessment tools aligned to Ontario curriculum standards.",
       "url": "https://www.psstcommunity.com/curriculum-resources/science-and-technology",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76246,7 +77195,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76279,7 +77231,18 @@
       "description": "Nonprofit providing free K-12 coding curriculum with block-to-text progression. Fully browser-based courses require no downloads. Teaches foundational computational thinking skills that are core to STEM Skills and Connections.",
       "url": "https://code.org",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76293,7 +77256,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76326,7 +77293,12 @@
       "description": "Straightforward, intuitive platform perfect for introducing coding basics without overwhelming beginners. Blockly Games requires no account and collects no personal information. Excellent for foundational algorithm and sequencing skills.",
       "url": "https://blockly.games",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        2,
+        3,
+        4,
+        5
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76340,7 +77312,10 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76373,7 +77348,14 @@
       "description": "Powerful coding platform based on Scratch 3.0, specifically designed for STEM and robotics learning. Supports progression from block-based to Python coding. Can program Makeblock robots and open-source hardware.",
       "url": "https://mblock.cc/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76387,7 +77369,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76436,7 +77422,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76469,7 +77459,10 @@
       "description": "Comprehensive full-year bundle aligned to 2022 Ontario curriculum. Covers STEM skills, design thinking, computational thinking, and making connections. Includes unit plans, daily lessons, labs, activities, projects, and assessments.",
       "url": "https://www.teacherspayteachers.com/Product/NEW-2022-Curriculum-Ontario-Grade-7-8-Science-STEM-FULL-YEAR-BUNDLE-8521894",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        7,
+        8
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76483,7 +77476,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76532,7 +77529,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76565,7 +77566,15 @@
       "description": "FIRST Robotics provides research-backed educational robotics programs and curriculum alignments for Ontario schools. Programs develop computational thinking, engineering design, and STEM problem-solving skills through hands-on robotics challenges.",
       "url": "https://firstroboticscanada.org/alignment/",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76579,7 +77588,11 @@
       "resource_type": "digital",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76612,7 +77625,16 @@
       "description": "Interactive platform dedicated to teaching coding and practical programming. Students write actual code directly in the browser. Offers structured pathways from basics through advanced topics. Supports development of computational thinking (Strand A).",
       "url": "https://www.codecademy.com",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76627,7 +77649,11 @@
       "resource_type": "interactive",
       "access_type": "purchase",
       "is_paid": true,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
@@ -76661,7 +77687,13 @@
       "description": "Free downloadable STEM resources from Western University with Ontario curriculum connections. Activities focus on design thinking, engineering principles, and problem-solving with materials typically available at home or in schools.",
       "url": "https://www.eng.uwo.ca/outreach/pre-university-programs/STEM-Home-archive.html",
       "publisher_creator": "Online Platform",
-      "grade_level": [],
+      "grade_level": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "grade_band": "multi",
       "subject": "Science",
       "strand": [
@@ -76675,7 +77707,11 @@
       "resource_type": "digital",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [],
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1",
+        "A1.1"
+      ],
       "accessibility": [
         "No Concerns"
       ],
