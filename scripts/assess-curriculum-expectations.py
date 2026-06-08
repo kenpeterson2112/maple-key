@@ -133,7 +133,7 @@ def sanitize_grades(raw_grades) -> list:
     return out
 
 
-def assess_batch(client: anthropic.Anthropic, batch: list[dict]) -> list[dict] | None:
+def assess_batch(client: anthropic.Anthropic, batch: list[dict], verbose: bool = False) -> list[dict] | None:
     items_text = "\n\n".join(build_item_text(r, i) for i, r in enumerate(batch))
     user_msg = USER_PROMPT_TEMPLATE.format(count=len(batch), items=items_text)
 
@@ -151,6 +151,8 @@ def assess_batch(client: anthropic.Anthropic, batch: list[dict]) -> list[dict] |
             messages=[{"role": "user", "content": user_msg}],
         )
         raw = response.content[0].text
+        if verbose:
+            print(f"  [verbose] raw model response:\n{raw}\n")
         return parse_response(raw, len(batch))
     except anthropic.APIError as e:
         print(f"  [error] API error: {e}")
@@ -170,16 +172,23 @@ def run(args: argparse.Namespace) -> None:
     resources = data["resources"]
     resource_index = {r["id"]: r for r in resources}
 
-    candidates = [
+    in_scope = [
         r for r in resources
         if (args.force or not r.get("curriculum_expectations") or not r.get("grade_level"))
         and (args.filter_subject is None or r.get("subject") == args.filter_subject)
     ]
+    # Prioritise resources missing curriculum codes (the main job); grade-only
+    # fills run after. Within each group, preserve resources.json order.
+    needs_codes = [r for r in in_scope if not r.get("curriculum_expectations")]
+    needs_grades_only = [r for r in in_scope if r.get("curriculum_expectations") and not r.get("grade_level")]
+    candidates = needs_codes + needs_grades_only
     if args.limit:
         candidates = candidates[: args.limit]
 
     print(f"  {len(resources)} total resources")
-    print(f"  {len(candidates)} need assessment" + (f" (filtered to subject={args.filter_subject})" if args.filter_subject else ""))
+    filter_note = f" (filtered to subject={args.filter_subject})" if args.filter_subject else ""
+    print(f"  {len(in_scope)} in scope{filter_note}: {len(needs_codes)} need codes, {len(needs_grades_only)} need grades only")
+    print(f"  {len(candidates)} will be processed this run")
 
     if not candidates:
         print("Nothing to do.")
@@ -194,7 +203,7 @@ def run(args: argparse.Namespace) -> None:
         batch = candidates[batch_start: batch_start + batch_size]
         print(f"  Batch {batch_start // batch_size + 1}: {len(batch)} resources ({batch[0]['id']} … {batch[-1]['id']})")
 
-        results = assess_batch(client, batch)
+        results = assess_batch(client, batch, verbose=args.verbose)
         if results is None:
             failed += len(batch)
             print("  Batch failed, skipping.")
@@ -251,6 +260,7 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=None, metavar="N", help="Process at most N resources")
     parser.add_argument("--filter-subject", metavar="SUBJ", help="Only process this subject (e.g. 'Math', 'Science')")
     parser.add_argument("--force", action="store_true", help="Re-assess resources that already have codes")
+    parser.add_argument("--verbose", action="store_true", help="Print raw Claude response for each batch")
     run(parser.parse_args())
 
 
