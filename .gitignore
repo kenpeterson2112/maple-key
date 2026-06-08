@@ -11,6 +11,10 @@ dist
 # typescript
 *.tsbuildinfo
 
+# python
+__pycache__/
+*.pyc
+
 # env
 .env
 .env.local
