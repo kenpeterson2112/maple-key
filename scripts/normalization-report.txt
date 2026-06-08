@@ -1,6 +1,6 @@
 Normalization Report
 ============================================================
-Generated: 2026-05-31 19:19 UTC
+Generated: 2026-06-08 02:25 UTC
 
 Input records:              1491
 Output records:             1491
@@ -8,7 +8,7 @@ Output records:             1491
 Records with original id:   1491
 Records assigned auto-id:   0
 
-grade_level changed:        910
+grade_level changed:        848
 modality changed:           1491
 accessibility changed:      0
 contributor names normed:   1491
@@ -17,7 +17,9 @@ With curriculum codes:      105
 Without curriculum codes:   1386
 
 Grade band breakdown:
-  multi            1491
+  intermediate     752
+  multi            643
+  senior           96
 
 Subject breakdown:
   Math                 1095

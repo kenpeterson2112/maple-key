@@ -34,6 +34,11 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/fetch-resources.py --subject social_studies
 
+      - name: Assess curriculum expectations (Assessor stage)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/assess-curriculum-expectations.py --filter-subject "Social Studies"
+
       - name: Commit new resources
         run: |
           git config user.name "github-actions[bot]"

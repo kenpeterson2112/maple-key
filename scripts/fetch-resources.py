@@ -161,7 +161,7 @@ Return ONLY a JSON array (no prose, no markdown fences). Each element must match
   "resource_type": string,         // one of: digital, interactive, video, print, audio, kit, other
   "access_type": string,           // one of: free, purchase, licensed
   "is_paid": boolean,
-  "curriculum_expectations": [],   // always empty array
+  "curriculum_expectations": [string],   // 1-5 Ontario curriculum codes in the form "<LETTER><DIGIT>.<DIGIT>" (e.g. "D1.1", "B2.3") that the resource covers, drawn from the subject's curriculum for the listed grade(s). Never empty.
   "accessibility": ["No Concerns"],
   "instructional_modes": [],       // populated by normalize-resources.py
   "usage_notes": null,             // populated by enrich-usage-notes.py
@@ -183,6 +183,8 @@ Rules:
 - Only include resources where the URL appears legitimate (not a generic homepage of a search engine).
 - Skip duplicates, ads, or low-quality pages.
 - Prefer free, online, Canadian or Ontario-specific resources.
+- `grade_level` must be a JSON array of integers (e.g. [6, 7, 8]) or the strings "K" / "PreK". Never wrap values in extra quotes or brackets — emit `[6]`, not `["[6]"]` or `["['6']"]`.
+- `curriculum_expectations` must list 1–5 Ontario curriculum codes covered by the resource. Each code is `<LETTER><DIGIT>.<DIGIT>` (e.g. "D1.1"). Skip a candidate rather than emit a resource you cannot align to at least one code.
 - Return between 3 and 8 resources.
 - If none of the candidates are suitable, return an empty array [].
 """
@@ -262,7 +264,9 @@ def stamp_resource(resource: dict, next_num: int) -> dict:
         "verified": False,
         "needs_review": True,
     }
-    # Ensure required fields have sensible defaults
+    # Ensure required fields have sensible defaults. Note: curriculum_expectations
+    # should be populated by the Researcher prompt; the Assessor stage
+    # (scripts/assess-curriculum-expectations.py) backfills anything still empty.
     resource.setdefault("curriculum_expectations", [])
     resource.setdefault("accessibility", ["No Concerns"])
     resource.setdefault("alignments", [])
