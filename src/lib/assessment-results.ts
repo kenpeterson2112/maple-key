@@ -224,32 +224,38 @@ export function getReadinessForCodes(codes: string[]): Record<string, ReadinessL
   return out
 }
 
-export interface OverallReadiness {
+export interface OverallCoverage {
   overall: string // e.g. "D1"
-  level: ReadinessLevel // count-weighted rollup of the children below
+  // Count-weighted rollup of the children below, or null when the class has no
+  // recorded data for this overall yet (caller should render a neutral pill).
+  level: ReadinessLevel | null
   children: { code: string; level: ReadinessLevel | null }[] // level === null → not assessed
 }
 
-// Group `codes` by their overall expectation (D1.1 → D1) and roll each overall's
-// recorded band counts up into a single count-weighted readiness level — the same
-// semantics as the dashboard rollUp. Pure: reads no storage, only the provided
-// code → counts map. Overalls with no recorded data are omitted.
-export function summarizeReadiness(
+// Group `codes` by their overall expectation (D1.1 → D1), returning one entry
+// per overall the resource covers, in curriculum order (A1, A2, B1 … — numeric
+// so C2 precedes C10). Each overall's recorded band counts roll up into a single
+// count-weighted readiness level using the same semantics as the dashboard;
+// overalls the class hasn't assessed yet carry level: null rather than being
+// dropped, so a card can always show every expectation a resource targets.
+// Pure: reads no storage, only the provided code → counts map.
+export function coverageForResource(
   codes: string[],
   progress: Record<string, BandCounts>,
-): OverallReadiness[] {
-  const out: OverallReadiness[] = []
+): OverallCoverage[] {
+  const out: OverallCoverage[] = []
   for (const [overall, childCodes] of Object.entries(groupByOverall(codes))) {
     const summed = emptyCounts()
-    const children = childCodes.map((code) => {
-      const counts = progress[code]
-      const total = counts ? counts.strong + counts.developing + counts.needsSupport : 0
-      if (total > 0) addInto(summed, counts)
-      return { code, level: total > 0 ? computeReadinessLevel(counts) : null }
-    })
+    const children = [...childCodes]
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+      .map((code) => {
+        const counts = progress[code]
+        const total = counts ? counts.strong + counts.developing + counts.needsSupport : 0
+        if (total > 0) addInto(summed, counts)
+        return { code, level: total > 0 ? computeReadinessLevel(counts) : null }
+      })
     const total = summed.strong + summed.developing + summed.needsSupport
-    if (total === 0) continue
-    out.push({ overall, level: computeReadinessLevel(summed), children })
+    out.push({ overall, level: total > 0 ? computeReadinessLevel(summed) : null, children })
   }
-  return out
+  return out.sort((a, b) => a.overall.localeCompare(b.overall, undefined, { numeric: true }))
 }

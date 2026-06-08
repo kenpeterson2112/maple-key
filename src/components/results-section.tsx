@@ -8,7 +8,7 @@ import { Search, X, Plus, Compass } from "lucide-react"
 import ResourceCard from "./resource-card"
 import type { Filters, Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
-import { normalizeGrades } from "@/lib/utils"
+import { normalizeGrades, minGrade } from "@/lib/utils"
 import { getReadinessForCodes, getProgressForCodes, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
 
 interface ResultsSectionProps {
@@ -132,13 +132,22 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
     })
   }, [filteredResources, searchQuery])
 
+  // Default order: grade ascending (1 → 12), then by first curriculum
+  // expectation ascending (A1.1 → F3.3), then title — a generally logical
+  // walk through the catalogue. Resources missing a grade or codes fall to the
+  // end of their respective group.
   const sortedResources = useMemo(() => {
     const resources = [...keywordFilteredResources]
     return resources.sort((a, b) => {
+      const gradeA = minGrade(a.grade_level)
+      const gradeB = minGrade(b.grade_level)
+      if (gradeA !== gradeB) return gradeA - gradeB
+
       const codeA = a.curriculum_expectations?.[0] || "ZZZ"
       const codeB = b.curriculum_expectations?.[0] || "ZZZ"
       const codeCompare = codeA.localeCompare(codeB, undefined, { numeric: true })
       if (codeCompare !== 0) return codeCompare
+
       return (a.topic_title || "").localeCompare(b.topic_title || "")
     })
   }, [keywordFilteredResources])

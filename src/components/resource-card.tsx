@@ -19,7 +19,8 @@ import { useBookmarks } from "@/lib/bookmarks-context"
 import { useState, useRef, useMemo } from "react"
 import ReviewsModal from "./reviews-modal"
 import { withBasePath } from "@/lib/base-path"
-import { summarizeReadiness, type OverallReadiness, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import { coverageForResource, type OverallCoverage, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import type { Resource } from "@/lib/types"
 
 const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; label: string }> = {
   poor: { dot: "#B45309", text: "#92400E", label: "Needs Support" },
@@ -28,12 +29,36 @@ const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; labe
   great: { dot: "#166534", text: "#14532D", label: "Excelling" },
 }
 
-// One pill per overall expectation (e.g. "D1"), colored by the rolled-up
-// readiness of the children this resource covers. Hover (desktop) or tap
-// (mobile) opens a portaled panel with the per-child color-coded breakdown.
-function OverallReadinessPill({ data }: { data: OverallReadiness }) {
+// One pill per overall expectation (e.g. "D1") the resource covers.
+//
+// When the class has recorded data for the overall, the pill is colored by the
+// rolled-up readiness of its children, and hover (desktop) / tap (mobile) opens
+// a portaled panel with the per-child color-coded breakdown.
+//
+// When there's no recorded data (data.level === null) — the common case until a
+// class runs assessments — the pill is rendered as a neutral, non-interactive
+// chip so the card still surfaces every expectation the resource covers. It
+// reuses the same "not assessed" greys as the per-child rows in the panel.
+function OverallReadinessPill({ data }: { data: OverallCoverage }) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  if (data.level === null) {
+    const label = overallLabel(data.overall)
+    const friendly = label !== data.overall ? label : null
+    return (
+      <span
+        className="flex items-center gap-1 px-2 py-0.5 rounded-full border"
+        style={{ borderColor: "#D4C5B540", backgroundColor: "#D4C5B515" }}
+        title={friendly ?? undefined}
+        aria-label={`${data.overall}${friendly ? ` ${friendly}` : ""} — not yet assessed`}
+      >
+        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#D4C5B5" }} />
+        <span className="text-[10px] font-semibold" style={{ color: "#A8998E" }}>{data.overall}</span>
+      </span>
+    )
+  }
+
   const style = READINESS_STYLES[data.level]
 
   const openNow = () => {
@@ -146,7 +171,7 @@ function getPrimaryIcon(modality: string) {
 }
 
 // ── Use-case label ─────────────────────────────────────────────────────────
-function getUseCaseLabel(resource): string {
+function getUseCaseLabel(resource: Resource): string {
   const m = (Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? "")).toLowerCase()
   const text = `${(resource.description ?? "").toLowerCase()} ${(resource.topic_title ?? "").toLowerCase()}`
   const codes = resource.curriculum_expectations?.length ?? 0
@@ -199,7 +224,7 @@ function getAccessibilityStyle(accessibilityArray) {
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
-export default function CompactResourceCard({ resource, codeProgress }: { resource: Record<string, unknown>; codeProgress?: Record<string, BandCounts> }) {
+export default function CompactResourceCard({ resource, codeProgress }: { resource: Resource; codeProgress?: Record<string, BandCounts> }) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
   const [showReviewsModal, setShowReviewsModal] = useState(false)
 
@@ -221,10 +246,11 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
   const useCaseLabel = getUseCaseLabel(resource)
   const accessLevel = getAccessibilityStyle(resource.accessibility)
 
-  // Collapse the resource's specific expectations into overalls (D1.1… → D1),
-  // each rolled up to a single readiness level from the class's recorded data.
-  const overallReadiness = useMemo(
-    () => summarizeReadiness((resource.curriculum_expectations as string[]) || [], codeProgress ?? {}),
+  // Collapse the resource's specific expectations into overalls (D1.1… → D1).
+  // Always lists every overall the resource covers; each carries a readiness
+  // level when the class has data for it, or null (neutral pill) when it doesn't.
+  const overallCoverage = useMemo(
+    () => coverageForResource(resource.curriculum_expectations || [], codeProgress ?? {}),
     [resource.curriculum_expectations, codeProgress],
   )
 
@@ -290,7 +316,7 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
         {/* ── Footer: readiness · accessibility · modalities · view (one condensed row) ── */}
         <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0 flex-wrap">
-            {overallReadiness.map((o) => (
+            {overallCoverage.map((o) => (
               <OverallReadinessPill key={o.overall} data={o} />
             ))}
 
