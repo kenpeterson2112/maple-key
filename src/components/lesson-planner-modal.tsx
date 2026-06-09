@@ -43,7 +43,9 @@ import { useBookmarks } from "@/lib/bookmarks-context"
 import { sanitizeQuestions } from "@/lib/assessment-types"
 import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
-import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
+import { readMaterialsSnapshot, getAllSelectedMaterialLabels } from "@/lib/classroom-resources"
+import MaterialsSummary from "@/components/materials-summary"
+import MaterialsEditorModal from "@/components/materials-editor-modal"
 import { getProgressForCodes, type BandCounts } from "@/lib/assessment-results"
 import { BAND_META, BAND_ORDER } from "@/lib/assessment-types"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
@@ -82,6 +84,8 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? "3-Part Lesson")
   const [teacherNotes, setTeacherNotes] = useState("")
   const [userMaterials, setUserMaterials] = useState<UserMaterial[]>([])
+  const [isMaterialsEditorOpen, setIsMaterialsEditorOpen] = useState(false)
+  const [materialsTick, setMaterialsTick] = useState(0)
   const [isGenerating, setIsGenerating] = useState(false)
   const [lessonGenerated, setLessonGenerated] = useState(!!lesson)
 
@@ -158,8 +162,10 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasClassProgress])
 
-  const classroomResourceIds = getClassroomResources()
-  const classroomResourceLabels = getClassroomResourceLabels(classroomResourceIds)
+  // materialsTick forces re-read after the in-planner editor saves.
+  void materialsTick
+  const classroomResourceLabels = getAllSelectedMaterialLabels()
+  const materialsSnapshot = readMaterialsSnapshot()
 
   if (!isOpen) return null
 
@@ -1968,25 +1974,26 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   </div>
                 </div>
 
-                {classroomResourceLabels.length > 0 && (
-                  <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                    <div className="flex items-center gap-2 mb-3">
+                <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-2">
                       <School size={18} className="text-[#8B4513]" />
-                      <h3 className="text-sm font-semibold text-[#2C2C2C]">Your Classroom Resources</h3>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {classroomResourceLabels.map((label) => (
-                        <span
-                          key={label}
-                          className="inline-block px-2.5 py-1 bg-[#FFF6EC] border border-[#E8D5C4] rounded-full text-xs text-[#8B4513] font-medium"
-                        >
-                          {label}
+                      <h3 className="text-sm font-semibold text-[#2C2C2C]">Your Classroom Materials</h3>
+                      {materialsSnapshot.total > 0 && (
+                        <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                          {materialsSnapshot.total}
                         </span>
-                      ))}
+                      )}
                     </div>
-                    <p className="text-xs text-[#888] mt-2">These will inform your lesson plan. Update them in Settings.</p>
                   </div>
-                )}
+                  <MaterialsSummary
+                    snapshot={materialsSnapshot}
+                    onEdit={() => setIsMaterialsEditorOpen(true)}
+                  />
+                  <p className="text-xs text-[#888] mt-3">
+                    Hover a row to see what's selected. Editing here doesn't reset your planning progress.
+                  </p>
+                </div>
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
@@ -2150,6 +2157,12 @@ Return a JSON object with exactly these fields (string values are plain text, no
           onSave={(fields) => handleSaveOrganizerFields(organizerArtifactIndex, fields)}
         />
       )}
+
+      <MaterialsEditorModal
+        isOpen={isMaterialsEditorOpen}
+        onClose={() => setIsMaterialsEditorOpen(false)}
+        onSaved={() => setMaterialsTick((t) => t + 1)}
+      />
 
       {showFeedbackDialog && (
         <div className="fixed inset-0 z-[300] flex items-center justify-center">
