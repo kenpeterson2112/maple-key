@@ -1753,7 +1753,18 @@ Return a JSON object with exactly these fields (string values are plain text, no
               <>
                 {/* District Notice */}
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-                  <Info size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
+                  <div
+                    className="relative group/districtTip flex-shrink-0 mt-0.5"
+                    tabIndex={0}
+                    aria-label="This is a planned feature but is currently for demo purposes only. No district level customizations are applied."
+                  >
+                    <Info size={20} className="text-blue-600 cursor-help" />
+                    <div className="absolute top-full left-0 mt-1.5 w-60 opacity-0 group-hover/districtTip:opacity-100 group-focus-within/districtTip:opacity-100 transition-opacity pointer-events-none z-[100]">
+                      <div className="bg-[#2C2C2C] text-white text-[11px] leading-snug rounded-lg px-2.5 py-1.5 shadow-xl">
+                        This is a planned feature but is currently for demo purposes only. No district level customizations are applied.
+                      </div>
+                    </div>
+                  </div>
                   <p className="text-sm text-blue-800">
                     <span className="font-medium">District Settings Active:</span> Your district administrator has
                     configured the lesson planner to align with approved pedagogical frameworks and instructional
