@@ -1,17 +1,13 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown, Pencil } from "lucide-react"
+import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
+import MaterialsSummary from "@/components/materials-summary"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
-import {
-  CLASSROOM_RESOURCE_CATEGORIES,
-  CLASSROOM_RESOURCE_OPTIONS,
-  getClassroomResources,
-  getCustomClassroomResources,
-} from "@/lib/classroom-resources"
+import { readMaterialsSnapshot } from "@/lib/classroom-resources"
 
 export type TopNavSpace = "resources" | "lessons" | "insights"
 
@@ -35,34 +31,6 @@ const TOGGLE_ITEMS: ToggleItem[] = [
   { id: "insights",  label: "Insights",  icon: BarChart3 },
 ]
 
-const CATEGORY_DOT: Record<string, string> = {
-  "math-manipulatives": "bg-emerald-500",
-  technology: "bg-blue-500",
-  spaces: "bg-amber-500",
-  supplies: "bg-violet-500",
-  "digital-resources": "bg-rose-500",
-  "digital-tools": "bg-cyan-500",
-}
-
-interface MaterialsSnapshot {
-  byCategory: { id: string; label: string; dot: string; items: string[] }[]
-  custom: string[]
-  total: number
-}
-
-function readMaterialsSnapshot(): MaterialsSnapshot {
-  const selectedIds = new Set(getClassroomResources())
-  const custom = getCustomClassroomResources()
-  const byCategory = CLASSROOM_RESOURCE_CATEGORIES.map((cat) => ({
-    id: cat.id,
-    label: cat.label,
-    dot: CATEGORY_DOT[cat.id] ?? "bg-stone-400",
-    items: CLASSROOM_RESOURCE_OPTIONS
-      .filter((o) => o.category === cat.id && selectedIds.has(o.id))
-      .map((o) => o.label),
-  }))
-  return { byCategory, custom, total: selectedIds.size + custom.length }
-}
 
 export default function TopNav({
   activeSpace,
@@ -149,45 +117,8 @@ export default function TopNav({
                   <ChevronDown size={14} className="text-[#A8998E]" />
                 </button>
                 {isMaterialsOpen && (
-                  <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-[#E8D5C4] bg-white shadow-xl z-50">
-                    <div className="p-2">
-                      {materials.byCategory.map((cat) => (
-                        <div
-                          key={cat.id}
-                          title={cat.items.length > 0 ? cat.items.join(", ") : "None selected"}
-                          className="flex items-center gap-3 rounded-lg px-3 py-2"
-                        >
-                          <span className={`h-2.5 w-2.5 rounded-full flex-shrink-0 ${cat.dot} ${cat.items.length === 0 ? "opacity-30" : ""}`} />
-                          <span className={`text-sm flex-1 ${cat.items.length === 0 ? "text-[#A8998E]" : "text-[#2C2C2C]"}`}>
-                            {cat.label}
-                          </span>
-                          <span className={`text-xs font-semibold tabular-nums ${cat.items.length === 0 ? "text-[#C8B8AA]" : "text-[#8B4513]"}`}>
-                            {cat.items.length}
-                          </span>
-                        </div>
-                      ))}
-                      {materials.custom.length > 0 && (
-                        <div
-                          title={materials.custom.join(", ")}
-                          className="flex items-center gap-3 rounded-lg px-3 py-2 border-t border-[#F0E8E0] mt-1 pt-3"
-                        >
-                          <span className="h-2.5 w-2.5 rounded-full flex-shrink-0 bg-[#8B4513]" />
-                          <span className="text-sm flex-1 text-[#2C2C2C]">Custom</span>
-                          <span className="text-xs font-semibold tabular-nums text-[#8B4513]">
-                            {materials.custom.length}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="border-t border-[#F0E8E0] p-2">
-                      <button
-                        onClick={openSettingsFromMaterials}
-                        className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FFF5ED] hover:bg-[#FFE5CC] px-3 py-2 text-sm font-semibold text-[#8B4513] transition-colors"
-                      >
-                        <Pencil size={14} />
-                        Edit materials
-                      </button>
-                    </div>
+                  <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-[#E8D5C4] bg-white shadow-xl z-50 p-2">
+                    <MaterialsSummary snapshot={materials} onEdit={openSettingsFromMaterials} />
                   </div>
                 )}
               </div>
@@ -307,36 +238,7 @@ export default function TopNav({
                     </span>
                   )}
                 </p>
-                <div className="space-y-1 mb-2">
-                  {materials.byCategory.map((cat) => (
-                    <div
-                      key={cat.id}
-                      className="flex items-center gap-2 rounded-lg px-2 py-1"
-                    >
-                      <span className={`h-2 w-2 rounded-full flex-shrink-0 ${cat.dot} ${cat.items.length === 0 ? "opacity-30" : ""}`} />
-                      <span className={`text-xs flex-1 ${cat.items.length === 0 ? "text-[#A8998E]" : "text-[#2C2C2C]"}`}>
-                        {cat.label}
-                      </span>
-                      <span className={`text-xs font-semibold tabular-nums ${cat.items.length === 0 ? "text-[#C8B8AA]" : "text-[#8B4513]"}`}>
-                        {cat.items.length}
-                      </span>
-                    </div>
-                  ))}
-                  {materials.custom.length > 0 && (
-                    <div className="flex items-center gap-2 rounded-lg px-2 py-1 border-t border-[#E8D5C4] mt-1 pt-2">
-                      <span className="h-2 w-2 rounded-full flex-shrink-0 bg-[#8B4513]" />
-                      <span className="text-xs flex-1 text-[#2C2C2C]">Custom</span>
-                      <span className="text-xs font-semibold tabular-nums text-[#8B4513]">{materials.custom.length}</span>
-                    </div>
-                  )}
-                </div>
-                <button
-                  onClick={openSettingsFromMaterials}
-                  className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-white hover:bg-[#FFE5CC] px-3 py-1.5 text-xs font-semibold text-[#8B4513] border border-[#E8D5C4] transition-colors"
-                >
-                  <Pencil size={12} />
-                  Edit materials
-                </button>
+                <MaterialsSummary snapshot={materials} onEdit={openSettingsFromMaterials} size="sm" />
               </div>
               <button
                 onClick={() => {

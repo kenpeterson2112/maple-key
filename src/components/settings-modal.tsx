@@ -9,6 +9,7 @@ import {
   setClassroomResources,
   getCustomClassroomResources,
   setCustomClassroomResources,
+  type CustomClassroomResource,
 } from "@/lib/classroom-resources"
 
 interface SettingsModalProps {
@@ -23,7 +24,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [classroomResources, setClassroomResourcesState] = useState<string[]>(() =>
     getClassroomResources()
   )
-  const [customMaterials, setCustomMaterialsState] = useState<string[]>(() =>
+  const [customMaterials, setCustomMaterialsState] = useState<CustomClassroomResource[]>(() =>
     getCustomClassroomResources()
   )
 
