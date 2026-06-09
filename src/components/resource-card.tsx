@@ -10,6 +10,7 @@ import {
   Users,
   Hammer,
   Mic,
+  Flag,
 } from "lucide-react"
 import * as Popover from "@radix-ui/react-popover"
 import { AnimatePresence, motion } from "framer-motion"
@@ -18,6 +19,7 @@ import { normalizeGrades } from "@/lib/utils"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useState, useRef, useMemo } from "react"
 import ReviewsModal from "./reviews-modal"
+import FlagModal from "./flag-modal"
 import { withBasePath } from "@/lib/base-path"
 import { coverageForResource, type OverallCoverage, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
 import type { Resource } from "@/lib/types"
@@ -227,6 +229,7 @@ function getAccessibilityStyle(accessibilityArray) {
 export default function CompactResourceCard({ resource, codeProgress }: { resource: Resource; codeProgress?: Record<string, BandCounts> }) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
   const [showReviewsModal, setShowReviewsModal] = useState(false)
+  const [showFlagModal, setShowFlagModal] = useState(false)
 
   const resourceId = resource.id || resource.topic_title || resource.url || Math.random().toString()
   const isSaved = isBookmarked(resourceId)
@@ -283,6 +286,14 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
             {resource.is_paid && (
               <span className="text-[#C65D3B] text-xs font-black">$</span>
             )}
+            <button
+              onClick={() => setShowFlagModal(true)}
+              className="p-1 rounded-lg text-[#A8998E] hover:text-[#C65D3B] hover:bg-[#FFE5CC] transition-colors duration-200"
+              aria-label="Report an issue with this resource"
+              title="Report an issue"
+            >
+              <Flag className="w-3.5 h-3.5" />
+            </button>
             <button
               onClick={handleToggleSave}
               className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-all duration-200 ${
@@ -358,6 +369,13 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
       <ReviewsModal
         isOpen={showReviewsModal}
         onClose={() => setShowReviewsModal(false)}
+        resourceId={resourceId}
+        resourceTitle={resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
+      />
+
+      <FlagModal
+        isOpen={showFlagModal}
+        onClose={() => setShowFlagModal(false)}
         resourceId={resourceId}
         resourceTitle={resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
       />
