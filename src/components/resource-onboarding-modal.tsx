@@ -25,7 +25,7 @@ const STEPS: {
     iconBg: "bg-[#FF6B35]/10",
     iconColor: "text-[#FF6B35]",
     title: "Find Your Resources",
-    body: "Start here every time. Maple Key's three-stage AI curation surfaces high-quality, curriculum-aligned materials for your province, grade, and subject — filtered to what's actually available in your classroom.",
+    body: "Start here to find resources for your next lesson. Filter or search to find what you need.",
     detail: "Researcher → Review → Assessor — three agents, one curated list.",
   },
   {
@@ -42,7 +42,7 @@ const STEPS: {
     iconColor: "text-amber-600",
     title: "Shape the Lesson",
     body: "Answer a few quick design questions — pacing, format, differentiation needs — then Maple Key drafts the lesson plan. Modify it directly until it reflects the true shape of your classroom.",
-    detail: "You stay in control: the AI proposes, you decide.",
+    detail: "You stay in control and have the final say on everything in your lesson.",
   },
   {
     icon: <BarChart3 size={28} />,
