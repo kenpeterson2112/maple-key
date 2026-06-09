@@ -26,7 +26,7 @@ const STEPS: {
     iconColor: "text-[#FF6B35]",
     title: "Find Your Resources",
     body: "Start here to find resources for your next lesson. Filter or search to find what you need.",
-    detail: "Researcher → Review → Assessor — three agents, one curated list.",
+    detail: "Find resources → add your favourites → plan a lesson around them.",
   },
   {
     icon: <BookmarkPlus size={28} />,
