@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-08T02:25:28Z",
-    "total_count": 1491,
+    "generated_at": "2026-06-09T06:02:45Z",
+    "total_count": 1494,
     "schema_version": "2.1"
   },
   "resources": [
@@ -83068,6 +83068,160 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
+      }
+    },
+    {
+      "topic_title": "What Is Matter? Definition and Examples",
+      "description": "Comprehensive educational resource defining matter in science with practical examples and explanations of different forms. Suitable for students learning foundational concepts about physical substances and their properties.",
+      "url": "https://sciencenotes.org/what-is-matter-definition-and-examples/",
+      "publisher_creator": "Science Notes and Projects",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "D1.1",
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2328",
+      "metadata": {
+        "added_at": "2026-06-09",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "States of Matter",
+      "description": "Educational resource explaining the states of matter (solid, liquid, gas) and how subatomic particles, atoms, and compounds behave in each state. Includes information on how matter transitions between states.",
+      "url": "https://sciencenotes.org/states-of-matter/",
+      "publisher_creator": "Science Notes and Projects",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "D1.1",
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2329",
+      "metadata": {
+        "added_at": "2026-06-09",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Matter Compilation: Crash Course Kids",
+      "description": "Video compilation from Crash Course Kids covering multiple topics related to matter including what matter is and particle properties. Engaging video format suitable for middle school learners.",
+      "url": "https://www.youtube.com/watch?v=wyRy8kowyM8",
+      "publisher_creator": "Crash Course Kids",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Video",
+        "Online"
+      ],
+      "resource_type": "video",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "D1.1",
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2330",
+      "metadata": {
+        "added_at": "2026-06-09",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
       }
     }
   ]
