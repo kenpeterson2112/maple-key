@@ -1829,58 +1829,69 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 </div>
                 )}
 
-                <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <BookOpen size={20} className="text-[#8B4513]" />
-                    <h3 className="text-lg font-semibold text-[#2C2C2C]">Selected Resources</h3>
-                  </div>
-
-                  {false && showWarning && (
-                    <div className="bg-amber-50 border border-amber-300 rounded-lg p-3 flex items-start gap-3 mb-4">
-                      <AlertTriangle size={18} className="text-amber-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-amber-800">
-                        You've selected resources across multiple topics. Consider narrowing your selection for a more
-                        focused lesson, or the generated plan will cover concepts at a higher level.
-                      </p>
-                    </div>
-                  )}
-
-                  {bookmarkedResources.length === 0 ? (
-                    <div className="bg-stone-50 rounded-lg p-6 flex flex-col items-center gap-3 text-center">
-                      <p className="text-sm text-[#666]">
-                        Return to the resource browser if you need to add other resources.
-                      </p>
-                      <button
-                        onClick={onBack}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
-                      >
-                        <ArrowLeft size={16} />
-                        Resource Browser
-                      </button>
-                    </div>
-                  ) : (
-                  <div className="bg-stone-50 rounded-lg p-3 space-y-2">
-                    {bookmarkedResources.map((resource, index) => (
-                      <div
-                        key={resource.url}
-                        className="flex items-center gap-3 py-2 px-3 bg-white rounded-lg border border-stone-200"
-                      >
-                        <div className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
-                          {index + 1}
-                        </div>
-                        <span className="text-sm text-[#2C2C2C] flex-1 truncate">{resource.topic_title}</span>
-                        {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
-                          <span className="text-xs text-gray-500 flex-shrink-0">
-                            {resource.curriculum_expectations.join(", ")}
-                          </span>
-                        )}
+                {(() => {
+                  const selectedResourcesBlock = (
+                    <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                      <div className="flex items-center gap-2 mb-4">
+                        <BookOpen size={20} className="text-[#8B4513]" />
+                        <h3 className="text-lg font-semibold text-[#2C2C2C]">Selected Resources</h3>
                       </div>
-                    ))}
-                  </div>
-                  )}
-                </div>
 
-                <UserMaterialsSection materials={userMaterials} onChange={setUserMaterials} />
+                      {bookmarkedResources.length === 0 ? (
+                        <div className="bg-stone-50 rounded-lg p-6 flex flex-col items-center gap-3 text-center">
+                          <p className="text-sm font-medium text-[#2C2C2C]">
+                            Want help from our database?
+                          </p>
+                          <p className="text-sm text-[#666] max-w-md">
+                            Browse curated resources and bookmark a few to include them alongside your own materials.
+                          </p>
+                          <button
+                            onClick={onBack}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
+                          >
+                            <ArrowLeft size={16} />
+                            Browse Resources
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="bg-stone-50 rounded-lg p-3 space-y-2">
+                          {bookmarkedResources.map((resource, index) => (
+                            <div
+                              key={resource.url}
+                              className="flex items-center gap-3 py-2 px-3 bg-white rounded-lg border border-stone-200"
+                            >
+                              <div className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
+                                {index + 1}
+                              </div>
+                              <span className="text-sm text-[#2C2C2C] flex-1 truncate">{resource.topic_title}</span>
+                              {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
+                                <span className="text-xs text-gray-500 flex-shrink-0">
+                                  {resource.curriculum_expectations.join(", ")}
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )
+
+                  const userMaterialsBlock = (
+                    <UserMaterialsSection materials={userMaterials} onChange={setUserMaterials} />
+                  )
+
+                  return bookmarkedResources.length > 0 ? (
+                    <>
+                      {selectedResourcesBlock}
+                      {userMaterialsBlock}
+                    </>
+                  ) : (
+                    <>
+                      {userMaterialsBlock}
+                      {selectedResourcesBlock}
+                    </>
+                  )
+                })()}
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">

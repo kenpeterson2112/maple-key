@@ -134,6 +134,7 @@ export default function App() {
       <TopNav
         activeSpace={topNavSpace}
         onChangeSpace={(s) => setActiveSpace(s)}
+        onPlanLesson={() => { setPlannerLesson(null); setActiveSpace("lessonplanner") }}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
       />
