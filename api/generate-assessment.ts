@@ -93,6 +93,23 @@ Return ONLY a JSON object with this exact shape:
     const questions = Array.isArray((parsed as { questions?: unknown })?.questions)
       ? (parsed as { questions: unknown[] }).questions
       : []
+    const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ?? req.socket?.remoteAddress ?? "unknown"
+    const userEmail = (req.headers["x-user-email"] as string | undefined) ?? ""
+    console.log(JSON.stringify({
+      event: "assessment_generated",
+      ts: new Date().toISOString(),
+      user: userEmail || null,
+      ip,
+      ua: req.headers["user-agent"] ?? "",
+      grade,
+      subject,
+      title,
+      expectationsCount: expList.length,
+      questionsCount: questions.length,
+      stop: message.stop_reason,
+      tokensIn: message.usage?.input_tokens ?? 0,
+      tokensOut: message.usage?.output_tokens ?? 0,
+    }))
     return res.status(200).json({ questions })
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unexpected error"

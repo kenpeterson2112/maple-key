@@ -109,6 +109,28 @@ export function setOnboarded(): void {
   }
 }
 
+const USER_EMAIL_KEY = "maplekey_user_email"
+
+export function getUserEmail(): string {
+  if (typeof window === "undefined") return ""
+  try {
+    return window.localStorage.getItem(USER_EMAIL_KEY) ?? ""
+  } catch {
+    return ""
+  }
+}
+
+export function setUserEmail(email: string): void {
+  if (typeof window === "undefined") return
+  try {
+    if (email.trim()) {
+      window.localStorage.setItem(USER_EMAIL_KEY, email.trim())
+    }
+  } catch {
+    // ignore
+  }
+}
+
 const RESOURCE_TOUR_KEY = "maplekey_resource_tour_seen"
 
 export function isResourceTourSeen(): boolean {
