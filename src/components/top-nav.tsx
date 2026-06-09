@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react"
 import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
-import BookmarksModal from "@/components/bookmarks-modal"
 import SettingsModal from "@/components/settings-modal"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
@@ -13,6 +12,7 @@ export type TopNavSpace = "resources" | "lessons" | "insights"
 interface TopNavProps {
   activeSpace: TopNavSpace | null
   onChangeSpace: (space: TopNavSpace) => void
+  onPlanLesson: () => void
   onOpenMobileFilters?: () => void
   totalActiveFilters?: number
 }
@@ -39,11 +39,11 @@ const EDTECH_SUBSCRIPTIONS = [
 export default function TopNav({
   activeSpace,
   onChangeSpace,
+  onPlanLesson,
   onOpenMobileFilters,
   totalActiveFilters = 0,
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
-  const [isBookmarksOpen, setIsBookmarksOpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [showSignInHint, setShowSignInHint] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -135,7 +135,7 @@ export default function TopNav({
               </div>
 
               <button
-                onClick={() => setIsBookmarksOpen(true)}
+                onClick={onPlanLesson}
                 className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
                   bookmarkedResources.length > 0
                     ? "bg-[#FF6B35] text-white shadow-sm hover:bg-[#E85A24]"
@@ -211,7 +211,7 @@ export default function TopNav({
                 </button>
               )}
               <button
-                onClick={() => setIsBookmarksOpen(true)}
+                onClick={onPlanLesson}
                 className={`relative flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
                   bookmarkedResources.length > 0
                     ? "bg-[#FF6B35] text-white shadow-sm"
@@ -298,7 +298,6 @@ export default function TopNav({
         </div>
       </header>
 
-      <BookmarksModal isOpen={isBookmarksOpen} onClose={() => setIsBookmarksOpen(false)} />
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
   )
