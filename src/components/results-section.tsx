@@ -54,6 +54,8 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
     if (!resources || !Array.isArray(resources)) return []
 
     return resources.filter((resource) => {
+      if (resource.is_collection) return false
+
       if (filters.province && filters.province !== "" && filters.province !== "Canada") {
         if (resource.province !== filters.province) return false
       }

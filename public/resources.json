@@ -271,7 +271,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-4",
@@ -552,7 +553,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-8",
@@ -1511,7 +1513,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-24",
@@ -6417,7 +6420,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-104",
@@ -6510,7 +6514,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-105",
@@ -9870,7 +9875,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-149",
@@ -11648,7 +11654,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1013",
@@ -11754,7 +11761,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1015",
@@ -12446,7 +12454,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1028",
@@ -12499,7 +12508,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1029",
@@ -12553,7 +12563,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1030",
@@ -13371,7 +13382,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1045",
@@ -13536,7 +13548,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1048",
@@ -13923,7 +13936,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1055",
@@ -14314,7 +14328,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1062",
@@ -16107,7 +16122,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1095",
@@ -17524,7 +17540,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1121",
@@ -18127,7 +18144,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1132",
@@ -19664,7 +19682,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1160",
@@ -19718,7 +19737,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1161",
@@ -19773,7 +19793,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1162",
@@ -20544,7 +20565,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1176",
@@ -22021,7 +22043,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1203",
@@ -22346,7 +22369,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1209",
@@ -23024,7 +23048,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1221",
@@ -24495,7 +24520,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1247",
@@ -25629,7 +25655,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1267",
@@ -26489,7 +26516,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1282",
@@ -29516,7 +29544,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1337",
@@ -31075,7 +31104,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1366",
@@ -32108,7 +32138,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1385",
@@ -32653,7 +32684,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1395",
@@ -32929,7 +32961,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1400",
@@ -33141,7 +33174,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1404",
@@ -33470,7 +33504,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1410",
@@ -34184,7 +34219,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1423",
@@ -39024,7 +39060,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1513",
@@ -39345,7 +39382,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1519",
@@ -40870,7 +40908,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1548",
@@ -41296,7 +41335,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1556",
@@ -41564,7 +41604,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1561",
@@ -41727,7 +41768,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1564",
@@ -41785,7 +41827,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1565",
@@ -42520,7 +42563,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1578",
@@ -43463,7 +43507,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1595",
@@ -43518,7 +43563,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1596",
@@ -45144,7 +45190,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1626",
@@ -45359,7 +45406,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1630",
@@ -45989,7 +46037,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1642",
@@ -47542,7 +47591,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1671",
@@ -48822,7 +48872,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1695",
@@ -48875,7 +48926,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1696",
@@ -49357,7 +49409,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1705",
@@ -51024,7 +51077,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1736",
@@ -58230,7 +58284,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1869",
@@ -59222,7 +59277,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1887",
@@ -60439,7 +60495,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1909",
@@ -60496,7 +60553,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1910",
@@ -62683,7 +62741,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1951",
@@ -63336,7 +63395,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1963",
@@ -64038,7 +64098,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1976",
@@ -64092,7 +64153,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1977",
@@ -64148,7 +64210,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1978",
@@ -64531,7 +64594,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1985",
@@ -64850,7 +64914,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-1991",
@@ -65506,7 +65571,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2003",
@@ -65724,7 +65790,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2007",
@@ -67392,7 +67459,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2038",
@@ -69526,7 +69594,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2078",
@@ -70863,7 +70932,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2103",
@@ -72926,7 +72996,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2141",
@@ -74370,7 +74441,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2168",
@@ -75372,7 +75444,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2187",
@@ -76014,7 +76087,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2199",
@@ -77776,7 +77850,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2231",
@@ -78108,7 +78183,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2237",
@@ -78170,7 +78246,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2238",
@@ -79933,7 +80010,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2270",
@@ -80479,7 +80557,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2280",
@@ -82422,7 +82501,8 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true
     },
     {
       "id": "r-2316",
