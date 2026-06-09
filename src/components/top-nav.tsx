@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import BookmarksModal from "@/components/bookmarks-modal"
 import SettingsModal from "@/components/settings-modal"
@@ -13,6 +13,8 @@ export type TopNavSpace = "resources" | "lessons" | "insights"
 interface TopNavProps {
   activeSpace: TopNavSpace | null
   onChangeSpace: (space: TopNavSpace) => void
+  onOpenMobileFilters?: () => void
+  totalActiveFilters?: number
 }
 
 interface ToggleItem {
@@ -27,12 +29,46 @@ const TOGGLE_ITEMS: ToggleItem[] = [
   { id: "insights",  label: "Insights",  icon: BarChart3 },
 ]
 
-export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
+const EDTECH_SUBSCRIPTIONS = [
+  { id: "edwin", name: "Edwin" },
+  { id: "knowledgehook", name: "Knowledgehook" },
+  { id: "amira", name: "Amira" },
+  { id: "myon", name: "MyON" },
+]
+
+export default function TopNav({
+  activeSpace,
+  onChangeSpace,
+  onOpenMobileFilters,
+  totalActiveFilters = 0,
+}: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
   const [isBookmarksOpen, setIsBookmarksOpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [showSignInHint, setShowSignInHint] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMaterialsOpen, setIsMaterialsOpen] = useState(false)
+  const [selectedSubscriptions, setSelectedSubscriptions] = useState<string[]>([])
+  const materialsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!isMaterialsOpen) return
+    const handleClickOutside = (event: MouseEvent) => {
+      if (materialsRef.current && !materialsRef.current.contains(event.target as Node)) {
+        setIsMaterialsOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [isMaterialsOpen])
+
+  const toggleSubscription = (subId: string) => {
+    setSelectedSubscriptions((prev) =>
+      prev.includes(subId) ? prev.filter((s) => s !== subId) : [...prev, subId]
+    )
+  }
+
+  const showResourceFilters = activeSpace === "resources" && !!onOpenMobileFilters
 
   return (
     <>
@@ -51,6 +87,53 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
             <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} />
 
             <div className="flex items-center gap-2">
+              <div ref={materialsRef} className="relative">
+                <button
+                  onClick={() => setIsMaterialsOpen((v) => !v)}
+                  className="flex items-center gap-1.5 rounded-full border border-[#E8D5C4] bg-white px-3.5 py-2 text-sm font-semibold text-[#8B4513] shadow-sm transition-all hover:bg-[#FFF5ED]"
+                  title="EdTech materials"
+                >
+                  <SlidersHorizontal size={14} className="text-[#C65D3B]" />
+                  <span>Materials</span>
+                  {selectedSubscriptions.length > 0 && (
+                    <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                      {selectedSubscriptions.length}
+                    </span>
+                  )}
+                  <ChevronDown size={14} className="text-[#A8998E]" />
+                </button>
+                {isMaterialsOpen && (
+                  <div className="absolute right-0 mt-2 w-60 rounded-2xl border border-[#E8D5C4] bg-white shadow-xl z-50">
+                    <div className="p-2">
+                      {EDTECH_SUBSCRIPTIONS.map((sub) => {
+                        const isSelected = selectedSubscriptions.includes(sub.id)
+                        return (
+                          <button
+                            key={sub.id}
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleSubscription(sub.id)
+                            }}
+                            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors ${
+                              isSelected ? "bg-[#FFE5CC]" : "hover:bg-[#FFF5ED]"
+                            }`}
+                          >
+                            <div
+                              className={`flex h-5 w-5 items-center justify-center rounded border-2 ${
+                                isSelected ? "border-[#FF6B35] bg-[#FF6B35]" : "border-[#E8D5C4]"
+                              }`}
+                            >
+                              {isSelected && <span className="text-xs font-bold text-white">✓</span>}
+                            </div>
+                            <span className="text-sm text-[#2C2C2C]">{sub.name}</span>
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <button
                 onClick={() => setIsBookmarksOpen(true)}
                 className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
@@ -112,6 +195,21 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
             <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} compact />
 
             <div className="flex items-center gap-1">
+              {showResourceFilters && (
+                <button
+                  onClick={onOpenMobileFilters}
+                  className="flex items-center gap-1 rounded-full border border-[#E8D5C4] bg-white px-2.5 py-1.5 text-xs font-semibold text-[#8B4513] shadow-sm"
+                  title="Filters"
+                >
+                  <SlidersHorizontal size={12} />
+                  Filters
+                  {totalActiveFilters > 0 && (
+                    <span className="rounded-full bg-[#FF6B35] px-1.5 text-[10px] font-bold text-white">
+                      {totalActiveFilters >= 10 ? "9+" : totalActiveFilters}
+                    </span>
+                  )}
+                </button>
+              )}
               <button
                 onClick={() => setIsBookmarksOpen(true)}
                 className={`relative flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
@@ -141,6 +239,40 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
 
           {isMobileMenuOpen && (
             <div className="md:hidden mt-3 rounded-2xl border-2 border-[#E8D5C4] bg-white p-3 shadow-lg space-y-2">
+              <div className="rounded-lg bg-[#FFF5ED] px-3 py-2">
+                <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#8B4513]">
+                  <SlidersHorizontal size={16} />
+                  Materials
+                  {selectedSubscriptions.length > 0 && (
+                    <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                      {selectedSubscriptions.length}
+                    </span>
+                  )}
+                </p>
+                <div className="space-y-1">
+                  {EDTECH_SUBSCRIPTIONS.map((sub) => {
+                    const isSelected = selectedSubscriptions.includes(sub.id)
+                    return (
+                      <button
+                        key={sub.id}
+                        onClick={() => toggleSubscription(sub.id)}
+                        className={`flex w-full items-center gap-3 rounded-lg px-2 py-1.5 text-left transition-colors ${
+                          isSelected ? "bg-[#FFE5CC]" : "hover:bg-white"
+                        }`}
+                      >
+                        <div
+                          className={`flex h-5 w-5 items-center justify-center rounded border-2 ${
+                            isSelected ? "border-[#FF6B35] bg-[#FF6B35]" : "border-[#E8D5C4]"
+                          }`}
+                        >
+                          {isSelected && <span className="text-xs font-bold text-white">✓</span>}
+                        </div>
+                        <span className="text-sm text-[#2C2C2C]">{sub.name}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
               <button
                 onClick={() => {
                   setIsSettingsOpen(true)

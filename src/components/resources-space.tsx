@@ -1,12 +1,10 @@
 "use client"
 
-import SearchHeader from "@/components/search-header"
 import HeroPersonalize from "@/components/hero-personalize"
 import SidebarFilters from "@/components/sidebar-filters"
 import ResultsSection from "@/components/results-section"
 import MobileFiltersDrawer from "@/components/mobile-filters-drawer"
 import BackToTopButton from "@/components/back-to-top-button"
-import { useState } from "react"
 import type { Filters } from "@/lib/types"
 
 interface ResourcesSpaceProps {
@@ -18,7 +16,8 @@ interface ResourcesSpaceProps {
   onCountChange: (count: number) => void
   inferred: boolean
   onReset: () => void
-  totalActiveFilters: number
+  isMobileFiltersOpen: boolean
+  onCloseMobileFilters: () => void
 }
 
 export default function ResourcesSpace({
@@ -30,19 +29,11 @@ export default function ResourcesSpace({
   onCountChange,
   inferred,
   onReset,
-  totalActiveFilters,
+  isMobileFiltersOpen,
+  onCloseMobileFilters,
 }: ResourcesSpaceProps) {
-  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
-
   return (
     <div className="flex flex-col h-full bg-[#FAF3E0] overflow-hidden">
-      <SearchHeader
-        filters={filters}
-        setFilters={setFilters}
-        onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
-        totalActiveFilters={totalActiveFilters}
-      />
-
       <HeroPersonalize
         filters={filters}
         setFilters={setFilters}
@@ -60,7 +51,7 @@ export default function ResourcesSpace({
 
       <MobileFiltersDrawer
         isOpen={isMobileFiltersOpen}
-        onClose={() => setIsMobileFiltersOpen(false)}
+        onClose={onCloseMobileFilters}
         filters={filters}
         setFilters={setFilters}
         sidebarFilters={sidebarFilters}
