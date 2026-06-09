@@ -228,9 +228,27 @@ Return ONLY a JSON object with this exact shape:
     // degraded result, not a real empty one.
     const status = questions.length === 0 ? "degraded" : "ok"
 
-    console.log(
-      `[generate-questions] stop=${message.stop_reason} raw=${rawQuestions.length} valid=${questions.length} status=${status}`,
-    )
+    const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ?? req.socket?.remoteAddress ?? "unknown"
+    const userEmail = (req.headers["x-user-email"] as string | undefined) ?? ""
+    console.log(JSON.stringify({
+      event: "questions_generated",
+      ts: new Date().toISOString(),
+      user: userEmail || null,
+      ip,
+      ua: req.headers["user-agent"] ?? "",
+      grade,
+      subject,
+      lessonTemplate,
+      lessonLength,
+      codesCount: allCodes.length,
+      resourcesCount: resources.length,
+      rawQuestions: rawQuestions.length,
+      validQuestions: questions.length,
+      status,
+      stop: message.stop_reason,
+      tokensIn: message.usage?.input_tokens ?? 0,
+      tokensOut: message.usage?.output_tokens ?? 0,
+    }))
 
     return res.status(200).json({ status, questions })
   } catch (err) {

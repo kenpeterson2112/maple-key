@@ -8,6 +8,8 @@ import {
   getPrefs,
   setPrefs,
   setOnboarded,
+  getUserEmail,
+  setUserEmail,
 } from "@/lib/personalization"
 import {
   getClassroomResources,
@@ -39,6 +41,7 @@ const PROVINCES: { code: string; name: string }[] = [
 
 export default function OnboardingModal({ open, onComplete }: OnboardingModalProps) {
   const [step, setStep] = React.useState<0 | 1 | 2>(0)
+  const [email, setEmail] = React.useState<string>(() => getUserEmail())
   const [province, setProvince] = React.useState<string>(() => getPrefs().province)
   const [resources, setResources] = React.useState<string[]>(() => getClassroomResources())
   const [customMaterials, setCustomMaterials] = React.useState(() => getCustomClassroomResources())
@@ -53,6 +56,7 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
     })
     setClassroomResources(resources)
     setCustomClassroomResources(customMaterials)
+    setUserEmail(email)
     setOnboarded()
     onComplete()
   }
@@ -97,6 +101,22 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
                   you have on hand — so the lessons and materials we surface fit your
                   classroom from the very first search.
                 </p>
+                <div className="pt-2">
+                  <label htmlFor="onboarding-email" className="block text-sm font-medium text-[#2C2C2C] mb-1.5">
+                    Your email <span className="text-[#888] font-normal">(optional)</span>
+                  </label>
+                  <input
+                    id="onboarding-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@school.ca"
+                    className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#E8D5C4] bg-white text-sm text-[#2C2C2C] placeholder:text-[#BDBDBD] focus:outline-none focus:border-[#FF6B35] transition-colors"
+                  />
+                  <p className="text-xs text-[#888] mt-1.5">
+                    Only used so we know who's using Maple Key during beta.
+                  </p>
+                </div>
               </div>
             )}
 

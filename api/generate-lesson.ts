@@ -313,9 +313,29 @@ ${sectionsSchema}
       return res.status(500).json({ error: "Claude returned malformed JSON. Please try again." })
     }
 
-    console.log(
-      `[generate-lesson] stop=${message.stop_reason} questions=${lesson.assessmentQuestions?.length ?? 0} codes=${lesson.curriculumCodesCovered?.length ?? 0} planningAnswers=${planningAnswers?.length ?? 0} excluded=${lesson.excludedResources?.length ?? 0}`,
-    )
+    const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ?? req.socket?.remoteAddress ?? "unknown"
+    const userEmail = (req.headers["x-user-email"] as string | undefined) ?? ""
+    console.log(JSON.stringify({
+      event: "lesson_generated",
+      ts: new Date().toISOString(),
+      user: userEmail || null,
+      ip,
+      ua: req.headers["user-agent"] ?? "",
+      grade,
+      subject,
+      province: null,
+      lessonTemplate,
+      lessonLength,
+      codesCount: lesson.curriculumCodesCovered?.length ?? 0,
+      codes: lesson.curriculumCodesCovered ?? [],
+      resourcesCount: resources.length,
+      planningAnswersCount: planningAnswers?.length ?? 0,
+      excludedCount: lesson.excludedResources?.length ?? 0,
+      assessmentQuestionsCount: lesson.assessmentQuestions?.length ?? 0,
+      stop: message.stop_reason,
+      tokensIn: message.usage?.input_tokens ?? 0,
+      tokensOut: message.usage?.output_tokens ?? 0,
+    }))
 
     return res.status(200).json(lesson)
   } catch (err) {

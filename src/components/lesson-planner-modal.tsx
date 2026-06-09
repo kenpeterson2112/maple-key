@@ -51,6 +51,7 @@ import { BAND_META, BAND_ORDER } from "@/lib/assessment-types"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
 import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
+import { getUserEmail } from "@/lib/personalization"
 
 interface PlanningQuestion {
   id: string
@@ -186,9 +187,13 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       }
     }
     try {
+      const userEmail = getUserEmail()
       const res = await fetch("/api/generate-lesson", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(userEmail ? { "X-User-Email": userEmail } : {}),
+        },
         body: JSON.stringify({
           resources: bookmarkedResources.map((r) => ({
             title: (r as any).topic_title,
@@ -308,9 +313,13 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     }
 
     try {
+      const qUserEmail = getUserEmail()
       const qRes = await fetch("/api/generate-questions", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(qUserEmail ? { "X-User-Email": qUserEmail } : {}),
+        },
         body: JSON.stringify(buildRequestPayload()),
       })
       if (qRes.ok) {
