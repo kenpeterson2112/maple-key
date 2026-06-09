@@ -12,6 +12,8 @@ import {
 import {
   getClassroomResources,
   setClassroomResources,
+  getCustomClassroomResources,
+  setCustomClassroomResources,
 } from "@/lib/classroom-resources"
 
 interface OnboardingModalProps {
@@ -39,6 +41,7 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
   const [step, setStep] = React.useState<0 | 1 | 2>(0)
   const [province, setProvince] = React.useState<string>(() => getPrefs().province)
   const [resources, setResources] = React.useState<string[]>(() => getClassroomResources())
+  const [customMaterials, setCustomMaterials] = React.useState(() => getCustomClassroomResources())
 
   const handleFinish = () => {
     const prefs = getPrefs()
@@ -49,6 +52,7 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
       strand: prefs.strand ?? "",
     })
     setClassroomResources(resources)
+    setCustomClassroomResources(customMaterials)
     setOnboarded()
     onComplete()
   }
@@ -134,7 +138,12 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
                 <p className="text-sm text-[#666] mb-4">
                   Pick what you have access to. You can change these any time in Settings.
                 </p>
-                <ClassroomResourcesPicker selected={resources} onChange={setResources} />
+                <ClassroomResourcesPicker
+                  selected={resources}
+                  onChange={setResources}
+                  customMaterials={customMaterials}
+                  onCustomChange={setCustomMaterials}
+                />
               </div>
             )}
           </div>
