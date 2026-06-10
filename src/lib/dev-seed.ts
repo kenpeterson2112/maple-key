@@ -82,12 +82,13 @@ const POOL: SubjectPool[] = [
   { subject: "Language", codes: ["LR.1", "LR.2", "LW.1", "LW.2", "LO.1", "LM.1"] },
   { subject: "Science", codes: ["SL.1", "SL.2", "SE.1", "SM.1", "SS.1"] },
   { subject: "Social Studies", codes: ["SH.1", "SH.2", "SP.1", "SG.1"] },
+  { subject: "FSL", codes: ["FA.1", "FA.2", "FB.1", "FC.1", "FC.2", "FD.1"] },
 ]
 
 export const POOL_SIZE = POOL.reduce((sum, p) => sum + p.codes.length, 0)
 export const MIN_QUANTITY = 5
 
-const GRADES = ["6", "7", "8", "9"]
+const GRADES = ["4", "5", "6", "7", "8", "9"]
 const DEV_PREFIX = "dev-seed:"
 
 export interface SeedOptions {
