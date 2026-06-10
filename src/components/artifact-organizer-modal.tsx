@@ -35,7 +35,9 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
   const initial = artifact.organizer?.fields ?? {}
   const [title, setTitle] = useState(initial.title ?? artifact.name)
   const [subtitle, setSubtitle] = useState(
-    initial.subtitle ?? `${lessonTitle} — ${artifact.purpose}`,
+    // French handouts must be self-contained French text — the overall lesson
+    // title is intentionally English (per scope), so don't prepend it here.
+    initial.subtitle ?? (isFrench ? artifact.purpose : `${lessonTitle} — ${artifact.purpose}`),
   )
   const [labels, setLabels] = useState<Record<string, string>>(() =>
     Object.fromEntries(
