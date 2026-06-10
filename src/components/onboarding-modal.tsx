@@ -96,11 +96,6 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
                 <p className="text-center text-base">
                   Help us personalize your experience.
                 </p>
-                <p className="text-center text-sm text-[#666] max-w-md mx-auto">
-                  We'll ask two quick questions — your province and the classroom resources
-                  you have on hand — so the lessons and materials we surface fit your
-                  classroom from the very first search.
-                </p>
                 <div className="pt-2">
                   <label htmlFor="onboarding-email" className="block text-sm font-medium text-[#2C2C2C] mb-1.5">
                     Your email <span className="text-[#888] font-normal">(optional)</span>

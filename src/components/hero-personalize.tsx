@@ -59,6 +59,31 @@ const SUBJECT_STRANDS: Record<string, string[]> = {
   "Social Studies": ["Heritage and Identity", "People and Environments", "Power and Governance"],
 }
 
+// Official Ontario curriculum strand letters. Cross-strand / cross-cutting
+// entries have no single lettered strand and are left unprefixed.
+const STRAND_CODES: Record<string, string> = {
+  // Math (2020)
+  Number: "B",
+  Algebra: "C",
+  "Data Literacy": "D",
+  Probability: "D",
+  "Spatial Sense": "E",
+  "Financial Literacy": "F",
+  // Science (2022)
+  "STEM Skills and Connections": "A",
+  "Life Systems": "B",
+  "Matter and Energy": "C",
+  "Earth and Space Systems": "E",
+  // Language (2023)
+  "Media Literacy": "A",
+  "Oral Communication": "B",
+  Reading: "C",
+  Writing: "D",
+  // Social Studies, History and Geography (2023)
+  "Heritage and Identity": "A",
+  "People and Environments": "B",
+}
+
 interface HeroPersonalizeProps {
   filters: Filters
   setFilters: (next: Filters) => void
@@ -79,7 +104,10 @@ export default function HeroPersonalize({
   const strandOptions: PickerOption[] = filters.subject
     ? [
         { value: "", label: "any strand" },
-        ...(SUBJECT_STRANDS[filters.subject] ?? []).map((s) => ({ value: s, label: s })),
+        ...(SUBJECT_STRANDS[filters.subject] ?? []).map((s) => ({
+          value: s,
+          label: STRAND_CODES[s] ? `${STRAND_CODES[s]}. ${s}` : s,
+        })),
       ]
     : []
 
