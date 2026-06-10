@@ -131,6 +131,34 @@ export function setUserEmail(email: string): void {
   }
 }
 
+const REPRODUCIBLE_LANGUAGE_KEY = "maplekey_reproducible_language"
+
+/**
+ * Language for AI-generated student reproducibles (Classroom Artifacts + the
+ * printable graphic organizer). The teacher's own lesson plan stays in English;
+ * this only switches the handouts students physically receive. Remembered across
+ * sessions so French Immersion teachers don't re-toggle every lesson.
+ */
+export function getReproducibleLanguage(): "English" | "French" {
+  if (typeof window === "undefined") return "English"
+  try {
+    return window.localStorage.getItem(REPRODUCIBLE_LANGUAGE_KEY) === "French"
+      ? "French"
+      : "English"
+  } catch {
+    return "English"
+  }
+}
+
+export function setReproducibleLanguage(lang: "English" | "French"): void {
+  if (typeof window === "undefined") return
+  try {
+    window.localStorage.setItem(REPRODUCIBLE_LANGUAGE_KEY, lang)
+  } catch {
+    // ignore quota / privacy errors
+  }
+}
+
 const RESOURCE_TOUR_KEY = "maplekey_resource_tour_seen"
 
 export function isResourceTourSeen(): boolean {
