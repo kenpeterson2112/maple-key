@@ -35,6 +35,7 @@ interface GenerateRequest {
   classroomResources?: string[]
   planningAnswers?: PlanningAnswer[]
   classProgress?: Record<string, BandCounts>
+  reproducibleLanguage?: "English" | "French"
 }
 
 function formatClassProgress(progress: Record<string, BandCounts>): string {
@@ -155,6 +156,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     classroomResources,
     planningAnswers,
     classProgress,
+    reproducibleLanguage,
   } = req.body as GenerateRequest
 
   if (!resources || resources.length === 0) {
@@ -200,6 +202,11 @@ Instructional structure guidance: Each resource may include a "Best used as" fie
       ? `The teacher has made these planning decisions — honour them in the lesson:\n${planningAnswers
           .map((a) => `  [${a.questionId}] ${a.questionPrompt}\n  → ${a.answer}`)
           .join("\n")}\nTreat each of the above as a binding choice, not a suggestion.`
+      : ""
+
+  const reproducibleLanguageBlock =
+    reproducibleLanguage === "French"
+      ? `LANGUAGE OVERRIDE FOR STUDENT HANDOUTS: Write the "name" and "purpose" of EVERY entry in the "artifacts" array in Canadian French (français canadien), at an elementary reading level appropriate to Grade ${grade}. This is for a French Immersion classroom. Do NOT translate anything else: all other fields — including every artifact's "section" value (which must remain exactly one of "mindsOn", "action", "consolidation", or "materials"), the lesson title, learning goal, success criteria, lesson body content, differentiation, materials, and assessment questions — MUST stay in English. Only artifact name/purpose change language.`
       : ""
 
   const templateSections = TEMPLATE_SECTIONS[lessonTemplate]
@@ -288,7 +295,9 @@ ${sectionsSchema}
 
 "successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.
 
-"artifacts" must list every concrete classroom artifact the teacher will need to produce or bring — examples: guided capture sheet, exit ticket, sticky-note reflection template, T-chart, observation sheet, workbook activity, reflection prompt handout. One entry per artifact. Use the artifact's most natural short name in "name". In "purpose", write one short phrase describing what students do with it. In "section", indicate which lesson section ("mindsOn", "action", "consolidation", "materials") it's used in. Do NOT list pre-existing bookmarked resources (those go in "materials.resources"); only list artifacts the teacher must produce or supply themselves. If the lesson genuinely needs no artifacts, return an empty array.`
+"artifacts" must list every concrete classroom artifact the teacher will need to produce or bring — examples: guided capture sheet, exit ticket, sticky-note reflection template, T-chart, observation sheet, workbook activity, reflection prompt handout. One entry per artifact. Use the artifact's most natural short name in "name". In "purpose", write one short phrase describing what students do with it. In "section", indicate which lesson section ("mindsOn", "action", "consolidation", "materials") it's used in. Do NOT list pre-existing bookmarked resources (those go in "materials.resources"); only list artifacts the teacher must produce or supply themselves. If the lesson genuinely needs no artifacts, return an empty array.
+
+${reproducibleLanguageBlock}`
 
   try {
     const message = await client.messages.create({

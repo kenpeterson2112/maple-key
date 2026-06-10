@@ -26,10 +26,11 @@ import {
   Pencil,
   MessageSquareText,
   School,
+  Languages,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
-import type { LessonMetadata, LessonArtifact, ArtifactStatus } from "@/lib/lesson-metadata"
+import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage } from "@/lib/lesson-metadata"
 import ArtifactsSection from "@/components/artifacts-section"
 import ArtifactOrganizerModal from "@/components/artifact-organizer-modal"
 import LessonBuildingLoader from "@/components/lesson-building-loader"
@@ -51,7 +52,7 @@ import { BAND_META, BAND_ORDER } from "@/lib/assessment-types"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
 import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
-import { getUserEmail } from "@/lib/personalization"
+import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage } from "@/lib/personalization"
 
 interface PlanningQuestion {
   id: string
@@ -84,6 +85,10 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [lessonLength, setLessonLength] = useState(lesson?.lessonLength ?? "60 minutes")
   const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? "3-Part Lesson")
   const [teacherNotes, setTeacherNotes] = useState("")
+  // Language for student-facing reproducibles only (artifacts + printable organizer).
+  // Reopening a saved lesson prefers its stored value; otherwise the remembered preference.
+  const [reproducibleLanguage, setReproducibleLanguageState] =
+    useState<ReproducibleLanguage>(fc?.reproducibleLanguage ?? getReproducibleLanguage())
   const [userMaterials, setUserMaterials] = useState<UserMaterial[]>([])
   const [isMaterialsEditorOpen, setIsMaterialsEditorOpen] = useState(false)
   const [materialsTick, setMaterialsTick] = useState(0)
@@ -210,6 +215,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           teacherNotes,
           includeAssessmentData,
           classroomResources: classroomResourceLabels,
+          reproducibleLanguage,
           ...(planningAnswers.length > 0 ? { planningAnswers } : {}),
           ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
         }),
@@ -279,6 +285,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
+          reproducibleLanguage,
         },
       })
       setLatestLesson(logged)
@@ -449,6 +456,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
+          reproducibleLanguage,
         },
       })
       setLatestLesson(logged)
@@ -516,6 +524,11 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     applyResponseJSON(pasteText, (msg) => setPasteError(msg))
   }
 
+  const handleLanguageChange = (lang: ReproducibleLanguage) => {
+    setReproducibleLanguageState(lang)
+    setReproducibleLanguage(lang)
+  }
+
   const buildRequestPayload = () => ({
     resources: bookmarkedResources.map((r) => ({
       title: (r as any).topic_title,
@@ -532,6 +545,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     teacherNotes,
     includeAssessmentData,
     classroomResources: classroomResourceLabels,
+    reproducibleLanguage,
     ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
   })
 
@@ -2016,10 +2030,41 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 </div>
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <FileText size={20} className="text-[#8B4513]" />
-                    <h3 className="text-lg font-semibold text-[#2C2C2C]">Additional Notes</h3>
-                    <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Optional</span>
+                  <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <FileText size={20} className="text-[#8B4513]" />
+                      <h3 className="text-lg font-semibold text-[#2C2C2C]">Additional Notes</h3>
+                      <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Optional</span>
+                    </div>
+
+                    {/* Language for student reproducibles (artifacts + printable organizer) */}
+                    <div className="flex items-center gap-1.5">
+                      <Languages size={15} className="text-[#8B4513]" />
+                      <span className="text-xs font-medium text-[#888] mr-1 hidden sm:inline">
+                        Student handouts
+                      </span>
+                      <div className="inline-flex rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white">
+                        {(["English", "French"] as const).map((lang) => {
+                          const selected = reproducibleLanguage === lang
+                          const label = lang === "French" ? "Français" : "English"
+                          return (
+                            <button
+                              key={lang}
+                              type="button"
+                              onClick={() => handleLanguageChange(lang)}
+                              aria-pressed={selected}
+                              className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+                                selected
+                                  ? "bg-[#FF6B35] text-white shadow-sm"
+                                  : "text-[#888] hover:text-[#FF6B35]"
+                              }`}
+                            >
+                              {label}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
                   </div>
 
                   <textarea
@@ -2031,6 +2076,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   />
                   <p className="text-xs text-gray-500 mt-2">
                     Example: "My class loves competition and games. Marcus and James could lead small groups."
+                    {" "}The <strong>Student handouts</strong> toggle only translates the printable activity sheets — your lesson plan stays in English.
                   </p>
                 </div>
 
@@ -2139,6 +2185,15 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   )}
                 </div>
               )}
+              {reproducibleLanguage === "French" && (
+                <div className="mb-3 flex items-center gap-2 rounded-xl border-2 border-blue-300 bg-blue-50 px-4 py-2.5">
+                  <Languages size={18} className="text-blue-600 shrink-0" />
+                  <p className="text-sm font-medium text-blue-800">
+                    Student handouts will be generated in <strong>French</strong> — the lesson
+                    plan itself stays in English.
+                  </p>
+                </div>
+              )}
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
@@ -2173,6 +2228,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
         <ArtifactOrganizerModal
           artifact={artifacts[organizerArtifactIndex]}
           lessonTitle={lessonTitle}
+          language={activeLesson?.fullContent?.reproducibleLanguage ?? reproducibleLanguage}
           onClose={() => setOrganizerArtifactIndex(null)}
           onSave={(fields) => handleSaveOrganizerFields(organizerArtifactIndex, fields)}
         />

@@ -14,6 +14,9 @@ export interface TemplateSection {
 export type ArtifactSection = "mindsOn" | "action" | "consolidation" | "materials"
 export type ArtifactStatus = "unset" | "have" | "will-make" | "help-me"
 
+/** Language for student-facing reproducibles (artifacts + printable organizer). */
+export type ReproducibleLanguage = "English" | "French"
+
 export interface LessonArtifact {
   name: string
   purpose: string
@@ -38,6 +41,8 @@ export interface LessonFullContent {
   excludedResources?: { title: string; reason: string }[]
   sections?: TemplateSection[]
   artifacts?: LessonArtifact[]
+  /** Language the student reproducibles were generated in. Defaults to English. */
+  reproducibleLanguage?: ReproducibleLanguage
 }
 
 export interface LessonMetadata {
