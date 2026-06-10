@@ -1,0 +1,194 @@
+[
+  {
+    "activity_number": 1,
+    "french_title": "Pourquoi apprendre le français?",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-1",
+    "description": "Students explore the importance of learning French, reviewing a brochure on reasons to continue French studies and testing their comprehension with true/false activities.",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C1.2"]
+  },
+  {
+    "activity_number": 2,
+    "french_title": "Je vais te persuader!",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-2",
+    "description": "Students compose an email to persuade their friends of the importance of continuing to study French, drawing on a document about the advantages of French studies.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D2.1"]
+  },
+  {
+    "activity_number": 3,
+    "french_title": "Les passe-temps : activités et intérêts",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-3",
+    "description": "This activity focuses on hobbies and pastimes, with students exploring vocabulary for various interests and activities and reflecting on their own favourite pastimes.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 4,
+    "french_title": "Qu'est-ce que tu aimes faire?",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-4",
+    "description": "Building on hobby vocabulary, students sort words into familiar words, cognates, and new words to develop comprehension strategies around leisure activities.",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C4.1"]
+  },
+  {
+    "activity_number": 5,
+    "french_title": "Les médias francophones",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-5",
+    "description": "Students examine examples of French-language local TV and radio programs for teens and reflect on the kinds of shows they enjoy.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 6,
+    "french_title": "La diversité au Canada",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-6",
+    "description": "Students explore the importance of diversity in Canada through a video about Michaëlle Jean and prepare to interview someone not born in Canada about their experience.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 7,
+    "french_title": "Le Canada : un pays diversifié",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-7",
+    "description": "Students explore Canadian diversity and how newcomers adapt, listening to an interview with Sanja and writing an article describing the experience of someone not born in Canada.",
+    "strand": ["Listening", "Writing"],
+    "curriculum_expectations": ["A1.1", "D1.1"]
+  },
+  {
+    "activity_number": 8,
+    "french_title": "Peux-tu lire les horaires?",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-8",
+    "description": "Students explore a Quebec school timetable, practising vocabulary for schedules and school subjects through matching and sorting activities.",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C1.2"]
+  },
+  {
+    "activity_number": 9,
+    "french_title": "Les transitions à l'école",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-9",
+    "description": "Students explore the transition from Grade 8 to secondary school, working with vocabulary about schedules, subjects, and school staff roles.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 10,
+    "french_title": "Les sports aux racines autochtones",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-10",
+    "description": "Students examine popular Canadian sports that have Indigenous roots, brainstorming examples and learning related vocabulary.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 11,
+    "french_title": "Honorons les racines de nos sports",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-11",
+    "description": "Students survey a variety of sports with Indigenous origins and take a closer look at one in particular: lacrosse.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 12,
+    "french_title": "Moi, j'aime lire!",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-12",
+    "description": "Students explore reading comprehension strategies that help with understanding texts, using a dialogue between siblings to discover and practise these strategies.",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C4.1"]
+  },
+  {
+    "activity_number": 13,
+    "french_title": "J'adore les films",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-13",
+    "description": "Students explore the world of film, learning cinema vocabulary, film genres, and how to read and write favourable or unfavourable movie reviews.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D2.1"]
+  },
+  {
+    "activity_number": 14,
+    "french_title": "Les problèmes écologiques",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-14",
+    "description": "Students explore ecological problems threatening the Earth, starting with vocabulary about the planet's beauty and natural riches.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 15,
+    "french_title": "Recycler, c'est important!",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-15",
+    "description": "Students consider why recycling matters in the face of growing waste, watching a video on the purpose of recycling and learning related vocabulary.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 16,
+    "french_title": "Le cinéma",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-16",
+    "description": "Students explore the history of cinema, reviewing film vocabulary and genres and considering which film-industry jobs interest them.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 17,
+    "french_title": "Les Jeux paralympiques",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-17",
+    "description": "Students explore the Paralympic Games, which allow athletes with physical disabilities to achieve great sporting performances on the international stage, supported by a video and vocabulary.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 18,
+    "french_title": "Aimes-tu les affiches?",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-18",
+    "description": "Students explore how a poster communicates through images, colours, and text, examining a sports-themed poster promoting a multi-sport approach.",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C1.2"]
+  },
+  {
+    "activity_number": 19,
+    "french_title": "L'article de journal",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-19",
+    "description": "Students explore the newspaper article and francophonie in their communities, learning journalism terms and analyzing a photo for information.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 20,
+    "french_title": "La correspondance",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-20",
+    "description": "Students explore written correspondence, especially letters, learning related vocabulary and texting abbreviations and reflecting on their own communication habits.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D2.1"]
+  },
+  {
+    "activity_number": 21,
+    "french_title": "La richesse du français",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-21",
+    "description": "Students explore the wide variety of French accents and expressions through a video, reflecting on the richness this brings to the language.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 22,
+    "french_title": "La francophonie autour du monde",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-22",
+    "description": "Students explore francophone communities, focusing on five European countries with large French-speaking populations: France, Switzerland, Luxembourg, Belgium, and Monaco.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 23,
+    "french_title": "Les séries télévisées",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-23",
+    "description": "Students reflect on television, reviewing film/TV vocabulary and examining French-Canadian series such as 'L'effet secondaire.'",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 24,
+    "french_title": "Les conversations formelles et informelles",
+    "url": "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-24",
+    "description": "Students explore and participate in conversations, focusing on the distinction between formal and informal conversations and the use of 'tu' versus 'vous.'",
+    "strand": ["Speaking", "Intercultural Understanding"],
+    "curriculum_expectations": ["B1.1", "B3.1"]
+  }
+]
