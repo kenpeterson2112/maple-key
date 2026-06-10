@@ -36,6 +36,7 @@ const SUBJECTS: PickerOption[] = [
   { value: "Science", label: "Science", color: "#1E40AF" },
   { value: "Language", label: "Language", color: "#CA8A04" },
   { value: "Social Studies", label: "Social Studies", color: "#7C3AED" },
+  { value: "FSL", label: "FSL", color: "#0D9488" },
 ]
 
 const SUBJECT_STRANDS: Record<string, string[]> = {
@@ -57,6 +58,7 @@ const SUBJECT_STRANDS: Record<string, string[]> = {
   ],
   Language: ["Media Literacy", "Writing", "Reading", "Oral Communication"],
   "Social Studies": ["Heritage and Identity", "People and Environments", "Power and Governance"],
+  FSL: ["Listening", "Speaking", "Reading", "Writing", "Intercultural Understanding"],
 }
 
 // Official Ontario curriculum strand letters. Cross-strand / cross-cutting
@@ -82,6 +84,9 @@ const STRAND_CODES: Record<string, string> = {
   // Social Studies, History and Geography (2023)
   "Heritage and Identity": "A",
   "People and Environments": "B",
+  // FSL (2013/2014) — Reading and Writing share letters C/D with Language above
+  Listening: "A",
+  Speaking: "B",
 }
 
 interface HeroPersonalizeProps {
