@@ -206,7 +206,12 @@ Instructional structure guidance: Each resource may include a "Best used as" fie
 
   const reproducibleLanguageBlock =
     reproducibleLanguage === "French"
-      ? `LANGUAGE OVERRIDE FOR STUDENT HANDOUTS: Write the "name" and "purpose" of EVERY entry in the "artifacts" array in Canadian French (français canadien), at an elementary reading level appropriate to Grade ${grade}. This is for a French Immersion classroom. Do NOT translate anything else: all other fields — including every artifact's "section" value (which must remain exactly one of "mindsOn", "action", "consolidation", or "materials"), the lesson title, learning goal, success criteria, lesson body content, differentiation, materials, and assessment questions — MUST stay in English. Only artifact name/purpose change language.`
+      ? `LANGUAGE OVERRIDE FOR STUDENT HANDOUTS: Every entry in the "artifacts" array must have BOTH its "name" AND its "purpose" written ENTIRELY in Canadian French (français canadien), at an elementary reading level appropriate to Grade ${grade}. This is for a French Immersion classroom — these two fields become a printed student handout.
+Both fields are full French sentences/phrases — even when the artifact itself is ABOUT French vocabulary or lists French words as content, the "purpose" field describing it must ALSO be written in French, not just the "name". For example:
+  WRONG (only "name" translated): { "name": "Feuille de vocabulaire — Les directions", "purpose": "Students color-code and label direction words (gauche, droite, nord, sud, est, ouest) with arrows and symbols to reinforce recognition.", "section": "action" }
+  CORRECT (both translated, "section" untouched): { "name": "Feuille de vocabulaire — Les directions", "purpose": "Les élèves colorient et étiquettent les mots de direction (gauche, droite, nord, sud, est, ouest) à l'aide de flèches et de symboles pour renforcer leur reconnaissance.", "section": "action" }
+Do NOT translate anything else: every artifact's "section" value MUST remain exactly one of "mindsOn", "action", "consolidation", or "materials" (these are code keys, not display text), and the lesson title, learning goal, success criteria, lesson body content, differentiation, materials, and assessment questions MUST stay in English.
+Before finalizing your response, re-check every single artifact entry: if "name" is in French, "purpose" must also be in French. Fix any entry where only one of the two was translated.`
       : ""
 
   const templateSections = TEMPLATE_SECTIONS[lessonTemplate]
