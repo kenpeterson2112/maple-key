@@ -1,0 +1,362 @@
+[
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 1,
+    "title": "Light and Heat",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-1",
+    "description": "Explores what it means to be a source of light by examining images and building a list of natural and artificial light sources.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 2,
+    "title": "Machines and the Environment",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-2",
+    "description": "Introduces the concept of \"work\" in machinery and how machines make moving objects easier and require less effort.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 3,
+    "title": "Mining for Batteries?",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-3",
+    "description": "Examines how batteries provide portable electricity and brainstorms the many everyday products and devices that rely on them.",
+    "strand": ["Earth and Space Systems", "STEM Skills and Connections"],
+    "curriculum_expectations": ["E1.1", "A1.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 4,
+    "title": "Wheels in Motion",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-4",
+    "description": "Explores common devices such as wheelbarrows, screwdrivers, and doorknobs to understand wheel-and-axle simple machines.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 5,
+    "title": "Properties of Sound",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-5",
+    "description": "Investigates sound as a form of energy made of vibrations that can travel through air, water, and solids in everyday life.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.2"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 6,
+    "title": "Pulley and Gear Systems",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-6",
+    "description": "Explores gears and pulleys as simple machines that make work easier and identifies gear and pulley systems seen in daily life.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1", "C2.2"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 7,
+    "title": "Canoes: Helping to Protect Natural Habitats",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-7",
+    "description": "Examines how technology is made from natural materials and how simple technologies like canoes can help protect natural habitats.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 8,
+    "title": "Biosphere Reserve",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-8",
+    "description": "Explains what a biosphere is and how life exists across the Earth, from the deepest oceans to the tallest mountains.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 9,
+    "title": "Green Iglu",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-9",
+    "description": "Reflects on where fruits and vegetables come from and whether they can be grown in Canada, exploring food production challenges.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.2"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 10,
+    "title": "Code It! Recycle Bot",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-10",
+    "description": "Uses coding concepts to program a robot called Recycle-Bot with movement commands, comparing and revising lines of code.",
+    "strand": ["STEM Skills and Connections"],
+    "curriculum_expectations": ["A3.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 1,
+    "title": "Save the Salmon",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-1",
+    "description": "Introduces food chains by examining how energy passes from producers like grass to consumers such as grasshoppers and beyond.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B2.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 2,
+    "title": "Classifying Animals",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-2",
+    "description": "Explores what different groups of animals have in common as a way of classifying them by shared characteristics.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B2.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 3,
+    "title": "Magnificent Machines",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-3",
+    "description": "Examines examples of simple machines and how different types of machines make life easier and can create positive change.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 4,
+    "title": "Glow and Grow",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-4",
+    "description": "Explores rainbows and how light is made of different layers of colour, prompting students to notice and wonder about light.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 5,
+    "title": "Everyday Rocks and Minerals",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-5",
+    "description": "Looks at where people use rocks and minerals in their daily lives by matching pictures to descriptions of common uses.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 6,
+    "title": "Aggregate Extraction",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-6",
+    "description": "Examines how a natural landscape changes through the extraction of rocks and minerals by comparing before-and-after scenes.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.2"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 7,
+    "title": "Hearing Aids",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-7",
+    "description": "Introduces what it means to be Deaf or hearing-impaired through a video about a Deaf family and the ways they communicate.",
+    "strand": ["Matter and Energy", "STEM Skills and Connections"],
+    "curriculum_expectations": ["C1.2", "A1.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 8,
+    "title": "Mechanisms and Motion",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-8",
+    "description": "Explores objects that spin or rotate as examples of rotary motion and identifies similar mechanisms in everyday life.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 9,
+    "title": "Star Stories",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-9",
+    "description": "Encourages students to observe a star-filled night sky and record what they know and wonder about stars.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 10,
+    "title": "Code It! Interconnections",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-10",
+    "description": "Uses coding concepts while learning about invasive species, such as the Rusty Crayfish, and their effect on Ontario habitats and communities.",
+    "strand": ["STEM Skills and Connections", "Life Systems"],
+    "curriculum_expectations": ["A3.1", "B2.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 1,
+    "title": "The Green Belt Movement",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-1",
+    "description": "Explores the importance of forests to people and what students already know about forest habitats through a sorting activity.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 2,
+    "title": "Habitats and Animal Diets",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-2",
+    "description": "Examines what a habitat is by exploring animals and plants and the living and non-living factors that meet their basic needs.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1", "B1.2"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 3,
+    "title": "Food Chain Communities",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-3",
+    "description": "Explores different meanings of connection, including how humans and living things feel connected to the natural environment and community.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B2.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 4,
+    "title": "Build a Beak",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-4",
+    "description": "Compares animal adaptations, such as why polar bears have white fur, to understand how physical traits help animals survive.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B2.2"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 5,
+    "title": "Animals by Design",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-5",
+    "description": "Examines how machines are part of everyday life and how all machines, complex or simple, are designed to reduce effort.",
+    "strand": ["Matter and Energy", "STEM Skills and Connections"],
+    "curriculum_expectations": ["C2.1", "A2.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 6,
+    "title": "Light Up Your Life",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-6",
+    "description": "Explores where light comes from and how natural habitats and people rely on light as a source of energy for food and growth.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 7,
+    "title": "Code It! – Invasive Species Quiz",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-7",
+    "description": "Explains what an invasive species is and how introduced species disturb the ecosystems they enter, using coding concepts.",
+    "strand": ["STEM Skills and Connections", "Life Systems"],
+    "curriculum_expectations": ["A3.1", "B1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 8,
+    "title": "The Impact of Technology on Nature",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-8",
+    "description": "Examines technology that produces lights and sounds, such as fireworks displays, and prompts reflection on its impact.",
+    "strand": ["STEM Skills and Connections"],
+    "curriculum_expectations": ["A1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 9,
+    "title": "Rainforests and Deforestation",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-9",
+    "description": "Explores the importance of rainforests by examining a rainforest habitat full of diverse plants and animals.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 10,
+    "title": "Protecting and Respecting the Environment",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-10",
+    "description": "Explores protected natural environments around the world, such as Kruger National Park, and the importance of protecting habitats.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 1,
+    "title": "Nature is Dependent for its Survival",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-1",
+    "description": "Explores how people and living things depend on one another for support, using a busy school day as a relatable example.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 2,
+    "title": "Cycles of Survival",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-2",
+    "description": "Highlights Ontario's rocks and minerals and how they are used to build roads and make products like cars, wire, and batteries.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1", "E1.2"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 3,
+    "title": "Food Chains?",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-3",
+    "description": "Explores where food comes from by sequencing pictures into a logical order, with a focus on Ontario people, places, and innovations.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B2.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 4,
+    "title": "Rocks and Minerals",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-4",
+    "description": "Uses a spot-the-differences puzzle to show how senses like sight, smell, and touch help geologists examine rocks and minerals.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 5,
+    "title": "Mighty Machines",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-5",
+    "description": "Examines how machines, from simple to complex, are an important part of people's lives and help them lift and move things.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 6,
+    "title": "Mining and Nature",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-6",
+    "description": "Explores Ontario's multi-million-dollar mining industry, including how mines create jobs and how minerals are found everywhere.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.2"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 7,
+    "title": "Save the Wetlands",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-7",
+    "description": "Introduces Ontario's wetlands and the four types—marshes, swamps, fens, and bogs—as an important part of the province's ecosystems.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 8,
+    "title": "Sources of Light",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-8",
+    "description": "Explores artificial and natural light as a type of energy and how people interact with different light sources every day.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 9,
+    "title": "Sounds Interesting",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-9",
+    "description": "Examines sound as a form of energy that is all around us, from people speaking to trucks rumbling down the street.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.2"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 10,
+    "title": "Code It! Food Chain Frenzy!",
+    "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-10",
+    "description": "Uses coding concepts while exploring the Great Lakes of North America, including Lake Ontario and the city of Toronto on its shore.",
+    "strand": ["STEM Skills and Connections", "Life Systems"],
+    "curriculum_expectations": ["A3.1", "B2.1"]
+  }
+]
