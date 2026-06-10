@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-10T17:16:39Z",
-    "total_count": 1655,
+    "generated_at": "2026-06-10T17:39:17Z",
+    "total_count": 1695,
     "schema_version": "2.1"
   },
   "resources": [
@@ -92084,6 +92084,2141 @@
         {
           "jurisdiction": "ontario",
           "grade": 5,
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2492",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 1: Light and Heat",
+      "description": "Explores what it means to be a source of light by examining images and building a list of natural and artificial light sources.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-1",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2493",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 2: Machines and the Environment",
+      "description": "Introduces the concept of \"work\" in machinery and how machines make moving objects easier and require less effort.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-2",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2494",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 3: Mining for Batteries?",
+      "description": "Examines how batteries provide portable electricity and brainstorms the many everyday products and devices that rely on them.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-3",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems",
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "E1.1",
+        "A1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2495",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 4: Wheels in Motion",
+      "description": "Explores common devices such as wheelbarrows, screwdrivers, and doorknobs to understand wheel-and-axle simple machines.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-4",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2496",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 5: Properties of Sound",
+      "description": "Investigates sound as a form of energy made of vibrations that can travel through air, water, and solids in everyday life.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-5",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2497",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 6: Pulley and Gear Systems",
+      "description": "Explores gears and pulleys as simple machines that make work easier and identifies gear and pulley systems seen in daily life.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-6",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C2.1",
+        "C2.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2498",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 7: Canoes: Helping to Protect Natural Habitats",
+      "description": "Examines how technology is made from natural materials and how simple technologies like canoes can help protect natural habitats.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-7",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2499",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 8: Biosphere Reserve",
+      "description": "Explains what a biosphere is and how life exists across the Earth, from the deepest oceans to the tallest mountains.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-8",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2500",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 9: Green Iglu",
+      "description": "Reflects on where fruits and vegetables come from and whether they can be grown in Canada, exploring food production challenges.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-9",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2501",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 10: Code It! Recycle Bot",
+      "description": "Uses coding concepts to program a robot called Recycle-Bot with movement commands, comparing and revising lines of code.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-10",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2502",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 1: Save the Salmon",
+      "description": "Introduces food chains by examining how energy passes from producers like grass to consumers such as grasshoppers and beyond.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-1",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2503",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 2: Classifying Animals",
+      "description": "Explores what different groups of animals have in common as a way of classifying them by shared characteristics.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-2",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2504",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 3: Magnificent Machines",
+      "description": "Examines examples of simple machines and how different types of machines make life easier and can create positive change.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-3",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2505",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 4: Glow and Grow",
+      "description": "Explores rainbows and how light is made of different layers of colour, prompting students to notice and wonder about light.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-4",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2506",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 5: Everyday Rocks and Minerals",
+      "description": "Looks at where people use rocks and minerals in their daily lives by matching pictures to descriptions of common uses.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-5",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "E1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2507",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 6: Aggregate Extraction",
+      "description": "Examines how a natural landscape changes through the extraction of rocks and minerals by comparing before-and-after scenes.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-6",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "E1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2508",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 7: Hearing Aids",
+      "description": "Introduces what it means to be Deaf or hearing-impaired through a video about a Deaf family and the ways they communicate.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-7",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy",
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.2",
+        "A1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2509",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 8: Mechanisms and Motion",
+      "description": "Explores objects that spin or rotate as examples of rotary motion and identifies similar mechanisms in everyday life.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-8",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2510",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 9: Star Stories",
+      "description": "Encourages students to observe a star-filled night sky and record what they know and wonder about stars.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-9",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "E1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2511",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 10: Code It! Interconnections",
+      "description": "Uses coding concepts while learning about invasive species, such as the Rusty Crayfish, and their effect on Ontario habitats and communities.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-10",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections",
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A3.1",
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2512",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 1: The Green Belt Movement",
+      "description": "Explores the importance of forests to people and what students already know about forest habitats through a sorting activity.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-1",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2513",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 2: Habitats and Animal Diets",
+      "description": "Examines what a habitat is by exploring animals and plants and the living and non-living factors that meet their basic needs.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-2",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2514",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 3: Food Chain Communities",
+      "description": "Explores different meanings of connection, including how humans and living things feel connected to the natural environment and community.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-3",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2515",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 4: Build a Beak",
+      "description": "Compares animal adaptations, such as why polar bears have white fur, to understand how physical traits help animals survive.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-4",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B2.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2516",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 5: Animals by Design",
+      "description": "Examines how machines are part of everyday life and how all machines, complex or simple, are designed to reduce effort.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-5",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy",
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C2.1",
+        "A2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2517",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 6: Light Up Your Life",
+      "description": "Explores where light comes from and how natural habitats and people rely on light as a source of energy for food and growth.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-6",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2518",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 7: Code It! – Invasive Species Quiz",
+      "description": "Explains what an invasive species is and how introduced species disturb the ecosystems they enter, using coding concepts.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-7",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections",
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A3.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2519",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 8: The Impact of Technology on Nature",
+      "description": "Examines technology that produces lights and sounds, such as fireworks displays, and prompts reflection on its impact.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-8",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2520",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 9: Rainforests and Deforestation",
+      "description": "Explores the importance of rainforests by examining a rainforest habitat full of diverse plants and animals.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-9",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2521",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 10: Protecting and Respecting the Environment",
+      "description": "Explores protected natural environments around the world, such as Kruger National Park, and the importance of protecting habitats.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-10",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "E1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2522",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 1: Nature is Dependent for its Survival",
+      "description": "Explores how people and living things depend on one another for support, using a busy school day as a relatable example.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-1",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2523",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 2: Cycles of Survival",
+      "description": "Highlights Ontario's rocks and minerals and how they are used to build roads and make products like cars, wire, and batteries.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-2",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "E1.1",
+        "E1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2524",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 3: Food Chains?",
+      "description": "Explores where food comes from by sequencing pictures into a logical order, with a focus on Ontario people, places, and innovations.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-3",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2525",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 4: Rocks and Minerals",
+      "description": "Uses a spot-the-differences puzzle to show how senses like sight, smell, and touch help geologists examine rocks and minerals.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-4",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "E1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2526",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 5: Mighty Machines",
+      "description": "Examines how machines, from simple to complex, are an important part of people's lives and help them lift and move things.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-5",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2527",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 6: Mining and Nature",
+      "description": "Explores Ontario's multi-million-dollar mining industry, including how mines create jobs and how minerals are found everywhere.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-6",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "E1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2528",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 7: Save the Wetlands",
+      "description": "Introduces Ontario's wetlands and the four types—marshes, swamps, fens, and bogs—as an important part of the province's ecosystems.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-7",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2529",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 8: Sources of Light",
+      "description": "Explores artificial and natural light as a type of energy and how people interact with different light sources every day.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-8",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2530",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 9: Sounds Interesting",
+      "description": "Examines sound as a form of energy that is all around us, from people speaking to trucks rumbling down the street.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-9",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2531",
+      "topic_title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 10: Code It! Food Chain Frenzy!",
+      "description": "Uses coding concepts while exploring the Great Lakes of North America, including Lake Ontario and the city of Toronto on its shore.",
+      "url": "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-10",
+      "publisher_creator": "TVO Learn — Grade 4 Science and Technology Learning Activities",
+      "grade_level": [
+        4
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections",
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A3.1",
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 4,
           "subject": "science",
           "strand": "stem_skills_and_connections",
           "expectation_code": null,
