@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-09T06:02:45Z",
-    "total_count": 1494,
+    "generated_at": "2026-06-10T04:21:05Z",
+    "total_count": 1542,
     "schema_version": "2.1"
   },
   "resources": [
@@ -83299,6 +83299,2643 @@
       "id": "r-2330",
       "metadata": {
         "added_at": "2026-06-09",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2331",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 1: Le portrait physique : partie 1",
+      "description": "Introduces vocabulary for describing physical appearance (eyes, hair, beard) using Papa Smurf as a model character to describe someone's looks.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-1",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2332",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 2: Le portrait physique : partie 2",
+      "description": "Students hear several people describe their physical characteristics and practice vocabulary for traits like height, face shape, and hair to match descriptions to images.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-2",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2333",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 3: Ma personnalité",
+      "description": "Explores personality traits through a dialogue between a cat and a mouse with very different personalities, learning words like timid, kind, and fearful.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-3",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2334",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 4: Décrire quelqu’un",
+      "description": "Focuses on character traits (curious, shy, fearful, mean, friendly), having students recognize and match these descriptions to different characters.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-4",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2335",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 5: La politesse",
+      "description": "Teaches politeness in French, including greetings and the difference between the formal \"vous\" and informal \"tu\" when addressing different people.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-5",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Speaking",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "speaking",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2336",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 6: Les activités",
+      "description": "Students listen to an interview where classmates discuss activities they like, learning vocabulary for hobbies like video games, reading, rugby, and roller skating.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-6",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2337",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 7: Je vais être…",
+      "description": "Through an episode of \"Minivers,\" students explore occupations and how interests can suggest a future career, matching people to their professions.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-7",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2338",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 8: Lettre de correspondance",
+      "description": "Introduces the personal profile, where students summarize identity in a few words and study an example profile to prepare for letter writing.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-8",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "D1.1",
+        "D1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "writing",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2339",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 9: La célébration culturelle",
+      "description": "Examines common elements of cultural celebrations through the example of a Cameroonian celebration, identifying features like food, dance, clothing, and stories.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-9",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2340",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 10: La tradition orale et les contes",
+      "description": "Highlights the importance of orally-told tales using \"La fourmi et le roi Salomon,\" a story from the oral tradition of Mauritania.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-10",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2341",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 11: La nourriture traditionnelle",
+      "description": "Explores traditional Métis cuisine through Joanne, a francophone Métis woman, and her traditional ingredients and family recipes.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-11",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2342",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 12: Un menu pour une célébration!",
+      "description": "Looks at food's role in celebrations through Michel and Katia preparing for a Métis rendezvous, including searching for a recipe and making moose stew.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-12",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2343",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 13: Je voudrais…",
+      "description": "Set in a restaurant, students follow Josée and a new waiter to learn restaurant vocabulary such as server, customer, and a glass of water.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-13",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Speaking",
+        "Listening"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "A1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "speaking",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2344",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 14: Créer une recette",
+      "description": "Students learn to follow a recipe by exploring an audio storybook for chocolate chip cookies, identifying ingredients and main steps.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-14",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2345",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 15: Préparons une célébration!",
+      "description": "Using a story about Mireille making a chocolate cake, students identify what's wrong and put the steps in the correct sequential order.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-15",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2346",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 16: Célébrons!",
+      "description": "Students read and listen to a text about attending a Métis gathering, focusing on the future tense structure \"je vais aller / je vais…\" for upcoming events.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-16",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "D2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2347",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 17: Explorons l’environnement",
+      "description": "Introduces vocabulary related to the planet and environment, such as the Earth, ocean, forest, pollution, fish, and animals.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-17",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2348",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 18: L’environnement, c’est important",
+      "description": "Explores why we must care for the planet while building environmental vocabulary like pollution, deforestation, the ozone layer, and fossil fuels.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-18",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2349",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 19: Les 3 R : Réduire, réutiliser, recycler",
+      "description": "Through a video, students discover what recycling means and why it matters, learning vocabulary like recycling, sorting centre, and reducing pollution.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-19",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2350",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 20: Protégeons l’environnement",
+      "description": "Centred on Earth Day (April 22), students consider everyday actions that help or harm the planet, such as turning off lights and recycling.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-20",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Speaking",
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "speaking",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2351",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 21: Les communautés francophones au Canada",
+      "description": "Examines French across Canada's two official languages, showing through a video that French is spoken with many accents beyond Quebec.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-21",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2352",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 22: Ô Canada",
+      "description": "Students listen to the French version of the national anthem \"Ô Canada\" and sort its vocabulary into familiar, cognate, and new words.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-22",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2353",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 23: Une chanson francophone",
+      "description": "Introduces a song tied to Franco-Canadian culture, with images and vocabulary about the coureurs des bois of New France (furs, canoe, Great Lakes).",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-23",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2354",
+      "topic_title": "TVO Learn — Grade 6 FSL Learning Activity 24: J’aime la chanson…",
+      "description": "Students listen to the song \"Au Canada\" by Franco-Canadian artist Gregg LeRock, learning the term \"les paroles\" and studying the song's vocabulary.",
+      "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-24",
+      "publisher_creator": "TVO Learn — Grade 6 FSL Learning Activities",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2355",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 1: Les personnalités : partie 1",
+      "description": "Students explore French adjectives used to describe personality traits, including how masculine and feminine forms of those adjectives are formed.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-1",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2356",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 2: Les personnalités : partie 2",
+      "description": "Students describe their own personality and weekly activities, building on personality-trait adjectives and their masculine and feminine forms.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-2",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Speaking",
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "speaking",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2357",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 3: Les familles",
+      "description": "Students learn vocabulary for family members and reflect on the personal and changing nature of who they consider part of their own family.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-3",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2358",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 4: Je me présente",
+      "description": "Students explore vocabulary for introducing themselves in French, including stating their name, age, where they live, and the languages they speak.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-4",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2359",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 5: Où j’habite",
+      "description": "Students explore the different types of buildings people live in, along with rooms of the home and the activities done in each one.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-5",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2360",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 6: Décorateur d’intérieur",
+      "description": "Imagining they work as an interior decorator, students learn bedroom furniture vocabulary and then describe a newly decorated bedroom to someone else.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-6",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2361",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 7: Le Carnaval de Québec : partie 1",
+      "description": "Students explore the Carnaval de Québec celebration, meeting its mascot Bonhomme and learning vocabulary for activities you can do at the carnival.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-7",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2362",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 8: Le Carnaval de Québec : partie 2",
+      "description": "Students continue exploring activities one can do at the Carnaval de Québec and practise naming them through interactive games.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-8",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Speaking",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "speaking",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2363",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 9: Les festivals et les célébrations",
+      "description": "Students consider the common elements shared by celebrations across Canada's diverse cultures and watch a video about one cultural celebration.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-9",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2364",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 10: Célébration : le pow-wow",
+      "description": "Students learn about National Indigenous Peoples Day on June 21 and pow-wows as a way some communities celebrate First Nations, Inuit, and Métis cultures.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-10",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2365",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 11: L’humour et les émotions : partie 1",
+      "description": "Students explore laughter and humour while learning vocabulary for a range of emotions and matching each emotion to its corresponding adjective.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-11",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2366",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 12: L’humour et les émotions : partie 2",
+      "description": "Students explore texts about playing tricks and telling jokes, review emotion-related vocabulary, and practise expressing themselves through dramatizations.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-12",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2367",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 13: Une visite au zoo",
+      "description": "Students learn the names of animals found in a zoo, organized by pavilion (Africa, the Americas, and Canada), and check their understanding with a matching game.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-13",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2368",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 14: Explorons le zoo!",
+      "description": "Students learn to identify main ideas in a brochure and to create captions describing photos, supported by zoo-related vocabulary for animals, places, and people.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-14",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2369",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 15: Explorons la vieille ville de Québec",
+      "description": "Students explore the francophone Québec City, discovering notable places to visit such as the Château Frontenac and popular leisure activities.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-15",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2370",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 16: Une visite à la ville de Québec",
+      "description": "Students review popular places and leisure activities in Québec City and practise matching images to each location or activity.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-16",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2371",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 17: La courtoisie et la politesse",
+      "description": "Students learn expressions of courtesy and politeness in French, including using the formal pronoun \"vous\" when addressing adults outside one's family.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-17",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Speaking",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "speaking",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2372",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 18: Quelle est la date de…?",
+      "description": "Students practise recognizing the months of the year in French by listening to audio clips and identifying the month named in each one.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-18",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2373",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 19: L’hiver",
+      "description": "Students explore the winter season and learn vocabulary for winter clothing such as a tuque, mittens, boots, and a coat through a video and activities.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-19",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2374",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 20: Un festival d’hiver",
+      "description": "Students explore winter festival activities, focusing on Ottawa's Winterlude (Bal de neige) festival, and learn related vocabulary while sharing their opinions.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-20",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Speaking",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "speaking",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2375",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 21: Un voyage à Québec : partie 1",
+      "description": "Students explore different modes of transportation and the things to consider when travelling, starting with transportation vocabulary and flashcards.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-21",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Reading"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "C1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2376",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 22: Un voyage à Québec : partie 2",
+      "description": "Students compare different modes of transportation for travelling between Toronto and Québec City, learning comparison vocabulary for speed and slowness.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-22",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Writing"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "D2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2377",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 23: Se déplacer dans la ville de Montréal",
+      "description": "Students explore places to visit in Montréal and the various modes of transportation for getting there, beginning with related vocabulary.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-23",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Reading",
+        "Intercultural Understanding"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "reading",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "id": "r-2378",
+      "topic_title": "TVO Learn — Grade 5 FSL Learning Activity 24: On donne des directions",
+      "description": "Students learn how to give directions in French, reflecting on how to explain the way to places in their community and watching a video on giving directions.",
+      "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-24",
+      "publisher_creator": "TVO Learn — Grade 5 FSL Learning Activities",
+      "grade_level": [
+        5
+      ],
+      "grade_band": "junior",
+      "subject": "FSL",
+      "strand": [
+        "Listening",
+        "Speaking"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Interactive",
+        "Online"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "small-group",
+        "whole-class"
+      ],
+      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 5,
+          "subject": "fsl",
+          "strand": "listening",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-06-10",
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true

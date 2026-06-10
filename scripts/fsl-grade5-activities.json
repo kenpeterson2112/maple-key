@@ -1,0 +1,194 @@
+[
+  {
+    "activity_number": 1,
+    "french_title": "Les personnalités : partie 1",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-1",
+    "description": "Students explore French adjectives used to describe personality traits, including how masculine and feminine forms of those adjectives are formed.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 2,
+    "french_title": "Les personnalités : partie 2",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-2",
+    "description": "Students describe their own personality and weekly activities, building on personality-trait adjectives and their masculine and feminine forms.",
+    "strand": ["Speaking", "Writing"],
+    "curriculum_expectations": ["B1.1", "D1.1"]
+  },
+  {
+    "activity_number": 3,
+    "french_title": "Les familles",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-3",
+    "description": "Students learn vocabulary for family members and reflect on the personal and changing nature of who they consider part of their own family.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 4,
+    "french_title": "Je me présente",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-4",
+    "description": "Students explore vocabulary for introducing themselves in French, including stating their name, age, where they live, and the languages they speak.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 5,
+    "french_title": "Où j’habite",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-5",
+    "description": "Students explore the different types of buildings people live in, along with rooms of the home and the activities done in each one.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 6,
+    "french_title": "Décorateur d’intérieur",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-6",
+    "description": "Imagining they work as an interior decorator, students learn bedroom furniture vocabulary and then describe a newly decorated bedroom to someone else.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 7,
+    "french_title": "Le Carnaval de Québec : partie 1",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-7",
+    "description": "Students explore the Carnaval de Québec celebration, meeting its mascot Bonhomme and learning vocabulary for activities you can do at the carnival.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 8,
+    "french_title": "Le Carnaval de Québec : partie 2",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-8",
+    "description": "Students continue exploring activities one can do at the Carnaval de Québec and practise naming them through interactive games.",
+    "strand": ["Speaking", "Intercultural Understanding"],
+    "curriculum_expectations": ["B1.1", "B3.1"]
+  },
+  {
+    "activity_number": 9,
+    "french_title": "Les festivals et les célébrations",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-9",
+    "description": "Students consider the common elements shared by celebrations across Canada's diverse cultures and watch a video about one cultural celebration.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 10,
+    "french_title": "Célébration : le pow-wow",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-10",
+    "description": "Students learn about National Indigenous Peoples Day on June 21 and pow-wows as a way some communities celebrate First Nations, Inuit, and Métis cultures.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 11,
+    "french_title": "L’humour et les émotions : partie 1",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-11",
+    "description": "Students explore laughter and humour while learning vocabulary for a range of emotions and matching each emotion to its corresponding adjective.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 12,
+    "french_title": "L’humour et les émotions : partie 2",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-12",
+    "description": "Students explore texts about playing tricks and telling jokes, review emotion-related vocabulary, and practise expressing themselves through dramatizations.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 13,
+    "french_title": "Une visite au zoo",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-13",
+    "description": "Students learn the names of animals found in a zoo, organized by pavilion (Africa, the Americas, and Canada), and check their understanding with a matching game.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 14,
+    "french_title": "Explorons le zoo!",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-14",
+    "description": "Students learn to identify main ideas in a brochure and to create captions describing photos, supported by zoo-related vocabulary for animals, places, and people.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D1.1"]
+  },
+  {
+    "activity_number": 15,
+    "french_title": "Explorons la vieille ville de Québec",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-15",
+    "description": "Students explore the francophone Québec City, discovering notable places to visit such as the Château Frontenac and popular leisure activities.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 16,
+    "french_title": "Une visite à la ville de Québec",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-16",
+    "description": "Students review popular places and leisure activities in Québec City and practise matching images to each location or activity.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 17,
+    "french_title": "La courtoisie et la politesse",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-17",
+    "description": "Students learn expressions of courtesy and politeness in French, including using the formal pronoun \"vous\" when addressing adults outside one's family.",
+    "strand": ["Speaking", "Intercultural Understanding"],
+    "curriculum_expectations": ["B1.1", "B3.1"]
+  },
+  {
+    "activity_number": 18,
+    "french_title": "Quelle est la date de…?",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-18",
+    "description": "Students practise recognizing the months of the year in French by listening to audio clips and identifying the month named in each one.",
+    "strand": ["Listening"],
+    "curriculum_expectations": ["A1.1", "A1.2"]
+  },
+  {
+    "activity_number": 19,
+    "french_title": "L’hiver",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-19",
+    "description": "Students explore the winter season and learn vocabulary for winter clothing such as a tuque, mittens, boots, and a coat through a video and activities.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 20,
+    "french_title": "Un festival d’hiver",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-20",
+    "description": "Students explore winter festival activities, focusing on Ottawa's Winterlude (Bal de neige) festival, and learn related vocabulary while sharing their opinions.",
+    "strand": ["Speaking", "Intercultural Understanding"],
+    "curriculum_expectations": ["B1.1", "B3.1"]
+  },
+  {
+    "activity_number": 21,
+    "french_title": "Un voyage à Québec : partie 1",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-21",
+    "description": "Students explore different modes of transportation and the things to consider when travelling, starting with transportation vocabulary and flashcards.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 22,
+    "french_title": "Un voyage à Québec : partie 2",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-22",
+    "description": "Students compare different modes of transportation for travelling between Toronto and Québec City, learning comparison vocabulary for speed and slowness.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D2.1"]
+  },
+  {
+    "activity_number": 23,
+    "french_title": "Se déplacer dans la ville de Montréal",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-23",
+    "description": "Students explore places to visit in Montréal and the various modes of transportation for getting there, beginning with related vocabulary.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 24,
+    "french_title": "On donne des directions",
+    "url": "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-24",
+    "description": "Students learn how to give directions in French, reflecting on how to explain the way to places in their community and watching a video on giving directions.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  }
+]
