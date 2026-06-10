@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-10T04:36:20Z",
-    "total_count": 1614,
+    "generated_at": "2026-06-10T07:11:20Z",
+    "total_count": 1615,
     "schema_version": "2.1"
   },
   "resources": [
@@ -89881,6 +89881,68 @@
           "alignment_strength": "primary"
         }
       ],
+      "metadata": {
+        "added_at": "2026-06-10",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Indigenous Peoples of the Americas: Wikipedia Overview",
+      "description": "Encyclopedic resource covering the history, cultures, social structures, and contemporary experiences of Indigenous peoples across the Americas. Provides accessible context for understanding Aboriginal heritage and identity.",
+      "url": "https://en.wikipedia.org/wiki/Indigenous_peoples_of_the_Americas",
+      "publisher_creator": "Wikipedia",
+      "grade_level": [
+        7,
+        8,
+        9
+      ],
+      "grade_band": "intermediate",
+      "subject": "Social Studies",
+      "strand": [
+        "Heritage and Identity",
+        "People and Environments"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.2",
+        "B1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "canada",
+          "grade": "[7, 8, 9]",
+          "subject": "social_studies",
+          "strand": "heritage_and_identity",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "canada",
+          "grade": "[7, 8, 9]",
+          "subject": "social_studies",
+          "strand": "people_and_environments",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2451",
       "metadata": {
         "added_at": "2026-06-10",
         "added_by": "maple_key_team",
