@@ -18,7 +18,7 @@ import { withBasePath } from "@/lib/base-path"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet"
 import type { Filters } from "@/lib/types"
 
-const AVAILABLE_GRADES = ["6", "7", "8", "9"]
+const AVAILABLE_GRADES = ["4", "5", "6", "7", "8", "9"]
 const AVAILABLE_SUBJECTS = ["Math", "Science", "Language", "Social Studies", "FSL"]
 
 const SUBJECT_STRANDS: Record<string, string[]> = {
