@@ -1,0 +1,194 @@
+[
+  {
+    "activity_number": 1,
+    "french_title": "Les salutations",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-1",
+    "description": "Introduces basic French greetings and self-introductions through two friends, Adrienne and Marcel, with audio clips and matching games.",
+    "strand": ["Listening"],
+    "curriculum_expectations": ["A1.1", "A1.2"]
+  },
+  {
+    "activity_number": 2,
+    "french_title": "Je me présente",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-2",
+    "description": "Builds vocabulary for introducing oneself, including name, age, nationality, where you live, and the languages you speak.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 3,
+    "french_title": "Je parle de toi",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-3",
+    "description": "Uses a video of two children meeting at the park to practice comprehension of personal information through true/false questions.",
+    "strand": ["Listening"],
+    "curriculum_expectations": ["A1.1", "A1.2"]
+  },
+  {
+    "activity_number": 4,
+    "french_title": "Enchanté!",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-4",
+    "description": "Examines a dialogue of two children meeting and teaches interrogative phrases used to ask about name, age, residence, nationality, and languages.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 5,
+    "french_title": "Les poèmes animaliers",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-5",
+    "description": "Uses animals to teach French numbers, pairing number words with digits and animal names with their images.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 6,
+    "french_title": "L'araignée à huit pattes",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-6",
+    "description": "Explores vocabulary for describing animals and their body parts (legs, tail, wings, nest) through images and matching activities.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 7,
+    "french_title": "Allons au festival",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-7",
+    "description": "Introduces the Festival franco-ontarien d'Ottawa through an audio interview, teaching festival-related vocabulary like music, eating, and performers.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 8,
+    "french_title": "Mangeons au festival!",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-8",
+    "description": "Explores food vocabulary found at the festival (poutine, fries, hot dog, popcorn) and how prices are written in French.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 9,
+    "french_title": "Les numéros",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-9",
+    "description": "Uses a video to teach reading and writing French numbers from 10 to 69, with matching activities pairing words to numerals.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 10,
+    "french_title": "Les mois de l'année",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-10",
+    "description": "Uses a festival poster to teach calendar and date vocabulary, answering questions about what, when, where, and how much.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 11,
+    "french_title": "Chez moi",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-11",
+    "description": "Uses a video of a child preparing breakfast to teach household and mealtime vocabulary such as fridge, glass, plate, and milk.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 12,
+    "french_title": "Quelle heure est-il?",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-12",
+    "description": "Uses the festival concert schedule to teach telling time in French by matching performers to the hours they sing.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 13,
+    "french_title": "La date en français",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-13",
+    "description": "Teaches the days of the week through flashcards with example sentences and audio pronunciation for weekly activities.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 14,
+    "french_title": "Comment y arriver?",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-14",
+    "description": "Teaches direction words (left, right, west) and how to give and follow directions to places in your community.",
+    "strand": ["Speaking", "Listening"],
+    "curriculum_expectations": ["B1.1", "A1.1"]
+  },
+  {
+    "activity_number": 15,
+    "french_title": "Au festival Bal de neige",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-15",
+    "description": "Introduces winter activity vocabulary such as cross-country skiing, freestyle skiing, and tobogganing through matching games.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 16,
+    "french_title": "On s'habille",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-16",
+    "description": "Uses a festival poster to teach seasons, months, and clothing vocabulary by deciding what to wear to the concert.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 17,
+    "french_title": "Mes endroits préférés",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-17",
+    "description": "Teaches colours in French as high-frequency descriptive adjectives using the \"Super Mini\" video and colour-mixing activities.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 18,
+    "french_title": "Mes endroits préférés",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-18",
+    "description": "Explores vocabulary for describing favourite places (the beach, classroom, park) including colours and animals seen in images.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 19,
+    "french_title": "Le corps humain",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-19",
+    "description": "Uses Madame Bonheur movement videos to teach body part vocabulary (arm, head, leg, body) and how to describe movement.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 20,
+    "french_title": "Le robot",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-20",
+    "description": "Uses a Madame Bonheur dance video to reinforce body part vocabulary (foot, arm, hand, head) and complete sentences from the song.",
+    "strand": ["Listening", "Writing"],
+    "curriculum_expectations": ["A1.1", "D1.1"]
+  },
+  {
+    "activity_number": 21,
+    "french_title": "La soupe des trois soeurs",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-21",
+    "description": "Introduces vegetable vocabulary (zucchini, eggplant, corn, turnip, carrot) and uses a video about giant vegetables with a sorting activity.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 22,
+    "french_title": "La soupe aux légumes",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-22",
+    "description": "Teaches body parts and vegetables through the traditional francophone song \"Savez-vous planter les choux\" with comprehension questions.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 23,
+    "french_title": "La tourtière",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-23",
+    "description": "Teaches the polite expressions \"s'il vous plaît\" and \"s'il te plaît\" and when to use each, using the \"La courtoisie selon Mini\" video.",
+    "strand": ["Speaking", "Intercultural Understanding"],
+    "curriculum_expectations": ["B1.1", "B3.1"]
+  },
+  {
+    "activity_number": 24,
+    "french_title": "Les boissons",
+    "url": "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-24",
+    "description": "Teaches drink vocabulary (orange juice, milkshake, milk, water) and introduces the concept of a recipe through making sumac lemonade.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  }
+]

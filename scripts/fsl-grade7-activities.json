@@ -1,0 +1,194 @@
+[
+  {
+    "activity_number": 1,
+    "french_title": "Une journée au parc d'attractions",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-1",
+    "description": "Students explore an amusement park map and learn French vocabulary for attractions and treats by matching rides and snacks to their labels.",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C1.2"]
+  },
+  {
+    "activity_number": 2,
+    "french_title": "Visiter le parc d'attractions",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-2",
+    "description": "Building on amusement park vocabulary, students use a video (« Mini Météo Été : Manège ») and listening strategies to learn more about visiting a park.",
+    "strand": ["Listening"],
+    "curriculum_expectations": ["A1.1", "A4.1"]
+  },
+  {
+    "activity_number": 3,
+    "french_title": "Le courriel",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-3",
+    "description": "Students compare ways of sending correspondence and learn the conventions and vocabulary for writing emails in French.",
+    "strand": ["Writing"],
+    "curriculum_expectations": ["D1.1", "D1.2"]
+  },
+  {
+    "activity_number": 4,
+    "french_title": "Les textos",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-4",
+    "description": "Students explore text-message conversations, comparing texting with phone calls and learning the informal French language used in texts.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D2.1"]
+  },
+  {
+    "activity_number": 5,
+    "french_title": "Les conversations téléphoniques et les messages",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-5",
+    "description": "Through the video « L'inconnu du téléphone », students learn vocabulary and conventions for French phone conversations and leaving messages.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 6,
+    "french_title": "Protégeons l'environnement",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-6",
+    "description": "Centered on Earth Day (April 22), students explore the importance of protecting the environment and learn related French vocabulary.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 7,
+    "french_title": "Les sports",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-7",
+    "description": "Students learn French sports vocabulary while discovering sports that originate from Indigenous peoples in Canada through a video.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 8,
+    "french_title": "Le cinéma et les critiques de film",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-8",
+    "description": "Students explore the history of cinema via the video « Top 5 sur le cinéma » and learn French vocabulary for talking about and reviewing films.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 9,
+    "french_title": "Au restaurant",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-9",
+    "description": "Using the video « Trouve l'objet : le verre d'eau au restaurant », students learn restaurant vocabulary and how to order and communicate with a server in French.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 10,
+    "french_title": "Les logements",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-10",
+    "description": "Students identify different types of housing and learn French vocabulary for homes and their various rooms and parts.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 11,
+    "french_title": "Les activités de loisir",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-11",
+    "description": "Students explore leisure activities through an audio street-interview (micro-trottoir) clip and learn related French vocabulary.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 12,
+    "french_title": "Les expressions idiomatiques",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-12",
+    "description": "Students learn French idiomatic expressions that carry a second, figurative meaning, such as « raconter des salades ».",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C1.2"]
+  },
+  {
+    "activity_number": 13,
+    "french_title": "Les invitations : partie 1",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-13",
+    "description": "Students explore the concept of parties and celebrations and learn the French vocabulary used to describe different kinds of fêtes.",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C1.2"]
+  },
+  {
+    "activity_number": 14,
+    "french_title": "Les invitations : partie 2",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-14",
+    "description": "Through a video about a Norouz celebration, students learn how to understand and create party invitations in French.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 15,
+    "french_title": "Les émotions",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-15",
+    "description": "Using the text « Des frissons avant le match », students examine a dialogue about nervousness and learn to express emotions in French.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 16,
+    "french_title": "Les techniques de relaxation",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-16",
+    "description": "Students learn to express varied daily emotions in French and explore relaxation techniques through a matching game and activities.",
+    "strand": ["Speaking", "Reading"],
+    "curriculum_expectations": ["B1.1", "C1.1"]
+  },
+  {
+    "activity_number": 17,
+    "french_title": "Les Caraïbes",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-17",
+    "description": "Students explore leisure activities and beaches of the Caribbean islands while learning related French vocabulary.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 18,
+    "french_title": "Les cartes postales",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-18",
+    "description": "Students learn the parts of a postcard, matching images with personal messages and practicing how to write postcards in French.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D2.1"]
+  },
+  {
+    "activity_number": 19,
+    "french_title": "Les clubs : partie 1",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-19",
+    "description": "Students explore different types of clubs and the benefits of joining them, learning related French vocabulary.",
+    "strand": ["Reading"],
+    "curriculum_expectations": ["C1.1", "C1.2"]
+  },
+  {
+    "activity_number": 20,
+    "french_title": "Les clubs : partie 2",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-20",
+    "description": "Through a video about a school club in Thunder Bay, students discuss clubs available to them and answer questions in French.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 21,
+    "french_title": "L'alimentation : partie 1",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-21",
+    "description": "Students explore a video about healthy snacks and learn French vocabulary related to food and snacking.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 22,
+    "french_title": "L'alimentation : partie 2",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-22",
+    "description": "Using a healthy-eating plate diagram, students learn to make healthy food choices and the French vocabulary for fruits, vegetables, and balanced meals.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 23,
+    "french_title": "La francophonie des Amériques",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-23",
+    "description": "Students learn that French is spoken across Canada and beyond Quebec, exploring francophone communities in the Americas.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 24,
+    "french_title": "Les affiches de voyage",
+    "url": "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-24",
+    "description": "Students examine travel posters and their typical format (country name, image, slogan) and learn to create their own in French.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D2.1"]
+  }
+]
