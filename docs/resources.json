@@ -28307,7 +28307,9 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true,
+      "decomposed": true
     },
     {
       "id": "r-1315",
@@ -74015,7 +74017,9 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true,
+      "decomposed": true
     },
     {
       "id": "r-2160",
@@ -76472,7 +76476,9 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true,
+      "decomposed": true
     },
     {
       "id": "r-2206",
@@ -76798,7 +76804,9 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true,
+      "decomposed": true
     },
     {
       "id": "r-2212",
@@ -77012,7 +77020,9 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true,
+      "decomposed": true
     },
     {
       "id": "r-2216",
@@ -77222,7 +77232,9 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true,
+      "decomposed": true
     },
     {
       "id": "r-2220",
@@ -77610,7 +77622,9 @@
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": false
-      }
+      },
+      "is_collection": true,
+      "decomposed": true
     },
     {
       "id": "r-2227",
