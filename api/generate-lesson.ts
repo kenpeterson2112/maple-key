@@ -20,10 +20,11 @@ interface PlanningAnswer {
   answer: string
 }
 
-interface BandCounts {
-  strong: number
-  developing: number
-  needsSupport: number
+interface LevelCounts {
+  level1: number
+  level2: number
+  level3: number
+  level4: number
 }
 
 interface GenerateRequest {
@@ -34,19 +35,19 @@ interface GenerateRequest {
   includeAssessmentData: boolean
   classroomResources?: string[]
   planningAnswers?: PlanningAnswer[]
-  classProgress?: Record<string, BandCounts>
+  classProgress?: Record<string, LevelCounts>
   reproducibleLanguage?: "English" | "French"
 }
 
-function formatClassProgress(progress: Record<string, BandCounts>): string {
+function formatClassProgress(progress: Record<string, LevelCounts>): string {
   const lines = Object.entries(progress)
-    .filter(([, c]) => c.strong + c.developing + c.needsSupport > 0)
+    .filter(([, c]) => c.level1 + c.level2 + c.level3 + c.level4 > 0)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([code, c]) => `  ${code}: ${c.strong} strong, ${c.developing} developing, ${c.needsSupport} needs support`)
+    .map(([code, c]) => `  ${code}: ${c.level4} surpassing, ${c.level3} meeting, ${c.level2} approaching, ${c.level1} needs critical attention`)
   if (lines.length === 0) return ""
   return `Recent class assessment data (use to target differentiation, do not restate verbatim):
 ${lines.join("\n")}
-Calibrate Minds On activation, Action scaffolding, and Consolidation depth accordingly. Where the class is mostly "needs support" on a code, build in extra modelling and concrete examples. Where they are mostly "strong", offer extension prompts.`
+Calibrate Minds On activation, Action scaffolding, and Consolidation depth accordingly. Where the class is mostly "needs critical attention" on a code, build in extra modelling and concrete examples. Where they are mostly "surpassing", offer extension prompts.`
 }
 
 interface MultipleChoiceQuestion {

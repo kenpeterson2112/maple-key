@@ -6,11 +6,11 @@ import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import {
   sanitizeQuestions,
-  bandFor,
+  levelFor,
   type AssessmentQuestion,
   type MultipleChoiceQuestion,
   type TrueFalseQuestion,
-  type Band,
+  type ProficiencyLevel,
 } from "@/lib/assessment-types"
 import { getCachedQuestions } from "@/lib/assessment-questions-cache"
 import {
@@ -188,8 +188,8 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
   }
   const setSelfRating = (key: string, state: ResponseState) => setSelfRatings((p) => ({ ...p, [key]: state }))
 
-  const computePerCodeBand = (): Record<string, Band> => {
-    const result: Record<string, Band> = {}
+  const computePerCodeLevel = (): Record<string, ProficiencyLevel> => {
+    const result: Record<string, ProficiencyLevel> = {}
     if (isGraded) {
       const byCode: Record<string, { correct: number; total: number }> = {}
       for (const q of questions) {
@@ -200,20 +200,20 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         agg.total += 1
         if (correct) agg.correct += 1
       }
-      for (const [code, { correct, total }] of Object.entries(byCode)) result[code] = bandFor(correct, total)
+      for (const [code, { correct, total }] of Object.entries(byCode)) result[code] = levelFor(correct, total)
     } else {
       for (const f of fallback) {
         if (!f.code) continue
         const r = selfRatings[f.key]
         if (!r || r === "unanswered") continue
-        result[f.code] = r === "understood" ? "strong" : "developing"
+        result[f.code] = r === "understood" ? "level4" : "level2"
       }
     }
     return result
   }
 
   const handleRecord = (count = 1) => {
-    recordAttempt(lesson, computePerCodeBand(), count)
+    recordAttempt(lesson, computePerCodeLevel(), count)
     setRecordedCount((n) => n + count)
     setAnswers({})
     setSelfRatings({})

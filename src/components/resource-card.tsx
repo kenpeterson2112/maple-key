@@ -21,7 +21,7 @@ import { useState, useRef, useMemo } from "react"
 import ReviewsModal from "./reviews-modal"
 import FlagModal from "./flag-modal"
 import { withBasePath } from "@/lib/base-path"
-import { coverageForResource, type OverallCoverage, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import { coverageForResource, type OverallCoverage, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
 import type { Resource } from "@/lib/types"
 
 const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; label: string }> = {
@@ -228,7 +228,7 @@ function getAccessibilityStyle(accessibilityArray) {
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
-export default function CompactResourceCard({ resource, codeProgress }: { resource: Resource; codeProgress?: Record<string, BandCounts> }) {
+export default function CompactResourceCard({ resource, codeProgress }: { resource: Resource; codeProgress?: Record<string, LevelCounts> }) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
   const [showReviewsModal, setShowReviewsModal] = useState(false)
   const [showFlagModal, setShowFlagModal] = useState(false)

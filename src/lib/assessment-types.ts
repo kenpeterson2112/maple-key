@@ -80,38 +80,47 @@ export function sanitizeQuestions(raw: unknown): AssessmentQuestion[] {
   return out
 }
 
-// ---- Proficiency bands (Growing Success, Ontario Ministry of Education) ----
-// Level 3-4: considerable to thorough understanding → "strong"
-// Level 2:   some understanding                     → "developing"
-// Level 1:   limited understanding                  → "needsSupport"
-export type Band = "strong" | "developing" | "needsSupport"
+// ---- Proficiency levels (Growing Success, Ontario Ministry of Education) ----
+// Level 4: surpassing the standard
+// Level 3: meeting the provincial standard
+// Level 2: approaching the standard
+// Level 1: needs critical attention
+export type ProficiencyLevel = "level1" | "level2" | "level3" | "level4"
 
-export const BAND_ORDER: Band[] = ["strong", "developing", "needsSupport"]
+export const LEVEL_ORDER: ProficiencyLevel[] = ["level1", "level2", "level3", "level4"]
 
-export const BAND_META: Record<Band, { label: string; phrase: string; barClass: string; textClass: string }> = {
-  strong: {
-    label: "Considerable to thorough understanding",
-    phrase: "demonstrate a considerable or thorough understanding",
-    barClass: "bg-emerald-400",
-    textClass: "text-emerald-700",
+export const LEVEL_META: Record<ProficiencyLevel, { label: string; phrase: string; barClass: string; textClass: string }> = {
+  level1: {
+    label: "Needs critical attention",
+    phrase: "demonstrate limited understanding and need critical support",
+    barClass: "bg-signal-1",
+    textClass: "text-signal-1-foreground",
   },
-  developing: {
-    label: "Some understanding",
-    phrase: "show some understanding",
-    barClass: "bg-amber-400",
-    textClass: "text-amber-700",
+  level2: {
+    label: "Approaching the standard",
+    phrase: "show some understanding but are still approaching the standard",
+    barClass: "bg-signal-2",
+    textClass: "text-signal-2-foreground",
   },
-  needsSupport: {
-    label: "Limited understanding",
-    phrase: "demonstrate limited understanding and may need more support",
-    barClass: "bg-red-400",
-    textClass: "text-red-600",
+  level3: {
+    label: "Meeting the provincial standard",
+    phrase: "demonstrate understanding that meets the provincial standard",
+    barClass: "bg-signal-3",
+    textClass: "text-signal-3-foreground",
+  },
+  level4: {
+    label: "Surpassing the standard",
+    phrase: "demonstrate understanding that surpasses the provincial standard",
+    barClass: "bg-signal-4",
+    textClass: "text-signal-4-foreground",
   },
 }
 
-// With 2 questions per expectation: 2/2 → strong, 1/2 → developing, 0/2 → needsSupport.
-export function bandFor(correct: number, total: number): Band {
-  if (total <= 0 || correct <= 0) return "needsSupport"
-  if (correct === total) return "strong"
-  return "developing"
+// With 2 questions per expectation: 2/2 → level4, 1/2 → level2, 0/2 → level1.
+// Individual 2-question checks are too noisy to claim a genuine 4-level result —
+// level3 is reached via self-rating and dev-seed data instead.
+export function levelFor(correct: number, total: number): ProficiencyLevel {
+  if (total <= 0 || correct <= 0) return "level1"
+  if (correct === total) return "level4"
+  return "level2"
 }
