@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-12T03:04:40Z",
-    "total_count": 1723,
+    "generated_at": "2026-06-12T06:26:54Z",
+    "total_count": 1724,
     "schema_version": "2.1"
   },
   "resources": [
@@ -97522,6 +97522,59 @@
           "alignment_strength": "primary"
         }
       ],
+      "metadata": {
+        "added_at": "2026-06-12",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Matter: Definition, Properties, and States",
+      "description": "National Geographic's educational resource on matter explains that matter is any substance with mass that takes up space, covering fundamental concepts essential for understanding the physical world. This resource is designed for K–12 learners and provides clear, accessible definitions aligned with science curricula.",
+      "url": "https://education.nationalgeographic.org/resource/matter/",
+      "publisher_creator": "National Geographic Society",
+      "grade_level": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A1.2",
+        "A2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "A1.1",
+          "expectation_description": "Identify and describe the properties of matter",
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2560",
       "metadata": {
         "added_at": "2026-06-12",
         "added_by": "maple_key_team",
