@@ -1,5 +1,5 @@
 import type { LessonMetadata } from "./lesson-metadata"
-import type { Band } from "./assessment-types"
+import type { ProficiencyLevel } from "./assessment-types"
 import { overallCodeOf, groupByOverall } from "./curriculum-codes"
 
 const STORAGE_KEY = "maplekey_assessment_results"
@@ -31,10 +31,11 @@ function activeKey(): string {
   return isSandboxMode() ? SANDBOX_KEY : STORAGE_KEY
 }
 
-export interface BandCounts {
-  strong: number
-  developing: number
-  needsSupport: number
+export interface LevelCounts {
+  level1: number
+  level2: number
+  level3: number
+  level4: number
 }
 
 // Whole-class aggregate for one lesson. Stores totals only — never individual
@@ -48,7 +49,7 @@ export interface LessonTally {
   codes: string[]
   updatedAt: number
   attempts: number
-  byExpectation: Record<string, BandCounts>
+  byExpectation: Record<string, LevelCounts>
 }
 
 type Store = Record<string, LessonTally>
@@ -70,8 +71,8 @@ function write(store: Store): void {
   }
 }
 
-function emptyCounts(): BandCounts {
-  return { strong: 0, developing: 0, needsSupport: 0 }
+function emptyCounts(): LevelCounts {
+  return { level1: 0, level2: 0, level3: 0, level4: 0 }
 }
 
 export function getLessonTally(lessonId: string): LessonTally | null {
@@ -84,7 +85,7 @@ export function getAllTallies(): LessonTally[] {
 
 // Record one completed quick check as anonymous class totals.
 // Pass count > 1 for a group response (same answers, multiple students).
-export function recordAttempt(lesson: LessonMetadata, perCodeBand: Record<string, Band>, count = 1): void {
+export function recordAttempt(lesson: LessonMetadata, perCodeLevel: Record<string, ProficiencyLevel>, count = 1): void {
   const store = read()
   const tally: LessonTally = store[lesson.id] ?? {
     lessonId: lesson.id,
@@ -102,9 +103,9 @@ export function recordAttempt(lesson: LessonMetadata, perCodeBand: Record<string
   if (lesson.curriculumCodesCovered?.length) tally.codes = lesson.curriculumCodesCovered
   tally.updatedAt = Date.now()
   tally.attempts += count
-  for (const [code, band] of Object.entries(perCodeBand)) {
+  for (const [code, level] of Object.entries(perCodeLevel)) {
     const counts = (tally.byExpectation[code] ??= emptyCounts())
-    counts[band] += count
+    counts[level] += count
   }
   store[lesson.id] = tally
   write(store)
@@ -139,8 +140,8 @@ export function clearAllResults(): void {
 // ---- Aggregation for dashboards ----
 export interface OverallAggregate {
   overall: string
-  bands: BandCounts
-  specifics: Record<string, BandCounts>
+  bands: LevelCounts
+  specifics: Record<string, LevelCounts>
 }
 
 export interface AggregatedResults {
@@ -149,13 +150,14 @@ export interface AggregatedResults {
   hasData: boolean
 }
 
-function addInto(target: BandCounts, src: BandCounts): void {
-  target.strong += src.strong
-  target.developing += (src.developing ?? 0)
-  target.needsSupport += src.needsSupport
+function addInto(target: LevelCounts, src: LevelCounts): void {
+  target.level1 += src.level1
+  target.level2 += src.level2
+  target.level3 += src.level3
+  target.level4 += src.level4
 }
 
-function rollUp(byExpectation: Record<string, BandCounts>): Record<string, OverallAggregate> {
+function rollUp(byExpectation: Record<string, LevelCounts>): Record<string, OverallAggregate> {
   const overall: Record<string, OverallAggregate> = {}
   for (const [code, counts] of Object.entries(byExpectation)) {
     const oc = overallCodeOf(code)
@@ -174,7 +176,7 @@ export function aggregateLesson(tally: LessonTally | null): AggregatedResults {
 }
 
 export function aggregateAll(tallies: LessonTally[]): AggregatedResults {
-  const merged: Record<string, BandCounts> = {}
+  const merged: Record<string, LevelCounts> = {}
   let attempts = 0
   for (const t of tallies) {
     attempts += t.attempts
@@ -185,12 +187,12 @@ export function aggregateAll(tallies: LessonTally[]): AggregatedResults {
   return { overall: rollUp(merged), attempts, hasData: Object.keys(merged).length > 0 }
 }
 
-// Sum recorded band counts per code for the given expectation codes.
+// Sum recorded level counts per code for the given expectation codes.
 // Returned object only contains entries for codes with at least one recorded response.
-export function getProgressForCodes(codes: string[]): Record<string, BandCounts> {
+export function getProgressForCodes(codes: string[]): Record<string, LevelCounts> {
   if (codes.length === 0) return {}
   const wanted = new Set(codes)
-  const out: Record<string, BandCounts> = {}
+  const out: Record<string, LevelCounts> = {}
   for (const t of Object.values(read())) {
     for (const [code, counts] of Object.entries(t.byExpectation)) {
       if (!wanted.has(code)) continue
@@ -203,12 +205,12 @@ export function getProgressForCodes(codes: string[]): Record<string, BandCounts>
 // ---- Readiness levels ----
 export type ReadinessLevel = "poor" | "okay" | "good" | "great"
 
-export function computeReadinessLevel(counts: BandCounts): ReadinessLevel {
-  const total = counts.strong + counts.developing + counts.needsSupport
+export function computeReadinessLevel(counts: LevelCounts): ReadinessLevel {
+  const total = counts.level1 + counts.level2 + counts.level3 + counts.level4
   if (total === 0) return "okay" // fallback; callers should gate on hasData first
-  if (counts.strong / total >= 0.8) return "great"
-  if (counts.strong / total >= 0.5) return "good"
-  if (counts.needsSupport / total >= 0.5) return "poor"
+  if (counts.level4 / total >= 0.8) return "great"
+  if ((counts.level3 + counts.level4) / total >= 0.5) return "good"
+  if (counts.level1 / total >= 0.5) return "poor"
   return "okay"
 }
 
@@ -218,7 +220,7 @@ export function getReadinessForCodes(codes: string[]): Record<string, ReadinessL
   const progress = getProgressForCodes(codes)
   const out: Record<string, ReadinessLevel> = {}
   for (const [code, counts] of Object.entries(progress)) {
-    const total = counts.strong + counts.developing + counts.needsSupport
+    const total = counts.level1 + counts.level2 + counts.level3 + counts.level4
     if (total > 0) out[code] = computeReadinessLevel(counts)
   }
   return out
@@ -231,23 +233,23 @@ export interface OverallReadiness {
 }
 
 // Group `codes` by their overall expectation (D1.1 → D1) and roll each overall's
-// recorded band counts up into a single count-weighted readiness level — the same
+// recorded level counts up into a single count-weighted readiness level — the same
 // semantics as the dashboard rollUp. Pure: reads no storage, only the provided
 // code → counts map. Overalls with no recorded data are omitted.
 export function summarizeReadiness(
   codes: string[],
-  progress: Record<string, BandCounts>,
+  progress: Record<string, LevelCounts>,
 ): OverallReadiness[] {
   const out: OverallReadiness[] = []
   for (const [overall, childCodes] of Object.entries(groupByOverall(codes))) {
     const summed = emptyCounts()
     const children = childCodes.map((code) => {
       const counts = progress[code]
-      const total = counts ? counts.strong + counts.developing + counts.needsSupport : 0
+      const total = counts ? counts.level1 + counts.level2 + counts.level3 + counts.level4 : 0
       if (total > 0) addInto(summed, counts)
       return { code, level: total > 0 ? computeReadinessLevel(counts) : null }
     })
-    const total = summed.strong + summed.developing + summed.needsSupport
+    const total = summed.level1 + summed.level2 + summed.level3 + summed.level4
     if (total === 0) continue
     out.push({ overall, level: computeReadinessLevel(summed), children })
   }

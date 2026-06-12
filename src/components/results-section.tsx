@@ -9,7 +9,7 @@ import ResourceCard from "./resource-card"
 import type { Filters, Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
 import { normalizeGrades } from "@/lib/utils"
-import { getReadinessForCodes, getProgressForCodes, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import { getReadinessForCodes, getProgressForCodes, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
 
 interface ResultsSectionProps {
   filters: Filters
@@ -41,7 +41,7 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
 
   // Raw per-code band counts for the same code set — lets each card roll its own
   // expectations up to an overall readiness without re-reading storage per render.
-  const classProgress = useMemo((): Record<string, BandCounts> => {
+  const classProgress = useMemo((): Record<string, LevelCounts> => {
     const resources = data?.resources
     if (!resources) return {}
     const codes = new Set<string>()

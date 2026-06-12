@@ -3,6 +3,7 @@
 import { Calendar, Check, ArrowRight, BookOpen, ClipboardCheck, Sparkles } from "lucide-react"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { getLessonTally, aggregateLesson } from "@/lib/assessment-results"
+import { LEVEL_ORDER, LEVEL_META } from "@/lib/assessment-types"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import type { Resource } from "@/lib/types"
 
@@ -65,18 +66,17 @@ export default function LessonOverviewCard({
   // High-level assessment summary
   const tally = getLessonTally(lesson.id)
   const agg = aggregateLesson(tally)
-  let strong = 0
-  let developing = 0
-  let needsSupport = 0
+  const levelTotals = { level1: 0, level2: 0, level3: 0, level4: 0 }
   if (tally) {
     for (const counts of Object.values(tally.byExpectation)) {
-      strong += counts.strong
-      developing += counts.developing ?? 0
-      needsSupport += counts.needsSupport
+      levelTotals.level1 += counts.level1
+      levelTotals.level2 += counts.level2
+      levelTotals.level3 += counts.level3
+      levelTotals.level4 += counts.level4
     }
   }
-  const bandTotal = strong + developing + needsSupport
-  const pct = (n: number) => (bandTotal > 0 ? Math.round((n / bandTotal) * 100) : 0)
+  const levelTotal = levelTotals.level1 + levelTotals.level2 + levelTotals.level3 + levelTotals.level4
+  const pct = (n: number) => (levelTotal > 0 ? Math.round((n / levelTotal) * 100) : 0)
 
   return (
     <div className={`rounded-2xl border-2 ${theme.border} ${theme.bg} shadow-sm overflow-hidden`}>
@@ -134,7 +134,7 @@ export default function LessonOverviewCard({
       </div>
 
       {/* Assessment summary */}
-      {agg.hasData && bandTotal > 0 && (
+      {agg.hasData && levelTotal > 0 && (
         <div className="px-4 pb-3">
           <div className="rounded-xl bg-white/70 border border-[#E8D5C4] px-3 py-2.5 space-y-1.5">
             <div className="flex items-center justify-between">
@@ -147,14 +147,19 @@ export default function LessonOverviewCard({
               </span>
             </div>
             <div className="flex h-1.5 rounded-full overflow-hidden bg-[#F0EADD]">
-              {strong > 0 && <div className="bg-emerald-500" style={{ width: `${pct(strong)}%` }} />}
-              {developing > 0 && <div className="bg-amber-400" style={{ width: `${pct(developing)}%` }} />}
-              {needsSupport > 0 && <div className="bg-rose-400" style={{ width: `${pct(needsSupport)}%` }} />}
+              {LEVEL_ORDER.map((level) => (
+                levelTotals[level] > 0 && (
+                  <div key={level} className={LEVEL_META[level].barClass} style={{ width: `${pct(levelTotals[level])}%` }} />
+                )
+              ))}
             </div>
-            <div className="flex items-center gap-3 text-[10px] text-[#888]">
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500" />{pct(strong)}% strong</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-400" />{pct(developing)}% developing</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-rose-400" />{pct(needsSupport)}% needs support</span>
+            <div className="flex items-center gap-3 text-[10px] text-[#888] flex-wrap">
+              {LEVEL_ORDER.map((level) => (
+                <span key={level} className="flex items-center gap-1">
+                  <span className={`w-2 h-2 rounded-full ${LEVEL_META[level].barClass}`} />
+                  {pct(levelTotals[level])}% {LEVEL_META[level].label.toLowerCase()}
+                </span>
+              ))}
             </div>
           </div>
         </div>

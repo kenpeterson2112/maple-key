@@ -43,8 +43,8 @@ import { sanitizeQuestions } from "@/lib/assessment-types"
 import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
 import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
-import { getProgressForCodes, type BandCounts } from "@/lib/assessment-results"
-import { BAND_META, BAND_ORDER } from "@/lib/assessment-types"
+import { getProgressForCodes, type LevelCounts } from "@/lib/assessment-results"
+import { LEVEL_META, LEVEL_ORDER } from "@/lib/assessment-types"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
 import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
@@ -145,10 +145,10 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const bookmarkedCodes = Array.from(
     new Set(bookmarkedResources.flatMap((r) => r.curriculum_expectations ?? [])),
   )
-  const classProgress: Record<string, BandCounts> =
+  const classProgress: Record<string, LevelCounts> =
     bookmarkedCodes.length > 0 ? getProgressForCodes(bookmarkedCodes) : {}
   const hasClassProgress = Object.values(classProgress).some(
-    (c) => c.strong + c.developing + c.needsSupport > 0,
+    (c) => c.level1 + c.level2 + c.level3 + c.level4 > 0,
   )
 
   useEffect(() => {
@@ -1777,7 +1777,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                       <span className="text-sm font-medium text-[#2C2C2C]">Include recent assessment data</span>
                       <p className="text-xs text-[#666] mt-0.5">
                         {hasClassProgress
-                          ? `Found ${Object.values(classProgress).reduce((sum, c) => sum + c.strong + c.developing + c.needsSupport, 0)} responses across ${Object.keys(classProgress).length} of these expectations — used to target differentiation.`
+                          ? `Found ${Object.values(classProgress).reduce((sum, c) => sum + c.level1 + c.level2 + c.level3 + c.level4, 0)} responses across ${Object.keys(classProgress).length} of these expectations — used to target differentiation.`
                           : "No prior quick check responses for these expectations yet."}
                       </p>
                     </div>
@@ -1786,10 +1786,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   {includeAssessmentData && hasClassProgress && (
                     <div className="mt-4 bg-stone-50 rounded-lg p-4 border border-stone-200 space-y-3">
                       {Object.entries(classProgress)
-                        .filter(([, c]) => c.strong + c.developing + c.needsSupport > 0)
+                        .filter(([, c]) => c.level1 + c.level2 + c.level3 + c.level4 > 0)
                         .sort(([a], [b]) => a.localeCompare(b))
                         .map(([code, counts]) => {
-                          const t = counts.strong + counts.developing + counts.needsSupport
+                          const t = counts.level1 + counts.level2 + counts.level3 + counts.level4
                           return (
                             <div key={code}>
                               <div className="flex items-start gap-2 mb-1.5">
@@ -1801,17 +1801,17 @@ Return a JSON object with exactly these fields (string values are plain text, no
                                 </span>
                               </div>
                               <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-stone-200">
-                                {BAND_ORDER.map((band) => {
-                                  const v = counts[band]
+                                {LEVEL_ORDER.map((level) => {
+                                  const v = counts[level]
                                   if (v === 0) return null
-                                  return <div key={band} className={BAND_META[band].barClass} style={{ width: `${(v / t) * 100}%` }} />
+                                  return <div key={level} className={LEVEL_META[level].barClass} style={{ width: `${(v / t) * 100}%` }} />
                                 })}
                               </div>
                               <p className="mt-1 text-[11px] leading-relaxed">
-                                {BAND_ORDER.filter((band) => counts[band] > 0).map((band, i, arr) => (
-                                  <span key={band}>
-                                    <span className={`font-semibold ${BAND_META[band].textClass}`}>{counts[band]}</span>
-                                    <span className="text-[#888]"> {BAND_META[band].phrase}</span>
+                                {LEVEL_ORDER.filter((level) => counts[level] > 0).map((level, i, arr) => (
+                                  <span key={level}>
+                                    <span className={`font-semibold ${LEVEL_META[level].textClass}`}>{counts[level]}</span>
+                                    <span className="text-[#888]"> {LEVEL_META[level].phrase}</span>
                                     {i < arr.length - 1 && <span className="text-[#C8B8AA]"> · </span>}
                                   </span>
                                 ))}

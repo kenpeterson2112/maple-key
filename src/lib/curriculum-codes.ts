@@ -51,3 +51,27 @@ export function groupByOverall(codes: string[]): Record<string, string[]> {
   }
   return out
 }
+
+// Strands group overall expectations (D1, D2 → strand D "Data"). Only the
+// strands present in CURRICULUM_DESCRIPTIONS are mapped; other subjects'
+// synthetic codes fall back to their raw prefix in strandLabel().
+export const STRANDS: { [key: string]: string } = {
+  D: "Data",
+  F: "Financial Literacy",
+}
+
+export function strandCodeOf(overall: string): string {
+  return overall.charAt(0)
+}
+
+export function strandLabel(strand: string): string {
+  return STRANDS[strand] ?? strand
+}
+
+export function groupByStrand(overalls: string[]): Record<string, string[]> {
+  const out: Record<string, string[]> = {}
+  for (const overall of overalls) {
+    ;(out[strandCodeOf(overall)] ??= []).push(overall)
+  }
+  return out
+}

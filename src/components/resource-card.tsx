@@ -19,7 +19,7 @@ import { useBookmarks } from "@/lib/bookmarks-context"
 import { useState, useRef, useMemo } from "react"
 import ReviewsModal from "./reviews-modal"
 import { withBasePath } from "@/lib/base-path"
-import { summarizeReadiness, type OverallReadiness, type BandCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import { summarizeReadiness, type OverallReadiness, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
 
 const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; label: string }> = {
   poor: { dot: "#B45309", text: "#92400E", label: "Needs Support" },
@@ -199,7 +199,7 @@ function getAccessibilityStyle(accessibilityArray) {
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
-export default function CompactResourceCard({ resource, codeProgress }: { resource: Record<string, unknown>; codeProgress?: Record<string, BandCounts> }) {
+export default function CompactResourceCard({ resource, codeProgress }: { resource: Record<string, unknown>; codeProgress?: Record<string, LevelCounts> }) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
   const [showReviewsModal, setShowReviewsModal] = useState(false)
 

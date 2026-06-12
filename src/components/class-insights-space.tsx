@@ -6,26 +6,11 @@ import {
   getAllTallies,
   aggregateAll,
   isSandboxMode,
+  computeReadinessLevel,
   type LessonTally,
-  type BandCounts,
 } from "@/lib/assessment-results"
 import ClassDashboard from "@/components/class-dashboard"
 import DevSeedControl from "@/components/dev/dev-seed-control"
-
-function total(counts: BandCounts): number {
-  return counts.strong + (counts.developing ?? 0) + counts.needsSupport
-}
-
-function readinessOf(counts: BandCounts): "great" | "good" | "developing" | "poor" | "none" {
-  const t = total(counts)
-  if (t === 0) return "none"
-  const sr = counts.strong / t
-  const nr = counts.needsSupport / t
-  if (sr >= 0.8) return "great"
-  if (sr >= 0.5) return "good"
-  if (nr >= 0.5) return "poor"
-  return "developing"
-}
 
 function formatDate(ts: number): string {
   return new Date(ts).toLocaleDateString("en-CA", { month: "short", day: "numeric" })
@@ -70,9 +55,11 @@ export default function ClassInsightsSpace() {
   const expectationStats = useMemo(() => {
     let attention = 0, developing = 0, strong = 0
     for (const agg of Object.values(data.overall)) {
-      const r = readinessOf(agg.bands)
+      const total = agg.bands.level1 + agg.bands.level2 + agg.bands.level3 + agg.bands.level4
+      if (total === 0) continue
+      const r = computeReadinessLevel(agg.bands)
       if (r === "great" || r === "good") strong++
-      else if (r === "developing") developing++
+      else if (r === "okay") developing++
       else if (r === "poor") attention++
     }
     return { attention, developing, strong }

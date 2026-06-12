@@ -6,60 +6,63 @@
 // the team wants the seeding available everywhere. It writes only to the same
 // localStorage the real Quick Check uses, through the `seedTallies` seam.
 
-import { seedTallies, clearLessonTally, clearAllResults, type BandCounts, type LessonTally } from "./assessment-results"
+import { seedTallies, clearLessonTally, clearAllResults, type LevelCounts, type LessonTally } from "./assessment-results"
+import { LEVEL_ORDER } from "./assessment-types"
 import type { LessonMetadata } from "./lesson-metadata"
 import { CURRICULUM_DESCRIPTIONS } from "./curriculum-codes"
 
 export type CentralLevel = 1 | 2 | 3 | 4
 
-// Per-student band probabilities chosen so a tight (spread≈0) sample lands on the
+// Per-student level probabilities chosen so a tight (spread≈0) sample lands on the
 // matching dashboard badge — see `computeReadinessLevel` thresholds in
-// assessment-results.ts (strong/total ≥.8 → great; ≥.5 → good; needs/total ≥.5 →
-// poor; else okay). Levels: 1 Needs attention, 2 Developing, 3 Strong, 4 Excelling.
-const CENTER: Record<CentralLevel, BandCounts> = {
-  1: { strong: 0.05, developing: 0.25, needsSupport: 0.7 },
-  2: { strong: 0.2, developing: 0.6, needsSupport: 0.2 },
-  3: { strong: 0.65, developing: 0.3, needsSupport: 0.05 },
-  4: { strong: 0.9, developing: 0.1, needsSupport: 0.0 },
+// assessment-results.ts (level4/total ≥.8 → great; (level3+level4)/total ≥.5 →
+// good; level1/total ≥.5 → poor; else okay). CentralLevel 1-4 maps directly onto
+// proficiency Level 1-4.
+const CENTER: Record<CentralLevel, LevelCounts> = {
+  1: { level1: 0.6, level2: 0.25, level3: 0.1, level4: 0.05 },
+  2: { level1: 0.15, level2: 0.5, level3: 0.25, level4: 0.1 },
+  3: { level1: 0.05, level2: 0.2, level3: 0.5, level4: 0.25 },
+  4: { level1: 0.0, level2: 0.05, level3: 0.25, level4: 0.7 },
 }
-const UNIFORM: BandCounts = { strong: 1 / 3, developing: 1 / 3, needsSupport: 1 / 3 }
+const UNIFORM: LevelCounts = { level1: 0.25, level2: 0.25, level3: 0.25, level4: 0.25 }
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v))
 const randInt = (min: number, max: number) => min + Math.floor(Math.random() * (max - min + 1))
 
-// Synthesize one expectation's band counts for `n` students at the given level and
+// Synthesize one expectation's level counts for `n` students at the given level and
 // spread. spread 0 → tight around the level's center; spread 1 → ~uniform/random.
-export function generateCounts(level: CentralLevel, spread: number, n: number): BandCounts {
+export function generateCounts(level: CentralLevel, spread: number, n: number): LevelCounts {
   const s = clamp01(spread)
   const c = CENTER[level]
-  const p: BandCounts = {
-    strong: lerp(c.strong, UNIFORM.strong, s),
-    developing: lerp(c.developing, UNIFORM.developing, s),
-    needsSupport: lerp(c.needsSupport, UNIFORM.needsSupport, s),
+  const p: LevelCounts = {
+    level1: lerp(c.level1, UNIFORM.level1, s),
+    level2: lerp(c.level2, UNIFORM.level2, s),
+    level3: lerp(c.level3, UNIFORM.level3, s),
+    level4: lerp(c.level4, UNIFORM.level4, s),
   }
   // A little jitter that grows with spread keeps totals from looking too clean.
   const jitter = (v: number) => v + (Math.random() - 0.5) * 2 * s * (n / 6)
-  const counts: BandCounts = {
-    strong: Math.max(0, Math.round(jitter(p.strong * n))),
-    developing: Math.max(0, Math.round(jitter(p.developing * n))),
-    needsSupport: Math.max(0, Math.round(jitter(p.needsSupport * n))),
+  const counts: LevelCounts = {
+    level1: Math.max(0, Math.round(jitter(p.level1 * n))),
+    level2: Math.max(0, Math.round(jitter(p.level2 * n))),
+    level3: Math.max(0, Math.round(jitter(p.level3 * n))),
+    level4: Math.max(0, Math.round(jitter(p.level4 * n))),
   }
   return fixSum(counts, n)
 }
 
-// Nudge band counts so they sum to exactly `n` after rounding/jitter.
-function fixSum(c: BandCounts, n: number): BandCounts {
-  const bands: (keyof BandCounts)[] = ["strong", "developing", "needsSupport"]
+// Nudge level counts so they sum to exactly `n` after rounding/jitter.
+function fixSum(c: LevelCounts, n: number): LevelCounts {
   const out = { ...c }
-  let sum = out.strong + out.developing + out.needsSupport
+  let sum = out.level1 + out.level2 + out.level3 + out.level4
   while (sum !== n) {
     if (sum < n) {
-      const k = bands.reduce((a, b) => (out[a] >= out[b] ? a : b))
+      const k = LEVEL_ORDER.reduce((a, b) => (out[a] >= out[b] ? a : b))
       out[k] += 1
       sum += 1
     } else {
-      const positive = bands.filter((b) => out[b] > 0)
+      const positive = LEVEL_ORDER.filter((b) => out[b] > 0)
       const k = positive.reduce((a, b) => (out[a] >= out[b] ? a : b))
       out[k] -= 1
       sum -= 1
@@ -107,9 +110,9 @@ function interleavedPairs(): { subject: string; code: string }[] {
   return out
 }
 
-function buildCounts(codes: string[], level: CentralLevel, spread: number): { byExpectation: Record<string, BandCounts>; attempts: number } {
+function buildCounts(codes: string[], level: CentralLevel, spread: number): { byExpectation: Record<string, LevelCounts>; attempts: number } {
   const attempts = randInt(16, 28) // class size; every student answers every code
-  const byExpectation: Record<string, BandCounts> = {}
+  const byExpectation: Record<string, LevelCounts> = {}
   for (const code of codes) byExpectation[code] = generateCounts(level, spread, attempts)
   return { byExpectation, attempts }
 }
