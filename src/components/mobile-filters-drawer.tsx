@@ -19,7 +19,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/com
 import type { Filters } from "@/lib/types"
 
 const AVAILABLE_GRADES = ["4", "5", "6", "7", "8", "9"]
-const AVAILABLE_SUBJECTS = ["Math", "Science", "Language", "Social Studies", "FSL"]
+const AVAILABLE_SUBJECTS = ["Math", "Science", "Language", "Social Studies", "FSL", "Health & Physical Education"]
 
 const SUBJECT_STRANDS: Record<string, string[]> = {
   Math: [
@@ -41,6 +41,12 @@ const SUBJECT_STRANDS: Record<string, string[]> = {
   Language: ["Media Literacy", "Writing", "Reading", "Oral Communication"],
   "Social Studies": ["Heritage and Identity", "People and Environments", "Power and Governance"],
   FSL: ["Listening", "Speaking", "Reading", "Writing", "Intercultural Understanding"],
+  "Health & Physical Education": [
+    "Social-Emotional Learning Skills",
+    "Active Living",
+    "Movement Competence",
+    "Healthy Living",
+  ],
 }
 
 interface MobileFiltersDrawerProps {
