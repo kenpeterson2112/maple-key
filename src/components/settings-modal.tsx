@@ -4,7 +4,13 @@ import { User, Mail, Globe, School } from "lucide-react"
 import { useState } from "react"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import ClassroomResourcesPicker from "@/components/classroom-resources-picker"
-import { getClassroomResources, setClassroomResources } from "@/lib/classroom-resources"
+import {
+  getClassroomResources,
+  setClassroomResources,
+  getCustomClassroomResources,
+  setCustomClassroomResources,
+  type CustomClassroomResource,
+} from "@/lib/classroom-resources"
 
 interface SettingsModalProps {
   isOpen: boolean
@@ -18,9 +24,13 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [classroomResources, setClassroomResourcesState] = useState<string[]>(() =>
     getClassroomResources()
   )
+  const [customMaterials, setCustomMaterialsState] = useState<CustomClassroomResource[]>(() =>
+    getCustomClassroomResources()
+  )
 
   const handleSave = () => {
     setClassroomResources(classroomResources)
+    setCustomClassroomResources(customMaterials)
     onClose()
   }
 
@@ -88,6 +98,8 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <ClassroomResourcesPicker
               selected={classroomResources}
               onChange={setClassroomResourcesState}
+              customMaterials={customMaterials}
+              onCustomChange={setCustomMaterialsState}
             />
           </div>
 

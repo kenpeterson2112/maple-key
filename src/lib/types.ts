@@ -44,6 +44,8 @@ export interface Resource {
   // Pedagogical deployment (populated by normalize-resources.py and enrich-usage-notes.py)
   instructional_modes?: ("whole-class" | "small-group" | "individual" | "station-rotation")[]
   usage_notes?: string
+  // Curation state
+  is_collection?: boolean
   // Provenance
   metadata: ResourceMetadata
 }

@@ -10,6 +10,7 @@ import {
   Users,
   Hammer,
   Mic,
+  Flag,
 } from "lucide-react"
 import * as Popover from "@radix-ui/react-popover"
 import { AnimatePresence, motion } from "framer-motion"
@@ -18,8 +19,10 @@ import { normalizeGrades } from "@/lib/utils"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useState, useRef, useMemo } from "react"
 import ReviewsModal from "./reviews-modal"
+import FlagModal from "./flag-modal"
 import { withBasePath } from "@/lib/base-path"
-import { summarizeReadiness, type OverallReadiness, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import { coverageForResource, type OverallCoverage, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import type { Resource } from "@/lib/types"
 
 const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; label: string }> = {
   poor: { dot: "#B45309", text: "#92400E", label: "Needs Support" },
@@ -28,12 +31,36 @@ const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; labe
   great: { dot: "#166534", text: "#14532D", label: "Excelling" },
 }
 
-// One pill per overall expectation (e.g. "D1"), colored by the rolled-up
-// readiness of the children this resource covers. Hover (desktop) or tap
-// (mobile) opens a portaled panel with the per-child color-coded breakdown.
-function OverallReadinessPill({ data }: { data: OverallReadiness }) {
+// One pill per overall expectation (e.g. "D1") the resource covers.
+//
+// When the class has recorded data for the overall, the pill is colored by the
+// rolled-up readiness of its children, and hover (desktop) / tap (mobile) opens
+// a portaled panel with the per-child color-coded breakdown.
+//
+// When there's no recorded data (data.level === null) — the common case until a
+// class runs assessments — the pill is rendered as a neutral, non-interactive
+// chip so the card still surfaces every expectation the resource covers. It
+// reuses the same "not assessed" greys as the per-child rows in the panel.
+function OverallReadinessPill({ data }: { data: OverallCoverage }) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  if (data.level === null) {
+    const label = overallLabel(data.overall)
+    const friendly = label !== data.overall ? label : null
+    return (
+      <span
+        className="flex items-center gap-1 px-2 py-0.5 rounded-full border"
+        style={{ borderColor: "#D4C5B540", backgroundColor: "#D4C5B515" }}
+        title={friendly ?? undefined}
+        aria-label={`${data.overall}${friendly ? ` ${friendly}` : ""} — not yet assessed`}
+      >
+        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#D4C5B5" }} />
+        <span className="text-[10px] font-semibold" style={{ color: "#A8998E" }}>{data.overall}</span>
+      </span>
+    )
+  }
+
   const style = READINESS_STYLES[data.level]
 
   const openNow = () => {
@@ -120,6 +147,8 @@ function getSubjectTheme(subject: string) {
     return { bg: "bg-[#F0FDF4]", border: "border-[#86EFAC]", dot: "bg-[#166534]", badge: "bg-gradient-to-r from-[#166534] to-[#14532D] text-white", label: "text-[#166534]" }
   if (s.includes("science"))
     return { bg: "bg-[#EFF6FF]", border: "border-[#93C5FD]", dot: "bg-[#1E40AF]", badge: "bg-gradient-to-r from-[#1E3A8A] to-[#1E293B] text-white", label: "text-[#1E40AF]" }
+  if (s.includes("fsl"))
+    return { bg: "bg-[#F0FDFA]", border: "border-[#5EEAD4]", dot: "bg-[#0D9488]", badge: "bg-gradient-to-r from-[#0D9488] to-[#0F766E] text-white", label: "text-[#0F766E]" }
   if (s.includes("language") || s.includes("english") || s.includes("french") || s.includes("literacy"))
     return { bg: "bg-[#FEFCE8]", border: "border-[#FDE047]", dot: "bg-[#CA8A04]", badge: "bg-gradient-to-r from-[#CA8A04] to-[#A16207] text-white", label: "text-[#92400E]" }
   if (s.includes("social") || s.includes("history") || s.includes("geo"))
@@ -146,7 +175,7 @@ function getPrimaryIcon(modality: string) {
 }
 
 // ── Use-case label ─────────────────────────────────────────────────────────
-function getUseCaseLabel(resource): string {
+function getUseCaseLabel(resource: Resource): string {
   const m = (Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? "")).toLowerCase()
   const text = `${(resource.description ?? "").toLowerCase()} ${(resource.topic_title ?? "").toLowerCase()}`
   const codes = resource.curriculum_expectations?.length ?? 0
@@ -199,9 +228,10 @@ function getAccessibilityStyle(accessibilityArray) {
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
-export default function CompactResourceCard({ resource, codeProgress }: { resource: Record<string, unknown>; codeProgress?: Record<string, LevelCounts> }) {
+export default function CompactResourceCard({ resource, codeProgress }: { resource: Resource; codeProgress?: Record<string, LevelCounts> }) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
   const [showReviewsModal, setShowReviewsModal] = useState(false)
+  const [showFlagModal, setShowFlagModal] = useState(false)
 
   const resourceId = resource.id || resource.topic_title || resource.url || Math.random().toString()
   const isSaved = isBookmarked(resourceId)
@@ -221,10 +251,11 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
   const useCaseLabel = getUseCaseLabel(resource)
   const accessLevel = getAccessibilityStyle(resource.accessibility)
 
-  // Collapse the resource's specific expectations into overalls (D1.1… → D1),
-  // each rolled up to a single readiness level from the class's recorded data.
-  const overallReadiness = useMemo(
-    () => summarizeReadiness((resource.curriculum_expectations as string[]) || [], codeProgress ?? {}),
+  // Collapse the resource's specific expectations into overalls (D1.1… → D1).
+  // Always lists every overall the resource covers; each carries a readiness
+  // level when the class has data for it, or null (neutral pill) when it doesn't.
+  const overallCoverage = useMemo(
+    () => coverageForResource(resource.curriculum_expectations || [], codeProgress ?? {}),
     [resource.curriculum_expectations, codeProgress],
   )
 
@@ -258,6 +289,14 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
               <span className="text-[#C65D3B] text-xs font-black">$</span>
             )}
             <button
+              onClick={() => setShowFlagModal(true)}
+              className="p-1 rounded-lg text-[#A8998E] hover:text-[#C65D3B] hover:bg-[#FFE5CC] transition-colors duration-200"
+              aria-label="Report an issue with this resource"
+              title="Report an issue"
+            >
+              <Flag className="w-3.5 h-3.5" />
+            </button>
+            <button
               onClick={handleToggleSave}
               className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-all duration-200 ${
                 isSaved
@@ -290,7 +329,7 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
         {/* ── Footer: readiness · accessibility · modalities · view (one condensed row) ── */}
         <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0 flex-wrap">
-            {overallReadiness.map((o) => (
+            {overallCoverage.map((o) => (
               <OverallReadinessPill key={o.overall} data={o} />
             ))}
 
@@ -332,6 +371,13 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
       <ReviewsModal
         isOpen={showReviewsModal}
         onClose={() => setShowReviewsModal(false)}
+        resourceId={resourceId}
+        resourceTitle={resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
+      />
+
+      <FlagModal
+        isOpen={showFlagModal}
+        onClose={() => setShowFlagModal(false)}
         resourceId={resourceId}
         resourceTitle={resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
       />

@@ -1,0 +1,194 @@
+[
+  {
+    "activity_number": 1,
+    "french_title": "Le portrait physique : partie 1",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-1",
+    "description": "Introduces vocabulary for describing physical appearance (eyes, hair, beard) using Papa Smurf as a model character to describe someone's looks.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 2,
+    "french_title": "Le portrait physique : partie 2",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-2",
+    "description": "Students hear several people describe their physical characteristics and practice vocabulary for traits like height, face shape, and hair to match descriptions to images.",
+    "strand": ["Listening"],
+    "curriculum_expectations": ["A1.1", "A1.2"]
+  },
+  {
+    "activity_number": 3,
+    "french_title": "Ma personnalité",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-3",
+    "description": "Explores personality traits through a dialogue between a cat and a mouse with very different personalities, learning words like timid, kind, and fearful.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 4,
+    "french_title": "Décrire quelqu’un",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-4",
+    "description": "Focuses on character traits (curious, shy, fearful, mean, friendly), having students recognize and match these descriptions to different characters.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 5,
+    "french_title": "La politesse",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-5",
+    "description": "Teaches politeness in French, including greetings and the difference between the formal \"vous\" and informal \"tu\" when addressing different people.",
+    "strand": ["Speaking", "Intercultural Understanding"],
+    "curriculum_expectations": ["B1.1", "B3.1"]
+  },
+  {
+    "activity_number": 6,
+    "french_title": "Les activités",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-6",
+    "description": "Students listen to an interview where classmates discuss activities they like, learning vocabulary for hobbies like video games, reading, rugby, and roller skating.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 7,
+    "french_title": "Je vais être…",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-7",
+    "description": "Through an episode of \"Minivers,\" students explore occupations and how interests can suggest a future career, matching people to their professions.",
+    "strand": ["Listening", "Speaking"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "activity_number": 8,
+    "french_title": "Lettre de correspondance",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-8",
+    "description": "Introduces the personal profile, where students summarize identity in a few words and study an example profile to prepare for letter writing.",
+    "strand": ["Writing"],
+    "curriculum_expectations": ["D1.1", "D1.2"]
+  },
+  {
+    "activity_number": 9,
+    "french_title": "La célébration culturelle",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-9",
+    "description": "Examines common elements of cultural celebrations through the example of a Cameroonian celebration, identifying features like food, dance, clothing, and stories.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 10,
+    "french_title": "La tradition orale et les contes",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-10",
+    "description": "Highlights the importance of orally-told tales using \"La fourmi et le roi Salomon,\" a story from the oral tradition of Mauritania.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 11,
+    "french_title": "La nourriture traditionnelle",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-11",
+    "description": "Explores traditional Métis cuisine through Joanne, a francophone Métis woman, and her traditional ingredients and family recipes.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 12,
+    "french_title": "Un menu pour une célébration!",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-12",
+    "description": "Looks at food's role in celebrations through Michel and Katia preparing for a Métis rendezvous, including searching for a recipe and making moose stew.",
+    "strand": ["Reading", "Intercultural Understanding"],
+    "curriculum_expectations": ["C1.1", "C3.1"]
+  },
+  {
+    "activity_number": 13,
+    "french_title": "Je voudrais…",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-13",
+    "description": "Set in a restaurant, students follow Josée and a new waiter to learn restaurant vocabulary such as server, customer, and a glass of water.",
+    "strand": ["Speaking", "Listening"],
+    "curriculum_expectations": ["B1.1", "A1.1"]
+  },
+  {
+    "activity_number": 14,
+    "french_title": "Créer une recette",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-14",
+    "description": "Students learn to follow a recipe by exploring an audio storybook for chocolate chip cookies, identifying ingredients and main steps.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 15,
+    "french_title": "Préparons une célébration!",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-15",
+    "description": "Using a story about Mireille making a chocolate cake, students identify what's wrong and put the steps in the correct sequential order.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D1.1"]
+  },
+  {
+    "activity_number": 16,
+    "french_title": "Célébrons!",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-16",
+    "description": "Students read and listen to a text about attending a Métis gathering, focusing on the future tense structure \"je vais aller / je vais…\" for upcoming events.",
+    "strand": ["Reading", "Writing"],
+    "curriculum_expectations": ["C1.1", "D2.1"]
+  },
+  {
+    "activity_number": 17,
+    "french_title": "Explorons l’environnement",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-17",
+    "description": "Introduces vocabulary related to the planet and environment, such as the Earth, ocean, forest, pollution, fish, and animals.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 18,
+    "french_title": "L’environnement, c’est important",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-18",
+    "description": "Explores why we must care for the planet while building environmental vocabulary like pollution, deforestation, the ozone layer, and fossil fuels.",
+    "strand": ["Reading", "Speaking"],
+    "curriculum_expectations": ["C1.1", "B1.1"]
+  },
+  {
+    "activity_number": 19,
+    "french_title": "Les 3 R : Réduire, réutiliser, recycler",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-19",
+    "description": "Through a video, students discover what recycling means and why it matters, learning vocabulary like recycling, sorting centre, and reducing pollution.",
+    "strand": ["Listening", "Writing"],
+    "curriculum_expectations": ["A1.1", "D1.1"]
+  },
+  {
+    "activity_number": 20,
+    "french_title": "Protégeons l’environnement",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-20",
+    "description": "Centred on Earth Day (April 22), students consider everyday actions that help or harm the planet, such as turning off lights and recycling.",
+    "strand": ["Speaking", "Writing"],
+    "curriculum_expectations": ["B1.1", "D1.1"]
+  },
+  {
+    "activity_number": 21,
+    "french_title": "Les communautés francophones au Canada",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-21",
+    "description": "Examines French across Canada's two official languages, showing through a video that French is spoken with many accents beyond Quebec.",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 22,
+    "french_title": "Ô Canada",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-22",
+    "description": "Students listen to the French version of the national anthem \"Ô Canada\" and sort its vocabulary into familiar, cognate, and new words.",
+    "strand": ["Listening", "Reading"],
+    "curriculum_expectations": ["A1.1", "C1.1"]
+  },
+  {
+    "activity_number": 23,
+    "french_title": "Une chanson francophone",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-23",
+    "description": "Introduces a song tied to Franco-Canadian culture, with images and vocabulary about the coureurs des bois of New France (furs, canoe, Great Lakes).",
+    "strand": ["Listening", "Intercultural Understanding"],
+    "curriculum_expectations": ["A1.1", "A3.1"]
+  },
+  {
+    "activity_number": 24,
+    "french_title": "J’aime la chanson…",
+    "url": "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-24",
+    "description": "Students listen to the song \"Au Canada\" by Franco-Canadian artist Gregg LeRock, learning the term \"les paroles\" and studying the song's vocabulary.",
+    "strand": ["Listening", "Writing"],
+    "curriculum_expectations": ["A1.1", "D1.1"]
+  }
+]

@@ -1,18 +1,22 @@
 "use client"
 
-import { useState } from "react"
-import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X } from "lucide-react"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
-import BookmarksModal from "@/components/bookmarks-modal"
 import SettingsModal from "@/components/settings-modal"
+import MaterialsSummary from "@/components/materials-summary"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
+import { readMaterialsSnapshot } from "@/lib/classroom-resources"
 
 export type TopNavSpace = "resources" | "lessons" | "insights"
 
 interface TopNavProps {
   activeSpace: TopNavSpace | null
   onChangeSpace: (space: TopNavSpace) => void
+  onPlanLesson: () => void
+  onOpenMobileFilters?: () => void
+  totalActiveFilters?: number
 }
 
 interface ToggleItem {
@@ -27,12 +31,58 @@ const TOGGLE_ITEMS: ToggleItem[] = [
   { id: "insights",  label: "Insights",  icon: BarChart3 },
 ]
 
-export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
+
+export default function TopNav({
+  activeSpace,
+  onChangeSpace,
+  onPlanLesson,
+  onOpenMobileFilters,
+  totalActiveFilters = 0,
+}: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
-  const [isBookmarksOpen, setIsBookmarksOpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [showSignInHint, setShowSignInHint] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMaterialsOpen, setIsMaterialsOpen] = useState(false)
+  const [materialsTick, setMaterialsTick] = useState(0)
+  const materialsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!isMaterialsOpen) return
+    const handleClickOutside = (event: MouseEvent) => {
+      if (materialsRef.current && !materialsRef.current.contains(event.target as Node)) {
+        setIsMaterialsOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [isMaterialsOpen])
+
+  // Re-read the store every time the popover opens or settings closes so edits land immediately.
+  const materials = useMemo(
+    () => readMaterialsSnapshot(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [materialsTick, isMaterialsOpen, isMobileMenuOpen]
+  )
+
+  const openMaterialsPopover = () => {
+    setMaterialsTick((t) => t + 1)
+    setIsMaterialsOpen((v) => !v)
+  }
+
+  const openSettingsFromMaterials = () => {
+    setIsMaterialsOpen(false)
+    setIsMobileMenuOpen(false)
+    setIsSettingsOpen(true)
+  }
+
+  // When the settings modal closes, bump the tick so the next snapshot re-reads storage.
+  const handleSettingsClose = () => {
+    setIsSettingsOpen(false)
+    setMaterialsTick((t) => t + 1)
+  }
+
+  const showResourceFilters = activeSpace === "resources" && !!onOpenMobileFilters
 
   return (
     <>
@@ -51,8 +101,30 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
             <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} />
 
             <div className="flex items-center gap-2">
+              <div ref={materialsRef} className="relative">
+                <button
+                  onClick={openMaterialsPopover}
+                  className="flex items-center gap-1.5 rounded-full border border-[#E8D5C4] bg-white px-3.5 py-2 text-sm font-semibold text-[#8B4513] shadow-sm transition-all hover:bg-[#FFF5ED]"
+                  title="Classroom materials"
+                >
+                  <SlidersHorizontal size={14} className="text-[#C65D3B]" />
+                  <span>Materials</span>
+                  {materials.total > 0 && (
+                    <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                      {materials.total}
+                    </span>
+                  )}
+                  <ChevronDown size={14} className="text-[#A8998E]" />
+                </button>
+                {isMaterialsOpen && (
+                  <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-[#E8D5C4] bg-white shadow-xl z-50 p-2">
+                    <MaterialsSummary snapshot={materials} onEdit={openSettingsFromMaterials} />
+                  </div>
+                )}
+              </div>
+
               <button
-                onClick={() => setIsBookmarksOpen(true)}
+                onClick={onPlanLesson}
                 className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
                   bookmarkedResources.length > 0
                     ? "bg-[#FF6B35] text-white shadow-sm hover:bg-[#E85A24]"
@@ -112,8 +184,23 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
             <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} compact />
 
             <div className="flex items-center gap-1">
+              {showResourceFilters && (
+                <button
+                  onClick={onOpenMobileFilters}
+                  className="flex items-center gap-1 rounded-full border border-[#E8D5C4] bg-white px-2.5 py-1.5 text-xs font-semibold text-[#8B4513] shadow-sm"
+                  title="Filters"
+                >
+                  <SlidersHorizontal size={12} />
+                  Filters
+                  {totalActiveFilters > 0 && (
+                    <span className="rounded-full bg-[#FF6B35] px-1.5 text-[10px] font-bold text-white">
+                      {totalActiveFilters >= 10 ? "9+" : totalActiveFilters}
+                    </span>
+                  )}
+                </button>
+              )}
               <button
-                onClick={() => setIsBookmarksOpen(true)}
+                onClick={onPlanLesson}
                 className={`relative flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
                   bookmarkedResources.length > 0
                     ? "bg-[#FF6B35] text-white shadow-sm"
@@ -141,6 +228,18 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
 
           {isMobileMenuOpen && (
             <div className="md:hidden mt-3 rounded-2xl border-2 border-[#E8D5C4] bg-white p-3 shadow-lg space-y-2">
+              <div className="rounded-lg bg-[#FFF5ED] px-3 py-2">
+                <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#8B4513]">
+                  <SlidersHorizontal size={16} />
+                  Materials
+                  {materials.total > 0 && (
+                    <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                      {materials.total}
+                    </span>
+                  )}
+                </p>
+                <MaterialsSummary snapshot={materials} onEdit={openSettingsFromMaterials} size="sm" />
+              </div>
               <button
                 onClick={() => {
                   setIsSettingsOpen(true)
@@ -166,8 +265,7 @@ export default function TopNav({ activeSpace, onChangeSpace }: TopNavProps) {
         </div>
       </header>
 
-      <BookmarksModal isOpen={isBookmarksOpen} onClose={() => setIsBookmarksOpen(false)} />
-      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+      <SettingsModal isOpen={isSettingsOpen} onClose={handleSettingsClose} />
     </>
   )
 }

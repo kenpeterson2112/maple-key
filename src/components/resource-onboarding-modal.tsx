@@ -25,8 +25,8 @@ const STEPS: {
     iconBg: "bg-[#FF6B35]/10",
     iconColor: "text-[#FF6B35]",
     title: "Find Your Resources",
-    body: "Start here every time. Maple Key's three-stage AI curation surfaces high-quality, curriculum-aligned materials for your province, grade, and subject — filtered to what's actually available in your classroom.",
-    detail: "Researcher → Review → Assessor — three agents, one curated list.",
+    body: "Start here to find resources for your next lesson. Filter or search to find what you need.",
+    detail: "Find resources → add your favourites → plan a lesson around them.",
   },
   {
     icon: <BookmarkPlus size={28} />,
@@ -42,7 +42,7 @@ const STEPS: {
     iconColor: "text-amber-600",
     title: "Shape the Lesson",
     body: "Answer a few quick design questions — pacing, format, differentiation needs — then Maple Key drafts the lesson plan. Modify it directly until it reflects the true shape of your classroom.",
-    detail: "You stay in control: the AI proposes, you decide.",
+    detail: "You stay in control and have the final say on everything in your lesson.",
   },
   {
     icon: <BarChart3 size={28} />,
@@ -69,8 +69,6 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
       handleClose()
     }
   }
-
-  const current = STEPS[step]
 
   return (
     <DialogPrimitive.Root open={open} onOpenChange={(o) => { if (!o) handleClose() }}>
@@ -106,19 +104,29 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
           </div>
 
           {/* Body */}
-          <div className="px-6 pt-3 pb-5 space-y-4">
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${current.iconBg}`}>
-              <span className={current.iconColor}>{current.icon}</span>
-            </div>
+          {/* All steps stack in the same grid cell so the modal height is
+              locked to the tallest step, regardless of which is active. */}
+          <div className="px-6 pt-3 pb-5 grid">
+            {STEPS.map((s, i) => (
+              <div
+                key={i}
+                aria-hidden={i !== step}
+                className={`col-start-1 row-start-1 space-y-4 ${i === step ? "" : "invisible"}`}
+              >
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${s.iconBg}`}>
+                  <span className={s.iconColor}>{s.icon}</span>
+                </div>
 
-            <h2 className="text-xl font-bold text-[#2C2C2C] leading-snug">{current.title}</h2>
+                <h2 className="text-xl font-bold text-[#2C2C2C] leading-snug">{s.title}</h2>
 
-            <p className="text-sm text-[#444] leading-relaxed">{current.body}</p>
+                <p className="text-sm text-[#444] leading-relaxed">{s.body}</p>
 
-            <div className="flex items-start gap-2.5 bg-white/60 border border-[#E8D5C4] rounded-xl px-4 py-3">
-              <span className="mt-0.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[#FF6B35] mt-1.5" />
-              <p className="text-xs text-[#666] leading-relaxed">{current.detail}</p>
-            </div>
+                <div className="flex items-start gap-2.5 bg-white/60 border border-[#E8D5C4] rounded-xl px-4 py-3">
+                  <span className="mt-0.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[#FF6B35] mt-1.5" />
+                  <p className="text-xs text-[#666] leading-relaxed">{s.detail}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* Footer */}

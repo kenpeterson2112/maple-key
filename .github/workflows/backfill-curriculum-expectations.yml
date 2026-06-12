@@ -1,0 +1,80 @@
+name: Backfill Curriculum Expectations
+
+on:
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: 'Filter to a single subject (e.g. "Math", "Science", "Social Studies"). Leave blank for all.'
+        required: false
+        default: ''
+      limit:
+        description: 'Process at most this many resources (0 = no limit).'
+        required: false
+        default: '0'
+      batch_size:
+        description: 'Resources per Claude call.'
+        required: false
+        default: '10'
+      dry_run:
+        description: 'Print results without writing.'
+        required: false
+        default: 'false'
+      verbose:
+        description: 'Print the raw Claude response for each batch (debug).'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backfill-curriculum-expectations
+  cancel-in-progress: false
+
+jobs:
+  assess:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/fetch-requirements.txt
+
+      - name: Run Assessor
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ARGS=(--batch-size "${{ github.event.inputs.batch_size }}")
+          if [ -n "${{ github.event.inputs.subject }}" ]; then
+            ARGS+=(--filter-subject "${{ github.event.inputs.subject }}")
+          fi
+          if [ "${{ github.event.inputs.limit }}" != "0" ]; then
+            ARGS+=(--limit "${{ github.event.inputs.limit }}")
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS+=(--dry-run)
+          fi
+          if [ "${{ github.event.inputs.verbose }}" = "true" ]; then
+            ARGS+=(--verbose)
+          fi
+          python scripts/assess-curriculum-expectations.py "${ARGS[@]}"
+
+      - name: Commit backfilled resources
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/resources.json docs/resources.json 2>/dev/null || git add public/resources.json
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git commit -m "data: assess curriculum expectations (backfill) [skip ci]"
+          git push

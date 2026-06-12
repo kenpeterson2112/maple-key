@@ -26,12 +26,14 @@ import {
   Pencil,
   MessageSquareText,
   School,
+  Languages,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
-import type { LessonMetadata, LessonArtifact, ArtifactStatus } from "@/lib/lesson-metadata"
+import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage } from "@/lib/lesson-metadata"
 import ArtifactsSection from "@/components/artifacts-section"
 import ArtifactOrganizerModal from "@/components/artifact-organizer-modal"
+import LessonBuildingLoader from "@/components/lesson-building-loader"
 import {
   openPrintWindow,
   escapeHtml,
@@ -42,12 +44,15 @@ import { useBookmarks } from "@/lib/bookmarks-context"
 import { sanitizeQuestions } from "@/lib/assessment-types"
 import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-cache"
 import AssessmentModal from "@/components/assessment-modal"
-import { getClassroomResources, getClassroomResourceLabels } from "@/lib/classroom-resources"
+import { readMaterialsSnapshot, getAllSelectedMaterialLabels } from "@/lib/classroom-resources"
+import MaterialsSummary from "@/components/materials-summary"
+import MaterialsEditorModal from "@/components/materials-editor-modal"
 import { getProgressForCodes, type LevelCounts } from "@/lib/assessment-results"
 import { LEVEL_META, LEVEL_ORDER } from "@/lib/assessment-types"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
 import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
+import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage } from "@/lib/personalization"
 
 interface PlanningQuestion {
   id: string
@@ -80,7 +85,13 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [lessonLength, setLessonLength] = useState(lesson?.lessonLength ?? "60 minutes")
   const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? "3-Part Lesson")
   const [teacherNotes, setTeacherNotes] = useState("")
+  // Language for student-facing reproducibles only (artifacts + printable organizer).
+  // Reopening a saved lesson prefers its stored value; otherwise the remembered preference.
+  const [reproducibleLanguage, setReproducibleLanguageState] =
+    useState<ReproducibleLanguage>(fc?.reproducibleLanguage ?? getReproducibleLanguage())
   const [userMaterials, setUserMaterials] = useState<UserMaterial[]>([])
+  const [isMaterialsEditorOpen, setIsMaterialsEditorOpen] = useState(false)
+  const [materialsTick, setMaterialsTick] = useState(0)
   const [isGenerating, setIsGenerating] = useState(false)
   const [lessonGenerated, setLessonGenerated] = useState(!!lesson)
 
@@ -157,8 +168,10 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasClassProgress])
 
-  const classroomResourceIds = getClassroomResources()
-  const classroomResourceLabels = getClassroomResourceLabels(classroomResourceIds)
+  // materialsTick forces re-read after the in-planner editor saves.
+  void materialsTick
+  const classroomResourceLabels = getAllSelectedMaterialLabels()
+  const materialsSnapshot = readMaterialsSnapshot()
 
   if (!isOpen) return null
 
@@ -179,9 +192,13 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       }
     }
     try {
+      const userEmail = getUserEmail()
       const res = await fetch("/api/generate-lesson", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(userEmail ? { "X-User-Email": userEmail } : {}),
+        },
         body: JSON.stringify({
           resources: bookmarkedResources.map((r) => ({
             title: (r as any).topic_title,
@@ -198,6 +215,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           teacherNotes,
           includeAssessmentData,
           classroomResources: classroomResourceLabels,
+          reproducibleLanguage,
           ...(planningAnswers.length > 0 ? { planningAnswers } : {}),
           ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
         }),
@@ -267,6 +285,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
+          reproducibleLanguage,
         },
       })
       setLatestLesson(logged)
@@ -301,9 +320,13 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     }
 
     try {
+      const qUserEmail = getUserEmail()
       const qRes = await fetch("/api/generate-questions", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(qUserEmail ? { "X-User-Email": qUserEmail } : {}),
+        },
         body: JSON.stringify(buildRequestPayload()),
       })
       if (qRes.ok) {
@@ -433,6 +456,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
+          reproducibleLanguage,
         },
       })
       setLatestLesson(logged)
@@ -500,6 +524,11 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     applyResponseJSON(pasteText, (msg) => setPasteError(msg))
   }
 
+  const handleLanguageChange = (lang: ReproducibleLanguage) => {
+    setReproducibleLanguageState(lang)
+    setReproducibleLanguage(lang)
+  }
+
   const buildRequestPayload = () => ({
     resources: bookmarkedResources.map((r) => ({
       title: (r as any).topic_title,
@@ -516,6 +545,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
     teacherNotes,
     includeAssessmentData,
     classroomResources: classroomResourceLabels,
+    reproducibleLanguage,
     ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
   })
 
@@ -1087,6 +1117,9 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
         {/* Content */}
         <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-6">
+          {isGenerating && !lessonGenerated ? (
+            <LessonBuildingLoader />
+          ) : (
           <div className="max-w-3xl mx-auto space-y-6">
             {lessonGenerated ? (
               <>{/* lesson view below */}
@@ -1749,7 +1782,18 @@ Return a JSON object with exactly these fields (string values are plain text, no
               <>
                 {/* District Notice */}
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-                  <Info size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
+                  <div
+                    className="relative group/districtTip flex-shrink-0 mt-0.5"
+                    tabIndex={0}
+                    aria-label="This is a planned feature but is currently for demo purposes only. No district level customizations are applied."
+                  >
+                    <Info size={20} className="text-blue-600 cursor-help" />
+                    <div className="absolute top-full left-0 mt-1.5 w-60 opacity-0 group-hover/districtTip:opacity-100 group-focus-within/districtTip:opacity-100 transition-opacity pointer-events-none z-[100]">
+                      <div className="bg-[#2C2C2C] text-white text-[11px] leading-snug rounded-lg px-2.5 py-1.5 shadow-xl">
+                        This is a planned feature but is currently for demo purposes only. No district level customizations are applied.
+                      </div>
+                    </div>
+                  </div>
                   <p className="text-sm text-blue-800">
                     <span className="font-medium">District Settings Active:</span> Your district administrator has
                     configured the lesson planner to align with approved pedagogical frameworks and instructional
@@ -1757,7 +1801,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   </p>
                 </div>
 
-                {/* Student Progress Data Section */}
+                {/* Student Progress Data Section — temporarily hidden; will be re-enabled later */}
+                {false && (
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Users size={20} className="text-[#8B4513]" />
@@ -1822,44 +1867,71 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     </div>
                   )}
                 </div>
+                )}
 
-                <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <BookOpen size={20} className="text-[#8B4513]" />
-                    <h3 className="text-lg font-semibold text-[#2C2C2C]">Selected Resources</h3>
-                  </div>
-
-                  {false && showWarning && (
-                    <div className="bg-amber-50 border border-amber-300 rounded-lg p-3 flex items-start gap-3 mb-4">
-                      <AlertTriangle size={18} className="text-amber-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-amber-800">
-                        You've selected resources across multiple topics. Consider narrowing your selection for a more
-                        focused lesson, or the generated plan will cover concepts at a higher level.
-                      </p>
-                    </div>
-                  )}
-
-                  <div className="bg-stone-50 rounded-lg p-3 space-y-2">
-                    {bookmarkedResources.map((resource, index) => (
-                      <div
-                        key={resource.url}
-                        className="flex items-center gap-3 py-2 px-3 bg-white rounded-lg border border-stone-200"
-                      >
-                        <div className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
-                          {index + 1}
-                        </div>
-                        <span className="text-sm text-[#2C2C2C] flex-1 truncate">{resource.topic_title}</span>
-                        {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
-                          <span className="text-xs text-gray-500 flex-shrink-0">
-                            {resource.curriculum_expectations.join(", ")}
-                          </span>
-                        )}
+                {(() => {
+                  const selectedResourcesBlock = (
+                    <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                      <div className="flex items-center gap-2 mb-4">
+                        <BookOpen size={20} className="text-[#8B4513]" />
+                        <h3 className="text-lg font-semibold text-[#2C2C2C]">Selected Resources</h3>
                       </div>
-                    ))}
-                  </div>
-                </div>
 
-                <UserMaterialsSection materials={userMaterials} onChange={setUserMaterials} />
+                      {bookmarkedResources.length === 0 ? (
+                        <div className="bg-stone-50 rounded-lg p-6 flex flex-col items-center gap-3 text-center">
+                          <p className="text-sm font-medium text-[#2C2C2C]">
+                            Want help from our database?
+                          </p>
+                          <p className="text-sm text-[#666] max-w-md">
+                            Browse curated resources and bookmark a few to include them alongside your own materials.
+                          </p>
+                          <button
+                            onClick={onBack}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
+                          >
+                            <ArrowLeft size={16} />
+                            Browse Resources
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="bg-stone-50 rounded-lg p-3 space-y-2">
+                          {bookmarkedResources.map((resource, index) => (
+                            <div
+                              key={resource.url}
+                              className="flex items-center gap-3 py-2 px-3 bg-white rounded-lg border border-stone-200"
+                            >
+                              <div className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
+                                {index + 1}
+                              </div>
+                              <span className="text-sm text-[#2C2C2C] flex-1 truncate">{resource.topic_title}</span>
+                              {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
+                                <span className="text-xs text-gray-500 flex-shrink-0">
+                                  {resource.curriculum_expectations.join(", ")}
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )
+
+                  const userMaterialsBlock = (
+                    <UserMaterialsSection materials={userMaterials} onChange={setUserMaterials} />
+                  )
+
+                  return bookmarkedResources.length > 0 ? (
+                    <>
+                      {selectedResourcesBlock}
+                      {userMaterialsBlock}
+                    </>
+                  ) : (
+                    <>
+                      {userMaterialsBlock}
+                      {selectedResourcesBlock}
+                    </>
+                  )
+                })()}
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
@@ -1936,31 +2008,63 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   </div>
                 </div>
 
-                {classroomResourceLabels.length > 0 && (
-                  <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                    <div className="flex items-center gap-2 mb-3">
+                <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-2">
                       <School size={18} className="text-[#8B4513]" />
-                      <h3 className="text-sm font-semibold text-[#2C2C2C]">Your Classroom Resources</h3>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {classroomResourceLabels.map((label) => (
-                        <span
-                          key={label}
-                          className="inline-block px-2.5 py-1 bg-[#FFF6EC] border border-[#E8D5C4] rounded-full text-xs text-[#8B4513] font-medium"
-                        >
-                          {label}
+                      <h3 className="text-sm font-semibold text-[#2C2C2C]">Your Classroom Materials</h3>
+                      {materialsSnapshot.total > 0 && (
+                        <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                          {materialsSnapshot.total}
                         </span>
-                      ))}
+                      )}
                     </div>
-                    <p className="text-xs text-[#888] mt-2">These will inform your lesson plan. Update them in Settings.</p>
                   </div>
-                )}
+                  <MaterialsSummary
+                    snapshot={materialsSnapshot}
+                    onEdit={() => setIsMaterialsEditorOpen(true)}
+                  />
+                  <p className="text-xs text-[#888] mt-3">
+                    Hover a row to see what's selected. Editing here doesn't reset your planning progress.
+                  </p>
+                </div>
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <FileText size={20} className="text-[#8B4513]" />
-                    <h3 className="text-lg font-semibold text-[#2C2C2C]">Additional Notes</h3>
-                    <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Optional</span>
+                  <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <FileText size={20} className="text-[#8B4513]" />
+                      <h3 className="text-lg font-semibold text-[#2C2C2C]">Additional Notes</h3>
+                      <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Optional</span>
+                    </div>
+
+                    {/* Language for student reproducibles (artifacts + printable organizer) */}
+                    <div className="flex items-center gap-1.5">
+                      <Languages size={15} className="text-[#8B4513]" />
+                      <span className="text-xs font-medium text-[#888] mr-1 hidden sm:inline">
+                        Student handouts
+                      </span>
+                      <div className="inline-flex rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white">
+                        {(["English", "French"] as const).map((lang) => {
+                          const selected = reproducibleLanguage === lang
+                          const label = lang === "French" ? "Français" : "English"
+                          return (
+                            <button
+                              key={lang}
+                              type="button"
+                              onClick={() => handleLanguageChange(lang)}
+                              aria-pressed={selected}
+                              className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+                                selected
+                                  ? "bg-[#FF6B35] text-white shadow-sm"
+                                  : "text-[#888] hover:text-[#FF6B35]"
+                              }`}
+                            >
+                              {label}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
                   </div>
 
                   <textarea
@@ -1972,6 +2076,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   />
                   <p className="text-xs text-gray-500 mt-2">
                     Example: "My class loves competition and games. Marcus and James could lead small groups."
+                    {" "}The <strong>Student handouts</strong> toggle only translates the printable activity sheets — your lesson plan stays in English.
                   </p>
                 </div>
 
@@ -1980,6 +2085,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             )}
           </div>
+          )}
         </div>
 
         {!lessonGenerated && showQuestionsStep && (
@@ -1995,7 +2101,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
           </div>
         )}
 
-        {!lessonGenerated && !showQuestionsStep && (
+        {!lessonGenerated && !showQuestionsStep && !isGenerating && (
           <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
             <div className="max-w-3xl mx-auto space-y-3">
               {generateError && (
@@ -2079,6 +2185,15 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   )}
                 </div>
               )}
+              {reproducibleLanguage === "French" && (
+                <div className="mb-3 flex items-center gap-2 rounded-xl border-2 border-blue-300 bg-blue-50 px-4 py-2.5">
+                  <Languages size={18} className="text-blue-600 shrink-0" />
+                  <p className="text-sm font-medium text-blue-800">
+                    Student handouts will be generated in <strong>French</strong> — the lesson
+                    plan itself stays in English.
+                  </p>
+                </div>
+              )}
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
@@ -2113,10 +2228,17 @@ Return a JSON object with exactly these fields (string values are plain text, no
         <ArtifactOrganizerModal
           artifact={artifacts[organizerArtifactIndex]}
           lessonTitle={lessonTitle}
+          language={activeLesson?.fullContent?.reproducibleLanguage ?? reproducibleLanguage}
           onClose={() => setOrganizerArtifactIndex(null)}
           onSave={(fields) => handleSaveOrganizerFields(organizerArtifactIndex, fields)}
         />
       )}
+
+      <MaterialsEditorModal
+        isOpen={isMaterialsEditorOpen}
+        onClose={() => setIsMaterialsEditorOpen(false)}
+        onSaved={() => setMaterialsTick((t) => t + 1)}
+      />
 
       {showFeedbackDialog && (
         <div className="fixed inset-0 z-[300] flex items-center justify-center">

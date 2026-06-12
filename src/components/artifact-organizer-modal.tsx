@@ -6,25 +6,43 @@ import { openPrintWindow, escapeHtml, nl2br, PRINT_ON_LOAD_SCRIPT } from "@/lib/
 interface Props {
   artifact: LessonArtifact
   lessonTitle: string
+  /** Language of the printed handout. Defaults to English. */
+  language?: "English" | "French"
   onClose: () => void
   onSave: (fields: Record<string, string>) => void
 }
 
-const DEFAULT_FIELDS: { key: string; label: string; placeholder: string }[] = [
-  { key: "q1", label: "What I noticed", placeholder: "Observations students record…" },
-  { key: "q2", label: "What I wonder", placeholder: "Questions students develop…" },
-  { key: "q3", label: "Evidence", placeholder: "Details, sketches, or quotes…" },
-  { key: "q4", label: "My idea", placeholder: "Conclusion or hypothesis…" },
+/**
+ * Default box labels seed the printed handout. Placeholders and the editor's own
+ * field labels stay English — they're teacher-facing tool chrome, never printed.
+ * Only these default label VALUES (which become the printed box headers) localize.
+ */
+const DEFAULT_FIELDS: { key: string; label: string; labelFr: string; placeholder: string }[] = [
+  { key: "q1", label: "What I noticed", labelFr: "Ce que j'ai remarqué", placeholder: "Observations students record…" },
+  { key: "q2", label: "What I wonder", labelFr: "Ce que je me demande", placeholder: "Questions students develop…" },
+  { key: "q3", label: "Evidence", labelFr: "Mes preuves", placeholder: "Details, sketches, or quotes…" },
+  { key: "q4", label: "My idea", labelFr: "Mon idée", placeholder: "Conclusion or hypothesis…" },
 ]
 
-export default function ArtifactOrganizerModal({ artifact, lessonTitle, onClose, onSave }: Props) {
+/** Strings printed on the handout itself (not the editor chrome). */
+const PRINT_STRINGS = {
+  English: { lang: "en", heading: "Editable Graphic Organizer", name: "Name:", date: "Date:" },
+  French: { lang: "fr", heading: "Organisateur graphique", name: "Nom :", date: "Date :" },
+} as const
+
+export default function ArtifactOrganizerModal({ artifact, lessonTitle, language = "English", onClose, onSave }: Props) {
+  const isFrench = language === "French"
   const initial = artifact.organizer?.fields ?? {}
   const [title, setTitle] = useState(initial.title ?? artifact.name)
   const [subtitle, setSubtitle] = useState(
-    initial.subtitle ?? `${lessonTitle} — ${artifact.purpose}`,
+    // French handouts must be self-contained French text — the overall lesson
+    // title is intentionally English (per scope), so don't prepend it here.
+    initial.subtitle ?? (isFrench ? artifact.purpose : `${lessonTitle} — ${artifact.purpose}`),
   )
   const [labels, setLabels] = useState<Record<string, string>>(() =>
-    Object.fromEntries(DEFAULT_FIELDS.map((f) => [`label_${f.key}`, initial[`label_${f.key}`] ?? f.label])),
+    Object.fromEntries(
+      DEFAULT_FIELDS.map((f) => [`label_${f.key}`, initial[`label_${f.key}`] ?? (isFrench ? f.labelFr : f.label)]),
+    ),
   )
 
   const buildFields = (): Record<string, string> => ({
@@ -40,9 +58,14 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, onClose,
 
   const handlePrint = () => {
     onSave(buildFields())
-    const html = renderOrganizerHtml(title, subtitle, DEFAULT_FIELDS.map((f) => ({
-      label: labels[`label_${f.key}`] || f.label,
-    })))
+    const html = renderOrganizerHtml(
+      title,
+      subtitle,
+      DEFAULT_FIELDS.map((f) => ({
+        label: labels[`label_${f.key}`] || (isFrench ? f.labelFr : f.label),
+      })),
+      language,
+    )
     openPrintWindow(html)
   }
 
@@ -126,7 +149,9 @@ function renderOrganizerHtml(
   title: string,
   subtitle: string,
   boxes: { label: string }[],
+  language: "English" | "French" = "English",
 ): string {
+  const t = PRINT_STRINGS[language]
   const boxesHtml = boxes
     .map(
       (b) => `
@@ -138,7 +163,7 @@ function renderOrganizerHtml(
     .join("")
 
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${t.lang}">
 <head>
   <meta charset="UTF-8">
   <title>${escapeHtml(title)}</title>
@@ -228,13 +253,13 @@ function renderOrganizerHtml(
 <body>
   <div class="header">
     <span class="brand">Maple Key</span>
-    <span>Editable Graphic Organizer</span>
+    <span>${escapeHtml(t.heading)}</span>
   </div>
   <h1 class="title">${escapeHtml(title)}</h1>
   <p class="subtitle">${nl2br(subtitle)}</p>
   <div class="name-row">
-    <div class="field"><span class="field-label">Name:</span></div>
-    <div class="field"><span class="field-label">Date:</span></div>
+    <div class="field"><span class="field-label">${escapeHtml(t.name)}</span></div>
+    <div class="field"><span class="field-label">${escapeHtml(t.date)}</span></div>
   </div>
   <div class="grid">${boxesHtml}</div>
   <div class="footer">Maple Key • maplekey.ca</div>

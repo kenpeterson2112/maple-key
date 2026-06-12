@@ -13,6 +13,8 @@ function getSubjectTheme(subject: string) {
     return { bg: "bg-[#F0FDF4]", border: "border-[#86EFAC]", dot: "bg-[#166534]", badge: "bg-gradient-to-r from-[#166534] to-[#14532D] text-white", label: "text-[#166534]" }
   if (s.includes("science"))
     return { bg: "bg-[#EFF6FF]", border: "border-[#93C5FD]", dot: "bg-[#1E40AF]", badge: "bg-gradient-to-r from-[#1E3A8A] to-[#1E293B] text-white", label: "text-[#1E40AF]" }
+  if (s.includes("fsl"))
+    return { bg: "bg-[#F0FDFA]", border: "border-[#5EEAD4]", dot: "bg-[#0D9488]", badge: "bg-gradient-to-r from-[#0D9488] to-[#0F766E] text-white", label: "text-[#0F766E]" }
   if (s.includes("language") || s.includes("english") || s.includes("french") || s.includes("literacy"))
     return { bg: "bg-[#FEFCE8]", border: "border-[#FDE047]", dot: "bg-[#CA8A04]", badge: "bg-gradient-to-r from-[#CA8A04] to-[#A16207] text-white", label: "text-[#92400E]" }
   if (s.includes("social") || s.includes("history") || s.includes("geo"))

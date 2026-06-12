@@ -50,6 +50,7 @@ export default function App() {
   const [resultCount, setResultCount] = useState(0)
 
   const [activeSpace, setActiveSpace] = useState<Space>("resources")
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [showResourceTour, setShowResourceTour] = useState(false)
@@ -130,7 +131,13 @@ export default function App() {
 
   return (
     <div className="fixed inset-0 bg-[#FAF3E0] overflow-hidden flex flex-col">
-      <TopNav activeSpace={topNavSpace} onChangeSpace={(s) => setActiveSpace(s)} />
+      <TopNav
+        activeSpace={topNavSpace}
+        onChangeSpace={(s) => setActiveSpace(s)}
+        onPlanLesson={() => { setPlannerLesson(null); setActiveSpace("lessonplanner") }}
+        onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
+        totalActiveFilters={totalActiveFilters}
+      />
 
       <div className="relative flex-1 min-h-0 overflow-hidden">
         {/* Resources discovery page — always-on landing layer */}
@@ -143,7 +150,8 @@ export default function App() {
           onCountChange={setResultCount}
           inferred={inferred}
           onReset={handleResetInferred}
-          totalActiveFilters={totalActiveFilters}
+          isMobileFiltersOpen={isMobileFiltersOpen}
+          onCloseMobileFilters={() => setIsMobileFiltersOpen(false)}
         />
 
         {/* Overlay spaces — slide in over resources */}

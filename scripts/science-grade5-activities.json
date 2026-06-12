@@ -1,0 +1,362 @@
+[
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 1,
+    "title": "Body Systems",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-1",
+    "description": "Explores what it takes to be an Olympic athlete and how athletes use their muscles, endurance, and body systems for different sports.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1", "B3.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 2,
+    "title": "Local and Large-scale Farming",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-2",
+    "description": "Investigates where food comes from and develops food literacy by examining how foods are grown and produced before reaching stores and markets.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.1", "B1.2"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 3,
+    "title": "Safety First!",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-3",
+    "description": "Examines safety equipment in sport and why protective gear differs from one sport to another to keep athletes safe.",
+    "strand": ["STEM Skills and Connections", "Life Systems"],
+    "curriculum_expectations": ["A1.1", "B1.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 4,
+    "title": "Bionic Design",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-4",
+    "description": "Features emerging technologies, STEM contributions, and Canadian innovations such as robotic arms that are making a difference.",
+    "strand": ["STEM Skills and Connections", "Life Systems"],
+    "curriculum_expectations": ["A3.1", "B1.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 5,
+    "title": "Changes in Body Systems",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-5",
+    "description": "Looks at how the human body is made up of many cells and systems that work together to help it function.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B3.1", "B3.2"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 6,
+    "title": "Global Positioning Systems",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-6",
+    "description": "Introduces how technology such as the global positioning system (GPS) works and the role it plays in everyday life.",
+    "strand": ["STEM Skills and Connections"],
+    "curriculum_expectations": ["A1.1", "A2.1"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 7,
+    "title": "Understanding Body Systems",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-7",
+    "description": "Focuses on the major human body systems, including the nervous system, and how each sends signals or supports the body.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B3.3"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 8,
+    "title": "Comparative Anatomy",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-8",
+    "description": "Explores what anatomy is by comparing the similarities and differences between the structures and systems of humans and various animals.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B2.1", "B3.4"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 9,
+    "title": "Food Labels",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-9",
+    "description": "Examines nutrition facts tables and ingredient lists required on prepackaged foods in Canada, including serving size, calories, and key nutrients.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B1.2", "B3.5"]
+  },
+  {
+    "module": "Scientific Innovations",
+    "activity_number": 10,
+    "title": "Code It! The Digestive System",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-10",
+    "description": "Uses coding and sequencing concepts to learn about the organs and processes of the human digestive system and how to care for the body.",
+    "strand": ["STEM Skills and Connections", "Life Systems"],
+    "curriculum_expectations": ["A3.1", "B3.5"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 1,
+    "title": "Transportation and Energy Consumption",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-1",
+    "description": "Looks at different types of transportation and the sources of energy used to power them, such as electric cars.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1", "C2.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 2,
+    "title": "Transportation and Body Systems",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-2",
+    "description": "Explores active, human-powered transportation methods like walking and biking and how they connect to health and physical activity.",
+    "strand": ["Life Systems", "Matter and Energy"],
+    "curriculum_expectations": ["B1.1", "C1.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 3,
+    "title": "The Evolution of Bicycles",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-3",
+    "description": "Traces how the bicycle has evolved since the late 1400s by comparing the similarities and differences of bicycle designs over time.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 4,
+    "title": "The Benefits of Cycling",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-4",
+    "description": "Examines cycle-friendly communities around the world and how those spaces are designed to support cycling.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 5,
+    "title": "Transportation Methods",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-5",
+    "description": "Explores transportation methods established before modern vehicles, including Indigenous perspectives from the Kitchenuhmaykoosib Inninuwug (K.I.) First Nation.",
+    "strand": ["Science: Cross-Strand"],
+    "curriculum_expectations": ["A1.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 6,
+    "title": "Transportation for a Greener Future",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-6",
+    "description": "Investigates how different types of transportation move and compares their similarities and differences with a focus on greener options.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1", "E2.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 7,
+    "title": "Code It! If... Then...",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-7",
+    "description": "Uses conditional (if/then) coding concepts while exploring active transportation types that can be used based on where someone lives.",
+    "strand": ["STEM Skills and Connections"],
+    "curriculum_expectations": ["A3.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 8,
+    "title": "Winter Wear",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-8",
+    "description": "Explores activities and technology used in extreme winter weather, such as off-road tracked vehicles, and the clothing needed for cold conditions.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C3.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 9,
+    "title": "City Planning, Part 1",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-9",
+    "description": "Examines images of city spaces and how those constructed spaces are planned and designed.",
+    "strand": ["STEM Skills and Connections"],
+    "curriculum_expectations": ["A1.1", "A2.1"]
+  },
+  {
+    "module": "Futures and Possible Futures",
+    "activity_number": 10,
+    "title": "City Planning, Part 2",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Futures-and-Possible-Futures-learning-activity-10",
+    "description": "Continues city planning with a focus on accessibility and sustainability to make environments usable for everyone and protect the planet for future generations.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1", "E2.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 1,
+    "title": "Manufacturing and Our Changing World",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-1",
+    "description": "Introduces manufacturing by exploring how everyday products like packaged food, clothing, and technology are made.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 2,
+    "title": "Producing Plastics",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-2",
+    "description": "Examines how many everyday products are made of plastic and how plastic products are manufactured around the world.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1", "C2.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 3,
+    "title": "Pulp and Paper",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-3",
+    "description": "Explores common paper products and how paper is manufactured, including its effects on people, animals, and the environment.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 4,
+    "title": "What is Waste?",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-4",
+    "description": "Looks at how waste is sorted into categories such as organics, garbage, mixed containers, and paper, and why separate bins matter.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.2"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 5,
+    "title": "Indigenous-led Conservation",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-5",
+    "description": "Shares perspectives from the Kitchenuhmaykoosib Inninuwug (K.I.) First Nation on their relationship to land and water and how it helps protect natural resources.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 6,
+    "title": "Forms of Energy",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-6",
+    "description": "Explains that energy is the ability to do work and exists in many forms, including potential and kinetic energy from sources like the sun, wind, and fuel.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1", "C2.2"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 7,
+    "title": "Code It! We're Fired Up!",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-7",
+    "description": "Uses coding concepts to explore what fire is and how it is created when heat forces gases from a burning object to combine with oxygen at the ignition point.",
+    "strand": ["STEM Skills and Connections", "Matter and Energy"],
+    "curriculum_expectations": ["A3.1", "C2.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 8,
+    "title": "The Impact of Technology",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-8",
+    "description": "Examines how technology, from steam engines to modern devices, helps people and what these innovations have in common.",
+    "strand": ["STEM Skills and Connections"],
+    "curriculum_expectations": ["A1.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 9,
+    "title": "Consuming Energy Responsibly",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-9",
+    "description": "Explores how people consume energy daily and how it can move and change but cannot be destroyed, encouraging responsible energy use.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E2.1"]
+  },
+  {
+    "module": "Global Focus",
+    "activity_number": 10,
+    "title": "Sustainable Manufacturing",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-10",
+    "description": "Looks at fashion as a global process and the series of steps used to manufacture clothing, with attention to sustainability.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.2"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 1,
+    "title": "The Roots of STEM",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-1",
+    "description": "Introduces what STEM learning is and what the acronym (science, technology, engineering, and math) stands for through classroom examples.",
+    "strand": ["STEM Skills and Connections"],
+    "curriculum_expectations": ["A1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 2,
+    "title": "Matter Matters",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-2",
+    "description": "Explores the states of matter through videos and examples, describing what students notice about each state.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 3,
+    "title": "Sustainable Design",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-3",
+    "description": "Examines how architects use science and technology to design homes, buildings, and other structures that are environmentally friendly.",
+    "strand": ["STEM Skills and Connections", "Matter and Energy"],
+    "curriculum_expectations": ["A2.1", "C2.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 4,
+    "title": "Renewable and Non renewable Energy Sources",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-4",
+    "description": "Looks at how Ontario generates electricity from diverse energy sources and how electrical energy can be transformed into other forms of energy.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E2.1", "E2.2"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 5,
+    "title": "States of Matter Changes in Everyday Life",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-5",
+    "description": "Explores the states of matter—solid, liquid, and gas—and how they appear in everyday situations.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C1.1", "C1.2"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 6,
+    "title": "Natural Disasters",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-6",
+    "description": "Examines weather and natural events such as storms, snowstorms, and smog through images and descriptions of conditions across Canada.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 7,
+    "title": "The Power of Water",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-7",
+    "description": "Uses a poem about natural wonders and a video on waterfalls to explore the power and movement of water.",
+    "strand": ["Earth and Space Systems"],
+    "curriculum_expectations": ["E1.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 8,
+    "title": "Animals Adaptations",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-8",
+    "description": "Explores how animals and insects adapt to their environments, including camouflage as a type of adaptation.",
+    "strand": ["Life Systems"],
+    "curriculum_expectations": ["B2.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 9,
+    "title": "Stable Structures",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-9",
+    "description": "Examines what makes structures strong and stable using examples like skyscrapers and key design elements.",
+    "strand": ["Matter and Energy"],
+    "curriculum_expectations": ["C2.1"]
+  },
+  {
+    "module": "Ontario Focus",
+    "activity_number": 10,
+    "title": "Code It! Make Change",
+    "url": "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-10",
+    "description": "Uses coding concepts to explore how matter changes, including physical and chemical changes that occur naturally or are caused by humans.",
+    "strand": ["STEM Skills and Connections", "Matter and Energy"],
+    "curriculum_expectations": ["A3.1", "C1.2"]
+  }
+]

@@ -36,6 +36,7 @@ interface GenerateRequest {
   classroomResources?: string[]
   planningAnswers?: PlanningAnswer[]
   classProgress?: Record<string, LevelCounts>
+  reproducibleLanguage?: "English" | "French"
 }
 
 function formatClassProgress(progress: Record<string, LevelCounts>): string {
@@ -156,6 +157,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     classroomResources,
     planningAnswers,
     classProgress,
+    reproducibleLanguage,
   } = req.body as GenerateRequest
 
   if (!resources || resources.length === 0) {
@@ -201,6 +203,16 @@ Instructional structure guidance: Each resource may include a "Best used as" fie
       ? `The teacher has made these planning decisions — honour them in the lesson:\n${planningAnswers
           .map((a) => `  [${a.questionId}] ${a.questionPrompt}\n  → ${a.answer}`)
           .join("\n")}\nTreat each of the above as a binding choice, not a suggestion.`
+      : ""
+
+  const reproducibleLanguageBlock =
+    reproducibleLanguage === "French"
+      ? `LANGUAGE OVERRIDE FOR STUDENT HANDOUTS: Every entry in the "artifacts" array must have BOTH its "name" AND its "purpose" written ENTIRELY in Canadian French (français canadien), at an elementary reading level appropriate to Grade ${grade}. This is for a French Immersion classroom — these two fields become a printed student handout.
+Both fields are full French sentences/phrases — even when the artifact itself is ABOUT French vocabulary or lists French words as content, the "purpose" field describing it must ALSO be written in French, not just the "name". For example:
+  WRONG (only "name" translated): { "name": "Feuille de vocabulaire — Les directions", "purpose": "Students color-code and label direction words (gauche, droite, nord, sud, est, ouest) with arrows and symbols to reinforce recognition.", "section": "action" }
+  CORRECT (both translated, "section" untouched): { "name": "Feuille de vocabulaire — Les directions", "purpose": "Les élèves colorient et étiquettent les mots de direction (gauche, droite, nord, sud, est, ouest) à l'aide de flèches et de symboles pour renforcer leur reconnaissance.", "section": "action" }
+Do NOT translate anything else: every artifact's "section" value MUST remain exactly one of "mindsOn", "action", "consolidation", or "materials" (these are code keys, not display text), and the lesson title, learning goal, success criteria, lesson body content, differentiation, materials, and assessment questions MUST stay in English.
+Before finalizing your response, re-check every single artifact entry: if "name" is in French, "purpose" must also be in French. Fix any entry where only one of the two was translated.`
       : ""
 
   const templateSections = TEMPLATE_SECTIONS[lessonTemplate]
@@ -289,7 +301,9 @@ ${sectionsSchema}
 
 "successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.
 
-"artifacts" must list every concrete classroom artifact the teacher will need to produce or bring — examples: guided capture sheet, exit ticket, sticky-note reflection template, T-chart, observation sheet, workbook activity, reflection prompt handout. One entry per artifact. Use the artifact's most natural short name in "name". In "purpose", write one short phrase describing what students do with it. In "section", indicate which lesson section ("mindsOn", "action", "consolidation", "materials") it's used in. Do NOT list pre-existing bookmarked resources (those go in "materials.resources"); only list artifacts the teacher must produce or supply themselves. If the lesson genuinely needs no artifacts, return an empty array.`
+"artifacts" must list every concrete classroom artifact the teacher will need to produce or bring — examples: guided capture sheet, exit ticket, sticky-note reflection template, T-chart, observation sheet, workbook activity, reflection prompt handout. One entry per artifact. Use the artifact's most natural short name in "name". In "purpose", write one short phrase describing what students do with it. In "section", indicate which lesson section ("mindsOn", "action", "consolidation", "materials") it's used in. Do NOT list pre-existing bookmarked resources (those go in "materials.resources"); only list artifacts the teacher must produce or supply themselves. If the lesson genuinely needs no artifacts, return an empty array.
+
+${reproducibleLanguageBlock}`
 
   try {
     const message = await client.messages.create({
@@ -314,9 +328,29 @@ ${sectionsSchema}
       return res.status(500).json({ error: "Claude returned malformed JSON. Please try again." })
     }
 
-    console.log(
-      `[generate-lesson] stop=${message.stop_reason} questions=${lesson.assessmentQuestions?.length ?? 0} codes=${lesson.curriculumCodesCovered?.length ?? 0} planningAnswers=${planningAnswers?.length ?? 0} excluded=${lesson.excludedResources?.length ?? 0}`,
-    )
+    const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ?? req.socket?.remoteAddress ?? "unknown"
+    const userEmail = (req.headers["x-user-email"] as string | undefined) ?? ""
+    console.log(JSON.stringify({
+      event: "lesson_generated",
+      ts: new Date().toISOString(),
+      user: userEmail || null,
+      ip,
+      ua: req.headers["user-agent"] ?? "",
+      grade,
+      subject,
+      province: null,
+      lessonTemplate,
+      lessonLength,
+      codesCount: lesson.curriculumCodesCovered?.length ?? 0,
+      codes: lesson.curriculumCodesCovered ?? [],
+      resourcesCount: resources.length,
+      planningAnswersCount: planningAnswers?.length ?? 0,
+      excludedCount: lesson.excludedResources?.length ?? 0,
+      assessmentQuestionsCount: lesson.assessmentQuestions?.length ?? 0,
+      stop: message.stop_reason,
+      tokensIn: message.usage?.input_tokens ?? 0,
+      tokensOut: message.usage?.output_tokens ?? 0,
+    }))
 
     return res.status(200).json(lesson)
   } catch (err) {
