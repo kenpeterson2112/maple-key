@@ -81,7 +81,7 @@ interface SubjectPool {
 }
 
 const POOL: SubjectPool[] = [
-  { subject: "Mathematics", codes: Object.keys(CURRICULUM_DESCRIPTIONS) },
+  { subject: "Math", codes: Object.keys(CURRICULUM_DESCRIPTIONS) },
   { subject: "Language", codes: ["LR.1", "LR.2", "LW.1", "LW.2", "LO.1", "LM.1"] },
   { subject: "Science", codes: ["SL.1", "SL.2", "SE.1", "SM.1", "SS.1"] },
   { subject: "Social Studies", codes: ["SH.1", "SH.2", "SP.1", "SG.1"] },

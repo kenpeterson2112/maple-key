@@ -11,6 +11,7 @@ import {
 } from "@/lib/assessment-results"
 import ClassDashboard from "@/components/class-dashboard"
 import DevSeedControl from "@/components/dev/dev-seed-control"
+import { normalizeSubject } from "@/lib/subjects"
 
 function formatDate(ts: number): string {
   return new Date(ts).toLocaleDateString("en-CA", { month: "short", day: "numeric" })
@@ -28,25 +29,27 @@ export default function ClassInsightsSpace() {
   const [reloadNonce, setReloadNonce] = useState(0)
   const tallies = useMemo<LessonTally[]>(() => getAllTallies(), [reloadNonce])
 
-  const allSubjects = useMemo(() => uniqueSorted(tallies.map(t => t.subject)), [tallies])
+  const allSubjects = useMemo(() => uniqueSorted(tallies.map(t => normalizeSubject(t.subject))), [tallies])
 
-  // Subject is the primary tab; grade is a sub-tab scoped to the active subject.
+  // A teacher only ever cares about one grade/subject combo at a time, so both
+  // filters are single-select with no "all" option.
   const [activeSubject, setActiveSubject] = useState<string>("")
-  const [activeGrade, setActiveGrade] = useState<string>("") // "" = all grades
+  const [activeGrade, setActiveGrade] = useState<string>("")
 
   const subject = activeSubject || allSubjects[0] || ""
 
   // Only the grades that actually appear within the active subject.
   const subjectGrades = useMemo(
-    () => uniqueSorted(tallies.filter(t => t.subject === subject).map(t => t.grade)),
+    () => uniqueSorted(tallies.filter(t => normalizeSubject(t.subject) === subject).map(t => t.grade)),
     [tallies, subject]
   )
 
-  // Drop a stale grade selection when it isn't present in the active subject.
-  const grade = activeGrade && subjectGrades.includes(activeGrade) ? activeGrade : ""
+  // Fall back to the first available grade when none is selected (or the
+  // selection doesn't exist within the active subject).
+  const grade = subjectGrades.includes(activeGrade) ? activeGrade : (subjectGrades[0] || "")
 
   const filtered = useMemo(
-    () => tallies.filter(t => t.subject === subject && (grade === "" || t.grade === grade)),
+    () => tallies.filter(t => normalizeSubject(t.subject) === subject && t.grade === grade),
     [tallies, subject, grade]
   )
 
@@ -116,50 +119,34 @@ export default function ClassInsightsSpace() {
         </div>
       </header>
 
-      {/* Subject folder tabs + grade sub-tabs */}
-      <div className="flex-shrink-0 bg-[#FAF3E0] px-6 pt-4">
-        <div className="mx-auto max-w-3xl">
-          {/* Subjects — folder tabs */}
-          <div className="flex flex-wrap items-end gap-1 border-b border-[#E8D5C4]">
-            {allSubjects.map((s) => {
-              const isActive = s === subject
-              return (
-                <button
-                  key={s}
-                  onClick={() => { setActiveSubject(s); setActiveGrade("") }}
-                  className={
-                    isActive
-                      ? "relative -mb-px rounded-t-xl border border-b-0 border-t-2 border-[#E8D5C4] border-t-[#FF6B35] bg-white px-4 py-2.5 text-sm font-bold text-[#2C2C2C] shadow-[0_-1px_4px_rgba(0,0,0,0.04)]"
-                      : "rounded-t-xl border border-transparent px-4 py-2 text-sm font-medium text-[#8B7355] transition-colors hover:bg-white/60 hover:text-[#2C2C2C]"
-                  }
-                >
-                  {s}
-                </button>
-              )
-            })}
-          </div>
+      {/* Subject + grade filters — one combo at a time */}
+      <div className="flex-shrink-0 border-b border-[#E8D5C4] bg-[#FAF3E0] px-6 py-3">
+        <div className="mx-auto flex max-w-3xl flex-wrap items-center gap-3">
+          <label className="flex items-center gap-2 text-xs font-semibold text-[#8B7355]">
+            Subject
+            <select
+              value={subject}
+              onChange={(e) => { setActiveSubject(e.target.value); setActiveGrade("") }}
+              className="rounded-lg border border-[#E8D5C4] bg-white px-2.5 py-1.5 text-sm font-bold text-[#2C2C2C] cursor-pointer hover:border-[#FF6B35]/50 transition-colors"
+            >
+              {allSubjects.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </label>
 
-          {/* Grades — sub-tabs, scoped to the active subject */}
-          {subjectGrades.length > 1 && (
-            <div className="flex flex-wrap items-center gap-4 px-1 pt-3">
-              {[{ label: "All grades", value: "" }, ...subjectGrades.map(g => ({ label: `Gr ${g}`, value: g }))].map((opt) => {
-                const isActive = grade === opt.value
-                return (
-                  <button
-                    key={opt.value || "__all"}
-                    onClick={() => setActiveGrade(opt.value)}
-                    className={`relative border-b-2 pb-1.5 text-xs font-semibold transition-colors ${
-                      isActive
-                        ? "border-[#FF6B35] text-[#2C2C2C]"
-                        : "border-transparent text-[#999] hover:text-[#2C2C2C]"
-                    }`}
-                  >
-                    {opt.label}
-                  </button>
-                )
-              })}
-            </div>
-          )}
+          <label className="flex items-center gap-2 text-xs font-semibold text-[#8B7355]">
+            Grade
+            <select
+              value={grade}
+              onChange={(e) => setActiveGrade(e.target.value)}
+              className="rounded-lg border border-[#E8D5C4] bg-white px-2.5 py-1.5 text-sm font-bold text-[#2C2C2C] cursor-pointer hover:border-[#FF6B35]/50 transition-colors"
+            >
+              {subjectGrades.map((g) => (
+                <option key={g} value={g}>Grade {g}</option>
+              ))}
+            </select>
+          </label>
         </div>
       </div>
 
