@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-12T06:26:54Z",
-    "total_count": 1724,
+    "generated_at": "2026-06-13T06:09:49Z",
+    "total_count": 1726,
     "schema_version": "2.1"
   },
   "resources": [
@@ -97577,6 +97577,123 @@
       "id": "r-2560",
       "metadata": {
         "added_at": "2026-06-12",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Facts About Earth - Science@NASA",
+      "description": "NASA's authoritative resource providing comprehensive facts about Earth, including its composition, atmosphere, and place in the solar system. Suitable for students learning about Earth and Space Systems with scientifically accurate, up-to-date information.",
+      "url": "https://science.nasa.gov/earth/facts/",
+      "publisher_creator": "NASA",
+      "grade_level": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A3.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "canada",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2561",
+      "metadata": {
+        "added_at": "2026-06-13",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Google Earth - Interactive 3D Mapping Tool",
+      "description": "Google Earth provides an interactive, photorealistic digital version of our planet, allowing students to explore geographical features, landscapes, and ecosystems from above. Ideal for Earth and Space Systems and STEM skills development through visualization and exploration.",
+      "url": "https://earth.google.com/",
+      "publisher_creator": "Google",
+      "grade_level": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems",
+        "STEM Skills and Connections"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "canada",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "canada",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2562",
+      "metadata": {
+        "added_at": "2026-06-13",
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
