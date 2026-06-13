@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-13T06:09:49Z",
-    "total_count": 1726,
+    "generated_at": "2026-06-13T06:59:58Z",
+    "total_count": 1728,
     "schema_version": "2.1"
   },
   "resources": [
@@ -97692,6 +97692,111 @@
         }
       ],
       "id": "r-2562",
+      "metadata": {
+        "added_at": "2026-06-13",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Ontario - Province Overview and Geography",
+      "description": "Comprehensive encyclopedia entry covering Ontario's geography, history, boundaries, and role as Canada's most populous province. Provides factual information about the province's location, size, and demographic significance suitable for junior grades social studies.",
+      "url": "https://thecanadianencyclopedia.ca/en/article/ontario",
+      "publisher_creator": "The Canadian Encyclopedia",
+      "grade_level": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "grade_band": "junior",
+      "subject": "Social Studies",
+      "strand": [
+        "People and Environments"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B1.3"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "social_studies",
+          "strand": "people_and_environments",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2563",
+      "metadata": {
+        "added_at": "2026-06-13",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Canada Maps and Facts",
+      "description": "World Atlas resource featuring detailed maps of Canada showing major cities, terrain, national parks, rivers, international borders, and key geographical facts. Useful for understanding Canada's physical geography and regional organization.",
+      "url": "https://www.worldatlas.com/maps/canada",
+      "publisher_creator": "World Atlas",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "junior",
+      "subject": "Social Studies",
+      "strand": [
+        "People and Environments"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.3",
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "canada",
+          "grade": "[6, 7, 8]",
+          "subject": "social_studies",
+          "strand": "people_and_environments",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2564",
       "metadata": {
         "added_at": "2026-06-13",
         "added_by": "maple_key_team",
