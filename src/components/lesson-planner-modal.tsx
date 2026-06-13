@@ -29,6 +29,7 @@ import {
   Languages,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
+import { normalizeGrades } from "@/lib/utils"
 import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
 import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage } from "@/lib/lesson-metadata"
 import ArtifactsSection from "@/components/artifacts-section"
@@ -260,7 +261,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setArtifacts(incomingArtifacts)
       const logged = logLesson({
         title: data.title ?? "",
-        grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
+        grade: normalizeGrades((bookmarkedResources[0] as any)?.grade_level)[0] ?? "",
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),
@@ -431,7 +432,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setArtifacts(incomingArtifacts)
       const logged = logLesson({
         title: data.title ?? "",
-        grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
+        grade: normalizeGrades((bookmarkedResources[0] as any)?.grade_level)[0] ?? "",
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),

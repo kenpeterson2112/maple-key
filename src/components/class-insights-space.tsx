@@ -12,6 +12,14 @@ import {
 import ClassDashboard from "@/components/class-dashboard"
 import DevSeedControl from "@/components/dev/dev-seed-control"
 import { normalizeSubject } from "@/lib/subjects"
+import { normalizeGrades } from "@/lib/utils"
+
+// Tallies recorded before the grade_level normalization fix may carry
+// bracket/quote artifacts (e.g. "[9]") — clean those up for display so they
+// don't show up as duplicate grade options alongside "9".
+function normalizeGrade(grade: string): string {
+  return normalizeGrades([grade])[0] ?? grade
+}
 
 function formatDate(ts: number): string {
   return new Date(ts).toLocaleDateString("en-CA", { month: "short", day: "numeric" })
@@ -40,7 +48,7 @@ export default function ClassInsightsSpace() {
 
   // Only the grades that actually appear within the active subject.
   const subjectGrades = useMemo(
-    () => uniqueSorted(tallies.filter(t => normalizeSubject(t.subject) === subject).map(t => t.grade)),
+    () => uniqueSorted(tallies.filter(t => normalizeSubject(t.subject) === subject).map(t => normalizeGrade(t.grade))),
     [tallies, subject]
   )
 
@@ -49,7 +57,7 @@ export default function ClassInsightsSpace() {
   const grade = subjectGrades.includes(activeGrade) ? activeGrade : (subjectGrades[0] || "")
 
   const filtered = useMemo(
-    () => tallies.filter(t => normalizeSubject(t.subject) === subject && t.grade === grade),
+    () => tallies.filter(t => normalizeSubject(t.subject) === subject && normalizeGrade(t.grade) === grade),
     [tallies, subject, grade]
   )
 
@@ -198,7 +206,7 @@ export default function ClassInsightsSpace() {
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-[#2C2C2C] truncate">{t.title}</p>
                       <p className="text-xs text-[#888]">
-                        Gr {t.grade} · {t.subject} · {t.attempts}{" "}
+                        Gr {normalizeGrade(t.grade)} · {normalizeSubject(t.subject)} · {t.attempts}{" "}
                         {t.attempts === 1 ? "response" : "responses"}
                       </p>
                     </div>
