@@ -5,6 +5,7 @@ import { Calendar, Check, BookOpen, ClipboardCheck, ArrowRight, Library } from "
 import { getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { getLessonTally } from "@/lib/assessment-results"
+import { useGlobalFilters } from "@/lib/global-filters"
 import DevSeedControl from "@/components/dev/dev-seed-control"
 import PageHeader from "@/components/page-header"
 
@@ -20,25 +21,28 @@ function formatDate(timestamp: number): string {
 
 export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
   const lessons = useMemo(() => getLessonLog(), [])
+  const globalFilters = useGlobalFilters()
   // The sample-data control bumps this to re-read per-lesson tallies (read inline on render).
   const [reloadNonce, setReloadNonce] = useState(0)
-  const [subject, setSubject] = useState<string>("All")
   const [sort, setSort] = useState<SortKey>("newest")
 
-  const subjects = useMemo(() => {
-    const set = new Set<string>()
-    for (const l of lessons) if (l.subject) set.add(l.subject)
-    return ["All", ...Array.from(set).sort()]
-  }, [lessons])
-
   const visible = useMemo(() => {
-    let list = subject === "All" ? lessons : lessons.filter((l) => l.subject === subject)
-    list = [...list]
+    let list = [...lessons]
+
+    // Filter by global curriculum filters
+    if (globalFilters.state.subject && globalFilters.state.subject !== "") {
+      list = list.filter((l) => l.subject === globalFilters.state.subject)
+    }
+    if (globalFilters.state.grade && globalFilters.state.grade !== "") {
+      list = list.filter((l) => l.grade === globalFilters.state.grade)
+    }
+
+    // Sort
     if (sort === "newest") list.sort((a, b) => b.timestamp - a.timestamp)
     else if (sort === "oldest") list.sort((a, b) => a.timestamp - b.timestamp)
     else list.sort((a, b) => a.title.localeCompare(b.title))
     return list
-  }, [lessons, subject, sort])
+  }, [lessons, globalFilters.state.subject, globalFilters.state.grade, sort])
 
   return (
     <div className="w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden">
@@ -49,18 +53,6 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
 
       {/* Controls */}
       <div className="px-4 md:px-6 py-3 border-b border-[#E8D5C4] bg-[#FAF3E0] flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-2">
-          <label className="text-xs font-semibold uppercase tracking-wider text-[#A8998E]">Subject</label>
-          <select
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            className="px-3 py-1.5 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors"
-          >
-            {subjects.map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
-        </div>
         <div className="flex items-center gap-2">
           <label className="text-xs font-semibold uppercase tracking-wider text-[#A8998E]">Sort</label>
           <select
