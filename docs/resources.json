@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-13T06:59:58Z",
-    "total_count": 1728,
+    "generated_at": "2026-06-14T07:24:43Z",
+    "total_count": 1729,
     "schema_version": "2.1"
   },
   "resources": [
@@ -97799,6 +97799,58 @@
       "id": "r-2564",
       "metadata": {
         "added_at": "2026-06-13",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Ontario Maps and Geographic Facts",
+      "description": "World Atlas provides detailed geographic information about Ontario, including its area, landforms, bodies of water, and borders with other provinces and territories. This resource is useful for understanding Ontario's physical geography and spatial relationships.",
+      "url": "https://www.worldatlas.com/maps/canada/ontario",
+      "publisher_creator": "World Atlas",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "intermediate",
+      "subject": "Social Studies",
+      "strand": [
+        "People and Environments"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B1.2",
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8]",
+          "subject": "social_studies",
+          "strand": "people_and_environments",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2565",
+      "metadata": {
+        "added_at": "2026-06-14",
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
