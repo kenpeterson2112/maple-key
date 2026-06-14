@@ -5,6 +5,7 @@ import { Search, BookOpen, BarChart3, Settings, LogIn, Menu, X, SlidersHorizonta
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
+import CurriculumFilterBar from "@/components/curriculum-filter-bar"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
@@ -265,6 +266,9 @@ export default function TopNav({
             </div>
           )}
         </div>
+
+        {/* Curriculum filter bar */}
+        <CurriculumFilterBar />
       </header>
 
       <SettingsModal isOpen={isSettingsOpen} onClose={handleSettingsClose} />

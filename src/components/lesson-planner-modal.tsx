@@ -51,7 +51,7 @@ import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
 import { type UserMaterial } from "@/components/user-materials-section"
 import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage } from "@/lib/personalization"
-import PlanContextBar from "@/components/plan-context-bar"
+import { useGlobalFilters } from "@/lib/global-filters"
 import PlanResourceSearch from "@/components/plan-resource-search"
 import LessonMaterials from "@/components/lesson-materials"
 import type { SidebarFilters } from "@/lib/use-filtered-resources"
@@ -97,6 +97,7 @@ export default function LessonPlannerModal({
   onSidebarFilterChange,
 }: LessonPlannerModalProps) {
   const { clearBookmarks, removeBookmark } = useBookmarks()
+  const globalFilters = useGlobalFilters()
   const fc = lesson?.fullContent
 
   const [includeAssessmentData, setIncludeAssessmentData] = useState(false)
@@ -1778,11 +1779,15 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             ) : (
               <>
-                {/* Context bar + embedded resource search */}
-                <PlanContextBar filters={filters} setFilters={setFilters} />
-
+                {/* Embedded resource search */}
                 <PlanResourceSearch
-                  filters={filters}
+                  filters={{
+                    ...filters,
+                    province: globalFilters.state.province,
+                    grade: globalFilters.state.grade,
+                    subject: globalFilters.state.subject,
+                    strand: globalFilters.state.strand,
+                  }}
                   setFilters={setFilters}
                   sidebarFilters={sidebarFilters}
                   onSidebarFilterChange={onSidebarFilterChange}

@@ -8,6 +8,7 @@ import {
   isSandboxMode,
   type LessonTally,
 } from "@/lib/assessment-results"
+import { useGlobalFilters } from "@/lib/global-filters"
 import ClassDashboard from "@/components/class-dashboard"
 import DevSeedControl from "@/components/dev/dev-seed-control"
 import PageHeader from "@/components/page-header"
@@ -36,15 +37,12 @@ export default function ClassInsightsSpace() {
   // (they're otherwise read once on mount).
   const [reloadNonce, setReloadNonce] = useState(0)
   const tallies = useMemo<LessonTally[]>(() => getAllTallies(), [reloadNonce])
+  const globalFilters = useGlobalFilters()
 
   const allSubjects = useMemo(() => uniqueSorted(tallies.map(t => normalizeSubject(t.subject))), [tallies])
 
-  // A teacher only ever cares about one grade/subject combo at a time, so both
-  // filters are single-select with no "all" option.
-  const [activeSubject, setActiveSubject] = useState<string>("")
-  const [activeGrade, setActiveGrade] = useState<string>("")
-
-  const subject = activeSubject || allSubjects[0] || ""
+  // Use global filters for subject and grade
+  const subject = globalFilters.state.subject ? normalizeSubject(globalFilters.state.subject) : (allSubjects[0] || "")
 
   // Only the grades that actually appear within the active subject.
   const subjectGrades = useMemo(
@@ -52,9 +50,10 @@ export default function ClassInsightsSpace() {
     [tallies, subject]
   )
 
-  // Fall back to the first available grade when none is selected (or the
-  // selection doesn't exist within the active subject).
-  const grade = subjectGrades.includes(activeGrade) ? activeGrade : (subjectGrades[0] || "")
+  // Use global grade filter if set and valid for the subject
+  const grade = (globalFilters.state.grade && subjectGrades.includes(globalFilters.state.grade))
+    ? globalFilters.state.grade
+    : (subjectGrades[0] || "")
 
   const filtered = useMemo(
     () => tallies.filter(t => normalizeSubject(t.subject) === subject && normalizeGrade(t.grade) === grade),
@@ -99,35 +98,6 @@ export default function ClassInsightsSpace() {
             Sandbox
           </span>
         )}
-
-        {/* Subject + grade filters — one combo at a time */}
-        <div className="flex items-center gap-3">
-          <label className="flex items-center gap-2 text-xs font-semibold text-[#8B7355]">
-            Subject
-            <select
-              value={subject}
-              onChange={(e) => { setActiveSubject(e.target.value); setActiveGrade("") }}
-              className="rounded-lg border border-[#E8D5C4] bg-white px-2.5 py-1.5 text-sm font-bold text-[#2C2C2C] cursor-pointer hover:border-[#FF6B35]/50 transition-colors"
-            >
-              {allSubjects.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
-          </label>
-
-          <label className="flex items-center gap-2 text-xs font-semibold text-[#8B7355]">
-            Grade
-            <select
-              value={grade}
-              onChange={(e) => setActiveGrade(e.target.value)}
-              className="rounded-lg border border-[#E8D5C4] bg-white px-2.5 py-1.5 text-sm font-bold text-[#2C2C2C] cursor-pointer hover:border-[#FF6B35]/50 transition-colors"
-            >
-              {subjectGrades.map((g) => (
-                <option key={g} value={g}>Grade {g}</option>
-              ))}
-            </select>
-          </label>
-        </div>
 
         <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
       </PageHeader>
