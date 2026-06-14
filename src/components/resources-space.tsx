@@ -1,5 +1,7 @@
 "use client"
 
+import { Compass } from "lucide-react"
+import PageHeader from "@/components/page-header"
 import HeroPersonalize from "@/components/hero-personalize"
 import SidebarFilters from "@/components/sidebar-filters"
 import ResultsSection from "@/components/results-section"
@@ -34,6 +36,8 @@ export default function ResourcesSpace({
 }: ResourcesSpaceProps) {
   return (
     <div className="flex flex-col h-full bg-[#FAF3E0] overflow-hidden">
+      <PageHeader icon={Compass} title="Resources" iconColor="#C65D3B" iconBg="bg-[#FFE5CC]" />
+
       <HeroPersonalize
         filters={filters}
         setFilters={setFilters}

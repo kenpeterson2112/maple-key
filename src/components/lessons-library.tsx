@@ -1,11 +1,12 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { Calendar, Check, BookOpen, ClipboardCheck, ArrowRight } from "lucide-react"
+import { Calendar, Check, BookOpen, ClipboardCheck, ArrowRight, Sparkles } from "lucide-react"
 import { getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { getLessonTally } from "@/lib/assessment-results"
 import DevSeedControl from "@/components/dev/dev-seed-control"
+import PageHeader from "@/components/page-header"
 
 interface LessonsLibraryProps {
   onOpenLesson: (lesson: LessonMetadata) => void
@@ -42,15 +43,12 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
   return (
     <div className="w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden">
       {/* Title strip */}
-      <div className="flex items-center gap-2 px-6 md:px-8 py-4 border-b border-[#E8D5C4] bg-white">
-        <h2 className="text-xl font-bold text-[#2C2C2C]">All Lessons</h2>
-        <div className="ml-auto">
-          <DevSeedControl scope={{ kind: "lessons", lessons }} onChanged={() => setReloadNonce((n) => n + 1)} />
-        </div>
-      </div>
+      <PageHeader icon={Sparkles} title="All Lessons" iconColor="#7C3AED" iconBg="bg-violet-100">
+        <DevSeedControl scope={{ kind: "lessons", lessons }} onChanged={() => setReloadNonce((n) => n + 1)} />
+      </PageHeader>
 
       {/* Controls */}
-      <div className="px-5 md:px-8 py-4 border-b border-[#E8D5C4] bg-[#FAF3E0]/90 flex flex-wrap items-center gap-3">
+      <div className="px-4 md:px-6 py-3 border-b border-[#E8D5C4] bg-[#FAF3E0] flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-2">
           <label className="text-xs font-semibold uppercase tracking-wider text-[#A8998E]">Subject</label>
           <select
