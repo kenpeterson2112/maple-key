@@ -5,9 +5,7 @@ import {
   ArrowLeft,
   Sparkles,
   X,
-  Info,
   Users,
-  BookOpen,
   Layout,
   Clock,
   FileText,
@@ -52,8 +50,13 @@ import { getProgressForCodes, type LevelCounts } from "@/lib/assessment-results"
 import { LEVEL_META, LEVEL_ORDER } from "@/lib/assessment-types"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
-import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
+import { type UserMaterial } from "@/components/user-materials-section"
 import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage } from "@/lib/personalization"
+import PlanContextBar from "@/components/plan-context-bar"
+import PlanResourceSearch from "@/components/plan-resource-search"
+import LessonMaterials from "@/components/lesson-materials"
+import type { SidebarFilters } from "@/lib/use-filtered-resources"
+import type { Filters } from "@/lib/types"
 
 interface PlanningQuestion {
   id: string
@@ -76,10 +79,25 @@ interface LessonPlannerModalProps {
   bookmarkedResources: Resource[]
   asSpace?: boolean
   lesson?: LessonMetadata | null
+  filters: Filters
+  setFilters: (filters: Filters) => void
+  sidebarFilters: SidebarFilters
+  onSidebarFilterChange: (group: string, items: string[]) => void
 }
 
-export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarkedResources, asSpace = false, lesson = null }: LessonPlannerModalProps) {
-  const { clearBookmarks } = useBookmarks()
+export default function LessonPlannerModal({
+  isOpen,
+  onClose,
+  onBack,
+  bookmarkedResources,
+  asSpace = false,
+  lesson = null,
+  filters,
+  setFilters,
+  sidebarFilters,
+  onSidebarFilterChange,
+}: LessonPlannerModalProps) {
+  const { clearBookmarks, removeBookmark } = useBookmarks()
   const fc = lesson?.fullContent
 
   const [includeAssessmentData, setIncludeAssessmentData] = useState(false)
@@ -1781,26 +1799,18 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             ) : (
               <>
-                {/* District Notice */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-                  <div
-                    className="relative group/districtTip flex-shrink-0 mt-0.5"
-                    tabIndex={0}
-                    aria-label="This is a planned feature but is currently for demo purposes only. No district level customizations are applied."
-                  >
-                    <Info size={20} className="text-blue-600 cursor-help" />
-                    <div className="absolute top-full left-0 mt-1.5 w-60 opacity-0 group-hover/districtTip:opacity-100 group-focus-within/districtTip:opacity-100 transition-opacity pointer-events-none z-[100]">
-                      <div className="bg-[#2C2C2C] text-white text-[11px] leading-snug rounded-lg px-2.5 py-1.5 shadow-xl">
-                        This is a planned feature but is currently for demo purposes only. No district level customizations are applied.
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-blue-800">
-                    <span className="font-medium">District Settings Active:</span> Your district administrator has
-                    configured the lesson planner to align with approved pedagogical frameworks and instructional
-                    standards.
-                  </p>
-                </div>
+                {/* Context bar + embedded resource search */}
+                <PlanContextBar filters={filters} setFilters={setFilters} />
+
+                <PlanResourceSearch
+                  filters={filters}
+                  setFilters={setFilters}
+                  sidebarFilters={sidebarFilters}
+                  onSidebarFilterChange={onSidebarFilterChange}
+                  onBrowseAll={onBack}
+                />
+
+                <hr className="border-t-[1.5px] border-[#E8D5C4]" />
 
                 {/* Student Progress Data Section — temporarily hidden; will be re-enabled later */}
                 {false && (
@@ -1870,69 +1880,12 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 </div>
                 )}
 
-                {(() => {
-                  const selectedResourcesBlock = (
-                    <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                      <div className="flex items-center gap-2 mb-4">
-                        <BookOpen size={20} className="text-[#8B4513]" />
-                        <h3 className="text-lg font-semibold text-[#2C2C2C]">Selected Resources</h3>
-                      </div>
-
-                      {bookmarkedResources.length === 0 ? (
-                        <div className="bg-stone-50 rounded-lg p-6 flex flex-col items-center gap-3 text-center">
-                          <p className="text-sm font-medium text-[#2C2C2C]">
-                            Want help from our database?
-                          </p>
-                          <p className="text-sm text-[#666] max-w-md">
-                            Browse curated resources and bookmark a few to include them alongside your own materials.
-                          </p>
-                          <button
-                            onClick={onBack}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
-                          >
-                            <ArrowLeft size={16} />
-                            Browse Resources
-                          </button>
-                        </div>
-                      ) : (
-                        <div className="bg-stone-50 rounded-lg p-3 space-y-2">
-                          {bookmarkedResources.map((resource, index) => (
-                            <div
-                              key={resource.url}
-                              className="flex items-center gap-3 py-2 px-3 bg-white rounded-lg border border-stone-200"
-                            >
-                              <div className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
-                                {index + 1}
-                              </div>
-                              <span className="text-sm text-[#2C2C2C] flex-1 truncate">{resource.topic_title}</span>
-                              {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
-                                <span className="text-xs text-gray-500 flex-shrink-0">
-                                  {resource.curriculum_expectations.join(", ")}
-                                </span>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )
-
-                  const userMaterialsBlock = (
-                    <UserMaterialsSection materials={userMaterials} onChange={setUserMaterials} />
-                  )
-
-                  return bookmarkedResources.length > 0 ? (
-                    <>
-                      {selectedResourcesBlock}
-                      {userMaterialsBlock}
-                    </>
-                  ) : (
-                    <>
-                      {userMaterialsBlock}
-                      {selectedResourcesBlock}
-                    </>
-                  )
-                })()}
+                <LessonMaterials
+                  resources={bookmarkedResources}
+                  onRemoveResource={removeBookmark}
+                  userMaterials={userMaterials}
+                  onUserMaterialsChange={setUserMaterials}
+                />
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
@@ -2198,6 +2151,11 @@ Return a JSON object with exactly these fields (string values are plain text, no
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
+                aria-label={
+                  isGenerating
+                    ? "Generating your lesson plan"
+                    : `Generate lesson plan with ${bookmarkedResources.length} selected resource${bookmarkedResources.length === 1 ? "" : "s"}`
+                }
                 className="w-full py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70"
               >
                 {isGenerating ? (
