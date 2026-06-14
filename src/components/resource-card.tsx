@@ -11,6 +11,8 @@ import {
   Hammer,
   Mic,
   Flag,
+  Plus,
+  Check,
 } from "lucide-react"
 import * as Popover from "@radix-ui/react-popover"
 import { AnimatePresence, motion } from "framer-motion"
@@ -174,51 +176,6 @@ function getPrimaryIcon(modality: string) {
   return { Icon: Globe, color: "#4CAFB5" }
 }
 
-// ── Use-case label ─────────────────────────────────────────────────────────
-function getUseCaseLabel(resource: Resource): string {
-  const m = (Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? "")).toLowerCase()
-  const text = `${(resource.description ?? "").toLowerCase()} ${(resource.topic_title ?? "").toLowerCase()}`
-  const codes = resource.curriculum_expectations?.length ?? 0
-
-  if (m.includes("interactive") || m.includes("web interactive")) {
-    if (text.includes("game") || text.includes("puzzle")) return "Game-based practice"
-    if (text.includes("simulation") || text.includes("explor")) return "Hands-on exploration tool"
-    return "Interactive learning tool"
-  }
-  if (m.includes("video") || m.includes("film")) {
-    if (text.includes("introduc") || text.includes("overview") || text.includes("what is") || text.includes("what are"))
-      return "Strong topic introduction"
-    if (text.includes("how to") || text.includes("step") || text.includes("tutorial"))
-      return "Step-by-step tutorial"
-    if (text.includes("documentary") || text.includes("histor") || text.includes("event"))
-      return "Documentary / real-world context"
-    return "Video explanation"
-  }
-  if (m.includes("book") || m.includes("print")) {
-    if (text.includes("worksheet") || text.includes("exercise") || text.includes("practice problem") || text.includes("activity sheet"))
-      return "Ready-to-use worksheets"
-    if (text.includes("novel") || text.includes("story") || text.includes("fiction") || text.includes("narrative"))
-      return "Narrative / fiction text"
-    if (text.includes("textbook") || text.includes("reference") || text.includes("guide"))
-      return "Student reference guide"
-    if (codes > 6) return "Broad curriculum coverage"
-    return "Detailed reading resource"
-  }
-  if (m.includes("audio") || m.includes("podcast")) return "Listening activity"
-  if (m.includes("trip") || m.includes("field")) return "Field trip opportunity"
-  if (m.includes("guest") || m.includes("speaker") || m.includes("workshop")) return "Expert-led learning"
-  if (m.includes("project")) return "Project-based activity"
-
-  // Online / web / default
-  if (text.includes("lesson plan") || text.includes("unit plan")) return "Ready-made lesson plan"
-  if (text.includes("assessment") || text.includes("quiz") || text.includes("test")) return "Assessment tool"
-  if (text.includes("worksheet") || text.includes("activity")) return "Classroom activity"
-  if (text.includes("introduc") || text.includes("overview")) return "Good topic introduction"
-  if (text.includes("comprehens") || text.includes("in-depth") || text.includes("detailed")) return "Comprehensive reference"
-  if (codes > 5) return "Broad curriculum coverage"
-  return "Curriculum-aligned resource"
-}
-
 // ── Accessibility indicator ────────────────────────────────────────────────
 function getAccessibilityStyle(accessibilityArray) {
   const rating = (accessibilityArray?.[0] || "").toLowerCase()
@@ -248,7 +205,6 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
   const theme = getSubjectTheme(subject)
   const modalityStr = Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? "")
   const { Icon: ModalityIcon, color: iconColor } = getPrimaryIcon(modalityStr)
-  const useCaseLabel = getUseCaseLabel(resource)
   const accessLevel = getAccessibilityStyle(resource.accessibility)
 
   // Collapse the resource's specific expectations into overalls (D1.1… → D1).
@@ -298,36 +254,26 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
             </button>
             <button
               onClick={handleToggleSave}
-              className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-all duration-200 ${
+              className={`flex-shrink-0 py-1 px-3 text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 hover:scale-105 transform ${
                 isSaved
-                  ? "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white shadow-md"
+                  ? "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white"
                   : "bg-[#F5F5F5] text-[#8B4513] hover:bg-[#FFE5CC]"
               }`}
               aria-label={isSaved ? "Remove from plan" : "Add to plan"}
             >
               {isSaved ? "Added" : "Add"}
+              {isSaved ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
             </button>
           </div>
         </div>
 
-        {/* ── Body: use-case + title + description ── */}
+        {/* ── Body: description ── */}
         <div className="px-3 pt-2.5 pb-3 space-y-1.5">
-          <div className="flex items-center gap-1.5">
-            <ModalityIcon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: iconColor }} />
-            <span className={`text-[11px] font-semibold tracking-wide ${theme.label}`}>
-              {useCaseLabel}
-            </span>
-          </div>
-
-          <h3 className="text-sm font-bold text-[#2C2C2C] leading-snug">
-            {resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
-          </h3>
-
           <p className="text-[11px] text-[#555] leading-relaxed line-clamp-3">{description}</p>
         </div>
 
-        {/* ── Footer: readiness · accessibility · modalities · view (one condensed row) ── */}
-        <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-2">
+        {/* ── Footer: readiness · accessibility · title · modality · view ── */}
+        <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-2 min-w-0 flex-wrap">
             {overallCoverage.map((o) => (
               <OverallReadinessPill key={o.overall} data={o} />
@@ -339,18 +285,13 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
               className="w-4 h-4 flex-shrink-0"
               title={accessLevel.label}
             />
+          </div>
 
-            {(resource.modality || []).map((type, i) => {
-              const { Icon, color } = getPrimaryIcon(type)
-              return (
-                <div key={i} className="relative group/modalityTip flex-shrink-0">
-                  <Icon className="w-3.5 h-3.5" style={{ color }} />
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 opacity-0 group-hover/modalityTip:opacity-100 transition-opacity pointer-events-none z-[100] whitespace-nowrap">
-                    <div className="bg-[#2C2C2C] text-white text-[10px] rounded-lg px-2 py-1 shadow-xl">{type}</div>
-                  </div>
-                </div>
-              )
-            })}
+          <div className="flex items-center gap-1.5 flex-1 min-w-[140px] justify-end">
+            <h3 className="text-sm font-bold text-[#2C2C2C] leading-snug text-right">
+              {resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
+            </h3>
+            <ModalityIcon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: iconColor }} />
           </div>
 
           <button

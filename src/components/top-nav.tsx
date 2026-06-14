@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
+import { Search, BookOpen, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
@@ -27,7 +27,7 @@ interface ToggleItem {
 
 const TOGGLE_ITEMS: ToggleItem[] = [
   { id: "resources", label: "Resources", icon: Search },
-  { id: "lessons",   label: "Lessons",   icon: Sparkles },
+  { id: "lessons",   label: "Lessons",   icon: BookOpen },
   { id: "insights",  label: "Insights",  icon: BarChart3 },
 ]
 

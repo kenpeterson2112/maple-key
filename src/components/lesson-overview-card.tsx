@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Check, ArrowRight, BookOpen, ClipboardCheck, Sparkles } from "lucide-react"
+import { Calendar, Check, ArrowRight, BookOpen, ClipboardCheck } from "lucide-react"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { getLessonTally, aggregateLesson } from "@/lib/assessment-results"
 import { LEVEL_ORDER, LEVEL_META } from "@/lib/assessment-types"
@@ -89,7 +89,6 @@ export default function LessonOverviewCard({
           <p className="text-xs font-semibold text-[#2C2C2C] truncate">{headerLine}</p>
         </div>
         <div className="flex items-center gap-1.5 flex-shrink-0 text-[#A8998E]">
-          <Sparkles size={13} className="text-violet-500" />
           <span className="text-[11px] font-medium hidden sm:inline">Most recent lesson</span>
           <Calendar size={13} />
         </div>
