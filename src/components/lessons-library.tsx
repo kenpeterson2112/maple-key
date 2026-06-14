@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { Calendar, Check, BookOpen, ClipboardCheck, ArrowRight, Sparkles } from "lucide-react"
+import { Calendar, Check, BookOpen, ClipboardCheck, ArrowRight, Library } from "lucide-react"
 import { getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { getLessonTally } from "@/lib/assessment-results"
@@ -43,7 +43,7 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
   return (
     <div className="w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden">
       {/* Title strip */}
-      <PageHeader icon={Sparkles} title="All Lessons" iconColor="#7C3AED" iconBg="bg-violet-100">
+      <PageHeader icon={Library} title="All Lessons" iconColor="#166534" iconBg="bg-green-100">
         <DevSeedControl scope={{ kind: "lessons", lessons }} onChanged={() => setReloadNonce((n) => n + 1)} />
       </PageHeader>
 

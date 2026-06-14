@@ -2,8 +2,6 @@
 
 import { useState, useRef, useEffect } from "react"
 import {
-  ArrowLeft,
-  Sparkles,
   X,
   Users,
   Layout,
@@ -1103,19 +1101,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
       <div className={asSpace ? "w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden" : "relative w-[95vw] h-[90vh] bg-[#FAF3E0] rounded-3xl shadow-2xl flex flex-col overflow-hidden"}>
         {/* Header */}
         <PageHeader
-          icon={Sparkles}
+          icon={Lightbulb}
           title={lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
-          iconColor="#7C3AED"
-          iconBg="bg-violet-100"
-          leading={
-            <button
-              onClick={onBack}
-              className="p-1.5 hover:bg-[#FFE5CC] rounded-full transition-colors"
-              aria-label="Back to saved resources"
-            >
-              <ArrowLeft size={20} className="text-[#8B4513]" />
-            </button>
-          }
+          iconColor="#16A34A"
+          iconBg="bg-green-100"
         >
           <span className="hidden sm:inline whitespace-nowrap text-xs text-[#888]">
             {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
