@@ -80,21 +80,6 @@ function ReadinessBadge({ counts }: { counts: LevelCounts }) {
   )
 }
 
-// Legend explaining the 4 signal-distribution levels, shown once above the accordion.
-function Legend() {
-  return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-xl border border-[#E8D5C4] bg-white px-4 py-3 text-[11px]">
-      {LEVEL_ORDER.map((level, i) => (
-        <span key={level} className="flex items-center gap-1.5">
-          <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${LEVEL_META[level].barClass}`} />
-          <span className="font-semibold text-[#2C2C2C]">Level {i + 1}</span>
-          <span className="text-[#888]">{LEVEL_META[level].label}</span>
-        </span>
-      ))}
-    </div>
-  )
-}
-
 // Single inline stacked bar split into the 4 signal-level segments.
 function Bar({ counts, thick = false }: { counts: LevelCounts; thick?: boolean }) {
   const t = total(counts)
@@ -191,6 +176,9 @@ function OverallRow({
           <span className="text-sm font-semibold text-[#2C2C2C] truncate">{overallLabel(agg.overall)}</span>
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
+          <span className="text-[11px] text-[#888]">
+            {total(agg.bands)} {total(agg.bands) === 1 ? "response" : "responses"}
+          </span>
           <div className="w-32 sm:w-44"><Bar counts={agg.bands} /></div>
           <ReadinessBadge counts={agg.bands} />
         </div>
@@ -248,6 +236,9 @@ function StrandAccordion({
                 <span className="text-sm font-semibold text-[#2C2C2C] truncate">{strandLabel(strand.code)}</span>
               </div>
               <div className="flex items-center gap-3 flex-shrink-0">
+                <span className="text-[11px] text-[#888]">
+                  {total(strand.bands)} {total(strand.bands) === 1 ? "response" : "responses"}
+                </span>
                 <div className="w-32 sm:w-44"><Bar counts={strand.bands} thick /></div>
                 <ReadinessBadge counts={strand.bands} />
               </div>
@@ -297,9 +288,6 @@ export default function ClassDashboard({ data }: { data: AggregatedResults }) {
 
   return (
     <div className="space-y-3">
-      <p className="text-xs font-semibold uppercase tracking-wide text-[#8B4513]">Expectation Breakdown</p>
-      <Legend />
-
       {hasStrandData ? (
         <StrandAccordion overalls={overalls} expanded={expanded} toggle={toggle} />
       ) : (

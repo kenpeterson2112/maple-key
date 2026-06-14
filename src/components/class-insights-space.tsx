@@ -6,7 +6,6 @@ import {
   getAllTallies,
   aggregateAll,
   isSandboxMode,
-  computeReadinessLevel,
   type LessonTally,
 } from "@/lib/assessment-results"
 import ClassDashboard from "@/components/class-dashboard"
@@ -63,19 +62,6 @@ export default function ClassInsightsSpace() {
 
   const data = useMemo(() => aggregateAll(filtered), [filtered])
 
-  const expectationStats = useMemo(() => {
-    let attention = 0, developing = 0, strong = 0
-    for (const agg of Object.values(data.overall)) {
-      const total = agg.bands.level1 + agg.bands.level2 + agg.bands.level3 + agg.bands.level4
-      if (total === 0) continue
-      const r = computeReadinessLevel(agg.bands)
-      if (r === "great" || r === "good") strong++
-      else if (r === "okay") developing++
-      else if (r === "poor") attention++
-    }
-    return { attention, developing, strong }
-  }, [data])
-
   if (tallies.length === 0) {
     return (
       <div className="flex flex-col h-full bg-[#FAF3E0]">
@@ -112,7 +98,7 @@ export default function ClassInsightsSpace() {
     <div className="flex flex-col h-full bg-[#FAF3E0]">
 
       {/* Header */}
-      <header className="flex-shrink-0 flex items-center gap-2 border-b border-[#E8D5C4] bg-white px-6 py-3">
+      <header className="flex-shrink-0 flex items-center gap-3 border-b border-[#E8D5C4] bg-white px-6 py-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
           <BarChart3 size={18} className="text-amber-600" />
         </div>
@@ -122,14 +108,9 @@ export default function ClassInsightsSpace() {
             Sandbox
           </span>
         )}
-        <div className="ml-auto">
-          <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
-        </div>
-      </header>
 
-      {/* Subject + grade filters — one combo at a time */}
-      <div className="flex-shrink-0 border-b border-[#E8D5C4] bg-[#FAF3E0] px-6 py-3">
-        <div className="mx-auto flex max-w-3xl flex-wrap items-center gap-3">
+        {/* Subject + grade filters — one combo at a time */}
+        <div className="flex items-center gap-3 ml-2">
           <label className="flex items-center gap-2 text-xs font-semibold text-[#8B7355]">
             Subject
             <select
@@ -156,30 +137,14 @@ export default function ClassInsightsSpace() {
             </select>
           </label>
         </div>
-      </div>
+
+        <div className="ml-auto">
+          <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
+        </div>
+      </header>
 
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl px-6 py-6 space-y-6">
-
-          {/* Summary stat cards */}
-          <div className="grid grid-cols-3 gap-3">
-            <StatCard
-              value={filtered.length}
-              label={filtered.length === 1 ? "lesson assessed" : "lessons assessed"}
-              valueColor="#FF6B35"
-            />
-            <StatCard
-              value={data.attempts}
-              label={data.attempts === 1 ? "student response" : "student responses"}
-              valueColor="#8B4513"
-            />
-            <StatCard
-              value={expectationStats.attention}
-              label={expectationStats.attention === 1 ? "area needs attention" : "areas need attention"}
-              valueColor={expectationStats.attention > 0 ? "#B45309" : "#16A34A"}
-              highlight={expectationStats.attention > 0}
-            />
-          </div>
 
           {/* Expectation breakdown */}
           {data.hasData ? (
@@ -219,25 +184,6 @@ export default function ClassInsightsSpace() {
 
         </div>
       </div>
-    </div>
-  )
-}
-
-function StatCard({
-  value,
-  label,
-  valueColor,
-  highlight = false,
-}: {
-  value: number
-  label: string
-  valueColor: string
-  highlight?: boolean
-}) {
-  return (
-    <div className={`rounded-xl border p-4 bg-white transition-colors ${highlight && value > 0 ? "border-amber-200 bg-amber-50/60" : "border-[#E8D5C4]"}`}>
-      <p className="text-2xl font-bold leading-none" style={{ color: valueColor }}>{value}</p>
-      <p className="text-xs text-[#888] mt-1.5 leading-tight">{label}</p>
     </div>
   )
 }
