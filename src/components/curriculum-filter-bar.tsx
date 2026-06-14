@@ -5,7 +5,7 @@ import { useGlobalFilters } from "@/lib/global-filters"
 import { PROVINCES, GRADES, SUBJECTS, STRAND_CODES } from "@/components/hero-personalize"
 import { getStrandOptions } from "@/lib/get-strand-options"
 import InlinePicker from "@/components/inline-picker"
-import { Zap, Leaf, BookStack, Calculator, Beaker, Globe, Quill, X } from "lucide-react"
+import { Zap, Leaf, BookOpen, Calculator, Beaker, Globe, PenTool, X } from "lucide-react"
 
 export default function CurriculumFilterBar() {
   const { state, setProvince, setGrade, setSubject, setStrand, setSandbox } = useGlobalFilters()
@@ -33,11 +33,11 @@ export default function CurriculumFilterBar() {
       case "Social Studies":
         return <Globe size={20} />
       case "Language":
-        return <Quill size={20} />
+        return <PenTool size={20} />
       case "FSL":
         return <span className="text-lg">⚜️</span> // Fleur-de-lys emoji
       default:
-        return <BookStack size={20} />
+        return <BookOpen size={20} />
     }
   }
 
