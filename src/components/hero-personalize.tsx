@@ -5,7 +5,7 @@ import { RotateCcw } from "lucide-react"
 import InlinePicker, { type PickerOption } from "@/components/inline-picker"
 import type { Filters } from "@/lib/types"
 
-const PROVINCES: PickerOption[] = [
+export const PROVINCES: PickerOption[] = [
   { value: "", label: "anywhere in Canada" },
   { value: "AB", label: "Alberta" },
   { value: "BC", label: "British Columbia" },
@@ -22,7 +22,7 @@ const PROVINCES: PickerOption[] = [
   { value: "YT", label: "Yukon" },
 ]
 
-const GRADES: PickerOption[] = [
+export const GRADES: PickerOption[] = [
   { value: "", label: "any grade" },
   { value: "4", label: "Grade 4" },
   { value: "5", label: "Grade 5" },
@@ -32,7 +32,7 @@ const GRADES: PickerOption[] = [
   { value: "9", label: "Grade 9" },
 ]
 
-const SUBJECTS: PickerOption[] = [
+export const SUBJECTS: PickerOption[] = [
   { value: "", label: "any subject" },
   { value: "Math", label: "Math", color: "#166534" },
   { value: "Science", label: "Science", color: "#1E40AF" },
@@ -42,7 +42,7 @@ const SUBJECTS: PickerOption[] = [
   { value: "Health & Physical Education", label: "Health & PE", color: "#EA580C" },
 ]
 
-const SUBJECT_STRANDS: Record<string, string[]> = {
+export const SUBJECT_STRANDS: Record<string, string[]> = {
   Math: [
     "Algebra",
     "Number",
@@ -72,7 +72,7 @@ const SUBJECT_STRANDS: Record<string, string[]> = {
 
 // Official Ontario curriculum strand letters. Cross-strand / cross-cutting
 // entries have no single lettered strand and are left unprefixed.
-const STRAND_CODES: Record<string, string> = {
+export const STRAND_CODES: Record<string, string> = {
   // Math (2020)
   Number: "B",
   Algebra: "C",

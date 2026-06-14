@@ -173,6 +173,10 @@ export default function App() {
                   bookmarkedResources={bookmarkedResources}
                   onClose={goResources}
                   onBack={goResources}
+                  filters={filters}
+                  setFilters={setFilters}
+                  sidebarFilters={sidebarFilters}
+                  onSidebarFilterChange={handleSidebarFilterChange}
                 />
               )}
 
