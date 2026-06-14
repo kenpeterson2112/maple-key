@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react"
 import {
   ArrowLeft,
-  Sparkles,
   X,
   Users,
   Layout,
@@ -1113,12 +1112,9 @@ Return a JSON object with exactly these fields (string values are plain text, no
             </button>
 
             <div>
-              <div className="flex items-center gap-2">
-                <Sparkles size={24} className="text-violet-600" />
-                <h2 className="text-2xl font-bold text-[#2C2C2C]">
-                  {lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
-                </h2>
-              </div>
+              <h2 className="text-2xl font-bold text-[#2C2C2C]">
+                {lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
+              </h2>
               <p className="text-sm text-[#666] mt-1">
                 {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
               </p>
@@ -1780,14 +1776,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                               onClick={() => advanceQuestion(q.id)}
                               className="mt-2 w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
                             >
-                              {isLastQuestion ? (
-                                <>
-                                  <Sparkles size={16} />
-                                  Generate Lesson Plan
-                                </>
-                              ) : (
-                                "Continue →"
-                              )}
+                              {isLastQuestion ? "Generate Lesson Plan" : "Continue →"}
                             </button>
                           )}
                         </div>
@@ -2164,10 +2153,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     Generating your lesson...
                   </>
                 ) : (
-                  <>
-                    <Sparkles size={20} />
-                    Generate Lesson Plan
-                  </>
+                  "Generate Lesson Plan"
                 )}
               </button>
             </div>

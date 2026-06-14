@@ -49,7 +49,7 @@ export default function App() {
   })
   const [resultCount, setResultCount] = useState(0)
 
-  const [activeSpace, setActiveSpace] = useState<Space>("resources")
+  const [activeSpace, setActiveSpace] = useState<Space>("lessonplanner")
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
