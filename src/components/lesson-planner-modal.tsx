@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import {
   ArrowLeft,
+  Sparkles,
   X,
   Users,
   Layout,
@@ -26,6 +27,7 @@ import {
   Languages,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
+import PageHeader from "@/components/page-header"
 import { normalizeGrades } from "@/lib/utils"
 import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
 import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage } from "@/lib/lesson-metadata"
@@ -1094,41 +1096,40 @@ Return a JSON object with exactly these fields (string values are plain text, no
   }
 
   return (
-    <div className={asSpace ? "fixed inset-0 z-[200] overflow-hidden" : "fixed inset-0 z-[200] flex items-center justify-center"}>
+    <div className={asSpace ? "w-full h-full overflow-hidden" : "fixed inset-0 z-[200] flex items-center justify-center"}>
       {!asSpace && <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />}
 
       {/* Content */}
       <div className={asSpace ? "w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden" : "relative w-[95vw] h-[90vh] bg-[#FAF3E0] rounded-3xl shadow-2xl flex flex-col overflow-hidden"}>
         {/* Header */}
-        <div className="flex items-center justify-between px-8 py-5 border-b-2 border-[#E8D5C4] bg-white">
-          <div className="flex items-center gap-4">
-            {/* Back button */}
+        <PageHeader
+          icon={Sparkles}
+          title={lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
+          iconColor="#7C3AED"
+          iconBg="bg-violet-100"
+          leading={
             <button
               onClick={onBack}
-              className="p-2 hover:bg-[#FFE5CC] rounded-full transition-all duration-200"
+              className="p-1.5 hover:bg-[#FFE5CC] rounded-full transition-colors"
               aria-label="Back to saved resources"
             >
-              <ArrowLeft size={24} className="text-[#8B4513]" />
+              <ArrowLeft size={20} className="text-[#8B4513]" />
             </button>
-
-            <div>
-              <h2 className="text-2xl font-bold text-[#2C2C2C]">
-                {lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
-              </h2>
-              <p className="text-sm text-[#666] mt-1">
-                {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-[#FFE5CC] rounded-full transition-all duration-200"
-            aria-label="Close modal"
-          >
-            <X size={28} className="text-[#8B4513]" />
-          </button>
-        </div>
+          }
+        >
+          <span className="hidden sm:inline whitespace-nowrap text-xs text-[#888]">
+            {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
+          </span>
+          {!asSpace && (
+            <button
+              onClick={onClose}
+              className="p-1.5 hover:bg-[#FFE5CC] rounded-full transition-colors"
+              aria-label="Close modal"
+            >
+              <X size={20} className="text-[#8B4513]" />
+            </button>
+          )}
+        </PageHeader>
 
         {/* Content */}
         <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-6">

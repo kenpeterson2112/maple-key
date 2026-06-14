@@ -10,6 +10,7 @@ import {
 } from "@/lib/assessment-results"
 import ClassDashboard from "@/components/class-dashboard"
 import DevSeedControl from "@/components/dev/dev-seed-control"
+import PageHeader from "@/components/page-header"
 import { normalizeSubject } from "@/lib/subjects"
 import { normalizeGrades } from "@/lib/utils"
 
@@ -65,20 +66,14 @@ export default function ClassInsightsSpace() {
   if (tallies.length === 0) {
     return (
       <div className="flex flex-col h-full bg-[#FAF3E0]">
-        <header className="flex items-center gap-2 border-b border-[#E8D5C4] bg-white px-6 py-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
-            <BarChart3 size={18} className="text-amber-600" />
-          </div>
-          <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
+        <PageHeader icon={BarChart3} title="Class Insights">
           {isSandboxMode() && (
             <span className="rounded-full bg-[#FFE5CC] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#C65D3B]">
               Sandbox
             </span>
           )}
-          <div className="ml-auto">
-            <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
-          </div>
-        </header>
+          <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
+        </PageHeader>
         <div className="flex flex-col items-center justify-center gap-4 flex-1 text-center px-6">
           <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center">
             <BarChart3 size={26} className="text-amber-600" />
@@ -98,11 +93,7 @@ export default function ClassInsightsSpace() {
     <div className="flex flex-col h-full bg-[#FAF3E0]">
 
       {/* Header */}
-      <header className="flex-shrink-0 flex items-center gap-3 border-b border-[#E8D5C4] bg-white px-6 py-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
-          <BarChart3 size={18} className="text-amber-600" />
-        </div>
-        <h1 className="text-base font-bold text-[#2C2C2C]">Class Insights</h1>
+      <PageHeader icon={BarChart3} title="Class Insights">
         {isSandboxMode() && (
           <span className="rounded-full bg-[#FFE5CC] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#C65D3B]">
             Sandbox
@@ -110,7 +101,7 @@ export default function ClassInsightsSpace() {
         )}
 
         {/* Subject + grade filters — one combo at a time */}
-        <div className="flex items-center gap-3 ml-2">
+        <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-xs font-semibold text-[#8B7355]">
             Subject
             <select
@@ -138,10 +129,8 @@ export default function ClassInsightsSpace() {
           </label>
         </div>
 
-        <div className="ml-auto">
-          <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
-        </div>
-      </header>
+        <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
+      </PageHeader>
 
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl px-6 py-6 space-y-6">
