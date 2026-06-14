@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect } from "react"
 import { SUBJECT_STRANDS } from "@/components/hero-personalize"
+import { isSandboxMode, setSandboxMode } from "@/lib/assessment-results"
 
 export interface GlobalFiltersState {
   province: string
@@ -16,7 +17,7 @@ const initialState: GlobalFiltersState = {
   grade: "",
   subject: "",
   strand: "",
-  isSandbox: false,
+  isSandbox: isSandboxMode(),
 }
 
 type GlobalFiltersAction =
@@ -59,8 +60,10 @@ function globalFiltersReducer(state: GlobalFiltersState, action: GlobalFiltersAc
       }
       return state
     }
-    case "SET_SANDBOX":
+    case "SET_SANDBOX": {
+      setSandboxMode(action.payload)
       return { ...state, isSandbox: action.payload }
+    }
     case "LOAD_FROM_STORAGE":
       return action.payload
     default:
