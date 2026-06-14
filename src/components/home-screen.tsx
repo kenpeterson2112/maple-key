@@ -1,6 +1,6 @@
 "use client"
 
-import { Sparkles, Settings, Bookmark, ArrowRight, ArrowDown } from "lucide-react"
+import { ClipboardList, Settings, Bookmark, ArrowRight, ArrowDown } from "lucide-react"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { getLatestLesson, getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
@@ -78,7 +78,7 @@ export default function HomeScreen({
               className="w-full rounded-2xl bg-violet-50 border-2 border-violet-200 px-5 py-8 flex flex-col items-center gap-3 shadow-sm active:scale-[0.99] transition-transform text-center"
             >
               <div className="w-12 h-12 rounded-2xl bg-violet-100 flex items-center justify-center">
-                <Sparkles size={22} className="text-violet-600" />
+                <ClipboardList size={22} className="text-violet-600" />
               </div>
               <div>
                 <p className="font-bold text-[#2C2C2C]">No lessons yet</p>

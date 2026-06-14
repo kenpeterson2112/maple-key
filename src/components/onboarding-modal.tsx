@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { MapPin, Sparkles, Check } from "lucide-react"
+import { MapPin, Compass, Check } from "lucide-react"
 import ClassroomResourcesPicker from "@/components/classroom-resources-picker"
 import {
   getPrefs,
@@ -90,7 +90,7 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
               <div className="space-y-4 text-[#2C2C2C]">
                 <div className="flex justify-center pt-2">
                   <div className="w-14 h-14 rounded-2xl bg-[#FF6B35]/10 flex items-center justify-center">
-                    <Sparkles size={28} className="text-[#FF6B35]" />
+                    <Compass size={28} className="text-[#FF6B35]" />
                   </div>
                 </div>
                 <p className="text-center text-base">

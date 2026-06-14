@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { X, CheckCircle, XCircle, HelpCircle, Sparkles, Loader2, Info, BarChart3 } from "lucide-react"
+import { X, CheckCircle, XCircle, HelpCircle, ClipboardCheck, Loader2, Info, BarChart3 } from "lucide-react"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import {
@@ -252,7 +252,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8D5C4] bg-[#FAF3E0]">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center">
-              <Sparkles size={18} className="text-amber-600" />
+              <ClipboardCheck size={18} className="text-amber-600" />
             </div>
             <div>
               <h2 className="font-bold text-[#2C2C2C] text-base">Quick Check</h2>
