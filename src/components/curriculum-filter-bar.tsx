@@ -7,7 +7,11 @@ import { getStrandOptions } from "@/lib/get-strand-options"
 import InlinePicker from "@/components/inline-picker"
 import { Zap, Leaf, BookOpen, Calculator, Beaker, Globe, PenTool, X } from "lucide-react"
 
-export default function CurriculumFilterBar() {
+interface CurriculumFilterBarProps {
+  pageTitle?: string
+}
+
+export default function CurriculumFilterBar({ pageTitle }: CurriculumFilterBarProps) {
   const { state, setProvince, setGrade, setSubject, setStrand, setSandbox } = useGlobalFilters()
   const [mobileOpenFilter, setMobileOpenFilter] = useState<"province" | "grade" | "subject" | "strand" | null>(null)
 
@@ -111,6 +115,13 @@ export default function CurriculumFilterBar() {
 
         {/* Mobile Layout */}
         <div className="flex md:hidden items-center gap-1.5">
+          {/* Page Title */}
+          {pageTitle && (
+            <span className="text-sm font-semibold text-[#2C2C2C] whitespace-nowrap mr-1">
+              {pageTitle}
+            </span>
+          )}
+
           {/* Province Button */}
           <button
             onClick={() => setMobileOpenFilter(mobileOpenFilter === "province" ? null : "province")}
