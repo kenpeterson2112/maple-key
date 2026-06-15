@@ -3,6 +3,9 @@ import type { VercelRequest, VercelResponse } from "@vercel/node"
 
 const LESSON_MODEL = "claude-haiku-4-5-20251001"
 
+/** A quick check is a fast readiness signal, not a diagnostic — keep it short. */
+const MAX_ASSESSMENT_QUESTIONS = 5
+
 interface ResourceInput {
   title: string
   description: string
@@ -248,11 +251,12 @@ Ontario curriculum codes available: ${allCodes.join(", ")}
 
 Resource-mismatch rule: If any provided resource does not fit the topic or curriculum codes of this lesson, do NOT use it. List it in "excludedResources" with a one-line reason. "materials.resources" must only contain titles of resources you actually use.
 
-You will also write "assessmentQuestions": a short auto-graded formative quick check anchored in the SPECIFIC content of the lesson you are writing (not generic).
-- If "curriculumCodesCovered" is non-empty: for EACH code in it, write exactly 2 questions — one "multiple-choice" and one "true-false" — and set each question's "code" to that curriculum code.
-- If "curriculumCodesCovered" is empty: identify 3 to 5 key concepts you actually taught and write 1-2 questions per concept (mix of types), setting each "code" to a short 2-4 word concept label (e.g., "Circumference and pi").
-- Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
-- Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions.
+You will also write "assessmentQuestions": a SHORT auto-graded formative quick check that gives the teacher a fast, actionable read on class readiness — NOT a thorough diagnostic.
+- Write 3 to 5 questions TOTAL. Aim for 3; use 4 only if needed and 5 only for a large lesson spanning many distinct expectations. Never exceed 5.
+- Write ONE well-designed question per curriculum expectation the lesson actually taught. Most lessons cover only 2-3 expectations — do not invent more. When several closely-related expectations are taught, CLUSTER them into a single well-designed question rather than adding more.
+- Set each question's "code" to the single curriculum expectation it targets (for a clustered question, use the most representative code). If "curriculumCodesCovered" is empty, write 3 questions on the key concepts you actually taught and set each "code" to a short 2-4 word concept label (e.g., "Circumference and pi").
+- Prefer "multiple-choice"; use "true-false" only when it genuinely tests the idea better. Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
+- Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions, and do NOT write more than one question for the same expectation.
 
 ${isThreePart ? `Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
@@ -279,7 +283,7 @@ ${isThreePart ? `Return a JSON object with exactly these fields (string values a
   ],
   "assessmentQuestions": [
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
-    { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+    { "code": "D1.2", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
 }` : `Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
@@ -300,7 +304,7 @@ ${sectionsSchema}
   ],
   "assessmentQuestions": [
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
-    { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+    { "code": "D1.2", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
 }`}
 
@@ -331,6 +335,11 @@ ${reproducibleLanguageBlock}`
       lesson = JSON.parse(extractJson(rawText))
     } catch {
       return res.status(500).json({ error: "Claude returned malformed JSON. Please try again." })
+    }
+
+    // Defensive cap — the prompt asks for 3-5, but never let a quick check balloon.
+    if (Array.isArray(lesson.assessmentQuestions) && lesson.assessmentQuestions.length > MAX_ASSESSMENT_QUESTIONS) {
+      lesson.assessmentQuestions = lesson.assessmentQuestions.slice(0, MAX_ASSESSMENT_QUESTIONS)
     }
 
     const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ?? req.socket?.remoteAddress ?? "unknown"

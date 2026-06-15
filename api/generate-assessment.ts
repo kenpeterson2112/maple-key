@@ -16,6 +16,9 @@ interface GenerateAssessmentRequest {
 
 const MAX_EXPECTATIONS = 8
 
+/** A quick check is a fast readiness signal, not a diagnostic — keep it short. */
+const MAX_ASSESSMENT_QUESTIONS = 5
+
 function extractJson(text: string): string {
   const trimmed = text.trim()
   const start = trimmed.indexOf("{")
@@ -48,13 +51,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const userPrompt = `Create a short formative quick check for Grade ${grade} ${subject}.
 Lesson title: "${title}"
 ${taughtBlock}
-Write questions for EACH of these curriculum expectations:
+These are the curriculum expectations the lesson covered:
 ${expLines}
 
+This quick check is a fast, actionable read on class readiness — NOT a thorough diagnostic.
+
 Rules:
-- For each expectation, write exactly 2 questions: one "multiple-choice" and one "true-false".
+- Write 3 to 5 questions TOTAL. Aim for 3; use 4 only if needed and 5 only when the lesson spans many distinct expectations. Never exceed 5.
+- Write ONE well-designed question per expectation. When several closely-related expectations were taught, CLUSTER them into a single question rather than adding more. Do NOT write more than one question for the same expectation.
+- Set each question's "code" to the single expectation it targets (for a clustered question, use the most representative code).
 - Tie questions to what was taught; keep prompts to 1-2 sentences at a Grade ${grade} reading level.
-- Multiple-choice: exactly 4 options, exactly one correct, with plausible distractors.
+- Prefer "multiple-choice"; use "true-false" only when it tests the idea better. Multiple-choice: exactly 4 options, exactly one correct, with plausible distractors.
 - Include a one-sentence "explanation" of the correct answer for every question.
 - Do NOT write open-ended or free-text questions.
 
@@ -62,7 +69,7 @@ Return ONLY a JSON object with this exact shape:
 {
   "questions": [
     { "code": "${expList[0].code}", "type": "multiple-choice", "prompt": "...", "options": ["a","b","c","d"], "correctIndex": 0, "explanation": "..." },
-    { "code": "${expList[0].code}", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+    { "code": "${expList[1]?.code ?? expList[0].code}", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
 }`
 
@@ -90,9 +97,11 @@ Return ONLY a JSON object with this exact shape:
       return res.status(200).json({ questions: [] })
     }
 
-    const questions = Array.isArray((parsed as { questions?: unknown })?.questions)
-      ? (parsed as { questions: unknown[] }).questions
-      : []
+    const questions = (
+      Array.isArray((parsed as { questions?: unknown })?.questions)
+        ? (parsed as { questions: unknown[] }).questions
+        : []
+    ).slice(0, MAX_ASSESSMENT_QUESTIONS)
     const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ?? req.socket?.remoteAddress ?? "unknown"
     const userEmail = (req.headers["x-user-email"] as string | undefined) ?? ""
     console.log(JSON.stringify({
