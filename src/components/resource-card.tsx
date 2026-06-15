@@ -13,11 +13,13 @@ import {
   Flag,
   Plus,
   Check,
+  BadgeCheck,
+  Lightbulb,
 } from "lucide-react"
 import * as Popover from "@radix-ui/react-popover"
 import { AnimatePresence, motion } from "framer-motion"
 import { overallLabel } from "@/lib/curriculum-codes"
-import { normalizeGrades } from "@/lib/utils"
+import { normalizeGrades, gradeToNumber } from "@/lib/utils"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useState, useRef, useMemo } from "react"
 import ReviewsModal from "./reviews-modal"
@@ -26,11 +28,27 @@ import { withBasePath } from "@/lib/base-path"
 import { coverageForResource, type OverallCoverage, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
 import type { Resource } from "@/lib/types"
 
-const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; label: string }> = {
-  poor: { dot: "#B45309", text: "#92400E", label: "Needs Support" },
-  okay: { dot: "#D97706", text: "#92400E", label: "Developing" },
-  good: { dot: "#16A34A", text: "#15803D", label: "Strong" },
-  great: { dot: "#166534", text: "#14532D", label: "Excelling" },
+// Readiness levels map onto the shared signal-distribution tokens (--signal-1…4)
+// rather than carrying their own hex, so the pills track the same proficiency
+// scale used across the dashboards. See src/index.css.
+const READINESS_TOKENS: Record<ReadinessLevel, { token: string; label: string }> = {
+  poor: { token: "--signal-1", label: "Needs Support" },
+  okay: { token: "--signal-2", label: "Developing" },
+  good: { token: "--signal-3", label: "Strong" },
+  great: { token: "--signal-4", label: "Excelling" },
+}
+
+// The signal tokens are tuned as solid fills; on a light tinted pill we want a
+// vivid dot, a faint background, and a darker readable label drawn from the same
+// hue. color-mix keeps everything anchored to the one token.
+function pillSurface(varName: string) {
+  return {
+    borderColor: `color-mix(in oklch, var(${varName}) 35%, transparent)`,
+    backgroundColor: `color-mix(in oklch, var(${varName}) 14%, transparent)`,
+  }
+}
+function pillText(varName: string) {
+  return `color-mix(in oklch, var(${varName}) 70%, black)`
 }
 
 // One pill per overall expectation (e.g. "D1") the resource covers.
@@ -41,8 +59,7 @@ const READINESS_STYLES: Record<ReadinessLevel, { dot: string; text: string; labe
 //
 // When there's no recorded data (data.level === null) — the common case until a
 // class runs assessments — the pill is rendered as a neutral, non-interactive
-// chip so the card still surfaces every expectation the resource covers. It
-// reuses the same "not assessed" greys as the per-child rows in the panel.
+// chip so the card still surfaces every expectation the resource covers.
 function OverallReadinessPill({ data }: { data: OverallCoverage }) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
@@ -53,17 +70,17 @@ function OverallReadinessPill({ data }: { data: OverallCoverage }) {
     return (
       <span
         className="flex items-center gap-1 px-2 py-0.5 rounded-full border"
-        style={{ borderColor: "#D4C5B540", backgroundColor: "#D4C5B515" }}
+        style={{ borderColor: "var(--border)", backgroundColor: "color-mix(in oklch, var(--muted-foreground) 7%, transparent)" }}
         title={friendly ?? undefined}
         aria-label={`${data.overall}${friendly ? ` ${friendly}` : ""} — not yet assessed`}
       >
-        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#D4C5B5" }} />
-        <span className="text-[10px] font-semibold" style={{ color: "#A8998E" }}>{data.overall}</span>
+        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "var(--muted)" }} />
+        <span className="text-[10px] font-semibold text-muted-foreground">{data.overall}</span>
       </span>
     )
   }
 
-  const style = READINESS_STYLES[data.level]
+  const v = READINESS_TOKENS[data.level].token
 
   const openNow = () => {
     clearTimeout(closeTimer.current)
@@ -82,12 +99,12 @@ function OverallReadinessPill({ data }: { data: OverallCoverage }) {
           type="button"
           onMouseEnter={openNow}
           onMouseLeave={closeSoon}
-          className="flex items-center gap-1 px-2 py-0.5 rounded-full border outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35]/40"
-          style={{ borderColor: style.dot + "40", backgroundColor: style.dot + "15" }}
-          aria-label={`${data.overall} ${overallLabel(data.overall)} — ${style.label}`}
+          className="flex items-center gap-1 px-2 py-0.5 rounded-full border outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+          style={pillSurface(v)}
+          aria-label={`${data.overall} ${overallLabel(data.overall)} — ${READINESS_TOKENS[data.level].label}`}
         >
-          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: style.dot }} />
-          <span className="text-[10px] font-semibold" style={{ color: style.text }}>{data.overall}</span>
+          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: `var(${v})` }} />
+          <span className="text-[10px] font-semibold" style={{ color: pillText(v) }}>{data.overall}</span>
         </button>
       </Popover.Trigger>
       <AnimatePresence>
@@ -106,28 +123,28 @@ function OverallReadinessPill({ data }: { data: OverallCoverage }) {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -4, scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 420, damping: 32 }}
-                className="z-[100] w-64 rounded-2xl border-2 border-[#E8D5C4] bg-white p-3 shadow-xl"
+                className="z-[100] w-64 rounded-2xl border border-border bg-popover p-3 shadow-xl"
               >
-                <p className="text-[11px] font-bold text-[#2C2C2C] mb-2">
+                <p className="text-[11px] font-bold text-popover-foreground mb-2">
                   {data.overall} · {overallLabel(data.overall)}
                 </p>
                 <ul className="space-y-1.5">
                   {data.children.map((child) => {
-                    const cs = child.level ? READINESS_STYLES[child.level] : null
+                    const cv = child.level ? READINESS_TOKENS[child.level].token : null
                     return (
                       <li key={child.code} className="flex items-center gap-2">
                         <span
                           className="w-2 h-2 rounded-full flex-shrink-0"
-                          style={{ backgroundColor: cs ? cs.dot : "#D4C5B5" }}
+                          style={{ backgroundColor: cv ? `var(${cv})` : "var(--muted)" }}
                         />
                         <span
                           className="text-[11px] font-semibold flex-shrink-0"
-                          style={{ color: cs ? cs.text : "#A8998E" }}
+                          style={{ color: cv ? pillText(cv) : "var(--muted-foreground)" }}
                         >
                           {child.code}
                         </span>
-                        <span className="text-[10px] text-[#888] ml-auto">
-                          {cs ? cs.label : "Not assessed"}
+                        <span className="text-[10px] text-muted-foreground ml-auto">
+                          {child.level ? READINESS_TOKENS[child.level].label : "Not assessed"}
                         </span>
                       </li>
                     )
@@ -142,24 +159,85 @@ function OverallReadinessPill({ data }: { data: OverallCoverage }) {
   )
 }
 
+// Tips affordance — keeps usage_notes prose off the card face but rewards the
+// hover/tap with the full note. Same hover-into-panel pattern as the pill.
+function TipsPopover({ notes }: { notes: string }) {
+  const [open, setOpen] = useState(false)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const openNow = () => {
+    clearTimeout(closeTimer.current)
+    setOpen(true)
+  }
+  const closeSoon = () => {
+    clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setOpen(false), 80)
+  }
+  return (
+    <Popover.Root open={open} onOpenChange={setOpen}>
+      <Popover.Trigger asChild>
+        <button
+          type="button"
+          onMouseEnter={openNow}
+          onMouseLeave={closeSoon}
+          className="flex items-center justify-center w-5 h-5 rounded-full text-muted-foreground hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-ring/40 transition-colors"
+          aria-label="Teaching tips"
+          title="Teaching tips"
+        >
+          <Lightbulb className="w-3.5 h-3.5" />
+        </button>
+      </Popover.Trigger>
+      <AnimatePresence>
+        {open && (
+          <Popover.Portal forceMount>
+            <Popover.Content
+              asChild
+              sideOffset={6}
+              align="start"
+              onOpenAutoFocus={(e) => e.preventDefault()}
+              onMouseEnter={openNow}
+              onMouseLeave={closeSoon}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: -4, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -4, scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                className="z-[100] w-64 rounded-2xl border border-border bg-popover p-3 shadow-xl"
+              >
+                <p className="flex items-center gap-1.5 text-[11px] font-bold text-popover-foreground mb-1.5">
+                  <Lightbulb className="w-3.5 h-3.5 text-primary" /> Teaching tips
+                </p>
+                <p className="text-[11px] leading-relaxed text-muted-foreground">{notes}</p>
+              </motion.div>
+            </Popover.Content>
+          </Popover.Portal>
+        )}
+      </AnimatePresence>
+    </Popover.Root>
+  )
+}
+
 // ── Subject-based card theme ───────────────────────────────────────────────
+// Subject palette stays on hex for now — there are no per-subject tokens in
+// :root (logged as remaining design-system debt in the handoff). Only `dot`
+// (accent bar) and `badge` (View button) are used on the card today.
 function getSubjectTheme(subject: string) {
   const s = (subject || "").toLowerCase()
   if (s.includes("math"))
-    return { bg: "bg-[#F0FDF4]", border: "border-[#86EFAC]", dot: "bg-[#166534]", badge: "bg-gradient-to-r from-[#166534] to-[#14532D] text-white", label: "text-[#166534]" }
+    return { dot: "bg-[#166534]", badge: "bg-gradient-to-r from-[#166534] to-[#14532D] text-white" }
   if (s.includes("science"))
-    return { bg: "bg-[#EFF6FF]", border: "border-[#93C5FD]", dot: "bg-[#1E40AF]", badge: "bg-gradient-to-r from-[#1E3A8A] to-[#1E293B] text-white", label: "text-[#1E40AF]" }
+    return { dot: "bg-[#1E40AF]", badge: "bg-gradient-to-r from-[#1E3A8A] to-[#1E293B] text-white" }
   if (s.includes("fsl"))
-    return { bg: "bg-[#F0FDFA]", border: "border-[#5EEAD4]", dot: "bg-[#0D9488]", badge: "bg-gradient-to-r from-[#0D9488] to-[#0F766E] text-white", label: "text-[#0F766E]" }
+    return { dot: "bg-[#0D9488]", badge: "bg-gradient-to-r from-[#0D9488] to-[#0F766E] text-white" }
   if (s.includes("language") || s.includes("english") || s.includes("french") || s.includes("literacy"))
-    return { bg: "bg-[#FEFCE8]", border: "border-[#FDE047]", dot: "bg-[#CA8A04]", badge: "bg-gradient-to-r from-[#CA8A04] to-[#A16207] text-white", label: "text-[#92400E]" }
+    return { dot: "bg-[#CA8A04]", badge: "bg-gradient-to-r from-[#CA8A04] to-[#A16207] text-white" }
   if (s.includes("social") || s.includes("history") || s.includes("geo"))
-    return { bg: "bg-[#F5F3FF]", border: "border-[#C4B5FD]", dot: "bg-[#7C3AED]", badge: "bg-gradient-to-r from-[#7C3AED] to-[#6D28D9] text-white", label: "text-[#7C3AED]" }
+    return { dot: "bg-[#7C3AED]", badge: "bg-gradient-to-r from-[#7C3AED] to-[#6D28D9] text-white" }
   if (s.includes("health") || s.includes("physical"))
-    return { bg: "bg-[#FFF7ED]", border: "border-[#FED7AA]", dot: "bg-[#EA580C]", badge: "bg-gradient-to-r from-[#EA580C] to-[#C2410C] text-white", label: "text-[#EA580C]" }
+    return { dot: "bg-[#EA580C]", badge: "bg-gradient-to-r from-[#EA580C] to-[#C2410C] text-white" }
   if (s.includes("art") || s.includes("music") || s.includes("drama") || s.includes("dance"))
-    return { bg: "bg-[#FDF4FF]", border: "border-[#E9D5FF]", dot: "bg-[#A21CAF]", badge: "bg-gradient-to-r from-[#A21CAF] to-[#86198F] text-white", label: "text-[#A21CAF]" }
-  return { bg: "bg-[#FFF5ED]", border: "border-[#FFB627]", dot: "bg-[#FF6B35]", badge: "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white", label: "text-[#C65D3B]" }
+    return { dot: "bg-[#A21CAF]", badge: "bg-gradient-to-r from-[#A21CAF] to-[#86198F] text-white" }
+  return { dot: "bg-[#FF6B35]", badge: "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white" }
 }
 
 // ── Primary modality icon ──────────────────────────────────────────────────
@@ -177,12 +255,43 @@ function getPrimaryIcon(modality: string) {
 }
 
 // ── Accessibility indicator ────────────────────────────────────────────────
-function getAccessibilityStyle(accessibilityArray) {
+function getAccessibilityStyle(accessibilityArray: string[] | undefined) {
   const rating = (accessibilityArray?.[0] || "").toLowerCase()
   if (rating.includes("no concerns")) return { icon: "/icons/accessibility-green.svg", label: "No accessibility concerns" }
   if (rating.includes("some concerns")) return { icon: "/icons/accessibility-yellow.svg", label: "Some accessibility concerns" }
   return { icon: "/icons/accessibility-orange.svg", label: "Accessibility not reviewed" }
 }
+
+// ── Grade-range collapsing (§5) ─────────────────────────────────────────────
+// PreK < K < 1…12. A `[3,4,5]` resource reads "Gr 3–5", not "Grade 3" — showing
+// only the first grade made teachers dismiss valid multi-grade matches.
+function formatGrade(n: number): string {
+  if (n === -1) return "PreK"
+  if (n === 0) return "K"
+  return String(n)
+}
+
+function gradeBandLabel(band?: string): string | null {
+  if (!band) return null
+  if (band === "multi") return "Multi-grade"
+  return band.charAt(0).toUpperCase() + band.slice(1)
+}
+
+function formatGradeRange(gradeLevel: unknown, band?: string): string | null {
+  const nums = normalizeGrades(gradeLevel)
+    .map(gradeToNumber)
+    .filter((n) => Number.isFinite(n))
+    .sort((a, b) => a - b)
+  if (nums.length === 0) return gradeBandLabel(band)
+  const lo = nums[0]
+  const hi = nums[nums.length - 1]
+  // "Gr" prefix only when the low end is a numbered grade; K / PreK read on their own.
+  const prefix = lo >= 1 ? "Gr " : ""
+  if (lo === hi) return `${prefix}${formatGrade(lo)}`
+  return `${prefix}${formatGrade(lo)}–${formatGrade(hi)}`
+}
+
+const MAX_PILLS = 4
 
 // ── Component ──────────────────────────────────────────────────────────────
 export default function CompactResourceCard({ resource, codeProgress }: { resource: Resource; codeProgress?: Record<string, LevelCounts> }) {
@@ -199,13 +308,26 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
   }
 
   const subject = resource.subject || "Math"
-  const grades = normalizeGrades(resource.grade_level)
-  const displayGrade = grades[0] || ""
-
   const theme = getSubjectTheme(subject)
-  const modalityStr = Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? "")
-  const { Icon: ModalityIcon, color: iconColor } = getPrimaryIcon(modalityStr)
+
+  const title = resource.topic_title || `${resource.strand?.[0] || subject} Resource`
+
+  const gradeRange = formatGradeRange(resource.grade_level, resource.grade_band)
+  const strandStr = resource.strand?.length
+    ? resource.strand[0] + (resource.strand.length > 1 ? ` +${resource.strand.length - 1}` : "")
+    : null
+  const contextParts = [gradeRange, subject, strandStr].filter(Boolean) as string[]
+
+  const primaryModality = resource.modality?.[0]
+  const { Icon: ModalityIcon, color: iconColor } = getPrimaryIcon(
+    Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? ""),
+  )
   const accessLevel = getAccessibilityStyle(resource.accessibility)
+
+  const isLicensed = resource.access_type === "licensed"
+  const isPaid = !isLicensed && (resource.is_paid || resource.access_type === "purchase")
+  const isNonEnglish = !!resource.language && resource.language.toLowerCase() !== "en"
+  const verified = resource.metadata?.verified === true
 
   // Collapse the resource's specific expectations into overalls (D1.1… → D1).
   // Always lists every overall the resource covers; each carries a readiness
@@ -214,70 +336,80 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
     () => coverageForResource(resource.curriculum_expectations || [], codeProgress ?? {}),
     [resource.curriculum_expectations, codeProgress],
   )
+  const visiblePills = overallCoverage.slice(0, MAX_PILLS)
+  const overflowPills = overallCoverage.length - visiblePills.length
 
   const description =
     resource.description ||
-    `A curriculum-aligned resource for Grade ${displayGrade} ${subject} students.`
-
-  const headerLine = [
-    displayGrade ? `Grade ${displayGrade}` : null,
-    subject || null,
-    resource.strand?.[0] || null,
-  ]
-    .filter(Boolean)
-    .join(" · ")
+    `A curriculum-aligned ${subject} resource${gradeRange ? ` for ${gradeRange}` : ""}.`
 
   return (
     <div className="relative">
-      <div className={`group/card rounded-2xl border-2 ${theme.border} ${theme.bg} shadow-sm transition-all duration-200 overflow-hidden hover:shadow-lg hover:shadow-black/5 hover:border-[#FF6B35]/40`}>
+      <div className="group/card flex overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-200 hover:shadow-lg hover:shadow-black/5 hover:border-primary/40">
+        {/* Subject accent bar — full left edge, colored by getSubjectTheme */}
+        <div className={`w-1.5 flex-shrink-0 ${theme.dot}`} aria-hidden="true" />
 
-        {/* ── Header: grade · subject · strand + publisher · $ · bookmark ── */}
-        <div className="bg-white px-3 py-2.5 border-b border-[#E8D5C4] flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <div className={`w-1.5 h-4 rounded-full flex-shrink-0 ${theme.dot}`} />
-            <p className="text-xs font-semibold text-[#2C2C2C] truncate">{headerLine}</p>
+        <div className="min-w-0 flex-1 p-3 sm:p-4">
+          {/* ── Title (headline) + verified · FR · Add ── */}
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="min-w-0 flex-1 font-sans text-base font-semibold leading-snug text-foreground line-clamp-2">
+              {title}
+            </h3>
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              {verified && (
+                <span title="Verified resource" aria-label="Verified resource" className="flex items-center text-signal-4">
+                  <BadgeCheck className="w-4 h-4" />
+                </span>
+              )}
+              {isNonEnglish && (
+                <span
+                  className="rounded-md border border-border bg-background px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-foreground"
+                  title={`${resource.language?.toUpperCase()} resource`}
+                >
+                  {resource.language?.toUpperCase()}
+                </span>
+              )}
+              <button
+                onClick={handleToggleSave}
+                className={`py-1 px-3 text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 hover:scale-105 transform ${
+                  isSaved
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted/60 text-foreground hover:bg-muted"
+                }`}
+                aria-label={isSaved ? "Remove from plan" : "Add to plan"}
+              >
+                {isSaved ? "Added" : "Add"}
+                {isSaved ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5 flex-shrink-0">
-            {resource.publisher_creator && (
-              <span className="text-[11px] text-[#888] truncate max-w-[90px] hidden sm:inline">{resource.publisher_creator}</span>
-            )}
-            {resource.is_paid && (
-              <span className="text-[#C65D3B] text-xs font-black">$</span>
-            )}
-            <button
-              onClick={() => setShowFlagModal(true)}
-              className="p-1 rounded-lg text-[#A8998E] hover:text-[#C65D3B] hover:bg-[#FFE5CC] transition-colors duration-200"
-              aria-label="Report an issue with this resource"
-              title="Report an issue"
-            >
-              <Flag className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={handleToggleSave}
-              className={`flex-shrink-0 py-1 px-3 text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 hover:scale-105 transform ${
-                isSaved
-                  ? "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white"
-                  : "bg-[#F5F5F5] text-[#8B4513] hover:bg-[#FFE5CC]"
-              }`}
-              aria-label={isSaved ? "Remove from plan" : "Add to plan"}
-            >
-              {isSaved ? "Added" : "Add"}
-              {isSaved ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
-            </button>
-          </div>
-        </div>
 
-        {/* ── Body: description ── */}
-        <div className="px-3 pt-2.5 pb-3 space-y-1.5">
-          <p className="text-[11px] text-[#555] leading-relaxed line-clamp-3">{description}</p>
-        </div>
+          {/* ── Context line: Grade(range) · Subject · Strand(+N) · Publisher ── */}
+          {contextParts.length > 0 && (
+            <p className="mt-1 text-[11px] font-medium tracking-wide text-muted-foreground">
+              {contextParts.join(" · ")}
+              {resource.publisher_creator && (
+                <span className="hidden sm:inline"> · {resource.publisher_creator}</span>
+              )}
+              {resource.is_collection && (
+                <span className="ml-1.5 align-middle inline-block rounded border border-border px-1 py-px text-[9px] font-semibold uppercase tracking-wide">
+                  Collection
+                </span>
+              )}
+            </p>
+          )}
 
-        {/* ── Footer: readiness · accessibility · title · modality · view ── */}
-        <div className="bg-white px-3 py-2 border-t border-[#E8D5C4] flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex items-center gap-2 min-w-0 flex-wrap">
-            {overallCoverage.map((o) => (
-              <OverallReadinessPill key={o.overall} data={o} />
-            ))}
+          {/* ── Description ── */}
+          <p className="mt-2 text-xs text-muted-foreground leading-relaxed line-clamp-3">{description}</p>
+
+          {/* ── Footer: left cluster (wraps) + View anchored right ── */}
+          <div className="mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 border-t border-border/60 pt-2.5">
+            {primaryModality && (
+              <span className="flex items-center gap-1 text-[11px] font-medium text-foreground/80">
+                <ModalityIcon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: iconColor }} />
+                {primaryModality}
+              </span>
+            )}
 
             <img
               src={withBasePath(accessLevel.icon)}
@@ -285,27 +417,54 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
               className="w-4 h-4 flex-shrink-0"
               title={accessLevel.label}
             />
-          </div>
 
-          <div className="flex items-center gap-1.5 flex-1 min-w-[140px] justify-end">
-            <h3 className="text-sm font-bold text-[#2C2C2C] leading-snug text-right">
-              {resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
-            </h3>
-            <ModalityIcon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: iconColor }} />
-          </div>
+            {isLicensed && (
+              <span className="rounded-md border border-border px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground" title="Licensed resource">
+                Licensed
+              </span>
+            )}
+            {isPaid && (
+              <span className="text-sm font-black text-primary" title="Paid resource" aria-label="Paid resource">$</span>
+            )}
 
-          <button
-            onClick={() => {
-              if (resource.url) window.open(resource.url, "_blank", "noopener,noreferrer")
-            }}
-            disabled={!resource.url}
-            className={`flex-shrink-0 py-1 px-3 ${theme.badge} text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 hover:scale-105 transform ${
-              !resource.url ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            View
-            <ExternalLink className="w-3 h-3" />
-          </button>
+            {visiblePills.map((o) => (
+              <OverallReadinessPill key={o.overall} data={o} />
+            ))}
+            {overflowPills > 0 && (
+              <span
+                className="px-2 py-0.5 rounded-full border border-border text-[10px] font-semibold text-muted-foreground"
+                title={`${overflowPills} more expectation${overflowPills > 1 ? "s" : ""}`}
+              >
+                +{overflowPills}
+              </span>
+            )}
+
+            {resource.usage_notes && <TipsPopover notes={resource.usage_notes} />}
+
+            {/* Right-anchored actions: report + View. ml-auto kills the dead-air void. */}
+            <div className="ml-auto flex items-center gap-1.5">
+              <button
+                onClick={() => setShowFlagModal(true)}
+                className="p-1 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors duration-200"
+                aria-label="Report an issue with this resource"
+                title="Report an issue"
+              >
+                <Flag className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => {
+                  if (resource.url) window.open(resource.url, "_blank", "noopener,noreferrer")
+                }}
+                disabled={!resource.url}
+                className={`flex-shrink-0 py-1 px-3 ${theme.badge} text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 hover:scale-105 transform ${
+                  !resource.url ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                View
+                <ExternalLink className="w-3 h-3" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -313,14 +472,14 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
         isOpen={showReviewsModal}
         onClose={() => setShowReviewsModal(false)}
         resourceId={resourceId}
-        resourceTitle={resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
+        resourceTitle={title}
       />
 
       <FlagModal
         isOpen={showFlagModal}
         onClose={() => setShowFlagModal(false)}
         resourceId={resourceId}
-        resourceTitle={resource.topic_title || `${resource.strand?.[0] || subject} – Grade ${displayGrade}`}
+        resourceTitle={title}
       />
     </div>
   )
