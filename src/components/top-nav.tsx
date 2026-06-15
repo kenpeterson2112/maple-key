@@ -5,17 +5,14 @@ import { Search, BookOpen, BarChart3, Settings, LogIn, Menu, X, SlidersHorizonta
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
-import CurriculumFilterBar from "@/components/curriculum-filter-bar"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
 
 export type TopNavSpace = "resources" | "lessons" | "insights"
-export type AllSpace = TopNavSpace | "lessonplanner" | "assessment"
 
 interface TopNavProps {
   activeSpace: TopNavSpace | null
-  fullActiveSpace?: AllSpace
   onChangeSpace: (space: TopNavSpace) => void
   onPlanLesson: () => void
   onOpenMobileFilters?: () => void
@@ -37,7 +34,6 @@ const TOGGLE_ITEMS: ToggleItem[] = [
 
 export default function TopNav({
   activeSpace,
-  fullActiveSpace,
   onChangeSpace,
   onPlanLesson,
   onOpenMobileFilters,
@@ -87,26 +83,6 @@ export default function TopNav({
   }
 
   const showResourceFilters = activeSpace === "resources" && !!onOpenMobileFilters
-
-  const getPageTitle = (space: AllSpace | null | undefined): string => {
-    switch (space) {
-      case "resources":
-        return "Resources"
-      case "lessons":
-        return "All Lessons"
-      case "insights":
-        return "Insights"
-      case "lessonplanner":
-        return "Planning"
-      case "assessment":
-        return "Assessment"
-      default:
-        return ""
-    }
-  }
-
-  // Use fullActiveSpace if provided, otherwise fall back to activeSpace
-  const pageTitle = getPageTitle(fullActiveSpace || activeSpace)
 
   return (
     <>
@@ -289,9 +265,6 @@ export default function TopNav({
             </div>
           )}
         </div>
-
-        {/* Curriculum filter bar */}
-        <CurriculumFilterBar pageTitle={pageTitle} />
       </header>
 
       <SettingsModal isOpen={isSettingsOpen} onClose={handleSettingsClose} />
