@@ -1,14 +1,18 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search, BookOpen, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
+import { Search, BookOpen, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown, Leaf, Calculator, Beaker, Globe, PenTool } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
-import CurriculumFilterBar from "@/components/curriculum-filter-bar"
+import InlinePicker from "@/components/inline-picker"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
+import { useGlobalFilters } from "@/lib/global-filters"
+import { PROVINCES, GRADES, SUBJECTS } from "@/components/hero-personalize"
+import { getStrandOptions } from "@/lib/get-strand-options"
+import { STRAND_CODES } from "@/components/hero-personalize"
 
 export type TopNavSpace = "resources" | "lessons" | "insights"
 export type AllSpace = TopNavSpace | "lessonplanner" | "assessment"
@@ -44,12 +48,17 @@ export default function TopNav({
   totalActiveFilters = 0,
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
+  const { state, setProvince, setGrade, setSubject, setStrand } = useGlobalFilters()
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [showSignInHint, setShowSignInHint] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMaterialsOpen, setIsMaterialsOpen] = useState(false)
   const [materialsTick, setMaterialsTick] = useState(0)
+  const [mobileOpenFilter, setMobileOpenFilter] = useState<"province" | "grade" | "subject" | "strand" | null>(null)
   const materialsRef = useRef<HTMLDivElement>(null)
+
+  const strandOptions = getStrandOptions(state.subject)
+  const isStrandDisabled = state.subject === ""
 
   useEffect(() => {
     if (!isMaterialsOpen) return
@@ -103,6 +112,37 @@ export default function TopNav({
       default:
         return ""
     }
+  }
+
+  const getProvinceLabel = () => {
+    if (!state.province) return "CA"
+    return state.province.toUpperCase()
+  }
+
+  const getGradeLabel = () => {
+    return state.grade ? state.grade : "K12"
+  }
+
+  const getSubjectIcon = () => {
+    switch (state.subject) {
+      case "Math":
+        return <Calculator size={20} />
+      case "Science":
+        return <Beaker size={20} />
+      case "Social Studies":
+        return <Globe size={20} />
+      case "Language":
+        return <PenTool size={20} />
+      case "FSL":
+        return <span className="text-lg">⚜️</span>
+      default:
+        return <BookOpen size={20} />
+    }
+  }
+
+  const getStrandLabel = () => {
+    if (!state.strand) return ""
+    return Object.entries(STRAND_CODES).find(([name]) => name === state.strand)?.[1] || state.strand[0]?.toUpperCase() || ""
   }
 
   // Use fullActiveSpace if provided, otherwise fall back to activeSpace
@@ -199,58 +239,211 @@ export default function TopNav({
           </div>
 
           {/* Mobile */}
-          <div className="flex md:hidden items-center justify-between gap-2">
+          <div className="flex md:hidden items-center justify-between gap-1.5">
             <img
               src={withBasePath("/maple-key-logo.png")}
               alt="Maple Key"
               width={785}
               height={673}
-              className="h-11 w-auto object-contain"
+              className="h-11 w-auto object-contain flex-shrink-0"
             />
 
-            <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} compact />
+            {/* Page Title */}
+            {pageTitle && (
+              <span className="text-sm font-semibold text-[#2C2C2C] whitespace-nowrap hidden sm:inline">
+                {pageTitle}
+              </span>
+            )}
 
-            <div className="flex items-center gap-1">
-              {showResourceFilters && (
-                <button
-                  onClick={onOpenMobileFilters}
-                  className="flex items-center gap-1 rounded-full border border-[#E8D5C4] bg-white px-2.5 py-1.5 text-xs font-semibold text-[#8B4513] shadow-sm"
-                  title="Filters"
-                >
-                  <SlidersHorizontal size={12} />
-                  Filters
-                  {totalActiveFilters > 0 && (
-                    <span className="rounded-full bg-[#FF6B35] px-1.5 text-[10px] font-bold text-white">
-                      {totalActiveFilters >= 10 ? "9+" : totalActiveFilters}
-                    </span>
-                  )}
-                </button>
-              )}
-              <button
-                onClick={onPlanLesson}
-                className={`relative flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
-                  bookmarkedResources.length > 0
-                    ? "bg-[#FF6B35] text-white shadow-sm"
-                    : "bg-white border border-[#E8D5C4] text-[#8B4513]"
-                }`}
-                title="Plan lesson"
-              >
-                Plan
-                {bookmarkedResources.length > 0 && (
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white/25 text-[9px] font-bold">
-                    {bookmarkedResources.length >= 10 ? "9+" : bookmarkedResources.length}
-                  </span>
-                )}
-              </button>
-              <button
-                onClick={() => setIsMobileMenuOpen((v) => !v)}
-                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#FFE5CC]"
-                aria-label="Menu"
-              >
-                {isMobileMenuOpen ? <X size={18} className="text-[#8B4513]" /> : <Menu size={18} className="text-[#8B4513]" />}
-              </button>
-            </div>
+            {/* Filter Buttons */}
+            {/* Province Button */}
+            <button
+              onClick={() => setMobileOpenFilter(mobileOpenFilter === "province" ? null : "province")}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
+              title="Choose province"
+            >
+              <Leaf size={18} />
+            </button>
+
+            {/* Grade Button */}
+            <button
+              onClick={() => setMobileOpenFilter(mobileOpenFilter === "grade" ? null : "grade")}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors text-xs font-semibold flex-shrink-0"
+              title="Choose grade"
+            >
+              {getGradeLabel()}
+            </button>
+
+            {/* Subject Button */}
+            <button
+              onClick={() => setMobileOpenFilter(mobileOpenFilter === "subject" ? null : "subject")}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
+              title="Choose subject"
+            >
+              {getSubjectIcon()}
+            </button>
+
+            {/* Strand Button */}
+            <button
+              onClick={() => setMobileOpenFilter(mobileOpenFilter === "strand" ? null : "strand")}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border text-xs font-semibold transition-colors flex-shrink-0 ${
+                isStrandDisabled
+                  ? "bg-[#F5F5F5] border-[#E0E0E0] text-[#A8998E] cursor-not-allowed opacity-50"
+                  : "bg-[#FFF5ED] border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC]"
+              }`}
+              disabled={isStrandDisabled}
+              title={isStrandDisabled ? "Select a subject first" : "Choose strand"}
+            >
+              {getStrandLabel() || "-"}
+            </button>
+
+            <div className="flex-1" />
+
+            <button
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#FFE5CC] flex-shrink-0"
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? <X size={18} className="text-[#8B4513]" /> : <Menu size={18} className="text-[#8B4513]" />}
+            </button>
           </div>
+
+          {/* Mobile Filter Dropdowns */}
+          {mobileOpenFilter && (
+            <div className="md:hidden mt-2 rounded-2xl border border-[#E8D5C4] bg-white shadow-lg">
+              {/* Province Dropdown */}
+              {mobileOpenFilter === "province" && (
+                <div className="p-3 space-y-2">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-semibold text-[#2C2C2C]">Province</h3>
+                    <button
+                      onClick={() => setMobileOpenFilter(null)}
+                      className="p-1 hover:bg-[#F5F5F5] rounded-lg"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto">
+                    {PROVINCES.map((opt) => (
+                      <button
+                        key={opt.value || "__any"}
+                        onClick={() => {
+                          setProvince(opt.value)
+                          setMobileOpenFilter(null)
+                        }}
+                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          state.province === opt.value
+                            ? "bg-[#FFE5CC] text-[#8B4513]"
+                            : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                        }`}
+                      >
+                        {opt.value || "All"}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Grade Dropdown */}
+              {mobileOpenFilter === "grade" && (
+                <div className="p-3 space-y-2">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-semibold text-[#2C2C2C]">Grade</h3>
+                    <button
+                      onClick={() => setMobileOpenFilter(null)}
+                      className="p-1 hover:bg-[#F5F5F5] rounded-lg"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {GRADES.map((opt) => (
+                      <button
+                        key={opt.value || "__any"}
+                        onClick={() => {
+                          setGrade(opt.value)
+                          setMobileOpenFilter(null)
+                        }}
+                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          state.grade === opt.value
+                            ? "bg-[#FFE5CC] text-[#8B4513]"
+                            : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                        }`}
+                      >
+                        {opt.value || "All"}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Subject Dropdown */}
+              {mobileOpenFilter === "subject" && (
+                <div className="p-3 space-y-2">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-semibold text-[#2C2C2C]">Subject</h3>
+                    <button
+                      onClick={() => setMobileOpenFilter(null)}
+                      className="p-1 hover:bg-[#F5F5F5] rounded-lg"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {SUBJECTS.map((opt) => (
+                      <button
+                        key={opt.value || "__any"}
+                        onClick={() => {
+                          setSubject(opt.value)
+                          setMobileOpenFilter(null)
+                        }}
+                        className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                          state.subject === opt.value
+                            ? "bg-[#FFE5CC] text-[#8B4513]"
+                            : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Strand Dropdown */}
+              {mobileOpenFilter === "strand" && !isStrandDisabled && (
+                <div className="p-3 space-y-2">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-semibold text-[#2C2C2C]">Strand</h3>
+                    <button
+                      onClick={() => setMobileOpenFilter(null)}
+                      className="p-1 hover:bg-[#F5F5F5] rounded-lg"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {strandOptions.map((opt) => (
+                      <button
+                        key={opt.value || "__any"}
+                        onClick={() => {
+                          setStrand(opt.value)
+                          setMobileOpenFilter(null)
+                        }}
+                        className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                          state.strand === opt.value
+                            ? "bg-[#FFE5CC] text-[#8B4513]"
+                            : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {isMobileMenuOpen && (
             <div className="md:hidden mt-3 rounded-2xl border-2 border-[#E8D5C4] bg-white p-3 shadow-lg space-y-2">
@@ -289,9 +482,6 @@ export default function TopNav({
             </div>
           )}
         </div>
-
-        {/* Curriculum filter bar */}
-        <CurriculumFilterBar pageTitle={pageTitle} />
       </header>
 
       <SettingsModal isOpen={isSettingsOpen} onClose={handleSettingsClose} />
