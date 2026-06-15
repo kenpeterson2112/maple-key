@@ -116,9 +116,10 @@ export const LEVEL_META: Record<ProficiencyLevel, { label: string; phrase: strin
   },
 }
 
-// With 2 questions per expectation: 2/2 → level4, 1/2 → level2, 0/2 → level1.
-// Individual 2-question checks are too noisy to claim a genuine 4-level result —
-// level3 is reached via self-rating and dev-seed data instead.
+// Quick checks ask ONE question per expectation, so the graded result is binary per
+// student per code: correct → level4, incorrect → level1. (If a code ever carries more
+// than one question, a partial score still maps to level2.) A single quick check is too
+// coarse to claim level3 — that is reached via self-rating and dev-seed data instead.
 export function levelFor(correct: number, total: number): ProficiencyLevel {
   if (total <= 0 || correct <= 0) return "level1"
   if (correct === total) return "level4"
