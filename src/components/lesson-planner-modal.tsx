@@ -2040,7 +2040,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
         )}
 
         {!lessonGenerated && !showQuestionsStep && !isGenerating && (
-          <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
+          <div className="hidden md:block sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
             <div className="max-w-3xl mx-auto space-y-3">
               {generateError && (
                 <div className={`rounded-lg px-4 py-3 border ${generateError === "API_BALANCE_LOW" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
