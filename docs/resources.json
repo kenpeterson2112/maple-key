@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-14T07:24:43Z",
-    "total_count": 1729,
+    "generated_at": "2026-06-15T09:25:08Z",
+    "total_count": 1730,
     "schema_version": "2.1"
   },
   "resources": [
@@ -97851,6 +97851,58 @@
       "id": "r-2565",
       "metadata": {
         "added_at": "2026-06-14",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Canadian Identity and Culture",
+      "description": "Wikipedia article exploring the unique culture, characteristics, and condition of being Canadian, including the many symbols and traditions that define Canadian identity. Examines how Canadians understand themselves as a distinct cultural group within North America.",
+      "url": "https://en.wikipedia.org/wiki/Canadians",
+      "publisher_creator": "Wikipedia",
+      "grade_level": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "grade_band": "intermediate",
+      "subject": "Social Studies",
+      "strand": [
+        "Heritage and Identity"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "social_studies",
+          "strand": "heritage_and_identity",
+          "expectation_code": "A1.1",
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2566",
+      "metadata": {
+        "added_at": "2026-06-15",
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
