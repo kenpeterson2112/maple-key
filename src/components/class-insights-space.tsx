@@ -9,7 +9,7 @@ import {
   computeReadinessLevel,
   type LessonTally,
 } from "@/lib/assessment-results"
-import ClassDashboard from "@/components/class-dashboard"
+import CurriculumOrbDashboard from "@/components/curriculum-orb-dashboard"
 import DevSeedControl from "@/components/dev/dev-seed-control"
 
 function formatDate(ts: number): string {
@@ -187,8 +187,8 @@ export default function ClassInsightsSpace() {
           </div>
 
           {/* Expectation breakdown */}
-          {data.hasData ? (
-            <ClassDashboard data={data} />
+          {filtered.length > 0 ? (
+            <CurriculumOrbDashboard tallies={filtered} />
           ) : (
             <div className="rounded-xl border-2 border-dashed border-[#E8D5C4] bg-white p-8 text-center">
               <p className="text-sm font-medium text-[#2C2C2C]">No results for this view</p>
