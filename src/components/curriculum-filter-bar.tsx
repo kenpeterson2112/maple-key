@@ -110,20 +110,20 @@ export default function CurriculumFilterBar() {
         </div>
 
         {/* Mobile Layout */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex md:hidden items-center gap-1.5">
           {/* Province Button */}
           <button
             onClick={() => setMobileOpenFilter(mobileOpenFilter === "province" ? null : "province")}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
             title="Choose province"
           >
-            <Leaf size={20} />
+            <Leaf size={18} />
           </button>
 
           {/* Grade Button */}
           <button
             onClick={() => setMobileOpenFilter(mobileOpenFilter === "grade" ? null : "grade")}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors text-sm font-semibold"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors text-xs font-semibold flex-shrink-0"
             title="Choose grade"
           >
             {getGradeLabel()}
@@ -132,7 +132,7 @@ export default function CurriculumFilterBar() {
           {/* Subject Button */}
           <button
             onClick={() => setMobileOpenFilter(mobileOpenFilter === "subject" ? null : "subject")}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
             title="Choose subject"
           >
             {getSubjectIcon()}
@@ -141,7 +141,7 @@ export default function CurriculumFilterBar() {
           {/* Strand Button */}
           <button
             onClick={() => setMobileOpenFilter(mobileOpenFilter === "strand" ? null : "strand")}
-            className={`flex h-11 w-11 items-center justify-center rounded-full border text-sm font-semibold transition-colors ${
+            className={`flex h-10 w-10 items-center justify-center rounded-full border text-xs font-semibold transition-colors flex-shrink-0 ${
               isStrandDisabled
                 ? "bg-[#F5F5F5] border-[#E0E0E0] text-[#A8998E] cursor-not-allowed opacity-50"
                 : "bg-[#FFF5ED] border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC]"
@@ -150,22 +150,6 @@ export default function CurriculumFilterBar() {
             title={isStrandDisabled ? "Select a subject first" : "Choose strand"}
           >
             {getStrandLabel() || "-"}
-          </button>
-
-          {/* Spacer */}
-          <div className="flex-1" />
-
-          {/* Sandbox Toggle */}
-          <button
-            onClick={() => setSandbox(!state.isSandbox)}
-            className={`flex h-11 items-center gap-1.5 rounded-full px-2.5 text-xs font-medium transition-colors ${
-              state.isSandbox
-                ? "bg-[#FFF3E0] text-[#E65100] border border-[#FFB74D]"
-                : "bg-muted text-muted-foreground border border-border hover:bg-[#F5F5F5]"
-            }`}
-            title={state.isSandbox ? "Using sandbox data" : "Using actual data"}
-          >
-            <Zap size={14} className={state.isSandbox ? "fill-current" : ""} />
           </button>
         </div>
 

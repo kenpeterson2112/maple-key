@@ -1,9 +1,10 @@
 "use client"
 
-import { User, Mail, Globe, School } from "lucide-react"
+import { User, Mail, Globe, School, FlaskConical } from "lucide-react"
 import { useState } from "react"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import ClassroomResourcesPicker from "@/components/classroom-resources-picker"
+import { isSandboxMode, setSandboxMode } from "@/lib/assessment-results"
 import {
   getClassroomResources,
   setClassroomResources,
@@ -21,6 +22,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [name, setName] = useState("Ken Peterson")
   const [email, setEmail] = useState("ken.peterson@maplekey.edu")
   const [language, setLanguage] = useState("English")
+  const [sandbox, setSandboxState] = useState(() => isSandboxMode())
   const [classroomResources, setClassroomResourcesState] = useState<string[]>(() =>
     getClassroomResources()
   )
@@ -31,7 +33,12 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const handleSave = () => {
     setClassroomResources(classroomResources)
     setCustomClassroomResources(customMaterials)
+    setSandboxMode(sandbox)
     onClose()
+  }
+
+  const handleSandboxToggle = () => {
+    setSandboxState(!sandbox)
   }
 
   return (
@@ -101,6 +108,28 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               customMaterials={customMaterials}
               onCustomChange={setCustomMaterialsState}
             />
+          </div>
+
+          {/* Developer & Sandbox Mode */}
+          <div className="bg-white border-2 border-[#E8D5C4] rounded-2xl p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <FlaskConical size={16} className="text-[#C65D3B]" />
+              <h3 className="text-sm font-semibold text-[#2C2C2C]">Developer & Test Mode</h3>
+            </div>
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={sandbox}
+                onChange={handleSandboxToggle}
+                className="w-5 h-5 rounded-lg border-2 border-[#E8D5C4] cursor-pointer accent-[#FF6B35]"
+              />
+              <div className="flex-1">
+                <p className="text-sm font-medium text-[#2C2C2C]">Sandbox Mode</p>
+                <p className="text-xs text-[#888]">
+                  {sandbox ? "Using generated sample data for testing" : "Using actual lesson data"}
+                </p>
+              </div>
+            </label>
           </div>
 
           <button
