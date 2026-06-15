@@ -1,6 +1,6 @@
 import type { LessonMetadata } from "./lesson-metadata"
 import type { ProficiencyLevel } from "./assessment-types"
-import { overallCodeOf, groupByOverall } from "./curriculum-codes"
+import { overallCodeOf, overallLabel, groupByOverall, groupByStrand, strandLabel } from "./curriculum-codes"
 
 const STORAGE_KEY = "maplekey_assessment_results"
 // Parallel "sandbox" store + on/off flag. When sandbox mode is on, every read/write
@@ -260,4 +260,91 @@ export function coverageForResource(
     out.push({ overall, level: total > 0 ? computeReadinessLevel(summed) : null, children })
   }
   return out.sort((a, b) => a.overall.localeCompare(b.overall, undefined, { numeric: true }))
+}
+
+// ---- Coverage tree (taught vs assessed) ----
+export interface SpecificCoverage {
+  code: string
+  counts: LevelCounts // empty if not yet assessed
+  assessed: boolean
+}
+
+export interface CoverageNode {
+  code: string // overall code (e.g. "D1") or strand code (e.g. "D")
+  label: string
+  specifics: SpecificCoverage[]
+  bands: LevelCounts // sum of assessed specifics' counts
+  coverageFraction: number // assessedCount / specifics.length, 0 when empty
+}
+
+// Build one node per overall expectation that appears in `tally.codes`
+// (taught) or `tally.byExpectation` (assessed) across the given tallies.
+// Each node's `specifics` lists every taught code under that overall, marking
+// which ones have recorded assessment data — the basis for the orb
+// dashboard's coverage-based fill.
+export function buildOverallCoverage(tallies: LessonTally[]): CoverageNode[] {
+  const taught = new Set<string>()
+  const assessed: Record<string, LevelCounts> = {}
+  for (const t of tallies) {
+    for (const code of t.codes) taught.add(code)
+    for (const [code, counts] of Object.entries(t.byExpectation)) {
+      taught.add(code)
+      addInto((assessed[code] ??= emptyCounts()), counts)
+    }
+  }
+
+  const out: CoverageNode[] = []
+  for (const [overall, codes] of Object.entries(groupByOverall([...taught]))) {
+    const specifics: SpecificCoverage[] = [...codes]
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+      .map((code) => ({
+        code,
+        counts: assessed[code] ?? emptyCounts(),
+        assessed: code in assessed,
+      }))
+    const bands = emptyCounts()
+    let assessedCount = 0
+    for (const spec of specifics) {
+      if (spec.assessed) {
+        addInto(bands, spec.counts)
+        assessedCount++
+      }
+    }
+    out.push({
+      code: overall,
+      label: overallLabel(overall),
+      specifics,
+      bands,
+      coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
+    })
+  }
+  return out.sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
+}
+
+// Groups overall coverage nodes into strand-level nodes via groupByStrand.
+export function buildStrandCoverage(overallNodes: CoverageNode[]): CoverageNode[] {
+  const groups = groupByStrand(overallNodes.map((n) => n.code))
+  const byCode = new Map(overallNodes.map((n) => [n.code, n]))
+
+  const out: CoverageNode[] = []
+  for (const [strand, overalls] of Object.entries(groups)) {
+    const children = overalls.map((code) => byCode.get(code)).filter((n): n is CoverageNode => !!n)
+    const specifics = children.flatMap((n) => n.specifics)
+    const bands = emptyCounts()
+    let assessedCount = 0
+    for (const spec of specifics) {
+      if (spec.assessed) {
+        addInto(bands, spec.counts)
+        assessedCount++
+      }
+    }
+    out.push({
+      code: strand,
+      label: strandLabel(strand),
+      specifics,
+      bands,
+      coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
+    })
+  }
+  return out.sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
 }

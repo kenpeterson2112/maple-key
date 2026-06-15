@@ -4,12 +4,11 @@ import { useMemo, useState } from "react"
 import { BarChart3, BookOpen } from "lucide-react"
 import {
   getAllTallies,
-  aggregateAll,
   isSandboxMode,
   type LessonTally,
 } from "@/lib/assessment-results"
 import { useGlobalFilters } from "@/lib/global-filters"
-import ClassDashboard from "@/components/class-dashboard"
+import CurriculumOrbDashboard from "@/components/curriculum-orb-dashboard"
 import DevSeedControl from "@/components/dev/dev-seed-control"
 import PageHeader from "@/components/page-header"
 import { normalizeSubject } from "@/lib/subjects"
@@ -60,8 +59,6 @@ export default function ClassInsightsSpace() {
     [tallies, subject, grade]
   )
 
-  const data = useMemo(() => aggregateAll(filtered), [filtered])
-
   if (tallies.length === 0) {
     return (
       <div className="flex flex-col h-full bg-[#FAF3E0]">
@@ -106,8 +103,8 @@ export default function ClassInsightsSpace() {
         <div className="mx-auto max-w-3xl px-6 py-6 space-y-6">
 
           {/* Expectation breakdown */}
-          {data.hasData ? (
-            <ClassDashboard data={data} />
+          {filtered.length > 0 ? (
+            <CurriculumOrbDashboard tallies={filtered} />
           ) : (
             <div className="rounded-xl border-2 border-dashed border-[#E8D5C4] bg-white p-8 text-center">
               <p className="text-sm font-medium text-[#2C2C2C]">No results for this view</p>
