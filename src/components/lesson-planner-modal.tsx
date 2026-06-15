@@ -127,6 +127,7 @@ export default function LessonPlannerModal({
   const [learningGoal, setLearningGoal] = useState(fc?.learningGoal ?? "")
   const [successCriteria, setSuccessCriteria] = useState<string[]>(fc?.successCriteria ?? [])
   const [materialsResources, setMaterialsResources] = useState<string[]>(fc?.materials?.resources ?? [])
+  const [classroomMaterialsUsed, setClassroomMaterialsUsed] = useState<string[]>(fc?.materials?.classroomMaterials ?? [])
   const [materialsPreparation, setMaterialsPreparation] = useState<string[]>(fc?.materials?.preparation ?? [])
   const [excludedResources, setExcludedResources] = useState<{ title: string; reason: string }[]>(fc?.excludedResources ?? [])
   const [artifacts, setArtifacts] = useState<LessonArtifact[]>(fc?.artifacts ?? [])
@@ -259,6 +260,7 @@ export default function LessonPlannerModal({
       setLearningGoal(data.learningGoal ?? "")
       setSuccessCriteria(data.successCriteria ?? [])
       setMaterialsResources(data.materials?.resources ?? [])
+      setClassroomMaterialsUsed(data.materials?.classroomMaterials ?? [])
       setMaterialsPreparation(data.materials?.preparation ?? [])
       setExcludedResources(data.excludedResources ?? [])
       if (Array.isArray(data.sections) && data.sections.length > 0) {
@@ -300,7 +302,7 @@ export default function LessonPlannerModal({
           consolidationAssessment: data.consolidationAssessment ?? "",
           learningGoal: data.learningGoal ?? "",
           successCriteria: data.successCriteria ?? [],
-          materials: data.materials ?? { resources: [], preparation: [] },
+          materials: data.materials ?? { resources: [], classroomMaterials: [], preparation: [] },
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
@@ -430,6 +432,7 @@ export default function LessonPlannerModal({
       setLearningGoal(data.learningGoal ?? "")
       setSuccessCriteria(data.successCriteria ?? [])
       setMaterialsResources(data.materials?.resources ?? [])
+      setClassroomMaterialsUsed(data.materials?.classroomMaterials ?? [])
       setMaterialsPreparation(data.materials?.preparation ?? [])
       setExcludedResources(data.excludedResources ?? [])
       if (Array.isArray(data.sections) && data.sections.length > 0) {
@@ -471,7 +474,7 @@ export default function LessonPlannerModal({
           consolidationAssessment: data.consolidationAssessment ?? "",
           learningGoal: data.learningGoal ?? "",
           successCriteria: data.successCriteria ?? [],
-          materials: data.materials ?? { resources: [], preparation: [] },
+          materials: data.materials ?? { resources: [], classroomMaterials: [], preparation: [] },
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
@@ -505,7 +508,7 @@ export default function LessonPlannerModal({
       actionDifferentiation,
       consolidationContent,
       consolidationAssessment,
-      materials: { resources: materialsResources, preparation: materialsPreparation },
+      materials: { resources: materialsResources, classroomMaterials: classroomMaterialsUsed, preparation: materialsPreparation },
       ...(excludedResources.length ? { excludedResources } : {}),
       ...(cached && cached.length ? { assessmentQuestions: cached } : {}),
     } : {
@@ -514,7 +517,7 @@ export default function LessonPlannerModal({
       successCriteria,
       curriculumCodesCovered: coveredCodes,
       sections: templateSections,
-      materials: { resources: materialsResources, preparation: materialsPreparation },
+      materials: { resources: materialsResources, classroomMaterials: classroomMaterialsUsed, preparation: materialsPreparation },
       ...(excludedResources.length ? { excludedResources } : {}),
       ...(cached && cached.length ? { assessmentQuestions: cached } : {}),
     }
@@ -708,6 +711,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
     const resourcesListHtml = resourcesForDisplay
       .map((r) => `<li><span class="bullet">•</span><span>${esc(r.topic_title)}</span></li>`)
+      .join("")
+
+    const classroomMaterialsHtml = classroomMaterialsUsed
+      .map((m) => `<li><span class="bullet">•</span><span>${esc(m)}</span></li>`)
       .join("")
 
     const preparationHtml = preparationSteps
@@ -1012,6 +1019,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
           <div class="panel-title">Resources</div>
           <ul>${resourcesListHtml || "<li><span>No resources selected</span></li>"}</ul>
         </div>
+        ${classroomMaterialsHtml ? `<div class="panel" style="margin-top:8px;">
+          <div class="panel-title">Classroom Materials</div>
+          <ul>${classroomMaterialsHtml}</ul>
+        </div>` : ""}
       </div>
       <div class="col-prep">
         <div class="panel">
@@ -1248,6 +1259,16 @@ Return a JSON object with exactly these fields (string values are plain text, no
                             {(materialsResources.length > 0 ? materialsResources : resources.map((r) => r.topic_title)).join(", ")}
                           </p>
                         </div>
+                        {classroomMaterialsUsed.length > 0 && (
+                          <div>
+                            <p className="text-xs font-medium text-stone-600 mb-2">
+                              Classroom materials used
+                            </p>
+                            <p className="text-sm text-[#444] bg-stone-50 p-2 rounded-lg">
+                              {classroomMaterialsUsed.join(", ")}
+                            </p>
+                          </div>
+                        )}
                         <div>
                           <p className="text-xs font-medium text-stone-600 mb-2">
                             Preparation steps (one per line)
@@ -1268,9 +1289,9 @@ Return a JSON object with exactly these fields (string values are plain text, no
                       </div>
                     ) : (
                       <div className="flex gap-4">
-                        {/* Left box - Resources (1/4 width) */}
+                        {/* Left box - Resources + classroom materials (1/4 width) */}
                         <div className="w-1/4 bg-stone-50 border border-stone-200 rounded-lg p-3">
-                          <p className="text-xs font-semibold text-stone-700 mb-2">Resources</p>
+                          <p className="text-xs font-semibold text-stone-700 mb-2">Materials</p>
                           <ul className="text-xs text-[#444] space-y-1.5">
                             {(materialsResources.length > 0 ? materialsResources.map((t) => ({ topic_title: t })) : resources).map((r, index) => (
                               <li key={index} className="flex items-start gap-1.5">
@@ -1279,6 +1300,21 @@ Return a JSON object with exactly these fields (string values are plain text, no
                               </li>
                             ))}
                           </ul>
+                          {classroomMaterialsUsed.length > 0 && (
+                            <>
+                              <p className="text-[10px] font-semibold uppercase tracking-wide text-stone-500 mt-3 mb-1.5">
+                                From your classroom
+                              </p>
+                              <ul className="text-xs text-[#444] space-y-1.5">
+                                {classroomMaterialsUsed.map((m, index) => (
+                                  <li key={index} className="flex items-start gap-1.5">
+                                    <span className="text-emerald-500 flex-shrink-0">▪</span>
+                                    <span>{m}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
                         </div>
 
                         {/* Right box - Preparation steps (3/4 width) */}

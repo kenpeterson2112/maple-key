@@ -88,6 +88,7 @@ interface LessonPlanResponse {
   consolidationAssessment: string
   materials: {
     resources: string[]
+    classroomMaterials: string[]
     preparation: string[]
   }
   artifacts?: LessonArtifact[]
@@ -190,10 +191,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
 Instructional structure guidance: Each resource may include a "Best used as" field and a "Deployment note" — use these to inform how you structure the lesson. Station rotation and centre-based learning are excellent, well-established strategies; choose them when resources list "station-rotation" in "Best used as", when the teacher's notes or template suggest it, or when multiple hands-on materials are naturally suited to it. For flexible resources (interactive tools, digital content, video), match the approach to the context — whole-class discussion, individual exploration, or partner work may serve the lesson better than stations. Let the resources and teacher intent guide the structure, not a default habit.`
 
-  const classroomResourcesLine =
+  const classroomMaterialsBlock =
     classroomResources && classroomResources.length > 0
-      ? `Classroom resources available: ${classroomResources.join(", ")}`
-      : ""
+      ? `Classroom materials the teacher has on hand — these are the ONLY pieces of equipment, technology, manipulatives, and digital tools you may build the lesson around:
+${classroomResources.map((m) => `  - ${m}`).join("\n")}
+Make deliberate, pedagogically sound use of the items that genuinely fit this content — decide HOW each is best deployed (concrete modelling, hands-on stations, guided exploration, partner work), do not merely name them. STRICT RULE: do NOT design any activity that depends on devices, software, manipulatives, or specialized equipment that is NOT in this list. If something not listed would help, adapt the activity to what IS available instead. Basic consumables (paper, pencils, markers, scissors, glue) and items the teacher produces themselves (handouts, capture sheets, exit tickets — list those under "artifacts") are always allowed.`
+      : `The teacher has not listed any classroom equipment, technology, manipulatives, or digital tools. STRICT RULE: do NOT assume access to devices, software, manipulatives, or specialized equipment. Build the lesson around basic consumables (paper, pencils, markers) and teacher-produced handouts only (list those under "artifacts").`
 
   const classProgressBlock =
     includeAssessmentData && classProgress ? formatClassProgress(classProgress) : ""
@@ -234,7 +237,7 @@ Before finalizing your response, re-check every single artifact entry: if "name"
 Template: ${lessonTemplate}
 ${templateGuidance}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
-${classroomResourcesLine}
+${classroomMaterialsBlock}
 ${classProgressBlock}
 ${planningAnswersBlock}
 
@@ -265,6 +268,7 @@ ${isThreePart ? `Return a JSON object with exactly these fields (string values a
   "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
+    "classroomMaterials": ["Exact label copied from the classroom materials list above"],
     "preparation": ["What to print or photocopy", "What to pre-load or test on devices", "How to set up the room"]
   },
   "artifacts": [
@@ -288,6 +292,7 @@ ${sectionsSchema}
   ],
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
+    "classroomMaterials": ["Exact label copied from the classroom materials list above"],
     "preparation": ["What to print or photocopy", "What to pre-load or test on devices", "How to set up the room"]
   },
   "excludedResources": [
@@ -299,7 +304,7 @@ ${sectionsSchema}
   ]
 }`}
 
-"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.
+"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "materials.classroomMaterials" must list ONLY items from the classroom materials list above that this lesson actually uses, copied verbatim with the exact labels given — never invent or rename one, and never list anything that was not in that list; return an empty array if the lesson uses none (or none were provided). "excludedResources" may be an empty array if all provided resources fit the lesson.
 
 "artifacts" must list every concrete classroom artifact the teacher will need to produce or bring — examples: guided capture sheet, exit ticket, sticky-note reflection template, T-chart, observation sheet, workbook activity, reflection prompt handout. One entry per artifact. Use the artifact's most natural short name in "name". In "purpose", write one short phrase describing what students do with it. In "section", indicate which lesson section ("mindsOn", "action", "consolidation", "materials") it's used in. Do NOT list pre-existing bookmarked resources (those go in "materials.resources"); only list artifacts the teacher must produce or supply themselves. If the lesson genuinely needs no artifacts, return an empty array.
 
@@ -344,6 +349,7 @@ ${reproducibleLanguageBlock}`
       codesCount: lesson.curriculumCodesCovered?.length ?? 0,
       codes: lesson.curriculumCodesCovered ?? [],
       resourcesCount: resources.length,
+      classroomMaterialsCount: lesson.materials?.classroomMaterials?.length ?? 0,
       planningAnswersCount: planningAnswers?.length ?? 0,
       excludedCount: lesson.excludedResources?.length ?? 0,
       assessmentQuestionsCount: lesson.assessmentQuestions?.length ?? 0,
