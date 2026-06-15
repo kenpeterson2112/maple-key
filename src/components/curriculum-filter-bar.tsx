@@ -5,28 +5,21 @@ import { useGlobalFilters } from "@/lib/global-filters"
 import { PROVINCES, GRADES, SUBJECTS, STRAND_CODES } from "@/components/hero-personalize"
 import { getStrandOptions } from "@/lib/get-strand-options"
 import InlinePicker from "@/components/inline-picker"
-import { Zap, Leaf, BookOpen, Calculator, Beaker, Globe, PenTool, X } from "lucide-react"
+import { Leaf, BookOpen, Calculator, Beaker, Globe, PenTool, X } from "lucide-react"
 
-interface CurriculumFilterBarProps {
-  pageTitle?: string
-}
-
-export default function CurriculumFilterBar({ pageTitle }: CurriculumFilterBarProps) {
-  const { state, setProvince, setGrade, setSubject, setStrand, setSandbox } = useGlobalFilters()
+// Inline curriculum filter cluster (province / grade / subject / strand).
+// Rendered inside PageHeader so the filters share a single white bar with the
+// page title — NOT a standalone strip. Desktop shows big InlinePicker
+// dropdowns; mobile shows four circular icon buttons that open a full-width
+// panel anchored below the header.
+export default function CurriculumFilterBar() {
+  const { state, setProvince, setGrade, setSubject, setStrand } = useGlobalFilters()
   const [mobileOpenFilter, setMobileOpenFilter] = useState<"province" | "grade" | "subject" | "strand" | null>(null)
 
   const strandOptions = getStrandOptions(state.subject)
   const isStrandDisabled = state.subject === ""
 
-  // Mobile helper functions
-  const getProvinceLabel = () => {
-    if (!state.province) return "CA"
-    return state.province.toUpperCase()
-  }
-
-  const getGradeLabel = () => {
-    return state.grade ? state.grade : "K12"
-  }
+  const getGradeLabel = () => (state.grade ? state.grade : "K12")
 
   const getSubjectIcon = () => {
     switch (state.subject) {
@@ -47,260 +40,207 @@ export default function CurriculumFilterBar({ pageTitle }: CurriculumFilterBarPr
 
   const getStrandLabel = () => {
     if (!state.strand) return ""
-    // Find the strand code letter
+    // Find the strand code letter for the active strand.
     return Object.entries(STRAND_CODES).find(([name]) => name === state.strand)?.[1] || state.strand[0]?.toUpperCase() || ""
   }
 
   return (
-    <div className="border-t border-border bg-white px-4 md:px-6 py-3">
-      <div className="mx-auto max-w-[1500px]">
-        {/* Desktop Layout */}
-        <div className="hidden md:flex flex-row items-center gap-2">
-          {/* Province */}
+    <>
+      {/* Desktop: inline dropdown pickers */}
+      <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+        <InlinePicker
+          value={state.province}
+          placeholder="anywhere in Canada"
+          options={PROVINCES}
+          onChange={setProvince}
+          ariaLabel="Choose province"
+        />
+        <InlinePicker
+          value={state.grade}
+          placeholder="any grade"
+          options={GRADES}
+          onChange={setGrade}
+          ariaLabel="Choose grade"
+        />
+        <InlinePicker
+          value={state.subject}
+          placeholder="any subject"
+          options={SUBJECTS}
+          onChange={setSubject}
+          ariaLabel="Choose subject"
+        />
+        {!isStrandDisabled && (
           <InlinePicker
-            value={state.province}
-            placeholder="anywhere in Canada"
-            options={PROVINCES}
-            onChange={setProvince}
-            ariaLabel="Choose province"
-          />
-
-          {/* Grade */}
-          <InlinePicker
-            value={state.grade}
-            placeholder="any grade"
-            options={GRADES}
-            onChange={setGrade}
-            ariaLabel="Choose grade"
-          />
-
-          {/* Subject */}
-          <InlinePicker
-            value={state.subject}
-            placeholder="any subject"
-            options={SUBJECTS}
-            onChange={setSubject}
-            ariaLabel="Choose subject"
-          />
-
-          {/* Strand */}
-          {!isStrandDisabled && (
-            <InlinePicker
-              value={state.strand}
-              placeholder="any strand"
-              options={strandOptions}
-              onChange={setStrand}
-              disabled={isStrandDisabled}
-              ariaLabel="Choose strand"
-            />
-          )}
-
-          {/* Spacer */}
-          <div className="flex-1" />
-
-          {/* Sandbox Toggle */}
-          <button
-            onClick={() => setSandbox(!state.isSandbox)}
-            className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
-              state.isSandbox
-                ? "bg-[#FFF3E0] text-[#E65100] border border-[#FFB74D]"
-                : "bg-muted text-muted-foreground border border-border hover:bg-[#F5F5F5]"
-            }`}
-            title={state.isSandbox ? "Using sandbox data" : "Using actual data"}
-          >
-            <Zap size={16} className={state.isSandbox ? "fill-current" : ""} />
-            <span>{state.isSandbox ? "Sandbox" : "Actual"}</span>
-          </button>
-        </div>
-
-        {/* Mobile Layout */}
-        <div className="flex md:hidden items-center gap-1.5">
-          {/* Page Title */}
-          {pageTitle && (
-            <span className="text-sm font-semibold text-[#2C2C2C] whitespace-nowrap mr-1">
-              {pageTitle}
-            </span>
-          )}
-
-          {/* Province Button */}
-          <button
-            onClick={() => setMobileOpenFilter(mobileOpenFilter === "province" ? null : "province")}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
-            title="Choose province"
-          >
-            <Leaf size={18} />
-          </button>
-
-          {/* Grade Button */}
-          <button
-            onClick={() => setMobileOpenFilter(mobileOpenFilter === "grade" ? null : "grade")}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors text-xs font-semibold flex-shrink-0"
-            title="Choose grade"
-          >
-            {getGradeLabel()}
-          </button>
-
-          {/* Subject Button */}
-          <button
-            onClick={() => setMobileOpenFilter(mobileOpenFilter === "subject" ? null : "subject")}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
-            title="Choose subject"
-          >
-            {getSubjectIcon()}
-          </button>
-
-          {/* Strand Button */}
-          <button
-            onClick={() => setMobileOpenFilter(mobileOpenFilter === "strand" ? null : "strand")}
-            className={`flex h-10 w-10 items-center justify-center rounded-full border text-xs font-semibold transition-colors flex-shrink-0 ${
-              isStrandDisabled
-                ? "bg-[#F5F5F5] border-[#E0E0E0] text-[#A8998E] cursor-not-allowed opacity-50"
-                : "bg-[#FFF5ED] border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC]"
-            }`}
+            value={state.strand}
+            placeholder="any strand"
+            options={strandOptions}
+            onChange={setStrand}
             disabled={isStrandDisabled}
-            title={isStrandDisabled ? "Select a subject first" : "Choose strand"}
-          >
-            {getStrandLabel() || "-"}
-          </button>
-        </div>
-
-        {/* Mobile Dropdowns */}
-        {mobileOpenFilter && (
-          <div className="md:hidden mt-2 rounded-2xl border border-[#E8D5C4] bg-white shadow-lg">
-            {/* Province Dropdown */}
-            {mobileOpenFilter === "province" && (
-              <div className="p-3 space-y-2">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-[#2C2C2C]">Province</h3>
-                  <button
-                    onClick={() => setMobileOpenFilter(null)}
-                    className="p-1 hover:bg-[#F5F5F5] rounded-lg"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
-                <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto">
-                  {PROVINCES.map((opt) => (
-                    <button
-                      key={opt.value || "__any"}
-                      onClick={() => {
-                        setProvince(opt.value)
-                        setMobileOpenFilter(null)
-                      }}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        state.province === opt.value
-                          ? "bg-[#FFE5CC] text-[#8B4513]"
-                          : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
-                      }`}
-                    >
-                      {opt.value || "All"}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Grade Dropdown */}
-            {mobileOpenFilter === "grade" && (
-              <div className="p-3 space-y-2">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-[#2C2C2C]">Grade</h3>
-                  <button
-                    onClick={() => setMobileOpenFilter(null)}
-                    className="p-1 hover:bg-[#F5F5F5] rounded-lg"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {GRADES.map((opt) => (
-                    <button
-                      key={opt.value || "__any"}
-                      onClick={() => {
-                        setGrade(opt.value)
-                        setMobileOpenFilter(null)
-                      }}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        state.grade === opt.value
-                          ? "bg-[#FFE5CC] text-[#8B4513]"
-                          : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
-                      }`}
-                    >
-                      {opt.value || "All"}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Subject Dropdown */}
-            {mobileOpenFilter === "subject" && (
-              <div className="p-3 space-y-2">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-[#2C2C2C]">Subject</h3>
-                  <button
-                    onClick={() => setMobileOpenFilter(null)}
-                    className="p-1 hover:bg-[#F5F5F5] rounded-lg"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {SUBJECTS.map((opt) => (
-                    <button
-                      key={opt.value || "__any"}
-                      onClick={() => {
-                        setSubject(opt.value)
-                        setMobileOpenFilter(null)
-                      }}
-                      className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        state.subject === opt.value
-                          ? "bg-[#FFE5CC] text-[#8B4513]"
-                          : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Strand Dropdown */}
-            {mobileOpenFilter === "strand" && !isStrandDisabled && (
-              <div className="p-3 space-y-2">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-[#2C2C2C]">Strand</h3>
-                  <button
-                    onClick={() => setMobileOpenFilter(null)}
-                    className="p-1 hover:bg-[#F5F5F5] rounded-lg"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {strandOptions.map((opt) => (
-                    <button
-                      key={opt.value || "__any"}
-                      onClick={() => {
-                        setStrand(opt.value)
-                        setMobileOpenFilter(null)
-                      }}
-                      className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        state.strand === opt.value
-                          ? "bg-[#FFE5CC] text-[#8B4513]"
-                          : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+            ariaLabel="Choose strand"
+          />
         )}
       </div>
-    </div>
+
+      {/* Mobile: circular icon buttons */}
+      <div className="flex md:hidden items-center gap-1.5 flex-shrink-0">
+        <button
+          onClick={() => setMobileOpenFilter(mobileOpenFilter === "province" ? null : "province")}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
+          title="Choose province"
+        >
+          <Leaf size={18} />
+        </button>
+
+        <button
+          onClick={() => setMobileOpenFilter(mobileOpenFilter === "grade" ? null : "grade")}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors text-xs font-semibold flex-shrink-0"
+          title="Choose grade"
+        >
+          {getGradeLabel()}
+        </button>
+
+        <button
+          onClick={() => setMobileOpenFilter(mobileOpenFilter === "subject" ? null : "subject")}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
+          title="Choose subject"
+        >
+          {getSubjectIcon()}
+        </button>
+
+        <button
+          onClick={() => setMobileOpenFilter(mobileOpenFilter === "strand" ? null : "strand")}
+          className={`flex h-10 w-10 items-center justify-center rounded-full border text-xs font-semibold transition-colors flex-shrink-0 ${
+            isStrandDisabled
+              ? "bg-[#F5F5F5] border-[#E0E0E0] text-[#A8998E] cursor-not-allowed opacity-50"
+              : "bg-[#FFF5ED] border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC]"
+          }`}
+          disabled={isStrandDisabled}
+          title={isStrandDisabled ? "Select a subject first" : "Choose strand"}
+        >
+          {getStrandLabel() || "-"}
+        </button>
+      </div>
+
+      {/* Mobile: full-width dropdown panel anchored below the header bar */}
+      {mobileOpenFilter && (
+        <div className="md:hidden absolute left-3 right-3 top-full z-50 mt-1 rounded-2xl border border-[#E8D5C4] bg-white shadow-lg">
+          {mobileOpenFilter === "province" && (
+            <div className="p-3 space-y-2">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-[#2C2C2C]">Province</h3>
+                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-[#F5F5F5] rounded-lg">
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto">
+                {PROVINCES.map((opt) => (
+                  <button
+                    key={opt.value || "__any"}
+                    onClick={() => {
+                      setProvince(opt.value)
+                      setMobileOpenFilter(null)
+                    }}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      state.province === opt.value
+                        ? "bg-[#FFE5CC] text-[#8B4513]"
+                        : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                    }`}
+                  >
+                    {opt.value || "All"}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {mobileOpenFilter === "grade" && (
+            <div className="p-3 space-y-2">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-[#2C2C2C]">Grade</h3>
+                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-[#F5F5F5] rounded-lg">
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {GRADES.map((opt) => (
+                  <button
+                    key={opt.value || "__any"}
+                    onClick={() => {
+                      setGrade(opt.value)
+                      setMobileOpenFilter(null)
+                    }}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      state.grade === opt.value
+                        ? "bg-[#FFE5CC] text-[#8B4513]"
+                        : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                    }`}
+                  >
+                    {opt.value || "All"}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {mobileOpenFilter === "subject" && (
+            <div className="p-3 space-y-2">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-[#2C2C2C]">Subject</h3>
+                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-[#F5F5F5] rounded-lg">
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {SUBJECTS.map((opt) => (
+                  <button
+                    key={opt.value || "__any"}
+                    onClick={() => {
+                      setSubject(opt.value)
+                      setMobileOpenFilter(null)
+                    }}
+                    className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      state.subject === opt.value
+                        ? "bg-[#FFE5CC] text-[#8B4513]"
+                        : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {mobileOpenFilter === "strand" && !isStrandDisabled && (
+            <div className="p-3 space-y-2">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-[#2C2C2C]">Strand</h3>
+                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-[#F5F5F5] rounded-lg">
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {strandOptions.map((opt) => (
+                  <button
+                    key={opt.value || "__any"}
+                    onClick={() => {
+                      setStrand(opt.value)
+                      setMobileOpenFilter(null)
+                    }}
+                    className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      state.strand === opt.value
+                        ? "bg-[#FFE5CC] text-[#8B4513]"
+                        : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </>
   )
 }
