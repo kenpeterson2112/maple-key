@@ -133,6 +133,7 @@ export default function App() {
     <div className="fixed inset-0 bg-[#FAF3E0] overflow-hidden flex flex-col">
       <TopNav
         activeSpace={topNavSpace}
+        fullActiveSpace={activeSpace}
         onChangeSpace={(s) => setActiveSpace(s)}
         onPlanLesson={() => { setPlannerLesson(null); setActiveSpace("lessonplanner") }}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
