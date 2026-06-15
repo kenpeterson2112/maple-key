@@ -32,6 +32,9 @@ export interface Resource {
   // Location
   province: string
   jurisdiction: string
+  // Language of the resource (ISO 639-1, e.g. "en", "fr"). Absent on a handful of
+  // legacy records; treat missing/"en" as English (no language badge on the card).
+  language?: string
   // Modality / access
   modality: string[]
   resource_type: string

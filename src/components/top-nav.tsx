@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search, Sparkles, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
+import { Search, BookOpen, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
@@ -27,7 +27,7 @@ interface ToggleItem {
 
 const TOGGLE_ITEMS: ToggleItem[] = [
   { id: "resources", label: "Resources", icon: Search },
-  { id: "lessons",   label: "Lessons",   icon: Sparkles },
+  { id: "lessons",   label: "Lessons",   icon: BookOpen },
   { id: "insights",  label: "Insights",  icon: BarChart3 },
 ]
 
@@ -89,18 +89,39 @@ export default function TopNav({
       <header className="sticky top-0 z-50 border-b border-[#E8D5C4] bg-[#FAF3E0]/90 backdrop-blur-md supports-[backdrop-filter]:bg-[#FAF3E0]/80">
         <div className="mx-auto max-w-[1500px] px-4 md:px-6 py-2.5">
           {/* Desktop */}
-          <div className="hidden md:flex items-center justify-between gap-4">
-            <img
-              src={withBasePath("/maple-key-logo.png")}
-              alt="Maple Key"
-              width={785}
-              height={673}
-              className="h-14 w-auto object-contain"
-            />
+          <div className="hidden md:flex items-center justify-between gap-4 relative">
+            <div className="flex items-center gap-3 z-10">
+              <img
+                src={withBasePath("/maple-key-logo.png")}
+                alt="Maple Key"
+                width={785}
+                height={673}
+                className="h-14 w-auto object-contain"
+              />
 
-            <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} />
+              <button
+                onClick={onPlanLesson}
+                className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
+                  bookmarkedResources.length > 0
+                    ? "bg-[#FF6B35] text-white shadow-sm hover:bg-[#E85A24]"
+                    : "bg-white border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFF5ED]"
+                }`}
+                title="Plan lesson"
+              >
+                Plan Lesson
+                {bookmarkedResources.length > 0 && (
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/25 text-[10px] font-bold">
+                    {bookmarkedResources.length >= 10 ? "9+" : bookmarkedResources.length}
+                  </span>
+                )}
+              </button>
+            </div>
 
-            <div className="flex items-center gap-2">
+            <div className="absolute left-1/2 -translate-x-1/2">
+              <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} />
+            </div>
+
+            <div className="flex items-center gap-2 z-10">
               <div ref={materialsRef} className="relative">
                 <button
                   onClick={openMaterialsPopover}
@@ -122,24 +143,6 @@ export default function TopNav({
                   </div>
                 )}
               </div>
-
-              <button
-                onClick={onPlanLesson}
-                className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
-                  bookmarkedResources.length > 0
-                    ? "bg-[#FF6B35] text-white shadow-sm hover:bg-[#E85A24]"
-                    : "bg-white border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFF5ED]"
-                }`}
-                title="Plan lesson"
-              >
-                <Sparkles size={14} />
-                Plan Lesson
-                {bookmarkedResources.length > 0 && (
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/25 text-[10px] font-bold">
-                    {bookmarkedResources.length >= 10 ? "9+" : bookmarkedResources.length}
-                  </span>
-                )}
-              </button>
 
               <button
                 onClick={() => setIsSettingsOpen(true)}
@@ -208,7 +211,6 @@ export default function TopNav({
                 }`}
                 title="Plan lesson"
               >
-                <Sparkles size={12} />
                 Plan
                 {bookmarkedResources.length > 0 && (
                   <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white/25 text-[9px] font-bold">

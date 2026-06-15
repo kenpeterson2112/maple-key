@@ -2,12 +2,8 @@
 
 import { useState, useRef, useEffect } from "react"
 import {
-  ArrowLeft,
-  Sparkles,
   X,
-  Info,
   Users,
-  BookOpen,
   Layout,
   Clock,
   FileText,
@@ -29,6 +25,8 @@ import {
   Languages,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
+import PageHeader from "@/components/page-header"
+import { normalizeGrades } from "@/lib/utils"
 import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
 import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage } from "@/lib/lesson-metadata"
 import ArtifactsSection from "@/components/artifacts-section"
@@ -51,8 +49,13 @@ import { getProgressForCodes, type LevelCounts } from "@/lib/assessment-results"
 import { LEVEL_META, LEVEL_ORDER } from "@/lib/assessment-types"
 import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
-import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
+import { type UserMaterial } from "@/components/user-materials-section"
 import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage } from "@/lib/personalization"
+import { useGlobalFilters } from "@/lib/global-filters"
+import PlanResourceSearch from "@/components/plan-resource-search"
+import LessonMaterials from "@/components/lesson-materials"
+import type { SidebarFilters } from "@/lib/use-filtered-resources"
+import type { Filters } from "@/lib/types"
 
 interface PlanningQuestion {
   id: string
@@ -75,10 +78,26 @@ interface LessonPlannerModalProps {
   bookmarkedResources: Resource[]
   asSpace?: boolean
   lesson?: LessonMetadata | null
+  filters: Filters
+  setFilters: (filters: Filters) => void
+  sidebarFilters: SidebarFilters
+  onSidebarFilterChange: (group: string, items: string[]) => void
 }
 
-export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarkedResources, asSpace = false, lesson = null }: LessonPlannerModalProps) {
-  const { clearBookmarks } = useBookmarks()
+export default function LessonPlannerModal({
+  isOpen,
+  onClose,
+  onBack,
+  bookmarkedResources,
+  asSpace = false,
+  lesson = null,
+  filters,
+  setFilters,
+  sidebarFilters,
+  onSidebarFilterChange,
+}: LessonPlannerModalProps) {
+  const { clearBookmarks, removeBookmark } = useBookmarks()
+  const globalFilters = useGlobalFilters()
   const fc = lesson?.fullContent
 
   const [includeAssessmentData, setIncludeAssessmentData] = useState(false)
@@ -108,6 +127,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
   const [learningGoal, setLearningGoal] = useState(fc?.learningGoal ?? "")
   const [successCriteria, setSuccessCriteria] = useState<string[]>(fc?.successCriteria ?? [])
   const [materialsResources, setMaterialsResources] = useState<string[]>(fc?.materials?.resources ?? [])
+  const [classroomMaterialsUsed, setClassroomMaterialsUsed] = useState<string[]>(fc?.materials?.classroomMaterials ?? [])
   const [materialsPreparation, setMaterialsPreparation] = useState<string[]>(fc?.materials?.preparation ?? [])
   const [excludedResources, setExcludedResources] = useState<{ title: string; reason: string }[]>(fc?.excludedResources ?? [])
   const [artifacts, setArtifacts] = useState<LessonArtifact[]>(fc?.artifacts ?? [])
@@ -240,6 +260,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setLearningGoal(data.learningGoal ?? "")
       setSuccessCriteria(data.successCriteria ?? [])
       setMaterialsResources(data.materials?.resources ?? [])
+      setClassroomMaterialsUsed(data.materials?.classroomMaterials ?? [])
       setMaterialsPreparation(data.materials?.preparation ?? [])
       setExcludedResources(data.excludedResources ?? [])
       if (Array.isArray(data.sections) && data.sections.length > 0) {
@@ -260,7 +281,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setArtifacts(incomingArtifacts)
       const logged = logLesson({
         title: data.title ?? "",
-        grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
+        grade: normalizeGrades((bookmarkedResources[0] as any)?.grade_level)[0] ?? "",
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),
@@ -281,7 +302,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           consolidationAssessment: data.consolidationAssessment ?? "",
           learningGoal: data.learningGoal ?? "",
           successCriteria: data.successCriteria ?? [],
-          materials: data.materials ?? { resources: [], preparation: [] },
+          materials: data.materials ?? { resources: [], classroomMaterials: [], preparation: [] },
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
@@ -411,6 +432,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setLearningGoal(data.learningGoal ?? "")
       setSuccessCriteria(data.successCriteria ?? [])
       setMaterialsResources(data.materials?.resources ?? [])
+      setClassroomMaterialsUsed(data.materials?.classroomMaterials ?? [])
       setMaterialsPreparation(data.materials?.preparation ?? [])
       setExcludedResources(data.excludedResources ?? [])
       if (Array.isArray(data.sections) && data.sections.length > 0) {
@@ -431,7 +453,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       setArtifacts(incomingArtifacts)
       const logged = logLesson({
         title: data.title ?? "",
-        grade: String((bookmarkedResources[0] as any)?.grade_level ?? ""),
+        grade: normalizeGrades((bookmarkedResources[0] as any)?.grade_level)[0] ?? "",
         subject: bookmarkedResources[0]?.subject ?? "",
         curriculumCodesCovered: data.curriculumCodesCovered ?? [],
         resourceIds: bookmarkedResources.map((r) => r.id),
@@ -452,7 +474,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
           consolidationAssessment: data.consolidationAssessment ?? "",
           learningGoal: data.learningGoal ?? "",
           successCriteria: data.successCriteria ?? [],
-          materials: data.materials ?? { resources: [], preparation: [] },
+          materials: data.materials ?? { resources: [], classroomMaterials: [], preparation: [] },
           excludedResources: data.excludedResources ?? [],
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
@@ -486,7 +508,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       actionDifferentiation,
       consolidationContent,
       consolidationAssessment,
-      materials: { resources: materialsResources, preparation: materialsPreparation },
+      materials: { resources: materialsResources, classroomMaterials: classroomMaterialsUsed, preparation: materialsPreparation },
       ...(excludedResources.length ? { excludedResources } : {}),
       ...(cached && cached.length ? { assessmentQuestions: cached } : {}),
     } : {
@@ -495,7 +517,7 @@ export default function LessonPlannerModal({ isOpen, onClose, onBack, bookmarked
       successCriteria,
       curriculumCodesCovered: coveredCodes,
       sections: templateSections,
-      materials: { resources: materialsResources, preparation: materialsPreparation },
+      materials: { resources: materialsResources, classroomMaterials: classroomMaterialsUsed, preparation: materialsPreparation },
       ...(excludedResources.length ? { excludedResources } : {}),
       ...(cached && cached.length ? { assessmentQuestions: cached } : {}),
     }
@@ -596,11 +618,12 @@ ${resourceList}
 
 Ontario curriculum codes available: ${allCodes.join(", ")}
 
-You will also write "assessmentQuestions": a short auto-graded formative quick check, anchored in the SPECIFIC content of the lesson you are writing (not generic).
-- If "curriculumCodesCovered" is non-empty: for EACH code in it, write exactly 2 questions — one "multiple-choice" and one "true-false" — and set each question's "code" to that curriculum code.
-- If "curriculumCodesCovered" is empty: identify 3 to 5 key concepts you actually taught and write 1-2 questions per concept (mix of types), setting each "code" to a short 2-4 word concept label (e.g., "Circumference and pi").
-- Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
-- Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions.
+You will also write "assessmentQuestions": a SHORT auto-graded formative quick check that gives the teacher a fast, actionable read on class readiness — NOT a thorough diagnostic.
+- Write 3 to 5 questions TOTAL. Aim for 3; use 4 only if needed and 5 only for a large lesson spanning many distinct expectations. Never exceed 5.
+- Write ONE well-designed question per curriculum expectation the lesson actually taught. Most lessons cover only 2-3 expectations — do not invent more. When several closely-related expectations are taught, CLUSTER them into a single well-designed question rather than adding more.
+- Set each question's "code" to the single curriculum expectation it targets (for a clustered question, use the most representative code). If "curriculumCodesCovered" is empty, write 3 questions on the key concepts you actually taught and set each "code" to a short 2-4 word concept label (e.g., "Circumference and pi").
+- Prefer "multiple-choice"; use "true-false" only when it genuinely tests the idea better. Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
+- Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions, and do NOT write more than one question for the same expectation.
 
 Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
@@ -621,7 +644,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
   "excludedResources": [],
   "assessmentQuestions": [
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
-    { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+    { "code": "D1.2", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
 }`
 
@@ -689,6 +712,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
     const resourcesListHtml = resourcesForDisplay
       .map((r) => `<li><span class="bullet">•</span><span>${esc(r.topic_title)}</span></li>`)
+      .join("")
+
+    const classroomMaterialsHtml = classroomMaterialsUsed
+      .map((m) => `<li><span class="bullet">•</span><span>${esc(m)}</span></li>`)
       .join("")
 
     const preparationHtml = preparationSteps
@@ -993,6 +1020,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
           <div class="panel-title">Resources</div>
           <ul>${resourcesListHtml || "<li><span>No resources selected</span></li>"}</ul>
         </div>
+        ${classroomMaterialsHtml ? `<div class="panel" style="margin-top:8px;">
+          <div class="panel-title">Classroom Materials</div>
+          <ul>${classroomMaterialsHtml}</ul>
+        </div>` : ""}
       </div>
       <div class="col-prep">
         <div class="panel">
@@ -1076,44 +1107,31 @@ Return a JSON object with exactly these fields (string values are plain text, no
   }
 
   return (
-    <div className={asSpace ? "fixed inset-0 z-[200] overflow-hidden" : "fixed inset-0 z-[200] flex items-center justify-center"}>
+    <div className={asSpace ? "w-full h-full overflow-hidden" : "fixed inset-0 z-[200] flex items-center justify-center"}>
       {!asSpace && <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />}
 
       {/* Content */}
       <div className={asSpace ? "w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden" : "relative w-[95vw] h-[90vh] bg-[#FAF3E0] rounded-3xl shadow-2xl flex flex-col overflow-hidden"}>
         {/* Header */}
-        <div className="flex items-center justify-between px-8 py-5 border-b-2 border-[#E8D5C4] bg-white">
-          <div className="flex items-center gap-4">
-            {/* Back button */}
+        <PageHeader
+          icon={Lightbulb}
+          title={lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
+          iconColor="#16A34A"
+          iconBg="bg-green-100"
+        >
+          <span className="hidden sm:inline whitespace-nowrap text-xs text-[#888]">
+            {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
+          </span>
+          {!asSpace && (
             <button
-              onClick={onBack}
-              className="p-2 hover:bg-[#FFE5CC] rounded-full transition-all duration-200"
-              aria-label="Back to saved resources"
+              onClick={onClose}
+              className="p-1.5 hover:bg-[#FFE5CC] rounded-full transition-colors"
+              aria-label="Close modal"
             >
-              <ArrowLeft size={24} className="text-[#8B4513]" />
+              <X size={20} className="text-[#8B4513]" />
             </button>
-
-            <div>
-              <div className="flex items-center gap-2">
-                <Sparkles size={24} className="text-violet-600" />
-                <h2 className="text-2xl font-bold text-[#2C2C2C]">
-                  {lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
-                </h2>
-              </div>
-              <p className="text-sm text-[#666] mt-1">
-                {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-[#FFE5CC] rounded-full transition-all duration-200"
-            aria-label="Close modal"
-          >
-            <X size={28} className="text-[#8B4513]" />
-          </button>
-        </div>
+          )}
+        </PageHeader>
 
         {/* Content */}
         <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-6">
@@ -1242,6 +1260,16 @@ Return a JSON object with exactly these fields (string values are plain text, no
                             {(materialsResources.length > 0 ? materialsResources : resources.map((r) => r.topic_title)).join(", ")}
                           </p>
                         </div>
+                        {classroomMaterialsUsed.length > 0 && (
+                          <div>
+                            <p className="text-xs font-medium text-stone-600 mb-2">
+                              Classroom materials used
+                            </p>
+                            <p className="text-sm text-[#444] bg-stone-50 p-2 rounded-lg">
+                              {classroomMaterialsUsed.join(", ")}
+                            </p>
+                          </div>
+                        )}
                         <div>
                           <p className="text-xs font-medium text-stone-600 mb-2">
                             Preparation steps (one per line)
@@ -1262,9 +1290,9 @@ Return a JSON object with exactly these fields (string values are plain text, no
                       </div>
                     ) : (
                       <div className="flex gap-4">
-                        {/* Left box - Resources (1/4 width) */}
+                        {/* Left box - Resources + classroom materials (1/4 width) */}
                         <div className="w-1/4 bg-stone-50 border border-stone-200 rounded-lg p-3">
-                          <p className="text-xs font-semibold text-stone-700 mb-2">Resources</p>
+                          <p className="text-xs font-semibold text-stone-700 mb-2">Materials</p>
                           <ul className="text-xs text-[#444] space-y-1.5">
                             {(materialsResources.length > 0 ? materialsResources.map((t) => ({ topic_title: t })) : resources).map((r, index) => (
                               <li key={index} className="flex items-start gap-1.5">
@@ -1273,6 +1301,21 @@ Return a JSON object with exactly these fields (string values are plain text, no
                               </li>
                             ))}
                           </ul>
+                          {classroomMaterialsUsed.length > 0 && (
+                            <>
+                              <p className="text-[10px] font-semibold uppercase tracking-wide text-stone-500 mt-3 mb-1.5">
+                                From your classroom
+                              </p>
+                              <ul className="text-xs text-[#444] space-y-1.5">
+                                {classroomMaterialsUsed.map((m, index) => (
+                                  <li key={index} className="flex items-start gap-1.5">
+                                    <span className="text-emerald-500 flex-shrink-0">▪</span>
+                                    <span>{m}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
                         </div>
 
                         {/* Right box - Preparation steps (3/4 width) */}
@@ -1761,14 +1804,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                               onClick={() => advanceQuestion(q.id)}
                               className="mt-2 w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
                             >
-                              {isLastQuestion ? (
-                                <>
-                                  <Sparkles size={16} />
-                                  Generate Lesson Plan
-                                </>
-                              ) : (
-                                "Continue →"
-                              )}
+                              {isLastQuestion ? "Generate Lesson Plan" : "Continue →"}
                             </button>
                           )}
                         </div>
@@ -1780,26 +1816,22 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             ) : (
               <>
-                {/* District Notice */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-                  <div
-                    className="relative group/districtTip flex-shrink-0 mt-0.5"
-                    tabIndex={0}
-                    aria-label="This is a planned feature but is currently for demo purposes only. No district level customizations are applied."
-                  >
-                    <Info size={20} className="text-blue-600 cursor-help" />
-                    <div className="absolute top-full left-0 mt-1.5 w-60 opacity-0 group-hover/districtTip:opacity-100 group-focus-within/districtTip:opacity-100 transition-opacity pointer-events-none z-[100]">
-                      <div className="bg-[#2C2C2C] text-white text-[11px] leading-snug rounded-lg px-2.5 py-1.5 shadow-xl">
-                        This is a planned feature but is currently for demo purposes only. No district level customizations are applied.
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-blue-800">
-                    <span className="font-medium">District Settings Active:</span> Your district administrator has
-                    configured the lesson planner to align with approved pedagogical frameworks and instructional
-                    standards.
-                  </p>
-                </div>
+                {/* Embedded resource search */}
+                <PlanResourceSearch
+                  filters={{
+                    ...filters,
+                    province: globalFilters.state.province,
+                    grade: globalFilters.state.grade,
+                    subject: globalFilters.state.subject,
+                    strand: globalFilters.state.strand,
+                  }}
+                  setFilters={setFilters}
+                  sidebarFilters={sidebarFilters}
+                  onSidebarFilterChange={onSidebarFilterChange}
+                  onBrowseAll={onBack}
+                />
+
+                <hr className="border-t-[1.5px] border-[#E8D5C4]" />
 
                 {/* Student Progress Data Section — temporarily hidden; will be re-enabled later */}
                 {false && (
@@ -1869,69 +1901,12 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 </div>
                 )}
 
-                {(() => {
-                  const selectedResourcesBlock = (
-                    <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                      <div className="flex items-center gap-2 mb-4">
-                        <BookOpen size={20} className="text-[#8B4513]" />
-                        <h3 className="text-lg font-semibold text-[#2C2C2C]">Selected Resources</h3>
-                      </div>
-
-                      {bookmarkedResources.length === 0 ? (
-                        <div className="bg-stone-50 rounded-lg p-6 flex flex-col items-center gap-3 text-center">
-                          <p className="text-sm font-medium text-[#2C2C2C]">
-                            Want help from our database?
-                          </p>
-                          <p className="text-sm text-[#666] max-w-md">
-                            Browse curated resources and bookmark a few to include them alongside your own materials.
-                          </p>
-                          <button
-                            onClick={onBack}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
-                          >
-                            <ArrowLeft size={16} />
-                            Browse Resources
-                          </button>
-                        </div>
-                      ) : (
-                        <div className="bg-stone-50 rounded-lg p-3 space-y-2">
-                          {bookmarkedResources.map((resource, index) => (
-                            <div
-                              key={resource.url}
-                              className="flex items-center gap-3 py-2 px-3 bg-white rounded-lg border border-stone-200"
-                            >
-                              <div className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
-                                {index + 1}
-                              </div>
-                              <span className="text-sm text-[#2C2C2C] flex-1 truncate">{resource.topic_title}</span>
-                              {resource.curriculum_expectations && resource.curriculum_expectations.length > 0 && (
-                                <span className="text-xs text-gray-500 flex-shrink-0">
-                                  {resource.curriculum_expectations.join(", ")}
-                                </span>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )
-
-                  const userMaterialsBlock = (
-                    <UserMaterialsSection materials={userMaterials} onChange={setUserMaterials} />
-                  )
-
-                  return bookmarkedResources.length > 0 ? (
-                    <>
-                      {selectedResourcesBlock}
-                      {userMaterialsBlock}
-                    </>
-                  ) : (
-                    <>
-                      {userMaterialsBlock}
-                      {selectedResourcesBlock}
-                    </>
-                  )
-                })()}
+                <LessonMaterials
+                  resources={bookmarkedResources}
+                  onRemoveResource={removeBookmark}
+                  userMaterials={userMaterials}
+                  onUserMaterialsChange={setUserMaterials}
+                />
 
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
@@ -2102,7 +2077,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
         )}
 
         {!lessonGenerated && !showQuestionsStep && !isGenerating && (
-          <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
+          <div className="hidden md:block sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
             <div className="max-w-3xl mx-auto space-y-3">
               {generateError && (
                 <div className={`rounded-lg px-4 py-3 border ${generateError === "API_BALANCE_LOW" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
@@ -2197,6 +2172,11 @@ Return a JSON object with exactly these fields (string values are plain text, no
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
+                aria-label={
+                  isGenerating
+                    ? "Generating your lesson plan"
+                    : `Generate lesson plan with ${bookmarkedResources.length} selected resource${bookmarkedResources.length === 1 ? "" : "s"}`
+                }
                 className="w-full py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70"
               >
                 {isGenerating ? (
@@ -2205,10 +2185,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     Generating your lesson...
                   </>
                 ) : (
-                  <>
-                    <Sparkles size={20} />
-                    Generate Lesson Plan
-                  </>
+                  "Generate Lesson Plan"
                 )}
               </button>
             </div>

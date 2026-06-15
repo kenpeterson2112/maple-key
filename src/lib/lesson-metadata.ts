@@ -37,7 +37,7 @@ export interface LessonFullContent {
   materialsContent?: string
   learningGoal?: string
   successCriteria?: string[]
-  materials?: { resources: string[]; preparation: string[] }
+  materials?: { resources: string[]; classroomMaterials?: string[]; preparation: string[] }
   excludedResources?: { title: string; reason: string }[]
   sections?: TemplateSection[]
   artifacts?: LessonArtifact[]

@@ -2,22 +2,17 @@
 
 import type React from "react"
 import { useEffect, useMemo, useState } from "react"
-import useSWR from "swr"
 import { motion } from "framer-motion"
 import { Search, X, Plus, Compass } from "lucide-react"
 import ResourceCard from "./resource-card"
-import type { Filters, Resource } from "@/lib/types"
-import { withBasePath } from "@/lib/base-path"
-import { normalizeGrades, minGrade } from "@/lib/utils"
-import { getReadinessForCodes, getProgressForCodes, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import type { Filters } from "@/lib/types"
+import { useFilteredResources, keywordFilter, sortResources, type SidebarFilters } from "@/lib/use-filtered-resources"
 
 interface ResultsSectionProps {
   filters: Filters
-  sidebarFilters?: { modality: string[]; cost: string[]; accessibility: string[]; readiness: string[] }
+  sidebarFilters?: SidebarFilters
   onCountChange?: (count: number) => void
 }
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 export default function ResultsSection({ filters, sidebarFilters, onCountChange }: ResultsSectionProps) {
   const [searchQuery, setSearchQuery] = useState("")
@@ -26,133 +21,18 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
   const [pageSize, setPageSize] = useState<number>(10)
   const [page, setPage] = useState(1)
 
-  const { data, error, isLoading } = useSWR<{ resources: Resource[] }>(withBasePath("/resources.json"), fetcher, {
-    refreshInterval: 3600000,
-    revalidateOnFocus: false,
-  })
+  const { error, isLoading, filteredResources, classProgress } = useFilteredResources(filters, sidebarFilters)
 
-  const classReadiness = useMemo((): Record<string, ReadinessLevel> => {
-    const resources = data?.resources
-    if (!resources) return {}
-    const codes = new Set<string>()
-    resources.forEach(r => r.curriculum_expectations?.forEach((c: string) => codes.add(c)))
-    return getReadinessForCodes(Array.from(codes))
-  }, [data])
-
-  // Raw per-code band counts for the same code set — lets each card roll its own
-  // expectations up to an overall readiness without re-reading storage per render.
-  const classProgress = useMemo((): Record<string, LevelCounts> => {
-    const resources = data?.resources
-    if (!resources) return {}
-    const codes = new Set<string>()
-    resources.forEach(r => r.curriculum_expectations?.forEach((c: string) => codes.add(c)))
-    return getProgressForCodes(Array.from(codes))
-  }, [data])
-
-  const filteredResources = useMemo(() => {
-    const resources = data?.resources
-    if (!resources || !Array.isArray(resources)) return []
-
-    return resources.filter((resource) => {
-      if (resource.is_collection) return false
-
-      if (filters.province && filters.province !== "" && filters.province !== "Canada") {
-        if (resource.province !== filters.province) return false
-      }
-
-      if (filters.grade && filters.grade !== "") {
-        const selectedGrades = filters.grade.split(",").map((g) => g.trim())
-        const resourceGrades = normalizeGrades(resource.grade_level)
-        if (!selectedGrades.some((g) => resourceGrades.includes(g))) return false
-      }
-
-      if (filters.subject && filters.subject !== "") {
-        if (resource.subject?.toLowerCase() !== filters.subject.toLowerCase()) return false
-      }
-
-      if (filters.strand && filters.strand !== "") {
-        const resourceStrands = resource.strand || []
-        if (!resourceStrands.some((s) => s.toLowerCase() === filters.strand?.toLowerCase())) return false
-      }
-
-      if (sidebarFilters?.modality && sidebarFilters.modality.length > 0) {
-        const resourceModalities = resource.modality || []
-        if (!sidebarFilters.modality.some((m) => resourceModalities.includes(m))) return false
-      }
-
-      if (sidebarFilters?.cost && sidebarFilters.cost.length > 0) {
-        const isPaidResource = resource.is_paid === true
-        const hasFreeFilter = sidebarFilters.cost.includes("Free Only")
-        const hasPaidFilter = sidebarFilters.cost.includes("Paid")
-        if (hasFreeFilter && !hasPaidFilter && isPaidResource) return false
-        if (hasPaidFilter && !hasFreeFilter && !isPaidResource) return false
-      }
-
-      if (sidebarFilters?.accessibility && sidebarFilters.accessibility.length > 0) {
-        const hasMatch = sidebarFilters.accessibility.some((accessFilter) => {
-          const resourceAccessibility = resource.accessibility?.[0] || ""
-          if (accessFilter === "No concerns") return resourceAccessibility.toLowerCase().includes("no concerns")
-          if (accessFilter === "Some Concerns") return resourceAccessibility.toLowerCase().includes("some concerns")
-          if (accessFilter === "Not Accessible") return resourceAccessibility.toLowerCase().includes("not accessible")
-          return false
-        })
-        if (!hasMatch) return false
-      }
-
-      if (sidebarFilters?.readiness && sidebarFilters.readiness.length > 0) {
-        const codes: string[] = resource.curriculum_expectations || []
-        const matches = sidebarFilters.readiness.some((selectedLevel) => {
-          if (selectedLevel === "no-data") {
-            return codes.length === 0 || codes.every(c => !classReadiness[c])
-          }
-          return codes.some(c => classReadiness[c] === selectedLevel)
-        })
-        if (!matches) return false
-      }
-
-      return true
-    })
-  }, [data, filters, sidebarFilters, classReadiness])
-
-  const keywordFilteredResources = useMemo(() => {
-    if (searchQuery.length < 3) return filteredResources
-    const query = searchQuery.toLowerCase()
-    return filteredResources.filter((resource) => {
-      const searchableFields = [
-        resource.topic_title,
-        resource.description,
-        resource.publisher_creator,
-        resource.subject,
-        resource.province,
-        resource.url,
-        ...(resource.modality || []),
-        ...(resource.strand || []),
-        ...(resource.curriculum_expectations || []),
-        ...(resource.accessibility || []),
-      ]
-      return searchableFields.some((field) => field && String(field).toLowerCase().includes(query))
-    })
-  }, [filteredResources, searchQuery])
+  const keywordFilteredResources = useMemo(
+    () => keywordFilter(filteredResources, searchQuery),
+    [filteredResources, searchQuery],
+  )
 
   // Default order: grade ascending (1 → 12), then by first curriculum
   // expectation ascending (A1.1 → F3.3), then title — a generally logical
   // walk through the catalogue. Resources missing a grade or codes fall to the
   // end of their respective group.
-  const sortedResources = useMemo(() => {
-    const resources = [...keywordFilteredResources]
-    return resources.sort((a, b) => {
-      const gradeA = minGrade(a.grade_level)
-      const gradeB = minGrade(b.grade_level)
-      if (gradeA !== gradeB) return gradeA - gradeB
-
-      const codeA = a.curriculum_expectations?.[0] || "ZZZ"
-      const codeB = b.curriculum_expectations?.[0] || "ZZZ"
-      const codeCompare = codeA.localeCompare(codeB, undefined, { numeric: true })
-      if (codeCompare !== 0) return codeCompare
-
-      return (a.topic_title || "").localeCompare(b.topic_title || "")
-    })
-  }, [keywordFilteredResources])
+  const sortedResources = useMemo(() => sortResources(keywordFilteredResources), [keywordFilteredResources])
 
   useEffect(() => {
     onCountChange?.(sortedResources.length)

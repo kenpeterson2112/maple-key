@@ -1,4 +1,4 @@
-import { ClipboardCheck, Check, PenLine, Sparkles } from "lucide-react"
+import { ClipboardCheck, Check, PenLine, Lightbulb } from "lucide-react"
 import type { LessonArtifact, ArtifactStatus, ArtifactSection } from "@/lib/lesson-metadata"
 
 const SECTION_LABEL: Record<ArtifactSection, string> = {
@@ -18,7 +18,7 @@ const SECTION_BADGE: Record<ArtifactSection, string> = {
 const CHOICES: { value: ArtifactStatus; label: string; icon: typeof Check }[] = [
   { value: "have", label: "I have one", icon: Check },
   { value: "will-make", label: "I'll make one", icon: PenLine },
-  { value: "help-me", label: "Help me make one", icon: Sparkles },
+  { value: "help-me", label: "Help me make one", icon: Lightbulb },
 ]
 
 interface Props {

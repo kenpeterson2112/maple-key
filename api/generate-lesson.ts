@@ -3,6 +3,9 @@ import type { VercelRequest, VercelResponse } from "@vercel/node"
 
 const LESSON_MODEL = "claude-haiku-4-5-20251001"
 
+/** A quick check is a fast readiness signal, not a diagnostic — keep it short. */
+const MAX_ASSESSMENT_QUESTIONS = 5
+
 interface ResourceInput {
   title: string
   description: string
@@ -88,6 +91,7 @@ interface LessonPlanResponse {
   consolidationAssessment: string
   materials: {
     resources: string[]
+    classroomMaterials: string[]
     preparation: string[]
   }
   artifacts?: LessonArtifact[]
@@ -190,10 +194,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
 Instructional structure guidance: Each resource may include a "Best used as" field and a "Deployment note" — use these to inform how you structure the lesson. Station rotation and centre-based learning are excellent, well-established strategies; choose them when resources list "station-rotation" in "Best used as", when the teacher's notes or template suggest it, or when multiple hands-on materials are naturally suited to it. For flexible resources (interactive tools, digital content, video), match the approach to the context — whole-class discussion, individual exploration, or partner work may serve the lesson better than stations. Let the resources and teacher intent guide the structure, not a default habit.`
 
-  const classroomResourcesLine =
+  const classroomMaterialsBlock =
     classroomResources && classroomResources.length > 0
-      ? `Classroom resources available: ${classroomResources.join(", ")}`
-      : ""
+      ? `Classroom materials the teacher has on hand — these are the ONLY pieces of equipment, technology, manipulatives, and digital tools you may build the lesson around:
+${classroomResources.map((m) => `  - ${m}`).join("\n")}
+Make deliberate, pedagogically sound use of the items that genuinely fit this content — decide HOW each is best deployed (concrete modelling, hands-on stations, guided exploration, partner work), do not merely name them. STRICT RULE: do NOT design any activity that depends on devices, software, manipulatives, or specialized equipment that is NOT in this list. If something not listed would help, adapt the activity to what IS available instead. Basic consumables (paper, pencils, markers, scissors, glue) and items the teacher produces themselves (handouts, capture sheets, exit tickets — list those under "artifacts") are always allowed.`
+      : `The teacher has not listed any classroom equipment, technology, manipulatives, or digital tools. STRICT RULE: do NOT assume access to devices, software, manipulatives, or specialized equipment. Build the lesson around basic consumables (paper, pencils, markers) and teacher-produced handouts only (list those under "artifacts").`
 
   const classProgressBlock =
     includeAssessmentData && classProgress ? formatClassProgress(classProgress) : ""
@@ -234,7 +240,7 @@ Before finalizing your response, re-check every single artifact entry: if "name"
 Template: ${lessonTemplate}
 ${templateGuidance}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
-${classroomResourcesLine}
+${classroomMaterialsBlock}
 ${classProgressBlock}
 ${planningAnswersBlock}
 
@@ -245,11 +251,12 @@ Ontario curriculum codes available: ${allCodes.join(", ")}
 
 Resource-mismatch rule: If any provided resource does not fit the topic or curriculum codes of this lesson, do NOT use it. List it in "excludedResources" with a one-line reason. "materials.resources" must only contain titles of resources you actually use.
 
-You will also write "assessmentQuestions": a short auto-graded formative quick check anchored in the SPECIFIC content of the lesson you are writing (not generic).
-- If "curriculumCodesCovered" is non-empty: for EACH code in it, write exactly 2 questions — one "multiple-choice" and one "true-false" — and set each question's "code" to that curriculum code.
-- If "curriculumCodesCovered" is empty: identify 3 to 5 key concepts you actually taught and write 1-2 questions per concept (mix of types), setting each "code" to a short 2-4 word concept label (e.g., "Circumference and pi").
-- Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
-- Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions.
+You will also write "assessmentQuestions": a SHORT auto-graded formative quick check that gives the teacher a fast, actionable read on class readiness — NOT a thorough diagnostic.
+- Write 3 to 5 questions TOTAL. Aim for 3; use 4 only if needed and 5 only for a large lesson spanning many distinct expectations. Never exceed 5.
+- Write ONE well-designed question per curriculum expectation the lesson actually taught. Most lessons cover only 2-3 expectations — do not invent more. When several closely-related expectations are taught, CLUSTER them into a single well-designed question rather than adding more.
+- Set each question's "code" to the single curriculum expectation it targets (for a clustered question, use the most representative code). If "curriculumCodesCovered" is empty, write 3 questions on the key concepts you actually taught and set each "code" to a short 2-4 word concept label (e.g., "Circumference and pi").
+- Prefer "multiple-choice"; use "true-false" only when it genuinely tests the idea better. Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
+- Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions, and do NOT write more than one question for the same expectation.
 
 ${isThreePart ? `Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
@@ -265,6 +272,7 @@ ${isThreePart ? `Return a JSON object with exactly these fields (string values a
   "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
+    "classroomMaterials": ["Exact label copied from the classroom materials list above"],
     "preparation": ["What to print or photocopy", "What to pre-load or test on devices", "How to set up the room"]
   },
   "artifacts": [
@@ -275,7 +283,7 @@ ${isThreePart ? `Return a JSON object with exactly these fields (string values a
   ],
   "assessmentQuestions": [
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
-    { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+    { "code": "D1.2", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
 }` : `Return a JSON object with exactly these fields (string values are plain text, no markdown):
 {
@@ -288,6 +296,7 @@ ${sectionsSchema}
   ],
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
+    "classroomMaterials": ["Exact label copied from the classroom materials list above"],
     "preparation": ["What to print or photocopy", "What to pre-load or test on devices", "How to set up the room"]
   },
   "excludedResources": [
@@ -295,11 +304,11 @@ ${sectionsSchema}
   ],
   "assessmentQuestions": [
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
-    { "code": "D1.1", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
+    { "code": "D1.2", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
 }`}
 
-"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "excludedResources" may be an empty array if all provided resources fit the lesson.
+"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "materials.classroomMaterials" must list ONLY items from the classroom materials list above that this lesson actually uses, copied verbatim with the exact labels given — never invent or rename one, and never list anything that was not in that list; return an empty array if the lesson uses none (or none were provided). "excludedResources" may be an empty array if all provided resources fit the lesson.
 
 "artifacts" must list every concrete classroom artifact the teacher will need to produce or bring — examples: guided capture sheet, exit ticket, sticky-note reflection template, T-chart, observation sheet, workbook activity, reflection prompt handout. One entry per artifact. Use the artifact's most natural short name in "name". In "purpose", write one short phrase describing what students do with it. In "section", indicate which lesson section ("mindsOn", "action", "consolidation", "materials") it's used in. Do NOT list pre-existing bookmarked resources (those go in "materials.resources"); only list artifacts the teacher must produce or supply themselves. If the lesson genuinely needs no artifacts, return an empty array.
 
@@ -328,6 +337,11 @@ ${reproducibleLanguageBlock}`
       return res.status(500).json({ error: "Claude returned malformed JSON. Please try again." })
     }
 
+    // Defensive cap — the prompt asks for 3-5, but never let a quick check balloon.
+    if (Array.isArray(lesson.assessmentQuestions) && lesson.assessmentQuestions.length > MAX_ASSESSMENT_QUESTIONS) {
+      lesson.assessmentQuestions = lesson.assessmentQuestions.slice(0, MAX_ASSESSMENT_QUESTIONS)
+    }
+
     const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ?? req.socket?.remoteAddress ?? "unknown"
     const userEmail = (req.headers["x-user-email"] as string | undefined) ?? ""
     console.log(JSON.stringify({
@@ -344,6 +358,7 @@ ${reproducibleLanguageBlock}`
       codesCount: lesson.curriculumCodesCovered?.length ?? 0,
       codes: lesson.curriculumCodesCovered ?? [],
       resourcesCount: resources.length,
+      classroomMaterialsCount: lesson.materials?.classroomMaterials?.length ?? 0,
       planningAnswersCount: planningAnswers?.length ?? 0,
       excludedCount: lesson.excludedResources?.length ?? 0,
       assessmentQuestionsCount: lesson.assessmentQuestions?.length ?? 0,
