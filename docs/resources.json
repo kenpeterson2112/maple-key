@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-15T09:25:08Z",
-    "total_count": 1730,
+    "generated_at": "2026-06-16T00:00:00Z",
+    "total_count": 1736,
     "schema_version": "2.1"
   },
   "resources": [
@@ -97903,6 +97903,343 @@
       "id": "r-2566",
       "metadata": {
         "added_at": "2026-06-15",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "TVO Learn — Grade 6 Social Studies",
+      "description": "TVO's free, Ontario Ministry of Education-approved hub for Grade 6 Social Studies, covering both Heritage and Identity (Communities in Canada, Past and Present) and People and Environments (Canada's Interactions with the Global Community). Created by Ontario-certified teachers with no ads, fees, or accounts required. Activities include video, reading, and inquiry tasks aligned to the 2023 curriculum.",
+      "url": "https://tvolearn.com/pages/grade-6-social-studies",
+      "publisher_creator": "TVO",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "intermediate",
+      "subject": "Social Studies",
+      "strand": [
+        "Heritage and Identity",
+        "People and Environments"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "B1.1",
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "social_studies",
+          "strand": "heritage_and_identity",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": 6,
+          "subject": "social_studies",
+          "strand": "people_and_environments",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2567",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Archives of Ontario — Online Lesson Plans by Theme",
+      "description": "Free primary-source lesson plans developed by historians and Ontario classroom teachers, organized by historical theme and aligned to Social Studies, History, and Canadian and World Studies curricula for Grades 3–12. Each plan uses documents and images from the Archives of Ontario collection to build inquiry, analysis, and communication skills. Topics include Indigenous peoples, settlement, governance, war, and economic change.",
+      "url": "https://www.archives.gov.on.ca/en/education/lesson_plans_themes.aspx",
+      "publisher_creator": "Archives of Ontario",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "multi",
+      "subject": "Social Studies",
+      "strand": [
+        "Heritage and Identity",
+        "People and Environments"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Books & Print Media"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.2",
+        "A1.3",
+        "A2.1",
+        "A2.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "social_studies",
+          "strand": "heritage_and_identity",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "social_studies",
+          "strand": "people_and_environments",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "secondary"
+        }
+      ],
+      "id": "r-2568",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Gord Downie & Chanie Wenjack Fund — Legacy Schools Lesson Plans",
+      "description": "Free, curriculum-aligned lesson plans focused on the legacy of residential schools, reconciliation, and Indigenous-settler relationships in Canada, produced by the Gord Downie & Chanie Wenjack Fund. Plans span multiple grade levels and support teachers in incorporating truth and reconciliation content across subject areas. Resources align with the 94 Calls to Action of the Truth and Reconciliation Commission and Ontario's commitment to Indigenous education.",
+      "url": "https://downiewenjack.ca/our-work/lesson-plans/",
+      "publisher_creator": "Gord Downie & Chanie Wenjack Fund",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "multi",
+      "subject": "Social Studies",
+      "strand": [
+        "Heritage and Identity"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Books & Print Media"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "A2.1",
+        "A2.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "social_studies",
+          "strand": "heritage_and_identity",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2569",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Project of Heart Ontario — Truth and Reconciliation Curriculum Guides",
+      "description": "Ontario-specific Truth and Reconciliation curriculum guides using the Project of Heart framework, with case studies on the Mohawk Institute (Grade 6) and Cecilia Jeffrey Indian Residential School (Grade 8). Each guide integrates the 94 Calls to Action and supports students in researching residential school history through inquiry, memorial art, and reflective writing. Freely downloadable and designed for Ontario classroom use.",
+      "url": "https://projectofheartontario.ca/trc-guides/",
+      "publisher_creator": "Project of Heart Ontario",
+      "grade_level": [
+        6,
+        8
+      ],
+      "grade_band": "multi",
+      "subject": "Social Studies",
+      "strand": [
+        "Heritage and Identity"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Books & Print Media"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A2.1",
+        "A2.2",
+        "A2.3"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "social_studies",
+          "strand": "heritage_and_identity",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2570",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Historica Canada — Heritage Minutes Critical Thinking Activities",
+      "description": "Free guided critical thinking exercises from Historica Canada's Education Portal that walk students through deconstructing Heritage Minutes (short Canadian historical films), examining bias, historical perspective, significance, and narrative choices. Activities are adaptable to any of the 90+ Heritage Minutes and suitable for Grades 6–8. The resource builds inquiry and media-literacy skills while deepening understanding of Canadian heritage and identity.",
+      "url": "http://education.historicacanada.ca/en/tools/95",
+      "publisher_creator": "Historica Canada",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "multi",
+      "subject": "Social Studies",
+      "strand": [
+        "Heritage and Identity"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Video",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.2",
+        "A1.3",
+        "A2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "social_studies",
+          "strand": "heritage_and_identity",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2571",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "AMO — Civic Education and Engagement Resources",
+      "description": "Free civic education materials from the Association of Municipalities of Ontario (AMO) that help students understand local government structure, democratic participation, and how municipal decisions affect their communities. Resources include classroom activities and information on how Ontario's 444 municipalities work, supporting curriculum expectations around power, governance, and active citizenship. Particularly useful for connecting abstract civics concepts to students' immediate local context.",
+      "url": "https://www.amo.on.ca/civic-education-and-engagement",
+      "publisher_creator": "Association of Municipalities of Ontario (AMO)",
+      "grade_level": [
+        6,
+        7,
+        8
+      ],
+      "grade_band": "multi",
+      "subject": "Social Studies",
+      "strand": [
+        "Power and Governance"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "C2.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "social_studies",
+          "strand": "power_and_governance",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2572",
+      "metadata": {
+        "added_at": "2026-06-16",
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
