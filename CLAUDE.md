@@ -24,7 +24,7 @@ footer driven by IntersectionObserver, assessment modal).
 - Class utils: `clsx` + `tailwind-merge`
 - Data: **SWR** for static `resources.json`; **Anthropic SDK** (`@anthropic-ai/sdk`) for AI calls
 - Deploy: **Vercel** (`vercel.json`, build `pnpm build` → `dist/`)
-- CI: GitHub Actions (`.github/workflows/deploy.yml` plus nightly resource refresh jobs)
+- CI: GitHub Actions (`.github/workflows/deploy.yml`); resource refresh runs nightly as a **Claude Code routine** on the Claude subscription (see `ROUTINES.md`), with the `nightly-*.yml` workflows retained as a manual, API-billed fallback
 
 ## Design system — THE shared contract
 
@@ -117,7 +117,8 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   Assessor) — keep the stages distinct; it's also the competitive-moat story,
   so don't shortcut it for convenience.
 - Static resource data ships as `public/resources.json` (~2.5 MB) and is fetched
-  via SWR. Treat as read-only at runtime; nightly GitHub Actions regenerate it.
+  via SWR. Treat as read-only at runtime; a nightly Claude Code routine
+  regenerates it (see `ROUTINES.md`).
 
 ## Known constraints / things that bite
 
