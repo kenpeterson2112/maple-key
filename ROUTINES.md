@@ -1,4 +1,4 @@
-# Nightly resource refresh — Claude Code routines
+# Nightly routines — Claude Code
 
 The nightly resource discovery used to run as **GitHub Actions** that called the
 **Anthropic API** (per-token billing via `ANTHROPIC_API_KEY`). That is now
@@ -33,7 +33,8 @@ by a commit. Set each one up once:
 5. **Prompt:** paste the matching prompt below.
 6. Save. Each nightly run opens a **draft PR** you can review and merge.
 
-Create **two** routines — one per subject.
+Create **three** routines: two resource-refresh (one per subject, below) and
+one link-health (further below).
 
 ### Routine 1 — Science (suggested: daily 02:00 UTC)
 
@@ -66,15 +67,47 @@ nightly Social Studies resources". If no suitable new resources are found, make
 no commit and stop.
 ```
 
+### Routine 3 — Link health (suggested: daily 04:00 UTC)
+
+Unlike the resource routines, this one checks the *existing* library for broken
+links. It runs `scripts/link-check.py` for the deterministic parts — a nightly
+DNS sweep of all ~1,730 URLs (instant dead-domain / malformed-URL flags) plus a
+date-sharded ~1/9 rotation, so the whole database gets a browser-grade check
+about once a week — and uses Claude's `WebFetch` for the verdict: it loads each
+queued page and reads its content, which sidesteps the bot-blocking that makes a
+plain HTTP probe return 403 on ~96% of these sites. Findings land in one
+**rolling** draft PR on `claude/link-health` and in `public/link-health.json`;
+`resources.json` is never touched.
+
+```
+Run the Maple Key nightly link-health check. Use the `check-links` skill. It
+DNS-sweeps every URL in public/resources.json (flagging dead domains and
+malformed URLs) and browser-verifies tonight's rotating ~1/9 shard with
+WebFetch, classifying each page as live / dead / moved / blocked / error from
+its actual content — so bot-walls aren't mistaken for dead links. Maintain the
+single rolling branch claude/link-health: carry the prior public/link-health.json
+forward, write the updated ledger, and keep one draft PR titled "Nightly link
+health" current with the broken-links report. Never modify public/resources.json.
+If nothing is broken this run, refresh the ledger but open no PR.
+```
+
+This session can be long — it makes ~150–190 WebFetch calls a night — so give it
+a little headroom after the resource routines.
+
 ## Notes & limits
 
 - **Billing:** routine runs consume subscription usage, not API token credits.
 - **Frequency:** routines allow a minimum 1-hour interval and have a per-account
-  daily run cap — two runs/night is well within that. See your remaining runs at
+  daily run cap — three runs/night is comfortably within that. See your remaining runs at
   https://claude.ai/code/routines and https://claude.ai/settings/usage.
 - **Review gate:** new rows are stamped `needs_review: true`, and runs land as
   **draft PRs** rather than committing straight to `main`.
 - **Fallback:** the API path still exists if you ever need it — run the
   `Nightly Science / Social Studies Resource Discovery` workflows manually from
   the Actions tab (`workflow_dispatch`). These still require `ANTHROPIC_API_KEY`.
+- **Link health vs. resource refresh:** link health checks the *existing*
+  library (broken/moved links) and writes only `public/link-health.json` via a
+  rolling PR; it never edits `resources.json`. The two resource routines *add*
+  new rows. Tune the sweep with `--cycle` (nights for a full pass) and
+  `--per-host-cap` in `scripts/link-check.py`.
 - Routines are a research-preview feature; the UI and limits may change.

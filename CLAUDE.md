@@ -24,7 +24,7 @@ footer driven by IntersectionObserver, assessment modal).
 - Class utils: `clsx` + `tailwind-merge`
 - Data: **SWR** for static `resources.json`; **Anthropic SDK** (`@anthropic-ai/sdk`) for AI calls
 - Deploy: **Vercel** (`vercel.json`, build `pnpm build` → `dist/`)
-- CI: GitHub Actions (`.github/workflows/deploy.yml`); resource refresh runs nightly as a **Claude Code routine** on the Claude subscription (see `ROUTINES.md`), with the `nightly-*.yml` workflows retained as a manual, API-billed fallback
+- CI: GitHub Actions (`.github/workflows/deploy.yml`); nightly resource refresh and link-health checks run as **Claude Code routines** on the Claude subscription (see `ROUTINES.md`), with the `nightly-*.yml` workflows retained as a manual, API-billed fallback
 
 ## Design system — THE shared contract
 
