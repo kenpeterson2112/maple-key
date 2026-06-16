@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-15T09:25:08Z",
-    "total_count": 1730,
+    "generated_at": "2026-06-16T00:00:00Z",
+    "total_count": 1735,
     "schema_version": "2.1"
   },
   "resources": [
@@ -97903,6 +97903,368 @@
       "id": "r-2566",
       "metadata": {
         "added_at": "2026-06-15",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "TVO Learn — Free K-12 Ontario Science Hub",
+      "description": "Free, Ontario curriculum-aligned digital learning hub developed by TVO Ontario Certified Teachers, offering instructional videos, activities, and lesson support for all science strands in grades K-12. Resources are organized by grade and subject, covering Life Systems, Matter and Energy, Earth and Space Systems, and STEM Skills and Connections. No account is required for most resources, making it immediately accessible for classroom or at-home use.",
+      "url": "https://tvolearn.com/",
+      "publisher_creator": "TVO Media Education Group",
+      "grade_level": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections",
+        "Life Systems",
+        "Matter and Energy",
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Video",
+        "Interactive"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B1.1",
+        "C1.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A1.1",
+          "expectation_description": "Use a scientific research process and scientific experimentation process to conduct investigations",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2567",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Exploring Careers in STEM — Grade 7 (Let's Talk Science)",
+      "description": "A free, Ontario-aligned Grade 7 lesson where students research STEM professions connected to their current science unit, identifying required skills, educational pathways, and real-world connections. Directly aligned to Ontario Science and Technology (2022), Strand A: STEM Skills and Connections, expectation A4.1. Includes a student activity sheet, teacher guide, and discussion prompts developed by Canadian STEM education experts.",
+      "url": "https://letstalkscience.ca/educational-resources/lessons/exploring-careers-in-stem-grade-7",
+      "publisher_creator": "Let's Talk Science",
+      "grade_level": [
+        7
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A4.1",
+        "A3.1",
+        "A1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[7]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A4.1",
+          "expectation_description": "Identify the areas of science and technology reflected in various STEM professions and the knowledge and skills associated with those professions",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[7]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A3.1",
+          "expectation_description": "Analyse the societal and environmental impacts of science and technology",
+          "alignment_strength": "secondary"
+        }
+      ],
+      "id": "r-2568",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Exploring Careers in STEM — Grade 8 (Let's Talk Science)",
+      "description": "A free, Ontario-aligned Grade 8 lesson in which students investigate STEM career types connected to their current science unit, examining required skills, post-secondary pathways, and real-world applications. Directly aligned to Ontario Grade 8 Science and Technology (2022), Strand A: STEM Skills and Connections, expectation A4.1. Includes teacher guide, student worksheets, and differentiation suggestions.",
+      "url": "https://letstalkscience.ca/educational-resources/lessons/exploring-careers-in-stem-grade-8",
+      "publisher_creator": "Let's Talk Science",
+      "grade_level": [
+        8
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A4.1",
+        "A3.1",
+        "A1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[8]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A4.1",
+          "expectation_description": "Identify the areas of science and technology reflected in various STEM professions and the knowledge and skills associated with those professions",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[8]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A3.1",
+          "expectation_description": "Analyse the societal and environmental impacts of science and technology",
+          "alignment_strength": "secondary"
+        }
+      ],
+      "id": "r-2569",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "PhET Interactive Science Simulations",
+      "description": "Free, research-backed interactive simulations from the University of Colorado Boulder covering physics, chemistry, biology, and earth science for grades 6-12. Particularly valuable for Ontario's Matter and Energy strand — simulations such as States of Matter, Forces and Motion, and Energy Skate Park allow students to visualize and experiment with abstract science concepts. All simulations run in-browser with no download required and are available in multiple languages.",
+      "url": "https://phet.colorado.edu/",
+      "publisher_creator": "University of Colorado Boulder",
+      "grade_level": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy",
+        "Earth and Space Systems",
+        "Life Systems"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1",
+        "D1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "C1.1",
+          "expectation_description": "Describe and explain properties and behaviours of matter related to the current unit of study",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "C2.1",
+          "expectation_description": "Use the scientific experimentation process to investigate properties and interactions of matter",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "secondary"
+        }
+      ],
+      "id": "r-2570",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "STAO Free Ontario Science Resource Library",
+      "description": "Curated library of free Ontario Science and Technology resources created by and for Ontario Certified Teachers through the Science Teachers' Association of Ontario (STAO). Includes lesson plans, lab activities, unit plans, and inquiry-based learning tools organized by grade (K-12) and strand, all aligned to the 2022 Ontario Science and Technology curriculum. Particularly strong for intermediate grades 6-9 with resources spanning all four science strands.",
+      "url": "https://stao.ca/category/free/",
+      "publisher_creator": "Science Teachers' Association of Ontario (STAO)",
+      "grade_level": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections",
+        "Life Systems",
+        "Matter and Energy",
+        "Earth and Space Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A1.1",
+        "B2.1",
+        "C2.1",
+        "D2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A1.1",
+          "expectation_description": "Use a scientific research process and scientific experimentation process to conduct investigations",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6, 7, 8, 9]",
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2571",
+      "metadata": {
+        "added_at": "2026-06-16",
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
