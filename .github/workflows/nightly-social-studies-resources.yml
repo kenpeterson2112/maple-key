@@ -1,9 +1,9 @@
 name: Nightly Social Studies Resource Discovery
 
+# Nightly scheduling now runs as a Claude Code routine on the Claude
+# subscription instead of the Anthropic API. See ROUTINES.md. This workflow
+# is retained only as a manual, API-billed fallback.
 on:
-  schedule:
-    # Runs at 03:00 UTC every night (1 hour after Science, avoids DDG rate-limits)
-    - cron: "0 3 * * *"
   workflow_dispatch:
 
 permissions:
