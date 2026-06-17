@@ -46,39 +46,51 @@ export default function CurriculumFilterBar() {
 
   return (
     <>
-      {/* Desktop: inline dropdown pickers */}
-      <div className="hidden md:flex items-center gap-2 flex-shrink-0">
-        <InlinePicker
-          value={state.province}
-          placeholder="anywhere in Canada"
-          options={PROVINCES}
-          onChange={setProvince}
-          ariaLabel="Choose province"
-        />
-        <InlinePicker
-          value={state.grade}
-          placeholder="any grade"
-          options={GRADES}
-          onChange={setGrade}
-          ariaLabel="Choose grade"
-        />
-        <InlinePicker
-          value={state.subject}
-          placeholder="any subject"
-          options={SUBJECTS}
-          onChange={setSubject}
-          ariaLabel="Choose subject"
-        />
-        {!isStrandDisabled && (
+      {/* Desktop: a single centered "segmented control" pill holding all four
+          filters (province · grade · subject · strand), divided by hairlines. */}
+      <div className="hidden md:flex items-center flex-shrink-0">
+        <div className="inline-flex items-center gap-0.5 rounded-full border border-[#E8D5C4] bg-white/70 px-1.5 py-1 shadow-sm">
           <InlinePicker
-            value={state.strand}
-            placeholder="any strand"
-            options={strandOptions}
-            onChange={setStrand}
-            disabled={isStrandDisabled}
-            ariaLabel="Choose strand"
+            variant="compact"
+            value={state.province}
+            placeholder="anywhere in Canada"
+            options={PROVINCES}
+            onChange={setProvince}
+            ariaLabel="Choose province"
           />
-        )}
+          <span className="h-4 w-px flex-shrink-0 bg-[#E8D5C4]" aria-hidden="true" />
+          <InlinePicker
+            variant="compact"
+            value={state.grade}
+            placeholder="any grade"
+            options={GRADES}
+            onChange={setGrade}
+            ariaLabel="Choose grade"
+          />
+          <span className="h-4 w-px flex-shrink-0 bg-[#E8D5C4]" aria-hidden="true" />
+          <InlinePicker
+            variant="compact"
+            value={state.subject}
+            placeholder="any subject"
+            options={SUBJECTS}
+            onChange={setSubject}
+            ariaLabel="Choose subject"
+          />
+          {!isStrandDisabled && (
+            <>
+              <span className="h-4 w-px flex-shrink-0 bg-[#E8D5C4]" aria-hidden="true" />
+              <InlinePicker
+                variant="compact"
+                value={state.strand}
+                placeholder="any strand"
+                options={strandOptions}
+                onChange={setStrand}
+                disabled={isStrandDisabled}
+                ariaLabel="Choose strand"
+              />
+            </>
+          )}
+        </div>
       </div>
 
       {/* Mobile: circular icon buttons */}

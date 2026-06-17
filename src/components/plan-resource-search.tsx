@@ -1,7 +1,8 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { Search, SlidersHorizontal, Compass, Sparkles, ChevronUp } from "lucide-react"
+import { Search, SlidersHorizontal, Compass, ChevronUp } from "lucide-react"
+import MapleKeyIcon from "@/components/ui/maple-key-icon"
 import PlanResourceCard from "./plan-resource-card"
 import MobileFiltersDrawer from "./mobile-filters-drawer"
 import { useBookmarks } from "@/lib/bookmarks-context"
@@ -43,6 +44,9 @@ export default function PlanResourceSearch({
 
   const primaryGrade = (filters.grade || "").split(",").filter(Boolean)[0] ?? ""
   const contextLabel = [primaryGrade ? `Grade ${primaryGrade}` : "", filters.subject || ""].filter(Boolean).join(" ")
+  // Suggestion heading carries the strand too (e.g. "Grade 6 Math · Spatial Sense");
+  // the search placeholder stays at grade/subject so it reads naturally.
+  const suggestionLabel = [contextLabel, filters.strand || ""].filter(Boolean).join(" · ")
   const searchPlaceholder = contextLabel ? `Search within ${contextLabel}…` : "Search resources…"
   const searchAriaLabel = contextLabel ? `Search resources within ${contextLabel}` : "Search resources"
 
@@ -69,9 +73,9 @@ export default function PlanResourceSearch({
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-1.5">
-            <Sparkles size={14} className="flex-shrink-0 text-[#FF6B35]" aria-hidden="true" />
+            <MapleKeyIcon className="h-3.5 w-3.5 flex-shrink-0 text-[#FF6B35]" />
             <h3 className="truncate text-[11px] font-semibold uppercase tracking-wide text-[#8B4513]" style={{ fontFamily: "var(--font-mono, monospace)" }}>
-              {contextLabel ? `Suggested for ${contextLabel}` : "Suggested resources"}
+              {suggestionLabel ? `Suggested for ${suggestionLabel}` : "Suggested resources"}
             </h3>
           </div>
           <button

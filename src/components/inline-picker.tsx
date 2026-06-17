@@ -25,6 +25,12 @@ interface InlinePickerProps {
   disabled?: boolean
   /** Optional aria label override. */
   ariaLabel?: string
+  /**
+   * Visual treatment.
+   * - `sentence` (default): big underlined display text for the "I teach …" hero.
+   * - `compact`: small, chip-sized text for the inline header filter cluster.
+   */
+  variant?: "sentence" | "compact"
 }
 
 export default function InlinePicker({
@@ -35,10 +41,22 @@ export default function InlinePicker({
   prefix,
   disabled,
   ariaLabel,
+  variant = "sentence",
 }: InlinePickerProps) {
   const [open, setOpen] = useState(false)
   const selected = options.find((o) => o.value === value)
   const display = selected ? `${prefix ?? ""}${selected.label}` : placeholder
+  const isCompact = variant === "compact"
+
+  const stateClasses = disabled
+    ? "cursor-not-allowed text-[#A8998E] opacity-60"
+    : selected
+      ? "text-[#8B4513] hover:bg-[#FFE5CC]"
+      : "text-[#C65D3B] hover:bg-[#FFE5CC]"
+
+  const triggerClasses = isCompact
+    ? `group inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-sm font-semibold tracking-tight transition-colors duration-200 ${stateClasses}`
+    : `group inline-flex items-center gap-1 rounded-lg px-2 py-1 text-lg md:text-2xl font-semibold tracking-tight transition-colors duration-200 ${stateClasses} underline decoration-[#FF6B35]/35 decoration-1 underline-offset-4 hover:decoration-[#FF6B35]`
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
@@ -47,23 +65,17 @@ export default function InlinePicker({
           type="button"
           disabled={disabled}
           aria-label={ariaLabel ?? display}
-          className={`group inline-flex items-center gap-1 rounded-lg px-2 py-1 text-lg md:text-2xl font-semibold tracking-tight transition-colors duration-200 ${
-            disabled
-              ? "cursor-not-allowed text-[#A8998E] opacity-60"
-              : selected
-                ? "text-[#8B4513] hover:bg-[#FFE5CC]"
-                : "text-[#C65D3B] hover:bg-[#FFE5CC]"
-          } underline decoration-[#FF6B35]/35 decoration-1 underline-offset-4 hover:decoration-[#FF6B35]`}
+          className={triggerClasses}
         >
           {selected?.color && (
             <span
-              className="inline-block w-2.5 h-2.5 rounded-full flex-shrink-0"
+              className={`inline-block rounded-full flex-shrink-0 ${isCompact ? "w-2 h-2" : "w-2.5 h-2.5"}`}
               style={{ backgroundColor: selected.color }}
             />
           )}
           <span>{display}</span>
           <ChevronDown
-            size={20}
+            size={isCompact ? 14 : 20}
             className={`text-[#C65D3B] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           />
         </button>
