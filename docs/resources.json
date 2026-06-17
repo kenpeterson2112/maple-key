@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-15T09:25:08Z",
-    "total_count": 1730,
+    "generated_at": "2026-06-17T00:00:00Z",
+    "total_count": 1736,
     "schema_version": "2.1"
   },
   "resources": [
@@ -97903,6 +97903,360 @@
       "id": "r-2566",
       "metadata": {
         "added_at": "2026-06-15",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Exploring Careers in STEM — Grade 7 (Let's Talk Science)",
+      "description": "A free, Ontario-aligned Grade 7 lesson where students research STEM professions connected to their current science unit, identifying required skills, educational pathways, and real-world connections. Directly aligned to Ontario Science and Technology (2022), Strand A: STEM Skills and Connections, expectation A4.1. Includes a student activity sheet, teacher guide, and discussion prompts developed by Canadian STEM education experts.",
+      "url": "https://letstalkscience.ca/educational-resources/lessons/exploring-careers-in-stem-grade-7",
+      "publisher_creator": "Let's Talk Science",
+      "grade_level": [
+        7
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A4.1",
+        "A3.1",
+        "A1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[7]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A4.1",
+          "expectation_description": "Identify the areas of science and technology reflected in various STEM professions and the knowledge and skills associated with those professions",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[7]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A3.1",
+          "expectation_description": "Analyse the societal and environmental impacts of science and technology",
+          "alignment_strength": "secondary"
+        }
+      ],
+      "id": "r-2568",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Exploring Careers in STEM — Grade 8 (Let's Talk Science)",
+      "description": "A free, Ontario-aligned Grade 8 lesson in which students investigate STEM career types connected to their current science unit, examining required skills, post-secondary pathways, and real-world applications. Directly aligned to Ontario Grade 8 Science and Technology (2022), Strand A: STEM Skills and Connections, expectation A4.1. Includes teacher guide, student worksheets, and differentiation suggestions.",
+      "url": "https://letstalkscience.ca/educational-resources/lessons/exploring-careers-in-stem-grade-8",
+      "publisher_creator": "Let's Talk Science",
+      "grade_level": [
+        8
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "STEM Skills and Connections"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "A4.1",
+        "A3.1",
+        "A1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[8]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A4.1",
+          "expectation_description": "Identify the areas of science and technology reflected in various STEM professions and the knowledge and skills associated with those professions",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[8]",
+          "subject": "science",
+          "strand": "stem_skills_and_connections",
+          "expectation_code": "A3.1",
+          "expectation_description": "Analyse the societal and environmental impacts of science and technology",
+          "alignment_strength": "secondary"
+        }
+      ],
+      "id": "r-2569",
+      "metadata": {
+        "added_at": "2026-06-16",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Exploring Biodiversity Through Inquiry — Grade 6 (STAO)",
+      "description": "A free, inquiry-based Grade 6 unit from the Science Teachers' Association of Ontario in which students investigate biodiversity in their local environment, starting from questions about their own community and ecosystem. Students conduct surveys of local species diversity and assess why biodiversity matters to ecosystem health. Directly aligned to Ontario Grade 6 Science and Technology (2022), Strand B: Life Systems (Biodiversity).",
+      "url": "https://stao.ca/resource/exploring-biodiversity-through-inquiry-grade-6/",
+      "publisher_creator": "Science Teachers' Association of Ontario (STAO)",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Life Systems"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Books & Print Media"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "B1.1",
+        "B2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6]",
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": "B1.1",
+          "expectation_description": "Identify factors that affect biodiversity within an ecosystem and assess the importance of biodiversity to the health and resilience of an ecosystem",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6]",
+          "subject": "science",
+          "strand": "life_systems",
+          "expectation_code": "B2.1",
+          "expectation_description": "Conduct an inquiry into the diversity of living things in a local environment",
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2572",
+      "metadata": {
+        "added_at": "2026-06-17",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Uranium and Oil Spills: It's Garbage Day, Humans — Grade 7 (STAO)",
+      "description": "A free, inquiry-based Grade 7 unit from STAO teaching that pure substances and mixtures have discoverable properties explained through particle theory, including methods to mix and separate them. Students examine the social, medical, economic, and environmental effects of hazardous waste and chemical disposal through real-world case studies. Directly aligned to Ontario Grade 7 Science and Technology (2022), Strand C: Matter and Energy (Pure Substances and Mixtures).",
+      "url": "https://stao.ca/resource/uranium-and-oil-spills-its-garbage-day-humans-grade-7/",
+      "publisher_creator": "Science Teachers' Association of Ontario (STAO)",
+      "grade_level": [
+        7
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Books & Print Media"
+      ],
+      "resource_type": "digital",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[7]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "C1.1",
+          "expectation_description": "Use scientific terminology to identify and describe properties used to classify substances as pure substances or mixtures",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[7]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "C2.1",
+          "expectation_description": "Conduct an inquiry into the properties of pure substances and mixtures, including ways to separate mixtures",
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2573",
+      "metadata": {
+        "added_at": "2026-06-17",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Mars Rover Rock Collector and Crusher — Systems in Action, Grade 8 (STAO)",
+      "description": "A free, design-challenge unit from STAO in which Grade 8 students build a Mars rover device that collects and crushes rock samples, applying concepts of input and output forces, mechanical advantage, and mechanical efficiency. Students test and iterate their designs against the six simple machines. Directly aligned to Ontario Grade 8 Science and Technology (2022), Strand C: Matter and Energy (Systems in Action).",
+      "url": "https://stao.ca/resource/mars-rover-rock-collector-and-crusher-systems-in-action-unit-grade-8/",
+      "publisher_creator": "Science Teachers' Association of Ontario (STAO)",
+      "grade_level": [
+        8
+      ],
+      "grade_band": "intermediate",
+      "subject": "Science",
+      "strand": [
+        "Matter and Energy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Books & Print Media"
+      ],
+      "resource_type": "kit",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "C1.1",
+        "C2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[8]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "C1.1",
+          "expectation_description": "Identify the components of a system and explain how the components interact with each other and with other systems",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[8]",
+          "subject": "science",
+          "strand": "matter_and_energy",
+          "expectation_code": "C2.1",
+          "expectation_description": "Investigate the relationships between the components of simple machines, including mechanical advantage and efficiency",
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2574",
+      "metadata": {
+        "added_at": "2026-06-17",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      }
+    },
+    {
+      "topic_title": "Gravity and Orbits Simulation (PhET)",
+      "description": "A free, individual interactive simulation from PhET in which students move the sun, Earth, moon, and a space station to observe how gravitational force shapes orbital paths, and compare the relative sizes and distances of bodies in the solar system. Directly supports Ontario Grade 6 Science and Technology (2022), Strand D: Earth and Space Systems (Space), where students investigate the Sun-Earth-Moon system and the effects of gravity.",
+      "url": "https://phet.colorado.edu/en/simulations/gravity-and-orbits",
+      "publisher_creator": "University of Colorado Boulder (PhET)",
+      "grade_level": [
+        6
+      ],
+      "grade_band": "junior",
+      "subject": "Science",
+      "strand": [
+        "Earth and Space Systems"
+      ],
+      "province": "CANADA",
+      "jurisdiction": "canada",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "D1.1",
+        "D2.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [],
+      "usage_notes": null,
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6]",
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": "D1.1",
+          "expectation_description": "Describe the components of the solar system and explain how gravitational force affects the movement of bodies within it",
+          "alignment_strength": "primary"
+        },
+        {
+          "jurisdiction": "ontario",
+          "grade": "[6]",
+          "subject": "science",
+          "strand": "earth_and_space_systems",
+          "expectation_code": "D2.1",
+          "expectation_description": "Use a model to demonstrate the motion of the Earth, sun, and moon and explain resulting phenomena",
+          "alignment_strength": "primary"
+        }
+      ],
+      "id": "r-2575",
+      "metadata": {
+        "added_at": "2026-06-17",
         "added_by": "maple_key_team",
         "verified": false,
         "needs_review": true
