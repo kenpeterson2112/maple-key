@@ -48,14 +48,19 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
         isAdded ? "border-[#86EFAC] bg-[#F0FDF4]" : "border-[#E8D5C4] bg-white hover:border-[#D8C7B8]"
       }`}
     >
-      <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide" style={{ color: typeInfo.color, fontFamily: "var(--font-mono, monospace)" }}>
-        {typeInfo.label}
-      </div>
-
-      {/* Title + accordion toggle. The description is collapsed by default to keep
-          the card vertically tight; the chevron reveals it on demand. */}
+      {/* Title row: title on the left with the modality/type tag sitting just to
+          its right; the accordion toggle stays anchored at the far right. The
+          description is collapsed by default to keep the card vertically tight. */}
       <div className="flex items-start justify-between gap-1.5">
-        <h3 className="min-w-0 text-sm font-semibold leading-snug text-[#2C2C2C]">{title}</h3>
+        <div className="flex min-w-0 items-baseline gap-2">
+          <h3 className="min-w-0 text-sm font-semibold leading-snug text-[#2C2C2C]">{title}</h3>
+          <span
+            className="flex-shrink-0 text-[10px] font-semibold uppercase tracking-wide"
+            style={{ color: typeInfo.color, fontFamily: "var(--font-mono, monospace)" }}
+          >
+            {typeInfo.label}
+          </span>
+        </div>
         {hasDescription && (
           <button
             type="button"
