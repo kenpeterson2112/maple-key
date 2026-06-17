@@ -115,6 +115,14 @@ Curation rules:
 - Clearly educational and appropriate for grades 6–9. Prefer **free, online,
   Canadian / Ontario-specific** resources.
 - Skip duplicates, ads, low-quality pages, and bare search-engine homepages.
+- **No hub/category/homepage links.** A teacher who already knows TVO Learn,
+  PhET, or STAO exist gets nothing from a link to their front page or a
+  category listing (e.g. `phet.colorado.edu/`, `stao.ca/category/free/`,
+  `tvolearn.com/`). Drill down one level further and link the specific
+  lesson, unit, activity, or simulation page a teacher could open and use in
+  a single class — e.g. `phet.colorado.edu/en/simulations/gravity-and-orbits`,
+  not `phet.colorado.edu/`. If a search turns up a repository, search again
+  *within* it for the individual resource before giving up on that source.
 - `grade_level` is a JSON array of integers (e.g. `[6, 7, 8]`) or the strings
   `"K"` / `"PreK"` — never strings like `"[6]"`.
 - One `alignments` entry per strand used; `subject` and `strand` in snake_case.
