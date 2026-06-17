@@ -100,11 +100,49 @@ interface LessonPlanResponse {
   sections?: Array<{ id: string; label: string; subtitle: string; content: string; callout?: string }>
 }
 
+/**
+ * Pull the lesson JSON object out of the model's raw text.
+ *
+ * The model is told to return JSON only, but Haiku — nudged by the long
+ * French-immersion instruction block, which embeds `{ … }` artifact examples
+ * and a "re-check every artifact entry and fix it" directive — sometimes wraps
+ * the object in prose or echoes an example object alongside the real one.
+ * Slicing first "{" → last "}" then spans multiple objects (e.g.
+ * `{example}. {lesson}`), which is unparseable. Instead, scan for every
+ * balanced, string-aware top-level object and keep the largest: the full lesson
+ * dwarfs any echoed snippet. Falls back to the de-fenced text (so a genuinely
+ * malformed or truncated response still surfaces via the parse failure + log).
+ */
 function extractJson(text: string): string {
-  const trimmed = text.trim()
-  const start = trimmed.indexOf("{")
-  const end = trimmed.lastIndexOf("}")
-  return start >= 0 && end > start ? trimmed.slice(start, end + 1) : trimmed
+  const unfenced = text.replace(/```(?:json)?/gi, "").trim()
+  let best = ""
+  let depth = 0
+  let startIdx = -1
+  let inString = false
+  let escaped = false
+  for (let i = 0; i < unfenced.length; i++) {
+    const ch = unfenced[i]
+    if (inString) {
+      if (escaped) escaped = false
+      else if (ch === "\\") escaped = true
+      else if (ch === '"') inString = false
+      continue
+    }
+    if (ch === '"') {
+      inString = true
+    } else if (ch === "{") {
+      if (depth === 0) startIdx = i
+      depth++
+    } else if (ch === "}" && depth > 0) {
+      depth--
+      if (depth === 0 && startIdx >= 0) {
+        const candidate = unfenced.slice(startIdx, i + 1)
+        if (candidate.length > best.length) best = candidate
+        startIdx = -1
+      }
+    }
+  }
+  return best || unfenced
 }
 
 function collectText(content: Anthropic.ContentBlock[]): string {
@@ -333,7 +371,30 @@ ${reproducibleLanguageBlock}`
     let lesson: LessonPlanResponse
     try {
       lesson = JSON.parse(extractJson(rawText))
-    } catch {
+    } catch (parseErr) {
+      // This path used to be silent: it discarded the model's raw output, the
+      // stop reason, and the parse error, so a malformed-JSON failure left
+      // nothing to inspect after the fact. Log enough to tell the failure modes
+      // apart — truncation (stop === "max_tokens") vs. an in-string malformation
+      // (parseError like "Bad control character" / "Unterminated string") vs.
+      // prose wrapped around the object — and carry reproducibleLanguage so the
+      // French path can be correlated against failures.
+      console.log(JSON.stringify({
+        event: "lesson_generation_failed",
+        ts: new Date().toISOString(),
+        grade,
+        subject,
+        lessonTemplate,
+        lessonLength,
+        reproducibleLanguage: reproducibleLanguage ?? "English",
+        planningAnswersCount: planningAnswers?.length ?? 0,
+        stop: message.stop_reason,
+        tokensIn: message.usage?.input_tokens ?? 0,
+        tokensOut: message.usage?.output_tokens ?? 0,
+        parseError: parseErr instanceof Error ? parseErr.message : String(parseErr),
+        rawTextLength: rawText.length,
+        rawText,
+      }))
       return res.status(500).json({ error: "Claude returned malformed JSON. Please try again." })
     }
 
