@@ -1825,9 +1825,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     subject: globalFilters.state.subject,
                     strand: globalFilters.state.strand,
                   }}
-                  setFilters={setFilters}
                   sidebarFilters={sidebarFilters}
-                  onSidebarFilterChange={onSidebarFilterChange}
                   onBrowseAll={onBack}
                 />
 
