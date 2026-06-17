@@ -48,7 +48,9 @@ curriculum expectation codes and grade levels. Append them to
 public/resources.json and mirror the change to docs/resources.json (updating
 meta.total_count and meta.generated_at). Skip any URL already present. Commit
 to a claude/ branch and open a draft PR titled "data: add nightly Science
-resources". If no suitable new resources are found, make no commit and stop.
+resources". After the PR is open, export this run's new rows to a dated
+Google Sheet for human URL verification (Stage 6 of the skill). If no
+suitable new resources are found, make no commit and stop.
 ```
 
 ### Routine 2 — Social Studies (suggested: daily 03:00 UTC)
@@ -63,8 +65,9 @@ pass assign real Ontario curriculum expectation codes and grade levels. Append
 them to public/resources.json and mirror the change to docs/resources.json
 (updating meta.total_count and meta.generated_at). Skip any URL already
 present. Commit to a claude/ branch and open a draft PR titled "data: add
-nightly Social Studies resources". If no suitable new resources are found, make
-no commit and stop.
+nightly Social Studies resources". After the PR is open, export this run's
+new rows to a dated Google Sheet for human URL verification (Stage 6 of the
+skill). If no suitable new resources are found, make no commit and stop.
 ```
 
 ### Routine 3 — Link health (suggested: daily 04:00 UTC)
@@ -102,6 +105,14 @@ a little headroom after the resource routines.
   https://claude.ai/code/routines and https://claude.ai/settings/usage.
 - **Review gate:** new rows are stamped `needs_review: true`, and runs land as
   **draft PRs** rather than committing straight to `main`.
+- **URL verification:** `WebFetch` gets HTTP 403'd by bot-protection on plenty
+  of legitimate sites, so it's not a reliable dead-link signal on its own.
+  Stage 6 of `refresh-resources` (shared by both subject routines) exports
+  each run's new rows to a dated Google Sheet — e.g. `Maple Key — Science
+  Resource URL Tracker — 2026-06-17` — for a human or browsing tool (the
+  Claude web extension works well) to verify outside the sandbox. This needs
+  the Google Drive MCP connector available in the routine's environment;
+  each run creates its own sheet rather than appending to one running log.
 - **Fallback:** the API path still exists if you ever need it — run the
   `Nightly Science / Social Studies Resource Discovery` workflows manually from
   the Actions tab (`workflow_dispatch`). These still require `ANTHROPIC_API_KEY`.
