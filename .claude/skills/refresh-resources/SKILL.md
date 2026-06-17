@@ -159,6 +159,35 @@ Write `public/resources.json`, then mirror to `docs/resources.json` if it exists
   `data: add nightly <Subject> resources` and open a **draft PR** for review
   (the rows carry `needs_review: true`, so a human confirms them before merge).
 
+## Stage 6 — Export for human URL verification
+
+Skip this stage entirely if zero resources were added in Stage 4.
+
+`WebFetch` from this environment is frequently blocked (HTTP 403) by
+bot-protection on otherwise-legitimate sites, so it can't be trusted as the
+final word on whether a URL is reachable. Hand verification off to a human
+(or a browsing tool, e.g. the Claude web extension) via a Google Sheet:
+
+1. Build a CSV with **one row per resource added this run** (not the whole
+   store) with exactly these columns:
+   `date_added, resource_id, subject, topic_title, url, publisher_creator, grade_level, strand, pr_number, url_check_status, checked_by, checked_at, notes`
+   - `grade_level`: comma-joined integers (e.g. `6,7,8`)
+   - `strand`: semicolon-joined if the resource has more than one
+   - `pr_number`: the PR number opened in Stage 5
+   - `url_check_status`, `checked_by`, `checked_at`, `notes`: leave blank —
+     these are filled in by the reviewer/browsing tool
+2. Create the sheet with `mcp__Google-Drive__create_file`:
+   - `title`: `Maple Key — <Subject> Resource URL Tracker — <UTC date>`
+     (e.g. `Maple Key — Social Studies Resource URL Tracker — 2026-06-16`)
+   - `textContent`: the CSV
+   - `contentMimeType`: `text/csv` (Drive auto-converts this to a native
+     Google Sheet)
+3. There is no Sheets append/update tool available in this environment —
+   each run creates its **own dated sheet** rather than appending to one
+   running tracker. Do not search for and try to overwrite a prior run's
+   sheet.
+4. Report the sheet's `viewUrl` in your final summary alongside the PR link.
+
 ## Guardrails
 
 - Never touch other subjects' rows; only append.
