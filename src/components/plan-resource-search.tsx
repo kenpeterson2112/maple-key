@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect } from "react"
 import { Search, SlidersHorizontal, Compass, ChevronUp } from "lucide-react"
 import MapleKeyIcon from "@/components/ui/maple-key-icon"
 import PlanResourceCard from "./plan-resource-card"
@@ -30,6 +30,7 @@ export default function PlanResourceSearch({
   const [searchQuery, setSearchQuery] = useState("")
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [suggestionPageIndex, setSuggestionPageIndex] = useState(0)
 
   const { filteredResources, classProgress } = useFilteredResources(filters, sidebarFilters)
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
@@ -40,7 +41,13 @@ export default function PlanResourceSearch({
   }, [filteredResources, searchQuery])
 
   const topResources = sortedResources.slice(0, TOP_RESULTS_LIMIT)
-  const suggestions = sortedResources.slice(0, SUGGESTION_LIMIT)
+
+  // Paginated suggestions: show 3 per page starting from suggestionPageIndex
+  const pageStart = suggestionPageIndex * SUGGESTION_LIMIT
+  const pageEnd = pageStart + SUGGESTION_LIMIT
+  const suggestions = sortedResources.slice(pageStart, pageEnd)
+  const totalSuggestions = sortedResources.length
+  const hasMoreSuggestions = pageEnd < totalSuggestions
 
   const primaryGrade = (filters.grade || "").split(",").filter(Boolean)[0] ?? ""
   const contextLabel = [primaryGrade ? `Grade ${primaryGrade}` : "", filters.subject || ""].filter(Boolean).join(" ")
@@ -65,7 +72,13 @@ export default function PlanResourceSearch({
   const collapseToSuggestions = () => {
     setIsExpanded(false)
     setSearchQuery("")
+    setSuggestionPageIndex(0)
   }
+
+  // Reset pagination when filters change or when expanding/collapsing
+  useEffect(() => {
+    setSuggestionPageIndex(0)
+  }, [filters, sidebarFilters, isExpanded])
 
   // Default state: a tight "suggested for this lesson" strip. Discovery only when wanted.
   if (!isExpanded) {
@@ -88,7 +101,7 @@ export default function PlanResourceSearch({
           </button>
         </div>
 
-        {suggestions.length === 0 ? (
+        {totalSuggestions === 0 ? (
           <div className="flex flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-[#E8D5C4] bg-white/60 p-6 text-center">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFE5CC]">
               <Compass size={18} className="text-[#C65D3B]" />
@@ -110,6 +123,20 @@ export default function PlanResourceSearch({
                 />
               )
             })}
+
+            <button
+              type="button"
+              onClick={() => {
+                if (hasMoreSuggestions) {
+                  setSuggestionPageIndex((i) => i + 1)
+                } else {
+                  onBrowseAll()
+                }
+              }}
+              className="mt-2 w-full py-2 px-3 rounded-lg border-2 border-dashed border-[#E8D5C4] bg-white/60 text-sm font-medium text-[#8B4513] transition-colors hover:border-[#FF6B35] hover:text-[#FF6B35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
+            >
+              {hasMoreSuggestions ? "Next 3" : "Search full resource database"}
+            </button>
           </div>
         )}
       </div>
