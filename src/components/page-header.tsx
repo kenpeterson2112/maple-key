@@ -29,17 +29,22 @@ export default function PageHeader({
 }) {
   return (
     <header className="relative flex-shrink-0 flex items-center gap-2 border-b border-[#E8D5C4] bg-white px-4 md:px-6 py-3">
-      {leading}
-      <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full ${iconBg}`}>
-        <Icon size={18} style={{ color: iconColor }} />
+      {/* Left zone: back · icon · title. flex-1 balances the right zone so the
+          centered filter cluster sits in the true middle of the bar. */}
+      <div className="flex flex-1 min-w-0 items-center gap-2">
+        {leading}
+        <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full ${iconBg}`}>
+          <Icon size={18} style={{ color: iconColor }} />
+        </div>
+        <h1 className="text-base font-bold text-[#2C2C2C] truncate min-w-0">{title}</h1>
       </div>
-      <h1 className="text-base font-bold text-[#2C2C2C] truncate min-w-0">{title}</h1>
 
-      {/* Curriculum filters share this row (see CurriculumFilterBar). */}
+      {/* Center zone: the curriculum filter cluster (see CurriculumFilterBar). */}
       <CurriculumFilterBar />
 
-      {/* Right-aligned page-specific controls */}
-      {children && <div className="ml-auto flex items-center gap-2 flex-shrink-0">{children}</div>}
+      {/* Right zone: page-specific controls. flex-1 on desktop mirrors the left
+          zone for centering; on mobile it only takes the space it needs. */}
+      <div className="flex flex-shrink-0 md:flex-1 min-w-0 items-center justify-end gap-2">{children}</div>
     </header>
   )
 }

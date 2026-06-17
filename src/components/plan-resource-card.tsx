@@ -1,6 +1,8 @@
 "use client"
 
-import { ExternalLink, Check } from "lucide-react"
+import { useState } from "react"
+import { ExternalLink, Check, ChevronDown } from "lucide-react"
+import { AnimatePresence, motion } from "framer-motion"
 import { coverageForResource, type LevelCounts } from "@/lib/assessment-results"
 import { overallLabel } from "@/lib/curriculum-codes"
 import type { Resource } from "@/lib/types"
@@ -37,6 +39,8 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
   const typeInfo = getResourceTypeInfo(resource)
   const title = resource.topic_title || "Untitled resource"
   const coverage = coverageForResource(resource.curriculum_expectations || [], codeProgress)
+  const [expanded, setExpanded] = useState(false)
+  const hasDescription = Boolean(resource.description)
 
   return (
     <div
@@ -47,12 +51,39 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
       <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide" style={{ color: typeInfo.color, fontFamily: "var(--font-mono, monospace)" }}>
         {typeInfo.label}
       </div>
-      <h3 className="mb-1 text-sm font-semibold leading-snug text-[#2C2C2C]">{title}</h3>
-      {resource.description && (
-        <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-[#888]">{resource.description}</p>
-      )}
 
-      <div className="flex items-center justify-between gap-2">
+      {/* Title + accordion toggle. The description is collapsed by default to keep
+          the card vertically tight; the chevron reveals it on demand. */}
+      <div className="flex items-start justify-between gap-1.5">
+        <h3 className="min-w-0 text-sm font-semibold leading-snug text-[#2C2C2C]">{title}</h3>
+        {hasDescription && (
+          <button
+            type="button"
+            onClick={() => setExpanded((prev) => !prev)}
+            aria-expanded={expanded}
+            aria-label={expanded ? "Hide description" : "Show description"}
+            className="-mr-1 mt-0.5 flex-shrink-0 rounded-md p-0.5 text-[#A8998E] transition-colors hover:bg-[#FFF5ED] hover:text-[#8B4513] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
+          >
+            <ChevronDown size={16} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+          </button>
+        )}
+      </div>
+
+      <AnimatePresence initial={false}>
+        {expanded && hasDescription && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="overflow-hidden"
+          >
+            <p className="pt-1.5 text-xs leading-relaxed text-[#888]">{resource.description}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="mt-2 flex items-center justify-between gap-2">
         <div className="flex min-w-0 flex-1 flex-wrap gap-1">
           {coverage.map((c) => {
             const bucket = c.level === null ? "new" : c.level === "good" || c.level === "great" ? "met" : "partial"
