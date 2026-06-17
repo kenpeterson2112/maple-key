@@ -1,7 +1,7 @@
 "use client"
 
 import { Calendar, Check, ArrowRight, BookOpen, ClipboardCheck } from "lucide-react"
-import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
+import { describeCode } from "@/lib/curriculum-codes"
 import { getLessonTally, aggregateLesson } from "@/lib/assessment-results"
 import { LEVEL_ORDER, LEVEL_META } from "@/lib/assessment-types"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
@@ -112,7 +112,7 @@ export default function LessonOverviewCard({
                 {" — "}
                 {codes
                   .slice(0, 3)
-                  .map((c) => CURRICULUM_DESCRIPTIONS[c] ?? c)
+                  .map((c) => describeCode(lesson.subject, c) ?? c)
                   .join("; ")}
                 {codes.length > 3 ? "…" : ""}
               </span>

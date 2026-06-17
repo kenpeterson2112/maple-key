@@ -3,9 +3,9 @@
 import { useState } from "react"
 import { ChevronRight, ChevronDown, Flag } from "lucide-react"
 import {
-  CURRICULUM_DESCRIPTIONS,
-  overallLabel,
-  STRANDS,
+  describeCode,
+  overallTitle,
+  hasStrandLabel,
   strandCodeOf,
   strandLabel,
 } from "@/lib/curriculum-codes"
@@ -123,7 +123,7 @@ function LevelSummary({ counts }: { counts: LevelCounts }) {
   )
 }
 
-function SpecificRow({ code, counts }: { code: string; counts: LevelCounts }) {
+function SpecificRow({ code, counts, subject }: { code: string; counts: LevelCounts; subject: string }) {
   return (
     <div className="px-4 py-3 space-y-2">
       <div className="flex items-start gap-2">
@@ -131,7 +131,7 @@ function SpecificRow({ code, counts }: { code: string; counts: LevelCounts }) {
           {code}
         </span>
         <p className="text-xs leading-snug text-[#555] flex-1">
-          {CURRICULUM_DESCRIPTIONS[code] ?? code}
+          {describeCode(subject, code) ?? code}
         </p>
       </div>
       <Bar counts={counts} />
@@ -154,11 +154,13 @@ function OverallRow({
   expanded,
   onToggle,
   nested,
+  subject,
 }: {
   agg: OverallAggregate
   expanded: boolean
   onToggle: () => void
   nested: boolean
+  subject: string
 }) {
   const specifics = Object.entries(agg.specifics).sort(([a], [b]) => a.localeCompare(b))
   return (
@@ -173,7 +175,7 @@ function OverallRow({
           <span className="flex-shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs font-bold text-stone-600">
             {agg.overall}
           </span>
-          <span className="text-sm font-semibold text-[#2C2C2C] truncate">{overallLabel(agg.overall)}</span>
+          <span className="text-sm font-semibold text-[#2C2C2C] truncate">{overallTitle(subject, agg.overall)}</span>
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
           <span className="text-[11px] text-[#888]">
@@ -187,7 +189,7 @@ function OverallRow({
       {expanded && specifics.length > 0 && (
         <div className="border-t border-[#F0E6D8] divide-y divide-[#F5EDE4] bg-[#FDFAF4]">
           {specifics.map(([code, counts]) => (
-            <SpecificRow key={code} code={code} counts={counts} />
+            <SpecificRow key={code} code={code} counts={counts} subject={subject} />
           ))}
         </div>
       )}
@@ -199,10 +201,12 @@ function StrandAccordion({
   overalls,
   expanded,
   toggle,
+  subject,
 }: {
   overalls: OverallAggregate[]
   expanded: Set<string>
   toggle: (key: string) => void
+  subject: string
 }) {
   const groups = new Map<string, OverallAggregate[]>()
   for (const agg of overalls) {
@@ -233,7 +237,7 @@ function StrandAccordion({
                 <span className="flex-shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs font-bold text-stone-600">
                   {strand.code}
                 </span>
-                <span className="text-sm font-semibold text-[#2C2C2C] truncate">{strandLabel(strand.code)}</span>
+                <span className="text-sm font-semibold text-[#2C2C2C] truncate">{strandLabel(subject, strand.code)}</span>
               </div>
               <div className="flex items-center gap-3 flex-shrink-0">
                 <span className="text-[11px] text-[#888]">
@@ -255,6 +259,7 @@ function StrandAccordion({
                       expanded={expanded.has(overallKey)}
                       onToggle={() => toggle(overallKey)}
                       nested
+                      subject={subject}
                     />
                   )
                 })}
@@ -267,10 +272,18 @@ function StrandAccordion({
   )
 }
 
-export default function ClassDashboard({ data }: { data: AggregatedResults }) {
+export default function ClassDashboard({
+  data,
+  subject,
+  caption,
+}: {
+  data: AggregatedResults | null
+  subject: string
+  caption?: string
+}) {
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
 
-  if (!data.hasData) return null
+  if (!data?.hasData) return null
 
   const toggle = (key: string) => {
     setExpanded((prev) => {
@@ -284,12 +297,13 @@ export default function ClassDashboard({ data }: { data: AggregatedResults }) {
   const overalls = Object.values(data.overall).sort(
     (a, b) => urgencyScore(b.bands) - urgencyScore(a.bands) || a.overall.localeCompare(b.overall)
   )
-  const hasStrandData = overalls.some((agg) => strandCodeOf(agg.overall) in STRANDS)
+  const hasStrandData = overalls.some((agg) => hasStrandLabel(subject, strandCodeOf(agg.overall)))
 
   return (
     <div className="space-y-3">
+      {caption && <p className="text-[11px] font-medium text-[#888]">{caption}</p>}
       {hasStrandData ? (
-        <StrandAccordion overalls={overalls} expanded={expanded} toggle={toggle} />
+        <StrandAccordion overalls={overalls} expanded={expanded} toggle={toggle} subject={subject} />
       ) : (
         <div className="space-y-3">
           {overalls.map((agg) => {
@@ -301,6 +315,7 @@ export default function ClassDashboard({ data }: { data: AggregatedResults }) {
                 expanded={expanded.has(key)}
                 onToggle={() => toggle(key)}
                 nested={false}
+                subject={subject}
               />
             )
           })}

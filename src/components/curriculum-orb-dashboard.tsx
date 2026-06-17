@@ -7,7 +7,7 @@ import {
   type CoverageNode,
   type SpecificCoverage,
 } from "@/lib/assessment-results"
-import { strandCodeOf, CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
+import { strandCodeOf, describeCode } from "@/lib/curriculum-codes"
 import { urgencyScore } from "@/lib/orb-math"
 import ProficiencyOrb from "@/components/ui/proficiency-orb"
 import CurriculumOrbDetailModal from "@/components/curriculum-orb-detail-modal"
@@ -107,6 +107,7 @@ function OverallRow({
 function StrandRow({
   node,
   overalls,
+  subject,
   expanded,
   toggle,
   showTiers,
@@ -115,6 +116,7 @@ function StrandRow({
 }: {
   node: CoverageNode
   overalls: CoverageNode[]
+  subject: string
   expanded: Set<string>
   toggle: (key: string) => void
   showTiers: boolean
@@ -158,7 +160,7 @@ function StrandRow({
                   onSelectSpecific({
                     code: spec.code,
                     title: overall.label,
-                    description: CURRICULUM_DESCRIPTIONS[spec.code],
+                    description: describeCode(subject, spec.code),
                     bands: spec.counts,
                     coverageFraction: spec.assessed ? 1 : 0,
                   })
@@ -177,8 +179,11 @@ export default function CurriculumOrbDashboard({ tallies }: { tallies: LessonTal
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
   const [modal, setModal] = useState<ModalTarget | null>(null)
 
-  const overallNodes = useMemo(() => buildOverallCoverage(tallies), [tallies])
-  const strandNodes = useMemo(() => sortByUrgency(buildStrandCoverage(overallNodes)), [overallNodes])
+  // Tallies handed to this dashboard are already filtered to a single subject, so
+  // any tally's subject is the subject for labelling.
+  const subject = tallies[0]?.subject ?? ""
+  const overallNodes = useMemo(() => buildOverallCoverage(tallies, subject), [tallies, subject])
+  const strandNodes = useMemo(() => sortByUrgency(buildStrandCoverage(overallNodes, subject)), [overallNodes, subject])
 
   if (overallNodes.length === 0) return null
 
@@ -206,6 +211,7 @@ export default function CurriculumOrbDashboard({ tallies }: { tallies: LessonTal
               key={strand.code}
               node={strand}
               overalls={overalls}
+              subject={subject}
               expanded={expanded}
               toggle={toggle}
               showTiers={showTiers}

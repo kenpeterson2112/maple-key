@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { X, CheckCircle, XCircle, HelpCircle, ClipboardCheck, Loader2, Info, BarChart3 } from "lucide-react"
-import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
+import { describeCode } from "@/lib/curriculum-codes"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import {
   sanitizeQuestions,
@@ -91,7 +91,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
 
   useEffect(() => {
     if (!isOpen) return
-    const codes = (lesson.curriculumCodesCovered ?? []).filter((c) => CURRICULUM_DESCRIPTIONS[c])
+    const codes = (lesson.curriculumCodesCovered ?? []).filter(Boolean)
 
     // Reset per-open state.
     setAnswers({})
@@ -356,6 +356,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                           q={q}
                           answer={answers[q.id]}
                           onAnswer={(i) => answerMC(q.id, i)}
+                          subject={lesson.subject}
                         />
                       ) : (
                         <TrueFalseCard
@@ -363,6 +364,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                           q={q}
                           answer={answers[q.id]}
                           onAnswer={(v) => answerTF(q.id, v)}
+                          subject={lesson.subject}
                         />
                       )
                     })()
@@ -374,6 +376,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                       state={selfRatings[fallback[currentQuestionIndex].key] ?? "unanswered"}
                       onRespond={(s) => setSelfRating(fallback[currentQuestionIndex].key, s)}
                       onAdvance={advanceQuestion}
+                      subject={lesson.subject}
                     />
                   )}
                 </>
@@ -404,7 +407,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   Grade {lesson.grade} {lesson.subject}
                 </button>
               </div>
-              <ClassDashboard data={dashboardData} caption={dashboardCaption} />
+              <ClassDashboard data={dashboardData} subject={lesson.subject} caption={dashboardCaption} />
             </>
           )}
         </div>
@@ -525,12 +528,13 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
   )
 }
 
-function CodeHeader({ code }: { code: string | null }) {
+function CodeHeader({ code, subject }: { code: string | null; subject: string }) {
   if (!code) return null
+  const description = describeCode(subject, code)
   return (
     <div className="flex items-center gap-2 mb-2">
       <span className="text-xs font-bold bg-stone-100 text-stone-700 px-2 py-0.5 rounded-full">{code}</span>
-      <span className="text-xs text-[#888] line-clamp-1">{CURRICULUM_DESCRIPTIONS[code]}</span>
+      {description && <span className="text-xs text-[#888] line-clamp-1">{description}</span>}
     </div>
   )
 }
@@ -557,15 +561,17 @@ function MultipleChoiceCard({
   q,
   answer,
   onAnswer,
+  subject,
 }: {
   q: MultipleChoiceQuestion
   answer?: Answer
   onAnswer: (i: number) => void
+  subject: string
 }) {
   const answered = answer?.selectedIndex !== undefined
   return (
     <div className="rounded-xl border-2 border-[#E8D5C4] bg-white p-4">
-      <CodeHeader code={q.code} />
+      <CodeHeader code={q.code} subject={subject} />
       <Prompt text={q.prompt} />
       <div className="space-y-2">
         {q.options.map((opt, i) => {
@@ -600,15 +606,17 @@ function TrueFalseCard({
   q,
   answer,
   onAnswer,
+  subject,
 }: {
   q: TrueFalseQuestion
   answer?: Answer
   onAnswer: (v: boolean) => void
+  subject: string
 }) {
   const answered = answer?.selectedBool !== undefined
   return (
     <div className="rounded-xl border-2 border-[#E8D5C4] bg-white p-4">
-      <CodeHeader code={q.code} />
+      <CodeHeader code={q.code} subject={subject} />
       <Prompt text={q.prompt} />
       <div className="flex gap-2">
         {[true, false].map((val) => {
@@ -643,12 +651,14 @@ function SelfRatingCard({
   state,
   onRespond,
   onAdvance,
+  subject,
 }: {
   code: string | null
   question: string
   state: ResponseState
   onRespond: (s: ResponseState) => void
   onAdvance: () => void
+  subject: string
 }) {
   return (
     <div
@@ -660,7 +670,7 @@ function SelfRatingCard({
             : "border-[#E8D5C4] bg-white"
       }`}
     >
-      <CodeHeader code={code} />
+      <CodeHeader code={code} subject={subject} />
       <Prompt text={question} />
       <div className="flex gap-2">
         <button
