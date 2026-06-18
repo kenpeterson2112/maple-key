@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-06-17T00:00:00Z",
+    "generated_at": "2026-06-18T13:28:28Z",
     "total_count": 1736,
     "schema_version": "2.1"
   },
@@ -2713,7 +2713,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -2742,7 +2742,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -2767,7 +2767,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -2798,7 +2798,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -2823,7 +2823,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -2852,7 +2852,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -2877,7 +2877,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -2906,7 +2906,7 @@
         {
           "jurisdiction": "alberta",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -3437,7 +3437,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -3469,7 +3469,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -3494,7 +3494,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -3523,7 +3523,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -3548,7 +3548,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -3577,7 +3577,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -3602,7 +3602,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -3631,7 +3631,7 @@
         {
           "jurisdiction": "nova_scotia",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -62718,7 +62718,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -62747,7 +62747,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -62772,7 +62772,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -62801,7 +62801,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -62826,7 +62826,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -62857,7 +62857,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -62882,7 +62882,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -62911,7 +62911,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -62937,7 +62937,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -62967,7 +62967,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -62992,7 +62992,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63022,7 +63022,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63048,7 +63048,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63078,7 +63078,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63103,7 +63103,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63133,7 +63133,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63159,7 +63159,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63189,7 +63189,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63215,7 +63215,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63244,7 +63244,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63269,7 +63269,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63299,7 +63299,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63324,7 +63324,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63353,7 +63353,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63378,7 +63378,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63407,7 +63407,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63432,7 +63432,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63461,7 +63461,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63486,7 +63486,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63515,7 +63515,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63540,7 +63540,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63569,7 +63569,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63595,7 +63595,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63624,7 +63624,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63649,7 +63649,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63679,7 +63679,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63704,7 +63704,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63734,7 +63734,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63759,7 +63759,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63789,7 +63789,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63814,7 +63814,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63844,7 +63844,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63872,7 +63872,7 @@
         7
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -63901,7 +63901,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -63926,7 +63926,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -63957,7 +63957,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -63984,7 +63984,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64013,7 +64013,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64038,7 +64038,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64068,7 +64068,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64093,7 +64093,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64124,7 +64124,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64149,7 +64149,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64179,7 +64179,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64206,7 +64206,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64235,7 +64235,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64260,7 +64260,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64289,7 +64289,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64314,7 +64314,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64343,7 +64343,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64368,7 +64368,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64400,7 +64400,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64425,7 +64425,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64454,7 +64454,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64481,7 +64481,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64510,7 +64510,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64593,7 +64593,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64623,7 +64623,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64648,7 +64648,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64677,7 +64677,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64702,7 +64702,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64731,7 +64731,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64756,7 +64756,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64785,7 +64785,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64812,7 +64812,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64841,7 +64841,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64866,7 +64866,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64895,7 +64895,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -64920,7 +64920,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -64949,7 +64949,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -65144,7 +65144,7 @@
         7
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -65172,7 +65172,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -67853,7 +67853,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -67882,7 +67882,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -67907,7 +67907,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -67936,7 +67936,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -67961,7 +67961,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -67991,7 +67991,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68016,7 +68016,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68045,7 +68045,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68070,7 +68070,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68100,7 +68100,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68125,7 +68125,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68155,7 +68155,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68180,7 +68180,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68209,7 +68209,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68234,7 +68234,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68265,7 +68265,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68290,7 +68290,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68321,7 +68321,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68346,7 +68346,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68375,7 +68375,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68400,7 +68400,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68430,7 +68430,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68455,7 +68455,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68484,7 +68484,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68509,7 +68509,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68540,7 +68540,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68565,7 +68565,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68595,7 +68595,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68620,7 +68620,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68649,7 +68649,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68675,7 +68675,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68704,7 +68704,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68729,7 +68729,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68758,7 +68758,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68785,7 +68785,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68814,7 +68814,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68839,7 +68839,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68867,7 +68867,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68892,7 +68892,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -68920,7 +68920,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -68945,7 +68945,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -68973,7 +68973,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -68998,7 +68998,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -69026,7 +69026,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -69051,7 +69051,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -69080,7 +69080,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -69106,7 +69106,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -69135,7 +69135,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -79732,7 +79732,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -79760,7 +79760,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -79785,7 +79785,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -79813,7 +79813,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -79838,7 +79838,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -79867,7 +79867,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -79892,7 +79892,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -79921,7 +79921,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -79946,7 +79946,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -79975,7 +79975,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80000,7 +80000,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80030,7 +80030,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80057,7 +80057,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80086,7 +80086,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80111,7 +80111,7 @@
         7
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80141,7 +80141,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80168,7 +80168,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80198,7 +80198,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80225,7 +80225,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80254,7 +80254,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80281,7 +80281,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80311,7 +80311,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80337,7 +80337,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80367,7 +80367,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80394,7 +80394,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80424,7 +80424,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80451,7 +80451,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80481,7 +80481,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80508,7 +80508,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80537,7 +80537,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80566,7 +80566,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80595,7 +80595,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80628,7 +80628,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80657,7 +80657,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80690,7 +80690,7 @@
         12
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80719,7 +80719,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80744,7 +80744,7 @@
         7
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80775,7 +80775,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80811,7 +80811,7 @@
         12
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80840,7 +80840,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80876,7 +80876,7 @@
         12
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80906,7 +80906,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80934,7 +80934,7 @@
         10
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -80963,7 +80963,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -80989,7 +80989,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81019,7 +81019,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81044,7 +81044,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81071,7 +81071,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81096,7 +81096,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81123,7 +81123,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81148,7 +81148,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81175,7 +81175,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81200,7 +81200,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81228,7 +81228,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81253,7 +81253,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81281,7 +81281,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81306,7 +81306,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81335,7 +81335,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81360,7 +81360,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81389,7 +81389,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81414,7 +81414,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81444,7 +81444,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81470,7 +81470,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81499,7 +81499,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81524,7 +81524,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81553,7 +81553,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81580,7 +81580,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81611,7 +81611,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81638,7 +81638,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81667,7 +81667,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81694,7 +81694,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81723,7 +81723,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81750,7 +81750,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81778,7 +81778,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81804,7 +81804,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81834,7 +81834,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81860,7 +81860,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81890,7 +81890,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81916,7 +81916,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -81945,7 +81945,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -81972,7 +81972,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -82001,7 +82001,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -82029,7 +82029,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -82057,7 +82057,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -82139,7 +82139,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -82168,7 +82168,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -82195,7 +82195,7 @@
         7
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -82224,7 +82224,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -82305,7 +82305,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82334,7 +82334,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82359,7 +82359,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82388,7 +82388,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82413,7 +82413,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82442,7 +82442,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82467,7 +82467,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82496,7 +82496,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82521,7 +82521,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82550,7 +82550,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82575,7 +82575,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82605,7 +82605,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82631,7 +82631,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82659,7 +82659,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82684,7 +82684,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82712,7 +82712,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82738,7 +82738,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82766,7 +82766,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82791,7 +82791,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82819,7 +82819,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82845,7 +82845,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82873,7 +82873,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82898,7 +82898,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82926,7 +82926,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -82952,7 +82952,7 @@
         10
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -82980,7 +82980,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83006,7 +83006,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83034,7 +83034,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83060,7 +83060,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83088,7 +83088,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83113,7 +83113,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83141,7 +83141,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83169,7 +83169,7 @@
         10
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83198,7 +83198,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83226,7 +83226,7 @@
         10
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83255,7 +83255,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83280,7 +83280,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83310,7 +83310,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 8,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83339,7 +83339,7 @@
         10
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83368,7 +83368,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83396,7 +83396,7 @@
         10
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83426,7 +83426,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83453,7 +83453,7 @@
         9
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83483,7 +83483,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83511,7 +83511,7 @@
         10
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83540,7 +83540,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83565,7 +83565,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83594,7 +83594,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83619,7 +83619,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83649,7 +83649,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83674,7 +83674,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83704,7 +83704,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83729,7 +83729,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83758,7 +83758,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83783,7 +83783,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83813,7 +83813,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -83879,7 +83879,7 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true
       },
       "language": "en"
     },
@@ -83935,7 +83935,7 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true
       },
       "language": "en"
     },
@@ -83949,7 +83949,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -83981,7 +83981,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -84008,7 +84008,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -84038,7 +84038,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -84106,7 +84106,7 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true
       },
       "language": "en"
     },
@@ -84120,7 +84120,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -84152,7 +84152,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -84178,7 +84178,7 @@
         8
       ],
       "grade_band": "multi",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -84207,7 +84207,7 @@
         {
           "jurisdiction": "ontario",
           "grade": null,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -84232,7 +84232,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -84261,7 +84261,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -84327,7 +84327,7 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true
       },
       "language": "en"
     },
@@ -84341,7 +84341,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -84370,7 +84370,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -84435,7 +84435,7 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true
       },
       "language": "en"
     },
@@ -84489,7 +84489,7 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true
       },
       "language": "en"
     },
@@ -84503,7 +84503,7 @@
         7
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -84532,7 +84532,7 @@
         {
           "jurisdiction": "ontario",
           "grade": 7,
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": null,
           "expectation_description": null,
@@ -84597,7 +84597,7 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true
       },
       "language": "en"
     },
@@ -84651,7 +84651,7 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true
       },
       "language": "en"
     },
@@ -97711,7 +97711,7 @@
         9
       ],
       "grade_band": "junior",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -97737,7 +97737,7 @@
         {
           "jurisdiction": "ontario",
           "grade": "[6, 7, 8, 9]",
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -97763,7 +97763,7 @@
         8
       ],
       "grade_band": "junior",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -97789,7 +97789,7 @@
         {
           "jurisdiction": "canada",
           "grade": "[6, 7, 8]",
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -97815,7 +97815,7 @@
         8
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "Geography",
       "strand": [
         "People and Environments"
       ],
@@ -97841,7 +97841,7 @@
         {
           "jurisdiction": "ontario",
           "grade": "[6, 7, 8]",
-          "subject": "social_studies",
+          "subject": "geography",
           "strand": "people_and_environments",
           "expectation_code": null,
           "expectation_description": null,
@@ -97868,7 +97868,7 @@
         9
       ],
       "grade_band": "intermediate",
-      "subject": "Social Studies",
+      "subject": "History",
       "strand": [
         "Heritage and Identity"
       ],
@@ -97893,7 +97893,7 @@
         {
           "jurisdiction": "ontario",
           "grade": "[6, 7, 8, 9]",
-          "subject": "social_studies",
+          "subject": "history",
           "strand": "heritage_and_identity",
           "expectation_code": "A1.1",
           "expectation_description": null,
