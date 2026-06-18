@@ -108,6 +108,7 @@ function StrandRow({
   node,
   overalls,
   subject,
+  grade,
   expanded,
   toggle,
   showTiers,
@@ -117,6 +118,7 @@ function StrandRow({
   node: CoverageNode
   overalls: CoverageNode[]
   subject: string
+  grade?: string
   expanded: Set<string>
   toggle: (key: string) => void
   showTiers: boolean
@@ -160,7 +162,7 @@ function StrandRow({
                   onSelectSpecific({
                     code: spec.code,
                     title: overall.label,
-                    description: describeCode(subject, spec.code),
+                    description: describeCode(subject, spec.code, grade),
                     bands: spec.counts,
                     coverageFraction: spec.assessed ? 1 : 0,
                   })
@@ -179,11 +181,12 @@ export default function CurriculumOrbDashboard({ tallies }: { tallies: LessonTal
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
   const [modal, setModal] = useState<ModalTarget | null>(null)
 
-  // Tallies handed to this dashboard are already filtered to a single subject, so
-  // any tally's subject is the subject for labelling.
+  // Tallies handed to this dashboard are already filtered to a single subject and
+  // grade, so any tally's subject/grade is the subject/grade for labelling.
   const subject = tallies[0]?.subject ?? ""
-  const overallNodes = useMemo(() => buildOverallCoverage(tallies, subject), [tallies, subject])
-  const strandNodes = useMemo(() => sortByUrgency(buildStrandCoverage(overallNodes, subject)), [overallNodes, subject])
+  const grade = tallies[0]?.grade
+  const overallNodes = useMemo(() => buildOverallCoverage(tallies, subject, grade), [tallies, subject, grade])
+  const strandNodes = useMemo(() => sortByUrgency(buildStrandCoverage(overallNodes, subject, grade)), [overallNodes, subject, grade])
 
   if (overallNodes.length === 0) return null
 
@@ -212,6 +215,7 @@ export default function CurriculumOrbDashboard({ tallies }: { tallies: LessonTal
               node={strand}
               overalls={overalls}
               subject={subject}
+              grade={grade}
               expanded={expanded}
               toggle={toggle}
               showTiers={showTiers}

@@ -357,6 +357,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                           answer={answers[q.id]}
                           onAnswer={(i) => answerMC(q.id, i)}
                           subject={lesson.subject}
+                          grade={lesson.grade}
                         />
                       ) : (
                         <TrueFalseCard
@@ -365,6 +366,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                           answer={answers[q.id]}
                           onAnswer={(v) => answerTF(q.id, v)}
                           subject={lesson.subject}
+                          grade={lesson.grade}
                         />
                       )
                     })()
@@ -377,6 +379,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                       onRespond={(s) => setSelfRating(fallback[currentQuestionIndex].key, s)}
                       onAdvance={advanceQuestion}
                       subject={lesson.subject}
+                      grade={lesson.grade}
                     />
                   )}
                 </>
@@ -407,7 +410,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   Grade {lesson.grade} {lesson.subject}
                 </button>
               </div>
-              <ClassDashboard data={dashboardData} subject={lesson.subject} caption={dashboardCaption} />
+              <ClassDashboard data={dashboardData} subject={lesson.subject} grade={lesson.grade} caption={dashboardCaption} />
             </>
           )}
         </div>
@@ -528,9 +531,9 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
   )
 }
 
-function CodeHeader({ code, subject }: { code: string | null; subject: string }) {
+function CodeHeader({ code, subject, grade }: { code: string | null; subject: string; grade?: string }) {
   if (!code) return null
-  const description = describeCode(subject, code)
+  const description = describeCode(subject, code, grade)
   return (
     <div className="flex items-center gap-2 mb-2">
       <span className="text-xs font-bold bg-stone-100 text-stone-700 px-2 py-0.5 rounded-full">{code}</span>
@@ -562,16 +565,18 @@ function MultipleChoiceCard({
   answer,
   onAnswer,
   subject,
+  grade,
 }: {
   q: MultipleChoiceQuestion
   answer?: Answer
   onAnswer: (i: number) => void
   subject: string
+  grade?: string
 }) {
   const answered = answer?.selectedIndex !== undefined
   return (
     <div className="rounded-xl border-2 border-[#E8D5C4] bg-white p-4">
-      <CodeHeader code={q.code} subject={subject} />
+      <CodeHeader code={q.code} subject={subject} grade={grade} />
       <Prompt text={q.prompt} />
       <div className="space-y-2">
         {q.options.map((opt, i) => {
@@ -607,16 +612,18 @@ function TrueFalseCard({
   answer,
   onAnswer,
   subject,
+  grade,
 }: {
   q: TrueFalseQuestion
   answer?: Answer
   onAnswer: (v: boolean) => void
   subject: string
+  grade?: string
 }) {
   const answered = answer?.selectedBool !== undefined
   return (
     <div className="rounded-xl border-2 border-[#E8D5C4] bg-white p-4">
-      <CodeHeader code={q.code} subject={subject} />
+      <CodeHeader code={q.code} subject={subject} grade={grade} />
       <Prompt text={q.prompt} />
       <div className="flex gap-2">
         {[true, false].map((val) => {
@@ -652,6 +659,7 @@ function SelfRatingCard({
   onRespond,
   onAdvance,
   subject,
+  grade,
 }: {
   code: string | null
   question: string
@@ -659,6 +667,7 @@ function SelfRatingCard({
   onRespond: (s: ResponseState) => void
   onAdvance: () => void
   subject: string
+  grade?: string
 }) {
   return (
     <div
@@ -670,7 +679,7 @@ function SelfRatingCard({
             : "border-[#E8D5C4] bg-white"
       }`}
     >
-      <CodeHeader code={code} subject={subject} />
+      <CodeHeader code={code} subject={subject} grade={grade} />
       <Prompt text={question} />
       <div className="flex gap-2">
         <button

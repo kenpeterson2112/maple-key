@@ -77,23 +77,31 @@ function fixSum(c: LevelCounts, n: number): LevelCounts {
 // overall expectations (e.g. B1.1/B1.2 → B1) and strands (first letter), so demo
 // data renders exactly the structure real Quick Check results produce. Math also
 // carries specific-expectation descriptions; the others degrade to code + strand.
+// `grades` is the set of grade tabs this pool entry seeds — grade-stable subjects
+// list every grade in GRADES, while grade-specific subjects (History) list only
+// the grade their codes belong to.
+const GRADES = ["4", "5", "6", "7", "8", "9"]
+
 interface SubjectPool {
   subject: string
+  grades: string[]
   codes: string[]
 }
 
 const POOL: SubjectPool[] = [
-  { subject: "Math", codes: describedCodes("Math") },
-  { subject: "Language", codes: ["A1.1", "B1.1", "B2.1", "C1.1", "D1.1", "D2.1"] },
-  { subject: "Science", codes: ["B1.1", "B1.2", "B2.1", "C1.1", "C2.1", "E1.1"] },
-  { subject: "Social Studies", codes: ["A1.1", "A1.2", "A2.1", "B1.1", "B2.1", "B3.1"] },
-  { subject: "FSL", codes: ["A1.1", "A2.1", "B1.1", "C1.1", "D1.1"] },
+  { subject: "Math", grades: GRADES, codes: describedCodes("Math") },
+  { subject: "Language", grades: GRADES, codes: ["A1.1", "B1.1", "B2.1", "C1.1", "D1.1", "D2.1"] },
+  { subject: "Science", grades: GRADES, codes: ["B1.1", "B1.2", "B2.1", "C1.1", "C2.1", "E1.1"] },
+  { subject: "Social Studies", grades: GRADES, codes: ["A1.1", "A1.2", "A2.1", "B1.1", "B2.1", "B3.1"] },
+  { subject: "FSL", grades: GRADES, codes: ["A1.1", "A2.1", "B1.1", "C1.1", "D1.1"] },
+  { subject: "History", grades: ["7"], codes: describedCodes("History", "7") },
+  { subject: "History", grades: ["8"], codes: describedCodes("History", "8") },
+  { subject: "Geography", grades: ["7"], codes: describedCodes("Geography", "7") },
 ]
 
 export const POOL_SIZE = POOL.reduce((sum, p) => sum + p.codes.length, 0)
 export const MIN_QUANTITY = 5
 
-const GRADES = ["4", "5", "6", "7", "8", "9"]
 const DEV_PREFIX = "dev-seed:"
 
 export interface SeedOptions {
@@ -103,12 +111,12 @@ export interface SeedOptions {
 }
 export type LevelSpread = Omit<SeedOptions, "quantity">
 
-// Round-robin across subjects so even a small `quantity` spans several subject tabs.
-function interleavedPairs(): { subject: string; code: string }[] {
-  const out: { subject: string; code: string }[] = []
+// Round-robin across pool entries so even a small `quantity` spans several subject tabs.
+function interleavedPairs(): { pool: SubjectPool; code: string }[] {
+  const out: { pool: SubjectPool; code: string }[] = []
   const max = Math.max(...POOL.map((p) => p.codes.length))
   for (let i = 0; i < max; i++) {
-    for (const p of POOL) if (i < p.codes.length) out.push({ subject: p.subject, code: p.codes[i] })
+    for (const p of POOL) if (i < p.codes.length) out.push({ pool: p, code: p.codes[i] })
   }
   return out
 }
@@ -130,24 +138,24 @@ export function seedGlobal({ quantity, level, spread }: SeedOptions): void {
   const wanted = Math.max(MIN_QUANTITY, Math.min(Math.round(quantity), POOL_SIZE))
   const pairs = interleavedPairs().slice(0, wanted)
 
-  const codesBySubject = new Map<string, string[]>()
-  for (const { subject, code } of pairs) {
-    const codes = codesBySubject.get(subject) ?? []
+  const codesByPool = new Map<SubjectPool, string[]>()
+  for (const { pool, code } of pairs) {
+    const codes = codesByPool.get(pool) ?? []
     codes.push(code)
-    codesBySubject.set(subject, codes)
+    codesByPool.set(pool, codes)
   }
 
   const now = Date.now()
   const tallies: LessonTally[] = []
   let i = 0
-  for (const [subject, codes] of codesBySubject) {
-    for (const grade of GRADES) {
+  for (const [pool, codes] of codesByPool) {
+    for (const grade of pool.grades) {
       const { byExpectation, attempts } = buildCounts(codes, level, spread)
       tallies.push({
-        lessonId: `${DEV_PREFIX}${subject.toLowerCase().replace(/\s+/g, "-")}-g${grade}`,
-        title: `Synthetic ${subject} · Grade ${grade}`,
+        lessonId: `${DEV_PREFIX}${pool.subject.toLowerCase().replace(/\s+/g, "-")}-g${grade}`,
+        title: `Synthetic ${pool.subject} · Grade ${grade}`,
         grade,
-        subject,
+        subject: pool.subject,
         codes,
         updatedAt: now - i * 60_000,
         attempts,

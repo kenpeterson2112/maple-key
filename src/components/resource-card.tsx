@@ -60,12 +60,12 @@ function pillText(varName: string) {
 // When there's no recorded data (data.level === null) — the common case until a
 // class runs assessments — the pill is rendered as a neutral, non-interactive
 // chip so the card still surfaces every expectation the resource covers.
-function OverallReadinessPill({ data, subject }: { data: OverallCoverage; subject: string }) {
+function OverallReadinessPill({ data, subject, grade }: { data: OverallCoverage; subject: string; grade?: string }) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   if (data.level === null) {
-    const label = overallLabel(subject, data.overall)
+    const label = overallLabel(subject, data.overall, grade)
     const friendly = label !== data.overall ? label : null
     return (
       <span
@@ -101,7 +101,7 @@ function OverallReadinessPill({ data, subject }: { data: OverallCoverage; subjec
           onMouseLeave={closeSoon}
           className="flex items-center gap-1 px-2 py-0.5 rounded-full border outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
           style={pillSurface(v)}
-          aria-label={`${data.overall} ${overallLabel(subject, data.overall)} — ${READINESS_TOKENS[data.level].label}`}
+          aria-label={`${data.overall} ${overallLabel(subject, data.overall, grade)} — ${READINESS_TOKENS[data.level].label}`}
         >
           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: `var(${v})` }} />
           <span className="text-[10px] font-semibold" style={{ color: pillText(v) }}>{data.overall}</span>
@@ -126,7 +126,7 @@ function OverallReadinessPill({ data, subject }: { data: OverallCoverage; subjec
                 className="z-[100] w-64 rounded-2xl border border-border bg-popover p-3 shadow-xl"
               >
                 <p className="text-[11px] font-bold text-popover-foreground mb-2">
-                  {data.overall} · {overallLabel(subject, data.overall)}
+                  {data.overall} · {overallLabel(subject, data.overall, grade)}
                 </p>
                 <ul className="space-y-1.5">
                   {data.children.map((child) => {
@@ -308,6 +308,7 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
   }
 
   const subject = resource.subject || "Math"
+  const grade = resource.grade_level?.[0]?.toString()
   const theme = getSubjectTheme(subject)
 
   const title = resource.topic_title || `${resource.strand?.[0] || subject} Resource`
@@ -428,7 +429,7 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
             )}
 
             {visiblePills.map((o) => (
-              <OverallReadinessPill key={o.overall} data={o} subject={subject} />
+              <OverallReadinessPill key={o.overall} data={o} subject={subject} grade={grade} />
             ))}
             {overflowPills > 0 && (
               <span

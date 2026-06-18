@@ -1872,7 +1872,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                                   {code}
                                 </span>
                                 <span className="text-xs leading-snug text-[#666]">
-                                  {describeCode(bookmarkedResources[0]?.subject ?? "", code) ?? code}
+                                  {describeCode(bookmarkedResources[0]?.subject ?? "", code, bookmarkedResources[0]?.grade_level?.[0]?.toString()) ?? code}
                                 </span>
                               </div>
                               <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-stone-200">
