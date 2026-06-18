@@ -171,6 +171,16 @@ const OVERALL_LABELS: Record<string, GradeTable<string>> = {
       F1: "Financial Literacy",
     },
   },
+  "Social Studies": {
+    "6": {
+      A1: "Application: Diversity, Inclusiveness, and Canadian Identities",
+      A2: "Inquiry: The Perspectives of Diverse Communities",
+      A3: "Understanding Context: The Development of Communities in Canada",
+      B1: "Application: Canada and International Cooperation",
+      B2: "Inquiry: Responses to Global Issues",
+      B3: "Understanding Context: Canada's Global Interactions",
+    },
+  },
   History: {
     "7": {
       A1: "Application: Colonial and Present-day Canada",
@@ -258,6 +268,95 @@ const SPECIFIC_DESCRIPTIONS: Record<string, GradeTable<string>> = {
         "explain the concept of interest rates, and identify types of interest rates and fees associated with different accounts and loans offered by various banks and other financial institutions",
       "F1.5":
         "describe trading, lending, borrowing, and donating as different ways to distribute financial and other resources among individuals and organizations",
+    },
+  },
+  "Social Studies": {
+    "6": {
+      // A1 — Application: Diversity, Inclusiveness, and Canadian Identities
+      "A1.1":
+        "explain how various built, physical, and social features of communities can contribute to identities in and images of a territory and/or country (e.g., memorials, landscapes, wildlife, cultural traditions), and assess the contribution of some of these features to images of and identities in Canada (e.g., resource-based communities, the Canadian winter, prairies and mountains, multicultural neighbourhoods)",
+      "A1.2":
+        "analyse some of the contributions that various First Nations, Métis, and Inuit communities and individuals have made to Canada (e.g., art, democratic ideas of the Haudenosaunee, guidance to fur traders and explorers, modes of transportation such as canoes and kayaks, Indigenous knowledge of plants and medicines, fishing and agricultural technologies)",
+      "A1.3":
+        "analyse some of the contributions that various settler/newcomer groups have made to Canadian identities (e.g., French and English communities to bilingualism, the British to the parliamentary system, Chinese labourers to the transcontinental railway, various communities to Canada's multicultural identity)",
+      "A1.4":
+        "explain how various groups and communities, including First Nations, Métis, and Inuit communities, have contributed to the goal of inclusiveness in Canada (e.g., women's rights, civil rights, Indigenous, and labour organizations), and assess the extent to which Canada has achieved the goal of being an inclusive society (e.g., the Charter of Rights and Freedoms, the Ontario Human Rights Code, freedom of religion, recognition of gay marriage)",
+      // A2 — Inquiry: The Perspectives of Diverse Communities
+      "A2.1":
+        "formulate questions to guide investigations into different perspectives on the historical and/or contemporary experiences of a few distinct communities, including First Nations, Métis, and/or Inuit communities, in Canada (e.g., the reserve system, Indigenous treaty negotiations, forced relocation of Japanese Canadians, formation of heritage neighbourhoods)",
+      "A2.2":
+        "gather and organize information from a variety of primary and secondary sources (e.g., photographs, letters and diaries, oral stories, maps, songs, paintings, newspaper reports, interviews with Elders, online archives, treaties and wampum belts) that present different perspectives on the experience of communities in Canada",
+      "A2.3":
+        "analyse and construct print and digital maps as part of their investigations into different perspectives on the experiences of communities, including First Nations, Métis, and/or Inuit communities, in Canada (e.g., flow maps of community relocations, thematic maps showing ethnic origins in a community, maps identifying Indigenous places of significance)",
+      "A2.4":
+        "interpret and analyse information and evidence relevant to their investigations, using a variety of tools (e.g., graphic organizers to determine differences in perspectives on the Red River Resistance, line graphs of census data on community changes, photographs of newcomer experiences, diaries about community life)",
+      "A2.5":
+        "evaluate evidence and draw conclusions about perspectives on the historical and/or contemporary experience of a few distinct communities, including First Nations, Métis, and/or Inuit communities, in Canada",
+      "A2.6":
+        "communicate the results of their inquiries using appropriate vocabulary (e.g., perspective, ethnic group, emigrant, immigrant, colonization, decolonization, racism, displacement, relocation, settler, newcomer) and formats (e.g., dramatic pieces voicing different perspectives, culturally sensitive presentations, slideshows with photographs)",
+      // A3 — Understanding Context: The Development of Communities in Canada
+      "A3.1":
+        "identify the traditional Indigenous and treaty territory or territories on which their community is located (e.g., Orillia on Ojibwe/Anishinaabe territory within the Williams Treaties; Sault Ste. Marie on Métis, Cree, Ojibwe territory within the Robinson-Huron Treaty)",
+      "A3.2":
+        "identify the main reasons why different peoples migrated to Canada (e.g., political or religious freedom, availability of land, economic opportunity, family ties, poverty, famine, forced migration of slaves and \"Home Children\")",
+      "A3.3":
+        "describe some key economic, political, cultural, and social aspects of life in settler/newcomer communities in Canada (e.g., land ownership, agricultural practices, religious beliefs, family life and gender roles), and identify how the culture of settlers' places of origin influenced their ways of life in Canada",
+      "A3.4":
+        "identify various types of communities in Canada and some ways they have contributed to the development of the country (e.g., First Nations, Inuit, Métis, French, British, and later immigrant groups; religious communities; resource towns; rural and urban communities)",
+      "A3.5":
+        "describe significant events or developments in the history of two or more First Nations, Métis, and/or Inuit communities in Canada (e.g., the fur trade, the Indian Act, residential schools, the reserve system, the creation of Nunavut, court challenges for recognition of rights) and how these events affected the communities' development and/or identities",
+      "A3.6":
+        "describe significant events or developments in the history of two or more settler/newcomer communities in Canada (e.g., expulsion of the Acadians, forced relocation of Japanese Canadians, the Underground Railroad, internment of Ukrainian Canadians) and how these events affected the communities' development and/or identities",
+      "A3.7":
+        "describe significant events or developments in the history of Jewish communities in Canada, including contributions to Canada (e.g., leaders in human rights, entrepreneurs in industry), and identify some of the impacts of antisemitism on these communities' development and/or identities (e.g., restrictions on immigration during WWII, prohibition of Jewish residences, responses such as building Mount Sinai Hospital and the Christie Pits Riot)",
+      "A3.8":
+        "describe interactions between communities in Canada, including between newcomers and groups already in the country (e.g., trade among precontact First Nations, cooperation in the fur trade, Indigenous treaties, discrimination against various groups, responses of local businesses, interactions with settlement agencies)",
+      "A3.9":
+        "identify key differences, including social, cultural, and/or economic differences, between a few historical and/or contemporary communities, including at least one First Nations, Métis, or Inuit community, in Canada (e.g., gender roles across cultures, class differences in industrializing cities, rural vs. urban lifestyles, differing spiritual beliefs about the land)",
+      "A3.10": "describe significant changes within their own community in Canada (e.g., within their ethnic or religious community, their local community, or their region)",
+      "A3.11":
+        "identify and describe fundamental elements of Canadian identities (e.g., inclusiveness, respect for human rights and diversity, multiculturalism, parliamentary democracy, bilingualism, universal health care, recognition of First Nations/Métis/Inuit as Indigenous peoples, the importance of treaties)",
+      // B1 — Application: Canada and International Cooperation
+      "B1.1":
+        "explain why Canada participates in specific international accords and organizations (e.g., NAFTA, APEC, WHO, NATO, the UN including the Declaration on the Rights of Indigenous People and the Convention on the Rights of the Child), and assess the influence of some of these accords and/or organizations",
+      "B1.2":
+        "analyse responses of Canadian governments, NGOs, and individual citizens to an economic, environmental, political, and/or social issue of international significance (e.g., responses to economic globalization, the spread of H1N1 or SARS, a natural disaster, child labour, child soldiers, climate change, or civil war and refugees)",
+      "B1.3":
+        "explain why some environmental issues are of international importance and require global participation to be effectively addressed (e.g., global warming, carbon dioxide and sulphur dioxide emissions, availability of fresh water, deforestation, overfishing, invasive species, habitat protection of migrating species)",
+      // B2 — Inquiry: Responses to Global Issues
+      "B2.1":
+        "formulate questions to guide investigations into global issues of political, social, economic, and/or environmental importance (e.g., child labour, dwindling oil supplies, access to fresh water, climate change, food shortages, refugees, or natural disasters), their impact, and responses to the issues",
+      "B2.2":
+        "gather and organize information on global issues using a variety of resources and technologies (e.g., spatial technologies, satellite images, online image banks, accounts by Inuit witnesses to climate change, interactive websites on health issues)",
+      "B2.3":
+        "analyse and construct different types of maps, both print and digital, as part of their investigations into global issues (e.g., digital maps locating refugee camps, interactive atlases tracking disease spread, demographic maps on quality of life indicators, flow maps showing the origins of products entering Canada)",
+      "B2.4":
+        "interpret and analyse information and data relevant to their investigations, using a variety of tools (e.g., online mapping programs, climate graphs, graphic organizers, computer-generated graphs comparing Canadian aid responses)",
+      "B2.5":
+        "evaluate evidence and draw conclusions about global issues of political, social, economic, and/or environmental importance, their impact on the global community, and responses to the issues",
+      "B2.6":
+        "communicate the results of their inquiries using appropriate vocabulary (e.g., non-governmental organization, intergovernmental organization, accord, international convention, aid, relief efforts) and formats (e.g., a plan of action for a fundraising project, a fair trade report for the school newsletter, an infographic on Canadian global contributions, a map showing climate change impact)",
+      // B3 — Understanding Context: Canada's Global Interactions
+      "B3.1":
+        "identify some of the major ways in which the Canadian government interacts with other nations (e.g., through trade agreements, military alliances, intergovernmental organizations, environmental accords, disaster relief, and funds for social and/or economic development)",
+      "B3.2":
+        "describe Canada's participation in different international accords, organizations, and/or programs (e.g., the UN Declaration on the Rights of Indigenous Peoples, WHO, NATO, the Blue Flag Program, UNICEF, NAFTA)",
+      "B3.3":
+        "describe several groups or organizations through which Canada and Canadians are involved in global issues (e.g., NGOs such as Doctors Without Borders and Free the Children; multinational corporations; intergovernmental organizations such as the UN, la Francophonie, the Commonwealth, and APEC)",
+      "B3.4":
+        "describe the responses of the Canadian government and some NGOs to different disasters and emergencies around the world (e.g., the 2010 earthquake in Haiti, the 2004 Indian Ocean tsunami, the AIDS pandemic in sub-Saharan Africa, poverty and drought in the Horn of Africa)",
+      "B3.5":
+        "describe the responses of the Canadian government to human rights violations during the Holocaust (e.g., severe immigration restrictions, the turning away of the MS St. Louis), and the impact that global changes in human rights legislation since WWII have had on Canada's responses to acts of hate (e.g., the Universal Declaration of Human Rights, the Charter of Rights and Freedoms, the Multiculturalism Act, Truth and Reconciliation Commission responses)",
+      "B3.6":
+        "identify some significant political, social, and economic interactions between Canada and other regions of the world, and describe some ways in which they affect these regions (e.g., stabilization from peacekeeping, development of maquiladoras from trade agreements, change in the status of women from education projects)",
+      "B3.7":
+        "identify and locate on a map countries and regions with which Canada has a significant interrelationship, and use longitude and latitude to locate cities in these countries/regions (e.g., Washington D.C., London, Beijing, Tokyo, Mogadishu, Nairobi, Tripoli, Mumbai, Kabul, Port-au-Prince)",
+      "B3.8":
+        "identify countries/regions with which Canada has a significant economic relationship (e.g., the U.S. and Mexico through NAFTA, trade with China, sources of tourists, recipients of Canadian aid) and some of the reasons why close relationships developed with these countries",
+      "B3.9":
+        "describe significant economic effects on Canada and Canadians of interactions between Canada and other regions of the world (e.g., loss of manufacturing jobs to lower-cost countries, the impact of trade agreements and disputes, effects of American cultural industry dominance)",
+      "B3.10":
+        "describe some ways in which Canada's interactions with other regions of the world have affected the environment (e.g., Canada's participation in UN tree-planting campaigns, proliferation of invasive species in the Great Lakes through international trade, over-farming from global demand for cheap cotton, sugar, cocoa, and tea)",
     },
   },
   History: {
