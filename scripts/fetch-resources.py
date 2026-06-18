@@ -6,6 +6,8 @@ Nightly job: discovers educational resources via web search and adds them to res
 Usage:
     python scripts/fetch-resources.py --subject science
     python scripts/fetch-resources.py --subject social_studies
+    python scripts/fetch-resources.py --subject history
+    python scripts/fetch-resources.py --subject geography
 
 Requires:
     ANTHROPIC_API_KEY environment variable
@@ -65,17 +67,47 @@ SUBJECT_CONFIG = {
     "social_studies": {
         "display": "Social Studies",
         "strands": [
-            "Heritage and Identity",
-            "People and Environments",
             "Power and Governance",
         ],
         "queries": [
-            "Ontario social studies curriculum grades 6 7 8 free educational resources",
-            "Heritage Identity Canadian history culture Ontario grades 6-9 resources",
-            "People Environments geography Ontario curriculum middle school free",
-            "Power Governance civics democracy Ontario grades 6-9 resources",
-            "Canadian geography history civics free classroom resources teachers",
-            "Indigenous culture heritage Ontario curriculum resources teachers free",
+            "Ontario social studies curriculum grades 6 free educational resources",
+            "Power Governance civics democracy Ontario grades 6 resources",
+            "Canadian civics government free classroom resources teachers",
+            "Indigenous culture heritage Ontario social studies grade 6 resources teachers free",
+        ],
+    },
+    "history": {
+        "display": "History",
+        "strands": [
+            "New France and British North America, 1713-1800",
+            "Canada, 1800-1850: Conflict and Challenges",
+            "Creating Canada, 1850-1890",
+            "Canada, 1890-1914: A Changing Society",
+        ],
+        "queries": [
+            "Ontario grade 7 history curriculum New France British North America free resources",
+            "Ontario grade 7 history Canada 1800-1850 conflict challenges resources teachers",
+            "Ontario grade 8 history Creating Canada 1850-1890 free educational resources",
+            "Ontario grade 8 history Canada 1890-1914 changing society resources teachers",
+            "Canadian history grades 7 8 free classroom resources teachers",
+            "Indigenous peoples Canadian history grades 7 8 Ontario curriculum resources free",
+        ],
+    },
+    "geography": {
+        "display": "Geography",
+        "strands": [
+            "Physical Patterns in a Changing World",
+            "Natural Resources Around the World: Use and Sustainability",
+            "Global Settlement: Patterns and Sustainability",
+            "Global Inequalities: Economic Development and Quality of Life",
+        ],
+        "queries": [
+            "Ontario grade 7 geography physical patterns changing world free resources",
+            "Ontario grade 7 geography natural resources sustainability resources teachers",
+            "Ontario grade 8 geography global settlement patterns sustainability resources",
+            "Ontario grade 8 geography global inequalities quality of life resources teachers",
+            "world geography grades 7 8 free classroom resources teachers",
+            "Canadian geography curriculum grades 7 8 Ontario free educational resources",
         ],
     },
 }

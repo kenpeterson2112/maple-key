@@ -33,7 +33,7 @@ by a commit. Set each one up once:
 5. **Prompt:** paste the matching prompt below.
 6. Save. Each nightly run opens a **draft PR** you can review and merge.
 
-Create **three** routines: two resource-refresh (one per subject, below) and
+Create **five** routines: four resource-refresh (one per subject, below) and
 one link-health (further below).
 
 ### Routine 1 — Science (suggested: daily 02:00 UTC)
@@ -51,14 +51,14 @@ to a claude/ branch and open a draft PR titled "data: add nightly Science
 resources". If no suitable new resources are found, make no commit and stop.
 ```
 
-### Routine 2 — Social Studies (suggested: daily 03:00 UTC)
+### Routine 2 — Social Studies (suggested: daily 02:30 UTC)
 
 ```
 Refresh the Maple Key Social Studies resource library. Use the
 `refresh-resources` skill with subject = social_studies. Follow the Researcher
 → review → Assessor waterfall exactly: discover candidate resources with the
 skill's Social Studies seed searches, curate 3–8 that genuinely fit Ontario
-grades 6–9 and match the schema, verify every URL loads, then in the Assessor
+grades 1–6 and match the schema, verify every URL loads, then in the Assessor
 pass assign real Ontario curriculum expectation codes and grade levels. Append
 them to public/resources.json and mirror the change to docs/resources.json
 (updating meta.total_count and meta.generated_at). Skip any URL already
@@ -67,7 +67,37 @@ nightly Social Studies resources". If no suitable new resources are found, make
 no commit and stop.
 ```
 
-### Routine 3 — Link health (suggested: daily 04:00 UTC)
+### Routine 3 — History (suggested: daily 03:00 UTC)
+
+```
+Refresh the Maple Key History resource library. Use the `refresh-resources`
+skill with subject = history. Follow the Researcher → review → Assessor
+waterfall exactly: discover candidate resources with the skill's History seed
+searches, curate 3–8 that genuinely fit Ontario grades 7–8 and match the
+schema, verify every URL loads, then in the Assessor pass assign real Ontario
+curriculum expectation codes and grade levels. Append them to
+public/resources.json and mirror the change to docs/resources.json (updating
+meta.total_count and meta.generated_at). Skip any URL already present. Commit
+to a claude/ branch and open a draft PR titled "data: add nightly History
+resources". If no suitable new resources are found, make no commit and stop.
+```
+
+### Routine 4 — Geography (suggested: daily 03:30 UTC)
+
+```
+Refresh the Maple Key Geography resource library. Use the `refresh-resources`
+skill with subject = geography. Follow the Researcher → review → Assessor
+waterfall exactly: discover candidate resources with the skill's Geography
+seed searches, curate 3–8 that genuinely fit Ontario grades 7–8 and match the
+schema, verify every URL loads, then in the Assessor pass assign real Ontario
+curriculum expectation codes and grade levels. Append them to
+public/resources.json and mirror the change to docs/resources.json (updating
+meta.total_count and meta.generated_at). Skip any URL already present. Commit
+to a claude/ branch and open a draft PR titled "data: add nightly Geography
+resources". If no suitable new resources are found, make no commit and stop.
+```
+
+### Routine 5 — Link health (suggested: daily 04:30 UTC)
 
 Unlike the resource routines, this one checks the *existing* library for broken
 links. It runs `scripts/link-check.py` for the deterministic parts — a nightly
@@ -98,7 +128,7 @@ a little headroom after the resource routines.
 
 - **Billing:** routine runs consume subscription usage, not API token credits.
 - **Frequency:** routines allow a minimum 1-hour interval and have a per-account
-  daily run cap — three runs/night is comfortably within that. See your remaining runs at
+  daily run cap — five runs/night is comfortably within that. See your remaining runs at
   https://claude.ai/code/routines and https://claude.ai/settings/usage.
 - **Review gate:** new rows are stamped `needs_review: true`, and runs land as
   **draft PRs** rather than committing straight to `main`.

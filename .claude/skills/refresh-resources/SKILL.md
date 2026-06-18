@@ -2,13 +2,13 @@
 name: refresh-resources
 description: >-
   Discover and curate new Ontario grades 6–9 educational resources for one
-  subject (science or social_studies) and append them to public/resources.json
-  via the Researcher → review → Assessor waterfall. Use for the nightly
-  resource-refresh routine (see ROUTINES.md) or an on-demand manual refresh.
-  Runs entirely on the Claude subscription — it does NOT call the Anthropic API
-  and needs no ANTHROPIC_API_KEY. This replaces the per-token work that
-  scripts/fetch-resources.py and scripts/assess-curriculum-expectations.py
-  used to do via the API.
+  subject (science, social_studies, history, or geography) and append them to
+  public/resources.json via the Researcher → review → Assessor waterfall. Use
+  for the nightly resource-refresh routine (see ROUTINES.md) or an on-demand
+  manual refresh. Runs entirely on the Claude subscription — it does NOT call
+  the Anthropic API and needs no ANTHROPIC_API_KEY. This replaces the
+  per-token work that scripts/fetch-resources.py and
+  scripts/assess-curriculum-expectations.py used to do via the API.
 ---
 
 # Refresh Resources — three-agent curation waterfall
@@ -25,7 +25,12 @@ into one pass.
 
 ## Input
 
-One subject per run: `science` or `social_studies`. The routine prompt names it.
+One subject per run: `science`, `social_studies`, `history`, or `geography`.
+The routine prompt names it.
+
+`history` and `geography` are the grade 7-8 Ontario curriculum subjects
+(distinct from `social_studies`, which is grades 1-6 plus the grade 7-8
+"Power and Governance" civics content that doesn't belong to either).
 
 ## Files (read and write both)
 
@@ -49,14 +54,39 @@ characters as-is) to match the existing file style.
   - Canadian science education resources grades 6 to 9 online free
 
 **social_studies**
-- Strands: `Heritage and Identity`, `People and Environments`, `Power and Governance`
+- Strands: `Power and Governance` (grades 1-6 scope; grade 7-8 social studies
+  content is split into `history` and `geography` below)
 - Seed searches:
-  - Ontario social studies curriculum grades 6 7 8 free educational resources
-  - Heritage Identity Canadian history culture Ontario grades 6-9 resources
-  - People Environments geography Ontario curriculum middle school free
-  - Power Governance civics democracy Ontario grades 6-9 resources
-  - Canadian geography history civics free classroom resources teachers
-  - Indigenous culture heritage Ontario curriculum resources teachers free
+  - Ontario social studies curriculum grades 6 free educational resources
+  - Power Governance civics democracy Ontario grades 6 resources
+  - Canadian civics government free classroom resources teachers
+  - Indigenous culture heritage Ontario social studies grade 6 resources teachers free
+
+**history**
+- Strands: `New France and British North America, 1713-1800` (grade 7),
+  `Canada, 1800-1850: Conflict and Challenges` (grade 7),
+  `Creating Canada, 1850-1890` (grade 8),
+  `Canada, 1890-1914: A Changing Society` (grade 8)
+- Seed searches:
+  - Ontario grade 7 history curriculum New France British North America free resources
+  - Ontario grade 7 history Canada 1800-1850 conflict challenges resources teachers
+  - Ontario grade 8 history Creating Canada 1850-1890 free educational resources
+  - Ontario grade 8 history Canada 1890-1914 changing society resources teachers
+  - Canadian history grades 7 8 free classroom resources teachers
+  - Indigenous peoples Canadian history grades 7 8 Ontario curriculum resources free
+
+**geography**
+- Strands: `Physical Patterns in a Changing World` (grade 7),
+  `Natural Resources Around the World: Use and Sustainability` (grade 7),
+  `Global Settlement: Patterns and Sustainability` (grade 8),
+  `Global Inequalities: Economic Development and Quality of Life` (grade 8)
+- Seed searches:
+  - Ontario grade 7 geography physical patterns changing world free resources
+  - Ontario grade 7 geography natural resources sustainability resources teachers
+  - Ontario grade 8 geography global settlement patterns sustainability resources
+  - Ontario grade 8 geography global inequalities quality of life resources teachers
+  - world geography grades 7 8 free classroom resources teachers
+  - Canadian geography curriculum grades 7 8 Ontario free educational resources
 
 ## Stage 0 — Load & dedup baseline
 
@@ -85,7 +115,7 @@ grades 6–9 and emit each as an object matching this schema **exactly**:
   "publisher_creator": "string — organization or author",
   "grade_level": [6, 7, 8],
   "grade_band": "one of: primary | junior | intermediate | senior | multi",
-  "subject": "Science | Social Studies (display form, matching existing rows)",
+  "subject": "Science | Social Studies | History | Geography (display form, matching existing rows)",
   "strand": ["one or more from the subject's strand list above"],
   "province": "ON | BC | AB | CANADA",
   "jurisdiction": "ontario | british_columbia | alberta | canada",
