@@ -16,38 +16,12 @@ import {
 } from "lucide-react"
 import { withBasePath } from "@/lib/base-path"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet"
+import { SUBJECTS } from "@/components/hero-personalize"
+import { getStrandValues } from "@/lib/get-strand-options"
 import type { Filters } from "@/lib/types"
 
 const AVAILABLE_GRADES = ["4", "5", "6", "7", "8", "9"]
-const AVAILABLE_SUBJECTS = ["Math", "Science", "Language", "Social Studies", "FSL", "Health & Physical Education"]
-
-const SUBJECT_STRANDS: Record<string, string[]> = {
-  Math: [
-    "Algebra",
-    "Number",
-    "Spatial Sense",
-    "Data Literacy",
-    "Probability",
-    "Financial Literacy",
-    "Math: Cross-Strand",
-  ],
-  Science: [
-    "Earth and Space Systems",
-    "Life Systems",
-    "Matter and Energy",
-    "Science: Cross-Strand",
-    "STEM Skills and Connections",
-  ],
-  Language: ["Media Literacy", "Writing", "Reading", "Oral Communication"],
-  "Social Studies": ["Heritage and Identity", "People and Environments", "Power and Governance"],
-  FSL: ["Listening", "Speaking", "Reading", "Writing", "Intercultural Understanding"],
-  "Health & Physical Education": [
-    "Social-Emotional Learning Skills",
-    "Active Living",
-    "Movement Competence",
-    "Healthy Living",
-  ],
-}
+const AVAILABLE_SUBJECTS = SUBJECTS.map((s) => s.value).filter(Boolean)
 
 interface MobileFiltersDrawerProps {
   isOpen: boolean
@@ -140,7 +114,8 @@ export default function MobileFiltersDrawer({
     (filters.strand ? 1 : 0) +
     Object.values(sidebarFilters).reduce((sum, arr) => sum + arr.length, 0)
 
-  const availableStrands = filters.subject ? SUBJECT_STRANDS[filters.subject] || [] : []
+  const primaryGrade = (filters.grade || "").split(",").filter(Boolean)[0] ?? ""
+  const availableStrands = filters.subject ? getStrandValues(filters.subject, primaryGrade) : []
 
   const getModalityIcon = (modality: string) => {
     const iconProps = { size: 14, className: "flex-shrink-0" }

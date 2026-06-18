@@ -148,6 +148,18 @@ export function hasStrandLabel(subject: string, strand: string, grade?: string):
   return Boolean(gradeLookup(STRAND_LABELS[normalizeSubject(subject)], grade, strand))
 }
 
+// All strand letter/label pairs for a subject at a grade (or the grade-agnostic
+// table when ungraded). Lets UI strand pickers stay in sync with this file for
+// subjects whose strand names shift by grade (History, Geography) instead of
+// keeping a second, grade-blind copy of the list elsewhere.
+export function strandsForSubject(subject: string, grade?: string): { code: string; label: string }[] {
+  const table = STRAND_LABELS[normalizeSubject(subject)]
+  if (!table) return []
+  const bucket = (grade && table[grade]) ?? table[GRADE_AGNOSTIC]
+  if (!bucket) return []
+  return Object.entries(bucket).map(([code, label]) => ({ code, label }))
+}
+
 // ---- Overall-expectation glosses (subject + grade keyed; sparse, degrade to code) ----
 // Only the overalls we have human-readable names for. Everything else degrades to
 // the code via overallLabel/overallTitle.

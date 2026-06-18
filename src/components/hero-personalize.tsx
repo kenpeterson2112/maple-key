@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { RotateCcw } from "lucide-react"
 import InlinePicker, { type PickerOption } from "@/components/inline-picker"
+import { strandsForSubject } from "@/lib/curriculum-codes"
 import type { Filters } from "@/lib/types"
 
 export const PROVINCES: PickerOption[] = [
@@ -40,8 +41,13 @@ export const SUBJECTS: PickerOption[] = [
   { value: "Social Studies", label: "Social Studies", color: "#7C3AED" },
   { value: "FSL", label: "FSL", color: "#0D9488" },
   { value: "Health & Physical Education", label: "Health & PE", color: "#EA580C" },
+  { value: "History", label: "History", color: "#92400E" },
+  { value: "Geography", label: "Geography", color: "#0E7490" },
 ]
 
+// Grade-stable subjects only — History and Geography rename their strands
+// every grade, so their options come from curriculum-codes.ts's grade-aware
+// `strandsForSubject` instead (see the lookups below).
 export const SUBJECT_STRANDS: Record<string, string[]> = {
   Math: [
     "Algebra",
@@ -123,10 +129,14 @@ export default function HeroPersonalize({
   const strandOptions: PickerOption[] = filters.subject
     ? [
         { value: "", label: "any strand" },
-        ...(SUBJECT_STRANDS[filters.subject] ?? []).map((s) => ({
-          value: s,
-          label: STRAND_CODES[s] ? `${STRAND_CODES[s]}. ${s}` : s,
-        })),
+        ...(SUBJECT_STRANDS[filters.subject]
+          ? SUBJECT_STRANDS[filters.subject].map((s) => ({
+              value: s,
+              label: STRAND_CODES[s] ? `${STRAND_CODES[s]}. ${s}` : s,
+            }))
+          // Grade-variant subjects (History, Geography) have no static list above —
+          // pull their strand names from curriculum-codes.ts for the active grade.
+          : strandsForSubject(filters.subject, primaryGrade).map((s) => ({ value: s.label, label: `${s.code}. ${s.label}` }))),
       ]
     : []
 

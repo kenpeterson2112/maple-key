@@ -5,7 +5,8 @@ import * as Popover from "@radix-ui/react-popover"
 import { AnimatePresence, motion } from "framer-motion"
 import { ChevronDown, Building2 } from "lucide-react"
 import type { PickerOption } from "@/components/inline-picker"
-import { GRADES, SUBJECTS, SUBJECT_STRANDS, STRAND_CODES } from "@/components/hero-personalize"
+import { GRADES, SUBJECTS } from "@/components/hero-personalize"
+import { getStrandOptions } from "@/lib/get-strand-options"
 import type { Filters } from "@/lib/types"
 
 interface PlanContextBarProps {
@@ -16,13 +17,7 @@ interface PlanContextBarProps {
 export default function PlanContextBar({ filters, setFilters }: PlanContextBarProps) {
   const primaryGrade = (filters.grade || "").split(",").filter(Boolean)[0] ?? ""
   const strandOptions: PickerOption[] = filters.subject
-    ? [
-        { value: "", label: "Any strand" },
-        ...(SUBJECT_STRANDS[filters.subject] ?? []).map((s) => ({
-          value: s,
-          label: STRAND_CODES[s] ? `${STRAND_CODES[s]}. ${s}` : s,
-        })),
-      ]
+    ? getStrandOptions(filters.subject, primaryGrade).map((o) => (o.value === "" ? { ...o, label: "Any strand" } : o))
     : [{ value: "", label: "Any strand" }]
 
   return (

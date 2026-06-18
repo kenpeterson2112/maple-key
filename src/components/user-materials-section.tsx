@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react"
 import { FilePlus2, Link2, X, FileText, Info, AlertCircle } from "lucide-react"
+import { SUBJECTS as SUBJECT_OPTIONS } from "@/components/hero-personalize"
 
 export type UserMaterialKind = "file" | "link"
 
@@ -23,7 +24,7 @@ interface UserMaterialsSectionProps {
   onChange: (materials: UserMaterial[]) => void
 }
 
-const SUBJECTS = ["Math", "Science", "Language", "Social Studies", "FSL", "Health & Physical Education"]
+const SUBJECTS = SUBJECT_OPTIONS.map((s) => s.value).filter(Boolean)
 const MAX_FILES = 5
 const MAX_FILE_SIZE_MB = 10
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
