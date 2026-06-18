@@ -121,41 +121,40 @@ function buildCounts(codes: string[], level: CentralLevel, spread: number): { by
 }
 
 // Class Insights (class-wide). Fabricates synthetic tallies spread across subjects
-// and grades so the subject folder tabs AND grade sub-tabs populate. Idempotent:
-// clears prior synthetic data first so re-generating replaces rather than piles up.
+// so the subject folder tabs populate, and replicated across every grade so each
+// grade sub-tab shows the same full strand coverage rather than a sliver of it.
+// Idempotent: clears prior synthetic data first so re-generating replaces rather
+// than piles up.
 export function seedGlobal({ quantity, level, spread }: SeedOptions): void {
   resetGlobal()
   const wanted = Math.max(MIN_QUANTITY, Math.min(Math.round(quantity), POOL_SIZE))
   const pairs = interleavedPairs().slice(0, wanted)
 
-  const seenPerSubject: Record<string, number> = {}
-  const groups = new Map<string, { subject: string; grade: string; codes: string[] }>()
+  const codesBySubject = new Map<string, string[]>()
   for (const { subject, code } of pairs) {
-    const idx = seenPerSubject[subject] ?? 0
-    seenPerSubject[subject] = idx + 1
-    const grade = GRADES[idx % GRADES.length] // fan a subject's codes across grades
-    const key = `${subject}__${grade}`
-    const g = groups.get(key) ?? { subject, grade, codes: [] }
-    g.codes.push(code)
-    groups.set(key, g)
+    const codes = codesBySubject.get(subject) ?? []
+    codes.push(code)
+    codesBySubject.set(subject, codes)
   }
 
   const now = Date.now()
   const tallies: LessonTally[] = []
   let i = 0
-  for (const { subject, grade, codes } of groups.values()) {
-    const { byExpectation, attempts } = buildCounts(codes, level, spread)
-    tallies.push({
-      lessonId: `${DEV_PREFIX}${subject.toLowerCase().replace(/\s+/g, "-")}-g${grade}`,
-      title: `Synthetic ${subject} · Grade ${grade}`,
-      grade,
-      subject,
-      codes,
-      updatedAt: now - i * 60_000,
-      attempts,
-      byExpectation,
-    })
-    i++
+  for (const [subject, codes] of codesBySubject) {
+    for (const grade of GRADES) {
+      const { byExpectation, attempts } = buildCounts(codes, level, spread)
+      tallies.push({
+        lessonId: `${DEV_PREFIX}${subject.toLowerCase().replace(/\s+/g, "-")}-g${grade}`,
+        title: `Synthetic ${subject} · Grade ${grade}`,
+        grade,
+        subject,
+        codes,
+        updatedAt: now - i * 60_000,
+        attempts,
+        byExpectation,
+      })
+      i++
+    }
   }
   seedTallies(tallies)
 }
