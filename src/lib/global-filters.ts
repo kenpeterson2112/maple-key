@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect } from "react"
-import { SUBJECT_STRANDS } from "@/components/hero-personalize"
+import { getStrandValues } from "@/lib/get-strand-options"
 import { isSandboxMode, setSandboxMode } from "@/lib/assessment-results"
 
 export interface GlobalFiltersState {
@@ -32,8 +32,13 @@ function globalFiltersReducer(state: GlobalFiltersState, action: GlobalFiltersAc
   switch (action.type) {
     case "SET_PROVINCE":
       return { ...state, province: action.payload }
-    case "SET_GRADE":
-      return { ...state, grade: action.payload }
+    case "SET_GRADE": {
+      // Grade-variant subjects (History, Geography) rename their strands by
+      // grade, so a strand valid under the old grade may not be under the new one.
+      const validStrands = state.subject ? getStrandValues(state.subject, action.payload) : []
+      const newStrand = validStrands.includes(state.strand) ? state.strand : ""
+      return { ...state, grade: action.payload, strand: newStrand }
+    }
     case "SET_SUBJECT": {
       const newSubject = action.payload
       // When subject changes, clear strand if it's not valid for the new subject
@@ -42,7 +47,7 @@ function globalFiltersReducer(state: GlobalFiltersState, action: GlobalFiltersAc
         newStrand = ""
       } else if (newSubject !== state.subject) {
         // Subject changed to a different value
-        const validStrands = SUBJECT_STRANDS[newSubject] ?? []
+        const validStrands = getStrandValues(newSubject, state.grade)
         if (!validStrands.includes(newStrand)) {
           newStrand = ""
         }
@@ -54,7 +59,7 @@ function globalFiltersReducer(state: GlobalFiltersState, action: GlobalFiltersAc
       if (state.subject === "") {
         return state // Can't set strand when subject is "any"
       }
-      const validStrands = SUBJECT_STRANDS[state.subject] ?? []
+      const validStrands = getStrandValues(state.subject, state.grade)
       if (action.payload === "" || validStrands.includes(action.payload)) {
         return { ...state, strand: action.payload }
       }

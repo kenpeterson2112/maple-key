@@ -2,10 +2,10 @@
 
 import { useState } from "react"
 import { useGlobalFilters } from "@/lib/global-filters"
-import { PROVINCES, GRADES, SUBJECTS, STRAND_CODES } from "@/components/hero-personalize"
+import { PROVINCES, GRADES, SUBJECTS } from "@/components/hero-personalize"
 import { getStrandOptions } from "@/lib/get-strand-options"
 import InlinePicker from "@/components/inline-picker"
-import { Leaf, BookOpen, Calculator, Beaker, Globe, PenTool, X } from "lucide-react"
+import { Leaf, BookOpen, Calculator, Beaker, Globe, PenTool, Landmark, Compass, X } from "lucide-react"
 
 // Inline curriculum filter cluster (province / grade / subject / strand).
 // Rendered inside PageHeader so the filters share a single white bar with the
@@ -16,7 +16,7 @@ export default function CurriculumFilterBar() {
   const { state, setProvince, setGrade, setSubject, setStrand } = useGlobalFilters()
   const [mobileOpenFilter, setMobileOpenFilter] = useState<"province" | "grade" | "subject" | "strand" | null>(null)
 
-  const strandOptions = getStrandOptions(state.subject)
+  const strandOptions = getStrandOptions(state.subject, state.grade)
   const isStrandDisabled = state.subject === ""
 
   const getGradeLabel = () => (state.grade ? state.grade : "K12")
@@ -29,6 +29,10 @@ export default function CurriculumFilterBar() {
         return <Beaker size={20} />
       case "Social Studies":
         return <Globe size={20} />
+      case "History":
+        return <Landmark size={20} />
+      case "Geography":
+        return <Compass size={20} />
       case "Language":
         return <PenTool size={20} />
       case "FSL":
@@ -40,8 +44,10 @@ export default function CurriculumFilterBar() {
 
   const getStrandLabel = () => {
     if (!state.strand) return ""
-    // Find the strand code letter for the active strand.
-    return Object.entries(STRAND_CODES).find(([name]) => name === state.strand)?.[1] || state.strand[0]?.toUpperCase() || ""
+    // strandOptions labels are formatted "<letter>. <name>" — pull the letter
+    // back out for the mobile icon button's single-character badge.
+    const option = strandOptions.find((o) => o.value === state.strand)
+    return option?.label.split(".")[0] || state.strand[0]?.toUpperCase() || ""
   }
 
   return (
