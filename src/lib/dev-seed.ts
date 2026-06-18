@@ -97,6 +97,7 @@ const POOL: SubjectPool[] = [
   { subject: "History", grades: ["7"], codes: describedCodes("History", "7") },
   { subject: "History", grades: ["8"], codes: describedCodes("History", "8") },
   { subject: "Geography", grades: ["7"], codes: describedCodes("Geography", "7") },
+  { subject: "Geography", grades: ["8"], codes: describedCodes("Geography", "8") },
 ]
 
 export const POOL_SIZE = POOL.reduce((sum, p) => sum + p.codes.length, 0)
