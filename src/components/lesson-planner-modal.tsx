@@ -47,7 +47,7 @@ import MaterialsSummary from "@/components/materials-summary"
 import MaterialsEditorModal from "@/components/materials-editor-modal"
 import { getProgressForCodes, type LevelCounts } from "@/lib/assessment-results"
 import { LEVEL_META, LEVEL_ORDER } from "@/lib/assessment-types"
-import { CURRICULUM_DESCRIPTIONS } from "@/lib/curriculum-codes"
+import { describeCode } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
 import { type UserMaterial } from "@/components/user-materials-section"
 import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage } from "@/lib/personalization"
@@ -1872,7 +1872,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                                   {code}
                                 </span>
                                 <span className="text-xs leading-snug text-[#666]">
-                                  {CURRICULUM_DESCRIPTIONS[code] ?? code}
+                                  {describeCode(bookmarkedResources[0]?.subject ?? "", code) ?? code}
                                 </span>
                               </div>
                               <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-stone-200">

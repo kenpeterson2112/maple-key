@@ -9,7 +9,7 @@
 import { seedTallies, clearLessonTally, clearAllResults, type LevelCounts, type LessonTally } from "./assessment-results"
 import { LEVEL_ORDER } from "./assessment-types"
 import type { LessonMetadata } from "./lesson-metadata"
-import { CURRICULUM_DESCRIPTIONS } from "./curriculum-codes"
+import { describedCodes } from "./curriculum-codes"
 
 export type CentralLevel = 1 | 2 | 3 | 4
 
@@ -72,20 +72,22 @@ function fixSum(c: LevelCounts, n: number): LevelCounts {
 }
 
 // --- Expectation pool -------------------------------------------------------
-// Math uses the real curriculum codes (clean D1/D2/F1 rollups). Non-math subjects
-// have no codes in the data, so we synthesize Parent.Child codes that still group
-// via `overallCodeOf` (split on "."). They render their code as the label.
+// Real Ontario curriculum codes per subject, drawn from the same code space the
+// resource data uses. Codes group via `overallCodeOf` (split on ".") into clean
+// overall expectations (e.g. B1.1/B1.2 → B1) and strands (first letter), so demo
+// data renders exactly the structure real Quick Check results produce. Math also
+// carries specific-expectation descriptions; the others degrade to code + strand.
 interface SubjectPool {
   subject: string
   codes: string[]
 }
 
 const POOL: SubjectPool[] = [
-  { subject: "Math", codes: Object.keys(CURRICULUM_DESCRIPTIONS) },
-  { subject: "Language", codes: ["LR.1", "LR.2", "LW.1", "LW.2", "LO.1", "LM.1"] },
-  { subject: "Science", codes: ["SL.1", "SL.2", "SE.1", "SM.1", "SS.1"] },
-  { subject: "Social Studies", codes: ["SH.1", "SH.2", "SP.1", "SG.1"] },
-  { subject: "FSL", codes: ["FA.1", "FA.2", "FB.1", "FC.1", "FC.2", "FD.1"] },
+  { subject: "Math", codes: describedCodes("Math") },
+  { subject: "Language", codes: ["A1.1", "B1.1", "B2.1", "C1.1", "D1.1", "D2.1"] },
+  { subject: "Science", codes: ["B1.1", "B1.2", "B2.1", "C1.1", "C2.1", "E1.1"] },
+  { subject: "Social Studies", codes: ["A1.1", "A1.2", "A2.1", "B1.1", "B2.1", "B3.1"] },
+  { subject: "FSL", codes: ["A1.1", "A2.1", "B1.1", "C1.1", "D1.1"] },
 ]
 
 export const POOL_SIZE = POOL.reduce((sum, p) => sum + p.codes.length, 0)

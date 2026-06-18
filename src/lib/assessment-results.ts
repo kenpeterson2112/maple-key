@@ -1,6 +1,6 @@
 import type { LessonMetadata } from "./lesson-metadata"
 import type { ProficiencyLevel } from "./assessment-types"
-import { overallCodeOf, overallLabel, groupByOverall, groupByStrand, strandLabel } from "./curriculum-codes"
+import { overallCodeOf, overallTitle, groupByOverall, groupByStrand, strandLabel } from "./curriculum-codes"
 
 const STORAGE_KEY = "maplekey_assessment_results"
 // Parallel "sandbox" store + on/off flag. When sandbox mode is on, every read/write
@@ -282,7 +282,7 @@ export interface CoverageNode {
 // Each node's `specifics` lists every taught code under that overall, marking
 // which ones have recorded assessment data — the basis for the orb
 // dashboard's coverage-based fill.
-export function buildOverallCoverage(tallies: LessonTally[]): CoverageNode[] {
+export function buildOverallCoverage(tallies: LessonTally[], subject: string): CoverageNode[] {
   const taught = new Set<string>()
   const assessed: Record<string, LevelCounts> = {}
   for (const t of tallies) {
@@ -312,7 +312,7 @@ export function buildOverallCoverage(tallies: LessonTally[]): CoverageNode[] {
     }
     out.push({
       code: overall,
-      label: overallLabel(overall),
+      label: overallTitle(subject, overall),
       specifics,
       bands,
       coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
@@ -322,7 +322,7 @@ export function buildOverallCoverage(tallies: LessonTally[]): CoverageNode[] {
 }
 
 // Groups overall coverage nodes into strand-level nodes via groupByStrand.
-export function buildStrandCoverage(overallNodes: CoverageNode[]): CoverageNode[] {
+export function buildStrandCoverage(overallNodes: CoverageNode[], subject: string): CoverageNode[] {
   const groups = groupByStrand(overallNodes.map((n) => n.code))
   const byCode = new Map(overallNodes.map((n) => [n.code, n]))
 
@@ -340,7 +340,7 @@ export function buildStrandCoverage(overallNodes: CoverageNode[]): CoverageNode[
     }
     out.push({
       code: strand,
-      label: strandLabel(strand),
+      label: strandLabel(subject, strand),
       specifics,
       bands,
       coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
