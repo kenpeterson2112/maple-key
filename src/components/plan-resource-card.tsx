@@ -96,7 +96,7 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
             return (
               <span
                 key={c.overall}
-                title={`${c.overall} ${overallLabel(resource.subject, c.overall)} — ${style.label}`}
+                title={`${c.overall} ${overallLabel(resource.subject, c.overall, resource.grade_level?.[0]?.toString())} — ${style.label}`}
                 className="rounded px-1.5 py-0.5 text-[10px] font-medium"
                 style={{ backgroundColor: style.bg, color: style.text, border: `1px solid ${style.border}`, fontFamily: "var(--font-mono, monospace)" }}
               >

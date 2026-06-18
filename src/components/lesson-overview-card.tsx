@@ -112,7 +112,7 @@ export default function LessonOverviewCard({
                 {" — "}
                 {codes
                   .slice(0, 3)
-                  .map((c) => describeCode(lesson.subject, c) ?? c)
+                  .map((c) => describeCode(lesson.subject, c, lesson.grade) ?? c)
                   .join("; ")}
                 {codes.length > 3 ? "…" : ""}
               </span>

@@ -282,7 +282,7 @@ export interface CoverageNode {
 // Each node's `specifics` lists every taught code under that overall, marking
 // which ones have recorded assessment data — the basis for the orb
 // dashboard's coverage-based fill.
-export function buildOverallCoverage(tallies: LessonTally[], subject: string): CoverageNode[] {
+export function buildOverallCoverage(tallies: LessonTally[], subject: string, grade?: string): CoverageNode[] {
   const taught = new Set<string>()
   const assessed: Record<string, LevelCounts> = {}
   for (const t of tallies) {
@@ -312,7 +312,7 @@ export function buildOverallCoverage(tallies: LessonTally[], subject: string): C
     }
     out.push({
       code: overall,
-      label: overallTitle(subject, overall),
+      label: overallTitle(subject, overall, grade),
       specifics,
       bands,
       coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
@@ -322,7 +322,7 @@ export function buildOverallCoverage(tallies: LessonTally[], subject: string): C
 }
 
 // Groups overall coverage nodes into strand-level nodes via groupByStrand.
-export function buildStrandCoverage(overallNodes: CoverageNode[], subject: string): CoverageNode[] {
+export function buildStrandCoverage(overallNodes: CoverageNode[], subject: string, grade?: string): CoverageNode[] {
   const groups = groupByStrand(overallNodes.map((n) => n.code))
   const byCode = new Map(overallNodes.map((n) => [n.code, n]))
 
@@ -340,7 +340,7 @@ export function buildStrandCoverage(overallNodes: CoverageNode[], subject: strin
     }
     out.push({
       code: strand,
-      label: strandLabel(subject, strand),
+      label: strandLabel(subject, strand, grade),
       specifics,
       bands,
       coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
