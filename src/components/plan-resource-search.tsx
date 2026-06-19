@@ -5,7 +5,7 @@ import { Compass } from "lucide-react"
 import MapleKeyIcon from "@/components/ui/maple-key-icon"
 import PlanResourceCard from "./plan-resource-card"
 import { useBookmarks } from "@/lib/bookmarks-context"
-import { useFilteredResources, sortResources, type SidebarFilters } from "@/lib/use-filtered-resources"
+import { useFilteredResources, sortResources, nextUpCodes, type SidebarFilters } from "@/lib/use-filtered-resources"
 import type { Filters } from "@/lib/types"
 
 const SUGGESTION_LIMIT = 3
@@ -29,7 +29,11 @@ export default function PlanResourceSearch({
   const { filteredResources, classProgress } = useFilteredResources(filters, sidebarFilters)
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
 
-  const sortedResources = useMemo(() => sortResources(filteredResources), [filteredResources])
+  // Surface what the class should cover next (per strand) ahead of plain
+  // alphanumeric order — falls back to that order automatically when there's
+  // no coverage data yet (new class, or "Actual" mode untouched).
+  const priorityCodes = useMemo(() => nextUpCodes(filteredResources, classProgress), [filteredResources, classProgress])
+  const sortedResources = useMemo(() => sortResources(filteredResources, priorityCodes), [filteredResources, priorityCodes])
 
   // Paginated suggestions: show 3 per page starting from suggestionPageIndex
   const pageStart = suggestionPageIndex * SUGGESTION_LIMIT

@@ -5,7 +5,8 @@ import useSWR from "swr"
 import type { Filters, Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
 import { normalizeGrades, minGrade } from "@/lib/utils"
-import { getReadinessForCodes, getProgressForCodes, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import { getReadinessForCodes, getProgressForCodes, frontierIndex, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import { strandCodeOf } from "@/lib/curriculum-codes"
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -133,16 +134,53 @@ export function keywordFilter(resources: Resource[], query: string): Resource[] 
   })
 }
 
-// Default sort: grade ascending, then by first curriculum expectation, then title.
-export function sortResources(resources: Resource[]): Resource[] {
+const compareCodes = (a: string, b: string) => a.localeCompare(b, undefined, { numeric: true })
+
+// Per strand, finds the class's coverage frontier among the codes these
+// resources actually carry, and returns that frontier code plus the one after
+// it (in case the frontier is already "great" and there's nothing left to do
+// at that exact code). Strands are computed independently — a teacher
+// interleaves strands by week, so Strand B's first code shouldn't rank behind
+// Strand A's last just because the letters sort that way. Used to bubble
+// "what's next" to the top of the suggestion list; falls back to plain
+// alphanumeric order wherever the result is empty (no progress data yet).
+export function nextUpCodes(resources: Resource[], progress: Record<string, LevelCounts>): Set<string> {
+  const byStrand = new Map<string, Set<string>>()
+  for (const resource of resources) {
+    for (const code of resource.curriculum_expectations || []) {
+      const strand = strandCodeOf(code)
+      ;(byStrand.get(strand) ?? byStrand.set(strand, new Set()).get(strand)!).add(code)
+    }
+  }
+
+  const out = new Set<string>()
+  for (const codes of byStrand.values()) {
+    const ordered = Array.from(codes).sort(compareCodes)
+    const idx = frontierIndex(ordered, progress)
+    if (ordered[idx]) out.add(ordered[idx])
+    if (ordered[idx + 1]) out.add(ordered[idx + 1])
+  }
+  return out
+}
+
+// Default sort: resources at the class's coverage frontier first (when
+// `priorityCodes` is given and non-empty), then grade ascending, then by
+// first curriculum expectation, then title.
+export function sortResources(resources: Resource[], priorityCodes?: Set<string>): Resource[] {
   return [...resources].sort((a, b) => {
+    if (priorityCodes && priorityCodes.size > 0) {
+      const aIsNext = (a.curriculum_expectations || []).some((c) => priorityCodes.has(c)) ? 0 : 1
+      const bIsNext = (b.curriculum_expectations || []).some((c) => priorityCodes.has(c)) ? 0 : 1
+      if (aIsNext !== bIsNext) return aIsNext - bIsNext
+    }
+
     const gradeA = minGrade(a.grade_level)
     const gradeB = minGrade(b.grade_level)
     if (gradeA !== gradeB) return gradeA - gradeB
 
     const codeA = a.curriculum_expectations?.[0] || "ZZZ"
     const codeB = b.curriculum_expectations?.[0] || "ZZZ"
-    const codeCompare = codeA.localeCompare(codeB, undefined, { numeric: true })
+    const codeCompare = compareCodes(codeA, codeB)
     if (codeCompare !== 0) return codeCompare
 
     return (a.topic_title || "").localeCompare(b.topic_title || "")
