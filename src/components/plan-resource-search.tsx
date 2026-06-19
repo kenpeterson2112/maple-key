@@ -111,7 +111,7 @@ export default function PlanResourceSearch({
             }}
             className="mt-2 w-full py-2 px-3 rounded-lg border-2 border-dashed border-[#E8D5C4] bg-white/60 text-sm font-medium text-[#8B4513] transition-colors hover:border-[#FF6B35] hover:text-[#FF6B35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
           >
-            {canShowNextPage ? "Next 3" : "Find more on this topic"}
+            {canShowNextPage ? "Next 3 suggested resources" : "Find more on this topic"}
           </button>
         </div>
       )}

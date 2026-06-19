@@ -48,30 +48,30 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
         isAdded ? "border-[#86EFAC] bg-[#F0FDF4]" : "border-[#E8D5C4] bg-white hover:border-[#D8C7B8]"
       }`}
     >
-      {/* Title row: title on the left with the modality/type tag sitting just to
-          its right; the accordion toggle stays anchored at the far right. The
+      {/* Title row: title on the left with the accordion toggle sitting just to
+          its right; the modality/type tag is anchored at the far right. The
           description is collapsed by default to keep the card vertically tight. */}
       <div className="flex items-start justify-between gap-1.5">
-        <div className="flex min-w-0 items-baseline gap-2">
+        <div className="flex min-w-0 items-baseline gap-1.5">
           <h3 className="min-w-0 text-sm font-semibold leading-snug text-[#2C2C2C]">{title}</h3>
-          <span
-            className="flex-shrink-0 text-[10px] font-semibold uppercase tracking-wide"
-            style={{ color: typeInfo.color, fontFamily: "var(--font-mono, monospace)" }}
-          >
-            {typeInfo.label}
-          </span>
+          {hasDescription && (
+            <button
+              type="button"
+              onClick={() => setExpanded((prev) => !prev)}
+              aria-expanded={expanded}
+              aria-label={expanded ? "Hide description" : "Show description"}
+              className="flex-shrink-0 rounded-md p-0.5 text-[#A8998E] transition-colors hover:bg-[#FFF5ED] hover:text-[#8B4513] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
+            >
+              <ChevronDown size={16} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+            </button>
+          )}
         </div>
-        {hasDescription && (
-          <button
-            type="button"
-            onClick={() => setExpanded((prev) => !prev)}
-            aria-expanded={expanded}
-            aria-label={expanded ? "Hide description" : "Show description"}
-            className="-mr-1 mt-0.5 flex-shrink-0 rounded-md p-0.5 text-[#A8998E] transition-colors hover:bg-[#FFF5ED] hover:text-[#8B4513] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
-          >
-            <ChevronDown size={16} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
-          </button>
-        )}
+        <span
+          className="mt-0.5 flex-shrink-0 text-[10px] font-semibold uppercase tracking-wide"
+          style={{ color: typeInfo.color, fontFamily: "var(--font-mono, monospace)" }}
+        >
+          {typeInfo.label}
+        </span>
       </div>
 
       <AnimatePresence initial={false}>
