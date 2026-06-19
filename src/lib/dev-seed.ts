@@ -100,64 +100,72 @@ const POOL: SubjectPool[] = [
   { subject: "Geography", grades: ["8"], codes: describedCodes("Geography", "8") },
 ]
 
-export const POOL_SIZE = POOL.reduce((sum, p) => sum + p.codes.length, 0)
-export const MIN_QUANTITY = 5
+export const SANDBOX_SUBJECTS: string[] = Array.from(new Set(POOL.map((p) => p.subject)))
+
+export const MIN_POSITION = 0.05
+export const MAX_POSITION = 1
 
 const DEV_PREFIX = "dev-seed:"
 
 export interface SeedOptions {
-  quantity: number
+  // 0..1 — how far through this subject's curriculum sequence the class has
+  // progressed. Drives a frontier (covered → partial → not covered), not a
+  // random sample, so generated data mirrors real sequential teaching.
+  position: number
   level: CentralLevel
   spread: number
+  // Omit to seed every subject in POOL; pass a subject to seed only its entries.
+  scope?: { subject: string }
 }
-export type LevelSpread = Omit<SeedOptions, "quantity">
+export type LevelSpread = Pick<SeedOptions, "level" | "spread">
 
-// Round-robin across pool entries so even a small `quantity` spans several subject tabs.
-function interleavedPairs(): { pool: SubjectPool; code: string }[] {
-  const out: { pool: SubjectPool; code: string }[] = []
-  const max = Math.max(...POOL.map((p) => p.codes.length))
-  for (let i = 0; i < max; i++) {
-    for (const p of POOL) if (i < p.codes.length) out.push({ pool: p, code: p.codes[i] })
-  }
-  return out
+// Splits an ordered code list at `position`: everything before the cut is
+// "full" (fully covered), the single code at the cut is "partial" (in
+// progress), everything after is "none" (not yet covered). Codes must already
+// be in real curriculum sequence (POOL entries are).
+function frontierSplit(codes: string[], position: number): { full: string[]; partial: string | null; none: string[] } {
+  const fullCount = Math.min(codes.length, Math.floor(clamp01(position) * codes.length))
+  return { full: codes.slice(0, fullCount), partial: codes[fullCount] ?? null, none: codes.slice(fullCount + 1) }
 }
 
-function buildCounts(codes: string[], level: CentralLevel, spread: number): { byExpectation: Record<string, LevelCounts>; attempts: number } {
+// Fully covered codes land around `level` with the usual jitter; the one
+// partial code trails it — one level down and fewer recorded attempts — so it
+// visibly reads as "in progress" rather than mastered or untouched.
+function buildFrontierCounts(codes: string[], position: number, level: CentralLevel, spread: number): { byExpectation: Record<string, LevelCounts>; attempts: number } {
+  const { full, partial } = frontierSplit(codes, position)
   const attempts = randInt(16, 28) // class size; every student answers every code
   const byExpectation: Record<string, LevelCounts> = {}
-  for (const code of codes) byExpectation[code] = generateCounts(level, spread, attempts)
+  for (const code of full) byExpectation[code] = generateCounts(level, spread, attempts)
+  if (partial) {
+    const partialLevel = Math.max(1, level - 1) as CentralLevel
+    byExpectation[partial] = generateCounts(partialLevel, spread, Math.max(4, Math.round(attempts * 0.4)))
+  }
   return { byExpectation, attempts }
 }
 
-// Class Insights (class-wide). Fabricates synthetic tallies spread across subjects
-// so the subject folder tabs populate, and replicated across every grade so each
-// grade sub-tab shows the same full strand coverage rather than a sliver of it.
-// Idempotent: clears prior synthetic data first so re-generating replaces rather
-// than piles up.
-export function seedGlobal({ quantity, level, spread }: SeedOptions): void {
+// Class Insights (class-wide). Fabricates synthetic tallies so the subject folder
+// tabs populate, each subject seeded as its own sequential frontier (covered →
+// partial → not covered) through its ordered code list, replicated across every
+// grade so each grade sub-tab shows the same frontier rather than a sliver of it.
+// `scope` narrows generation to one subject; omitted, every subject gets seeded
+// independently at the same `position`. Idempotent: clears prior synthetic data
+// first so re-generating replaces rather than piles up.
+export function seedGlobal({ position, level, spread, scope }: SeedOptions): void {
   resetGlobal()
-  const wanted = Math.max(MIN_QUANTITY, Math.min(Math.round(quantity), POOL_SIZE))
-  const pairs = interleavedPairs().slice(0, wanted)
-
-  const codesByPool = new Map<SubjectPool, string[]>()
-  for (const { pool, code } of pairs) {
-    const codes = codesByPool.get(pool) ?? []
-    codes.push(code)
-    codesByPool.set(pool, codes)
-  }
+  const pools = scope ? POOL.filter((pool) => pool.subject === scope.subject) : POOL
 
   const now = Date.now()
   const tallies: LessonTally[] = []
   let i = 0
-  for (const [pool, codes] of codesByPool) {
+  for (const pool of pools) {
     for (const grade of pool.grades) {
-      const { byExpectation, attempts } = buildCounts(codes, level, spread)
+      const { byExpectation, attempts } = buildFrontierCounts(pool.codes, position, level, spread)
       tallies.push({
         lessonId: `${DEV_PREFIX}${pool.subject.toLowerCase().replace(/\s+/g, "-")}-g${grade}`,
         title: `Synthetic ${pool.subject} · Grade ${grade}`,
         grade,
         subject: pool.subject,
-        codes,
+        codes: pool.codes,
         updatedAt: now - i * 60_000,
         attempts,
         byExpectation,
@@ -171,6 +179,15 @@ export function seedGlobal({ quantity, level, spread }: SeedOptions): void {
 // The sandbox is entirely synthetic, so a global reset clears the whole active store.
 export function resetGlobal(): void {
   clearAllResults()
+}
+
+// A lesson's own codes are all "taught" together (not a curriculum span), so
+// every code lands at the same level — no frontier here, unlike seedGlobal.
+function buildCounts(codes: string[], level: CentralLevel, spread: number): { byExpectation: Record<string, LevelCounts>; attempts: number } {
+  const attempts = randInt(16, 28)
+  const byExpectation: Record<string, LevelCounts> = {}
+  for (const code of codes) byExpectation[code] = generateCounts(level, spread, attempts)
+  return { byExpectation, attempts }
 }
 
 // Quick Check modal — seed the one open lesson's expectations.

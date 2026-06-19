@@ -19,8 +19,9 @@ import {
   resetGlobal,
   resetLesson,
   resetLessons,
-  POOL_SIZE,
-  MIN_QUANTITY,
+  MIN_POSITION,
+  MAX_POSITION,
+  SANDBOX_SUBJECTS,
   type CentralLevel,
 } from "@/lib/dev-seed"
 
@@ -39,7 +40,8 @@ const LEVEL_LABELS: Record<CentralLevel, string> = {
 export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedScope; onChanged: () => void }) {
   const [open, setOpen] = useState(false)
   const [sandbox, setSandbox] = useState(() => isSandboxMode())
-  const [quantity, setQuantity] = useState(Math.min(POOL_SIZE, 12))
+  const [subject, setSubject] = useState("all")
+  const [position, setPosition] = useState(0.4)
   const [level, setLevel] = useState<CentralLevel>(3)
   const [spread, setSpread] = useState(0.25)
 
@@ -51,7 +53,7 @@ export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedSco
   }
 
   const handleGenerate = () => {
-    if (scope.kind === "global") seedGlobal({ quantity, level, spread })
+    if (scope.kind === "global") seedGlobal({ position, level, spread, scope: subject === "all" ? undefined : { subject } })
     else if (scope.kind === "lesson") seedForLesson(scope.lesson, { level, spread })
     else seedForLessons(scope.lessons, { level, spread })
     onChanged()
@@ -133,15 +135,35 @@ export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedSco
                 {sandbox && (
                   <>
                     {scope.kind === "global" && (
-                      <SliderRow
-                        label="Quantity"
-                        display={`${quantity} expectations`}
-                        min={MIN_QUANTITY}
-                        max={POOL_SIZE}
-                        step={1}
-                        value={quantity}
-                        onChange={setQuantity}
-                      />
+                      <>
+                        <div className="mb-3">
+                          <div className="mb-1 flex items-center justify-between">
+                            <span className="text-[11px] font-semibold text-[#8B4513]">Subject</span>
+                          </div>
+                          <select
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)}
+                            className="w-full rounded-lg border border-[#E8D5C4] bg-white px-2 py-1.5 text-[11px] text-[#2C2C2C]"
+                          >
+                            <option value="all">All subjects</option>
+                            {SANDBOX_SUBJECTS.map((s) => (
+                              <option key={s} value={s}>
+                                {s}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <SliderRow
+                          label="Curriculum progress"
+                          display={`${Math.round(position * 100)}% through`}
+                          min={MIN_POSITION}
+                          max={MAX_POSITION}
+                          step={0.05}
+                          value={position}
+                          onChange={setPosition}
+                        />
+                      </>
                     )}
 
                     <SliderRow

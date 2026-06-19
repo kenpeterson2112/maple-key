@@ -226,6 +226,22 @@ export function getReadinessForCodes(codes: string[]): Record<string, ReadinessL
   return out
 }
 
+// `orderedCodes` must already be in curriculum sequence. Returns the index of
+// the class's current frontier — the first code with no recorded data, or the
+// first code whose readiness is still "poor"/"okay" — i.e. where the class's
+// real progress currently sits. Returns `orderedCodes.length` when every code
+// reads "good"/"great" (nothing left to recommend next in this sequence).
+export function frontierIndex(orderedCodes: string[], progress: Record<string, LevelCounts>): number {
+  for (let i = 0; i < orderedCodes.length; i++) {
+    const counts = progress[orderedCodes[i]]
+    const total = counts ? counts.level1 + counts.level2 + counts.level3 + counts.level4 : 0
+    if (total === 0) return i
+    const readiness = computeReadinessLevel(counts)
+    if (readiness === "poor" || readiness === "okay") return i
+  }
+  return orderedCodes.length
+}
+
 export interface OverallCoverage {
   overall: string // e.g. "D1"
   // Count-weighted rollup of the children below, or null when the class has no
