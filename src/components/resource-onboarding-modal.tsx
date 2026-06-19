@@ -22,16 +22,16 @@ const STEPS: {
 }[] = [
   {
     icon: <Search size={28} />,
-    iconBg: "bg-[#FF6B35]/10",
-    iconColor: "text-[#FF6B35]",
+    iconBg: "bg-primary/10",
+    iconColor: "text-primary",
     title: "Find Your Resources",
     body: "Start here to find resources for your next lesson. Filter or search to find what you need.",
     detail: "Find resources → add your favourites → plan a lesson around them.",
   },
   {
     icon: <BookmarkPlus size={28} />,
-    iconBg: "bg-[#8B4513]/10",
-    iconColor: "text-[#8B4513]",
+    iconBg: "bg-secondary/10",
+    iconColor: "text-secondary",
     title: "Review & Add Your Own",
     body: "Browse the curated list, bookmark resources that resonate, and bring in materials you already love. Add notes about the lesson theme or learning goals you have in mind — this context shapes what gets generated.",
     detail: "Your bookmarks and notes travel with you into the lesson planner.",
@@ -74,13 +74,13 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
     <DialogPrimitive.Root open={open} onOpenChange={(o) => { if (!o) handleClose() }}>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-        <DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-50 w-[92vw] max-w-lg -translate-x-1/2 -translate-y-1/2 bg-[#FAF3E0] border-2 border-[#E8D5C4] rounded-2xl shadow-2xl overflow-hidden flex flex-col data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95">
+        <DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-50 w-[92vw] max-w-lg -translate-x-1/2 -translate-y-1/2 bg-background border-2 border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95">
 
           {/* Header */}
-          <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-[#E8D5C4]">
+          <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-border">
             <div className="flex items-center gap-2">
               <span className="text-xl" aria-hidden>🍁</span>
-              <DialogPrimitive.Title className="text-base font-semibold text-[#2C2C2C]">
+              <DialogPrimitive.Title className="text-base font-semibold text-foreground">
                 How Maple Key Works
               </DialogPrimitive.Title>
             </div>
@@ -88,7 +88,7 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
               <StepDots current={step} total={4} />
               <DialogPrimitive.Close
                 onClick={handleClose}
-                className="p-1 rounded-lg text-[#888] hover:text-[#2C2C2C] hover:bg-black/5 transition-colors"
+                className="p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-black/5 transition-colors"
                 aria-label="Close"
               >
                 <X size={16} />
@@ -98,7 +98,7 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
 
           {/* Step label */}
           <div className="px-6 pt-4 pb-0">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#FF6B35]">
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
               Step {step + 1} of 4
             </span>
           </div>
@@ -117,25 +117,25 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
                   <span className={s.iconColor}>{s.icon}</span>
                 </div>
 
-                <h2 className="text-xl font-bold text-[#2C2C2C] leading-snug">{s.title}</h2>
+                <h2 className="text-xl font-bold text-foreground leading-snug">{s.title}</h2>
 
-                <p className="text-sm text-[#444] leading-relaxed">{s.body}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.body}</p>
 
-                <div className="flex items-start gap-2.5 bg-white/60 border border-[#E8D5C4] rounded-xl px-4 py-3">
-                  <span className="mt-0.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[#FF6B35] mt-1.5" />
-                  <p className="text-xs text-[#666] leading-relaxed">{s.detail}</p>
+                <div className="flex items-start gap-2.5 bg-card/60 border border-border rounded-xl px-4 py-3">
+                  <span className="mt-0.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary mt-1.5" />
+                  <p className="text-xs text-muted-foreground leading-relaxed">{s.detail}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between px-6 py-4 border-t border-[#E8D5C4] bg-white/40">
+          <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-card/40">
             <button
               type="button"
               onClick={() => step > 0 && setStep((s) => (s - 1) as Step)}
               disabled={step === 0}
-              className="px-4 py-2 text-sm font-medium text-[#666] hover:text-[#2C2C2C] disabled:opacity-0 disabled:pointer-events-none transition-colors"
+              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground disabled:opacity-0 disabled:pointer-events-none transition-colors"
             >
               Back
             </button>
@@ -145,7 +145,7 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="px-3 py-2 text-sm text-[#888] hover:text-[#2C2C2C] transition-colors"
+                  className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Skip
                 </button>
@@ -153,7 +153,7 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
               <button
                 type="button"
                 onClick={handleNext}
-                className="px-6 py-2.5 bg-[#FF6B35] text-white font-semibold rounded-xl text-sm hover:bg-[#E85A24] transition-colors"
+                className="px-6 py-2.5 bg-primary text-primary-foreground font-semibold rounded-xl text-sm hover:bg-primary/90 transition-colors"
               >
                 {step < 3 ? "Next" : "Get Started"}
               </button>
@@ -172,7 +172,7 @@ function StepDots({ current, total }: { current: number; total: number }) {
         <span
           key={i}
           className={`h-1.5 rounded-full transition-all ${
-            i === current ? "w-6 bg-[#FF6B35]" : i < current ? "w-1.5 bg-[#FF6B35]/40" : "w-1.5 bg-[#E8D5C4]"
+            i === current ? "w-6 bg-primary" : i < current ? "w-1.5 bg-primary/40" : "w-1.5 bg-border"
           }`}
         />
       ))}
