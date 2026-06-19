@@ -1915,21 +1915,27 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   <div className="space-y-4">
                     {/* Lesson Length */}
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-medium text-[#2C2C2C] mb-2">
-                        <Clock size={16} className="text-[#8B4513]" />
-                        Lesson Length
+                      <label className="flex items-center justify-between gap-2 text-sm font-medium text-[#2C2C2C] mb-2">
+                        <span className="flex items-center gap-2">
+                          <Clock size={16} className="text-[#8B4513]" />
+                          Lesson Length
+                        </span>
+                        <span className="text-sm font-semibold text-[#FF6B35]">{lessonMinutes} minutes</span>
                       </label>
-                      <select
-                        value={lessonLength}
-                        onChange={(e) => setLessonLength(e.target.value)}
-                        className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors"
-                      >
-                        <option value="40 minutes">40 minutes</option>
-                        <option value="60 minutes">60 minutes</option>
-                        <option value="75 minutes">75 minutes</option>
-                        <option value="90 minutes">90 minutes</option>
-                        <option value="120 minutes">120 minutes (double)</option>
-                      </select>
+                      <input
+                        type="range"
+                        min={10}
+                        max={120}
+                        step={5}
+                        value={lessonMinutes}
+                        onChange={(e) => setLessonLength(`${e.target.value} minutes`)}
+                        className="w-full accent-[#FF6B35]"
+                        aria-label="Lesson length in minutes"
+                      />
+                      <div className="flex justify-between text-xs text-[#8B4513]/60 mt-1">
+                        <span>10 min</span>
+                        <span>120 min</span>
+                      </div>
                     </div>
 
                     {/* Lesson Template Card Picker */}
