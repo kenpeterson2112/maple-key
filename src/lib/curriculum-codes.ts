@@ -31,6 +31,17 @@ export function strandCodeOf(overall: string): string {
   return overall.charAt(0)
 }
 
+// Real expectation codes are always <strand letter(s)><overall number>[.<specific
+// number>] (e.g. "D1", "D1.1"). Lesson plans can carry free-form fallback "codes"
+// (short concept labels) when the AI had no curriculum code to attach to a
+// question — those must never reach the coverage tree, since `strandCodeOf`
+// would otherwise turn a bare/malformed token into a fake one-letter strand.
+const EXPECTATION_CODE_PATTERN = /^[A-Za-z]+\d+(\.\d+)?$/
+
+export function isExpectationCode(code: string): boolean {
+  return EXPECTATION_CODE_PATTERN.test(code)
+}
+
 export function groupByOverall(codes: string[]): Record<string, string[]> {
   const out: Record<string, string[]> = {}
   for (const code of codes) {
