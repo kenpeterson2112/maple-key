@@ -25,6 +25,7 @@ export function setSandboxMode(on: boolean): void {
   } catch {
     // ignore
   }
+  notifyResultsChanged()
 }
 
 function activeKey(): string {
@@ -69,6 +70,30 @@ function write(store: Store): void {
   } catch {
     // Storage quota exceeded — skip.
   }
+  notifyResultsChanged()
+}
+
+// ---- Change notification ----
+// Components that read this store (e.g. resource cards' readiness pills) may
+// stay mounted across tab switches — App.tsx keeps Resources as an "always-on"
+// background layer — so a plain useMemo([data]) never learns that a sibling
+// component (the dev-seed sandbox control, a Quick Check) just wrote new
+// results. This lets useSyncExternalStore subscribers re-read storage on change.
+let resultsVersion = 0
+const resultsListeners = new Set<() => void>()
+
+function notifyResultsChanged(): void {
+  resultsVersion++
+  for (const listener of resultsListeners) listener()
+}
+
+export function subscribeResultsChanged(listener: () => void): () => void {
+  resultsListeners.add(listener)
+  return () => resultsListeners.delete(listener)
+}
+
+export function getResultsVersion(): number {
+  return resultsVersion
 }
 
 function emptyCounts(): LevelCounts {
@@ -135,6 +160,7 @@ export function clearAllResults(): void {
   } catch {
     // ignore
   }
+  notifyResultsChanged()
 }
 
 // ---- Aggregation for dashboards ----
