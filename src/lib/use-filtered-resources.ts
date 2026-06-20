@@ -1,11 +1,19 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useSyncExternalStore } from "react"
 import useSWR from "swr"
 import type { Filters, Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
 import { normalizeGrades, minGrade } from "@/lib/utils"
-import { getReadinessForCodes, getProgressForCodes, frontierIndex, type LevelCounts, type ReadinessLevel } from "@/lib/assessment-results"
+import {
+  getReadinessForCodes,
+  getProgressForCodes,
+  frontierIndex,
+  subscribeResultsChanged,
+  getResultsVersion,
+  type LevelCounts,
+  type ReadinessLevel,
+} from "@/lib/assessment-results"
 import { strandCodeOf } from "@/lib/curriculum-codes"
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
@@ -27,13 +35,20 @@ export function useFilteredResources(filters: Filters, sidebarFilters?: SidebarF
     revalidateOnFocus: false,
   })
 
+  // Resources stays mounted as App.tsx's "always-on" background layer, so a
+  // plain useMemo([data]) would never notice sandbox/quick-check data written
+  // while some other space (Insights, the Lesson Planner) is on top. Subscribe
+  // to the results store directly so these recompute on every change, no
+  // matter which space triggered it.
+  const resultsVersion = useSyncExternalStore(subscribeResultsChanged, getResultsVersion, getResultsVersion)
+
   const classReadiness = useMemo((): Record<string, ReadinessLevel> => {
     const resources = data?.resources
     if (!resources) return {}
     const codes = new Set<string>()
     resources.forEach(r => r.curriculum_expectations?.forEach((c: string) => codes.add(c)))
     return getReadinessForCodes(Array.from(codes))
-  }, [data])
+  }, [data, resultsVersion])
 
   // Raw per-code band counts for the same code set — lets each card roll its own
   // expectations up to an overall readiness without re-reading storage per render.
@@ -43,7 +58,7 @@ export function useFilteredResources(filters: Filters, sidebarFilters?: SidebarF
     const codes = new Set<string>()
     resources.forEach(r => r.curriculum_expectations?.forEach((c: string) => codes.add(c)))
     return getProgressForCodes(Array.from(codes))
-  }, [data])
+  }, [data, resultsVersion])
 
   const filteredResources = useMemo(() => {
     const resources = data?.resources
