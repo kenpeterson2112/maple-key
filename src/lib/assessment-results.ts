@@ -1,6 +1,6 @@
 import type { LessonMetadata } from "./lesson-metadata"
 import type { ProficiencyLevel } from "./assessment-types"
-import { overallCodeOf, overallTitle, groupByOverall, groupByStrand, strandLabel } from "./curriculum-codes"
+import { overallCodeOf, overallTitle, groupByOverall, groupByStrand, strandLabel, isExpectationCode } from "./curriculum-codes"
 
 const STORAGE_KEY = "maplekey_assessment_results"
 // Parallel "sandbox" store + on/off flag. When sandbox mode is on, every read/write
@@ -302,8 +302,9 @@ export function buildOverallCoverage(tallies: LessonTally[], subject: string, gr
   const taught = new Set<string>()
   const assessed: Record<string, LevelCounts> = {}
   for (const t of tallies) {
-    for (const code of t.codes) taught.add(code)
+    for (const code of t.codes) if (isExpectationCode(code)) taught.add(code)
     for (const [code, counts] of Object.entries(t.byExpectation)) {
+      if (!isExpectationCode(code)) continue
       taught.add(code)
       addInto((assessed[code] ??= emptyCounts()), counts)
     }
