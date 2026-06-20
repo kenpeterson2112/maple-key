@@ -89,7 +89,17 @@ interface SubjectPool {
 }
 
 const POOL: SubjectPool[] = [
-  { subject: "Math", grades: GRADES, codes: describedCodes("Math") },
+  {
+    subject: "Math",
+    grades: GRADES,
+    codes: [
+      "B1.1", "B1.2", "B1.3", "B2.1", "B2.2", "B2.3",
+      "C1.1", "C1.2", "C2.1", "C2.2", "C3.1", "C3.2",
+      "D1.1", "D1.2", "D1.3", "D1.4", "D1.5", "D1.6", "D2.1", "D2.2",
+      "E1.1", "E1.2", "E1.3", "E1.4", "E2.1", "E2.2", "E2.3", "E2.4",
+      "F1.1", "F1.2", "F1.3", "F1.4", "F1.5",
+    ],
+  },
   { subject: "Language", grades: GRADES, codes: ["A1.1", "B1.1", "B2.1", "C1.1", "D1.1", "D2.1"] },
   { subject: "Science", grades: GRADES, codes: ["B1.1", "B1.2", "B2.1", "C1.1", "C2.1", "E1.1"] },
   { subject: "Social Studies", grades: GRADES, codes: ["A1.1", "A1.2", "A2.1", "B1.1", "B2.1", "B3.1"] },
