@@ -24,6 +24,12 @@ function sortByUrgency(nodes: CoverageNode[]): CoverageNode[] {
   return [...nodes].sort((a, b) => urgencyScore(b) - urgencyScore(a) || a.code.localeCompare(b.code, undefined, { numeric: true }))
 }
 
+// Strand rows read top-to-bottom like the curriculum document (A, B, C...),
+// rather than jumping to whichever strand needs attention most.
+function sortByCode(nodes: CoverageNode[]): CoverageNode[] {
+  return [...nodes].sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
+}
+
 function TiersToggle({ checked, onChange }: { checked: boolean; onChange: (next: boolean) => void }) {
   return (
     <button
@@ -186,7 +192,7 @@ export default function CurriculumOrbDashboard({ tallies }: { tallies: LessonTal
   const subject = tallies[0]?.subject ?? ""
   const grade = tallies[0]?.grade
   const overallNodes = useMemo(() => buildOverallCoverage(tallies, subject, grade), [tallies, subject, grade])
-  const strandNodes = useMemo(() => sortByUrgency(buildStrandCoverage(overallNodes, subject, grade)), [overallNodes, subject, grade])
+  const strandNodes = useMemo(() => sortByCode(buildStrandCoverage(overallNodes, subject, grade)), [overallNodes, subject, grade])
 
   if (overallNodes.length === 0) return null
 
