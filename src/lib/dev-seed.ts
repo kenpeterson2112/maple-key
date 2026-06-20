@@ -101,7 +101,7 @@ const POOL: SubjectPool[] = [
     ],
   },
   { subject: "Language", grades: GRADES, codes: ["A1.1", "B1.1", "B2.1", "C1.1", "D1.1", "D2.1"] },
-  { subject: "Science", grades: GRADES, codes: ["B1.1", "B1.2", "B2.1", "C1.1", "C2.1", "E1.1"] },
+  { subject: "Science", grades: GRADES, codes: ["B1.1", "B1.2", "B2.1", "C1.1", "C2.1", "D1.1", "D2.1", "E1.1"] },
   { subject: "Social Studies", grades: GRADES, codes: ["A1.1", "A1.2", "A2.1", "B1.1", "B2.1", "B3.1"] },
   { subject: "FSL", grades: GRADES, codes: ["A1.1", "A2.1", "B1.1", "C1.1", "D1.1"] },
   { subject: "History", grades: ["7"], codes: describedCodes("History", "7") },
