@@ -2,12 +2,23 @@
 
 A Canadian K-12 educational resource discovery platform for teachers.
 
-Single-page React app, built with Vite, deployed to GitHub Pages from
-`main/docs`.
+Single-page React app, built with Vite, with AI lesson planning and
+assessment features powered by serverless functions in `api/`.
 
 ## Live site
 
-**https://kenpeterson2112.github.io/v0-maple-key-website/**
+**Production (canonical): https://maplekey.vercel.app/**
+
+Vercel hosts the full app, including the AI features (lesson generation,
+assessment, planning questions) backed by the serverless functions in
+`api/*.ts`. This is the deployment to use for anything involving AI.
+
+A secondary static mirror is published to GitHub Pages at
+**https://kenpeterson2112.github.io/v0-maple-key-website/** for resource
+discovery only. GitHub Pages serves static files with no serverless
+runtime, so `api/*.ts` doesn't exist there — any AI feature
+(`fetch("/api/generate-lesson")` etc.) 404s silently. Don't rely on the
+Pages mirror to test or demo AI functionality.
 
 ## Stack
 
@@ -17,6 +28,9 @@ Single-page React app, built with Vite, deployed to GitHub Pages from
 - Radix UI (Popover, Dialog) for primitives
 - framer-motion for animation
 - SWR for the static `resources.json` fetch
+- Anthropic SDK, called from Vercel serverless functions in `api/` (lesson
+  planning, generation, assessment) — Vercel-only, not available on the
+  GitHub Pages mirror
 
 ## Develop
 
@@ -42,16 +56,28 @@ VITE_BASE_PATH=/v0-maple-key-website/ pnpm build
 
 ## Deployment
 
-Automatic. On every push to `main`, `.github/workflows/deploy.yml`:
+### Production — Vercel (canonical)
+
+Vercel's GitHub integration auto-builds and deploys on every push to
+`main` (see `vercel.json`). This is the only place the AI features work,
+because only Vercel runs the serverless functions in `api/`. Don't change
+this without updating this README, `CLAUDE.md`, and `DESIGNER_HANDOFF.md`
+together.
+
+### Static mirror — GitHub Pages (discovery-only)
+
+`.github/workflows/deploy.yml` also runs on every push to `main`:
 
 1. Builds with `VITE_BASE_PATH=/v0-maple-key-website/`.
 2. Replaces the `docs/` folder with the new `dist/` output.
 3. Commits the result back to `main` with `[skip ci]` (the marker
    prevents an infinite loop).
 
-GitHub Pages serves from `main/docs/`.
+GitHub Pages serves the result from `main/docs/`. This mirror has no
+serverless runtime, so it's resource-discovery only — the lesson
+planning, generation, and assessment features won't work there.
 
-### One-time Pages setup
+#### One-time Pages setup
 
 In repo Settings → Pages:
 

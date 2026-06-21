@@ -23,7 +23,7 @@ footer driven by IntersectionObserver, assessment modal).
 - UI primitives: **Radix UI** (`@radix-ui/react-dialog`, `@radix-ui/react-popover`), **Framer Motion** for overlays, **Lucide React** for icons
 - Class utils: `clsx` + `tailwind-merge`
 - Data: **SWR** for static `resources.json`; **Anthropic SDK** (`@anthropic-ai/sdk`) for AI calls
-- Deploy: **Vercel** (`vercel.json`, build `pnpm build` → `dist/`)
+- Deploy: **Vercel** is the canonical production deployment (`vercel.json`, build `pnpm build` → `dist/`), auto-deployed on push to `main`. It's also the only place the AI features work, since only Vercel runs the serverless functions in `api/*.ts`. GitHub Pages (`.github/workflows/deploy.yml` → `docs/`) is a secondary **discovery-only static mirror** with no serverless runtime — `fetch("/api/...")` 404s silently there. See `README.md` for the full split.
 - CI: GitHub Actions (`.github/workflows/deploy.yml`); nightly resource refresh and link-health checks run as **Claude Code routines** on the Claude subscription (see `ROUTINES.md`), with the `nightly-*.yml` workflows retained as a manual, API-billed fallback
 
 ## Design system — THE shared contract
