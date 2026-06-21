@@ -495,6 +495,12 @@ export interface ResourceAlignment {
 
 Live deployment is a **Vercel-hosted Vite React 19 + TypeScript application**, not standalone HTML with CDN React. Build targets modern browsers; no IE11 or legacy support needed.
 
+A static-only copy of the build also ships to GitHub Pages as a
+discovery-only mirror. It has no serverless runtime, so any AI-feature
+mockups (lesson generation, assessment, planning questions) should be
+designed and validated against the Vercel production deployment, not the
+Pages mirror — those API calls simply don't exist there.
+
 ---
 
 ## Key Implementation Notes
