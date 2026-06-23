@@ -1,5 +1,18 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
+import { guardRequest } from "./_lib/guard"
+import {
+  MAX_CLASSROOM_RESOURCES,
+  MAX_PLANNING_ANSWER_FIELD_LENGTH,
+  MAX_PLANNING_ANSWERS,
+  MAX_RESOURCE_DESCRIPTION_LENGTH,
+  MAX_RESOURCE_TITLE_LENGTH,
+  MAX_RESOURCES,
+  MAX_TEACHER_NOTES_LENGTH,
+  PayloadTooLargeError,
+  assertMaxArrayLength,
+  assertMaxLength,
+} from "./_lib/limits"
 
 const LESSON_MODEL = "claude-haiku-4-5-20251001"
 
@@ -185,6 +198,7 @@ const TEMPLATE_GUIDANCE: Record<string, string> = {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!guardRequest(req, res)) return
   const client = new Anthropic()
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" })
@@ -204,6 +218,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (!resources || resources.length === 0) {
     return res.status(400).json({ error: "At least one resource is required" })
+  }
+
+  try {
+    assertMaxArrayLength(resources, MAX_RESOURCES, "resources")
+    assertMaxArrayLength(classroomResources, MAX_CLASSROOM_RESOURCES, "classroomResources")
+    assertMaxArrayLength(planningAnswers, MAX_PLANNING_ANSWERS, "planningAnswers")
+    assertMaxLength(teacherNotes, MAX_TEACHER_NOTES_LENGTH, "teacherNotes")
+    resources.forEach((r, i) => {
+      assertMaxLength(r.title, MAX_RESOURCE_TITLE_LENGTH, `resources[${i}].title`)
+      assertMaxLength(r.description, MAX_RESOURCE_DESCRIPTION_LENGTH, `resources[${i}].description`)
+    })
+    planningAnswers?.forEach((a, i) => {
+      assertMaxLength(a.questionPrompt, MAX_PLANNING_ANSWER_FIELD_LENGTH, `planningAnswers[${i}].questionPrompt`)
+      assertMaxLength(a.answer, MAX_PLANNING_ANSWER_FIELD_LENGTH, `planningAnswers[${i}].answer`)
+    })
+  } catch (err) {
+    if (err instanceof PayloadTooLargeError) {
+      return res.status(413).json({ error: err.message })
+    }
+    throw err
   }
 
   const allCodes = [...new Set(resources.flatMap((r) => r.curriculum_expectations ?? []))]
