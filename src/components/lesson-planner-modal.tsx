@@ -217,6 +217,7 @@ export default function LessonPlannerModal({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-MK-Api-Key": import.meta.env.VITE_MK_API_KEY ?? "",
           ...(userEmail ? { "X-User-Email": userEmail } : {}),
         },
         body: JSON.stringify({
@@ -346,6 +347,7 @@ export default function LessonPlannerModal({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-MK-Api-Key": import.meta.env.VITE_MK_API_KEY ?? "",
           ...(qUserEmail ? { "X-User-Email": qUserEmail } : {}),
         },
         body: JSON.stringify(buildRequestPayload()),

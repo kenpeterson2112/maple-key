@@ -1,5 +1,14 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
+import { guardRequest } from "./_lib/guard"
+import {
+  MAX_ASSESSMENT_TITLE_LENGTH,
+  MAX_EXPECTATIONS,
+  MAX_LESSON_CONTENT_FIELD_LENGTH,
+  PayloadTooLargeError,
+  assertMaxArrayLength,
+  assertMaxLength,
+} from "./_lib/limits"
 
 interface ExpectationInput {
   code: string
@@ -14,7 +23,8 @@ interface GenerateAssessmentRequest {
   lessonContent?: { mindsOn: string; action: string; consolidation: string }
 }
 
-const MAX_EXPECTATIONS = 8
+/** How many expectations get described in the prompt — separate from the hard MAX_EXPECTATIONS reject cap in _lib/limits. */
+const EXPECTATIONS_IN_PROMPT = 8
 
 /** A quick check is a fast readiness signal, not a diagnostic — keep it short. */
 const MAX_ASSESSMENT_QUESTIONS = 5
@@ -27,6 +37,7 @@ function extractJson(text: string): string {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!guardRequest(req, res)) return
   const client = new Anthropic()
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" })
@@ -38,7 +49,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: "At least one expectation is required" })
   }
 
-  const expList = expectations.slice(0, MAX_EXPECTATIONS)
+  try {
+    assertMaxArrayLength(expectations, MAX_EXPECTATIONS, "expectations")
+    assertMaxLength(title, MAX_ASSESSMENT_TITLE_LENGTH, "title")
+    assertMaxLength(lessonContent?.mindsOn, MAX_LESSON_CONTENT_FIELD_LENGTH, "lessonContent.mindsOn")
+    assertMaxLength(lessonContent?.action, MAX_LESSON_CONTENT_FIELD_LENGTH, "lessonContent.action")
+    assertMaxLength(lessonContent?.consolidation, MAX_LESSON_CONTENT_FIELD_LENGTH, "lessonContent.consolidation")
+  } catch (err) {
+    if (err instanceof PayloadTooLargeError) {
+      return res.status(413).json({ error: err.message })
+    }
+    throw err
+  }
+
+  const expList = expectations.slice(0, EXPECTATIONS_IN_PROMPT)
 
   const systemPrompt = `You are an experienced Ontario elementary school teacher writing a short formative "quick check" for students at the end of a lesson. You write clear, grade-appropriate questions that check understanding of specific curriculum expectations. You always respond with valid JSON only — no markdown fences, no extra text.`
 

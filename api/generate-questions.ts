@@ -1,5 +1,16 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
+import { guardRequest } from "./_lib/guard"
+import {
+  MAX_CLASSROOM_RESOURCES,
+  MAX_RESOURCE_DESCRIPTION_LENGTH,
+  MAX_RESOURCE_TITLE_LENGTH,
+  MAX_RESOURCES,
+  MAX_TEACHER_NOTES_LENGTH,
+  PayloadTooLargeError,
+  assertMaxArrayLength,
+  assertMaxLength,
+} from "./_lib/limits"
 
 /**
  * CALL 1 of the two-call lesson flow.
@@ -58,7 +69,8 @@ interface PlanningQuestion {
 /** Bounds — keep the call cheap and the UI fast. */
 const MIN_QUESTIONS = 3
 const MAX_QUESTIONS = 4
-const MAX_RESOURCES = 12
+/** How many resources get described in the prompt — separate from the hard MAX_RESOURCES reject cap in _lib/limits. */
+const RESOURCES_IN_PROMPT = 12
 
 /** Reused verbatim from generate-assessment.ts — model-agnostic JSON rescue. */
 function extractJson(text: string): string {
@@ -114,6 +126,7 @@ function validateQuestion(raw: unknown, index: number): PlanningQuestion | null 
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (!guardRequest(req, res)) return
   const client = new Anthropic()
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" })
@@ -126,8 +139,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: "At least one resource is required" })
   }
 
+  try {
+    assertMaxArrayLength(resources, MAX_RESOURCES, "resources")
+    assertMaxArrayLength(classroomResources, MAX_CLASSROOM_RESOURCES, "classroomResources")
+    assertMaxLength(teacherNotes, MAX_TEACHER_NOTES_LENGTH, "teacherNotes")
+    resources.forEach((r, i) => {
+      assertMaxLength(r.title, MAX_RESOURCE_TITLE_LENGTH, `resources[${i}].title`)
+      assertMaxLength(r.description, MAX_RESOURCE_DESCRIPTION_LENGTH, `resources[${i}].description`)
+    })
+  } catch (err) {
+    if (err instanceof PayloadTooLargeError) {
+      return res.status(413).json({ error: err.message })
+    }
+    throw err
+  }
+
   const resourceList = resources
-    .slice(0, MAX_RESOURCES)
+    .slice(0, RESOURCES_IN_PROMPT)
     .map((r, i) => {
       const lines = [
         `Resource ${i + 1}: "${r.title}"`,
