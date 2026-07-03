@@ -159,6 +159,27 @@ export function setReproducibleLanguage(lang: "English" | "French"): void {
   }
 }
 
+const NO_TECH_MODE_KEY = "maplekey_no_tech_mode"
+
+/** Remembered across sessions so teachers don't re-toggle every lesson. */
+export function getNoTechMode(): boolean {
+  if (typeof window === "undefined") return false
+  try {
+    return window.localStorage.getItem(NO_TECH_MODE_KEY) === "true"
+  } catch {
+    return false
+  }
+}
+
+export function setNoTechMode(value: boolean): void {
+  if (typeof window === "undefined") return
+  try {
+    window.localStorage.setItem(NO_TECH_MODE_KEY, String(value))
+  } catch {
+    // ignore quota / privacy errors
+  }
+}
+
 const RESOURCE_TOUR_KEY = "maplekey_resource_tour_seen"
 
 export function isResourceTourSeen(): boolean {
