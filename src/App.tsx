@@ -125,7 +125,7 @@ export default function App() {
   }
 
   const topNavSpace: TopNavSpace | null =
-    activeSpace === "resources" || activeSpace === "lessons" || activeSpace === "insights"
+    activeSpace === "lessonplanner" || activeSpace === "resources" || activeSpace === "insights"
       ? activeSpace
       : null
 
@@ -133,8 +133,11 @@ export default function App() {
     <div className="fixed inset-0 bg-[#FAF3E0] overflow-hidden flex flex-col">
       <TopNav
         activeSpace={topNavSpace}
-        onChangeSpace={(s) => setActiveSpace(s)}
-        onPlanLesson={() => { setPlannerLesson(null); setActiveSpace("lessonplanner") }}
+        onChangeSpace={(s) => {
+          // Plan always starts fresh, matching the old "Plan Lesson" button.
+          if (s === "lessonplanner") setPlannerLesson(null)
+          setActiveSpace(s)
+        }}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
       />
@@ -173,6 +176,7 @@ export default function App() {
                   bookmarkedResources={bookmarkedResources}
                   onClose={goResources}
                   onBack={goResources}
+                  onOpenSavedLessons={() => setActiveSpace("lessons")}
                   filters={filters}
                   setFilters={setFilters}
                   sidebarFilters={sidebarFilters}
