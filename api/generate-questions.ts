@@ -48,6 +48,7 @@ interface GenerateQuestionsRequest {
   lessonTemplate: string
   teacherNotes: string
   classroomResources?: string[]
+  noTechMode?: boolean
 }
 
 /** The three answer formats the renderer is built to handle. */
@@ -132,7 +133,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" })
   }
 
-  const { resources, lessonLength, lessonTemplate, teacherNotes, classroomResources } =
+  const { resources, lessonLength, lessonTemplate, teacherNotes, classroomResources, noTechMode } =
     req.body as GenerateQuestionsRequest
 
   if (!resources || resources.length === 0) {
@@ -185,10 +186,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ? `Classroom resources the teacher has available: ${classroomResources.join(", ")}`
       : ""
 
+  const noTechModeLine = noTechMode
+    ? "IMPORTANT CONSTRAINT: This lesson will be delivered in no-tech mode — students will not use any device or screen themselves (a teacher-led projector for whole-class display is fine). Do not ask a planning question that assumes students will use a device, app, or website; if a resource is normally tech-delivered, frame any question around its hands-on or paper-based alternative instead."
+    : ""
+
   const userPrompt = `A Grade ${grade} ${subject} teacher is about to generate a ${lessonLength} lesson plan (template: ${lessonTemplate}) from the resources below. Before the lesson is written, ask them ${MIN_QUESTIONS}-${MAX_QUESTIONS} planning questions.
 
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomResourcesLine}
+${noTechModeLine}
 
 Resources to be used:
 ${resourceList}

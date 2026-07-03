@@ -23,12 +23,13 @@ import {
   MessageSquareText,
   School,
   Languages,
+  MonitorOff,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import PageHeader from "@/components/page-header"
 import { normalizeGrades } from "@/lib/utils"
 import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
-import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage } from "@/lib/lesson-metadata"
+import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage, TemplateSection } from "@/lib/lesson-metadata"
 import ArtifactsSection from "@/components/artifacts-section"
 import ArtifactOrganizerModal from "@/components/artifact-organizer-modal"
 import LessonBuildingLoader from "@/components/lesson-building-loader"
@@ -48,9 +49,9 @@ import MaterialsEditorModal from "@/components/materials-editor-modal"
 import { getProgressForCodes, type LevelCounts } from "@/lib/assessment-results"
 import { LEVEL_META, LEVEL_ORDER } from "@/lib/assessment-types"
 import { describeCode } from "@/lib/curriculum-codes"
-import { LESSON_TEMPLATES, getTemplate, resolveTemplateId, type TemplateSection } from "@/lib/lesson-templates"
+import { LESSON_TEMPLATES, getTemplate, resolveTemplateId } from "@/lib/lesson-templates"
 import { type UserMaterial } from "@/components/user-materials-section"
-import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage } from "@/lib/personalization"
+import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage, getNoTechMode, setNoTechMode } from "@/lib/personalization"
 import { useGlobalFilters } from "@/lib/global-filters"
 import PlanResourceSearch from "@/components/plan-resource-search"
 import LessonMaterials from "@/components/lesson-materials"
@@ -108,6 +109,7 @@ export default function LessonPlannerModal({
   // Reopening a saved lesson prefers its stored value; otherwise the remembered preference.
   const [reproducibleLanguage, setReproducibleLanguageState] =
     useState<ReproducibleLanguage>(fc?.reproducibleLanguage ?? getReproducibleLanguage())
+  const [noTechMode, setNoTechModeState] = useState<boolean>(fc?.noTechMode ?? getNoTechMode())
   const [userMaterials, setUserMaterials] = useState<UserMaterial[]>([])
   const [isMaterialsEditorOpen, setIsMaterialsEditorOpen] = useState(false)
   const [materialsTick, setMaterialsTick] = useState(0)
@@ -237,6 +239,7 @@ export default function LessonPlannerModal({
           includeAssessmentData,
           classroomResources: classroomResourceLabels,
           reproducibleLanguage,
+          noTechMode,
           ...(planningAnswers.length > 0 ? { planningAnswers } : {}),
           ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
         }),
@@ -308,6 +311,7 @@ export default function LessonPlannerModal({
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
           reproducibleLanguage,
+          noTechMode,
         },
       })
       setLatestLesson(logged)
@@ -481,6 +485,7 @@ export default function LessonPlannerModal({
           sections: data.sections ?? [],
           artifacts: incomingArtifacts,
           reproducibleLanguage,
+          noTechMode,
         },
       })
       setLatestLesson(logged)
@@ -553,6 +558,11 @@ export default function LessonPlannerModal({
     setReproducibleLanguage(lang)
   }
 
+  const handleNoTechModeChange = (value: boolean) => {
+    setNoTechModeState(value)
+    setNoTechMode(value)
+  }
+
   const buildRequestPayload = () => ({
     resources: bookmarkedResources.map((r) => ({
       title: (r as any).topic_title,
@@ -570,6 +580,7 @@ export default function LessonPlannerModal({
     includeAssessmentData,
     classroomResources: classroomResourceLabels,
     reproducibleLanguage,
+    noTechMode,
     ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
   })
 
@@ -1986,6 +1997,25 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         })}
                       </div>
                     </div>
+
+                    {/* No-Tech Mode */}
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={noTechMode}
+                        onChange={(e) => handleNoTechModeChange(e.target.checked)}
+                        className="mt-0.5 w-5 h-5 rounded-lg border-2 border-[#E8D5C4] cursor-pointer accent-[#FF6B35]"
+                      />
+                      <div className="flex-1">
+                        <span className="flex items-center gap-2 text-sm font-medium text-[#2C2C2C]">
+                          <MonitorOff size={16} className="text-[#8B4513]" />
+                          No-Tech Mode
+                        </span>
+                        <p className="text-xs text-[#888] mt-0.5">
+                          Keep students completely off screens. Planning and a projector for whole-class display are still fine — nothing for students to hold or operate themselves.
+                        </p>
+                      </div>
+                    </label>
                   </div>
                 </div>
 

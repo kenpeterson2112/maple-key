@@ -53,6 +53,7 @@ interface GenerateRequest {
   planningAnswers?: PlanningAnswer[]
   classProgress?: Record<string, LevelCounts>
   reproducibleLanguage?: "English" | "French"
+  noTechMode?: boolean
 }
 
 function formatClassProgress(progress: Record<string, LevelCounts>): string {
@@ -214,6 +215,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     planningAnswers,
     classProgress,
     reproducibleLanguage,
+    noTechMode,
   } = req.body as GenerateRequest
 
   if (!resources || resources.length === 0) {
@@ -273,6 +275,10 @@ ${classroomResources.map((m) => `  - ${m}`).join("\n")}
 Make deliberate, pedagogically sound use of the items that genuinely fit this content — decide HOW each is best deployed (concrete modelling, hands-on stations, guided exploration, partner work), do not merely name them. STRICT RULE: do NOT design any activity that depends on devices, software, manipulatives, or specialized equipment that is NOT in this list. If something not listed would help, adapt the activity to what IS available instead. Basic consumables (paper, pencils, markers, scissors, glue) and items the teacher produces themselves (handouts, capture sheets, exit tickets — list those under "artifacts") are always allowed.`
       : `The teacher has not listed any classroom equipment, technology, manipulatives, or digital tools. STRICT RULE: do NOT assume access to devices, software, manipulatives, or specialized equipment. Build the lesson around basic consumables (paper, pencils, markers) and teacher-produced handouts only (list those under "artifacts").`
 
+  const noTechModeBlock = noTechMode
+    ? `NO-TECH MODE: This lesson must be deliverable with students completely off screens. STRICT RULE: do NOT design any student-facing activity around a device, app, website, or software the students themselves look at or operate — this includes Chromebooks, tablets/iPads, laptops, and an Interactive Whiteboard when a student is the one using it. The ONLY exception is a Projector used by the teacher for whole-class display (e.g. showing an image, video, or slide to the room) — that is still allowed. Even if "Chromebook Cart", "iPad / Tablet Cart", or "Interactive Whiteboard" appear in the classroom materials list, do not assign them to student-facing activities under this mode. The teacher's own planning, printing, and prep work may freely use technology; this constraint is about what students do during the lesson, not how the teacher prepares it. If a bookmarked resource is normally delivered via student device, replace it with a hands-on, paper-based, or oral/discussion equivalent — do not drop the underlying learning goal.`
+    : ""
+
   const classProgressBlock =
     includeAssessmentData && classProgress ? formatClassProgress(classProgress) : ""
 
@@ -313,6 +319,7 @@ Template: ${lessonTemplate}
 ${templateGuidance}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomMaterialsBlock}
+${noTechModeBlock}
 ${classProgressBlock}
 ${planningAnswersBlock}
 

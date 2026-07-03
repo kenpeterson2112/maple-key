@@ -43,6 +43,8 @@ export interface LessonFullContent {
   artifacts?: LessonArtifact[]
   /** Language the student reproducibles were generated in. Defaults to English. */
   reproducibleLanguage?: ReproducibleLanguage
+  /** Whether the lesson was generated in no-tech mode (students off screens). */
+  noTechMode?: boolean
 }
 
 export interface LessonMetadata {
