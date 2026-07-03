@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { guardRequest } from "./_lib/guard"
+import { guardRequest } from "./_lib/guard.js"
 import {
   MAX_ASSESSMENT_TITLE_LENGTH,
   MAX_EXPECTATIONS,
@@ -8,7 +8,7 @@ import {
   PayloadTooLargeError,
   assertMaxArrayLength,
   assertMaxLength,
-} from "./_lib/limits"
+} from "./_lib/limits.js"
 
 interface ExpectationInput {
   code: string
