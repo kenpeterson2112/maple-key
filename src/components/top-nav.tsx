@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search, BookOpen, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
+import { Search, Lightbulb, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
@@ -9,12 +9,11 @@ import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
 
-export type TopNavSpace = "resources" | "lessons" | "insights"
+export type TopNavSpace = "lessonplanner" | "resources" | "insights"
 
 interface TopNavProps {
   activeSpace: TopNavSpace | null
   onChangeSpace: (space: TopNavSpace) => void
-  onPlanLesson: () => void
   onOpenMobileFilters?: () => void
   totalActiveFilters?: number
 }
@@ -26,16 +25,15 @@ interface ToggleItem {
 }
 
 const TOGGLE_ITEMS: ToggleItem[] = [
-  { id: "resources", label: "Resources", icon: Search },
-  { id: "lessons",   label: "Lessons",   icon: BookOpen },
-  { id: "insights",  label: "Insights",  icon: BarChart3 },
+  { id: "lessonplanner", label: "Plan",   icon: Lightbulb },
+  { id: "resources",     label: "Search", icon: Search },
+  { id: "insights",      label: "Track",  icon: BarChart3 },
 ]
 
 
 export default function TopNav({
   activeSpace,
   onChangeSpace,
-  onPlanLesson,
   onOpenMobileFilters,
   totalActiveFilters = 0,
 }: TopNavProps) {
@@ -98,27 +96,14 @@ export default function TopNav({
                 height={673}
                 className="h-14 w-auto object-contain"
               />
-
-              <button
-                onClick={onPlanLesson}
-                className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
-                  bookmarkedResources.length > 0
-                    ? "bg-[#FF6B35] text-white shadow-sm hover:bg-[#E85A24]"
-                    : "bg-white border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFF5ED]"
-                }`}
-                title="Plan lesson"
-              >
-                Plan Lesson
-                {bookmarkedResources.length > 0 && (
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/25 text-[10px] font-bold">
-                    {bookmarkedResources.length >= 10 ? "9+" : bookmarkedResources.length}
-                  </span>
-                )}
-              </button>
             </div>
 
             <div className="absolute left-1/2 -translate-x-1/2">
-              <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} />
+              <SpaceToggle
+                activeSpace={activeSpace}
+                onChangeSpace={onChangeSpace}
+                planBadge={bookmarkedResources.length}
+              />
             </div>
 
             <div className="flex items-center gap-2 z-10">
@@ -184,7 +169,12 @@ export default function TopNav({
               className="h-11 w-auto object-contain"
             />
 
-            <SpaceToggle activeSpace={activeSpace} onChangeSpace={onChangeSpace} compact />
+            <SpaceToggle
+              activeSpace={activeSpace}
+              onChangeSpace={onChangeSpace}
+              planBadge={bookmarkedResources.length}
+              compact
+            />
 
             <div className="flex items-center gap-1">
               {showResourceFilters && (
@@ -202,22 +192,6 @@ export default function TopNav({
                   )}
                 </button>
               )}
-              <button
-                onClick={onPlanLesson}
-                className={`relative flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
-                  bookmarkedResources.length > 0
-                    ? "bg-[#FF6B35] text-white shadow-sm"
-                    : "bg-white border border-[#E8D5C4] text-[#8B4513]"
-                }`}
-                title="Plan lesson"
-              >
-                Plan
-                {bookmarkedResources.length > 0 && (
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white/25 text-[9px] font-bold">
-                    {bookmarkedResources.length >= 10 ? "9+" : bookmarkedResources.length}
-                  </span>
-                )}
-              </button>
               <button
                 onClick={() => setIsMobileMenuOpen((v) => !v)}
                 className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#FFE5CC]"
@@ -275,10 +249,13 @@ export default function TopNav({
 function SpaceToggle({
   activeSpace,
   onChangeSpace,
+  planBadge = 0,
   compact = false,
 }: {
   activeSpace: TopNavSpace | null
   onChangeSpace: (space: TopNavSpace) => void
+  /** Bookmarked-resource count shown on the Plan tab. */
+  planBadge?: number
   compact?: boolean
 }) {
   return (
@@ -290,6 +267,7 @@ function SpaceToggle({
       {TOGGLE_ITEMS.map((item) => {
         const Icon = item.icon
         const isActive = activeSpace === item.id
+        const showBadge = item.id === "lessonplanner" && planBadge > 0
         return (
           <button
             key={item.id}
@@ -305,6 +283,15 @@ function SpaceToggle({
             <Icon size={compact ? 14 : 16} />
             {!compact && <span>{item.label}</span>}
             {compact && <span className="sr-only">{item.label}</span>}
+            {showBadge && (
+              <span
+                className={`flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold ${
+                  isActive ? "bg-white/25 text-white" : "bg-[#FF6B35] text-white"
+                }`}
+              >
+                {planBadge >= 10 ? "9+" : planBadge}
+              </span>
+            )}
           </button>
         )
       })}

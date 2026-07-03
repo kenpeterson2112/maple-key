@@ -24,6 +24,7 @@ import {
   School,
   Languages,
   MonitorOff,
+  BookOpen,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import PageHeader from "@/components/page-header"
@@ -76,6 +77,8 @@ interface LessonPlannerModalProps {
   isOpen: boolean
   onClose: () => void
   onBack: () => void
+  /** Opens the saved-lessons library (button in the page header). */
+  onOpenSavedLessons?: () => void
   bookmarkedResources: Resource[]
   asSpace?: boolean
   lesson?: LessonMetadata | null
@@ -89,6 +92,7 @@ export default function LessonPlannerModal({
   isOpen,
   onClose,
   onBack,
+  onOpenSavedLessons,
   bookmarkedResources,
   asSpace = false,
   lesson = null,
@@ -1135,6 +1139,16 @@ Return a JSON object with exactly these fields (string values are plain text, no
           <span className="hidden sm:inline whitespace-nowrap text-xs text-[#888]">
             {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
           </span>
+          {onOpenSavedLessons && (
+            <button
+              onClick={onOpenSavedLessons}
+              className="flex items-center gap-1.5 rounded-full border border-[#E8D5C4] bg-white px-3.5 py-2 text-sm font-semibold text-[#8B4513] shadow-sm transition-all hover:bg-[#FFF5ED]"
+              title="Saved lessons"
+            >
+              <BookOpen size={14} className="text-[#C65D3B]" />
+              <span className="hidden sm:inline">Saved Lessons</span>
+            </button>
+          )}
           {!asSpace && (
             <button
               onClick={onClose}
