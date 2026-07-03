@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { applyCors, getClientIp, requireApiSecret } from "./security"
-import { checkRateLimit } from "./rate-limit"
+import { applyCors, getClientIp, requireApiSecret } from "./security.js"
+import { checkRateLimit } from "./rate-limit.js"
 
 /**
  * CORS preflight + shared-secret gate + per-IP rate limit, shared by all

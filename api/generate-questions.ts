@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { guardRequest } from "./_lib/guard"
+import { guardRequest } from "./_lib/guard.js"
 import {
   MAX_CLASSROOM_RESOURCES,
   MAX_RESOURCE_DESCRIPTION_LENGTH,
@@ -10,7 +10,7 @@ import {
   PayloadTooLargeError,
   assertMaxArrayLength,
   assertMaxLength,
-} from "./_lib/limits"
+} from "./_lib/limits.js"
 
 /**
  * CALL 1 of the two-call lesson flow.

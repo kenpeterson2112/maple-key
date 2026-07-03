@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import { guardRequest } from "./_lib/guard"
+import { guardRequest } from "./_lib/guard.js"
 import {
   MAX_CLASSROOM_RESOURCES,
   MAX_PLANNING_ANSWER_FIELD_LENGTH,
@@ -12,7 +12,7 @@ import {
   PayloadTooLargeError,
   assertMaxArrayLength,
   assertMaxLength,
-} from "./_lib/limits"
+} from "./_lib/limits.js"
 
 const LESSON_MODEL = "claude-haiku-4-5-20251001"
 
