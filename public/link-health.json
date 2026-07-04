@@ -1,15 +1,15 @@
 {
   "meta": {
-    "last_run": "2026-06-27T07:09:25Z",
+    "last_run": "2026-07-04T07:09:07Z",
     "cycle_days": 9,
-    "last_shard": 3,
+    "last_shard": 1,
     "total_urls": 1736,
-    "checked_this_run": 27,
+    "checked_this_run": 215,
     "summary": {
-      "blocked": 204,
+      "blocked": 392,
       "dead_domain": 26,
       "invalid": 1,
-      "unchecked": 1505
+      "unchecked": 1317
     }
   },
   "links": {
@@ -80,7 +80,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://youtu.be/BA2xWdAdy3s?si=T6C_FufCPBIJ6O51": {
@@ -117,11 +117,11 @@
       "id": "r-11",
       "title": "Making Cents: Youth Financial Education",
       "host": "www.mymoney.gov",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.coast.capital/community/financial-literacy": {
       "id": "r-12",
@@ -150,7 +150,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.tourguys.ca/school-tours/downtown-toronto-school-tour": {
@@ -330,7 +330,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.worldgeography.games/": {
@@ -340,7 +340,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.noredink.com/": {
@@ -380,7 +380,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.mediasmartscanada.ca/": {
@@ -390,7 +390,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ingeniumcanada.org/scitech/education": {
@@ -540,7 +540,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.nationalgeographic.org/education/resource-library/?q=data": {
@@ -577,11 +577,11 @@
       "id": "r-57",
       "title": "Earth Learning Idea: Geology Activities",
       "host": "www.earthlearningidea.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://education.nationalgeographic.org/": {
       "id": "r-58",
@@ -660,18 +660,18 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.genome.gov/genetics-glossary": {
       "id": "r-66",
       "title": "Genetics and Probability: Punnett Squares",
       "host": "www.genome.gov",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.biointeractive.org/classroom-resources": {
       "id": "r-67",
@@ -730,7 +730,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.elections.ca/content.aspx?section=vot&dir=yth&document=index&lang=e": {
@@ -750,7 +750,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.amnesty.ca/human-rights-education/": {
@@ -817,11 +817,11 @@
       "id": "r-81",
       "title": "Open Middle: Statistics and Probability Challenges",
       "host": "www.openmiddle.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.cira.ca/en/resources-for-teachers/digital-literacy/": {
       "id": "r-82",
@@ -887,11 +887,11 @@
       "id": "r-88",
       "title": "Interactivate: Probability Explorations",
       "host": "www.shodor.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.mint.com/budgeting-resources": {
       "id": "r-89",
@@ -950,7 +950,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.scotiabank.com/ca/en/personal/advice-plus/features/articles/financial-literacy.html": {
@@ -997,11 +997,11 @@
       "id": "r-99",
       "title": "Math Playground: Probability Games",
       "host": "www.mathplayground.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.splashlearn.com/math/probability-games": {
       "id": "r-100",
@@ -1110,7 +1110,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.investorseducation.ca/student-resources": {
@@ -1120,7 +1120,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.theglobeandmail.com/investing/education-centre/": {
@@ -1147,21 +1147,21 @@
       "id": "r-114",
       "title": "Wealthsimple: Money 101 for Young Canadians",
       "host": "www.wealthsimple.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://a.co/d/2oXDXTS": {
       "id": "r-115",
       "title": "Data Literacy for Kids 2023",
       "host": "a.co",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.maneuveringthemiddle.com/teaching-probability/": {
       "id": "r-116",
@@ -1187,11 +1187,11 @@
       "id": "r-118",
       "title": "Financial Literacy Workshops with Genius Learning Lab",
       "host": "www.geniuslearning.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.vaughanpl.info/programs/view/2683": {
       "id": "r-119",
@@ -1217,11 +1217,11 @@
       "id": "r-121",
       "title": "Financial Literacy for Kids",
       "host": "youtu.be",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.codingal.com/coding-for-kids/blog/5-fun-and-interactive-data-science-projects-for-kids/": {
       "id": "r-122",
@@ -1297,11 +1297,11 @@
       "id": "r-129",
       "title": "Department of Math",
       "host": "www.aspo.utoronto.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://a.co/d/1pP7Z4I": {
       "id": "r-130",
@@ -1340,7 +1340,7 @@
       "status": "invalid",
       "reason": "lint: missing_scheme",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.youcubed.org/tasks/data-talks/": {
@@ -1377,11 +1377,11 @@
       "id": "r-137",
       "title": "Math Antics - Basic Probability",
       "host": "youtu.be",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.geogebra.org/m/probability": {
       "id": "r-138",
@@ -1397,11 +1397,11 @@
       "id": "r-139",
       "title": "Random.org: Virtual Dice and Probability Tools",
       "host": "www.random.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.illuminations.nctm.org/probability": {
       "id": "r-140",
@@ -1410,7 +1410,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.amazon.ca/dp/B07T4VLJ6C?linkCode=gg4&tag=due01-20#": {
@@ -1637,21 +1637,21 @@
       "id": "r-163",
       "title": "Resources for Teaching and Learning about Statistics",
       "host": "ssc.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g7-math/strand-c/c1": {
       "id": "r-1000",
       "title": "Ontario Curriculum Portal — Strand C, Grade 7 (C1: Patterns and Relationships)",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g7-math/strand-c/c2": {
       "id": "r-1001",
@@ -1787,11 +1787,11 @@
       "id": "r-1014",
       "title": "OntarioMath.Support — Coding Resources for Algebra",
       "host": "ontariomath.support",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool session-wide outage",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://mycalltoteach.com/products/grade-7-ontario-math-patterns-equations-assessments": {
       "id": "r-1015",
@@ -1987,11 +1987,11 @@
       "id": "r-1034",
       "title": "Mathspace – Ontario Grade 7 Probability Unit",
       "host": "mathspace.co",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://mathspace.co/textbooks/syllabuses/Syllabus-1078/topics/Topic-20931/subtopics/Subtopic-271309/": {
       "id": "r-1035",
@@ -2087,11 +2087,11 @@
       "id": "r-1044",
       "title": "NRICH – Probability Topic Collection",
       "host": "nrich.maths.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.openmiddle.com/": {
       "id": "r-1045",
@@ -2137,11 +2137,11 @@
       "id": "r-1049",
       "title": "Ontario Curriculum — E1 Geometric and Spatial Reasoning, Grade 8",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/01b0b598-d5dc-455b-83de-9b7436bcefeb/Spatial_AODA.pdf": {
       "id": "r-1050",
@@ -2457,11 +2457,11 @@
       "id": "r-1081",
       "title": "Mathspace — Ontario Grade 7 Number Operations",
       "host": "mathspace.co",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teachpastthepotholes.com/product/number-sense-operations-grade-7-ontario-math/": {
       "id": "r-1082",
@@ -2557,31 +2557,31 @@
       "id": "r-1091",
       "title": "Ontario Curriculum – F1. Money and Finances (Grade 7)",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g8-math/strand-f/f1": {
       "id": "r-1092",
       "title": "Ontario Curriculum – F1. Money and Finances (Grade 8)",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/8a374255-069f-4539-b020-5737aaf672f9/Financial_AODA.pdf": {
       "id": "r-1093",
       "title": "Ontario Financial Literacy Continuum (Grades 1–8)",
       "host": "assets-us-01.kc-usercontent.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://ontariomath.support/?pg=results&type=subject&lang=EN&subject=FinLit": {
       "id": "r-1094",
@@ -2597,11 +2597,11 @@
       "id": "r-1095",
       "title": "TVO Learn – Grade 7 Financial Literacy Learning Activities",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-8-mathematics-financial-literacy-learning-activity-1": {
       "id": "r-1096",
@@ -2677,11 +2677,11 @@
       "id": "r-1103",
       "title": "Khan Academy – Personal Finance: Interest and Debt",
       "host": "www.khanacademy.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.geogebra.org/m/f3vQVgbw": {
       "id": "r-1104",
@@ -2697,11 +2697,11 @@
       "id": "r-1105",
       "title": "Desmos – Simple & Compound Interest Activity",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.ngpf.org/courses/middle-school-course/": {
       "id": "r-1106",
@@ -2767,11 +2767,11 @@
       "id": "r-1112",
       "title": "Financial Literacy Ontario (F1) – Grade 7 Unit (TPT)",
       "host": "www.teacherspayteachers.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.teacherspayteachers.com/Product/Grade-8-New-Ontario-Math-2020-Financial-Literacy-GOOGLE-PDF-INCLUDED-7474840": {
       "id": "r-1113",
@@ -3217,11 +3217,11 @@
       "id": "r-1157",
       "title": "WRDSB MTH1W Course Resources (Waterloo Region DSB)",
       "host": "sites.google.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://sites.google.com/lkdsb.com/mth1w-supportmaterials/home": {
       "id": "r-1158",
@@ -3557,11 +3557,11 @@
       "id": "r-1191",
       "title": "IXL – Grade 7 Data, Statistics & Probability Skills",
       "host": "www.ixl.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.ixl.com/math/grade-8": {
       "id": "r-1192",
@@ -3610,7 +3610,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://tvolearn.com/pages/financial_literacy": {
@@ -3657,11 +3657,11 @@
       "id": "r-1201",
       "title": "United for Literacy — Grade 7 Financial Literacy Resource Guide",
       "host": "www.unitedforliteracy.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.teacherspayteachers.com/browse?search=financial+literacy+grade+7": {
       "id": "r-1202",
@@ -3757,11 +3757,11 @@
       "id": "r-1211",
       "title": "IXL — Ontario Grade 7 Math: Financial Literacy Skills Practice",
       "host": "www.ixl.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.edu.gov.on.ca/eng/curriculum/elementary/elementaryfnmi.pdf": {
       "id": "r-1212",
@@ -3887,11 +3887,11 @@
       "id": "r-1224",
       "title": "Wigwametry: A K–12 Geometry Teaching Unit Based on the Anishinaabe Wigwam",
       "host": "www.aboriginalaccess.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://edcp.educ.ubc.ca/beadworkmathwork/": {
       "id": "r-1225",
@@ -3987,11 +3987,11 @@
       "id": "r-1234",
       "title": "Indigenous Math Collection (Resource Bank — Curated Collection 133)",
       "host": "resourcebank.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://cangeoeducation.ca/en/resources/giant-floor-maps/": {
       "id": "r-1235",
@@ -4007,11 +4007,11 @@
       "id": "r-1236",
       "title": "Rethinking Mathematics: Teaching Social Justice by the Numbers (Rethinking Schools)",
       "host": "rethinkingschools.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/08f5a14f-576a-4282-af82-096dc302ed10/Data_AODA.pdf": {
       "id": "r-1237",
@@ -4197,11 +4197,11 @@
       "id": "r-1255",
       "title": "7e année — Mathématiques (Curriculum Ontario)",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/cfe1d699-cafa-4f09-b723-772db8f5aa75/Le%20curriculum%20de%20l'Ontario%20de%20la%201re-8e-Mathematiques.pdf": {
       "id": "r-1256",
@@ -4237,11 +4237,11 @@
       "id": "r-1259",
       "title": "En avant, les maths! — 7e année Concepts mathématiques",
       "host": "enavantlesmaths.e-a-v.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://enavantlesmathstag.cforp.io/8e-annee/mini-lecons/": {
       "id": "r-1260",
@@ -4267,11 +4267,11 @@
       "id": "r-1262",
       "title": "GEEM — Guide d'enseignement efficace des mathématiques, 7e à 10e année (Fascicule 3 — Mesure et géométrie)",
       "host": "edusourceontario.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://ontariomath.support/?pg=results&type=grade&lang=FR&grade=7": {
       "id": "r-1263",
@@ -4357,11 +4357,11 @@
       "id": "r-1271",
       "title": "Mon Classeur de Mathématiques — Cycle 4 (5e, 4e, 3e)",
       "host": "www.monclasseurdemaths.fr",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://afemo.on.ca/": {
       "id": "r-1272",
@@ -4427,11 +4427,11 @@
       "id": "r-1278",
       "title": "Ontario Curriculum Portal — Grade 8 Strand B, B2 Operations",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/08f5a14f-576a-4282-af82-096dc302ed10/Number_AODA.pdf": {
       "id": "r-1279",
@@ -4477,21 +4477,21 @@
       "id": "r-1283",
       "title": "Desmos Classroom — Middle School Math Curriculum",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.geogebra.org/math?lang=en": {
       "id": "r-1284",
       "title": "GeoGebra — Numbers and Operations Resources",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://mathigon.org/": {
       "id": "r-1285",
@@ -4797,11 +4797,11 @@
       "id": "r-1315",
       "title": "Categories of Knowledge and Skills — Ontario Curriculum Portal",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.dcp.edu.gov.on.ca/en/assessment-evaluation/sample-achievement-charts": {
       "id": "r-1316",
@@ -4967,11 +4967,11 @@
       "id": "r-1332",
       "title": "Formative (goformative.com)",
       "host": "www.formative.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool session-wide outage",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://mathspace.co/us/diagnostic": {
       "id": "r-1333",
@@ -5217,21 +5217,21 @@
       "id": "r-1357",
       "title": "Khan Academy — Grade 7 Ontario Measurement",
       "host": "www.khanacademy.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.khanacademy.org/math/cc-eighth-grade-math/cc-8th-geometry": {
       "id": "r-1358",
       "title": "Khan Academy — Grade 8 Geometry and Measurement",
       "host": "www.khanacademy.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://mathspace.co/textbooks/syllabuses/Syllabus-1077/topics/Topic-20920/subtopics/Subtopic-271230/": {
       "id": "r-1359",
@@ -5357,11 +5357,11 @@
       "id": "r-1371",
       "title": "GeoGebra — Learn Inequalities (Interactive Collection)",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://phet.colorado.edu/sims/html/equality-explorer/latest/equality-explorer_en.html": {
       "id": "r-1372",
@@ -5377,11 +5377,11 @@
       "id": "r-1373",
       "title": "CEMC Waterloo — Grade 7/8 Mathematics Courseware (Equations Strand)",
       "host": "courseware.cemc.uwaterloo.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.khanacademy.org/math/7th-grade-illustrative-math/unit-6-expressions-equations-and-inequalities": {
       "id": "r-1374",
@@ -5547,11 +5547,11 @@
       "id": "r-1390",
       "title": "Youcubed — Visual Math Activities & Problem Tasks (Jo Boaler)",
       "host": "www.youcubed.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.lessonplanet.com/teachers/area-perimeter-and-volume": {
       "id": "r-1391",
@@ -5707,11 +5707,11 @@
       "id": "r-1406",
       "title": "NRICH — Statistics (Secondary)",
       "host": "nrich.maths.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://flexbooks.ck12.org/cbook/ck-12-middle-school-math-concepts-grade-8/section/10.7/primary/lesson/make-a-scatterplot-to-represent-data-msm8/": {
       "id": "r-1407",
@@ -5790,18 +5790,18 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.geogebra.org/math/transformations?lang=en": {
       "id": "r-1415",
       "title": "GeoGebra — Transformations Topic Hub",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.geogebra.org/m/yq2nnewu": {
       "id": "r-1416",
@@ -5920,7 +5920,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.mathplayground.com/index_geometry.html": {
@@ -5967,11 +5967,11 @@
       "id": "r-1432",
       "title": "Khan Academy — Grade 8 Geometric Transformations Unit",
       "host": "www.khanacademy.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.teacherspayteachers.com/Product/Location-and-Movement-Geometric-Transformations-Dilations-Grade-7-Ontario-Math-3726990": {
       "id": "r-1433",
@@ -6027,11 +6027,11 @@
       "id": "r-1438",
       "title": "Khan Academy — Grade 7 Unit 7: Angles, Triangles, and Prisms",
       "host": "www.khanacademy.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.ixl.com/math/grade-7/classify-triangles": {
       "id": "r-1439",
@@ -6137,11 +6137,11 @@
       "id": "r-1449",
       "title": "TVO Learn — Grade 8 Financial Literacy Learning Activity 5",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-8-mathematics-financial-literacy-learning-activity-8": {
       "id": "r-1450",
@@ -6207,21 +6207,21 @@
       "id": "r-1456",
       "title": "Desmos Classroom — Simple and Compound Interest Activity",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.geogebra.org/m/tmHGgS9q": {
       "id": "r-1457",
       "title": "GeoGebra — Compound Interest Interactive Applet",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.geogebra.org/m/chezhtdx": {
       "id": "r-1458",
@@ -6307,11 +6307,11 @@
       "id": "r-1466",
       "title": "Ontario Teachers' Federation — Teaching Financial Literacy (OTF Connects)",
       "host": "www.otffeo.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://resources.chatterhigh.com/gamified-financial-literacy-course-for-teens": {
       "id": "r-1467",
@@ -6427,11 +6427,11 @@
       "id": "r-1478",
       "title": "Make Math Moments — Stacking Paper 3-Act Math Task",
       "host": "learn.makemathmoments.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.khanacademy.org/math/7th-grade-illustrative-math": {
       "id": "r-1479",
@@ -6537,11 +6537,11 @@
       "id": "r-1489",
       "title": "GeoGebra — Compound Interest III (Finding Amount)",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.geogebra.org/m/txsfesp7": {
       "id": "r-1490",
@@ -6597,11 +6597,11 @@
       "id": "r-1495",
       "title": "Talk With Our Kids About Money Day (TWOKAM) — CFEE",
       "host": "cfee.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.jacampus.org/": {
       "id": "r-1496",
@@ -6657,11 +6657,11 @@
       "id": "r-1501",
       "title": "Choose a Credit Card — Financial Literacy Task",
       "host": "www.teacherspayteachers.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.teacherspayteachers.com/Product/Exchange-Rate-Currency-Conversions-Grade-7-and-8-Financial-Literacy-7613911": {
       "id": "r-1502",
@@ -6707,11 +6707,11 @@
       "id": "r-1506",
       "title": "Ontario Teachers' Federation — Coding with Math Report",
       "host": "www.otffeo.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://scratch.mit.edu/": {
       "id": "r-1507",
@@ -6897,11 +6897,11 @@
       "id": "r-1525",
       "title": "Code for Fun — Middle School Lesson Plans & Resources",
       "host": "www.codeforfun.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g7-math/strands/c/c3": {
       "id": "r-1526",
@@ -6937,11 +6937,11 @@
       "id": "r-1529",
       "title": "TVO Outreach — Coding Transformations (cross-grade lesson)",
       "host": "outreach.tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.lynxcoding.club/": {
       "id": "r-1530",
@@ -7207,11 +7207,11 @@
       "id": "r-1556",
       "title": "Teachers Pay Teachers — Stacey's Circle Grade 7 NEW Ontario Math FULL-YEAR Bundle",
       "host": "www.teacherspayteachers.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://nrich.maths.org/problems/mathematical-programming-tasks": {
       "id": "r-1557",
@@ -7267,11 +7267,11 @@
       "id": "r-1562",
       "title": "Ditch That Textbook — Google CS First: Free Interactive Coding Lessons for Your Class",
       "host": "ditchthattextbook.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://indigenizinglearning.educ.ubc.ca/curriculum-bundles/building-indigenous-mathematical-skills/": {
       "id": "r-1563",
@@ -7467,11 +7467,11 @@
       "id": "r-1582",
       "title": "First Nations, Métis, and Inuit Ways of Knowing — Teaching Math (UAlberta LibGuide)",
       "host": "guides.library.ualberta.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.strongnations.com/store/6397/math-that-matters-2-a-teacher-resource-linking-math-and-social-justice": {
       "id": "r-1583",
@@ -7580,7 +7580,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ontariomath.support/": {
@@ -7607,11 +7607,11 @@
       "id": "r-1596",
       "title": "NRICH — Shape and Space (Age 11-14)",
       "host": "nrich.maths.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.openmiddle.com/geometry": {
       "id": "r-1597",
@@ -7667,11 +7667,11 @@
       "id": "r-1602",
       "title": "Tinkercad — 3D Shape Design & Geometry",
       "host": "www.tinkercad.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://phet.colorado.edu/en/simulations/filter?subjects=geometry": {
       "id": "r-1603",
@@ -7687,11 +7687,11 @@
       "id": "r-1604",
       "title": "CEMC's Gauss, Pascal, and Cayley Mathematics Contests (Geometry Components)",
       "host": "www.cemc.uwaterloo.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool session-wide outage",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g8-math/strands": {
       "id": "r-1605",
@@ -7760,7 +7760,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://school.nelson.com/math-pre-assessment/": {
@@ -7777,11 +7777,11 @@
       "id": "r-1613",
       "title": "My Math Path 8 — Ontario Curriculum Correlation Document",
       "host": "pages.nelson.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.ixl.com/diagnostic": {
       "id": "r-1614",
@@ -7827,11 +7827,11 @@
       "id": "r-1618",
       "title": "Smarter Balanced — Stack of Cups Grade 8 Performance Task",
       "host": "portal.smarterbalanced.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tasks.illustrativemathematics.org/content-standards/8": {
       "id": "r-1619",
@@ -7897,11 +7897,11 @@
       "id": "r-1625",
       "title": "My Call to Teach — Grade 8 Ontario Math Curriculum Tests & Quizzes Bundle",
       "host": "mycalltoteach.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.teacherspayteachers.com/Product/Grade-8-Number-Sense-Ontario-Math-Assessment-Editable-9489883": {
       "id": "r-1626",
@@ -7927,11 +7927,11 @@
       "id": "r-1628",
       "title": "Past the Potholes — Grade 8 Full Year Bundle (Ontario Math 2020)",
       "host": "teachpastthepotholes.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://math.sccdsb.net/assessment": {
       "id": "r-1629",
@@ -8127,11 +8127,11 @@
       "id": "r-1648",
       "title": "NRICH - Number Problems for Ages 11-14",
       "host": "nrich.maths.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-mathematics/grades/g7-math": {
       "id": "r-1649",
@@ -8180,7 +8180,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "http://www.sandbox.edugains.ca/newsite/math2/gapclosingmain.html": {
@@ -8190,7 +8190,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.eqao.com/math-resource-released-questions-g6-2023/": {
@@ -8217,11 +8217,11 @@
       "id": "r-1657",
       "title": "Manitoba Education — Middle Years Assessment: Grade 7 Mathematics",
       "host": "www.edu.gov.mb.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://jumpmath.org/ca/product/assessment-practice-book-7-1/": {
       "id": "r-1658",
@@ -8327,11 +8327,11 @@
       "id": "r-1668",
       "title": "Past the Potholes — Grade 7 Full Year Bundle (Ontario Math 2020)",
       "host": "teachpastthepotholes.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://access.openupresources.org/curricula/our6-8math/en/grade-7/index.html": {
       "id": "r-1669",
@@ -8367,11 +8367,11 @@
       "id": "r-1672",
       "title": "Amplify Classroom Free Lessons & Activities",
       "host": "classroom.amplify.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/5b32a8caa1cff72b67a45578": {
       "id": "r-1673",
@@ -8497,11 +8497,11 @@
       "id": "r-1685",
       "title": "Ontario Curriculum Mathematics 2020 — Curriculum Context (Background PDF)",
       "host": "assets-us-01.kc-usercontent.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://mathigon.org/task/what-makes-a-game-fair-": {
       "id": "r-1686",
@@ -8647,11 +8647,11 @@
       "id": "r-1700",
       "title": "Linear Function Exploration",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/5831bb9627e495f1053a113e": {
       "id": "r-1701",
@@ -8740,7 +8740,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/5eb3c296c7b0a70c6400e560": {
@@ -8847,11 +8847,11 @@
       "id": "r-1720",
       "title": "GeoGebra — Area, Surface Area, Volume — Nets",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://phet.colorado.edu/en/simulations/area-builder": {
       "id": "r-1721",
@@ -8997,11 +8997,11 @@
       "id": "r-1735",
       "title": "Make Math Moments — Real World Math Lessons & Tasks",
       "host": "learn.makemathmoments.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://robertkaplinsky.com/work/do-we-have-enough-paint/": {
       "id": "r-1736",
@@ -9037,11 +9037,11 @@
       "id": "r-1739",
       "title": "Fractions on a Number Line",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/560411737786ed1a065481f3": {
       "id": "r-1740",
@@ -9067,11 +9067,11 @@
       "id": "r-1742",
       "title": "Comparing and Ordering Fractions, Decimals, and Percents",
       "host": "goopenva.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.perkins.org/resource/linear-functions-and-problem-solving-3-y-intercept-and-slope-using-desmos/": {
       "id": "r-1743",
@@ -9157,11 +9157,11 @@
       "id": "r-1751",
       "title": "Desmos Graphing Calculator",
       "host": "www.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://help.desmos.com/hc/en-us/articles/4405633253389-Statistics": {
       "id": "r-1752",
@@ -9257,11 +9257,11 @@
       "id": "r-1761",
       "title": "Mathigon — Building Balance Scale Puzzle",
       "host": "mathigon.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://flexbooks.ck12.org/cbook/ck-12-interactive-middle-school-math-7-for-ccss/section/3.11/related/lesson/solving-two-step-inequalities-math-7-ccss-msm7-ccss-te/": {
       "id": "r-1762",
@@ -9277,11 +9277,11 @@
       "id": "r-1763",
       "title": "Khan Academy — 7th Grade Expressions, Equations, & Inequalities (Unit)",
       "host": "www.khanacademy.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-variables-expressions/cc-7th-inequalities/e/one_step_inequalities": {
       "id": "r-1764",
@@ -9317,11 +9317,11 @@
       "id": "r-1767",
       "title": "IXL — Solve Two-Step Equations (Grade 7)",
       "host": "www.ixl.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.ixl.com/math/grade-7/solve-two-step-inequalities": {
       "id": "r-1768",
@@ -9367,11 +9367,11 @@
       "id": "r-1772",
       "title": "Cuemath — 7th Grade Inequalities Worksheets",
       "host": "www.cuemath.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool session-wide outage",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://cemc.uwaterloo.ca/resources/potw-archive": {
       "id": "r-1773",
@@ -9397,41 +9397,41 @@
       "id": "r-1775",
       "title": "Mathspace — Grade 7 Ontario Edition: Introduction to Equations",
       "host": "mathspace.co",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://staceyscircle.com/product/grade-7-ontario-math-equations-and-inequalities/": {
       "id": "r-1776",
       "title": "Stacey's Circle — Grade 7 Ontario Math: Equations and Inequalities Unit",
       "host": "staceyscircle.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.teacherspayteachers.com/Product/Grade-7-Equations-Inequalities-NEW-Ontario-Math-Digital-Google-Slides-7273177": {
       "id": "r-1777",
       "title": "Teachers Pay Teachers — Grade 7 Equations & Inequalities NEW Ontario Math (Digital Google Slides)",
       "host": "www.teacherspayteachers.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/5fba833c35435e089ddb7aa6": {
       "id": "r-1778",
       "title": "Desmos Classroom — Grade 7 Hanger Models: Solving Equations",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/61ad684591c28f0a5c4d6d6d": {
       "id": "r-1779",
@@ -9457,11 +9457,11 @@
       "id": "r-1781",
       "title": "GeoGebra — Equation Balance Model",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.geogebra.org/m/MG7eZX3g": {
       "id": "r-1782",
@@ -9577,11 +9577,11 @@
       "id": "r-1793",
       "title": "Math Antics — Solving Basic Equations Lesson Page",
       "host": "mathantics.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.maneuveringthemiddle.com/product/expressions-and-equations-activity-bundle-7th-grade/": {
       "id": "r-1794",
@@ -9677,11 +9677,11 @@
       "id": "r-1803",
       "title": "Hot Air Balloon - Integer Operations",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/57575e3c35834d7a09ecaeeb": {
       "id": "r-1804",
@@ -9697,21 +9697,21 @@
       "id": "r-1805",
       "title": "Integer Chutes and Ladders",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/59de912a3f06a210c73513fa": {
       "id": "r-1806",
       "title": "Balancing Bears / Make It Balance",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/5ce8955fede3ee69f744c55f": {
       "id": "r-1807",
@@ -9767,11 +9767,11 @@
       "id": "r-1812",
       "title": "Math Curriculum Context (French AODA)",
       "host": "assets-us-01.kc-usercontent.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://apprendre.tfo.org/7e-annee/mathematiques/activites": {
       "id": "r-1813",
@@ -9800,7 +9800,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ontariomath.support/?pg=resources&lang=FR": {
@@ -10060,7 +10060,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://carrefour-education.qc.ca/site_web_commentes/le_site_du_domaine_de_la_mathematique": {
@@ -10070,7 +10070,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://cybersavoir.cssdm.gouv.qc.ca/mat-sec/category/ressources/": {
@@ -10097,11 +10097,11 @@
       "id": "r-1845",
       "title": "Sésamath — Manuel numérique cycle 4 (édition 2016)",
       "host": "manuel.sesamath.net",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://manuel.sesamath.net/send_file.php?file=/files/cycle4_2016.pdf": {
       "id": "r-1846",
@@ -10237,11 +10237,11 @@
       "id": "r-1859",
       "title": "Desmos Classroom — Probability: Independent and Dependent Events",
       "host": "teacher.desmos.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.nctm.org/Classroom-Resources/Illuminations/Interactives/Adjustable-Spinner/": {
       "id": "r-1860",
@@ -10427,11 +10427,11 @@
       "id": "r-1878",
       "title": "Math Learning Center — Algebra Through Visual Patterns",
       "host": "www.mathlearningcenter.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://nrich.maths.org/patterns-and-sequences-age-11-14": {
       "id": "r-1879",
@@ -10547,21 +10547,21 @@
       "id": "r-1890",
       "title": "Toronto Zoo — Grade 7 Interactions in the Environment Teacher Resource",
       "host": "www.torontozoo.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://trca.ca/programs/wetland-ecosystems/": {
       "id": "r-1891",
       "title": "Toronto Region Conservation Authority — Wetland Ecosystems Program",
       "host": "trca.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://trca.ca/programs/watershed-on-wheels/": {
       "id": "r-1892",
@@ -10577,11 +10577,11 @@
       "id": "r-1893",
       "title": "Canadian Wildlife Federation — Educators / Lesson Plans Library",
       "host": "cwf-fcf.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.hww.ca/educators/": {
       "id": "r-1894",
@@ -10617,11 +10617,11 @@
       "id": "r-1897",
       "title": "ExploreLearning Gizmos — Forest Ecosystem",
       "host": "gizmos.explorelearning.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://gizmos.explorelearning.com/find-gizmos/lesson-info?resourceId=381": {
       "id": "r-1898",
@@ -10737,11 +10737,11 @@
       "id": "r-1909",
       "title": "Edwin (formerly Nelson) — Ontario Science Resources Hub",
       "host": "www.edwin.app",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool session-wide outage",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://cubeforteachers.com/": {
       "id": "r-1910",
@@ -10847,11 +10847,11 @@
       "id": "r-1920",
       "title": "Crash Course Kids — The Great Picnic Mix Up (Episode 19.1)",
       "host": "www.youtube.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.youtube.com/watch?v=WGESd7O4_Uk": {
       "id": "r-1921",
@@ -10907,11 +10907,11 @@
       "id": "r-1926",
       "title": "Kahoot! — Mixtures and Solutions",
       "host": "create.kahoot.it",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://ca.ixl.com/science/grade-7": {
       "id": "r-1927",
@@ -11027,11 +11027,11 @@
       "id": "r-1938",
       "title": "Canada's History — Lesson Plans",
       "host": "www.canadashistory.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://library-archives.canada.ca/eng/collection/about-collection/teachers-resources": {
       "id": "r-1939",
@@ -11057,11 +11057,11 @@
       "id": "r-1941",
       "title": "Virtual Museum of New France (Canadian Museum of History)",
       "host": "www.historymuseum.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.biographi.ca/en/": {
       "id": "r-1942",
@@ -11157,11 +11157,11 @@
       "id": "r-1951",
       "title": "CBC — Canada: A People's History (Teacher Resources, Grades 5-9)",
       "host": "www.cbc.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://atlas.gc.ca/toporama/en/index.html": {
       "id": "r-1952",
@@ -11357,11 +11357,11 @@
       "id": "r-1971",
       "title": "PBS LearningMedia — Weather, Climate, Water Cycle & Biomes Hub",
       "host": "www.pbslearningmedia.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://cangeoeducation.ca/en/resources/can-geo-educations-indigenous-resources/": {
       "id": "r-1972",
@@ -11427,21 +11427,21 @@
       "id": "r-1978",
       "title": "EQAO — Grade 9 Assessment of Mathematics: Released Questions 2024",
       "host": "www.eqao.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://emcf.weebly.com/grade-9-mathematics-mth1w-de-streamed.html": {
       "id": "r-1979",
       "title": "EMCF — Grade 9 Mathematics MTH1W (De-streamed) Implementation Hub",
       "host": "emcf.weebly.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://emcf.weebly.com/sprialing-the-curriculum.html": {
       "id": "r-1980",
@@ -11557,11 +11557,11 @@
       "id": "r-1991",
       "title": "GeoGebra — Grade 9 Mathematics (Ontario MTH1W) Activity Book",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://mathspace.co/textbooks/syllabuses/Syllabus-1088/topics/Topic-21177/subtopics/Subtopic-274426/": {
       "id": "r-1992",
@@ -11647,11 +11647,11 @@
       "id": "r-2000",
       "title": "The Ontario Curriculum, Grades 1–8: Science and Technology (2022) — Full PDF",
       "host": "assets-us-01.kc-usercontent.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-8-science-and-technology": {
       "id": "r-2001",
@@ -11697,11 +11697,11 @@
       "id": "r-2005",
       "title": "Science North — Educator Resources Portal",
       "host": "schools.sciencenorth.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://scitechontario.ca/grade-8/": {
       "id": "r-2006",
@@ -11737,11 +11737,11 @@
       "id": "r-2009",
       "title": "Learn.Genetics (University of Utah) — Cells Module",
       "host": "learn.genetics.utah.edu",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://learn.genetics.utah.edu/content/cells/scale/": {
       "id": "r-2010",
@@ -11827,21 +11827,21 @@
       "id": "r-2018",
       "title": "PBS LearningMedia — Cells and Cell Processes (Topic Hub)",
       "host": "www.pbslearningmedia.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://thecrashcourse.com/courses/eukaryopolis-the-city-of-animal-cells-crash-course-biology-4/": {
       "id": "r-2019",
       "title": "Crash Course Biology — Eukaryopolis: The City of Animal Cells (PBS LearningMedia)",
       "host": "thecrashcourse.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool session-wide outage",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.amoebasisters.com/handouts.html": {
       "id": "r-2020",
@@ -12047,11 +12047,11 @@
       "id": "r-2040",
       "title": "Canadian Geographic Education — Indigenous Peoples Atlas of Canada Hub",
       "host": "cangeoeducation.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://pier21.ca/": {
       "id": "r-2041",
@@ -12077,11 +12077,11 @@
       "id": "r-2043",
       "title": "Defining Moments Canada — Lesson Plan: Immigration in Canada (StoryMap Supplement)",
       "host": "definingmomentscanada.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://education.nationalgeographic.org/resource/sustainable-development-goal-11-sustainable-cities-and-communities/": {
       "id": "r-2044",
@@ -12107,11 +12107,11 @@
       "id": "r-2046",
       "title": "Population Education — People and the Planet: Lessons for a Sustainable Future",
       "host": "populationeducation.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.education.com/resources/grade-8/interactive-worksheets/math/algebra/": {
       "id": "r-2047",
@@ -12177,11 +12177,11 @@
       "id": "r-2053",
       "title": "GeoGebra — Multiplying and Dividing Fractions (Slider-Based Activity)",
       "host": "www.geogebra.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://visualfractions.com/": {
       "id": "r-2054",
@@ -12347,11 +12347,11 @@
       "id": "r-2070",
       "title": "Brilliant.org — 7th Grade Math Wiki",
       "host": "brilliant.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://brilliant.org/wiki/converting-between-fractions-decimals-and/": {
       "id": "r-2071",
@@ -12517,21 +12517,21 @@
       "id": "r-2087",
       "title": "NRICH — Inequalities Problem Set",
       "host": "nrich.maths.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://solveme.edc.org/play.html": {
       "id": "r-2088",
       "title": "SolveMe Mobiles — Balance Puzzles for Algebraic Reasoning",
       "host": "solveme.edc.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.mathplayground.com/algebraic_reasoning.html": {
       "id": "r-2089",
@@ -12557,11 +12557,11 @@
       "id": "r-2091",
       "title": "PhET — Area Model Algebra Simulation",
       "host": "phet.colorado.edu",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://phet.colorado.edu/en/simulations/expression-exchange": {
       "id": "r-2092",
@@ -12737,21 +12737,21 @@
       "id": "r-2109",
       "title": "Khan Academy - 3Blue1Brown Collaboration",
       "host": "www.youtube.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool returned 403 (tool-level failure, not page evidence)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.criticalthinking.com/articles/gifted-free-activities-for-middle-school-students": {
       "id": "r-2110",
       "title": "Critical Thinking Company - Math Enrichment Activities",
       "host": "www.criticalthinking.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "http://www.mathwire.com/archives/enrichment.html": {
       "id": "r-2111",
@@ -12767,11 +12767,11 @@
       "id": "r-2112",
       "title": "Bank of Canada Museum — Lesson Plans (K–8)",
       "host": "www.bankofcanadamuseum.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.bankofcanadamuseum.ca/learn/learning-resources-by-grade/": {
       "id": "r-2113",
@@ -13237,11 +13237,11 @@
       "id": "r-2159",
       "title": "Ontario 2022 Curriculum — Key Changes for Strand E (Earth and Space Systems)",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.dcp.edu.gov.on.ca/en/curriculum/secondary-science/courses/snc1w/strands": {
       "id": "r-2160",
@@ -13277,11 +13277,11 @@
       "id": "r-2163",
       "title": "Science North — Grade 8 Watersheds Lesson Plan (Offline)",
       "host": "www.sciencenorth.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool session-wide outage",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://letstalkscience.ca/educational-resources/lessons/what-water-cycle": {
       "id": "r-2164",
@@ -13417,11 +13417,11 @@
       "id": "r-2177",
       "title": "CK-12 Middle School Earth Science 2.0 — Processes of the Water Cycle",
       "host": "flexbooks.ck12.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://openscied.org/instructional-materials/6-3-weather-climate-water-cycling/": {
       "id": "r-2178",
@@ -13457,11 +13457,11 @@
       "id": "r-2181",
       "title": "STAO — Pathways to Astronomy/Space in the Revised Ontario Grade Nine Science Curriculum",
       "host": "stao.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://stao.ca/resource_grade_level/grade-9/": {
       "id": "r-2182",
@@ -13477,11 +13477,11 @@
       "id": "r-2183",
       "title": "Ontario Science Centre — Space Exploration (Grade 9)",
       "host": "www.ontariosciencecentre.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://schools.sciencenorth.ca/grade-9": {
       "id": "r-2184",
@@ -13500,7 +13500,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-06-27T07:09:25Z",
+      "last_checked": "2026-07-04T07:09:07Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://gz.explorelearning.com/index.cfm?method=cUser.dspSharedGizmos&GizmoListID=250110": {
@@ -13577,21 +13577,21 @@
       "id": "r-2193",
       "title": "TED-Ed — Earth and Space Science Lessons",
       "host": "ed.ted.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://gpm.nasa.gov/education/sites/default/files/lesson_plan_files/Entire-9th-Grade-Curriculum-Unit-2_0.pdf": {
       "id": "r-2194",
       "title": "NASA Educational Resources — Climate Science in Focus (Grade 9 Unit)",
       "host": "gpm.nasa.gov",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://gpm.nasa.gov/education/lesson-plans/meteorology-educators-resource-inquiry-based-learning-grades-5-9": {
       "id": "r-2195",
@@ -13627,11 +13627,11 @@
       "id": "r-2198",
       "title": "edX — Astronomy Courses and Programs",
       "host": "www.edx.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.teacherspayteachers.com/browse?search=ontario+grade+9+science": {
       "id": "r-2199",
@@ -13737,11 +13737,11 @@
       "id": "r-2209",
       "title": "Resources for Rethinking — Two-Eyed Seeing: Weaving Indigenous and Western Ways of Knowing",
       "host": "resources4rethinking.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 (proxy egress denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.ontariosciencecentre.ca/teachers-plus-students/teacher-resources/curriculum-resources/exploring-chemistry": {
       "id": "r-2210",
@@ -13797,11 +13797,11 @@
       "id": "r-2215",
       "title": "dcp.edu.gov.on.ca — Key Changes: Grade 9 Science Strand D",
       "host": "www.dcp.edu.gov.on.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://phet.colorado.edu/en/simulations/circuit-construction-kit-dc": {
       "id": "r-2216",
@@ -14047,11 +14047,11 @@
       "id": "r-2240",
       "title": "TVO Learn — Grade 7 Geography Natural Resources, Learning Activity 2",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-7-history-and-geography-natural-resources-learning-activity-3": {
       "id": "r-2241",
@@ -14157,11 +14157,11 @@
       "id": "r-2251",
       "title": "Atlas of Canada — Minerals and Mining",
       "host": "atlas.gc.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://resources.esri.ca/education-and-research/modernizing-geography-with-arcgis-mapping-wildlife-and-natural-resources": {
       "id": "r-2252",
@@ -14247,11 +14247,11 @@
       "id": "r-2260",
       "title": "Energy Education Encyclopedia (University of Calgary)",
       "host": "energyeducation.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 (proxy/egress policy denial)",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://cdn.we.org/wp-content/uploads/2017/02/Canadas-Resources-Environment.pdf": {
       "id": "r-2261",
@@ -14477,11 +14477,11 @@
       "id": "r-2283",
       "title": "NFB Education — Social Issues & Poverty Films Collection",
       "host": "www.nfb.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool session-wide outage",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.heifer.org/take-action/get-involved/schools/global-study-guides": {
       "id": "r-2284",
@@ -14687,11 +14687,11 @@
       "id": "r-2304",
       "title": "Métis Nation of Ontario — K-12 Métis Education Kit",
       "host": "www.metisnation.org",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.metisnation.org/wp-content/uploads/2024/11/Lesson-Plan-RIEL_Louis_Riel.pdf": {
       "id": "r-2305",
@@ -14777,11 +14777,11 @@
       "id": "r-2313",
       "title": "Ontario Grade 7 History & Geography 4-Book Bundle",
       "host": "www.onthemarkpress.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://supersimplesheets.com/products/ontario-grade-7-history-geography-full-year-bundle": {
       "id": "r-2314",
@@ -14877,11 +14877,11 @@
       "id": "r-2323",
       "title": "Ontario Virtual School — Grade 7 History Online Course",
       "host": "www.ontariovirtualschool.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://www.2peasandadog.com/product/grade-7-history-bundle-modified-ontario-curriculum": {
       "id": "r-2324",
@@ -15017,21 +15017,21 @@
       "id": "r-2337",
       "title": "TVO Learn — Grade 6 FSL Learning Activity 7: Je vais être…",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-8": {
       "id": "r-2338",
       "title": "TVO Learn — Grade 6 FSL Learning Activity 8: Lettre de correspondance",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-9": {
       "id": "r-2339",
@@ -15157,11 +15157,11 @@
       "id": "r-2351",
       "title": "TVO Learn — Grade 6 FSL Learning Activity 21: Les communautés francophones au Canada",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-6-french-as-a-second-language-learning-activity-22": {
       "id": "r-2352",
@@ -15337,11 +15337,11 @@
       "id": "r-2369",
       "title": "TVO Learn — Grade 5 FSL Learning Activity 15: Explorons la vieille ville de Québec",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-16": {
       "id": "r-2370",
@@ -15377,11 +15377,11 @@
       "id": "r-2373",
       "title": "TVO Learn — Grade 5 FSL Learning Activity 19: L’hiver",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-5-french-as-a-second-language-learning-activity-20": {
       "id": "r-2374",
@@ -15447,11 +15447,11 @@
       "id": "r-2380",
       "title": "TVO Learn — Grade 4 FSL Learning Activity 2: Je me présente",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-3": {
       "id": "r-2381",
@@ -15477,21 +15477,21 @@
       "id": "r-2383",
       "title": "TVO Learn — Grade 4 FSL Learning Activity 5: Les poèmes animaliers",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-6": {
       "id": "r-2384",
       "title": "TVO Learn — Grade 4 FSL Learning Activity 6: L'araignée à huit pattes",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-7": {
       "id": "r-2385",
@@ -15567,11 +15567,11 @@
       "id": "r-2392",
       "title": "TVO Learn — Grade 4 FSL Learning Activity 14: Comment y arriver?",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-15": {
       "id": "r-2393",
@@ -15587,11 +15587,11 @@
       "id": "r-2394",
       "title": "TVO Learn — Grade 4 FSL Learning Activity 16: On s'habille",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-17": {
       "id": "r-2395",
@@ -15627,11 +15627,11 @@
       "id": "r-2398",
       "title": "TVO Learn — Grade 4 FSL Learning Activity 20: Le robot",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-french-as-a-second-language-learning-activity-21": {
       "id": "r-2399",
@@ -15677,11 +15677,11 @@
       "id": "r-2403",
       "title": "TVO Learn — Grade 7 FSL Learning Activity 1: Une journée au parc d'attractions",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-2": {
       "id": "r-2404",
@@ -15727,11 +15727,11 @@
       "id": "r-2408",
       "title": "TVO Learn — Grade 7 FSL Learning Activity 6: Protégeons l'environnement",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-7": {
       "id": "r-2409",
@@ -15767,11 +15767,11 @@
       "id": "r-2412",
       "title": "TVO Learn — Grade 7 FSL Learning Activity 10: Les logements",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-11": {
       "id": "r-2413",
@@ -15807,11 +15807,11 @@
       "id": "r-2416",
       "title": "TVO Learn — Grade 7 FSL Learning Activity 14: Les invitations : partie 2",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-7-french-as-a-second-language-learning-activity-15": {
       "id": "r-2417",
@@ -15907,11 +15907,11 @@
       "id": "r-2426",
       "title": "TVO Learn — Grade 7 FSL Learning Activity 24: Les affiches de voyage",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-1": {
       "id": "r-2427",
@@ -15997,11 +15997,11 @@
       "id": "r-2435",
       "title": "TVO Learn — Grade 8 FSL Learning Activity 9: Les transitions à l'école",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-10": {
       "id": "r-2436",
@@ -16077,11 +16077,11 @@
       "id": "r-2443",
       "title": "TVO Learn — Grade 8 FSL Learning Activity 17: Les Jeux paralympiques",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-8-french-as-a-second-language-learning-activity-18": {
       "id": "r-2444",
@@ -16227,11 +16227,11 @@
       "id": "r-2458",
       "title": "TVO Learn — Grade 5 Science and Technology (Scientific Innovations) Learning Activity 7: Understanding Body Systems",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-5-science-and-technology-Scientific-Innovations-learning-activity-8": {
       "id": "r-2459",
@@ -16357,11 +16357,11 @@
       "id": "r-2471",
       "title": "TVO Learn — Grade 5 Science and Technology (Futures and Possible Futures) Learning Activity 10: City Planning, Part 2",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-1": {
       "id": "r-2472",
@@ -16407,11 +16407,11 @@
       "id": "r-2476",
       "title": "TVO Learn — Grade 5 Science and Technology (Global Focus) Learning Activity 5: Indigenous-led Conservation",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-6": {
       "id": "r-2477",
@@ -16427,11 +16427,11 @@
       "id": "r-2478",
       "title": "TVO Learn — Grade 5 Science and Technology (Global Focus) Learning Activity 7: Code It! We're Fired Up!",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-8": {
       "id": "r-2479",
@@ -16447,11 +16447,11 @@
       "id": "r-2480",
       "title": "TVO Learn — Grade 5 Science and Technology (Global Focus) Learning Activity 9: Consuming Energy Responsibly",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-5-science-and-technology-Global-Focus-learning-activity-10": {
       "id": "r-2481",
@@ -16487,11 +16487,11 @@
       "id": "r-2484",
       "title": "TVO Learn — Grade 5 Science and Technology (Ontario Focus) Learning Activity 3: Sustainable Design",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-5-science-and-technology-Ontario-Focus-learning-activity-4": {
       "id": "r-2485",
@@ -16597,21 +16597,21 @@
       "id": "r-2495",
       "title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 4: Wheels in Motion",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-5": {
       "id": "r-2496",
       "title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 5: Properties of Sound",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-6": {
       "id": "r-2497",
@@ -16647,11 +16647,11 @@
       "id": "r-2500",
       "title": "TVO Learn — Grade 4 Science and Technology (Scientific Innovations) Learning Activity 9: Green Iglu",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Scientific-Innovations-learning-activity-10": {
       "id": "r-2501",
@@ -16687,11 +16687,11 @@
       "id": "r-2504",
       "title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 3: Magnificent Machines",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-4": {
       "id": "r-2505",
@@ -16707,21 +16707,21 @@
       "id": "r-2506",
       "title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 5: Everyday Rocks and Minerals",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-6": {
       "id": "r-2507",
       "title": "TVO Learn — Grade 4 Science and Technology (Futures and Possible Futures) Learning Activity 6: Aggregate Extraction",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Futures-and-Possible-Futures-learning-activity-7": {
       "id": "r-2508",
@@ -16797,11 +16797,11 @@
       "id": "r-2515",
       "title": "TVO Learn — Grade 4 Science and Technology (Global Focus) Learning Activity 4: Build a Beak",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Global-Focus-learning-activity-5": {
       "id": "r-2516",
@@ -16887,11 +16887,11 @@
       "id": "r-2524",
       "title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 3: Food Chains?",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-4": {
       "id": "r-2525",
@@ -16917,11 +16917,11 @@
       "id": "r-2527",
       "title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 6: Mining and Nature",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-7": {
       "id": "r-2528",
@@ -16937,11 +16937,11 @@
       "id": "r-2529",
       "title": "TVO Learn — Grade 4 Science and Technology (Ontario Focus) Learning Activity 8: Sources of Light",
       "host": "tvolearn.com",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch blocked session-wide: proxy gateway returned 403 to CONNECT for every host tried this session, including unrelated control domains (wikipedia.org, example.com) -- confirmed via agent-proxy st",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://tvolearn.com/pages/grade-4-science-and-technology-Ontario-Focus-learning-activity-9": {
       "id": "r-2530",
@@ -16987,11 +16987,11 @@
       "id": "r-2534",
       "title": "Bien bouger",
       "host": "ophea.net",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://ophea.net/fr/favoriser-une-vie-saine-chez-les-eleves-laide-de-lart-dramatique": {
       "id": "r-2535",
@@ -17017,21 +17017,21 @@
       "id": "r-2537",
       "title": "Alimenter la réflexion pour des choix plus sains",
       "host": "ophea.net",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://ophea.net/fr/lapq-chaque-jour": {
       "id": "r-2538",
       "title": "L'APQ chaque jour",
       "host": "ophea.net",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://ophea.net/fr/vitalite": {
       "id": "r-2539",
@@ -17067,11 +17067,11 @@
       "id": "r-2542",
       "title": "RécréAgir",
       "host": "ophea.net",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://ophea.net/fr/lapprentissage-fonde-sur-lenquete": {
       "id": "r-2543",
@@ -17127,11 +17127,11 @@
       "id": "r-2548",
       "title": "Les commotions cérébrales : Guide de l'enseignant et leçon",
       "host": "ophea.net",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch tool call failed: HTTP 403 Forbidden",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://ophea.net/fr/trousse-pour-leducation-en-plein-air": {
       "id": "r-2549",
@@ -17337,11 +17337,11 @@
       "id": "r-2572",
       "title": "Exploring Biodiversity Through Inquiry — Grade 6 (STAO)",
       "host": "stao.ca",
-      "status": "unchecked",
-      "reason": "",
+      "status": "blocked",
+      "reason": "WebFetch failed: HTTP 403 Forbidden, could not retrieve content",
       "final_url": null,
-      "last_checked": null,
-      "first_flagged": null
+      "last_checked": "2026-07-04T07:09:07Z",
+      "first_flagged": "2026-07-04T07:09:07Z"
     },
     "https://stao.ca/resource/uranium-and-oil-spills-its-garbage-day-humans-grade-7/": {
       "id": "r-2573",
