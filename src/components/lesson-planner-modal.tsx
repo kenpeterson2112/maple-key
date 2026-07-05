@@ -25,6 +25,8 @@ import {
   Languages,
   MonitorOff,
   BookOpen,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import PageHeader from "@/components/page-header"
@@ -52,7 +54,7 @@ import { LEVEL_META, LEVEL_ORDER } from "@/lib/assessment-types"
 import { describeCode } from "@/lib/curriculum-codes"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId } from "@/lib/lesson-templates"
 import { type UserMaterial } from "@/components/user-materials-section"
-import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage, getNoTechMode, setNoTechMode } from "@/lib/personalization"
+import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage, getNoTechMode, setNoTechMode, getLessonSetupMode, setLessonSetupMode, type LessonSetupMode } from "@/lib/personalization"
 import { useGlobalFilters } from "@/lib/global-filters"
 import PlanResourceSearch from "@/components/plan-resource-search"
 import LessonMaterials from "@/components/lesson-materials"
@@ -72,6 +74,34 @@ interface PlanningAnswer {
   questionPrompt: string
   answer: string
 }
+
+/**
+ * Guided setup steps. Same form state as the single-page layout — the wizard
+ * only changes which cards are visible at once, so switching modes mid-setup
+ * never loses anything.
+ */
+const WIZARD_STEPS = [
+  {
+    label: "Resources",
+    title: "Choose your resources",
+    blurb: "Search the library and add the resources this lesson should build on.",
+  },
+  {
+    label: "Format",
+    title: "Shape the lesson",
+    blurb: "Pick how long the lesson runs and which structure it follows.",
+  },
+  {
+    label: "Personalize",
+    title: "Make it yours",
+    blurb: "Tell us about your classroom so the plan fits how you actually teach.",
+  },
+  {
+    label: "Review",
+    title: "Review & generate",
+    blurb: "Double-check your choices — you can jump back to any step before generating.",
+  },
+] as const
 
 interface LessonPlannerModalProps {
   isOpen: boolean
@@ -119,6 +149,10 @@ export default function LessonPlannerModal({
   const [materialsTick, setMaterialsTick] = useState(0)
   const [isGenerating, setIsGenerating] = useState(false)
   const [lessonGenerated, setLessonGenerated] = useState(!!lesson)
+
+  // Setup layout: guided one-step-at-a-time wizard vs. everything on one page.
+  const [setupMode, setSetupModeState] = useState<LessonSetupMode>(getLessonSetupMode())
+  const [wizardStep, setWizardStep] = useState(0)
 
   const [editingSection, setEditingSection] = useState<string | null>(null)
   const [lessonTitle, setLessonTitle] = useState(lesson?.title ?? "")
@@ -177,7 +211,7 @@ export default function LessonPlannerModal({
 
   useEffect(() => {
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: "smooth" })
-  }, [currentQuestionIndex, showQuestionsStep])
+  }, [currentQuestionIndex, showQuestionsStep, wizardStep, setupMode])
 
   const bookmarkedCodes = Array.from(
     new Set(bookmarkedResources.flatMap((r) => r.curriculum_expectations ?? [])),
@@ -565,6 +599,15 @@ export default function LessonPlannerModal({
   const handleNoTechModeChange = (value: boolean) => {
     setNoTechModeState(value)
     setNoTechMode(value)
+  }
+
+  const handleSetupModeChange = (mode: LessonSetupMode) => {
+    setSetupModeState(mode)
+    setLessonSetupMode(mode)
+  }
+
+  const goToWizardStep = (step: number) => {
+    setWizardStep(Math.max(0, Math.min(step, WIZARD_STEPS.length - 1)))
   }
 
   const buildRequestPayload = () => ({
@@ -1122,6 +1165,248 @@ Return a JSON object with exactly these fields (string values are plain text, no
       alert("Please allow popups to export the lesson plan")
     }
   }
+
+  // ——— Setup form pieces, shared between the guided wizard and the
+  // single-page "all options" layout. Both render the same state, so
+  // switching modes mid-setup keeps every choice.
+  const isWizard = setupMode === "wizard"
+  const isLastWizardStep = wizardStep === WIZARD_STEPS.length - 1
+
+  const setupModeToggle = (
+    <div className="flex items-center justify-between gap-3 flex-wrap">
+      <p className="text-xs text-[#888]">
+        {isWizard
+          ? "One step at a time — switch anytime to see every option on one page."
+          : "Everything on one page — switch to guided steps for a walkthrough."}
+      </p>
+      <div className="inline-flex rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white" role="group" aria-label="Setup layout">
+        {([["wizard", "Guided steps"], ["full", "All options"]] as const).map(([mode, label]) => {
+          const selected = setupMode === mode
+          return (
+            <button
+              key={mode}
+              type="button"
+              onClick={() => handleSetupModeChange(mode)}
+              aria-pressed={selected}
+              className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+                selected ? "bg-[#FF6B35] text-white shadow-sm" : "text-[#888] hover:text-[#FF6B35]"
+              }`}
+            >
+              {label}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+
+  const wizardHeader = (
+    <div>
+      <div className="flex items-center justify-between gap-3 mb-2">
+        <p className="text-sm font-medium text-[#8B4513]">
+          Step {wizardStep + 1} of {WIZARD_STEPS.length}
+        </p>
+        <div className="flex gap-1.5">
+          {WIZARD_STEPS.map((s, i) => (
+            <button
+              key={s.label}
+              type="button"
+              onClick={() => i < wizardStep && goToWizardStep(i)}
+              disabled={i >= wizardStep}
+              aria-label={`Go back to step ${i + 1}: ${s.label}`}
+              className={`h-1.5 w-8 rounded-full transition-colors ${
+                i < wizardStep
+                  ? "bg-[#FF6B35]/50 hover:bg-[#FF6B35] cursor-pointer"
+                  : i === wizardStep
+                  ? "bg-[#FF6B35]"
+                  : "bg-[#E8D5C4]"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+      <h3 className="text-lg font-semibold text-[#2C2C2C]">{WIZARD_STEPS[wizardStep].title}</h3>
+      <p className="text-sm text-[#888] mt-0.5">{WIZARD_STEPS[wizardStep].blurb}</p>
+    </div>
+  )
+
+  const reviewRows: { label: string; value: string; step: number }[] = [
+    {
+      label: "Resources",
+      value:
+        bookmarkedResources.length > 0
+          ? bookmarkedResources.map((r) => r.topic_title).join(", ")
+          : "None selected",
+      step: 0,
+    },
+    { label: "Lesson length", value: `${lessonMinutes} minutes`, step: 1 },
+    { label: "Template", value: templateDef.displayName, step: 1 },
+    { label: "No-Tech Mode", value: noTechMode ? "On — nothing for students to operate" : "Off", step: 1 },
+    {
+      label: "Classroom materials",
+      value: materialsSnapshot.total > 0 ? `${materialsSnapshot.total} selected` : "None selected",
+      step: 2,
+    },
+    { label: "Student handouts", value: reproducibleLanguage === "French" ? "Français" : "English", step: 2 },
+    { label: "Additional notes", value: teacherNotes.trim() || "None", step: 2 },
+  ]
+
+  const wizardReviewCard = (
+    <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+      <div className="flex items-center gap-2 mb-2">
+        <ClipboardList size={18} className="text-[#8B4513]" />
+        <h3 className="text-lg font-semibold text-[#2C2C2C]">Your lesson setup</h3>
+      </div>
+      <dl className="divide-y divide-[#F0E4D6]">
+        {reviewRows.map((row) => (
+          <div key={row.label} className="flex items-start justify-between gap-4 py-2.5">
+            <div className="min-w-0">
+              <dt className="text-xs font-semibold text-[#8B4513] uppercase tracking-wide">{row.label}</dt>
+              <dd className="text-sm text-[#444] mt-0.5 break-words">{row.value}</dd>
+            </div>
+            <button
+              type="button"
+              onClick={() => goToWizardStep(row.step)}
+              className="flex-shrink-0 flex items-center gap-1 text-xs font-medium text-[#888] hover:text-[#FF6B35] transition-colors mt-0.5"
+              aria-label={`Edit ${row.label}`}
+            >
+              <Pencil size={12} />
+              Edit
+            </button>
+          </div>
+        ))}
+      </dl>
+      {bookmarkedResources.length === 0 && (
+        <div className="mt-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5">
+          <AlertTriangle size={14} className="text-amber-500 flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-amber-800">
+            No resources are selected yet — you can still generate, but the plan won't build on curated resources.{" "}
+            <button
+              type="button"
+              onClick={() => goToWizardStep(0)}
+              className="font-semibold underline hover:text-amber-900"
+            >
+              Pick resources
+            </button>
+          </p>
+        </div>
+      )}
+    </div>
+  )
+
+  const generateErrorPanel = generateError && (
+    <div className={`rounded-lg px-4 py-3 border ${generateError === "API_BALANCE_LOW" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
+      <div className="flex items-start gap-2">
+        <AlertTriangle size={16} className={`flex-shrink-0 mt-0.5 ${generateError === "API_BALANCE_LOW" ? "text-amber-500" : "text-red-500"}`} />
+        <p className={`text-sm ${generateError === "API_BALANCE_LOW" ? "text-amber-800" : "text-red-700"}`}>
+          {generateError === "API_BALANCE_LOW"
+            ? "The AI service is temporarily unavailable while we top up our API credits. Please try again shortly — we're working on it!"
+            : generateError}
+        </p>
+      </div>
+      {generateError === "API_BALANCE_LOW" && (
+        <div className="mt-3 space-y-2">
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={handleExportRequestJSON}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+            >
+              <Download size={13} />
+              Download request JSON
+            </button>
+            <button
+              onClick={handleCopyRequestJSON}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+            >
+              {copiedState === "request" ? <Check size={13} /> : <Copy size={13} />}
+              {copiedState === "request" ? "Copied!" : "Copy request JSON"}
+            </button>
+            <button
+              onClick={handleCopyFullPrompt}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+            >
+              {copiedState === "prompt" ? <Check size={13} /> : <Copy size={13} />}
+              {copiedState === "prompt" ? "Copied!" : "Copy prompt for LLM"}
+            </button>
+            <button
+              onClick={() => { setShowPastePanel((v) => !v); setPasteError(null) }}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+            >
+              <ClipboardList size={13} />
+              Paste response JSON
+            </button>
+            <button
+              onClick={() => importInputRef.current?.click()}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+            >
+              <Upload size={13} />
+              Import file
+            </button>
+            <input
+              ref={importInputRef}
+              type="file"
+              accept=".json,application/json"
+              onChange={handleImportResponseJSON}
+              className="hidden"
+            />
+          </div>
+          {showPastePanel && (
+            <div className="space-y-2">
+              <textarea
+                value={pasteText}
+                onChange={(e) => { setPasteText(e.target.value); setPasteError(null) }}
+                rows={6}
+                placeholder={'Paste the JSON response from the LLM here, e.g.:\n{\n  "title": "...",\n  "mindsOnContent": "...",\n  ...\n}'}
+                className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-white text-xs font-mono text-[#444] focus:outline-none focus:border-amber-500 transition-colors resize-none"
+              />
+              {pasteError && (
+                <p className="text-xs text-red-600">{pasteError}</p>
+              )}
+              <button
+                onClick={handlePasteLoad}
+                disabled={!pasteText.trim()}
+                className="px-4 py-1.5 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 text-white text-xs font-medium rounded-lg transition-colors"
+              >
+                Load lesson
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+
+  const frenchHandoutsNotice = reproducibleLanguage === "French" && (
+    <div className="mb-3 flex items-center gap-2 rounded-xl border-2 border-blue-300 bg-blue-50 px-4 py-2.5">
+      <Languages size={18} className="text-blue-600 shrink-0" />
+      <p className="text-sm font-medium text-blue-800">
+        Student handouts will be generated in <strong>French</strong> — the lesson
+        plan itself stays in English.
+      </p>
+    </div>
+  )
+
+  const generateButton = (
+    <button
+      onClick={handleGenerate}
+      disabled={isGenerating}
+      aria-label={
+        isGenerating
+          ? "Generating your lesson plan"
+          : `Generate lesson plan with ${bookmarkedResources.length} selected resource${bookmarkedResources.length === 1 ? "" : "s"}`
+      }
+      className="w-full py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70"
+    >
+      {isGenerating ? (
+        <>
+          <Loader2 size={20} className="animate-spin" />
+          Generating your lesson...
+        </>
+      ) : (
+        "Generate Lesson Plan"
+      )}
+    </button>
+  )
 
   return (
     <div className={asSpace ? "w-full h-full overflow-hidden" : "fixed inset-0 z-[200] flex items-center justify-center"}>
@@ -1843,6 +2128,12 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             ) : (
               <>
+                {setupModeToggle}
+
+                {isWizard && wizardHeader}
+
+                {/* Step 1 — resources (all cards visible at once in all-options mode) */}
+                {(!isWizard || wizardStep === 0) && (<>
                 {/* Embedded resource search */}
                 <PlanResourceSearch
                   filters={{
@@ -1932,7 +2223,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   userMaterials={userMaterials}
                   onUserMaterialsChange={setUserMaterials}
                 />
+                </>)}
 
+                {/* Step 2 — lesson format */}
+                {(!isWizard || wizardStep === 1) && (
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Layout size={16} className="text-[#8B4513]" />
@@ -2032,7 +2326,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     </label>
                   </div>
                 </div>
+                )}
 
+                {/* Step 3 — personalize */}
+                {(!isWizard || wizardStep === 2) && (<>
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2">
@@ -2104,6 +2401,10 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     {" "}The <strong>Student handouts</strong> toggle only translates the printable activity sheets — your lesson plan stays in English.
                   </p>
                 </div>
+                </>)}
+
+                {/* Step 4 — review (wizard only; the all-options page doesn't need it) */}
+                {isWizard && wizardStep === 3 && wizardReviewCard}
 
                 {/* Spacer for bottom */}
                 <div className="h-6" />
@@ -2126,118 +2427,45 @@ Return a JSON object with exactly these fields (string values are plain text, no
           </div>
         )}
 
-        {!lessonGenerated && !showQuestionsStep && !isGenerating && (
+        {!lessonGenerated && !showQuestionsStep && !isGenerating && !isWizard && (
           <div className="hidden md:block sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
             <div className="max-w-3xl mx-auto space-y-3">
-              {generateError && (
-                <div className={`rounded-lg px-4 py-3 border ${generateError === "API_BALANCE_LOW" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
-                  <div className="flex items-start gap-2">
-                    <AlertTriangle size={16} className={`flex-shrink-0 mt-0.5 ${generateError === "API_BALANCE_LOW" ? "text-amber-500" : "text-red-500"}`} />
-                    <p className={`text-sm ${generateError === "API_BALANCE_LOW" ? "text-amber-800" : "text-red-700"}`}>
-                      {generateError === "API_BALANCE_LOW"
-                        ? "The AI service is temporarily unavailable while we top up our API credits. Please try again shortly — we're working on it!"
-                        : generateError}
-                    </p>
-                  </div>
-                  {generateError === "API_BALANCE_LOW" && (
-                    <div className="mt-3 space-y-2">
-                      <div className="flex flex-wrap gap-2">
-                        <button
-                          onClick={handleExportRequestJSON}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                        >
-                          <Download size={13} />
-                          Download request JSON
-                        </button>
-                        <button
-                          onClick={handleCopyRequestJSON}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                        >
-                          {copiedState === "request" ? <Check size={13} /> : <Copy size={13} />}
-                          {copiedState === "request" ? "Copied!" : "Copy request JSON"}
-                        </button>
-                        <button
-                          onClick={handleCopyFullPrompt}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                        >
-                          {copiedState === "prompt" ? <Check size={13} /> : <Copy size={13} />}
-                          {copiedState === "prompt" ? "Copied!" : "Copy prompt for LLM"}
-                        </button>
-                        <button
-                          onClick={() => { setShowPastePanel((v) => !v); setPasteError(null) }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                        >
-                          <ClipboardList size={13} />
-                          Paste response JSON
-                        </button>
-                        <button
-                          onClick={() => importInputRef.current?.click()}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
-                        >
-                          <Upload size={13} />
-                          Import file
-                        </button>
-                        <input
-                          ref={importInputRef}
-                          type="file"
-                          accept=".json,application/json"
-                          onChange={handleImportResponseJSON}
-                          className="hidden"
-                        />
-                      </div>
-                      {showPastePanel && (
-                        <div className="space-y-2">
-                          <textarea
-                            value={pasteText}
-                            onChange={(e) => { setPasteText(e.target.value); setPasteError(null) }}
-                            rows={6}
-                            placeholder={'Paste the JSON response from the LLM here, e.g.:\n{\n  "title": "...",\n  "mindsOnContent": "...",\n  ...\n}'}
-                            className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-white text-xs font-mono text-[#444] focus:outline-none focus:border-amber-500 transition-colors resize-none"
-                          />
-                          {pasteError && (
-                            <p className="text-xs text-red-600">{pasteError}</p>
-                          )}
-                          <button
-                            onClick={handlePasteLoad}
-                            disabled={!pasteText.trim()}
-                            className="px-4 py-1.5 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 text-white text-xs font-medium rounded-lg transition-colors"
-                          >
-                            Load lesson
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
-              {reproducibleLanguage === "French" && (
-                <div className="mb-3 flex items-center gap-2 rounded-xl border-2 border-blue-300 bg-blue-50 px-4 py-2.5">
-                  <Languages size={18} className="text-blue-600 shrink-0" />
-                  <p className="text-sm font-medium text-blue-800">
-                    Student handouts will be generated in <strong>French</strong> — the lesson
-                    plan itself stays in English.
-                  </p>
-                </div>
-              )}
-              <button
-                onClick={handleGenerate}
-                disabled={isGenerating}
-                aria-label={
-                  isGenerating
-                    ? "Generating your lesson plan"
-                    : `Generate lesson plan with ${bookmarkedResources.length} selected resource${bookmarkedResources.length === 1 ? "" : "s"}`
-                }
-                className="w-full py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70"
-              >
-                {isGenerating ? (
-                  <>
-                    <Loader2 size={20} className="animate-spin" />
-                    Generating your lesson...
-                  </>
-                ) : (
-                  "Generate Lesson Plan"
+              {generateErrorPanel}
+              {frenchHandoutsNotice}
+              {generateButton}
+            </div>
+          </div>
+        )}
+
+        {!lessonGenerated && !showQuestionsStep && !isGenerating && isWizard && (
+          <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
+            <div className="max-w-3xl mx-auto space-y-3">
+              {isLastWizardStep && generateErrorPanel}
+              {isLastWizardStep && frenchHandoutsNotice}
+              <div className="flex items-center gap-3">
+                {wizardStep > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => goToWizardStep(wizardStep - 1)}
+                    className="flex-shrink-0 flex items-center gap-1.5 px-4 py-3 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-semibold rounded-xl transition-colors"
+                  >
+                    <ChevronLeft size={16} />
+                    Back
+                  </button>
                 )}
-              </button>
+                {isLastWizardStep ? (
+                  generateButton
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => goToWizardStep(wizardStep + 1)}
+                    className="w-full py-3 bg-[#FF6B35] hover:bg-[#e55a2a] text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-colors"
+                  >
+                    Next: {WIZARD_STEPS[wizardStep + 1].label}
+                    <ChevronRight size={16} />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         )}

@@ -180,6 +180,33 @@ export function setNoTechMode(value: boolean): void {
   }
 }
 
+const LESSON_SETUP_MODE_KEY = "maplekey_lesson_setup_mode"
+
+export type LessonSetupMode = "wizard" | "full"
+
+/**
+ * How the lesson-planner setup form is presented. "wizard" walks through one
+ * step at a time (gentler for first-time users); "full" shows every option on
+ * a single scrolling page (faster for tweaking). Remembered across sessions.
+ */
+export function getLessonSetupMode(): LessonSetupMode {
+  if (typeof window === "undefined") return "wizard"
+  try {
+    return window.localStorage.getItem(LESSON_SETUP_MODE_KEY) === "full" ? "full" : "wizard"
+  } catch {
+    return "wizard"
+  }
+}
+
+export function setLessonSetupMode(mode: LessonSetupMode): void {
+  if (typeof window === "undefined") return
+  try {
+    window.localStorage.setItem(LESSON_SETUP_MODE_KEY, mode)
+  } catch {
+    // ignore quota / privacy errors
+  }
+}
+
 const RESOURCE_TOUR_KEY = "maplekey_resource_tour_seen"
 
 export function isResourceTourSeen(): boolean {
