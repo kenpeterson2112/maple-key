@@ -54,6 +54,34 @@ sub-path baked in:
 VITE_BASE_PATH=/v0-maple-key-website/ pnpm build
 ```
 
+## Admin — Database Manager
+
+Open the app with the `#admin` hash (e.g. `https://maplekey.vercel.app/#admin`)
+to load a stripped-down curation surface over `public/resources.json`:
+search and filter every record (including collections and suppressed ones),
+then tag, suppress, edit, or delete resources. Changes accumulate locally
+(they survive reloads via localStorage) until you push them.
+
+**Push to GitHub** sends the changeset to `api/admin-push.ts`, which applies
+it to both `public/resources.json` and `docs/resources.json` on a fresh
+`admin/resource-edits-*` branch and opens a draft PR — merging the PR is the
+review gate; nothing writes to `main` directly. **Download JSON** is the
+no-server fallback: it downloads the edited `resources.json` for a manual
+commit.
+
+Two Vercel env vars power the push flow:
+
+- `MK_ADMIN_SECRET` — the admin key you type into the push dialog. Not baked
+  into the client bundle (unlike `MK_API_SECRET`), so visitors who find
+  `#admin` can browse but not open PRs.
+- `MK_ADMIN_GITHUB_TOKEN` — fine-grained PAT scoped to this repo with
+  *Contents: write* and *Pull requests: write*.
+
+Suppression model: `is_collection` marks hub/index pages (see
+`scripts/detect-collections.py`), `suppressed` is the manual catch-all set
+from this tool. Both hide a record from every teacher-facing search surface
+(`src/lib/use-filtered-resources.ts`) without deleting it.
+
 ## Deployment
 
 ### Production — Vercel (canonical)

@@ -1028,7 +1028,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-15",
@@ -1424,7 +1425,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-22",
@@ -1593,7 +1595,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-25",
@@ -1983,7 +1986,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-32",
@@ -2205,7 +2209,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-36",
@@ -2371,7 +2376,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-39",
@@ -2755,7 +2761,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-46",
@@ -3425,7 +3432,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-58",
@@ -3482,7 +3490,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-59",
@@ -3802,7 +3811,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-64",
@@ -4111,7 +4121,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-69",
@@ -4279,7 +4290,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-72",
@@ -4798,7 +4810,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-80",
@@ -4955,7 +4968,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-82",
@@ -5399,7 +5413,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-89",
@@ -5816,7 +5831,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-94",
@@ -5879,7 +5895,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-95",
@@ -5952,7 +5969,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-96",
@@ -6219,7 +6237,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-100",
@@ -7061,7 +7080,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-111",
@@ -7619,7 +7639,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-119",
@@ -8943,7 +8964,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-134",
@@ -10416,7 +10438,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-154",
@@ -11110,7 +11133,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1000",
@@ -11662,7 +11686,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1010",
@@ -11886,7 +11911,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1014",
@@ -12262,7 +12288,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1021",
@@ -12370,7 +12397,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1023",
@@ -13259,7 +13287,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1039",
@@ -13314,7 +13343,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1040",
@@ -13477,7 +13507,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1043",
@@ -13533,7 +13564,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1044",
@@ -13647,7 +13679,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1046",
@@ -14608,7 +14641,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1063",
@@ -14663,7 +14697,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1064",
@@ -14827,7 +14862,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1067",
@@ -15209,7 +15245,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1074",
@@ -15710,7 +15747,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1083",
@@ -15765,7 +15803,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1084",
@@ -15927,7 +15966,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1087",
@@ -15982,7 +16022,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1088",
@@ -17045,7 +17086,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1107",
@@ -17375,7 +17417,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1113",
@@ -18104,7 +18147,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1126",
@@ -18158,7 +18202,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1127",
@@ -18212,7 +18257,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1128",
@@ -18266,7 +18312,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1129",
@@ -18381,7 +18428,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1131",
@@ -18769,7 +18817,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1138",
@@ -18826,7 +18875,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1139",
@@ -18940,7 +18990,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1141",
@@ -19164,7 +19215,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1145",
@@ -19667,7 +19719,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1154",
@@ -19781,7 +19834,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1156",
@@ -19837,7 +19891,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1157",
@@ -19893,7 +19948,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1158",
@@ -20174,7 +20230,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1163",
@@ -20520,7 +20577,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1169",
@@ -20686,7 +20744,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1172",
@@ -20849,7 +20908,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1175",
@@ -20960,7 +21020,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1177",
@@ -21407,7 +21468,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1185",
@@ -21576,7 +21638,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1188",
@@ -21630,7 +21693,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1189",
@@ -21741,7 +21805,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1191",
@@ -22074,7 +22139,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1197",
@@ -22299,7 +22365,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1201",
@@ -22464,7 +22531,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1204",
@@ -22520,7 +22588,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1205",
@@ -22797,7 +22866,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1210",
@@ -23031,7 +23101,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1214",
@@ -23372,7 +23443,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1220",
@@ -23661,7 +23733,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1225",
@@ -24191,7 +24264,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1234",
@@ -24253,7 +24327,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1235",
@@ -24537,7 +24612,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1240",
@@ -24987,7 +25063,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1248",
@@ -25211,7 +25288,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1252",
@@ -25267,7 +25345,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1253",
@@ -25444,7 +25523,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1256",
@@ -25570,7 +25650,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1258",
@@ -25633,7 +25714,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1259",
@@ -25915,7 +25997,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1264",
@@ -25970,7 +26053,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1265",
@@ -26380,7 +26464,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1272",
@@ -26442,7 +26527,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1273",
@@ -27016,7 +27102,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1283",
@@ -27074,7 +27161,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1284",
@@ -27133,7 +27221,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1285",
@@ -27190,7 +27279,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1286",
@@ -27411,7 +27501,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1290",
@@ -27518,7 +27609,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1292",
@@ -28386,7 +28478,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1308",
@@ -28494,7 +28587,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1310",
@@ -29241,7 +29335,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1323",
@@ -29352,7 +29447,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1325",
@@ -29409,7 +29505,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1326",
@@ -30103,7 +30200,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1338",
@@ -30593,7 +30691,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1347",
@@ -30862,7 +30961,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1352",
@@ -31419,7 +31519,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1362",
@@ -31473,7 +31574,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1363",
@@ -31527,7 +31629,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1364",
@@ -31915,7 +32018,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1371",
@@ -32080,7 +32184,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1374",
@@ -32247,7 +32352,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1377",
@@ -32411,7 +32517,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1380",
@@ -33188,7 +33295,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1394",
@@ -33801,7 +33909,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1405",
@@ -33857,7 +33966,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1406",
@@ -34024,7 +34134,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1409",
@@ -34198,7 +34309,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1412",
@@ -34375,7 +34487,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1415",
@@ -34866,7 +34979,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1424",
@@ -35139,7 +35253,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1429",
@@ -35193,7 +35308,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1430",
@@ -35245,7 +35361,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1431",
@@ -35297,7 +35414,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1432",
@@ -35569,7 +35687,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1437",
@@ -35841,7 +35960,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1442",
@@ -35895,7 +36015,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1443",
@@ -35950,7 +36071,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1444",
@@ -36444,7 +36566,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1453",
@@ -36499,7 +36622,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1454",
@@ -36885,7 +37009,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1461",
@@ -36941,7 +37066,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1462",
@@ -37104,7 +37230,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1465",
@@ -37272,7 +37399,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1468",
@@ -37435,7 +37563,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1471",
@@ -37602,7 +37731,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1474",
@@ -37770,7 +37900,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1477",
@@ -38113,7 +38244,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1483",
@@ -38874,7 +39006,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1497",
@@ -38930,7 +39063,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1498",
@@ -38983,7 +39117,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1499",
@@ -39039,7 +39174,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1500",
@@ -39093,7 +39229,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1501",
@@ -39254,7 +39391,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1504",
@@ -39359,7 +39497,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1506",
@@ -39795,7 +39934,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1514",
@@ -40173,7 +40313,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1521",
@@ -40382,7 +40523,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1525",
@@ -40434,7 +40576,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1526",
@@ -41181,7 +41324,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1540",
@@ -41676,7 +41820,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1549",
@@ -41730,7 +41875,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1550",
@@ -41783,7 +41929,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1551",
@@ -42112,7 +42259,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1557",
@@ -42727,7 +42875,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1568",
@@ -42954,7 +43103,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1572",
@@ -43070,7 +43220,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1574",
@@ -43132,7 +43283,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1575",
@@ -43189,7 +43341,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1576",
@@ -43696,7 +43849,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1585",
@@ -43976,7 +44130,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1590",
@@ -44150,7 +44305,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1593",
@@ -44208,7 +44364,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1594",
@@ -44440,7 +44597,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1598",
@@ -44663,7 +44821,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1602",
@@ -45159,7 +45318,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1611",
@@ -45214,7 +45374,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1612",
@@ -45544,7 +45705,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1618",
@@ -45871,7 +46033,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1624",
@@ -45926,7 +46089,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1625",
@@ -46146,7 +46310,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1629",
@@ -46255,7 +46420,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1631",
@@ -46365,7 +46531,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1633",
@@ -46791,7 +46958,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1641",
@@ -47233,7 +47401,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1649",
@@ -47394,7 +47563,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1652",
@@ -47502,7 +47672,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1654",
@@ -47934,7 +48105,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1662",
@@ -48154,7 +48326,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1666",
@@ -48209,7 +48382,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1667",
@@ -48264,7 +48438,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1668",
@@ -48319,7 +48494,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1669",
@@ -48374,7 +48550,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1670",
@@ -48537,7 +48714,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1673",
@@ -50497,7 +50675,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1709",
@@ -51540,7 +51719,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1728",
@@ -51597,7 +51777,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1729",
@@ -51654,7 +51835,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1730",
@@ -52142,7 +52324,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1739",
@@ -52689,7 +52872,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1749",
@@ -52967,7 +53151,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1754",
@@ -53020,7 +53205,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1755",
@@ -53073,7 +53259,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1756",
@@ -53236,7 +53423,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1759",
@@ -53507,7 +53695,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1764",
@@ -53873,7 +54062,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1771",
@@ -54199,7 +54389,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1777",
@@ -55158,7 +55349,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1795",
@@ -56372,7 +56564,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1817",
@@ -56542,7 +56735,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1820",
@@ -56607,7 +56801,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1821",
@@ -56792,7 +56987,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1824",
@@ -57025,7 +57221,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1828",
@@ -57089,7 +57286,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1829",
@@ -57152,7 +57350,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1830",
@@ -57318,7 +57517,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1833",
@@ -57376,7 +57576,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1834",
@@ -57488,7 +57689,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1836",
@@ -57546,7 +57748,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1837",
@@ -57945,7 +58148,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1844",
@@ -58001,7 +58205,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1845",
@@ -58059,7 +58264,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1846",
@@ -58233,7 +58439,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1849",
@@ -58290,7 +58497,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1850",
@@ -59536,7 +59744,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1873",
@@ -59759,7 +59968,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1877",
@@ -60088,7 +60298,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1883",
@@ -60269,7 +60480,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1886",
@@ -60395,7 +60607,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1888",
@@ -60450,7 +60663,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1889",
@@ -60729,7 +60943,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1894",
@@ -61459,7 +61674,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1907",
@@ -61684,7 +61900,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1911",
@@ -62163,7 +62380,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1920",
@@ -62434,7 +62652,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1925",
@@ -63035,7 +63254,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1936",
@@ -63091,7 +63311,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1937",
@@ -63257,7 +63478,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1940",
@@ -63474,7 +63696,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1944",
@@ -63528,7 +63751,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1945",
@@ -63747,7 +63971,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1949",
@@ -64248,7 +64473,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1958",
@@ -64581,7 +64807,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1964",
@@ -64962,7 +65189,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1971",
@@ -65020,7 +65248,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1972",
@@ -65075,7 +65304,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1973",
@@ -65466,7 +65696,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1980",
@@ -65577,7 +65808,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1982",
@@ -65687,7 +65919,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1984",
@@ -65799,7 +66032,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1986",
@@ -65853,7 +66087,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1987",
@@ -65908,7 +66143,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1988",
@@ -65963,7 +66199,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1989",
@@ -66016,7 +66253,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1990",
@@ -66238,7 +66476,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1994",
@@ -66350,7 +66589,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1996",
@@ -66460,7 +66700,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-1998",
@@ -66795,7 +67036,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2004",
@@ -66907,7 +67149,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2006",
@@ -67567,7 +67810,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2018",
@@ -67626,7 +67870,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2019",
@@ -67895,7 +68140,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2024",
@@ -68058,7 +68304,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2027",
@@ -68827,7 +69074,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2041",
@@ -68880,7 +69128,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2042",
@@ -70180,7 +70429,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2066",
@@ -70349,7 +70599,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2069",
@@ -70891,7 +71142,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2079",
@@ -70999,7 +71251,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2081",
@@ -71110,7 +71363,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2083",
@@ -71273,7 +71527,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2086",
@@ -71326,7 +71581,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2087",
@@ -71539,7 +71795,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2091",
@@ -71864,7 +72121,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2097",
@@ -72529,7 +72787,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2109",
@@ -72916,7 +73175,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2116",
@@ -73026,7 +73286,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2118",
@@ -73082,7 +73343,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2119",
@@ -73248,7 +73510,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2122",
@@ -73304,7 +73567,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2123",
@@ -73696,7 +73960,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2130",
@@ -74027,7 +74292,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2136",
@@ -74469,7 +74735,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2144",
@@ -75178,7 +75445,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2157",
@@ -75396,7 +75664,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2161",
@@ -75450,7 +75719,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2162",
@@ -75721,7 +75991,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2167",
@@ -76152,7 +76423,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2175",
@@ -76259,7 +76531,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2177",
@@ -76418,7 +76691,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2180",
@@ -76472,7 +76746,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2181",
@@ -76689,7 +76964,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2185",
@@ -76907,7 +77183,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2189",
@@ -77126,7 +77403,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2193",
@@ -77181,7 +77459,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2194",
@@ -77235,7 +77514,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2195",
@@ -77509,7 +77789,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2200",
@@ -77622,7 +77903,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2202",
@@ -78951,7 +79233,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2226",
@@ -79195,7 +79478,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2230",
@@ -79428,7 +79712,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2234",
@@ -80154,7 +80439,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2247",
@@ -80324,7 +80610,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2250",
@@ -80608,7 +80895,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2255",
@@ -80919,7 +81207,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2260",
@@ -81032,7 +81321,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2262",
@@ -81958,7 +82248,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2279",
@@ -82070,7 +82361,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2281",
@@ -82237,7 +82529,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2284",
@@ -82672,7 +82965,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2292",
@@ -83211,7 +83505,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2302",
@@ -83323,7 +83618,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2304",
@@ -83607,7 +83903,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2309",
@@ -83662,7 +83959,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2310",
@@ -83717,7 +84015,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2311",
@@ -83826,7 +84125,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2313",
@@ -83881,7 +84181,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2314",
@@ -83937,7 +84238,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2315",
@@ -84051,7 +84353,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2317",
@@ -84108,7 +84411,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2318",
@@ -84165,7 +84469,8 @@
         "verified": false,
         "needs_review": false
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2319",
@@ -84437,7 +84742,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "id": "r-2324",
@@ -84653,7 +84959,8 @@
         "verified": false,
         "needs_review": true
       },
-      "language": "en"
+      "language": "en",
+      "is_collection": true
     },
     {
       "topic_title": "What Is Matter? Definition and Examples",
