@@ -49,6 +49,12 @@ export interface Resource {
   usage_notes?: string
   // Curation state
   is_collection?: boolean
+  // Hidden from every teacher-facing search surface without deleting the
+  // record. Set from the admin Database Manager (#admin); is_collection is the
+  // narrower "this is a hub of resources" flag, suppressed is the catch-all.
+  suppressed?: boolean
+  // Freeform admin labels applied in the Database Manager (e.g. "needs-review")
+  tags?: string[]
   // Provenance
   metadata: ResourceMetadata
 }

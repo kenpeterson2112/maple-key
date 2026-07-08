@@ -2,5 +2,10 @@
   "framework": "vite",
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install",
+  "functions": {
+    "api/admin-push.ts": {
+      "maxDuration": 60
+    }
+  }
 }

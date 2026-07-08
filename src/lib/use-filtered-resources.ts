@@ -65,7 +65,7 @@ export function useFilteredResources(filters: Filters, sidebarFilters?: SidebarF
     if (!resources || !Array.isArray(resources)) return []
 
     return resources.filter((resource) => {
-      if (resource.is_collection) return false
+      if (resource.is_collection || resource.suppressed) return false
 
       if (filters.province && filters.province !== "" && filters.province !== "Canada") {
         if (resource.province !== filters.province) return false
