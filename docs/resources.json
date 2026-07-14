@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-06-18T13:28:28Z",
-    "total_count": 1736,
+    "generated_at": "2026-07-14T02:55:23Z",
+    "total_count": 1743,
     "schema_version": "2.1"
   },
   "resources": [
@@ -98568,6 +98568,381 @@
         "verified": false,
         "needs_review": true
       }
+    },
+    {
+      "id": "r-2576",
+      "topic_title": "CRA Learn About Your Taxes — Purpose of Taxes",
+      "description": "Official CRA lesson plan explaining why Canadians pay taxes, what tax revenue funds, and how the Canadian tax system works, with built-in quizzes and real-life examples. Covers the civic and economic rationale for taxation as a mechanism to distribute resources for public services.",
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-purpose-taxes.html",
+      "publisher_creator": "Canada Revenue Agency (CRA)",
+      "grade_level": [
+        9
+      ],
+      "grade_band": "senior",
+      "subject": "Math",
+      "strand": [
+        "Financial Literacy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "F1.5"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "whole-class"
+      ],
+      "usage_notes": "Self-paced online lesson with built-in quizzes; assign individually or walk through as a class using the embedded real-life tax-slip examples. Also deliverable as a scored, gamified activity via ChatterHigh's Gamified Tax Literacy Course for Teens.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "mathematics",
+          "strand": "financial_literacy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-07-14",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      },
+      "language": "en"
+    },
+    {
+      "id": "r-2577",
+      "topic_title": "CRA Learn About Your Taxes — Starting to Work",
+      "description": "Lesson plan covering what students need to know when they start their first job: obtaining a Social Insurance Number, completing a TD1 form, reading a pay stub, and understanding T4 slips and payroll deductions (CPP, EI, income tax). Includes 4 sub-lessons and interactive quizzes.",
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-starting-work.html",
+      "publisher_creator": "Canada Revenue Agency (CRA)",
+      "grade_level": [
+        9
+      ],
+      "grade_band": "senior",
+      "subject": "Math",
+      "strand": [
+        "Financial Literacy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "F1.1",
+        "F1.2"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "whole-class"
+      ],
+      "usage_notes": "Self-paced online lesson with built-in quizzes; assign individually or walk through as a class using the embedded real-life tax-slip examples. Also deliverable as a scored, gamified activity via ChatterHigh's Gamified Tax Literacy Course for Teens.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "mathematics",
+          "strand": "financial_literacy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-07-14",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      },
+      "language": "en"
+    },
+    {
+      "id": "r-2578",
+      "topic_title": "CRA Learn About Your Taxes — Preparing to Do Your Taxes",
+      "description": "Guides students through organizing the information and slips needed before filing — including T4s and other income slips — and compares different filing methods (paper vs. certified tax software). Covers key dates and how staying organized reduces barriers to reaching financial goals.",
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-preparing-your-taxes.html",
+      "publisher_creator": "Canada Revenue Agency (CRA)",
+      "grade_level": [
+        9
+      ],
+      "grade_band": "senior",
+      "subject": "Math",
+      "strand": [
+        "Financial Literacy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "F1.1",
+        "F1.3"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "whole-class"
+      ],
+      "usage_notes": "Self-paced online lesson with built-in quizzes; assign individually or walk through as a class using the embedded real-life tax-slip examples. Also deliverable as a scored, gamified activity via ChatterHigh's Gamified Tax Literacy Course for Teens.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "mathematics",
+          "strand": "financial_literacy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-07-14",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      },
+      "language": "en"
+    },
+    {
+      "id": "r-2579",
+      "topic_title": "CRA Learn About Your Taxes — Completing a Basic Tax Return",
+      "description": "Step-by-step lesson on filling out a tax return: reporting all income sources (including tips and platform-economy income), understanding Canada's progressive tax system, and calculating whether a refund or balance owing results. Real T4 slip examples are embedded throughout.",
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-completing-basic-return.html",
+      "publisher_creator": "Canada Revenue Agency (CRA)",
+      "grade_level": [
+        9
+      ],
+      "grade_band": "senior",
+      "subject": "Math",
+      "strand": [
+        "Financial Literacy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "F1.2",
+        "F1.5"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "whole-class"
+      ],
+      "usage_notes": "Self-paced online lesson with built-in quizzes; assign individually or walk through as a class using the embedded real-life tax-slip examples. Also deliverable as a scored, gamified activity via ChatterHigh's Gamified Tax Literacy Course for Teens.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "mathematics",
+          "strand": "financial_literacy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-07-14",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      },
+      "language": "en"
+    },
+    {
+      "id": "r-2580",
+      "topic_title": "CRA Learn About Your Taxes — After Sending Us Your Tax Return",
+      "description": "Explains what happens after a return is filed: how to read a Notice of Assessment, how to request a change to a return, and how to respond to CRA correspondence. Helps students understand what factors (errors, missing slips) can affect their financial standing post-filing.",
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-after-sending-tax-return.html",
+      "publisher_creator": "Canada Revenue Agency (CRA)",
+      "grade_level": [
+        9
+      ],
+      "grade_band": "senior",
+      "subject": "Math",
+      "strand": [
+        "Financial Literacy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "F1.3"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "whole-class"
+      ],
+      "usage_notes": "Self-paced online lesson with built-in quizzes; assign individually or walk through as a class using the embedded real-life tax-slip examples. Also deliverable as a scored, gamified activity via ChatterHigh's Gamified Tax Literacy Course for Teens.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "mathematics",
+          "strand": "financial_literacy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-07-14",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      },
+      "language": "en"
+    },
+    {
+      "id": "r-2581",
+      "topic_title": "CRA Learn About Your Taxes — Accessing Your Benefits and Credits",
+      "description": "Introduces the most common CRA-administered benefits and credits (e.g., GST/HST credit, Canada Child Benefit), explains basic eligibility criteria, and walks students through how to apply and keep receiving payments — illustrating how government programs distribute financial resources to eligible individuals.",
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-accessing-benefits-credits.html",
+      "publisher_creator": "Canada Revenue Agency (CRA)",
+      "grade_level": [
+        9
+      ],
+      "grade_band": "senior",
+      "subject": "Math",
+      "strand": [
+        "Financial Literacy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "F1.2",
+        "F1.5"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "whole-class"
+      ],
+      "usage_notes": "Self-paced online lesson with built-in quizzes; assign individually or walk through as a class using the embedded real-life tax-slip examples. Also deliverable as a scored, gamified activity via ChatterHigh's Gamified Tax Literacy Course for Teens.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "mathematics",
+          "strand": "financial_literacy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-07-14",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      },
+      "language": "en"
+    },
+    {
+      "id": "r-2582",
+      "topic_title": "CRA Learn About Your Taxes — Using My Account",
+      "description": "Walks students through registering for and navigating CRA's \"My Account\" online portal: viewing tax information, tracking refunds, updating personal details, and managing benefit payments digitally. An accessible introduction to managing one's finances through official government digital services.",
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-using-my-account.html",
+      "publisher_creator": "Canada Revenue Agency (CRA)",
+      "grade_level": [
+        9
+      ],
+      "grade_band": "senior",
+      "subject": "Math",
+      "strand": [
+        "Financial Literacy"
+      ],
+      "province": "ON",
+      "jurisdiction": "ontario",
+      "modality": [
+        "Online",
+        "Interactive"
+      ],
+      "resource_type": "interactive",
+      "access_type": "free",
+      "is_paid": false,
+      "curriculum_expectations": [
+        "F1.1"
+      ],
+      "accessibility": [
+        "No Concerns"
+      ],
+      "instructional_modes": [
+        "individual",
+        "whole-class"
+      ],
+      "usage_notes": "Self-paced online lesson with built-in quizzes; assign individually or walk through as a class using the embedded real-life tax-slip examples. Also deliverable as a scored, gamified activity via ChatterHigh's Gamified Tax Literacy Course for Teens.",
+      "alignments": [
+        {
+          "jurisdiction": "ontario",
+          "grade": null,
+          "subject": "mathematics",
+          "strand": "financial_literacy",
+          "expectation_code": null,
+          "expectation_description": null,
+          "alignment_strength": "primary"
+        }
+      ],
+      "metadata": {
+        "added_at": "2026-07-14",
+        "added_by": "maple_key_team",
+        "verified": false,
+        "needs_review": true
+      },
+      "language": "en"
     }
   ]
 }
