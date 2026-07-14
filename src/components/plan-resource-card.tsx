@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { ExternalLink, Check, ChevronDown } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
-import { coverageForResource, type LevelCounts } from "@/lib/assessment-results"
-import { overallLabel } from "@/lib/curriculum-codes"
+import { type LevelCounts } from "@/lib/assessment-results"
+import { ReadinessPillRow } from "@/components/ui/readiness-pill"
 import type { Resource } from "@/lib/types"
 
 const TYPE_STYLES: { match: (modality: string, resourceType: string) => boolean; label: string; color: string }[] = [
@@ -22,12 +22,6 @@ function getResourceTypeInfo(resource: Resource) {
   return { label: resource.resource_type || resource.modality?.[0] || "Resource", color: "#8B4513" }
 }
 
-const PILL_STYLES = {
-  met: { bg: "#DCFCE7", text: "#15803D", border: "#86EFAC", label: "Expectation met" },
-  partial: { bg: "#FEF9C3", text: "#92400E", border: "#FCD34D", label: "Expectation partially addressed" },
-  new: { bg: "#F1F5F9", text: "#64748B", border: "#CBD5E1", label: "New expectation" },
-}
-
 interface PlanResourceCardProps {
   resource: Resource
   codeProgress: Record<string, LevelCounts>
@@ -38,7 +32,6 @@ interface PlanResourceCardProps {
 export default function PlanResourceCard({ resource, codeProgress, isAdded, onToggleAdd }: PlanResourceCardProps) {
   const typeInfo = getResourceTypeInfo(resource)
   const title = resource.topic_title || "Untitled resource"
-  const coverage = coverageForResource(resource.curriculum_expectations || [], codeProgress)
   const [expanded, setExpanded] = useState(false)
   const hasDescription = Boolean(resource.description)
 
@@ -89,21 +82,13 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
       </AnimatePresence>
 
       <div className="mt-2 flex items-center justify-between gap-2">
-        <div className="flex min-w-0 flex-1 flex-wrap gap-1">
-          {coverage.map((c) => {
-            const bucket = c.level === null ? "new" : c.level === "good" || c.level === "great" ? "met" : "partial"
-            const style = PILL_STYLES[bucket]
-            return (
-              <span
-                key={c.overall}
-                title={`${c.overall} ${overallLabel(resource.subject, c.overall, resource.grade_level?.[0]?.toString())} — ${style.label}`}
-                className="rounded px-1.5 py-0.5 text-[10px] font-medium"
-                style={{ backgroundColor: style.bg, color: style.text, border: `1px solid ${style.border}`, fontFamily: "var(--font-mono, monospace)" }}
-              >
-                {c.overall}
-              </span>
-            )
-          })}
+        <div className="flex min-w-0 flex-1 flex-wrap items-center gap-1">
+          <ReadinessPillRow
+            expectations={resource.curriculum_expectations || []}
+            codeProgress={codeProgress}
+            subject={resource.subject}
+            grade={resource.grade_level?.[0]?.toString()}
+          />
         </div>
 
         <div className="flex flex-shrink-0 items-center gap-1.5">

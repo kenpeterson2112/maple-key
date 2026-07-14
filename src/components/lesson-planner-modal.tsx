@@ -57,8 +57,7 @@ import { LESSON_TEMPLATES, getTemplate, resolveTemplateId } from "@/lib/lesson-t
 import { type UserMaterial } from "@/components/user-materials-section"
 import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage, getNoTechMode, setNoTechMode, getLessonSetupMode, setLessonSetupMode, type LessonSetupMode } from "@/lib/personalization"
 import { useGlobalFilters } from "@/lib/global-filters"
-import PlanResourceSearch from "@/components/plan-resource-search"
-import LessonMaterials from "@/components/lesson-materials"
+import PlanResourcePicker from "@/components/plan-resource-picker"
 import type { SidebarFilters } from "@/lib/use-filtered-resources"
 import type { Filters } from "@/lib/types"
 
@@ -2168,8 +2167,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
                 {/* Step 1 — resources (all cards visible at once in all-options mode) */}
                 {(!isWizard || wizardStep === 0) && (<>
-                {/* Embedded resource search */}
-                <PlanResourceSearch
+                {/* Unified resource picker: search / recommended / add-my-own + tray */}
+                <PlanResourcePicker
                   filters={{
                     ...filters,
                     province: globalFilters.state.province,
@@ -2178,10 +2177,12 @@ Return a JSON object with exactly these fields (string values are plain text, no
                     strand: globalFilters.state.strand,
                   }}
                   sidebarFilters={sidebarFilters}
+                  bookmarkedResources={bookmarkedResources}
+                  userMaterials={userMaterials}
+                  onUserMaterialsChange={setUserMaterials}
                   onBrowseAll={onBack}
+                  fillHeight={isWizard}
                 />
-
-                <hr className="border-t-[1.5px] border-[#E8D5C4]" />
 
                 {/* Student Progress Data Section — temporarily hidden; will be re-enabled later */}
                 {false && (
@@ -2251,12 +2252,6 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 </div>
                 )}
 
-                <LessonMaterials
-                  resources={bookmarkedResources}
-                  onRemoveResource={removeBookmark}
-                  userMaterials={userMaterials}
-                  onUserMaterialsChange={setUserMaterials}
-                />
                 </>)}
 
                 {/* Step 2 — lesson format */}
