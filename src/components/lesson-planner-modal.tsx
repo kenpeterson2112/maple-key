@@ -34,6 +34,7 @@ import { normalizeGrades } from "@/lib/utils"
 import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
 import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage, TemplateSection } from "@/lib/lesson-metadata"
 import ArtifactsSection from "@/components/artifacts-section"
+import StageReviewFooter from "@/components/stage-review-footer"
 import ArtifactOrganizerModal from "@/components/artifact-organizer-modal"
 import LessonBuildingLoader from "@/components/lesson-building-loader"
 import {
@@ -172,6 +173,7 @@ export default function LessonPlannerModal({
   const [excludedResources, setExcludedResources] = useState<{ title: string; reason: string }[]>(fc?.excludedResources ?? [])
   const [artifacts, setArtifacts] = useState<LessonArtifact[]>(fc?.artifacts ?? [])
   const [organizerArtifactIndex, setOrganizerArtifactIndex] = useState<number | null>(null)
+  const [approvedSections, setApprovedSections] = useState<Record<string, boolean>>(fc?.approvedSections ?? {})
 
   // Two-call flow state
   const [showQuestionsStep, setShowQuestionsStep] = useState(false)
@@ -448,6 +450,7 @@ export default function LessonPlannerModal({
 
   const handleRegenerate = () => {
     setLessonGenerated(false)
+    persistApprovals({}) // regenerated content must be re-reviewed
     callGenerateLesson()
   }
 
@@ -730,12 +733,33 @@ Return a JSON object with exactly these fields (string values are plain text, no
     )
   }
 
+  const persistApprovals = (next: Record<string, boolean>) => {
+    setApprovedSections(next)
+    const id = activeLesson?.id
+    if (id) updateLessonFullContent(id, { approvedSections: next })
+  }
+
+  const approveStage = (key: string) => persistApprovals({ ...approvedSections, [key]: true })
+
+  // Editing a stage means it needs a fresh review, so drop any prior approval.
+  const editStage = (key: string) => {
+    setEditingSection(key)
+    if (approvedSections[key]) persistApprovals({ ...approvedSections, [key]: false })
+  }
+
   const lessonMinutes = Number.parseInt(lessonLength) || 60
   const mindsOnTime = Math.round(lessonMinutes * 0.17)
   const actionTime = Math.round(lessonMinutes * 0.58)
   const consolidationTime = Math.round(lessonMinutes * 0.25)
   const templateDef = getTemplate(lessonTemplate)
   const isThreePart = resolveTemplateId(lessonTemplate) === "3-part"
+
+  // Export gating: every lesson stage (not Materials) must be approved first.
+  const requiredStageKeys = isThreePart
+    ? ["mindsOn", "action", "consolidation"]
+    : templateSections.map((s) => `section-${s.id}`)
+  const unapprovedCount = requiredStageKeys.filter((k) => !approvedSections[k]).length
+  const allStagesApproved = requiredStageKeys.length > 0 && unapprovedCount === 0
 
   const handleExportPDF = () => {
     const esc = escapeHtml
@@ -1477,18 +1501,21 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         </p>
                       )}
                     </div>
-                    <div className="flex gap-2 flex-wrap">
+                    <div className="flex gap-2 flex-wrap justify-end">
                       <button
                         onClick={handleExportPDF}
-                        className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg flex items-center gap-2 transition-colors"
+                        disabled={!allStagesApproved}
+                        title={allStagesApproved ? undefined : "Approve every lesson stage before exporting"}
+                        className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-orange-500"
                       >
                         <Download size={16} />
                         Export PDF
                       </button>
                       <button
                         onClick={handleExportResponseJSON}
-                        title="Save the full lesson JSON (including quiz questions) so you can reload it later without using API credits"
-                        className="px-4 py-2 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-medium rounded-lg flex items-center gap-2 transition-colors"
+                        disabled={!allStagesApproved}
+                        title={allStagesApproved ? "Save the full lesson JSON (including quiz questions) so you can reload it later without using API credits" : "Approve every lesson stage before saving"}
+                        className="px-4 py-2 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-medium rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
                       >
                         <Download size={16} />
                         Save JSON
@@ -1501,6 +1528,13 @@ Return a JSON object with exactly these fields (string values are plain text, no
                           <RefreshCw size={16} />
                           Regenerate
                         </button>
+                      )}
+                      {unapprovedCount > 0 && (
+                        <p className="basis-full text-right text-xs font-medium text-amber-700">
+                          {unapprovedCount === 1
+                            ? "1 stage still needs review before export"
+                            : `${unapprovedCount} stages still need review before export`}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -1671,13 +1705,6 @@ Return a JSON object with exactly these fields (string values are plain text, no
                           {mindsOnTime} minutes
                         </span>
                       </div>
-                      <button
-                        onClick={() => setEditingSection(editingSection === "mindsOn" ? null : "mindsOn")}
-                        className="p-1.5 hover:bg-blue-50 rounded-lg transition-colors"
-                        aria-label="Edit Minds On section"
-                      >
-                        <Pencil size={16} className="text-blue-600" />
-                      </button>
                     </div>
                     <p className="text-xs text-blue-600 font-medium uppercase tracking-wide mb-3">
                       Activating Prior Knowledge
@@ -1716,6 +1743,13 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         </div>
                       </>
                     )}
+                    {editingSection !== "mindsOn" && (
+                      <StageReviewFooter
+                        approved={!!approvedSections["mindsOn"]}
+                        onApprove={() => approveStage("mindsOn")}
+                        onEdit={() => editStage("mindsOn")}
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -1730,13 +1764,6 @@ Return a JSON object with exactly these fields (string values are plain text, no
                           {actionTime} minutes
                         </span>
                       </div>
-                      <button
-                        onClick={() => setEditingSection(editingSection === "action" ? null : "action")}
-                        className="p-1.5 hover:bg-emerald-50 rounded-lg transition-colors"
-                        aria-label="Edit Action section"
-                      >
-                        <Pencil size={16} className="text-emerald-600" />
-                      </button>
                     </div>
                     <p className="text-xs text-emerald-600 font-medium uppercase tracking-wide mb-3">
                       Exploring & Applying
@@ -1807,6 +1834,13 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         </div>
                       </>
                     )}
+                    {editingSection !== "action" && (
+                      <StageReviewFooter
+                        approved={!!approvedSections["action"]}
+                        onApprove={() => approveStage("action")}
+                        onEdit={() => editStage("action")}
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -1821,13 +1855,6 @@ Return a JSON object with exactly these fields (string values are plain text, no
                           {consolidationTime} minutes
                         </span>
                       </div>
-                      <button
-                        onClick={() => setEditingSection(editingSection === "consolidation" ? null : "consolidation")}
-                        className="p-1.5 hover:bg-violet-50 rounded-lg transition-colors"
-                        aria-label="Edit Consolidation section"
-                      >
-                        <Pencil size={16} className="text-violet-600" />
-                      </button>
                     </div>
                     <p className="text-xs text-violet-600 font-medium uppercase tracking-wide mb-3">
                       Reflecting & Connecting
@@ -1866,6 +1893,13 @@ Return a JSON object with exactly these fields (string values are plain text, no
                         </div>
                       </>
                     )}
+                    {editingSection !== "consolidation" && (
+                      <StageReviewFooter
+                        approved={!!approvedSections["consolidation"]}
+                        onApprove={() => approveStage("consolidation")}
+                        onEdit={() => editStage("consolidation")}
+                      />
+                    )}
                   </div>
                 </div>
                 </>)}
@@ -1886,13 +1920,6 @@ Return a JSON object with exactly these fields (string values are plain text, no
                               {sectionTime} minutes
                             </span>
                           </div>
-                          <button
-                            onClick={() => setEditingSection(editingSection === editKey ? null : editKey)}
-                            className={`p-1.5 ${sectionDef.colors.hoverBg} rounded-lg transition-colors`}
-                            aria-label={`Edit ${section.label} section`}
-                          >
-                            <Pencil size={16} className={sectionDef.colors.accent} />
-                          </button>
                         </div>
                         <p className={`text-xs ${sectionDef.colors.accent} font-medium uppercase tracking-wide mb-3`}>
                           {section.subtitle}
@@ -1942,6 +1969,13 @@ Return a JSON object with exactly these fields (string values are plain text, no
                               </div>
                             )}
                           </>
+                        )}
+                        {editingSection !== editKey && (
+                          <StageReviewFooter
+                            approved={!!approvedSections[editKey]}
+                            onApprove={() => approveStage(editKey)}
+                            onEdit={() => editStage(editKey)}
+                          />
                         )}
                       </div>
                     </div>

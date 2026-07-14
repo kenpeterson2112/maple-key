@@ -41,6 +41,10 @@ export interface LessonFullContent {
   excludedResources?: { title: string; reason: string }[]
   sections?: TemplateSection[]
   artifacts?: LessonArtifact[]
+  /** Per-stage teacher approval. Keys: "mindsOn" | "action" | "consolidation"
+   *  for 3-part lessons, or `section-${id}` for template sections. Materials is
+   *  never keyed. Absent/false = not yet reviewed. */
+  approvedSections?: Record<string, boolean>
   /** Language the student reproducibles were generated in. Defaults to English. */
   reproducibleLanguage?: ReproducibleLanguage
   /** Whether the lesson was generated in no-tech mode (students off screens). */
