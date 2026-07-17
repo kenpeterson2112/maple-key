@@ -125,7 +125,10 @@ export default function App() {
   }
 
   const topNavSpace: TopNavSpace | null =
-    activeSpace === "lessonplanner" || activeSpace === "resources" || activeSpace === "insights"
+    activeSpace === "lessonplanner" ||
+    activeSpace === "resources" ||
+    activeSpace === "insights" ||
+    activeSpace === "lessons"
       ? activeSpace
       : null
 
@@ -176,7 +179,6 @@ export default function App() {
                   bookmarkedResources={bookmarkedResources}
                   onClose={goResources}
                   onBack={goResources}
-                  onOpenSavedLessons={() => setActiveSpace("lessons")}
                   filters={filters}
                   setFilters={setFilters}
                   sidebarFilters={sidebarFilters}

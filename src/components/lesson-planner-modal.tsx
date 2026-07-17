@@ -24,7 +24,6 @@ import {
   School,
   Languages,
   MonitorOff,
-  BookOpen,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react"
@@ -107,8 +106,6 @@ interface LessonPlannerModalProps {
   isOpen: boolean
   onClose: () => void
   onBack: () => void
-  /** Opens the saved-lessons library (button in the page header). */
-  onOpenSavedLessons?: () => void
   bookmarkedResources: Resource[]
   asSpace?: boolean
   lesson?: LessonMetadata | null
@@ -122,7 +119,6 @@ export default function LessonPlannerModal({
   isOpen,
   onClose,
   onBack,
-  onOpenSavedLessons,
   bookmarkedResources,
   asSpace = false,
   lesson = null,
@@ -1200,31 +1196,24 @@ Return a JSON object with exactly these fields (string values are plain text, no
     ? "max-w-3xl xl:max-w-4xl" // ~768–896px reading column
     : "max-w-3xl lg:max-w-5xl" // setup grows to ~1024px on lg+
 
-  const setupModeToggle = (
-    <div className="flex items-center justify-between gap-3 flex-wrap">
-      <p className="text-xs text-[#888]">
-        {isWizard
-          ? "One step at a time — switch anytime to see every option on one page."
-          : "Everything on one page — switch to guided steps for a walkthrough."}
-      </p>
-      <div className="inline-flex rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white" role="group" aria-label="Setup layout">
-        {([["wizard", "Guided steps"], ["full", "All options"]] as const).map(([mode, label]) => {
-          const selected = setupMode === mode
-          return (
-            <button
-              key={mode}
-              type="button"
-              onClick={() => handleSetupModeChange(mode)}
-              aria-pressed={selected}
-              className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
-                selected ? "bg-[#FF6B35] text-white shadow-sm" : "text-[#888] hover:text-[#FF6B35]"
-              }`}
-            >
-              {label}
-            </button>
-          )
-        })}
-      </div>
+  const layoutToggle = (
+    <div className="inline-flex flex-shrink-0 rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white" role="group" aria-label="Setup layout">
+      {([["wizard", "Guided steps"], ["full", "All options"]] as const).map(([mode, label]) => {
+        const selected = setupMode === mode
+        return (
+          <button
+            key={mode}
+            type="button"
+            onClick={() => handleSetupModeChange(mode)}
+            aria-pressed={selected}
+            className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+              selected ? "bg-[#FF6B35] text-white shadow-sm" : "text-[#888] hover:text-[#FF6B35]"
+            }`}
+          >
+            {label}
+          </button>
+        )
+      })}
     </div>
   )
 
@@ -1452,16 +1441,6 @@ Return a JSON object with exactly these fields (string values are plain text, no
           <span className="hidden sm:inline whitespace-nowrap text-xs text-[#888]">
             {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
           </span>
-          {onOpenSavedLessons && (
-            <button
-              onClick={onOpenSavedLessons}
-              className="flex items-center gap-1.5 rounded-full border border-[#E8D5C4] bg-white px-3.5 py-2 text-sm font-semibold text-[#8B4513] shadow-sm transition-all hover:bg-[#FFF5ED]"
-              title="Saved lessons"
-            >
-              <BookOpen size={14} className="text-[#C65D3B]" />
-              <span className="hidden sm:inline">Saved Lessons</span>
-            </button>
-          )}
           {!asSpace && (
             <button
               onClick={onClose}
@@ -2166,8 +2145,6 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             ) : (
               <>
-                {setupModeToggle}
-
                 {isWizard && wizardHeader}
 
                 {/* Step 1 — resources (all cards visible at once in all-options mode) */}
@@ -2187,6 +2164,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   onUserMaterialsChange={setUserMaterials}
                   onBrowseAll={onBack}
                   fillHeight={isWizard}
+                  layoutToggle={layoutToggle}
                 />
 
                 {/* Student Progress Data Section — temporarily hidden; will be re-enabled later */}
