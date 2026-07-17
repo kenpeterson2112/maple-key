@@ -155,7 +155,7 @@ export default function PlanResourcePicker({
         className={cn(
           "grid gap-4 transition-[grid-template-columns] duration-300",
           fillHeight && "min-h-0 flex-1",
-          trayOpen ? "grid-cols-1 lg:grid-cols-[1fr_280px]" : "grid-cols-1",
+          trayOpen ? "grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_320px]" : "grid-cols-1",
         )}
       >
         {/* ── Picker column ─────────────────────────────────────────────── */}

@@ -1195,6 +1195,11 @@ Return a JSON object with exactly these fields (string values are plain text, no
   const isWizard = setupMode === "wizard"
   const isLastWizardStep = wizardStep === WIZARD_STEPS.length - 1
 
+  // Setup breathes on large screens; the finished lesson stays a readable measure.
+  const contentWidthClass = lessonGenerated
+    ? "max-w-3xl xl:max-w-4xl" // ~768–896px reading column
+    : "max-w-3xl lg:max-w-5xl" // setup grows to ~1024px on lg+
+
   const setupModeToggle = (
     <div className="flex items-center justify-between gap-3 flex-wrap">
       <p className="text-xs text-[#888]">
@@ -1469,11 +1474,11 @@ Return a JSON object with exactly these fields (string values are plain text, no
         </PageHeader>
 
         {/* Content */}
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-6">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-6 lg:p-8">
           {isGenerating && !lessonGenerated ? (
             <LessonBuildingLoader />
           ) : (
-          <div className="max-w-3xl mx-auto space-y-6">
+          <div className={`${contentWidthClass} mx-auto space-y-6`}>
             {lessonGenerated ? (
               <>{/* lesson view below */}
                 {/* SUCCESS BANNER */}
@@ -2445,7 +2450,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
         {!lessonGenerated && showQuestionsStep && (
           <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
-            <div className="max-w-3xl mx-auto">
+            <div className={`${contentWidthClass} mx-auto`}>
               <button
                 onClick={handleQuestionsSubmit}
                 className="w-full py-2 text-sm text-[#888] hover:text-violet-700 transition-colors"
@@ -2458,7 +2463,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
         {!lessonGenerated && !showQuestionsStep && !isGenerating && !isWizard && (
           <div className="hidden md:block sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
-            <div className="max-w-3xl mx-auto space-y-3">
+            <div className={`${contentWidthClass} mx-auto space-y-3`}>
               {generateErrorPanel}
               {frenchHandoutsNotice}
               {generateButton}
@@ -2468,7 +2473,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
         {!lessonGenerated && !showQuestionsStep && !isGenerating && isWizard && (
           <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
-            <div className="max-w-3xl mx-auto space-y-3">
+            <div className={`${contentWidthClass} mx-auto space-y-3`}>
               {isLastWizardStep && generateErrorPanel}
               {isLastWizardStep && frenchHandoutsNotice}
               <div className="flex items-center gap-3">
