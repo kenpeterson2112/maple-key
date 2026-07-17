@@ -70,10 +70,10 @@ export default function App() {
     })
     setInferred(prefs.inferred)
     setHydrated(true)
-    if (!isOnboarded()) {
-      setShowOnboarding(true)
-    } else if (!isResourceTourSeen()) {
+    if (!isResourceTourSeen()) {
       setShowResourceTour(true)
+    } else if (!isOnboarded()) {
+      setShowOnboarding(true)
     }
   }, [])
 
@@ -121,7 +121,6 @@ export default function App() {
       strand: prefs.strand,
     }))
     setInferred(false)
-    if (!isResourceTourSeen()) setShowResourceTour(true)
   }
 
   const topNavSpace: TopNavSpace | null =
@@ -224,11 +223,18 @@ export default function App() {
       {/* Settings panel — slides down from top, overlays everything */}
       <SettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />
 
-      {/* First-visit onboarding */}
-      <OnboardingModal open={showOnboarding} onComplete={handleOnboardingComplete} />
+      {/* First-visit tour — "How Maple Key Works", leads into classroom setup */}
+      <ResourceOnboardingModal
+        open={showResourceTour}
+        onClose={() => setShowResourceTour(false)}
+        onClassroomSetup={() => {
+          setShowResourceTour(false)
+          setShowOnboarding(true)
+        }}
+      />
 
-      {/* Resource page tour — shown after province + materials are set */}
-      <ResourceOnboardingModal open={showResourceTour} onClose={() => setShowResourceTour(false)} />
+      {/* Classroom materials setup — reached from the end of the tour */}
+      <OnboardingModal open={showOnboarding} onComplete={handleOnboardingComplete} />
     </div>
   )
 }

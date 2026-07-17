@@ -40,6 +40,12 @@ const CATEGORY_STYLES: Record<string, { chip: string; chipSelected: string; head
     header: "text-violet-800",
     customPill: "bg-violet-50 border-violet-300 text-violet-900",
   },
+  "print-resources": {
+    chip: "border-orange-200 text-orange-800 hover:bg-orange-50",
+    chipSelected: "bg-orange-100 border-orange-400 text-orange-900",
+    header: "text-orange-800",
+    customPill: "bg-orange-50 border-orange-300 text-orange-900",
+  },
   "digital-resources": {
     chip: "border-rose-200 text-rose-800 hover:bg-rose-50",
     chipSelected: "bg-rose-100 border-rose-400 text-rose-900",

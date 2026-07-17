@@ -15,6 +15,7 @@ export const CLASSROOM_RESOURCE_CATEGORIES: ClassroomResourceCategory[] = [
   { id: "technology", label: "Technology", color: "blue" },
   { id: "spaces", label: "Spaces & Furniture", color: "amber" },
   { id: "supplies", label: "Supplies & Materials", color: "violet" },
+  { id: "print-resources", label: "Print Resources", color: "orange" },
   { id: "digital-resources", label: "Digital Resources", color: "rose" },
   { id: "digital-tools", label: "Digital Tools", color: "cyan" },
 ]
@@ -65,11 +66,15 @@ export const CLASSROOM_RESOURCE_OPTIONS: ClassroomResourceOption[] = [
   { id: "sticky-notes", label: "Sticky Notes / Chart Paper", category: "supplies" },
   { id: "calculators", label: "Calculators (class set)", category: "supplies" },
   { id: "science-equipment", label: "Basic Science Equipment", category: "supplies" },
+  // Print Resources
+  { id: "nelson-literacy", label: "Nelson Literacy", category: "print-resources" },
+  { id: "levelled-readers", label: "Levelled Readers", category: "print-resources" },
+  { id: "nelson-math", label: "Nelson Math", category: "print-resources" },
+  { id: "math-up", label: "Math UP", category: "print-resources" },
   // Digital Resources
   { id: "edwin", label: "Edwin", category: "digital-resources" },
   { id: "knowledgehook", label: "Knowledgehook", category: "digital-resources" },
   { id: "ixl", label: "IXL", category: "digital-resources" },
-  { id: "nelson-literacy", label: "Nelson Literacy", category: "digital-resources" },
   { id: "myon", label: "MyON", category: "digital-resources" },
   // Digital Tools
   { id: "book-creator", label: "Book Creator", category: "digital-tools" },
