@@ -8,6 +8,7 @@ const CATEGORY_DOT: Record<string, string> = {
   technology: "bg-blue-500",
   spaces: "bg-amber-500",
   supplies: "bg-violet-500",
+  "print-resources": "bg-orange-500",
   "digital-resources": "bg-rose-500",
   "digital-tools": "bg-cyan-500",
 }

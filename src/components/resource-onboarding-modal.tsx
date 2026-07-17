@@ -8,6 +8,8 @@ import { setResourceTourSeen } from "@/lib/personalization"
 interface ResourceOnboardingModalProps {
   open: boolean
   onClose: () => void
+  /** Called when the user finishes the tour and moves on to classroom setup. */
+  onClassroomSetup: () => void
 }
 
 type Step = 0 | 1 | 2 | 3
@@ -54,7 +56,7 @@ const STEPS: {
   },
 ]
 
-export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboardingModalProps) {
+export default function ResourceOnboardingModal({ open, onClose, onClassroomSetup }: ResourceOnboardingModalProps) {
   const [step, setStep] = React.useState<Step>(0)
 
   const handleClose = () => {
@@ -66,7 +68,8 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
     if (step < 3) {
       setStep((s) => (s + 1) as Step)
     } else {
-      handleClose()
+      setResourceTourSeen()
+      onClassroomSetup()
     }
   }
 
@@ -155,7 +158,7 @@ export default function ResourceOnboardingModal({ open, onClose }: ResourceOnboa
                 onClick={handleNext}
                 className="px-6 py-2.5 bg-primary text-primary-foreground font-semibold rounded-xl text-sm hover:bg-primary/90 transition-colors"
               >
-                {step < 3 ? "Next" : "Get Started"}
+                {step < 3 ? "Next" : "Classroom Setup"}
               </button>
             </div>
           </div>
