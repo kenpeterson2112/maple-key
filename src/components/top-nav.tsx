@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search, Lightbulb, BarChart3, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
+import { Search, Lightbulb, BarChart3, BookOpen, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
@@ -9,7 +9,7 @@ import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
 
-export type TopNavSpace = "lessonplanner" | "resources" | "insights"
+export type TopNavSpace = "lessonplanner" | "resources" | "insights" | "lessons"
 
 interface TopNavProps {
   activeSpace: TopNavSpace | null
@@ -25,9 +25,10 @@ interface ToggleItem {
 }
 
 const TOGGLE_ITEMS: ToggleItem[] = [
-  { id: "lessonplanner", label: "Plan",   icon: Lightbulb },
-  { id: "resources",     label: "Search", icon: Search },
-  { id: "insights",      label: "Track",  icon: BarChart3 },
+  { id: "lessonplanner", label: "Plan",    icon: Lightbulb },
+  { id: "resources",     label: "Search",  icon: Search },
+  { id: "insights",      label: "Track",   icon: BarChart3 },
+  { id: "lessons",       label: "Lessons", icon: BookOpen },
 ]
 
 
