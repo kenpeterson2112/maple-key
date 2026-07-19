@@ -2,7 +2,7 @@
 
 A Canadian K-12 educational resource discovery platform for teachers.
 
-Single-page React app, built with Vite, with AI lesson planning and
+Single-page React app, built with Vite, with AI-assisted lesson planning and
 assessment features powered by serverless functions in `api/`.
 
 ## Live site
