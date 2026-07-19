@@ -80,26 +80,10 @@ interface PlanningAnswer {
  * never loses anything.
  */
 const WIZARD_STEPS = [
-  {
-    label: "Resources",
-    title: "Choose your resources",
-    blurb: "Search the library and add the resources this lesson should build on.",
-  },
-  {
-    label: "Format",
-    title: "Shape the lesson",
-    blurb: "Pick how long the lesson runs and which structure it follows.",
-  },
-  {
-    label: "Personalize",
-    title: "Make it yours",
-    blurb: "Tell us about your classroom so the plan fits how you actually teach.",
-  },
-  {
-    label: "Review",
-    title: "Review & generate",
-    blurb: "Double-check your choices — you can jump back to any step before generating.",
-  },
+  { label: "Resources" },
+  { label: "Format" },
+  { label: "Personalize" },
+  { label: "Review" },
 ] as const
 
 interface LessonPlannerModalProps {
@@ -1196,54 +1180,64 @@ Return a JSON object with exactly these fields (string values are plain text, no
     ? "max-w-3xl xl:max-w-4xl" // ~768–896px reading column
     : "max-w-3xl lg:max-w-5xl" // setup grows to ~1024px on lg+
 
-  const layoutToggle = (
-    <div className="inline-flex flex-shrink-0 rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white" role="group" aria-label="Setup layout">
-      {([["wizard", "Guided steps"], ["full", "All options"]] as const).map(([mode, label]) => {
-        const selected = setupMode === mode
-        return (
-          <button
-            key={mode}
-            type="button"
-            onClick={() => handleSetupModeChange(mode)}
-            aria-pressed={selected}
-            className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
-              selected ? "bg-[#FF6B35] text-white shadow-sm" : "text-[#888] hover:text-[#FF6B35]"
-            }`}
-          >
-            {label}
-          </button>
-        )
-      })}
-    </div>
-  )
-
-  const wizardHeader = (
-    <div>
-      <div className="flex items-center justify-between gap-3 mb-2">
-        <p className="text-sm font-medium text-[#8B4513]">
-          Step {wizardStep + 1} of {WIZARD_STEPS.length}
-        </p>
-        <div className="flex gap-1.5">
-          {WIZARD_STEPS.map((s, i) => (
+  // Unified setup nav: the Guided/All-options toggle and the stage progress are
+  // one decision, so they live in one strip. Guided expands the four stages
+  // (highlighting as you advance); All options collapses them to a single page.
+  const setupNav = (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+      <div className="inline-flex flex-shrink-0 rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white" role="group" aria-label="Setup layout">
+        {([["wizard", "Guided"], ["full", "All options"]] as const).map(([mode, label]) => {
+          const selected = setupMode === mode
+          return (
             <button
-              key={s.label}
+              key={mode}
               type="button"
-              onClick={() => i < wizardStep && goToWizardStep(i)}
-              disabled={i >= wizardStep}
-              aria-label={`Go back to step ${i + 1}: ${s.label}`}
-              className={`h-1.5 w-8 rounded-full transition-colors ${
-                i < wizardStep
-                  ? "bg-[#FF6B35]/50 hover:bg-[#FF6B35] cursor-pointer"
-                  : i === wizardStep
-                  ? "bg-[#FF6B35]"
-                  : "bg-[#E8D5C4]"
+              onClick={() => handleSetupModeChange(mode)}
+              aria-pressed={selected}
+              className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+                selected ? "bg-[#FF6B35] text-white shadow-sm" : "text-[#888] hover:text-[#FF6B35]"
               }`}
-            />
-          ))}
-        </div>
+            >
+              {label}
+            </button>
+          )
+        })}
       </div>
-      <h3 className="text-lg font-semibold text-[#2C2C2C]">{WIZARD_STEPS[wizardStep].title}</h3>
-      <p className="text-sm text-[#888] mt-0.5">{WIZARD_STEPS[wizardStep].blurb}</p>
+
+      {isWizard ? (
+        <nav aria-label="Setup steps" className="flex flex-wrap items-center gap-1.5">
+          {WIZARD_STEPS.map((s, i) => {
+            const done = i < wizardStep
+            const current = i === wizardStep
+            return (
+              <button
+                key={s.label}
+                type="button"
+                onClick={() => done && goToWizardStep(i)}
+                disabled={!done}
+                aria-current={current ? "step" : undefined}
+                aria-label={`Step ${i + 1}: ${s.label}`}
+                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${
+                  current
+                    ? "bg-[#FF6B35]/10 text-[#FF6B35] ring-1 ring-inset ring-[#FF6B35]/30"
+                    : done
+                    ? "text-[#8B4513] hover:bg-[#FFF5ED] cursor-pointer"
+                    : "text-[#C8B8AA]"
+                }`}
+              >
+                {done ? (
+                  <Check size={11} strokeWidth={3} aria-hidden />
+                ) : (
+                  <span className="tabular-nums">{i + 1}</span>
+                )}
+                {s.label}
+              </button>
+            )
+          })}
+        </nav>
+      ) : (
+        <span className="text-xs font-medium text-[#A8998E]">Everything on one page</span>
+      )}
     </div>
   )
 
@@ -1437,6 +1431,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
           title={lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
           iconColor="#16A34A"
           iconBg="bg-green-100"
+          hideTitleOnMobile={!lessonGenerated}
         >
           <span className="hidden sm:inline whitespace-nowrap text-xs text-[#888]">
             {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
@@ -2145,7 +2140,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
               </>
             ) : (
               <>
-                {isWizard && wizardHeader}
+                {setupNav}
 
                 {/* Step 1 — resources (all cards visible at once in all-options mode) */}
                 {(!isWizard || wizardStep === 0) && (<>
@@ -2164,7 +2159,6 @@ Return a JSON object with exactly these fields (string values are plain text, no
                   onUserMaterialsChange={setUserMaterials}
                   onBrowseAll={onBack}
                   fillHeight={isWizard}
-                  layoutToggle={layoutToggle}
                 />
 
                 {/* Student Progress Data Section — temporarily hidden; will be re-enabled later */}

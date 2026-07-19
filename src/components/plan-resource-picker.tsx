@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState, type ReactNode } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Search, Sparkles, Paperclip, X, ChevronRight, FileText, Compass } from "lucide-react"
 import PlanResourceCard from "./plan-resource-card"
 import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
@@ -79,8 +79,6 @@ interface PlanResourcePickerProps {
   onBrowseAll: () => void
   /** Wizard mode fills the viewport height; all-options mode uses bounded heights. */
   fillHeight?: boolean
-  /** Guided/All-options layout toggle, surfaced in the search bar to save top chrome. */
-  layoutToggle?: ReactNode
 }
 
 const resourceKey = (r: { id?: string; topic_title?: string; url?: string }) =>
@@ -94,7 +92,6 @@ export default function PlanResourcePicker({
   onUserMaterialsChange,
   onBrowseAll,
   fillHeight = false,
-  layoutToggle,
 }: PlanResourcePickerProps) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
   const { filteredResources, classProgress } = useFilteredResources(filters, sidebarFilters)
@@ -183,7 +180,6 @@ export default function PlanResourcePicker({
                 aria-label="Search the resource library"
                 className="min-w-[150px] flex-1 border-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
               />
-              {layoutToggle}
               {searchOpen && (
                 <button
                   type="button"
