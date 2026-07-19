@@ -15,6 +15,7 @@ export default function PageHeader({
   iconBg = "bg-amber-100",
   leading,
   children,
+  hideTitleOnMobile = false,
 }: {
   icon: LucideIcon
   title: string
@@ -26,6 +27,8 @@ export default function PageHeader({
   leading?: ReactNode
   /** Right-aligned controls (badges, dev tools, actions). */
   children?: ReactNode
+  /** Hide the title text on small screens (the icon carries context there). */
+  hideTitleOnMobile?: boolean
 }) {
   return (
     <header className="relative flex-shrink-0 flex items-center gap-2 border-b border-[#E8D5C4] bg-white px-4 md:px-6 py-3">
@@ -36,7 +39,7 @@ export default function PageHeader({
         <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full ${iconBg}`}>
           <Icon size={18} style={{ color: iconColor }} />
         </div>
-        <h1 className="text-base font-bold text-[#2C2C2C] truncate min-w-0">{title}</h1>
+        <h1 className={`text-base font-bold text-[#2C2C2C] truncate min-w-0 ${hideTitleOnMobile ? "hidden sm:block" : ""}`}>{title}</h1>
       </div>
 
       {/* Center zone: the curriculum filter cluster (see CurriculumFilterBar). */}
