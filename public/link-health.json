@@ -1,15 +1,15 @@
 {
   "meta": {
-    "last_run": "2026-07-04T07:09:07Z",
+    "last_run": "2026-07-18T07:14:02Z",
     "cycle_days": 9,
-    "last_shard": 1,
-    "total_urls": 1736,
-    "checked_this_run": 215,
+    "last_shard": 6,
+    "total_urls": 1743,
+    "checked_this_run": 26,
     "summary": {
       "blocked": 392,
       "dead_domain": 26,
       "invalid": 1,
-      "unchecked": 1317
+      "unchecked": 1324
     }
   },
   "links": {
@@ -80,7 +80,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://youtu.be/BA2xWdAdy3s?si=T6C_FufCPBIJ6O51": {
@@ -150,7 +150,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.tourguys.ca/school-tours/downtown-toronto-school-tour": {
@@ -340,7 +340,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.noredink.com/": {
@@ -380,7 +380,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.mediasmartscanada.ca/": {
@@ -390,7 +390,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ingeniumcanada.org/scitech/education": {
@@ -540,7 +540,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.nationalgeographic.org/education/resource-library/?q=data": {
@@ -660,7 +660,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.genome.gov/genetics-glossary": {
@@ -730,7 +730,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.elections.ca/content.aspx?section=vot&dir=yth&document=index&lang=e": {
@@ -750,7 +750,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.amnesty.ca/human-rights-education/": {
@@ -950,7 +950,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.scotiabank.com/ca/en/personal/advice-plus/features/articles/financial-literacy.html": {
@@ -1110,7 +1110,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.investorseducation.ca/student-resources": {
@@ -1120,7 +1120,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.theglobeandmail.com/investing/education-centre/": {
@@ -1340,7 +1340,7 @@
       "status": "invalid",
       "reason": "lint: missing_scheme",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.youcubed.org/tasks/data-talks/": {
@@ -1410,7 +1410,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.amazon.ca/dp/B07T4VLJ6C?linkCode=gg4&tag=due01-20#": {
@@ -3610,7 +3610,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://tvolearn.com/pages/financial_literacy": {
@@ -5790,7 +5790,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.geogebra.org/math/transformations?lang=en": {
@@ -5920,7 +5920,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.mathplayground.com/index_geometry.html": {
@@ -7580,7 +7580,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ontariomath.support/": {
@@ -7760,7 +7760,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://school.nelson.com/math-pre-assessment/": {
@@ -8180,7 +8180,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "http://www.sandbox.edugains.ca/newsite/math2/gapclosingmain.html": {
@@ -8190,7 +8190,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.eqao.com/math-resource-released-questions-g6-2023/": {
@@ -8740,7 +8740,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/5eb3c296c7b0a70c6400e560": {
@@ -9800,7 +9800,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ontariomath.support/?pg=resources&lang=FR": {
@@ -10060,7 +10060,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://carrefour-education.qc.ca/site_web_commentes/le_site_du_domaine_de_la_mathematique": {
@@ -10070,7 +10070,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://cybersavoir.cssdm.gouv.qc.ca/mat-sec/category/ressources/": {
@@ -13500,7 +13500,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-04T07:09:07Z",
+      "last_checked": "2026-07-18T07:14:02Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://gz.explorelearning.com/index.cfm?method=cUser.dspSharedGizmos&GizmoListID=250110": {
@@ -17367,6 +17367,76 @@
       "id": "r-2575",
       "title": "Gravity and Orbits Simulation (PhET)",
       "host": "phet.colorado.edu",
+      "status": "unchecked",
+      "reason": "",
+      "final_url": null,
+      "last_checked": null,
+      "first_flagged": null
+    },
+    "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-purpose-taxes.html": {
+      "id": "r-2576",
+      "title": "CRA Learn About Your Taxes — Purpose of Taxes",
+      "host": "www.canada.ca",
+      "status": "unchecked",
+      "reason": "",
+      "final_url": null,
+      "last_checked": null,
+      "first_flagged": null
+    },
+    "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-starting-work.html": {
+      "id": "r-2577",
+      "title": "CRA Learn About Your Taxes — Starting to Work",
+      "host": "www.canada.ca",
+      "status": "unchecked",
+      "reason": "",
+      "final_url": null,
+      "last_checked": null,
+      "first_flagged": null
+    },
+    "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-preparing-your-taxes.html": {
+      "id": "r-2578",
+      "title": "CRA Learn About Your Taxes — Preparing to Do Your Taxes",
+      "host": "www.canada.ca",
+      "status": "unchecked",
+      "reason": "",
+      "final_url": null,
+      "last_checked": null,
+      "first_flagged": null
+    },
+    "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-completing-basic-return.html": {
+      "id": "r-2579",
+      "title": "CRA Learn About Your Taxes — Completing a Basic Tax Return",
+      "host": "www.canada.ca",
+      "status": "unchecked",
+      "reason": "",
+      "final_url": null,
+      "last_checked": null,
+      "first_flagged": null
+    },
+    "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-after-sending-tax-return.html": {
+      "id": "r-2580",
+      "title": "CRA Learn About Your Taxes — After Sending Us Your Tax Return",
+      "host": "www.canada.ca",
+      "status": "unchecked",
+      "reason": "",
+      "final_url": null,
+      "last_checked": null,
+      "first_flagged": null
+    },
+    "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-accessing-benefits-credits.html": {
+      "id": "r-2581",
+      "title": "CRA Learn About Your Taxes — Accessing Your Benefits and Credits",
+      "host": "www.canada.ca",
+      "status": "unchecked",
+      "reason": "",
+      "final_url": null,
+      "last_checked": null,
+      "first_flagged": null
+    },
+    "https://www.canada.ca/en/revenue-agency/services/tax/individuals/educational-programs/lesson-plans/lp-using-my-account.html": {
+      "id": "r-2582",
+      "title": "CRA Learn About Your Taxes — Using My Account",
+      "host": "www.canada.ca",
       "status": "unchecked",
       "reason": "",
       "final_url": null,
