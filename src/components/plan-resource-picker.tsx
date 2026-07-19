@@ -233,10 +233,13 @@ export default function PlanResourcePicker({
             className={cn(
               "grid gap-4 transition-[grid-template-columns] duration-300",
               fillHeight && !searchOpen && "min-h-0 flex-1",
+              // Below sm the panels stack: the active one takes the full width and
+              // the other collapses to a short horizontal bar (see SquarePanel).
+              // From sm up they sit side by side with a vertical rail.
               activePanel === "recommend"
-                ? "grid-cols-[1fr_120px]"
+                ? "grid-cols-1 sm:grid-cols-[1fr_120px]"
                 : activePanel === "addown"
-                  ? "grid-cols-[120px_1fr]"
+                  ? "grid-cols-1 sm:grid-cols-[120px_1fr]"
                   : "grid-cols-2",
             )}
           >
@@ -390,12 +393,12 @@ function SquarePanel({
         type="button"
         onClick={onActivate}
         aria-label={`Open ${title}`}
-        className="flex min-h-[220px] flex-col items-center gap-3 rounded-2xl border border-border bg-card p-4 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+        className="flex w-full flex-row items-center justify-center gap-3 rounded-2xl border border-border bg-card p-3 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 sm:min-h-[220px] sm:flex-col sm:p-4"
       >
         <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-primary/15 text-primary">
           {icon}
         </span>
-        <span className="font-display text-sm font-bold [writing-mode:vertical-rl]">{title}</span>
+        <span className="font-display text-sm font-bold sm:[writing-mode:vertical-rl]">{title}</span>
       </button>
     )
   }
