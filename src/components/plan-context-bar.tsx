@@ -5,7 +5,7 @@ import * as Popover from "@radix-ui/react-popover"
 import { AnimatePresence, motion } from "framer-motion"
 import { ChevronDown, Building2 } from "lucide-react"
 import type { PickerOption } from "@/components/inline-picker"
-import { GRADES, SUBJECTS } from "@/components/hero-personalize"
+import { GRADES, SUBJECTS, PROVINCES } from "@/components/hero-personalize"
 import { getStrandOptions } from "@/lib/get-strand-options"
 import type { Filters } from "@/lib/types"
 
@@ -19,9 +19,18 @@ export default function PlanContextBar({ filters, setFilters }: PlanContextBarPr
   const strandOptions: PickerOption[] = filters.subject
     ? getStrandOptions(filters.subject, primaryGrade).map((o) => (o.value === "" ? { ...o, label: "Any strand" } : o))
     : [{ value: "", label: "Any strand" }]
+  const provinceLabel = PROVINCES.find((p) => p.value === filters.province)?.label ?? "Any province"
 
   return (
     <div className="flex items-center gap-2 overflow-x-auto pb-1">
+      <ChipPicker
+        value={filters.province || ""}
+        options={PROVINCES.map((p) => (p.value === "" ? { ...p, label: "Any province" } : p))}
+        onChange={(v) => setFilters({ ...filters, province: v })}
+        ariaLabel={`Change province, currently ${provinceLabel}`}
+        display={filters.province ? provinceLabel : "Any province"}
+        variant="solid"
+      />
       <ChipPicker
         value={primaryGrade}
         options={GRADES.map((g) => (g.value === "" ? { ...g, label: "Any grade" } : g))}
@@ -46,6 +55,7 @@ export default function PlanContextBar({ filters, setFilters }: PlanContextBarPr
         display={filters.strand || "Any strand"}
         variant={filters.strand ? "outline-set" : "outline"}
       />
+      <TopicInput value={filters.topic || ""} onChange={(v) => setFilters({ ...filters, topic: v })} />
       <DistrictBadge />
     </div>
   )
@@ -123,6 +133,22 @@ function ChipPicker({
         )}
       </AnimatePresence>
     </Popover.Root>
+  )
+}
+
+// Free-text topic hint. Unlike the chips it never narrows the resource set —
+// it's a soft ranking signal (see topicScore in use-filtered-resources.ts), so
+// a typo or off-list phrase just means no boost, never an empty list.
+function TopicInput({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Topic (e.g. fractions)"
+      aria-label="Topic you're teaching (optional)"
+      className="inline-flex h-[34px] w-40 flex-shrink-0 rounded-full border border-dashed border-[#D8C7B8] bg-transparent px-3 text-sm font-medium text-[#2C2C2C] placeholder:text-[#8B4513]/60 focus-visible:border-[#FF6B35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
+    />
   )
 }
 

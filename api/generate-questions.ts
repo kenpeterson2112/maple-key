@@ -11,6 +11,7 @@ import {
   assertMaxArrayLength,
   assertMaxLength,
 } from "./_lib/limits.js"
+import { provinceLabel } from "./_lib/provinces.js"
 
 /**
  * CALL 1 of the two-call lesson flow.
@@ -49,6 +50,12 @@ interface GenerateQuestionsRequest {
   teacherNotes: string
   classroomResources?: string[]
   noTechMode?: boolean
+  // Class context from the planner's first step; authoritative when present.
+  // grade/subject otherwise fall back to the first resource, province to Ontario.
+  province?: string
+  grade?: string
+  subject?: string
+  topic?: string
 }
 
 /** The three answer formats the renderer is built to handle. */
@@ -133,8 +140,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" })
   }
 
-  const { resources, lessonLength, lessonTemplate, teacherNotes, classroomResources, noTechMode } =
-    req.body as GenerateQuestionsRequest
+  const {
+    resources,
+    lessonLength,
+    lessonTemplate,
+    teacherNotes,
+    classroomResources,
+    noTechMode,
+    province: reqProvince,
+    grade: reqGrade,
+    subject: reqSubject,
+    topic,
+  } = req.body as GenerateQuestionsRequest
 
   if (!resources || resources.length === 0) {
     return res.status(400).json({ error: "At least one resource is required" })
@@ -144,6 +161,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     assertMaxArrayLength(resources, MAX_RESOURCES, "resources")
     assertMaxArrayLength(classroomResources, MAX_CLASSROOM_RESOURCES, "classroomResources")
     assertMaxLength(teacherNotes, MAX_TEACHER_NOTES_LENGTH, "teacherNotes")
+    assertMaxLength(topic, MAX_RESOURCE_TITLE_LENGTH, "topic")
     resources.forEach((r, i) => {
       assertMaxLength(r.title, MAX_RESOURCE_TITLE_LENGTH, `resources[${i}].title`)
       assertMaxLength(r.description, MAX_RESOURCE_DESCRIPTION_LENGTH, `resources[${i}].description`)
@@ -174,12 +192,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
     .join("\n\n")
 
-  const grade = resources[0].grade ?? "unknown"
-  const subject = resources[0].subject ?? "unknown"
+  const grade = reqGrade || resources[0].grade || "unknown"
+  const subject = reqSubject || resources[0].subject || "unknown"
+  const provinceName = provinceLabel(reqProvince || null)
 
   const allCodes = [...new Set(resources.flatMap((r) => r.curriculum_expectations ?? []))]
 
-  const systemPrompt = `You are an experienced Ontario elementary school teacher and instructional coach. Before a colleague generates a lesson plan, you ask them a few sharp planning questions so the lesson reflects THEIR professional judgment about THEIR classroom — not a generic template. You always respond with valid JSON only — no markdown fences, no extra text.`
+  const systemPrompt = `You are an experienced ${provinceName} elementary school teacher and instructional coach. Before a colleague generates a lesson plan, you ask them a few sharp planning questions so the lesson reflects THEIR professional judgment about THEIR classroom — not a generic template. You always respond with valid JSON only — no markdown fences, no extra text.`
 
   const classroomResourcesLine =
     classroomResources && classroomResources.length > 0
@@ -190,7 +209,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     ? "IMPORTANT CONSTRAINT: This lesson will be delivered in no-tech mode — students will not use any device or screen themselves (a teacher-led projector for whole-class display is fine). Do not ask a planning question that assumes students will use a device, app, or website; if a resource is normally tech-delivered, frame any question around its hands-on or paper-based alternative instead."
     : ""
 
-  const userPrompt = `A Grade ${grade} ${subject} teacher is about to generate a ${lessonLength} lesson plan (template: ${lessonTemplate}) from the resources below. Before the lesson is written, ask them ${MIN_QUESTIONS}-${MAX_QUESTIONS} planning questions.
+  const topicFocus = topic ? `\nThe teacher is focusing this lesson on "${topic}" — make the questions specific to that topic.` : ""
+
+  const userPrompt = `A Grade ${grade} ${subject} teacher is about to generate a ${lessonLength} lesson plan (template: ${lessonTemplate}) from the resources below. Before the lesson is written, ask them ${MIN_QUESTIONS}-${MAX_QUESTIONS} planning questions.${topicFocus}
 
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomResourcesLine}
@@ -199,7 +220,7 @@ ${noTechModeLine}
 Resources to be used:
 ${resourceList}
 
-Ontario curriculum codes in play: ${allCodes.join(", ") || "not specified"}
+${provinceName} curriculum codes in play: ${allCodes.join(", ") || "not specified"}
 
 Write ${MIN_QUESTIONS} to ${MAX_QUESTIONS} questions. Requirements:
 - Each question MUST be answerable specifically because of THESE resources or THIS topic. Do not ask generic questions that would apply to any lesson (avoid "what pacing do you want?"). A good question references a specific resource, its type, or a real pedagogical fork the topic creates.

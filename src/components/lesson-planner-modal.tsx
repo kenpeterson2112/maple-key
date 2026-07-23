@@ -26,6 +26,7 @@ import {
   MonitorOff,
   ChevronLeft,
   ChevronRight,
+  GraduationCap,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import PageHeader from "@/components/page-header"
@@ -57,6 +58,7 @@ import { type UserMaterial } from "@/components/user-materials-section"
 import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage, getNoTechMode, setNoTechMode, getLessonSetupMode, setLessonSetupMode, type LessonSetupMode } from "@/lib/personalization"
 import { useGlobalFilters } from "@/lib/global-filters"
 import PlanResourcePicker from "@/components/plan-resource-picker"
+import PlanContextBar from "@/components/plan-context-bar"
 import type { SidebarFilters } from "@/lib/use-filtered-resources"
 import type { Filters } from "@/lib/types"
 
@@ -80,6 +82,7 @@ interface PlanningAnswer {
  * never loses anything.
  */
 const WIZARD_STEPS = [
+  { label: "Class" },
   { label: "Resources" },
   { label: "Format" },
   { label: "Personalize" },
@@ -259,6 +262,7 @@ export default function LessonPlannerModal({
           classroomResources: classroomResourceLabels,
           reproducibleLanguage,
           noTechMode,
+          ...classContextPayload,
           ...(planningAnswers.length > 0 ? { planningAnswers } : {}),
           ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
         }),
@@ -610,6 +614,7 @@ export default function LessonPlannerModal({
     classroomResources: classroomResourceLabels,
     reproducibleLanguage,
     noTechMode,
+    ...classContextPayload,
     ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
   })
 
@@ -1175,6 +1180,38 @@ Return a JSON object with exactly these fields (string values are plain text, no
   const isWizard = setupMode === "wizard"
   const isLastWizardStep = wizardStep === WIZARD_STEPS.length - 1
 
+  // Class-context step shares one PlanContextBar over two stores: province/grade/
+  // subject/strand live in the persisted global filters (also driving the full
+  // discovery surface), while free-text topic lives in the App-level filters.
+  // Each ChipPicker changes exactly one field per call, so we route by diff.
+  const classContextFilters: Filters = {
+    ...filters,
+    province: globalFilters.state.province,
+    grade: globalFilters.state.grade,
+    subject: globalFilters.state.subject,
+    strand: globalFilters.state.strand,
+    topic: filters.topic,
+  }
+  const handleClassContextChange = (next: Filters) => {
+    if (next.province !== globalFilters.state.province) globalFilters.setProvince(next.province)
+    if (next.grade !== globalFilters.state.grade) globalFilters.setGrade(next.grade)
+    if (next.subject !== globalFilters.state.subject) globalFilters.setSubject(next.subject)
+    if (next.strand !== globalFilters.state.strand) globalFilters.setStrand(next.strand)
+    if (next.topic !== filters.topic) setFilters({ ...filters, topic: next.topic })
+  }
+
+  // Explicit class context for the two generation calls. Only non-empty fields
+  // are sent, so the API keeps its resources[0]/Ontario fallbacks when a teacher
+  // skips the step. `grade` takes the first selected grade (the API expects one).
+  const classContextPayload = {
+    ...(globalFilters.state.province ? { province: globalFilters.state.province } : {}),
+    ...(globalFilters.state.grade
+      ? { grade: globalFilters.state.grade.split(",").filter(Boolean)[0] ?? "" }
+      : {}),
+    ...(globalFilters.state.subject ? { subject: globalFilters.state.subject } : {}),
+    ...(filters.topic ? { topic: filters.topic } : {}),
+  }
+
   // Setup breathes on large screens; the finished lesson stays a readable measure.
   const contentWidthClass = lessonGenerated
     ? "max-w-3xl xl:max-w-4xl" // ~768–896px reading column
@@ -1243,23 +1280,36 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
   const reviewRows: { label: string; value: string; step: number }[] = [
     {
+      label: "Class",
+      value:
+        [
+          globalFilters.state.grade && `Grade ${globalFilters.state.grade}`,
+          globalFilters.state.subject,
+          globalFilters.state.province,
+          filters.topic && `“${filters.topic}”`,
+        ]
+          .filter(Boolean)
+          .join(" · ") || "Not set",
+      step: 0,
+    },
+    {
       label: "Resources",
       value:
         bookmarkedResources.length > 0
           ? bookmarkedResources.map((r) => r.topic_title).join(", ")
           : "None selected",
-      step: 0,
+      step: 1,
     },
-    { label: "Lesson length", value: `${lessonMinutes} minutes`, step: 1 },
-    { label: "Template", value: templateDef.displayName, step: 1 },
-    { label: "No-Tech Mode", value: noTechMode ? "On — nothing for students to operate" : "Off", step: 1 },
+    { label: "Lesson length", value: `${lessonMinutes} minutes`, step: 2 },
+    { label: "Template", value: templateDef.displayName, step: 2 },
+    { label: "No-Tech Mode", value: noTechMode ? "On — nothing for students to operate" : "Off", step: 2 },
     {
       label: "Classroom materials",
       value: materialsSnapshot.total > 0 ? `${materialsSnapshot.total} selected` : "None selected",
-      step: 2,
+      step: 3,
     },
-    { label: "Student handouts", value: reproducibleLanguage === "French" ? "Français" : "English", step: 2 },
-    { label: "Additional notes", value: teacherNotes.trim() || "None", step: 2 },
+    { label: "Student handouts", value: reproducibleLanguage === "French" ? "Français" : "English", step: 3 },
+    { label: "Additional notes", value: teacherNotes.trim() || "None", step: 3 },
   ]
 
   const wizardReviewCard = (
@@ -1294,7 +1344,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
             No resources are selected yet — you can still generate, but the plan won't build on curated resources.{" "}
             <button
               type="button"
-              onClick={() => goToWizardStep(0)}
+              onClick={() => goToWizardStep(1)}
               className="font-semibold underline hover:text-amber-900"
             >
               Pick resources
@@ -2142,8 +2192,26 @@ Return a JSON object with exactly these fields (string values are plain text, no
               <>
                 {setupNav}
 
-                {/* Step 1 — resources (all cards visible at once in all-options mode) */}
-                {(!isWizard || wizardStep === 0) && (<>
+                {/* Step 1 — class context (province / grade / subject / topic). Sets
+                    the authoritative filters that scope the Recommended box below and
+                    are threaded into lesson generation, instead of guessing from the
+                    first bookmarked resource. */}
+                {(!isWizard || wizardStep === 0) && (
+                <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+                  <div className="flex items-center gap-2 mb-1">
+                    <GraduationCap size={16} className="text-[#8B4513]" />
+                    <h3 className="text-lg font-semibold text-[#2C2C2C]">What are you teaching?</h3>
+                  </div>
+                  <p className="text-sm text-[#666] mb-4">
+                    This scopes your recommendations and tailors the generated lesson. Topic is optional —
+                    it nudges the best matches to the top without hiding anything.
+                  </p>
+                  <PlanContextBar filters={classContextFilters} setFilters={handleClassContextChange} />
+                </div>
+                )}
+
+                {/* Step 2 — resources (all cards visible at once in all-options mode) */}
+                {(!isWizard || wizardStep === 1) && (<>
                 {/* Unified resource picker: search / recommended / add-my-own + tray */}
                 <PlanResourcePicker
                   filters={{
@@ -2231,8 +2299,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
                 </>)}
 
-                {/* Step 2 — lesson format */}
-                {(!isWizard || wizardStep === 1) && (
+                {/* Step 3 — lesson format */}
+                {(!isWizard || wizardStep === 2) && (
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Layout size={16} className="text-[#8B4513]" />
@@ -2334,8 +2402,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 </div>
                 )}
 
-                {/* Step 3 — personalize */}
-                {(!isWizard || wizardStep === 2) && (<>
+                {/* Step 4 — personalize */}
+                {(!isWizard || wizardStep === 3) && (<>
                 <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2">
@@ -2409,8 +2477,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
                 </div>
                 </>)}
 
-                {/* Step 4 — review (wizard only; the all-options page doesn't need it) */}
-                {isWizard && wizardStep === 3 && wizardReviewCard}
+                {/* Step 5 — review (wizard only; the all-options page doesn't need it) */}
+                {isWizard && wizardStep === 4 && wizardReviewCard}
 
                 {/* Spacer for bottom */}
                 <div className="h-6" />
