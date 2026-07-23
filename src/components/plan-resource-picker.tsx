@@ -113,8 +113,8 @@ export default function PlanResourcePicker({
     [filteredResources, classProgress],
   )
   const recommended = useMemo(
-    () => applyTypeChips(sortResources(filteredResources, priorityCodes), typeFilters).slice(0, 12),
-    [filteredResources, priorityCodes, typeFilters],
+    () => applyTypeChips(sortResources(filteredResources, priorityCodes, filters.topic), typeFilters).slice(0, 12),
+    [filteredResources, priorityCodes, filters.topic, typeFilters],
   )
 
   // Search: keyword over the same fields the full browser uses, then chips.
@@ -247,7 +247,11 @@ export default function PlanResourcePicker({
             <SquarePanel
               icon={<Sparkles className="h-4 w-4" aria-hidden="true" />}
               title="Recommended"
-              description="A short list matched to your class, based on grade and subject."
+              description={
+                filters.topic
+                  ? `A short list matched to your class — grade, subject, and “${filters.topic}”.`
+                  : "A short list matched to your class, based on grade and subject."
+              }
               isActive={activePanel === "recommend"}
               isRail={activePanel === "addown"}
               onActivate={() => setActivePanel((p) => (p === "recommend" ? null : "recommend"))}

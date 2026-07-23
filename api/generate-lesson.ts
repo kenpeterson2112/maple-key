@@ -13,6 +13,7 @@ import {
   assertMaxArrayLength,
   assertMaxLength,
 } from "./_lib/limits.js"
+import { provinceLabel } from "./_lib/provinces.js"
 
 const LESSON_MODEL = "claude-haiku-4-5-20251001"
 
@@ -54,6 +55,13 @@ interface GenerateRequest {
   classProgress?: Record<string, LevelCounts>
   reproducibleLanguage?: "English" | "French"
   noTechMode?: boolean
+  // Class context from the planner's first step. When present these are
+  // authoritative; grade/subject otherwise fall back to the first resource, and
+  // province defaults to Ontario. `topic` is a free-text focus for the lesson.
+  province?: string
+  grade?: string
+  subject?: string
+  topic?: string
 }
 
 function formatClassProgress(progress: Record<string, LevelCounts>): string {
@@ -216,6 +224,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     classProgress,
     reproducibleLanguage,
     noTechMode,
+    province: reqProvince,
+    grade: reqGrade,
+    subject: reqSubject,
+    topic,
   } = req.body as GenerateRequest
 
   if (!resources || resources.length === 0) {
@@ -227,6 +239,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     assertMaxArrayLength(classroomResources, MAX_CLASSROOM_RESOURCES, "classroomResources")
     assertMaxArrayLength(planningAnswers, MAX_PLANNING_ANSWERS, "planningAnswers")
     assertMaxLength(teacherNotes, MAX_TEACHER_NOTES_LENGTH, "teacherNotes")
+    assertMaxLength(topic, MAX_RESOURCE_TITLE_LENGTH, "topic")
     resources.forEach((r, i) => {
       assertMaxLength(r.title, MAX_RESOURCE_TITLE_LENGTH, `resources[${i}].title`)
       assertMaxLength(r.description, MAX_RESOURCE_DESCRIPTION_LENGTH, `resources[${i}].description`)
@@ -243,8 +256,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const allCodes = [...new Set(resources.flatMap((r) => r.curriculum_expectations ?? []))]
-  const grade = resources[0].grade ?? "unknown"
-  const subject = resources[0].subject ?? "unknown"
+  const grade = reqGrade || resources[0].grade || "unknown"
+  const subject = reqSubject || resources[0].subject || "unknown"
+  const province = reqProvince || null
+  const provinceName = provinceLabel(province)
 
   const resourceList = resources
     .map((r, i) => {
@@ -264,7 +279,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
     .join("\n\n")
 
-  const systemPrompt = `You are an experienced Ontario elementary school teacher and curriculum expert. You create clear, practical, standards-aligned lesson plans for Canadian classrooms. You always respond with valid JSON only — no markdown fences, no extra text.
+  const systemPrompt = `You are an experienced ${provinceName} elementary school teacher and curriculum expert. You create clear, practical, standards-aligned lesson plans for Canadian classrooms. You always respond with valid JSON only — no markdown fences, no extra text.
 
 Instructional structure guidance: Each resource may include a "Best used as" field and a "Deployment note" — use these to inform how you structure the lesson. Station rotation and centre-based learning are excellent, well-established strategies; choose them when resources list "station-rotation" in "Best used as", when the teacher's notes or template suggest it, or when multiple hands-on materials are naturally suited to it. For flexible resources (interactive tools, digital content, video), match the approach to the context — whole-class discussion, individual exploration, or partner work may serve the lesson better than stations. Let the resources and teacher intent guide the structure, not a default habit.`
 
@@ -313,7 +328,9 @@ Before finalizing your response, re-check every single artifact entry: if "name"
         .join(",\n")
     : ""
 
-  const userPrompt = `Create a ${lessonLength} lesson plan for Grade ${grade} ${subject} using the following bookmarked resources.
+  const topicFocus = topic ? `\nTopic focus: build this lesson around "${topic}".` : ""
+
+  const userPrompt = `Create a ${lessonLength} lesson plan for Grade ${grade} ${subject} using the following bookmarked resources.${topicFocus}
 
 Template: ${lessonTemplate}
 ${templateGuidance}
@@ -326,7 +343,7 @@ ${planningAnswersBlock}
 Resources to incorporate:
 ${resourceList}
 
-Ontario curriculum codes available: ${allCodes.join(", ")}
+${provinceName} curriculum codes available: ${allCodes.join(", ")}
 
 Resource-mismatch rule: If any provided resource does not fit the topic or curriculum codes of this lesson, do NOT use it. List it in "excludedResources" with a one-line reason. "materials.resources" must only contain titles of resources you actually use.
 
@@ -454,7 +471,7 @@ ${reproducibleLanguageBlock}`
       ua: req.headers["user-agent"] ?? "",
       grade,
       subject,
-      province: null,
+      province,
       lessonTemplate,
       lessonLength,
       codesCount: lesson.curriculumCodesCovered?.length ?? 0,

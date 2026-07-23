@@ -151,6 +151,29 @@ export function keywordFilter(resources: Resource[], query: string): Resource[] 
 
 const compareCodes = (a: string, b: string) => a.localeCompare(b, undefined, { numeric: true })
 
+// Soft topic-relevance score: how many of the topic's terms appear anywhere in
+// the resource's title/description/subject/strand/codes. Never used to exclude —
+// only to bubble on-topic resources up the recommendation list. Returns 0 when
+// no topic is set, so ranking degrades to the existing frontier/grade order.
+export function topicScore(resource: Resource, topic?: string): number {
+  const terms = (topic || "")
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((t) => t.length >= 3)
+  if (terms.length === 0) return 0
+  const haystack = [
+    resource.topic_title,
+    resource.description,
+    resource.subject,
+    ...(resource.strand || []),
+    ...(resource.curriculum_expectations || []),
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase()
+  return terms.reduce((n, term) => (haystack.includes(term) ? n + 1 : n), 0)
+}
+
 // Per strand, finds the class's coverage frontier among the codes these
 // resources actually carry, and returns that frontier code plus the one after
 // it (in case the frontier is already "great" and there's nothing left to do
@@ -179,14 +202,21 @@ export function nextUpCodes(resources: Resource[], progress: Record<string, Leve
 }
 
 // Default sort: resources at the class's coverage frontier first (when
-// `priorityCodes` is given and non-empty), then grade ascending, then by
-// first curriculum expectation, then title.
-export function sortResources(resources: Resource[], priorityCodes?: Set<string>): Resource[] {
+// `priorityCodes` is given and non-empty), then — when a `topic` is given —
+// resources matching more of the topic's terms, then grade ascending, then by
+// first curriculum expectation, then title. Topic sits below the frontier
+// signal so it reorders within "what's next" rather than overriding it.
+export function sortResources(resources: Resource[], priorityCodes?: Set<string>, topic?: string): Resource[] {
   return [...resources].sort((a, b) => {
     if (priorityCodes && priorityCodes.size > 0) {
       const aIsNext = (a.curriculum_expectations || []).some((c) => priorityCodes.has(c)) ? 0 : 1
       const bIsNext = (b.curriculum_expectations || []).some((c) => priorityCodes.has(c)) ? 0 : 1
       if (aIsNext !== bIsNext) return aIsNext - bIsNext
+    }
+
+    if (topic) {
+      const topicCompare = topicScore(b, topic) - topicScore(a, topic)
+      if (topicCompare !== 0) return topicCompare
     }
 
     const gradeA = minGrade(a.grade_level)
