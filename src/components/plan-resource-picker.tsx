@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { Search, Sparkles, Paperclip, X, ChevronRight, FileText, Compass } from "lucide-react"
+import { Search, Sparkles, Paperclip, X, ChevronRight, FileText, Compass, AlertTriangle } from "lucide-react"
 import PlanResourceCard from "./plan-resource-card"
 import UserMaterialsSection, { type UserMaterial } from "@/components/user-materials-section"
 import { useBookmarks } from "@/lib/bookmarks-context"
@@ -94,7 +94,7 @@ export default function PlanResourcePicker({
   fillHeight = false,
 }: PlanResourcePickerProps) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarks()
-  const { filteredResources, classProgress } = useFilteredResources(filters, sidebarFilters)
+  const { error, filteredResources, classProgress } = useFilteredResources(filters, sidebarFilters)
 
   // Row 1 (search) and the two squares (row 2) open independently.
   const [searchOpen, setSearchOpen] = useState(false)
@@ -258,7 +258,13 @@ export default function PlanResourcePicker({
             >
               <FilterChips active={typeFilters} onToggle={toggleType} />
               <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-1">
-                {recommended.length === 0 ? (
+                {error ? (
+                  <EmptyHint
+                    icon={<AlertTriangle className="h-4 w-4 text-destructive" aria-hidden="true" />}
+                    title="Couldn't load resources"
+                    body="The resource library didn't load. Refresh the page to try again."
+                  />
+                ) : recommended.length === 0 ? (
                   <EmptyHint
                     icon={<Compass className="h-4 w-4 text-primary" aria-hidden="true" />}
                     title="No suggestions yet"

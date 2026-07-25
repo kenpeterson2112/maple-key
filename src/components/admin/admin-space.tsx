@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import { withBasePath } from "@/lib/base-path"
+import { fetchJson } from "@/lib/fetch-json"
 import { keywordFilter } from "@/lib/use-filtered-resources"
 import {
   applyChangeset,
@@ -33,7 +34,7 @@ import AdminResourceEditor from "./admin-resource-editor"
 // and push the accumulated changeset to GitHub as a PR (api/admin-push.ts).
 // Reached via the #admin hash (see main.tsx); not linked from the app chrome.
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetcher = fetchJson
 
 type StatusFilter = "all" | "visible" | "collections" | "suppressed" | "changed"
 

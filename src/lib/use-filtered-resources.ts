@@ -15,8 +15,7 @@ import {
   type ReadinessLevel,
 } from "@/lib/assessment-results"
 import { strandCodeOf } from "@/lib/curriculum-codes"
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+import { fetchJson } from "@/lib/fetch-json"
 
 export interface SidebarFilters {
   modality: string[]
@@ -30,7 +29,7 @@ export interface SidebarFilters {
 // Resource Discovery results list and the embedded Plan-screen search panel.
 // Keyword search, sorting, and pagination are left to each caller.
 export function useFilteredResources(filters: Filters, sidebarFilters?: SidebarFilters) {
-  const { data, error, isLoading } = useSWR<{ resources: Resource[] }>(withBasePath("/resources.json"), fetcher, {
+  const { data, error, isLoading } = useSWR<{ resources: Resource[] }>(withBasePath("/resources.json"), fetchJson, {
     refreshInterval: 3600000,
     revalidateOnFocus: false,
   })
