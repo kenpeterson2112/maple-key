@@ -29,8 +29,11 @@ export interface SidebarFilters {
 // Resource Discovery results list and the embedded Plan-screen search panel.
 // Keyword search, sorting, and pagination are left to each caller.
 export function useFilteredResources(filters: Filters, sidebarFilters?: SidebarFilters) {
+  // resources.json is ~3 MB and a nightly routine is the only thing that
+  // regenerates it, so polling it on a timer re-downloads the whole file to
+  // learn nothing. SWR still revalidates on mount, which is as fresh as a
+  // nightly artifact can usefully be.
   const { data, error, isLoading } = useSWR<{ resources: Resource[] }>(withBasePath("/resources.json"), fetchJson, {
-    refreshInterval: 3600000,
     revalidateOnFocus: false,
   })
 
