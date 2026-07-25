@@ -4,7 +4,6 @@ import ResourcesSpace from "@/components/resources-space"
 import LessonPlannerModal from "@/components/lesson-planner-modal"
 import LessonsLibrary from "@/components/lessons-library"
 import AssessmentModal from "@/components/assessment-modal"
-import SettingsModal from "@/components/settings-modal"
 import OnboardingModal from "@/components/onboarding-modal"
 import ResourceOnboardingModal from "@/components/resource-onboarding-modal"
 import ClassInsightsSpace from "@/components/class-insights-space"
@@ -51,7 +50,6 @@ export default function App() {
 
   const [activeSpace, setActiveSpace] = useState<Space>("lessonplanner")
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
-  const [showSettings, setShowSettings] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [showResourceTour, setShowResourceTour] = useState(false)
   const [assessmentLesson, setAssessmentLesson] = useState<LessonMetadata | null>(null)
@@ -220,8 +218,7 @@ export default function App() {
         </AnimatePresence>
       </div>
 
-      {/* Settings panel — slides down from top, overlays everything */}
-      <SettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />
+      {/* Settings lives in TopNav, which owns its own open state and modal instance. */}
 
       {/* First-visit tour — "How Maple Key Works", leads into classroom setup */}
       <ResourceOnboardingModal
