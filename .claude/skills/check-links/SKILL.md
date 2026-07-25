@@ -59,7 +59,33 @@ Stage 4 (nothing to verify tonight).
 
 ## Stage 3 — Browser-verify the queue with WebFetch
 
-For **each** item in `plan.queue`, call `WebFetch` on its `url` with this prompt:
+### Stage 3a — Preflight: confirm this environment has browser egress
+
+Before touching the queue, `WebFetch` **one control URL** — `https://example.com/`
+— and check that content comes back.
+
+If the control fails, this environment has no outbound browser egress and
+**every** queued URL will fail for that reason alone, telling you nothing about
+the links. In that case:
+
+- **Skip the rest of Stage 3 entirely.** Do not fetch the queue.
+- Write `/tmp/lc-results.json` as an empty array `[]`, so the ledger records
+  tonight as tier-0-only rather than filling up with a few hundred phantom
+  `blocked` rows that are really one environment fault.
+- Carry the failure into the Stage 5 PR body as the **lead** item, above the
+  broken-links table, naming the control URL that failed.
+
+This check exists because the browser tier silently classified nothing for over
+a month — runs on 2026-06-17, 2026-07-04, 2026-07-18, and 2026-07-25 all hit a
+session-wide egress block, and each one recorded its whole queue as `blocked`
+without ever making it obvious the routine had stopped working. A control fetch
+turns a month of quiet no-ops into one loud line. Rotation is date-derived and
+stateless, so a skipped night costs nothing beyond that night.
+
+### Stage 3b — Verify the queue
+
+Only if the preflight succeeded. For **each** item in `plan.queue`, call
+`WebFetch` on its `url` with this prompt:
 
 > Classify this page for a link-health check. Reply with EXACTLY one token,
 > then " — ", then a ≤12-word reason.
@@ -117,6 +143,11 @@ PR body: lead with the run summary (shard N/9, URLs checked, counts), then the
 broken-links table from Stage 4, then a one-line note that `resources.json` was
 not modified and the rows are for the maintainer to fix or remove.
 
+If the Stage 3a preflight failed, that goes **first**, above the summary, stated
+as an environment fault rather than a link finding — the DNS tier still ran, but
+no browser verification happened at all and the run is not evidence about any
+queued URL.
+
 If Stage 4 reported `NO_BROKEN_LINKS_THIS_RUN` and no PR is open, make no PR;
 just push the ledger refresh so rotation/history stay current.
 
@@ -131,3 +162,6 @@ just push the ledger refresh so rotation/history stay current.
 - Don't run the API-billed scripts (`fetch-resources.py`,
   `assess-curriculum-expectations.py`); this routine is unrelated to them.
 - Requires an environment with outbound network (DNS + WebFetch). No API key.
+  These are two separate capabilities and they fail independently: DNS has kept
+  working while WebFetch has been blocked. Stage 3a is what tells them apart —
+  without it the routine looks like it ran fine while verifying nothing.

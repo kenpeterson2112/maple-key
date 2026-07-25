@@ -61,20 +61,11 @@ import PlanResourcePicker from "@/components/plan-resource-picker"
 import PlanContextBar from "@/components/plan-context-bar"
 import type { SidebarFilters } from "@/lib/use-filtered-resources"
 import type { Filters } from "@/lib/types"
-
-interface PlanningQuestion {
-  id: string
-  prompt: string
-  rationale: string
-  answerFormat: "single-select" | "this-that-both" | "multi-select"
-  options: string[]
-}
-
-interface PlanningAnswer {
-  questionId: string
-  questionPrompt: string
-  answer: string
-}
+import {
+  PlanningQuestionsStep,
+  usePlanningQuestions,
+  type PlanningAnswer,
+} from "@/components/lesson-planner/planning-questions"
 
 /**
  * Guided setup steps. Same form state as the single-page layout — the wizard
@@ -158,13 +149,20 @@ export default function LessonPlannerModal({
   const [approvedSections, setApprovedSections] = useState<Record<string, boolean>>(fc?.approvedSections ?? {})
 
   // Two-call flow state
-  const [showQuestionsStep, setShowQuestionsStep] = useState(false)
-  const [planningQuestions, setPlanningQuestions] = useState<PlanningQuestion[]>([])
-  const [questionSelections, setQuestionSelections] = useState<Record<string, string[]>>({})
+  const planning = usePlanningQuestions()
+  const {
+    showQuestionsStep,
+    setShowQuestionsStep,
+    planningQuestions,
+    setPlanningQuestions,
+    questionSelections,
+    setQuestionSelections,
+    currentQuestionIndex,
+    setCurrentQuestionIndex,
+    openResponseValues,
+    showingOpenResponse,
+  } = planning
   const [templateSections, setTemplateSections] = useState<TemplateSection[]>(fc?.sections ?? [])
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [openResponseValues, setOpenResponseValues] = useState<Record<string, string>>({})
-  const [showingOpenResponse, setShowingOpenResponse] = useState<Record<string, boolean>>({})
 
   const [generateError, setGenerateError] = useState<string | null>(null)
   const [showAssessment, setShowAssessment] = useState(false)
@@ -184,14 +182,6 @@ export default function LessonPlannerModal({
 
   const importInputRef = useRef<HTMLInputElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (showQuestionsStep) {
-      setCurrentQuestionIndex(0)
-      setOpenResponseValues({})
-      setShowingOpenResponse({})
-    }
-  }, [showQuestionsStep])
 
   useEffect(() => {
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: "smooth" })
@@ -2047,145 +2037,7 @@ Return a JSON object with exactly these fields (string values are plain text, no
             ) : showQuestionsStep ? (
               <>
                 {/* PLANNING QUESTIONS STEP — one question at a time */}
-                {(() => {
-                  const q = planningQuestions[currentQuestionIndex]
-                  if (!q) return null
-                  const isLastQuestion = currentQuestionIndex === planningQuestions.length - 1
-                  const selections = questionSelections[q.id] ?? []
-                  const openText = openResponseValues[q.id] ?? ""
-                  const isOpenActive = showingOpenResponse[q.id] ?? false
-                  const hasAnswer = selections.length > 0 || (isOpenActive && openText.trim().length > 0)
-                  const opts = q.answerFormat === "this-that-both" ? [...q.options, "Both"] : q.options
-
-                  const handleSelect = (opt: string) => {
-                    setQuestionSelections((prev) => ({ ...prev, [q.id]: [opt] }))
-                    setShowingOpenResponse((prev) => ({ ...prev, [q.id]: false }))
-                    setTimeout(() => advanceQuestion(q.id, [opt]), 250)
-                  }
-
-                  const handleMultiToggle = (opt: string) => {
-                    const cur = questionSelections[q.id] ?? []
-                    setShowingOpenResponse((prev) => ({ ...prev, [q.id]: false }))
-                    setQuestionSelections((prev) => ({
-                      ...prev,
-                      [q.id]: cur.includes(opt) ? cur.filter((o) => o !== opt) : [...cur, opt],
-                    }))
-                  }
-
-                  return (
-                    <>
-                      {/* Progress indicator */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          {currentQuestionIndex > 0 && (
-                            <button
-                              onClick={() => setCurrentQuestionIndex((i) => i - 1)}
-                              className="text-sm text-violet-600 hover:text-violet-800 font-medium transition-colors"
-                            >
-                              ← Back
-                            </button>
-                          )}
-                          <p className="text-sm font-medium text-violet-700">
-                            Question {currentQuestionIndex + 1} of {planningQuestions.length}
-                          </p>
-                        </div>
-                        <div className="flex gap-1.5">
-                          {planningQuestions.map((_, i) => (
-                            <div
-                              key={i}
-                              className={`h-1.5 w-6 rounded-full transition-colors ${
-                                i < currentQuestionIndex
-                                  ? "bg-violet-400"
-                                  : i === currentQuestionIndex
-                                  ? "bg-violet-600"
-                                  : "bg-gray-200"
-                              }`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Question card */}
-                      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-                        <p className="font-medium text-[#2C2C2C] mb-1">{q.prompt}</p>
-                        <p className="text-xs text-[#888] mb-4">{q.rationale}</p>
-
-                        <div className="flex flex-col gap-2">
-                          {opts.map((opt, i) => {
-                            const isSelected =
-                              q.answerFormat === "multi-select" ? selections.includes(opt) : selections[0] === opt
-                            const isRecommended = i === 0
-
-                            return (
-                              <button
-                                key={opt}
-                                onClick={() =>
-                                  q.answerFormat === "multi-select" ? handleMultiToggle(opt) : handleSelect(opt)
-                                }
-                                className={`w-full text-left px-4 py-3 rounded-lg text-sm border-2 transition-colors flex items-center justify-between gap-2 ${
-                                  isSelected
-                                    ? "bg-violet-600 border-violet-600 text-white"
-                                    : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
-                                }`}
-                              >
-                                <span>{opt}</span>
-                                {isRecommended && (
-                                  <span
-                                    className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${
-                                      isSelected ? "bg-white/20 text-white" : "bg-violet-100 text-violet-700"
-                                    }`}
-                                  >
-                                    Recommended
-                                  </span>
-                                )}
-                              </button>
-                            )
-                          })}
-
-                          {/* Open response option */}
-                          {isOpenActive ? (
-                            <div className="border-2 border-violet-400 rounded-lg p-3 bg-violet-50">
-                              <p className="text-xs font-medium text-violet-700 mb-2">Your answer:</p>
-                              <input
-                                autoFocus
-                                type="text"
-                                value={openText}
-                                onChange={(e) =>
-                                  setOpenResponseValues((prev) => ({ ...prev, [q.id]: e.target.value }))
-                                }
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter" && openText.trim()) advanceQuestion(q.id)
-                                }}
-                                placeholder="Type your own answer..."
-                                className="w-full px-3 py-2 border border-violet-300 rounded-lg bg-white text-sm focus:outline-none focus:border-violet-500"
-                              />
-                            </div>
-                          ) : (
-                            <button
-                              onClick={() => {
-                                setQuestionSelections((prev) => ({ ...prev, [q.id]: [] }))
-                                setShowingOpenResponse((prev) => ({ ...prev, [q.id]: true }))
-                              }}
-                              className="w-full text-left px-4 py-3 rounded-lg text-sm border-2 border-dashed border-[#E8D5C4] text-[#888] hover:border-violet-400 hover:text-violet-600 transition-colors"
-                            >
-                              Other (write your own)…
-                            </button>
-                          )}
-
-                          {/* Continue / Generate button for multi-select and open response */}
-                          {(q.answerFormat === "multi-select" || isOpenActive) && hasAnswer && (
-                            <button
-                              onClick={() => advanceQuestion(q.id)}
-                              className="mt-2 w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
-                            >
-                              {isLastQuestion ? "Generate Lesson Plan" : "Continue →"}
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </>
-                  )
-                })()}
+                <PlanningQuestionsStep state={planning} onAdvance={advanceQuestion} />
                 <div className="h-6" />
               </>
             ) : (

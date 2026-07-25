@@ -558,10 +558,13 @@
         "added_at": "2025-11-10",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "is_collection": true,
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-8",
@@ -1026,10 +1029,13 @@
         "added_at": "2025-11-10",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-15",
@@ -2097,9 +2103,12 @@
         "added_at": "2025-11-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-34",
@@ -2319,9 +2328,12 @@
         "added_at": "2025-11-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-38",
@@ -2374,10 +2386,13 @@
         "added_at": "2025-11-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-39",
@@ -3207,9 +3222,12 @@
         "added_at": "2025-11-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-54",
@@ -3949,9 +3967,12 @@
         "added_at": "2025-11-10",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-66",
@@ -4345,9 +4366,12 @@
         "added_at": "2025-11-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-73",
@@ -4458,9 +4482,12 @@
         "added_at": "2025-11-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-75",
@@ -5893,10 +5920,13 @@
         "added_at": "2025-11-10",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": true
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-95",
@@ -7078,10 +7108,13 @@
         "added_at": "2025-11-10",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-111",
@@ -7152,9 +7185,12 @@
         "added_at": "2025-11-10",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-112",
@@ -8853,7 +8889,7 @@
       "id": "r-133",
       "topic_title": "You are the Economy",
       "description": "You Are the Economy is a set of six lessons and activities that explore economic and financial literacy and are designed to fit within social studies, history, geography, economics, business and career courses",
-      "url": "www.bankofcanadamuseum.ca/you-are-the-economy/",
+      "url": "https://www.bankofcanadamuseum.ca/you-are-the-economy/",
       "publisher_creator": "Bank of Canada Museum",
       "grade_level": [
         5,
@@ -9428,9 +9464,12 @@
         "added_at": "2025-11-10",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-141",
@@ -22137,10 +22176,13 @@
         "added_at": "2026-04-15",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-1197",
@@ -34485,10 +34527,13 @@
         "added_at": "2026-04-23",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-1415",
@@ -35196,9 +35241,12 @@
         "added_at": "2026-04-23",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-1428",
@@ -44362,10 +44410,13 @@
         "added_at": "2026-04-27",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-1594",
@@ -45372,10 +45423,13 @@
         "added_at": "2026-04-27",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-1612",
@@ -47670,10 +47724,13 @@
         "added_at": "2026-04-29",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
       "language": "en",
-      "is_collection": true
+      "is_collection": true,
+      "suppressed": true
     },
     {
       "id": "r-1654",
@@ -47725,9 +47782,12 @@
         "added_at": "2026-04-29",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-1655",
@@ -50729,9 +50789,12 @@
         "added_at": "2026-04-29",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-1710",
@@ -56506,9 +56569,12 @@
         "added_at": "2026-05-01",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-1816",
@@ -58032,9 +58098,12 @@
         "added_at": "2026-05-01",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-1842",
@@ -58089,9 +58158,12 @@
         "added_at": "2026-05-01",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-1843",
@@ -77017,9 +77089,12 @@
         "added_at": "2026-05-06",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": true,
+        "link_status": "dead_domain",
+        "link_checked_at": "2026-07-25"
       },
-      "language": "en"
+      "language": "en",
+      "suppressed": true
     },
     {
       "id": "r-2186",

@@ -15,8 +15,7 @@ import {
   type ReadinessLevel,
 } from "@/lib/assessment-results"
 import { strandCodeOf } from "@/lib/curriculum-codes"
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+import { fetchJson } from "@/lib/fetch-json"
 
 export interface SidebarFilters {
   modality: string[]
@@ -30,8 +29,11 @@ export interface SidebarFilters {
 // Resource Discovery results list and the embedded Plan-screen search panel.
 // Keyword search, sorting, and pagination are left to each caller.
 export function useFilteredResources(filters: Filters, sidebarFilters?: SidebarFilters) {
-  const { data, error, isLoading } = useSWR<{ resources: Resource[] }>(withBasePath("/resources.json"), fetcher, {
-    refreshInterval: 3600000,
+  // resources.json is ~3 MB and a nightly routine is the only thing that
+  // regenerates it, so polling it on a timer re-downloads the whole file to
+  // learn nothing. SWR still revalidates on mount, which is as fresh as a
+  // nightly artifact can usefully be.
+  const { data, error, isLoading } = useSWR<{ resources: Resource[] }>(withBasePath("/resources.json"), fetchJson, {
     revalidateOnFocus: false,
   })
 
