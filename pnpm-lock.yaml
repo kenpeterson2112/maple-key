@@ -41,7 +41,10 @@ importers:
     devDependencies:
       '@tailwindcss/vite':
         specifier: ^4.1.9
-        version: 4.2.4(vite@6.4.2(@types/node@20.11.0)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0))
+        version: 4.2.4(vite@6.4.2(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0))
+      '@types/node':
+        specifier: ^22.20.1
+        version: 22.20.1
       '@types/react':
         specifier: ^19.0.0
         version: 19.2.14
@@ -53,7 +56,7 @@ importers:
         version: 5.8.0(rollup@4.60.3)
       '@vitejs/plugin-react':
         specifier: ^5.0.0
-        version: 5.2.0(vite@6.4.2(@types/node@20.11.0)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0))
+        version: 5.2.0(vite@6.4.2(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0))
       tailwindcss:
         specifier: ^4.1.9
         version: 4.2.4
@@ -62,7 +65,7 @@ importers:
         version: 5.9.3
       vite:
         specifier: ^6.0.0
-        version: 6.4.2(@types/node@20.11.0)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0)
+        version: 6.4.2(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0)
 
 packages:
 
@@ -1055,6 +1058,9 @@ packages:
   '@types/node@20.11.0':
     resolution: {integrity: sha512-o9bjXmDNcF7GbM4CNQpmi+TutCgap/K3w1JyKgxAjqx41zp9qlIAVFi0IhCNsJcXolEqLWhbFbEeL0PvYm4pcQ==}
 
+  '@types/node@22.20.1':
+    resolution: {integrity: sha512-EANqOCF9QFyra+4pfxUcX9STKJpCLjMbObVzljIJomAWSnuSIEAvyzEU53GaajbXJEgdh0iEcPL+DGvpUd4k1Q==}
+
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
@@ -1728,6 +1734,9 @@ packages:
 
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
   undici@5.28.4:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
@@ -2543,12 +2552,12 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.2.4
       '@tailwindcss/oxide-win32-x64-msvc': 4.2.4
 
-  '@tailwindcss/vite@4.2.4(vite@6.4.2(@types/node@20.11.0)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0))':
+  '@tailwindcss/vite@4.2.4(vite@6.4.2(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0))':
     dependencies:
       '@tailwindcss/node': 4.2.4
       '@tailwindcss/oxide': 4.2.4
       tailwindcss: 4.2.4
-      vite: 6.4.2(@types/node@20.11.0)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0)
+      vite: 6.4.2(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0)
 
   '@ts-morph/common@0.11.1':
     dependencies:
@@ -2585,6 +2594,10 @@ snapshots:
   '@types/node@20.11.0':
     dependencies:
       undici-types: 5.26.5
+
+  '@types/node@22.20.1':
+    dependencies:
+      undici-types: 6.21.0
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
@@ -2666,7 +2679,7 @@ snapshots:
       json-schema-to-ts: 1.6.4
       ts-morph: 12.0.0
 
-  '@vitejs/plugin-react@5.2.0(vite@6.4.2(@types/node@20.11.0)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0))':
+  '@vitejs/plugin-react@5.2.0(vite@6.4.2(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
@@ -2674,7 +2687,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-rc.3
       '@types/babel__core': 7.20.5
       react-refresh: 0.18.0
-      vite: 6.4.2(@types/node@20.11.0)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0)
+      vite: 6.4.2(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -3258,6 +3271,8 @@ snapshots:
 
   undici-types@5.26.5: {}
 
+  undici-types@6.21.0: {}
+
   undici@5.28.4:
     dependencies:
       '@fastify/busboy': 2.1.1
@@ -3293,7 +3308,7 @@ snapshots:
     dependencies:
       react: 19.2.6
 
-  vite@6.4.2(@types/node@20.11.0)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0):
+  vite@6.4.2(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.21.0):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.4)
@@ -3302,7 +3317,7 @@ snapshots:
       rollup: 4.60.3
       tinyglobby: 0.2.16
     optionalDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 22.20.1
       fsevents: 2.3.3
       jiti: 2.7.0
       lightningcss: 1.32.0
