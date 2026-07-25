@@ -152,3 +152,6 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - **No `any` in new TypeScript.** Run `npm run typecheck` before pushing.
 - **No hardcoded colors / hex / arbitrary spacing in new code.** Use tokens.
 - Reference PRs that set precedent (e.g. backend improvements in PR #44).
+- **PR watching:** rely on webhook events (comments, CI failures, merge/close)
+  to follow a watched PR. Do **not** schedule `send_later` self check-in
+  reminders for it — skip that fallback here.
