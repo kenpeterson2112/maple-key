@@ -1,8 +1,9 @@
 ---
 name: refresh-resources
 description: >-
-  Discover and curate new Ontario grades 6–9 educational resources for one
-  subject (science, social_studies, history, or geography) and append them to
+  Discover and curate new Ontario educational resources for one subject
+  (science grades 6–9, social_studies grades 1–6, history or geography
+  grades 7–8) and append them to
   public/resources.json via the Researcher → review → Assessor waterfall. Use
   for the nightly resource-refresh routine (see ROUTINES.md) or an on-demand
   manual refresh. Runs entirely on the Claude subscription — it does NOT call
@@ -43,7 +44,11 @@ characters as-is) to match the existing file style.
 
 ## Subject config
 
+Each subject has its **own** grade scope — they are not all grades 6–9. Curate
+to the scope of the subject you were given.
+
 **science**
+- Grades: **6–9**
 - Strands: `Earth and Space Systems`, `Life Systems`, `Matter and Energy`, `STEM Skills and Connections`
 - Seed searches:
   - Ontario science curriculum grades 6 7 8 9 free educational resources teachers
@@ -54,6 +59,7 @@ characters as-is) to match the existing file style.
   - Canadian science education resources grades 6 to 9 online free
 
 **social_studies**
+- Grades: **1–6**
 - Strands: `Power and Governance` (grades 1-6 scope; grade 7-8 social studies
   content is split into `history` and `geography` below)
 - Seed searches:
@@ -63,6 +69,7 @@ characters as-is) to match the existing file style.
   - Indigenous culture heritage Ontario social studies grade 6 resources teachers free
 
 **history**
+- Grades: **7–8**
 - Strands: `New France and British North America, 1713-1800` (grade 7),
   `Canada, 1800-1850: Conflict and Challenges` (grade 7),
   `Creating Canada, 1850-1890` (grade 8),
@@ -76,6 +83,7 @@ characters as-is) to match the existing file style.
   - Indigenous peoples Canadian history grades 7 8 Ontario curriculum resources free
 
 **geography**
+- Grades: **7–8**
 - Strands: `Physical Patterns in a Changing World` (grade 7),
   `Natural Resources Around the World: Use and Sustainability` (grade 7),
   `Global Settlement: Patterns and Sustainability` (grade 8),
@@ -96,6 +104,28 @@ characters as-is) to match the existing file style.
 3. Note the highest existing id of the form `r-<N>`; new ids continue from
    `max(N) + 1`.
 
+## Stage 0.5 — Preflight: confirm this environment has web egress
+
+Before running a single seed search, `WebFetch` **one control URL** —
+`https://example.com/` — and check that content comes back.
+
+If the control fails, this environment cannot reach the open web. A `403` or
+`407` from the proxy is an **egress-policy denial**, not a dead site; so is a
+blanket TLS or connection failure on a URL that obviously works elsewhere. In
+that case:
+
+- **Stop.** Do not run the seed searches, do not curate, do not commit, do not
+  open a PR.
+- Report the failure explicitly as an **environment fault**, naming the control
+  URL and the exact error.
+
+Do **not** fall through to the Stage 5 "zero resources found" path. That path
+means *the web was searched and nothing was worth keeping* — a real, informative
+outcome. A blocked environment reports the same thing while having searched
+nothing, which is how the sibling link-health routine no-opped undetected for
+over a month (see `.claude/skills/check-links/SKILL.md`, Stage 3a). One control
+fetch is what tells "nothing new tonight" apart from "this routine is dead."
+
 ## Stage 1 — Researcher (discover)
 
 Run each seed search for the subject with `WebSearch`. Collect candidates as
@@ -104,8 +134,10 @@ Aim for a healthy candidate pool before curating.
 
 ## Stage 2 — Review (curate & validate)
 
-From the candidates, select **3–8** genuinely useful resources for Ontario
-grades 6–9 and emit each as an object matching this schema **exactly**:
+From the candidates, select **3–8** genuinely useful resources that fit **this
+subject's grade scope** (see Subject config above — science is 6–9,
+social_studies is 1–6, history and geography are 7–8) and emit each as an object
+matching this schema **exactly**:
 
 ```json
 {
@@ -142,8 +174,8 @@ grades 6–9 and emit each as an object matching this schema **exactly**:
 ```
 
 Curation rules:
-- Clearly educational and appropriate for grades 6–9. Prefer **free, online,
-  Canadian / Ontario-specific** resources.
+- Clearly educational and appropriate for the subject's grade scope. Prefer
+  **free, online, Canadian / Ontario-specific** resources.
 - Skip duplicates, ads, low-quality pages, and bare search-engine homepages.
 - **No hub/category/homepage links.** A teacher who already knows TVO Learn,
   PhET, or STAO exist gets nothing from a link to their front page or a
@@ -192,6 +224,8 @@ Write `public/resources.json`, then mirror to `docs/resources.json` if it exists
 
 ## Stage 5 — Land the change
 
+- If the Stage 0.5 preflight failed, you never got here — report the environment
+  fault and stop. "Zero found" is not an acceptable summary of a blocked run.
 - If **zero** resources were added, make no commit — report that none were found.
 - Otherwise commit to a `claude/` branch with a message like
   `data: add nightly <Subject> resources` and open a **draft PR** for review
