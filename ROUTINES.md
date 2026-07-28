@@ -20,7 +20,7 @@ so the cost lands on your subscription.
 
 Every one of these routines is a web-research job. `WebSearch` finds candidates,
 `WebFetch` verifies them, and for link health `WebFetch` *is* the verdict. If the
-environment's network policy blocks outbound HTTPS to arbitrary hosts, all five
+environment's network policy blocks outbound HTTPS to arbitrary hosts, both
 routines still "succeed" nightly while accomplishing nothing.
 
 **How to tell:** in a session on that environment, `WebFetch https://example.com/`.
@@ -50,83 +50,54 @@ by a commit. Set each one up once:
    level is fine) so `WebSearch` / `WebFetch` work. No `ANTHROPIC_API_KEY` is
    needed.
 4. **Trigger:** Schedule → daily. Times are entered in your local timezone and
-   converted to UTC. Suggested cadence below (staggered so the two PRs stay
+   converted to UTC. Use the cron below (staggered so the two PRs stay
    separate).
 5. **Prompt:** paste the matching prompt below.
 6. Save. Each nightly run opens a **draft PR** you can review and merge.
 
-Create **five** routines: four resource-refresh (one per subject, below) and
-one link-health (further below).
+Create **two** routines: one rotating resource-refresh routine and one
+link-health routine.
 
-### Routine 1 — Science (daily 02:00 UTC — `0 2 * * *`)
+Earlier versions of this document told you to create five — one per subject plus
+link health. That is now one routine covering all four subjects, because four
+near-identical schedules meant four things to misconfigure independently, and
+two of them sat un-scheduled and unnoticed for six weeks. Fewer moving parts is
+the point.
 
-```
-Refresh the Maple Key Science resource library. Use the `refresh-resources`
-skill with subject = science. Follow the Researcher → review → Assessor
-waterfall exactly: discover candidate resources with the skill's Science seed
-searches, curate 3–8 that genuinely fit Ontario grades 6–9 and match the
-schema, verify every URL loads, then in the Assessor pass assign real Ontario
-curriculum expectation codes and grade levels. Append them to
-public/resources.json and mirror the change to docs/resources.json (updating
-meta.total_count and meta.generated_at). Skip any URL already present. Commit
-to a claude/ branch and open a draft PR titled "data: add nightly Science
-resources". If no suitable new resources are found, make no commit and stop.
-```
+### Routine 1 — Resource refresh, rotating subject (daily 02:00 UTC — `0 2 * * *`)
 
-### Routine 2 — Social Studies (daily 02:30 UTC — `30 2 * * *`)
+One routine covers all four subjects on a four-night cycle. The skill derives
+tonight's subject from the date (`days_since_epoch % 4` over
+`science → social_studies → history → geography`), the same stateless rotation
+`scripts/link-check.py` uses for its shard. A missed night costs one subject's
+turn and nothing else — there is no cursor to fall out of sync.
 
-```
-Refresh the Maple Key Social Studies resource library. Use the
-`refresh-resources` skill with subject = social_studies. Follow the Researcher
-→ review → Assessor waterfall exactly: discover candidate resources with the
-skill's Social Studies seed searches, curate 3–8 that genuinely fit Ontario
-grades 1–6 and match the schema, verify every URL loads, then in the Assessor
-pass assign real Ontario curriculum expectation codes and grade levels. Append
-them to public/resources.json and mirror the change to docs/resources.json
-(updating meta.total_count and meta.generated_at). Skip any URL already
-present. Commit to a claude/ branch and open a draft PR titled "data: add
-nightly Social Studies resources". If no suitable new resources are found, make
-no commit and stop.
-```
-
-### Routine 3 — History (daily 03:00 UTC — `0 3 * * *`)
+Do **not** name a subject in the prompt; that is what switches the skill into
+manual single-subject mode.
 
 ```
-Refresh the Maple Key History resource library. Use the `refresh-resources`
-skill with subject = history. Follow the Researcher → review → Assessor
-waterfall exactly: discover candidate resources with the skill's History seed
-searches, curate 3–8 that genuinely fit Ontario grades 7–8 and match the
-schema, verify every URL loads, then in the Assessor pass assign real Ontario
-curriculum expectation codes and grade levels. Append them to
-public/resources.json and mirror the change to docs/resources.json (updating
-meta.total_count and meta.generated_at). Skip any URL already present. Commit
-to a claude/ branch and open a draft PR titled "data: add nightly History
-resources". If no suitable new resources are found, make no commit and stop.
+Refresh the Maple Key resource library for tonight's rotating subject. Use the
+`refresh-resources` skill and let it derive the subject from the date — do not
+pick one yourself. Follow the Researcher → review → Assessor waterfall exactly:
+run the skill's seed searches for that subject, curate 3-8 resources that
+genuinely fit the subject's Ontario grade scope and match the schema, verify
+every URL loads, then in the Assessor pass assign real Ontario curriculum
+expectation codes and grade levels. Append them to public/resources.json and
+mirror the change to docs/resources.json (updating meta.total_count and
+meta.generated_at). Skip any URL already present. Commit to a claude/ branch and
+open a draft PR titled "data: add nightly <Subject> resources". If the Stage 0.5
+egress preflight fails, report that as an environment fault and stop. If no
+suitable new resources are found, make no commit and stop.
 ```
 
-### Routine 4 — Geography (daily 03:30 UTC — `30 3 * * *`)
-
-```
-Refresh the Maple Key Geography resource library. Use the `refresh-resources`
-skill with subject = geography. Follow the Researcher → review → Assessor
-waterfall exactly: discover candidate resources with the skill's Geography
-seed searches, curate 3–8 that genuinely fit Ontario grades 7–8 and match the
-schema, verify every URL loads, then in the Assessor pass assign real Ontario
-curriculum expectation codes and grade levels. Append them to
-public/resources.json and mirror the change to docs/resources.json (updating
-meta.total_count and meta.generated_at). Skip any URL already present. Commit
-to a claude/ branch and open a draft PR titled "data: add nightly Geography
-resources". If no suitable new resources are found, make no commit and stop.
-```
-
-### Routine 5 — Link health (daily 04:30 UTC — `30 4 * * *`)
+### Routine 2 — Link health (daily 04:30 UTC — `30 4 * * *`)
 
 **Must be daily.** The shard is derived from the date
 (`days_since_epoch % cycle`), so a nightly run walks all 9 shards in 9 nights.
 On a weekly cadence the same rotation takes 9 weeks and most of the library
 sits `unchecked` indefinitely.
 
-Unlike the resource routines, this one checks the *existing* library for broken
+Unlike the resource routine, this one checks the *existing* library for broken
 links. It runs `scripts/link-check.py` for the deterministic parts — a nightly
 DNS sweep of all ~1,730 URLs (instant dead-domain / malformed-URL flags) plus a
 date-sharded ~1/9 rotation, so the whole database gets a browser-grade check
@@ -149,20 +120,49 @@ If nothing is broken this run, refresh the ledger but open no PR.
 ```
 
 This session can be long — it makes ~150–190 WebFetch calls a night — so give it
-a little headroom after the resource routines.
+a little headroom after the resource routine.
 
 ## Verifying the routines actually run
 
-These routines fail *quietly*. A routine with no schedule, or one pointed at an
-environment with no web egress, looks healthy in the UI and produces nothing.
-Check all four of these, not just the first:
+### The watchdog does this for you
+
+`.github/workflows/routine-watchdog.yml` runs every day at 12:00 UTC and opens
+a GitHub issue when the routines stop producing fresh output. It reads only the
+files the routines maintain — `public/link-health.json` (`meta.last_run`,
+`meta.summary`) and `public/resources.json` (`meta.generated_at`) — and never
+calls a routine or the Anthropic API.
+
+That indirection is deliberate: **a routine that never fires cannot report its
+own absence.** Push notifications, preflights and better prompts all live
+*inside* the run, so none of them fire either. The alarm has to be somewhere
+that executes independently, which is why it is a plain GitHub Actions cron
+rather than a sixth routine.
+
+It maintains one issue, edited in place rather than re-posted, and closes it
+automatically once every check passes again. Run it by hand any time:
+
+```bash
+python3 scripts/routine-watchdog.py
+```
+
+It flags three things: link health not running for 3+ days, a link-health run
+that produced `blocked` rows but zero `live`/`dead`/`moved` verdicts (the
+signature of blocked egress, not of bad links), and a resource library that has
+not grown in 21 days. The resource threshold is generous on purpose — an
+occasional empty night is a legitimate outcome of the waterfall.
+
+### Checking by hand
+
+If you want to look yourself, these routines fail *quietly*. A routine with no
+schedule, or one pointed at an environment with no web egress, looks healthy in
+the UI and produces nothing. Check all four of these, not just the first:
 
 | Check | Where | Healthy looks like |
 | --- | --- | --- |
 | Schedule is set | https://claude.ai/code/routines | Every routine shows a **next run** time. A routine with no cron never fires — it is poke-only, and the UI does not flag this. |
-| Cadence matches the design | same | All five are **daily**. Link health on a weekly cadence stretches its 9-night rotation to 9 *weeks*. |
+| Cadence matches the design | same | Both are **daily**. Link health on a weekly cadence stretches its 9-night rotation to 9 *weeks*. |
 | It has run recently | same | A **last run** within the last day. |
-| It produced something | repo PR list | Resource routines open `data: add nightly <Subject> resources` draft PRs; link health keeps one rolling `Nightly link health` PR current. |
+| It produced something | repo PR list | The resource routine opens `data: add nightly <Subject> resources` draft PRs; link health keeps one rolling `Nightly link health` PR current. |
 
 The ledger is the fastest health signal for link checking:
 
@@ -195,11 +195,18 @@ audit has a baseline:
 Routines created through the web UI can only be edited in the web UI — the API
 refuses agent edits to them, so an agent cannot repair this drift for you.
 
+**What changed in response:** the four per-subject routines collapsed into one
+date-rotating routine (four schedules to keep correct became one), and
+`.github/workflows/routine-watchdog.yml` now watches the output independently so
+the next six-week silence surfaces on day three instead of never. Neither change
+can set a cron for you — that part is still manual, and still the first thing to
+check.
+
 ## Notes & limits
 
 - **Billing:** routine runs consume subscription usage, not API token credits.
 - **Frequency:** routines allow a minimum 1-hour interval and have a per-account
-  daily run cap — five runs/night is comfortably within that. See your remaining runs at
+  daily run cap — two runs/night is comfortably within that. See your remaining runs at
   https://claude.ai/code/routines and https://claude.ai/settings/usage.
 - **Review gate:** new rows are stamped `needs_review: true`, and runs land as
   **draft PRs** rather than committing straight to `main`.
@@ -208,7 +215,7 @@ refuses agent edits to them, so an agent cannot repair this drift for you.
   the Actions tab (`workflow_dispatch`). These still require `ANTHROPIC_API_KEY`.
 - **Link health vs. resource refresh:** link health checks the *existing*
   library (broken/moved links) and writes only `public/link-health.json` via a
-  rolling PR; it never edits `resources.json`. The two resource routines *add*
+  rolling PR; it never edits `resources.json`. The resource routine *adds*
   new rows. Tune the sweep with `--cycle` (nights for a full pass) and
   `--per-host-cap` in `scripts/link-check.py`.
 - Routines are a research-preview feature; the UI and limits may change.

@@ -27,7 +27,23 @@ into one pass.
 ## Input
 
 One subject per run: `science`, `social_studies`, `history`, or `geography`.
-The routine prompt names it.
+
+**If the prompt names a subject, use it** (that's the on-demand manual case).
+**If it doesn't, derive tonight's subject from the date:**
+
+```bash
+python3 -c "import time;print(['science','social_studies','history','geography'][int(time.time()//86400)%4])"
+```
+
+This is the nightly routine's normal path. The rotation is deliberately
+date-derived and stateless — the same trick `scripts/link-check.py` uses to pick
+its shard — so it needs no stored cursor, survives a missed night without
+drifting, and lets **one** routine cover all four subjects on a four-night
+cycle. Four separate routines meant four schedules to misconfigure
+independently, and two of them silently sat un-scheduled for six weeks.
+
+Announce the subject you derived before doing anything else, so a run's output
+says which subject it covered.
 
 `history` and `geography` are the grade 7-8 Ontario curriculum subjects
 (distinct from `social_studies`, which is grades 1-6 plus the grade 7-8
