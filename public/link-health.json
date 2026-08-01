@@ -1,15 +1,14 @@
 {
   "meta": {
-    "last_run": "2026-07-25T07:13:51Z",
+    "last_run": "2026-08-01T07:11:00Z",
     "cycle_days": 9,
-    "last_shard": 4,
+    "last_shard": 2,
     "total_urls": 1743,
-    "checked_this_run": 214,
+    "checked_this_run": 25,
     "summary": {
       "blocked": 580,
       "dead_domain": 26,
-      "invalid": 1,
-      "unchecked": 1136
+      "unchecked": 1137
     }
   },
   "links": {
@@ -80,7 +79,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://youtu.be/BA2xWdAdy3s?si=T6C_FufCPBIJ6O51": {
@@ -150,7 +149,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.tourguys.ca/school-tours/downtown-toronto-school-tour": {
@@ -340,7 +339,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.noredink.com/": {
@@ -380,7 +379,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.mediasmartscanada.ca/": {
@@ -390,7 +389,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ingeniumcanada.org/scitech/education": {
@@ -540,7 +539,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.nationalgeographic.org/education/resource-library/?q=data": {
@@ -660,7 +659,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.genome.gov/genetics-glossary": {
@@ -730,7 +729,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.elections.ca/content.aspx?section=vot&dir=yth&document=index&lang=e": {
@@ -750,7 +749,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.amnesty.ca/human-rights-education/": {
@@ -950,7 +949,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.scotiabank.com/ca/en/personal/advice-plus/features/articles/financial-literacy.html": {
@@ -1110,7 +1109,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.investorseducation.ca/student-resources": {
@@ -1120,7 +1119,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.theglobeandmail.com/investing/education-centre/": {
@@ -1333,16 +1332,6 @@
       "last_checked": null,
       "first_flagged": null
     },
-    "www.bankofcanadamuseum.ca/you-are-the-economy/": {
-      "id": "r-133",
-      "title": "You are the Economy",
-      "host": "",
-      "status": "invalid",
-      "reason": "lint: missing_scheme",
-      "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
-      "first_flagged": "2026-06-17T08:16:26Z"
-    },
     "https://www.youcubed.org/tasks/data-talks/": {
       "id": "r-134",
       "title": "YouCubed: Data Talks",
@@ -1410,7 +1399,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.amazon.ca/dp/B07T4VLJ6C?linkCode=gg4&tag=due01-20#": {
@@ -3610,7 +3599,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://tvolearn.com/pages/financial_literacy": {
@@ -5790,7 +5779,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.geogebra.org/math/transformations?lang=en": {
@@ -5920,7 +5909,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.mathplayground.com/index_geometry.html": {
@@ -7580,7 +7569,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ontariomath.support/": {
@@ -7760,7 +7749,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://school.nelson.com/math-pre-assessment/": {
@@ -8180,7 +8169,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "http://www.sandbox.edugains.ca/newsite/math2/gapclosingmain.html": {
@@ -8190,7 +8179,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://www.eqao.com/math-resource-released-questions-g6-2023/": {
@@ -8740,7 +8729,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://teacher.desmos.com/activitybuilder/custom/5eb3c296c7b0a70c6400e560": {
@@ -9800,7 +9789,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://ontariomath.support/?pg=resources&lang=FR": {
@@ -10060,7 +10049,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://carrefour-education.qc.ca/site_web_commentes/le_site_du_domaine_de_la_mathematique": {
@@ -10070,7 +10059,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://cybersavoir.cssdm.gouv.qc.ca/mat-sec/category/ressources/": {
@@ -13500,7 +13489,7 @@
       "status": "dead_domain",
       "reason": "domain does not resolve (DNS)",
       "final_url": null,
-      "last_checked": "2026-07-25T07:13:51Z",
+      "last_checked": "2026-08-01T07:11:00Z",
       "first_flagged": "2026-06-17T08:16:26Z"
     },
     "https://gz.explorelearning.com/index.cfm?method=cUser.dspSharedGizmos&GizmoListID=250110": {
@@ -17437,6 +17426,16 @@
       "id": "r-2582",
       "title": "CRA Learn About Your Taxes — Using My Account",
       "host": "www.canada.ca",
+      "status": "unchecked",
+      "reason": "",
+      "final_url": null,
+      "last_checked": null,
+      "first_flagged": null
+    },
+    "https://www.bankofcanadamuseum.ca/you-are-the-economy/": {
+      "id": "r-133",
+      "title": "You are the Economy",
+      "host": "www.bankofcanadamuseum.ca",
       "status": "unchecked",
       "reason": "",
       "final_url": null,
