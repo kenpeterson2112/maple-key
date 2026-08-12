@@ -82,6 +82,31 @@ Suppression model: `is_collection` marks hub/index pages (see
 from this tool. Both hide a record from every teacher-facing search surface
 (`src/lib/use-filtered-resources.ts`) without deleting it.
 
+### Review queue
+
+The status filter has a **Needs review** option listing every record with
+`metadata.needs_review`, most-escalated first. Each queued row gets three
+verdicts alongside the usual icons:
+
+- **Approve** (✓) — clears `needs_review` and sets `metadata.verified`.
+- **Escalate** (⚑) — keeps it queued and bumps `metadata.review_priority`, so
+  repeat-flagged records sort to the top.
+- **Remove** (🗑) — asks for a reason, then archives the full row to
+  `public/removed-resources.json` before deleting it from `resources.json`. This
+  is the only delete path, so no record ever vanishes without a reason attached.
+  To hide a resource *without* deleting it, use suppress.
+
+### Coverage panel
+
+**Coverage** in the header opens a read-only snapshot: a grade × subject gap grid
+and a health-by-subject table (totals, % enriched, link status, review counts).
+
+The grid counts per grade from `grade_level`, **not** `grade_band` — 38% of
+records are `grade_band: "multi"`, which smears a band grid badly enough to
+invent gaps that aren't there and hide ones that are. It also counts only records
+visible in the app, excluding collection hubs and suppressed rows, so its totals
+are intentionally lower than the header's whole-file counts.
+
 ## Deployment
 
 ### Production — Vercel (canonical)
