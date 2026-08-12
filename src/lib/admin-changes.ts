@@ -20,7 +20,24 @@ export interface AdminEditableFields {
   is_collection?: boolean
   suppressed?: boolean
   tags?: string[]
+  // Triage state. Nested under metadata in the record, so this one key is
+  // merged into the existing metadata object rather than replacing it — see
+  // applyChangeset. Only the review fields are editable; provenance
+  // (added_at / added_by) and enrichment output stay owned by the pipeline.
+  metadata?: AdminEditableMetadata
 }
+
+export interface AdminEditableMetadata {
+  verified?: boolean
+  needs_review?: boolean
+  review_priority?: number
+}
+
+export const ADMIN_EDITABLE_METADATA_KEYS = [
+  "verified",
+  "needs_review",
+  "review_priority",
+] as const satisfies readonly (keyof AdminEditableMetadata)[]
 
 export const ADMIN_EDITABLE_KEYS = [
   "topic_title",
@@ -35,11 +52,17 @@ export const ADMIN_EDITABLE_KEYS = [
   "is_collection",
   "suppressed",
   "tags",
+  "metadata",
 ] as const satisfies readonly (keyof AdminEditableFields)[]
 
 export type AdminChange =
   | { action: "edit"; fields: AdminEditableFields }
-  | { action: "delete" }
+  // `reason` is carried so api/admin-push.ts can archive the full row to
+  // public/removed-resources.json before dropping it. Optional because the
+  // plain trash-icon delete predates the triage queue and doesn't collect one.
+  | { action: "delete"; reason?: string }
+
+export const REMOVAL_REASON_MAX = 300
 
 // Keyed by resource id. One entry per touched resource; an edit entry holds
 // only the fields that differ from the original record.
@@ -75,11 +98,48 @@ export function applyChangeset(resources: Resource[], changes: AdminChangeset): 
     if (!change) {
       out.push(resource)
     } else if (change.action === "edit") {
-      out.push({ ...resource, ...change.fields })
+      out.push(applyEdit(resource, change.fields))
     }
     // action === "delete": drop the record entirely
   }
   return out
+}
+
+// A plain spread would replace `metadata` wholesale, dropping added_at/added_by
+// and any enrichment output for the sake of a one-field triage change. Every
+// other editable key is a scalar or array and overwrites cleanly.
+export function applyEdit(resource: Resource, fields: AdminEditableFields): Resource {
+  const { metadata, ...flat } = fields
+  const next: Resource = { ...resource, ...flat }
+  if (metadata) next.metadata = { ...resource.metadata, ...metadata }
+  return next
+}
+
+// ── Triage actions ──────────────────────────────────────────────────────────
+// The review queue's three verdicts, as metadata patches. Approve and escalate
+// are ordinary edits; remove is a delete (see AdminChange) because a record that
+// is genuinely broken should stop being served, not just be hidden. `suppressed`
+// remains the soft, non-destructive option for everything else.
+
+export function approvePatch(): AdminEditableMetadata {
+  return { needs_review: false, verified: true }
+}
+
+// Escalation keeps the record queued and bumps a counter, so a record flagged
+// three times sorts above one flagged once.
+export function escalatePatch(resource: Resource): AdminEditableMetadata {
+  return {
+    needs_review: true,
+    review_priority: (resource.metadata?.review_priority ?? 0) + 1,
+  }
+}
+
+// Sort key for the queue: most-escalated first, then oldest-added, so repeat
+// offenders and long-ignored records surface before fresh arrivals.
+export function reviewQueueOrder(a: Resource, b: Resource): number {
+  const byPriority = (b.metadata?.review_priority ?? 0) - (a.metadata?.review_priority ?? 0)
+  if (byPriority !== 0) return byPriority
+  return (a.metadata?.added_at ?? "").localeCompare(b.metadata?.added_at ?? "")
 }
 
 export function countChangeset(changes: AdminChangeset): { edits: number; deletes: number } {
@@ -99,6 +159,13 @@ export function diffFields(original: Resource, proposed: AdminEditableFields): A
   const diff: AdminEditableFields = {}
   for (const key of ADMIN_EDITABLE_KEYS) {
     if (!(key in proposed)) continue
+    if (key === "metadata") {
+      // A proposed metadata is a *partial*, so comparing the objects whole
+      // would report a change for every key the caller simply left out.
+      const metaDiff = diffMetadata(original, proposed.metadata)
+      if (metaDiff) diff.metadata = metaDiff
+      continue
+    }
     const next = proposed[key]
     const prev = original[key]
     // Treat absent boolean flags / tags as false / [] so toggling a flag off
@@ -111,4 +178,26 @@ export function diffFields(original: Resource, proposed: AdminEditableFields): A
     }
   }
   return diff
+}
+
+// Reduce a proposed partial metadata to only the review keys that actually
+// differ. Returns undefined when nothing changed, so the caller can drop the
+// key entirely rather than storing an empty object in the changeset.
+function diffMetadata(
+  original: Resource,
+  proposed: AdminEditableMetadata | undefined,
+): AdminEditableMetadata | undefined {
+  if (!proposed) return undefined
+  const diff: AdminEditableMetadata = {}
+  for (const key of ADMIN_EDITABLE_METADATA_KEYS) {
+    if (!(key in proposed)) continue
+    const next = proposed[key]
+    // review_priority is absent on every record until the first escalation, so
+    // an absent counter reads as 0 rather than as a change to 0.
+    const prev = original.metadata?.[key] ?? (key === "review_priority" ? 0 : undefined)
+    if (JSON.stringify(next) !== JSON.stringify(prev)) {
+      ;(diff as Record<string, unknown>)[key] = next
+    }
+  }
+  return Object.keys(diff).length > 0 ? diff : undefined
 }
