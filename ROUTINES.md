@@ -55,8 +55,9 @@ by a commit. Set each one up once:
 5. **Prompt:** paste the matching prompt below.
 6. Save. Each nightly run opens a **draft PR** you can review and merge.
 
-Create **two** routines: one rotating resource-refresh routine and one
-link-health routine.
+Create **two** routines now — one rotating resource-refresh routine and one
+link-health routine. A third (resource enrichment) is documented below but is
+deliberately **not** scheduled until its pilot has been reviewed.
 
 Earlier versions of this document told you to create five — one per subject plus
 link health. That is now one routine covering all four subjects, because four
@@ -121,6 +122,51 @@ If nothing is broken this run, refresh the ledger but open no PR.
 
 This session can be long — it makes ~150–190 WebFetch calls a night — so give it
 a little headroom after the resource routine.
+
+### Routine 3 — Resource enrichment (daily 06:00 UTC — `0 6 * * *`)
+
+**Gated on a human-reviewed pilot — do not schedule this until the 85-record
+junior Science pilot PR has been read and merged.**
+
+Unlike the other two, this routine rewrites *existing* rows. It replaces the
+templated `usage_notes` and `instructional_modes` — 23 distinct strings across
+1,743 records, keyed off `resource_type` — with per-resource guidance grounded in
+each resource's actual page, and adds `pedagogical_function` and
+`estimated_minutes`. It matters because `api/generate-lesson.ts` feeds those
+fields to the prompt as "Deployment note" and "Best used as" and structures the
+lesson around them, so today 23 canned strings are steering every generated
+lesson.
+
+Batches are bounded (~120/night) and resumable via `metadata.enriched_at`, so the
+catalog completes in ~12 nights and new resources are picked up automatically.
+The same WebFetch that grounds the note also yields a link verdict, so this does
+not re-walk the URLs link-health already walks.
+
+Run the pilot **manually** first:
+
+```
+Run the Maple Key resource-enrichment pilot. Use the `enrich-resources` skill,
+scoped to junior Science only (--subject Science --grade-band junior --limit 85).
+Follow the Stage 0.5 egress preflight and stop with an environment fault if the
+control fetch fails. Fetch every resource's page before writing its note — do not
+write a note for a page you could not read. Open a draft PR that includes four
+full before/after usage_notes pairs so the quality can be judged without reading
+the diff, and state that catalog-wide runs are gated on this review.
+```
+
+Then, once merged, the nightly prompt:
+
+```
+Enrich the next batch of Maple Key resources. Use the `enrich-resources` skill
+with a limit of 120 and no subject scope, so it walks the catalog in
+metadata.enriched_at order. Follow the Stage 0.5 egress preflight and stop with an
+environment fault if the control fetch fails. Never write a note for a page you
+could not read — omit the record and let the next run pick it up. Apply with
+scripts/enrich-resources.py apply, then open a draft PR titled
+"data: enrich resource guidance" with the counts, any records flagged
+needs_review from a link verdict, and four before/after usage_notes pairs. If
+select prints NOTHING_TO_ENRICH, make no commit and stop.
+```
 
 ## Verifying the routines actually run
 
@@ -213,9 +259,13 @@ check.
 - **Fallback:** the API path still exists if you ever need it — run the
   `Nightly Science / Social Studies Resource Discovery` workflows manually from
   the Actions tab (`workflow_dispatch`). These still require `ANTHROPIC_API_KEY`.
-- **Link health vs. resource refresh:** link health checks the *existing*
-  library (broken/moved links) and writes only `public/link-health.json` via a
-  rolling PR; it never edits `resources.json`. The resource routine *adds*
-  new rows. Tune the sweep with `--cycle` (nights for a full pass) and
-  `--per-host-cap` in `scripts/link-check.py`.
+- **Which routine touches what:** link health checks the *existing* library
+  (broken/moved links) and writes only `public/link-health.json` via a rolling
+  PR; it never edits `resources.json`. The resource routine *adds* new rows.
+  Enrichment *rewrites fields on existing rows* (`usage_notes`,
+  `instructional_modes`, `pedagogical_function`, `estimated_minutes`) and is the
+  only one of the three that modifies records already in the library — which is
+  why it lands as a draft PR with before/after samples and why its pilot is
+  human-gated. Tune the link sweep with `--cycle` and `--per-host-cap` in
+  `scripts/link-check.py`.
 - Routines are a research-preview feature; the UI and limits may change.

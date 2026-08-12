@@ -24,7 +24,7 @@ footer driven by IntersectionObserver, assessment modal).
 - Class utils: `clsx` + `tailwind-merge`
 - Data: **SWR** for static `resources.json`; **Anthropic SDK** (`@anthropic-ai/sdk`) for AI calls
 - Deploy: **Vercel** is the canonical production deployment (`vercel.json`, build `pnpm build` → `dist/`), auto-deployed on push to `main`. It's also the only place the AI features work, since only Vercel runs the serverless functions in `api/*.ts`. GitHub Pages (`.github/workflows/deploy.yml` → `docs/`) is a secondary **discovery-only static mirror** with no serverless runtime — `fetch("/api/...")` 404s silently there. See `README.md` for the full split.
-- CI: GitHub Actions (`.github/workflows/deploy.yml`); nightly resource refresh and link-health checks run as **Claude Code routines** on the Claude subscription (see `ROUTINES.md`), with the `nightly-*.yml` workflows retained as a manual, API-billed fallback
+- CI: GitHub Actions (`.github/workflows/deploy.yml`); nightly resource refresh, link-health checks, and resource enrichment run as **Claude Code routines** on the Claude subscription (see `ROUTINES.md`), with the `nightly-*.yml` workflows retained as a manual, API-billed fallback. New automation belongs on the subscription (a skill + routine), not the Anthropic API — that migration was deliberate.
 
 ## Design system — THE shared contract
 
@@ -118,7 +118,23 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   so don't shortcut it for convenience.
 - Static resource data ships as `public/resources.json` (~2.5 MB) and is fetched
   via SWR. Treat as read-only at runtime; a nightly Claude Code routine
-  regenerates it (see `ROUTINES.md`).
+  regenerates it (see `ROUTINES.md`). **There is no database** — admin edits
+  accumulate in localStorage and land as a draft PR via `api/admin-push.ts`, so
+  git history is the audit log and the recovery path.
+- `usage_notes` and `instructional_modes` are **not display-only**:
+  `api/generate-lesson.ts` injects them as "Deployment note" / "Best used as" and
+  structures the lesson around them. Changing how they're generated changes
+  generated lessons, so verify with a real generation, not just the card UI.
+- Triage state lives under `metadata` (`verified`, `needs_review`,
+  `review_priority`, `enriched_at`, `link_status`). The admin changeset can write
+  `metadata` as a *partial* patch — `applyEdit` in `src/lib/admin-changes.ts`
+  merges it so provenance (`added_at` / `added_by`) survives; a plain spread would
+  clobber it. `api/admin-push.ts` carries a hand-synced twin of that merge plus a
+  subkey allowlist, since `api/` can't import from `src/`.
+- **Never conflate "our request failed" with "the resource is dead."** A denied
+  egress proxy returns 403 for every host, which is how 580 live URLs came to be
+  recorded as `blocked`. Link-check code separates `dead` (the site said so) from
+  `error` (we failed), and nothing is auto-suppressed on a link verdict.
 
 ## Known constraints / things that bite
 

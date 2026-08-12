@@ -3,10 +3,13 @@
 import { useEffect, useMemo, useState } from "react"
 import useSWR from "swr"
 import {
+  BarChart3,
   Boxes,
+  CheckCircle2,
   Download,
   Eye,
   EyeOff,
+  Flag,
   GitPullRequest,
   Pencil,
   RotateCcw,
@@ -20,13 +23,19 @@ import { fetchJson } from "@/lib/fetch-json"
 import { keywordFilter } from "@/lib/use-filtered-resources"
 import {
   applyChangeset,
+  applyEdit,
+  approvePatch,
   countChangeset,
   diffFields,
+  escalatePatch,
   loadChangeset,
+  reviewQueueOrder,
   saveChangeset,
+  REMOVAL_REASON_MAX,
   type AdminChangeset,
   type AdminEditableFields,
 } from "@/lib/admin-changes"
+import AdminCoverage from "./admin-coverage"
 import AdminResourceEditor from "./admin-resource-editor"
 
 // Admin Database Manager — a stripped-down version of Resource Discovery for
@@ -36,7 +45,7 @@ import AdminResourceEditor from "./admin-resource-editor"
 
 const fetcher = fetchJson
 
-type StatusFilter = "all" | "visible" | "collections" | "suppressed" | "changed"
+type StatusFilter = "all" | "visible" | "collections" | "suppressed" | "changed" | "needs_review"
 
 const ADMIN_KEY_STORAGE = "mk-admin-key"
 const PAGE_SIZE = 50
@@ -62,6 +71,8 @@ export default function AdminSpace() {
   const [status, setStatus] = useState<StatusFilter>("all")
   const [page, setPage] = useState(1)
   const [editingId, setEditingId] = useState<string | null>(null)
+  const [removingId, setRemovingId] = useState<string | null>(null)
+  const [showCoverage, setShowCoverage] = useState(false)
   const [showPushDialog, setShowPushDialog] = useState(false)
 
   useEffect(() => saveChangeset(changes), [changes])
@@ -72,7 +83,7 @@ export default function AdminSpace() {
       const change = changes[original.id]
       if (!change) return { original, effective: original, deleted: false, edited: false }
       if (change.action === "delete") return { original, effective: original, deleted: true, edited: false }
-      return { original, effective: { ...original, ...change.fields }, deleted: false, edited: true }
+      return { original, effective: applyEdit(original, change.fields), deleted: false, edited: true }
     })
   }, [data, changes])
 
@@ -94,6 +105,13 @@ export default function AdminSpace() {
     if (status === "collections") out = out.filter((r) => r.effective.is_collection)
     if (status === "suppressed") out = out.filter((r) => r.effective.suppressed)
     if (status === "changed") out = out.filter((r) => r.deleted || r.edited)
+    if (status === "needs_review") {
+      // Most-escalated first so repeat-flagged records lead the queue.
+      out = out
+        .filter((r) => r.effective.metadata?.needs_review)
+        .slice()
+        .sort((a, b) => reviewQueueOrder(a.effective, b.effective))
+    }
     if (searchQuery.length >= 3) {
       const matched = new Set(keywordFilter(out.map((r) => r.effective), searchQuery).map((r) => r.id))
       out = out.filter((r) => matched.has(r.original.id))
@@ -107,6 +125,21 @@ export default function AdminSpace() {
   const pagedRows = filteredRows.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
   const { edits, deletes } = countChangeset(changes)
   const pendingCount = edits + deletes
+  const reviewQueueCount = useMemo(
+    () => rows.filter((r) => !r.deleted && r.effective.metadata?.needs_review).length,
+    [rows],
+  )
+
+  // Coverage counts only what a teacher can actually find, so it matches the
+  // app's own visibility rule (use-filtered-resources.ts). Counting the 394
+  // collection hubs and the suppressed records would overstate every cell.
+  const coverageResources = useMemo(
+    () =>
+      rows
+        .filter((r) => !r.deleted && !r.effective.is_collection && !r.effective.suppressed)
+        .map((r) => r.effective),
+    [rows],
+  )
 
   // Merge a field diff into the changeset, dropping entries that become no-ops.
   const setFields = (original: Resource, fields: AdminEditableFields) => {
@@ -128,6 +161,17 @@ export default function AdminSpace() {
       else next[row.original.id] = { action: "delete" }
       return next
     })
+  }
+
+  // Triage: approve and escalate are metadata edits, so they ride the normal
+  // changeset path and land in the same review PR as everything else.
+  const approve = (row: Row) => setFields(row.original, { metadata: approvePatch() })
+  const escalate = (row: Row) => setFields(row.original, { metadata: escalatePatch(row.effective) })
+
+  // Remove is the hard action: it archives the row with a reason, then deletes.
+  const removeWithReason = (row: Row, reason: string) => {
+    setChanges((prev) => ({ ...prev, [row.original.id]: { action: "delete", reason } }))
+    setRemovingId(null)
   }
 
   const downloadJson = () => {
@@ -162,11 +206,30 @@ export default function AdminSpace() {
                 : `${rows.length} records · ${rows.filter((r) => !r.deleted && !r.effective.is_collection && !r.effective.suppressed).length} visible in app · ${rows.filter((r) => r.effective.is_collection).length} collections · ${rows.filter((r) => r.effective.suppressed).length} suppressed`}
             </p>
           </div>
-          <a href={withBasePath("/")} className="text-sm text-primary underline">
-            Back to app
-          </a>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowCoverage((v) => !v)}
+              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm ${
+                showCoverage
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border text-foreground hover:bg-muted"
+              }`}
+              title="Coverage and health snapshot"
+            >
+              <BarChart3 size={14} /> Coverage
+            </button>
+            <a href={withBasePath("/")} className="text-sm text-primary underline">
+              Back to app
+            </a>
+          </div>
         </div>
       </header>
+
+      {showCoverage && (
+        <div className="border-b border-border bg-card/40">
+          <AdminCoverage resources={coverageResources} />
+        </div>
+      )}
 
       {/* Search + filters */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border bg-card/60 px-4 py-2 md:px-6">
@@ -202,6 +265,7 @@ export default function AdminSpace() {
           <option value="collections">Collections</option>
           <option value="suppressed">Suppressed</option>
           <option value="changed">Pending changes</option>
+          <option value="needs_review">Needs review ({reviewQueueCount})</option>
         </select>
         <span className="text-xs text-muted-foreground">{filteredRows.length} matches</span>
       </div>
@@ -241,6 +305,14 @@ export default function AdminSpace() {
                     {row.deleted && (
                       <span className="rounded-full bg-destructive px-2 py-0.5 text-[10px] font-semibold text-destructive-foreground">delete pending</span>
                     )}
+                    {r.metadata?.needs_review && (
+                      <span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[10px] font-semibold text-secondary">
+                        needs review{(r.metadata.review_priority ?? 0) > 0 ? ` ·${r.metadata.review_priority}` : ""}
+                      </span>
+                    )}
+                    {r.metadata?.verified && (
+                      <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">verified</span>
+                    )}
                     {(r.tags ?? []).map((t) => (
                       <span key={t} className="rounded-full border border-border px-2 py-0.5 text-[10px] text-muted-foreground">#{t}</span>
                     ))}
@@ -250,6 +322,26 @@ export default function AdminSpace() {
                   </p>
                 </div>
                 <div className="flex shrink-0 items-center gap-1">
+                  {/* Triage verdicts — shown only for records actually in the
+                      queue, so the default row keeps its original density. */}
+                  {r.metadata?.needs_review && (
+                    <>
+                      <button
+                        onClick={() => approve(row)}
+                        className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-primary"
+                        title="Approve — no issue; mark verified and clear review"
+                      >
+                        <CheckCircle2 size={15} />
+                      </button>
+                      <button
+                        onClick={() => escalate(row)}
+                        className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                        title="Escalate — keep in queue and raise its priority"
+                      >
+                        <Flag size={15} />
+                      </button>
+                    </>
+                  )}
                   <button
                     onClick={() => setEditingId(r.id)}
                     className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -271,10 +363,13 @@ export default function AdminSpace() {
                   >
                     <Boxes size={15} />
                   </button>
+                  {/* Removal always goes through the reason dialog, so every
+                      delete lands in removed-resources.json rather than just
+                      vanishing from the file. */}
                   <button
-                    onClick={() => toggleDelete(row)}
+                    onClick={() => (row.deleted ? toggleDelete(row) : setRemovingId(r.id))}
                     className={`rounded-lg p-1.5 hover:bg-muted ${row.deleted ? "text-foreground" : "text-muted-foreground hover:text-destructive"}`}
-                    title={row.deleted ? "Undo delete" : "Delete record"}
+                    title={row.deleted ? "Undo removal" : "Remove — archive with a reason, then delete"}
                   >
                     {row.deleted ? <RotateCcw size={15} /> : <Trash2 size={15} />}
                   </button>
@@ -362,6 +457,18 @@ export default function AdminSpace() {
         )
       })()}
 
+      {removingId && (() => {
+        const row = rows.find((r) => r.original.id === removingId)
+        if (!row) return null
+        return (
+          <RemoveDialog
+            resource={row.effective}
+            onClose={() => setRemovingId(null)}
+            onConfirm={(reason) => removeWithReason(row, reason)}
+          />
+        )
+      })()}
+
       {showPushDialog && (
         <PushDialog
           changes={changes}
@@ -369,6 +476,66 @@ export default function AdminSpace() {
           onPushed={() => setChanges({})}
         />
       )}
+    </div>
+  )
+}
+
+// Removal is the one destructive triage verdict, so it collects a reason before
+// it will commit. api/admin-push.ts archives the full row plus that reason to
+// public/removed-resources.json in the same commit that drops it, which is what
+// makes the delete recoverable without git archaeology.
+function RemoveDialog({
+  resource,
+  onClose,
+  onConfirm,
+}: {
+  resource: Resource
+  onClose: () => void
+  onConfirm: (reason: string) => void
+}) {
+  const [reason, setReason] = useState("")
+  const trimmed = reason.trim()
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/50 p-4" onClick={onClose}>
+      <div className="w-full max-w-md rounded-2xl bg-card p-5 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <h2 className="text-base font-bold text-card-foreground">Remove this resource</h2>
+        <p className="mt-2 truncate text-sm font-semibold text-card-foreground">{resource.topic_title}</p>
+        <p className="truncate text-xs text-muted-foreground">{resource.url}</p>
+        <div className="mt-3 space-y-3">
+          <p className="text-xs text-muted-foreground">
+            Deletes the record so nothing downstream can serve it. The full row is archived to{" "}
+            <span className="font-mono">removed-resources.json</span> with this reason, and the change still
+            goes through a draft PR. To hide a resource without deleting it, use suppress instead.
+          </p>
+          <textarea
+            className="w-full rounded-lg border border-border bg-input px-3 py-2 text-sm outline-none focus:border-ring"
+            rows={2}
+            maxLength={REMOVAL_REASON_MAX}
+            placeholder="Why is this being removed? (e.g. dead link, duplicate of r-123)"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            autoFocus
+          />
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-[10px] text-muted-foreground">
+              {trimmed.length}/{REMOVAL_REASON_MAX}
+            </span>
+            <div className="flex justify-end gap-2">
+              <button onClick={onClose} className="rounded-lg border border-border px-4 py-2 text-sm text-muted-foreground hover:bg-muted">
+                Cancel
+              </button>
+              <button
+                onClick={() => onConfirm(trimmed)}
+                disabled={trimmed.length === 0}
+                className="rounded-lg bg-destructive px-4 py-2 text-sm font-semibold text-destructive-foreground disabled:opacity-50"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
