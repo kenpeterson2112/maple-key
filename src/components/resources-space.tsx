@@ -20,6 +20,7 @@ interface ResourcesSpaceProps {
   onReset: () => void
   isMobileFiltersOpen: boolean
   onCloseMobileFilters: () => void
+  searchSeed?: { query: string; nonce: number }
 }
 
 export default function ResourcesSpace({
@@ -33,6 +34,7 @@ export default function ResourcesSpace({
   onReset,
   isMobileFiltersOpen,
   onCloseMobileFilters,
+  searchSeed,
 }: ResourcesSpaceProps) {
   const globalFilters = useGlobalFilters()
 
@@ -52,7 +54,7 @@ export default function ResourcesSpace({
       <div className="flex flex-1 min-h-0">
         <SidebarFilters onFilterChange={onSidebarFilterChange} sidebarFilters={sidebarFilters} />
         <div className="flex-1 min-w-0">
-          <ResultsSection filters={mergedFilters} sidebarFilters={sidebarFilters} onCountChange={onCountChange} />
+          <ResultsSection filters={mergedFilters} sidebarFilters={sidebarFilters} onCountChange={onCountChange} searchSeed={searchSeed} />
         </div>
       </div>
 
