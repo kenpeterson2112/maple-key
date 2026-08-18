@@ -52,6 +52,7 @@ export default function App() {
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [showResourceTour, setShowResourceTour] = useState(false)
+  const [searchSeed, setSearchSeed] = useState<{ query: string; nonce: number } | undefined>(undefined)
   const [assessmentLesson, setAssessmentLesson] = useState<LessonMetadata | null>(null)
   const [plannerLesson, setPlannerLesson] = useState<LessonMetadata | null>(null)
 
@@ -155,6 +156,7 @@ export default function App() {
           onReset={handleResetInferred}
           isMobileFiltersOpen={isMobileFiltersOpen}
           onCloseMobileFilters={() => setIsMobileFiltersOpen(false)}
+          searchSeed={searchSeed}
         />
 
         {/* Overlay spaces — slide in over resources */}
@@ -211,7 +213,12 @@ export default function App() {
               )}
 
               {activeSpace === "insights" && (
-                <ClassInsightsSpace />
+                <ClassInsightsSpace
+                  onFindResources={(code) => {
+                    setSearchSeed({ query: code, nonce: Date.now() })
+                    setActiveSpace("resources")
+                  }}
+                />
               )}
             </motion.div>
           )}

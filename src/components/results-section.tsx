@@ -12,9 +12,12 @@ interface ResultsSectionProps {
   filters: Filters
   sidebarFilters?: SidebarFilters
   onCountChange?: (count: number) => void
+  /** Search text pushed in from another space. `nonce` changes on every send so
+   *  asking for the same code twice re-applies it after the teacher has typed. */
+  searchSeed?: { query: string; nonce: number }
 }
 
-export default function ResultsSection({ filters, sidebarFilters, onCountChange }: ResultsSectionProps) {
+export default function ResultsSection({ filters, sidebarFilters, onCountChange, searchSeed }: ResultsSectionProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [isSearching, setIsSearching] = useState(false)
   const [showSubmitDialog, setShowSubmitDialog] = useState(false)
@@ -37,6 +40,12 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange 
   useEffect(() => {
     onCountChange?.(sortedResources.length)
   }, [sortedResources.length, onCountChange])
+
+  // Keyword search already matches curriculum_expectations, so seeding the code
+  // lands on exactly the resources that target it.
+  useEffect(() => {
+    if (searchSeed) setSearchQuery(searchSeed.query)
+  }, [searchSeed?.nonce])
 
   // Reset to page 1 whenever the result set changes
   useEffect(() => {

@@ -3,11 +3,13 @@
 import { useMemo, useState } from "react"
 import { BarChart3, BookOpen } from "lucide-react"
 import {
+  buildOverallCoverage,
   getAllTallies,
   isSandboxMode,
   type LessonTally,
 } from "@/lib/assessment-results"
 import { useGlobalFilters } from "@/lib/global-filters"
+import AssessmentTriage from "@/components/assessment-triage"
 import CurriculumOrbDashboard from "@/components/curriculum-orb-dashboard"
 import DevSeedControl from "@/components/dev/dev-seed-control"
 import PageHeader from "@/components/page-header"
@@ -31,7 +33,12 @@ function uniqueSorted(values: string[]): string[] {
   )
 }
 
-export default function ClassInsightsSpace() {
+interface ClassInsightsSpaceProps {
+  /** Jumps to Resources with this expectation code seeded into the search. */
+  onFindResources?: (code: string) => void
+}
+
+export default function ClassInsightsSpace({ onFindResources }: ClassInsightsSpaceProps) {
   // The sample-data control bumps this to force a re-read of localStorage tallies
   // (they're otherwise read once on mount).
   const [reloadNonce, setReloadNonce] = useState(0)
@@ -58,6 +65,14 @@ export default function ClassInsightsSpace() {
     () => tallies.filter(t => normalizeSubject(t.subject) === subject && normalizeGrade(t.grade) === grade),
     [tallies, subject, grade]
   )
+
+  // Overall-level nodes carry every taught specific and its evidence — the
+  // same tree the orb dashboard renders, reused so triage and the breakdown
+  // can never disagree about what was assessed.
+  const coverage = useMemo(() => buildOverallCoverage(filtered, subject, grade), [filtered, subject, grade])
+
+  // getAllTallies sorts newest first, and `filtered` preserves that order.
+  const latest = filtered[0] ?? null
 
   if (tallies.length === 0) {
     return (
@@ -101,6 +116,17 @@ export default function ClassInsightsSpace() {
 
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl px-6 py-6 space-y-6">
+
+          {/* What to do next */}
+          {filtered.length > 0 && onFindResources && (
+            <AssessmentTriage
+              nodes={coverage}
+              latest={latest}
+              subject={subject}
+              grade={grade}
+              onFindResources={onFindResources}
+            />
+          )}
 
           {/* Expectation breakdown */}
           {filtered.length > 0 ? (
