@@ -52,6 +52,18 @@ export function generateCounts(level: CentralLevel, spread: number, n: number): 
   return fixSum(counts, n)
 }
 
+// Synthetic data models every student answering every code individually, so
+// each response is its own recording event — the strongest evidence the real
+// app can produce. Sample data should read that way rather than inheriting the
+// "unknown evidence" state reserved for tallies predating event tracking.
+function eventsFrom(byExpectation: Record<string, LevelCounts>): Record<string, number> {
+  const out: Record<string, number> = {}
+  for (const [code, c] of Object.entries(byExpectation)) {
+    out[code] = c.level1 + c.level2 + c.level3 + c.level4
+  }
+  return out
+}
+
 // Nudge level counts so they sum to exactly `n` after rounding/jitter.
 function fixSum(c: LevelCounts, n: number): LevelCounts {
   const out = { ...c }
@@ -178,7 +190,9 @@ export function seedGlobal({ position, level, spread, scope }: SeedOptions): voi
         codes: pool.codes,
         updatedAt: now - i * 60_000,
         attempts,
+        events: attempts,
         byExpectation,
+        eventsByExpectation: eventsFrom(byExpectation),
       })
       i++
     }
@@ -214,7 +228,9 @@ export function seedForLesson(lesson: LessonMetadata, { level, spread }: LevelSp
       codes,
       updatedAt: Date.now(),
       attempts,
+      events: attempts,
       byExpectation,
+      eventsByExpectation: eventsFrom(byExpectation),
     },
   ])
 }

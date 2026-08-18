@@ -49,8 +49,22 @@ export interface LessonTally {
   subject: string
   codes: string[]
   updatedAt: number
+  // Total recorded RESPONSES. A group entry of 24 students adds 24 here from a
+  // single tap, so this counts students represented — not independent evidence.
   attempts: number
+  // Distinct recording EVENTS — how many times Record was pressed. One group
+  // entry is one event no matter how many students it covers, so this is what
+  // says how much independent evidence a number rests on. Absent on tallies
+  // written before event tracking: treat missing as unknown, never as zero.
+  events?: number
   byExpectation: Record<string, LevelCounts>
+  // Per-code twin of `events`, same absence rule.
+  eventsByExpectation?: Record<string, number>
+  // Set when a tally carries responses recorded before event tracking existed.
+  // Those responses can never be attributed to events, so every code in this
+  // tally reports unknown evidence rather than a count that reads stronger
+  // than it is.
+  hasUntrackedResponses?: boolean
 }
 
 type Store = Record<string, LessonTally>
@@ -120,17 +134,26 @@ export function recordAttempt(lesson: LessonMetadata, perCodeLevel: Record<strin
     codes: lesson.curriculumCodesCovered ?? [],
     updatedAt: Date.now(),
     attempts: 0,
+    events: 0,
     byExpectation: {},
+    eventsByExpectation: {},
   }
+  // A tally with responses but no event count predates this tracking. Its
+  // history can't be reconstructed, so flag it once — permanently — rather
+  // than letting new events imply the old responses were independent too.
+  if (tally.events === undefined && tally.attempts > 0) tally.hasUntrackedResponses = true
   tally.title = lesson.title
   tally.grade = lesson.grade
   tally.subject = lesson.subject
   if (lesson.curriculumCodesCovered?.length) tally.codes = lesson.curriculumCodesCovered
   tally.updatedAt = Date.now()
   tally.attempts += count
+  tally.events = (tally.events ?? 0) + 1
+  const events = (tally.eventsByExpectation ??= {})
   for (const [code, level] of Object.entries(perCodeLevel)) {
     const counts = (tally.byExpectation[code] ??= emptyCounts())
     counts[level] += count
+    events[code] = (events[code] ?? 0) + 1
   }
   store[lesson.id] = tally
   write(store)
@@ -304,11 +327,70 @@ export function coverageForResource(
   return out.sort((a, b) => a.overall.localeCompare(b.overall, undefined, { numeric: true }))
 }
 
+// ---- Evidence strength ----
+// How much a number can be leaned on, kept separate from what the number says.
+// `responses` counts students represented; `events` counts distinct recording
+// events. They diverge whenever group entry is used — one tap covering 24
+// students is 24 responses but a single answer set, and a single answer set
+// tells you one thing however many students it is attributed to. Ranking
+// confidence on responses would read that as the strongest evidence in the
+// class, so every confidence judgement here keys on events.
+export interface Evidence {
+  responses: number
+  events: number
+  // False when some contributing responses predate event tracking, making
+  // `events` an undercount. Callers must show "unknown", not a weak reading.
+  known: boolean
+}
+
+export type EvidenceStrength = "none" | "unknown" | "thin" | "medium" | "strong"
+
+// Thresholds are in answer sets, not students: under 4 is a handful of
+// voices, 10+ means a substantial share of a typical 20-30 student class
+// answered separately. A class checked only through group entry stays "thin"
+// however many students it covers — which is the honest reading, and the
+// prompt to run one individual check before acting on it.
+const MEDIUM_EVIDENCE = 4
+const STRONG_EVIDENCE = 10
+
+export function emptyEvidence(): Evidence {
+  return { responses: 0, events: 0, known: true }
+}
+
+export function evidenceStrength(evidence: Evidence): EvidenceStrength {
+  if (evidence.responses === 0) return "none"
+  if (!evidence.known) return "unknown"
+  if (evidence.events >= STRONG_EVIDENCE) return "strong"
+  if (evidence.events >= MEDIUM_EVIDENCE) return "medium"
+  return "thin"
+}
+
+function totalOfCounts(counts: LevelCounts): number {
+  return counts.level1 + counts.level2 + counts.level3 + counts.level4
+}
+
+// Fold one tally's contribution for `code` into `target`.
+function addEvidenceFrom(target: Evidence, tally: LessonTally, code: string, counts: LevelCounts): void {
+  const responses = totalOfCounts(counts)
+  if (responses === 0) return
+  target.responses += responses
+  const events = tally.eventsByExpectation?.[code]
+  if (typeof events === "number" && !tally.hasUntrackedResponses) target.events += events
+  else target.known = false
+}
+
+function addEvidenceInto(target: Evidence, src: Evidence): void {
+  target.responses += src.responses
+  target.events += src.events
+  if (!src.known) target.known = false
+}
+
 // ---- Coverage tree (taught vs assessed) ----
 export interface SpecificCoverage {
   code: string
   counts: LevelCounts // empty if not yet assessed
   assessed: boolean
+  evidence: Evidence // how much independent evidence `counts` rests on
 }
 
 export interface CoverageNode {
@@ -317,6 +399,7 @@ export interface CoverageNode {
   specifics: SpecificCoverage[]
   bands: LevelCounts // sum of assessed specifics' counts
   coverageFraction: number // assessedCount / specifics.length, 0 when empty
+  evidence: Evidence // sum of assessed specifics' evidence
 }
 
 // Build one node per overall expectation that appears in `tally.codes`
@@ -327,12 +410,14 @@ export interface CoverageNode {
 export function buildOverallCoverage(tallies: LessonTally[], subject: string, grade?: string): CoverageNode[] {
   const taught = new Set<string>()
   const assessed: Record<string, LevelCounts> = {}
+  const evidence: Record<string, Evidence> = {}
   for (const t of tallies) {
     for (const code of t.codes) if (isExpectationCode(code)) taught.add(code)
     for (const [code, counts] of Object.entries(t.byExpectation)) {
       if (!isExpectationCode(code)) continue
       taught.add(code)
       addInto((assessed[code] ??= emptyCounts()), counts)
+      addEvidenceFrom((evidence[code] ??= emptyEvidence()), t, code, counts)
     }
   }
 
@@ -344,12 +429,15 @@ export function buildOverallCoverage(tallies: LessonTally[], subject: string, gr
         code,
         counts: assessed[code] ?? emptyCounts(),
         assessed: code in assessed,
+        evidence: evidence[code] ?? emptyEvidence(),
       }))
     const bands = emptyCounts()
+    const nodeEvidence = emptyEvidence()
     let assessedCount = 0
     for (const spec of specifics) {
       if (spec.assessed) {
         addInto(bands, spec.counts)
+        addEvidenceInto(nodeEvidence, spec.evidence)
         assessedCount++
       }
     }
@@ -359,6 +447,7 @@ export function buildOverallCoverage(tallies: LessonTally[], subject: string, gr
       specifics,
       bands,
       coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
+      evidence: nodeEvidence,
     })
   }
   return out.sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
@@ -374,10 +463,12 @@ export function buildStrandCoverage(overallNodes: CoverageNode[], subject: strin
     const children = overalls.map((code) => byCode.get(code)).filter((n): n is CoverageNode => !!n)
     const specifics = children.flatMap((n) => n.specifics)
     const bands = emptyCounts()
+    const nodeEvidence = emptyEvidence()
     let assessedCount = 0
     for (const spec of specifics) {
       if (spec.assessed) {
         addInto(bands, spec.counts)
+        addEvidenceInto(nodeEvidence, spec.evidence)
         assessedCount++
       }
     }
@@ -387,6 +478,7 @@ export function buildStrandCoverage(overallNodes: CoverageNode[], subject: strin
       specifics,
       bands,
       coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
+      evidence: nodeEvidence,
     })
   }
   return out.sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
