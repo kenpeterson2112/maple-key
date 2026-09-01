@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { X } from "lucide-react"
-import type { Resource } from "@/lib/types"
+import type { GradeLevel, Resource, Subject } from "@/lib/types"
+import { SUBJECTS, isValidGradeLevel } from "../../../shared/resource-schema"
 import { diffFields, type AdminEditableFields } from "@/lib/admin-changes"
 
 interface AdminResourceEditorProps {
@@ -22,13 +23,17 @@ const textToList = (text: string) =>
     .map((s) => s.trim())
     .filter(Boolean)
 
-const textToGrades = (text: string): (number | "K" | "PreK")[] =>
-  textToList(text).map((g) => {
-    if (g.toLowerCase() === "k") return "K"
-    if (g.toLowerCase() === "prek") return "PreK"
-    const n = Number(g)
-    return Number.isFinite(n) ? n : "K"
-  })
+// Anything that isn't a valid grade is dropped rather than coerced. The old
+// fallback turned a typo into "K", quietly filing a grade-9 resource under
+// kindergarten.
+const textToGrades = (text: string): GradeLevel[] =>
+  textToList(text)
+    .map((g): GradeLevel => {
+      if (g.toLowerCase() === "k") return "K"
+      if (g.toLowerCase() === "prek") return "PreK"
+      return Number(g)
+    })
+    .filter(isValidGradeLevel)
 
 const FIELD_CLASS =
   "w-full rounded-lg border border-border bg-input px-3 py-2 text-sm text-foreground outline-none focus:border-ring"
@@ -98,7 +103,17 @@ export default function AdminResourceEditor({ original, effective, onSave, onClo
             </div>
             <div>
               <label className={LABEL_CLASS}>Subject</label>
-              <input className={FIELD_CLASS} value={subject} onChange={(e) => setSubject(e.target.value)} />
+              <select
+                className={FIELD_CLASS}
+                value={subject}
+                onChange={(e) => setSubject(e.target.value as Subject)}
+              >
+                {SUBJECTS.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div>

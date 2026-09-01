@@ -189,13 +189,14 @@ Open a **draft** PR. In the body:
 ## Guardrails
 
 - **Never write a note for a page you could not read.** Omit the record instead.
-- **`pedagogical_function` is a closed enum.** Extend it in
-  `src/lib/types.ts` *and* `scripts/enrich-resources.py` together, in its own PR
-  — never by slipping a new value into a results file.
+- **`pedagogical_function` is a closed enum.** It now has one home:
+  `schema/resource-schema.json`. Extend it there (and in the matching union in
+  `shared/resource-schema.ts`, which `scripts/check-schema-sync.py` enforces), in
+  its own PR — never by slipping a new value into a results file.
 - Don't run the API-billed scripts (`enrich-usage-notes.py`,
   `fetch-resources.py`, `assess-curriculum-expectations.py`). This routine exists
   to replace `enrich-usage-notes.py` on the subscription; billing the API is
   precisely what `ROUTINES.md` moved away from.
-- Don't touch `alignments`, `curriculum_expectations`, `grade_level`, or
+- Don't touch `curriculum_expectations`, `grade_level`, or
   `subject` — those belong to the Assessor stage of the curation waterfall.
 - Requires outbound egress (`WebFetch`). No `ANTHROPIC_API_KEY`.

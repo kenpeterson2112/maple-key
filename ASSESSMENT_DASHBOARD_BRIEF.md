@@ -137,8 +137,8 @@ Tallies are snapshots, so assessment history outlives the 20-lesson log cap.
 ### 5. Resource library (~2.5 MB static JSON, read-only at runtime)
 
 Each resource carries: `topic_title`, `description`, `url`, `publisher_creator`,
-`grade_level[]`, `subject`, `strand[]`, `curriculum_expectations[]`, alignments
-with `alignment_strength` (primary/secondary), `resource_type`, `modality[]`,
+`grade_level[]`, `subject`, `strand[]`, `curriculum_expectations[]`,
+`resource_type`, `modality[]`,
 `accessibility[]`, `access_type`, plus pedagogical metadata:
 `pedagogical_function` (one of: hook, core_teaching, guided_practice,
 independent_practice, assessment, extension), `instructional_modes`

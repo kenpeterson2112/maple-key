@@ -1,4 +1,8 @@
-import type { Resource } from "@/lib/types"
+import type { GradeLevel, Resource, Strand, Subject } from "@/lib/types"
+import {
+  ADMIN_EDITABLE_KEYS,
+  ADMIN_EDITABLE_METADATA_KEYS,
+} from "../../shared/resource-schema"
 
 // Changeset model for the admin Database Manager (#admin). Edits accumulate
 // locally (localStorage) against the read-only resources.json, then get
@@ -6,15 +10,21 @@ import type { Resource } from "@/lib/types"
 // changeset shape server-side against the repo copy.
 
 // Fields the Database Manager can edit. Kept to display/curation metadata —
-// alignments and provenance stay owned by the curation pipeline.
+// grade_band, resource_type, access_type, modality and all provenance stay
+// owned by the curation pipeline.
+//
+// The allowlists below are re-exported from shared/resource-schema.ts, which
+// derives them from schema/resource-schema.json — the same file api/admin-push.ts
+// reads. They used to be two hand-synced copies because api/ cannot import from
+// src/; `satisfies` here still proves the shared list matches this interface.
 export interface AdminEditableFields {
   topic_title?: string
   description?: string
   url?: string
   publisher_creator?: string
-  subject?: string
-  grade_level?: (number | "K" | "PreK")[]
-  strand?: string[]
+  subject?: Subject
+  grade_level?: GradeLevel[]
+  strand?: Strand[]
   curriculum_expectations?: string[]
   usage_notes?: string
   is_collection?: boolean
@@ -33,27 +43,11 @@ export interface AdminEditableMetadata {
   review_priority?: number
 }
 
-export const ADMIN_EDITABLE_METADATA_KEYS = [
-  "verified",
-  "needs_review",
-  "review_priority",
-] as const satisfies readonly (keyof AdminEditableMetadata)[]
-
-export const ADMIN_EDITABLE_KEYS = [
-  "topic_title",
-  "description",
-  "url",
-  "publisher_creator",
-  "subject",
-  "grade_level",
-  "strand",
-  "curriculum_expectations",
-  "usage_notes",
-  "is_collection",
-  "suppressed",
-  "tags",
-  "metadata",
-] as const satisfies readonly (keyof AdminEditableFields)[]
+const _editableMetadataKeys: readonly (keyof AdminEditableMetadata)[] =
+  ADMIN_EDITABLE_METADATA_KEYS
+const _editableKeys: readonly (keyof AdminEditableFields)[] = ADMIN_EDITABLE_KEYS
+export { _editableKeys as ADMIN_EDITABLE_KEYS }
+export { _editableMetadataKeys as ADMIN_EDITABLE_METADATA_KEYS }
 
 export type AdminChange =
   | { action: "edit"; fields: AdminEditableFields }

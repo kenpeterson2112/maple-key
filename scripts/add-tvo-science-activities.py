@@ -18,9 +18,8 @@ Input JSON is a list of objects:
       "curriculum_expectations": ["B1.1", "B3.1"]
     }
 
-Mirrors the conventions used by add-tvo-fsl-activities.py: single
-expectation_code: null in alignments (primary strand drives the
-alignment), shared usage_notes, modality ["Interactive", "Online"].
+Mirrors the conventions used by add-tvo-fsl-activities.py: shared
+usage_notes, modality ["Interactive", "Online"].
 """
 
 import argparse
@@ -104,17 +103,6 @@ def main():
             "accessibility": ["No Concerns"],
             "instructional_modes": ["individual", "small-group", "whole-class"],
             "usage_notes": USAGE_NOTES,
-            "alignments": [
-                {
-                    "jurisdiction": "ontario",
-                    "grade": grade,
-                    "subject": "science",
-                    "strand": snake_case(strand[0]),
-                    "expectation_code": None,
-                    "expectation_description": None,
-                    "alignment_strength": "primary",
-                }
-            ],
             "metadata": {
                 "added_at": TODAY,
                 "added_by": "maple_key_team",

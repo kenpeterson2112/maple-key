@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.api.json",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "validate:schema": "python3 scripts/check-schema-sync.py && python3 scripts/validate-resources.py"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",

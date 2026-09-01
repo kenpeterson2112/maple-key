@@ -43,35 +43,6 @@ export default function CompactResourceCard({
   "accessibility": ["No Concerns"],
   "instructional_modes": ["individual", "small-group", "whole-class"],
   "usage_notes": "Open-ended structure supports inquiry; assign on individual devices for self-directed exploration or project whole-class to guide discussion.",
-  "alignments": [
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D1.1",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D1.2",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D1.3",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    }
-  ],
   "metadata": {
     "added_at": "2025-11-10",
     "added_by": "maple_key_team",
@@ -105,17 +76,6 @@ export default function CompactResourceCard({
   "accessibility": ["No Concerns"],
   "instructional_modes": ["individual", "small-group", "whole-class"],
   "usage_notes": null,
-  "alignments": [
-    {
-      "jurisdiction": "ontario",
-      "grade": null,
-      "subject": "health_and_physical_education",
-      "strand": "active_living",
-      "expectation_code": null,
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    }
-  ],
   "metadata": {
     "added_at": "2026-06-12",
     "added_by": "maple_key_team",
@@ -147,71 +107,6 @@ export default function CompactResourceCard({
   "accessibility": ["Some Concerns"],
   "instructional_modes": ["individual", "small-group"],
   "usage_notes": "A print textbook or unit resource; assign specific pages for individual reading or guided partner work. No technology required.",
-  "alignments": [
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D1.1",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D1.2",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D1.3",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D1.4",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D1.5",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D2.1",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": 6,
-      "subject": "mathematics",
-      "strand": "data_literacy",
-      "expectation_code": "D2.2",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    }
-  ],
   "metadata": {
     "added_at": "2025-11-10",
     "added_by": "maple_key_team",
@@ -245,26 +140,6 @@ export default function CompactResourceCard({
   "accessibility": ["No Concerns"],
   "instructional_modes": ["individual", "small-group", "whole-class"],
   "usage_notes": "Works well on individual devices for self-paced practice or projected whole-class for competitive whole-group play. No station rotation needed.",
-  "alignments": [
-    {
-      "jurisdiction": "ontario",
-      "grade": null,
-      "subject": "mathematics",
-      "strand": "probability",
-      "expectation_code": "D2.1",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    },
-    {
-      "jurisdiction": "ontario",
-      "grade": null,
-      "subject": "mathematics",
-      "strand": "probability",
-      "expectation_code": "D2.2",
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    }
-  ],
   "metadata": {
     "added_at": "2025-11-10",
     "added_by": "maple_key_team",
@@ -452,7 +327,6 @@ export interface Resource {
   subject: string
   strand: string[]
   curriculum_expectations: string[]
-  alignments: ResourceAlignment[]
   province: string
   jurisdiction: string
   modality: string[]
@@ -466,16 +340,6 @@ export interface Resource {
   is_collection?: boolean
   metadata: ResourceMetadata
   language?: string
-}
-
-export interface ResourceAlignment {
-  jurisdiction: string
-  grade: number | "K" | "PreK" | null
-  subject: string | null
-  strand: string | null
-  expectation_code: string | null
-  expectation_description: string | null
-  alignment_strength: "primary" | "secondary"
 }
 ```
 
@@ -520,7 +384,7 @@ Pages mirror — those API calls simply don't exist there.
 1. Read `src/components/resource-card.tsx` end-to-end to see current layout/logic.
 2. Map desired visual changes against the 4 example resources above (especially r-3 paid + multi-expectation, r-98 multi-grade).
 3. Cross-ref design tokens to ensure colors/fonts match the `:root` declarations.
-4. For any field not currently displayed (usage_notes, instructional_modes, full alignments), confirm visibility/prominence in redesign.
+4. For any field not currently displayed (usage_notes, instructional_modes), confirm visibility/prominence in redesign.
 5. Consider mobile viewport behavior—sticky footer and IntersectionObserver interactions.
 
 ---

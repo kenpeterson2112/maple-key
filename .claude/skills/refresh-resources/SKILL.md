@@ -168,26 +168,20 @@ matching this schema **exactly**:
   "province": "ON | BC | AB | CANADA",
   "jurisdiction": "ontario | british_columbia | alberta | canada",
   "modality": ["subset of: Online, Interactive, Video, Audio/Podcast, Books & Print Media, Field Trip, Guest Speaker"],
-  "resource_type": "one of: digital | interactive | video | print | audio | kit | other",
+  "resource_type": "one of: digital | interactive | video | print | audio | physical | kit | other",
   "access_type": "one of: free | purchase | licensed",
   "is_paid": false,
   "curriculum_expectations": ["1-5 codes — set in Stage 3"],
   "accessibility": ["No Concerns"],
   "instructional_modes": [],
-  "usage_notes": null,
-  "alignments": [
-    {
-      "jurisdiction": "ontario",
-      "grade": "[6, 7, 8]",
-      "subject": "snake_case, e.g. social_studies",
-      "strand": "snake_case, e.g. heritage_and_identity",
-      "expectation_code": null,
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    }
-  ]
+  "usage_notes": null
 }
 ```
+
+Every vocabulary above (`grade_band`, `subject`, `modality`, `resource_type`,
+`access_type`, `accessibility`, `strand`, `province`/`jurisdiction`) is closed and
+lives in `schema/resource-schema.json`. Validate the file after writing with
+`python3 scripts/validate-resources.py` — an out-of-vocabulary value fails CI.
 
 Curation rules:
 - Clearly educational and appropriate for the subject's grade scope. Prefer
@@ -203,7 +197,6 @@ Curation rules:
   *within* it for the individual resource before giving up on that source.
 - `grade_level` is a JSON array of integers (e.g. `[6, 7, 8]`) or the strings
   `"K"` / `"PreK"` — never strings like `"[6]"`.
-- One `alignments` entry per strand used; `subject` and `strand` in snake_case.
 - **Verify each URL is reachable** with `WebFetch` before keeping it (a 2xx/3xx
   page that actually loads). Drop dead or redirected-to-junk links.
 - If nothing is suitable, keep zero — an empty run is a valid outcome.
@@ -229,12 +222,16 @@ For each kept resource, in order:
    { "added_at": "<UTC date YYYY-MM-DD>", "added_by": "maple_key_team", "verified": false, "needs_review": true }
    ```
 3. Ensure defaults are present: `curriculum_expectations` (non-empty),
-   `accessibility` (`["No Concerns"]`), `alignments`, `instructional_modes`
-   (`[]`), `usage_notes` (`null`).
+   `accessibility` (`["No Concerns"]`), `instructional_modes` (`[]`),
+   `usage_notes` (`null`).
 
 Then append to `resources`, and update `meta`:
 - `meta.total_count` = new length of `resources`
 - `meta.generated_at` = current UTC timestamp `YYYY-MM-DDTHH:MM:SSZ`
+- leave `meta.schema_version` as it is
+
+Finally run `python3 scripts/validate-resources.py` and fix anything it reports
+before opening the PR.
 
 Write `public/resources.json`, then mirror to `docs/resources.json` if it exists.
 

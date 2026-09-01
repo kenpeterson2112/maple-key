@@ -38,16 +38,6 @@ USAGE_NOTES = (
     "Gamified Tax Literacy Course for Teens."
 )
 
-ALIGNMENT = {
-    "jurisdiction": "ontario",
-    "grade": None,
-    "subject": "mathematics",
-    "strand": "financial_literacy",
-    "expectation_code": None,
-    "expectation_description": None,
-    "alignment_strength": "primary",
-}
-
 # fmt: off
 ENTRIES = [
     {
@@ -170,7 +160,6 @@ def build_resource(entry: dict, id_num: int) -> dict:
         "accessibility": ["No Concerns"],
         "instructional_modes": ["individual", "whole-class"],
         "usage_notes": USAGE_NOTES,
-        "alignments": [ALIGNMENT],
         "metadata": {
             "added_at": TODAY,
             "added_by": "maple_key_team",

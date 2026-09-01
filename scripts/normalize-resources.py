@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
 normalize-resources.py
-Cleans and restructures public/resources.json to schema v2.0.
+Cleans and restructures public/resources.json to the current schema
+(schema/resource-schema.json; validate the result with
+scripts/validate-resources.py).
 
 Changes made:
 - grade_level: string/CSV → sorted array of int/"K"/"PreK"
@@ -10,7 +12,7 @@ Changes made:
 - submitted_by → metadata.added_by (canonical names)
 - timestamp → metadata.added_at (YYYY-MM-DD)
 - needs_review → metadata.needs_review (bool)
-- New fields: resource_type, access_type, grade_band, jurisdiction, alignments, metadata
+- New fields: resource_type, access_type, grade_band, jurisdiction, metadata
 - curriculum_expectations kept at top level for backward compat
 - Wraps output in {"meta": {...}, "resources": [...]}
 """
@@ -87,17 +89,6 @@ SUBJECT_DISPLAY_MAP = {
     "health": "Health",
     "arts": "Arts",
     "music": "Music",
-}
-
-SUBJECT_KEY_MAP = {
-    "Math": "mathematics",
-    "Mathematics": "mathematics",
-    "Science": "science",
-    "Language": "language",
-    "Social Studies": "social_studies",
-    "Health": "health",
-    "Arts": "arts",
-    "Music": "music",
 }
 
 # ── Grade helpers ──────────────────────────────────────────────────────────────
@@ -303,11 +294,6 @@ def normalize_subject_display(subject: str) -> str:
     return mapped if mapped else subject.strip()
 
 
-def subject_to_key(subject_display: str) -> str:
-    """Return snake_case key for alignments."""
-    return SUBJECT_KEY_MAP.get(subject_display, subject_display.lower().replace(" ", "_"))
-
-
 # ── Accessibility ──────────────────────────────────────────────────────────────
 
 def normalize_accessibility(acc_list: list) -> list:
@@ -363,52 +349,6 @@ def normalize_timestamp(ts: str):
     return None
 
 
-# ── Alignments ────────────────────────────────────────────────────────────────
-
-def build_alignments(resource: dict, grade_levels: list, subject_key: str) -> list:
-    codes = resource.get("curriculum_expectations") or []
-    strands = resource.get("strand") or []
-    province = resource.get("province") or "ON"
-    jurisdiction = PROVINCE_TO_JURISDICTION.get(province, "ontario")
-
-    # Primary grade for alignment
-    primary_grade = next((g for g in grade_levels if isinstance(g, int)), None)
-    if primary_grade is None and grade_levels:
-        primary_grade = grade_levels[0]
-
-    # Primary strand → snake_case
-    strand_raw = strands[0] if strands else None
-    if strand_raw:
-        strand_key = re.sub(r"[^a-z0-9]+", "_", strand_raw.lower()).strip("_")
-    else:
-        strand_key = None
-
-    alignments = []
-    if codes:
-        for code in codes:
-            alignments.append({
-                "jurisdiction": jurisdiction,
-                "grade": primary_grade,
-                "subject": subject_key,
-                "strand": strand_key,
-                "expectation_code": code,
-                "expectation_description": None,
-                "alignment_strength": "primary",
-            })
-    else:
-        alignments.append({
-            "jurisdiction": jurisdiction,
-            "grade": primary_grade,
-            "subject": subject_key,
-            "strand": strand_key,
-            "expectation_code": None,
-            "expectation_description": None,
-            "alignment_strength": "primary",
-        })
-
-    return alignments
-
-
 # ── Main normalization ─────────────────────────────────────────────────────────
 
 def normalize_resource(resource: dict, auto_id_counter: int) -> dict:
@@ -426,7 +366,6 @@ def normalize_resource(resource: dict, auto_id_counter: int) -> dict:
 
     # ── Subject ──
     subject_display = normalize_subject_display(resource.get("subject", ""))
-    subject_key = subject_to_key(subject_display)
 
     # ── Modality ──
     modalities = normalize_modality(resource.get("modality") or "")
@@ -451,9 +390,6 @@ def normalize_resource(resource: dict, auto_id_counter: int) -> dict:
 
     # ── Curriculum expectations (top-level for backward compat) ──
     curriculum_expectations = resource.get("curriculum_expectations") or []
-
-    # ── Alignments ──
-    alignments = build_alignments(resource, grade_levels, subject_key)
 
     # ── Metadata ── (handle both old flat fields and already-migrated metadata object)
     existing_meta = resource.get("metadata") or {}
@@ -484,13 +420,11 @@ def normalize_resource(resource: dict, auto_id_counter: int) -> dict:
         "curriculum_expectations": curriculum_expectations,
         # Accessibility
         "accessibility": accessibility,
-        # Publication info (sparse — only 11% of records have this)
+        # Publication info (declared by the schema; no record carries it today)
         **({"year_published": resource["year_published"]} if resource.get("year_published") is not None else {}),
         # Pedagogical deployment context
         "instructional_modes": instructional_modes,
         "usage_notes": resource.get("usage_notes") or None,
-        # New relational structure
-        "alignments": alignments,
         # Provenance
         "metadata": {
             "added_at": added_at,

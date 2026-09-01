@@ -87,18 +87,7 @@ this schema exactly:
   "curriculum_expectations": [string],  // 1–5 Ontario codes like "D1.1", "B2.3"
   "accessibility": ["No Concerns"],
   "instructional_modes": [],
-  "usage_notes": null,
-  "alignments": [
-    {
-      "jurisdiction": string,
-      "grade": string,
-      "subject": string,
-      "strand": string,
-      "expectation_code": null,
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    }
-  ]
+  "usage_notes": null
 }
 
 Rules:
@@ -203,7 +192,6 @@ def stamp(resource: dict, id_num: int) -> dict:
     resource["id"] = f"r-{id_num}"
     resource.setdefault("curriculum_expectations", [])
     resource.setdefault("accessibility", ["No Concerns"])
-    resource.setdefault("alignments", [])
     resource.setdefault("instructional_modes", [])
     resource.setdefault("usage_notes", None)
     resource["metadata"] = {

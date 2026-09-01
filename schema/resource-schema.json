@@ -1,0 +1,205 @@
+{
+  "$comment": "Canonical vocabulary and field contract for a resource record in public/resources.json. Language-neutral JSON because three consumers must read it: the client (via shared/resource-schema.ts), the Vercel functions (same module), and the Python ingest scripts (via scripts/_schema.py). Do not hand-edit a vocabulary in one of those consumers — change it here.",
+  "schema_version": "3.0",
+
+  "fields": {
+    "required": [
+      "id",
+      "topic_title",
+      "description",
+      "url",
+      "publisher_creator",
+      "grade_level",
+      "grade_band",
+      "subject",
+      "strand",
+      "curriculum_expectations",
+      "province",
+      "jurisdiction",
+      "modality",
+      "resource_type",
+      "access_type",
+      "is_paid",
+      "accessibility",
+      "metadata"
+    ],
+    "optional": [
+      "language",
+      "year_published",
+      "instructional_modes",
+      "usage_notes",
+      "pedagogical_function",
+      "estimated_minutes",
+      "is_collection",
+      "suppressed",
+      "decomposed",
+      "tags"
+    ],
+    "$comment_flags": "Flag fields are written only when true and omitted otherwise — never written as false. diffFields() in src/lib/admin-changes.ts coerces an absent flag to false so toggling one off on a record that never carried it is not a change.",
+    "flags": ["is_collection", "suppressed", "decomposed"],
+    "nullable": ["usage_notes"]
+  },
+
+  "metadata_fields": {
+    "required": ["added_at", "added_by", "verified", "needs_review"],
+    "optional": ["review_priority", "link_status", "link_checked_at", "enriched_at"]
+  },
+
+  "vocabularies": {
+    "grade_level": {
+      "numeric_min": 1,
+      "numeric_max": 12,
+      "named": ["K", "PreK"]
+    },
+    "grade_band": ["primary", "junior", "intermediate", "senior", "multi"],
+    "subject": [
+      "FSL",
+      "Geography",
+      "Health & Physical Education",
+      "History",
+      "Language",
+      "Math",
+      "Science",
+      "Social Studies"
+    ],
+    "strand": [
+      "Active Living",
+      "Algebra",
+      "Data Literacy",
+      "Earth and Space Systems",
+      "Financial Literacy",
+      "Healthy Living",
+      "Heritage and Identity",
+      "Intercultural Understanding",
+      "Life Systems",
+      "Listening",
+      "Math: Cross-Strand",
+      "Matter and Energy",
+      "Media Literacy",
+      "Movement Competence",
+      "Number",
+      "Oral Communication",
+      "People and Environments",
+      "Power and Governance",
+      "Probability",
+      "Reading",
+      "STEM Skills and Connections",
+      "Science: Cross-Strand",
+      "Social Studies: Cross-Strand",
+      "Social-Emotional Learning Skills",
+      "Spatial Sense",
+      "Speaking",
+      "Structures and Mechanisms (D)",
+      "Writing"
+    ],
+    "modality": [
+      "Audio/Podcast",
+      "Books & Print Media",
+      "Field Trip",
+      "Guest Speaker",
+      "Interactive",
+      "Online",
+      "Video"
+    ],
+    "$comment_resource_type": "audio and other carry no records today but are declared by the refresh-resources Researcher template, so they stay in-vocabulary rather than failing a legitimate curation run.",
+    "resource_type": [
+      "audio",
+      "digital",
+      "interactive",
+      "kit",
+      "other",
+      "physical",
+      "print",
+      "video"
+    ],
+    "access_type": ["free", "purchase", "licensed"],
+    "accessibility": ["No Concerns", "Some Concerns", "Not Accessible"],
+    "instructional_modes": [
+      "whole-class",
+      "small-group",
+      "individual",
+      "station-rotation"
+    ],
+    "pedagogical_function": [
+      "hook",
+      "core_teaching",
+      "guided_practice",
+      "independent_practice",
+      "assessment",
+      "extension"
+    ],
+    "$comment_link_status": "Union of the link-check ledger vocabulary (scripts/link-check.py) and the enrichment verdicts (scripts/enrich-resources.py). The dead/dead_domain vs error/blocked split is load-bearing: 'the site said so' must never collapse into 'our request failed' — a denied egress proxy once recorded 580 live URLs as blocked. Advisory only; nothing is auto-suppressed on a link verdict.",
+    "link_status": [
+      "live",
+      "dead",
+      "dead_domain",
+      "invalid",
+      "moved",
+      "blocked",
+      "error"
+    ],
+    "jurisdiction_by_province": {
+      "AB": "alberta",
+      "BC": "british_columbia",
+      "CANADA": "canada",
+      "MB": "manitoba",
+      "NS": "nova_scotia",
+      "ON": "ontario",
+      "QC": "quebec",
+      "SK": "saskatchewan"
+    }
+  },
+
+  "admin": {
+    "$comment": "Allowlists for the Database Manager changeset. src/lib/admin-changes.ts and api/admin-push.ts both derive from here, replacing the two hand-synced copies that api/ could not share because it cannot import from src/. Curation-pipeline fields (grade_band, resource_type, access_type, province, jurisdiction, modality, accessibility, instructional_modes, and all provenance) stay out.",
+    "editable_keys": [
+      "topic_title",
+      "description",
+      "url",
+      "publisher_creator",
+      "subject",
+      "grade_level",
+      "strand",
+      "curriculum_expectations",
+      "usage_notes",
+      "is_collection",
+      "suppressed",
+      "tags",
+      "metadata"
+    ],
+    "editable_metadata_keys": ["verified", "needs_review", "review_priority"],
+    "$comment_vocab": "Editable keys whose values must stay in-vocabulary. Without this, validateChanges() in api/admin-push.ts checked type and length only, so an admin edit could widen subject or strand to any string.",
+    "vocabulary_checked_keys": ["subject", "strand", "grade_level"],
+    "limits": {
+      "max_changes": 500,
+      "max_field_length": 5000,
+      "max_array_length": 100,
+      "max_reason_length": 300,
+      "max_review_priority": 1000,
+      "id_pattern": "^[\\w-]{1,40}$"
+    }
+  },
+
+  "invariants": [
+    {
+      "name": "is_paid_matches_access_type",
+      "description": "is_paid is fully derivable from access_type and agrees on all records today. Kept as a field because three readers use it directly (src/lib/use-filtered-resources.ts, src/components/resource-card.tsx), but enforced so the two cannot drift.",
+      "rule": "is_paid === (access_type === 'purchase')"
+    },
+    {
+      "name": "jurisdiction_matches_province",
+      "description": "jurisdiction is the snake_case expansion of province; see vocabularies.jurisdiction_by_province.",
+      "rule": "jurisdiction === jurisdiction_by_province[province]"
+    },
+    {
+      "name": "unique_ids",
+      "description": "Resource ids are the changeset key for the admin Database Manager, so a duplicate would make an edit ambiguous.",
+      "rule": "id is unique across resources"
+    },
+    {
+      "name": "flags_never_false",
+      "description": "Flag fields are omitted rather than written false; see fields.flags.",
+      "rule": "for f in fields.flags: f absent or f === true"
+    }
+  ]
+}

@@ -42,6 +42,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _schema  # noqa: E402
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RESOURCES_PATH = REPO_ROOT / "public" / "resources.json"
 LEDGER_PATH = REPO_ROOT / "public" / "link-health.json"
@@ -49,7 +52,13 @@ LEDGER_PATH = REPO_ROOT / "public" / "link-health.json"
 DNS_TIMEOUT = 5
 socket.setdefaulttimeout(DNS_TIMEOUT)
 
-# Statuses we treat as "broken / needs a human" when reporting.
+# The full verdict vocabulary lives in schema/resource-schema.json, shared with
+# the enrichment routine and the TypeScript LinkStatus union.
+LINK_STATUSES = set(_schema.LINK_STATUSES)
+# Statuses we treat as "broken / needs a human" when reporting. `blocked` and
+# `error` are deliberately excluded: those mean our request failed, not that the
+# resource is dead — conflating the two is how 580 live URLs were once recorded
+# as blocked.
 ACTIONABLE = {"dead", "dead_domain", "invalid", "moved"}
 # Re-check these first when they fall in tonight's shard.
 RECHECK_FIRST = {"dead", "moved", "blocked", "error"}
@@ -241,7 +250,9 @@ def cmd_apply(args: argparse.Namespace) -> None:
         set_status(it["url"], "dead_domain", "domain does not resolve (DNS)")
         checked_this_run.append(it["url"])
 
-    valid_statuses = {"live", "dead", "moved", "blocked", "error"}
+    # Verdicts a browser-tier check can return; the tier-0 DNS/lint sweep
+    # above contributes dead_domain and invalid.
+    valid_statuses = LINK_STATUSES - {"dead_domain", "invalid"}
     for r in results:
         url = r.get("url")
         status = r.get("status")

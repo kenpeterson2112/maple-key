@@ -196,18 +196,7 @@ Return ONLY a JSON array (no prose, no markdown fences). Each element must match
   "curriculum_expectations": [string],   // 1-5 Ontario curriculum codes in the form "<LETTER><DIGIT>.<DIGIT>" (e.g. "D1.1", "B2.3") that the resource covers, drawn from the subject's curriculum for the listed grade(s). Never empty.
   "accessibility": ["No Concerns"],
   "instructional_modes": [],       // populated by normalize-resources.py
-  "usage_notes": null,             // populated by enrich-usage-notes.py
-  "alignments": [                  // one alignment per strand used
-    {
-      "jurisdiction": string,
-      "grade": string,             // e.g. "[6, 7, 8]"
-      "subject": string,           // snake_case, e.g. "social_studies"
-      "strand": string,            // snake_case, e.g. "heritage_and_identity"
-      "expectation_code": null,
-      "expectation_description": null,
-      "alignment_strength": "primary"
-    }
-  ]
+  "usage_notes": null              // populated by enrich-usage-notes.py
 }
 
 Rules:
@@ -301,7 +290,6 @@ def stamp_resource(resource: dict, next_num: int) -> dict:
     # (scripts/assess-curriculum-expectations.py) backfills anything still empty.
     resource.setdefault("curriculum_expectations", [])
     resource.setdefault("accessibility", ["No Concerns"])
-    resource.setdefault("alignments", [])
     resource.setdefault("instructional_modes", [])
     resource.setdefault("usage_notes", None)
     return resource
