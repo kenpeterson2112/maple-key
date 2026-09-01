@@ -15,7 +15,11 @@
 // closes that gap in CI, so adding a value to the JSON without adding it here
 // fails the build.
 
-import schema from "../schema/resource-schema.json"
+// The `with { type: "json" }` attribute is required, not optional styling: the
+// Vercel serverless runtime loads this as Node ESM, which rejects a bare JSON
+// import with ERR_IMPORT_ATTRIBUTE_MISSING. The client bundler does not care
+// either way, so the attribute is what makes one module work in both.
+import schema from "../schema/resource-schema.json" with { type: "json" }
 
 // ── Vocabulary types ────────────────────────────────────────────────────────
 
