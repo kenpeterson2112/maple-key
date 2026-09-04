@@ -51,7 +51,7 @@ SUBJECT = "Health & Physical Education"
 LANGUAGE = "fr"
 
 # Ontario 2019 H&PE strands. Keyed by the resource's URL slug (path after /fr/).
-# strand[0] is the primary alignment. "access" overrides the free default.
+# strand[0] is the primary strand. "access" overrides the free default.
 CURATION = {
     "ressource-dapprentissage-de-la-petite-enfance": {"strand": ["Active Living", "Healthy Living"]},
     "50-gif-dactivites-physiques-dophea": {"strand": ["Active Living"]},
@@ -257,17 +257,6 @@ def main():
             "accessibility": ["No Concerns"],
             "instructional_modes": ["individual", "small-group", "whole-class"],
             "usage_notes": None,
-            "alignments": [
-                {
-                    "jurisdiction": "ontario",
-                    "grade": next((g for g in grades if isinstance(g, int)), None),
-                    "subject": "health_and_physical_education",
-                    "strand": snake_case(strand[0]),
-                    "expectation_code": None,
-                    "expectation_description": None,
-                    "alignment_strength": "primary",
-                }
-            ],
             "metadata": {
                 "added_at": TODAY,
                 "added_by": "maple_key_team",

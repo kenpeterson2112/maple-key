@@ -19,8 +19,7 @@ Input JSON is a list of objects:
 
 Mirrors the conventions used by the existing
 "TVO Learn — Grade 8 Financial Literacy Learning Activities" series
-(see r-1447..r-1451): single alignment per resource (expectation_code: null),
-shared usage_notes, modality ["Interactive", "Online"].
+(see r-1447..r-1451): shared usage_notes, modality ["Interactive", "Online"].
 """
 
 import argparse
@@ -101,17 +100,6 @@ def main():
             "accessibility": ["No Concerns"],
             "instructional_modes": ["individual", "small-group", "whole-class"],
             "usage_notes": USAGE_NOTES,
-            "alignments": [
-                {
-                    "jurisdiction": "ontario",
-                    "grade": grade,
-                    "subject": "fsl",
-                    "strand": snake_case(strand[0]),
-                    "expectation_code": None,
-                    "expectation_description": None,
-                    "alignment_strength": "primary",
-                }
-            ],
             "metadata": {
                 "added_at": TODAY,
                 "added_by": "maple_key_team",

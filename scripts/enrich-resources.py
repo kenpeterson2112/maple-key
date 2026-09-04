@@ -43,6 +43,9 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _schema  # noqa: E402
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # public/ is authoritative; docs/ is the Pages mirror, written only if present.
@@ -51,23 +54,22 @@ OUTPUTS = [
     REPO_ROOT / "docs" / "resources.json",
 ]
 
-# Closed enum — matches PedagogicalFunction in src/lib/types.ts. Extend in both
-# places together; never let a free-form value in.
-PEDAGOGICAL_FUNCTIONS = {
-    "hook",
-    "core_teaching",
-    "guided_practice",
-    "independent_practice",
-    "assessment",
-    "extension",
-}
+# Closed enums, read from schema/resource-schema.json — the same file
+# src/lib/types.ts and api/admin-push.ts validate against. Extend the vocabulary
+# there; never let a free-form value in here.
+PEDAGOGICAL_FUNCTIONS = set(_schema.PEDAGOGICAL_FUNCTIONS)
+INSTRUCTIONAL_MODES = set(_schema.INSTRUCTIONAL_MODES)
 
-# Matches the instructional_modes union in src/lib/types.ts.
-INSTRUCTIONAL_MODES = {"whole-class", "small-group", "individual", "station-rotation"}
-
-# Link verdicts the enrichment fetch can produce. `dead`/`moved` route the record
-# to human review; nothing is ever auto-suppressed on a link check.
+# The subset of link verdicts this routine's fetch can actually produce — the
+# full vocabulary also covers the ledger-only verdicts from link-check.py.
+# `dead`/`moved` route the record to human review; nothing is ever
+# auto-suppressed on a link check, and "our request failed" (blocked/error) is
+# never recorded as "the resource is dead".
 LINK_VERDICTS = {"live", "dead", "moved", "blocked", "error"}
+assert LINK_VERDICTS <= set(_schema.LINK_STATUSES), (
+    "LINK_VERDICTS must stay a subset of the link_status vocabulary in "
+    "schema/resource-schema.json"
+)
 REVIEW_WORTHY_VERDICTS = {"dead", "moved"}
 
 USAGE_NOTES_MIN = 40
@@ -272,7 +274,12 @@ def cmd_apply(args: argparse.Namespace) -> int:
                 metadata["needs_review"] = True
                 flagged += 1
 
-    data["meta"] = {**data.get("meta", {}), "generated_at": stamp, "total_count": len(resources)}
+    data["meta"] = {
+        **data.get("meta", {}),
+        "generated_at": stamp,
+        "total_count": len(resources),
+        "schema_version": _schema.SCHEMA_VERSION,
+    }
 
     for path in OUTPUTS:
         if path.exists() or path == OUTPUTS[0]:

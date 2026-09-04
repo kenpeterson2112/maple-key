@@ -2,6 +2,14 @@ import crypto from "node:crypto"
 import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { applyCors, getClientIp } from "./_lib/security.js"
 import { checkRateLimit } from "./_lib/rate-limit.js"
+import {
+  ADMIN_EDITABLE_KEYS,
+  ADMIN_EDITABLE_METADATA_KEYS,
+  ADMIN_LIMITS,
+  ADMIN_VOCABULARY_CHECKED_KEYS,
+  isInVocabulary,
+  isValidGradeLevel,
+} from "../shared/resource-schema.js"
 
 /**
  * Admin Database Manager "push" endpoint.
@@ -27,37 +35,44 @@ const RESOURCE_PATHS = ["public/resources.json", "docs/resources.json"]
 // removal is recoverable without digging through git history. Mirrored to docs/
 // for the same reason resources.json is.
 const REMOVED_PATHS = ["public/removed-resources.json", "docs/removed-resources.json"]
-const MAX_CHANGES = 500
-const MAX_FIELD_LENGTH = 5_000
+const MAX_CHANGES = ADMIN_LIMITS.max_changes
+const MAX_FIELD_LENGTH = ADMIN_LIMITS.max_field_length
 const MAX_NOTE_LENGTH = 2_000
-const MAX_REASON_LENGTH = 300
+const ID_PATTERN = new RegExp(ADMIN_LIMITS.id_pattern)
+const MAX_REASON_LENGTH = ADMIN_LIMITS.max_reason_length
+const MAX_ARRAY_LENGTH = ADMIN_LIMITS.max_array_length
 
-// Mirrors ADMIN_EDITABLE_KEYS in src/lib/admin-changes.ts (api/ can't import
-// from src/). Anything outside this list is rejected, so a forged request
-// can't rewrite pipeline-owned fields like alignments.
-const EDITABLE_KEYS = new Set([
-  "topic_title",
-  "description",
-  "url",
-  "publisher_creator",
-  "subject",
-  "grade_level",
-  "strand",
-  "curriculum_expectations",
-  "usage_notes",
-  "is_collection",
-  "suppressed",
-  "tags",
-  "metadata",
-])
+// Both allowlists now come from schema/resource-schema.json via shared/, which
+// src/lib/admin-changes.ts reads too — they used to be hand-mirrored copies
+// because api/ cannot import from src/. Anything outside the list is rejected,
+// so a forged request can't rewrite pipeline-owned fields like grade_band or
+// access_type.
+const EDITABLE_KEYS = new Set<string>(ADMIN_EDITABLE_KEYS)
 
 // `metadata` is the one editable object, and only its triage fields are
 // writable — provenance (added_at / added_by), link health, and enrichment
-// output stay owned by the pipeline. Mirrors ADMIN_EDITABLE_METADATA_KEYS in
-// src/lib/admin-changes.ts. Validated by subkey *and* type, because unlike the
-// flat keys this one would otherwise be a hole straight into the record.
-const EDITABLE_METADATA_KEYS = new Set(["verified", "needs_review", "review_priority"])
-const MAX_REVIEW_PRIORITY = 1_000
+// output stay owned by the pipeline. Validated by subkey *and* type, because
+// unlike the flat keys this one would otherwise be a hole straight into the
+// record.
+const EDITABLE_METADATA_KEYS = new Set<string>(ADMIN_EDITABLE_METADATA_KEYS)
+const MAX_REVIEW_PRIORITY = ADMIN_LIMITS.max_review_priority
+
+// Returns an error string, or null when every supplied value for a
+// vocabulary-controlled field is in that field's vocabulary. grade_level has a
+// numeric range rather than a value list, so it gets its own check.
+function validateVocabulary(key: string, value: unknown, id: string): string | null {
+  if (key === "grade_level") {
+    if (!Array.isArray(value)) return `grade_level must be an array (${id})`
+    const bad = value.filter((g) => !isValidGradeLevel(g))
+    if (bad.length) return `invalid grade_level: ${bad.join(", ")} (${id})`
+    return null
+  }
+  if (!isInVocabulary(key, value)) {
+    const supplied = Array.isArray(value) ? value.join(", ") : String(value)
+    return `${key} value not in vocabulary: ${supplied} (${id})`
+  }
+  return null
+}
 
 // Returns an error string, or null when the value is an acceptable metadata patch.
 function validateMetadataPatch(value: unknown, id: string): string | null {
@@ -102,7 +117,7 @@ function validateChanges(raw: unknown): Record<string, Change> | string {
 
   const out: Record<string, Change> = {}
   for (const [id, value] of entries) {
-    if (!/^[\w-]{1,40}$/.test(id)) return `invalid resource id: ${id}`
+    if (!ID_PATTERN.test(id)) return `invalid resource id: ${id}`
     const change = value as { action?: unknown; fields?: unknown; reason?: unknown }
     if (change?.action === "delete") {
       if (change.reason !== undefined && typeof change.reason !== "string") {
@@ -124,7 +139,14 @@ function validateChanges(raw: unknown): Record<string, Change> | string {
         continue
       }
       if (typeof fieldValue === "string" && fieldValue.length > MAX_FIELD_LENGTH) return `field too long: ${key} (${id})`
-      if (Array.isArray(fieldValue) && fieldValue.length > 100) return `list too long: ${key} (${id})`
+      if (Array.isArray(fieldValue) && fieldValue.length > MAX_ARRAY_LENGTH) return `list too long: ${key} (${id})`
+      // Length and type alone let an admin edit widen a closed vocabulary —
+      // writing any string into subject or strand, or a grade of 47. These
+      // fields are checked against schema/resource-schema.json instead.
+      if (ADMIN_VOCABULARY_CHECKED_KEYS.includes(key)) {
+        const err = validateVocabulary(key, fieldValue, id)
+        if (err) return err
+      }
     }
     out[id] = { action: "edit", fields }
   }

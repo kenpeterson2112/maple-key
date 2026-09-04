@@ -1,0 +1,41 @@
+name: Validate resource schema
+
+# The dataset is the product — there is no database, so a bad ingest lands
+# straight in public/resources.json. These checks are what stop that.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Schema sync (JSON vs TypeScript)
+        run: python3 scripts/check-schema-sync.py
+
+      - name: Validate resources.json
+        run: python3 scripts/validate-resources.py
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck

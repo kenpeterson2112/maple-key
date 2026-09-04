@@ -121,6 +121,15 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   regenerates it (see `ROUTINES.md`). **There is no database** — admin edits
   accumulate in localStorage and land as a draft PR via `api/admin-push.ts`, so
   git history is the audit log and the recovery path.
+- **The resource schema has one home: `schema/resource-schema.json`** (currently
+  `schema_version` 3.0). It holds every field vocabulary, the required/optional
+  split, and the admin allowlists, and all three languages read it:
+  `shared/resource-schema.ts` for the client *and* `api/` (both tsconfigs include
+  `shared/`), `scripts/_schema.py` for the ingest scripts. Add a subject, strand,
+  or link status there — never inline in a component, an API route, or a script.
+  The literal unions in `shared/resource-schema.ts` are hand-written because a
+  JSON import widens to `string[]`; `scripts/check-schema-sync.py` fails CI if
+  they drift. Validate the dataset with `pnpm validate:schema`.
 - `usage_notes` and `instructional_modes` are **not display-only**:
   `api/generate-lesson.ts` injects them as "Deployment note" / "Best used as" and
   structures the lesson around them. Changing how they're generated changes
@@ -129,12 +138,15 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `review_priority`, `enriched_at`, `link_status`). The admin changeset can write
   `metadata` as a *partial* patch — `applyEdit` in `src/lib/admin-changes.ts`
   merges it so provenance (`added_at` / `added_by`) survives; a plain spread would
-  clobber it. `api/admin-push.ts` carries a hand-synced twin of that merge plus a
-  subkey allowlist, since `api/` can't import from `src/`.
+  clobber it. `api/admin-push.ts` carries a twin of that merge, since `api/` can't
+  import from `src/` — but both ends now take their allowlists from
+  `schema/resource-schema.json`, so only the merge itself is hand-synced.
 - **Never conflate "our request failed" with "the resource is dead."** A denied
   egress proxy returns 403 for every host, which is how 580 live URLs came to be
   recorded as `blocked`. Link-check code separates `dead` (the site said so) from
-  `error` (we failed), and nothing is auto-suppressed on a link verdict.
+  `error` (we failed), and nothing is auto-suppressed on a link verdict. The
+  `link_status` vocabulary is closed and shared — `dead`/`dead_domain`/`invalid`/
+  `moved` are verdicts about the resource, `blocked`/`error` are about us.
 
 ## Known constraints / things that bite
 

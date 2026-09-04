@@ -90,7 +90,7 @@ export function useFilteredResources(filters: Filters, sidebarFilters?: SidebarF
 
       if (sidebarFilters?.modality && sidebarFilters.modality.length > 0) {
         const resourceModalities = resource.modality || []
-        if (!sidebarFilters.modality.some((m) => resourceModalities.includes(m))) return false
+        if (!sidebarFilters.modality.some((m) => resourceModalities.some((rm) => rm === m))) return false
       }
 
       if (sidebarFilters?.cost && sidebarFilters.cost.length > 0) {
