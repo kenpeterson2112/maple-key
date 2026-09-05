@@ -109,6 +109,20 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-fade-in: fade-in 0.35s ease-out;
+}
+
+/* Named so `animate-fade-in` and the arbitrary `animate-[fade-in_…]` callsites
+   resolve to the same keyframes. Tailwind v4 ships no animate plugin here. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @layer base {

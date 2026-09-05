@@ -32,6 +32,7 @@ import type { SidebarFilters } from "@/lib/use-filtered-resources"
 import type { Filters } from "@/lib/types"
 import {
   PlanningQuestionsStep,
+  resolveAnswer,
   usePlanningQuestions,
   type PlanningAnswer,
 } from "@/components/lesson-planner/planning-questions"
@@ -134,7 +135,6 @@ export default function LessonPlannerModal({
     currentQuestionIndex,
     setCurrentQuestionIndex,
     openResponseValues,
-    showingOpenResponse,
   } = planning
   const [templateSections, setTemplateSections] = useState<TemplateSection[]>(fc?.sections ?? [])
 
@@ -402,37 +402,29 @@ export default function LessonPlannerModal({
     await callGenerateLesson([])
   }
 
+  /**
+   * Answers are resolved from the raw state at send time rather than folded in
+   * as each question is committed, so navigating back shows exactly what the
+   * teacher left behind — their text and the suggestion they were weighing.
+   */
+  const buildPlanningAnswers = (): PlanningAnswer[] =>
+    planningQuestions.map((q) => ({
+      questionId: q.id,
+      questionPrompt: q.prompt,
+      answer: resolveAnswer(q.id, questionSelections, openResponseValues).join(", "),
+    }))
+
+  /** Skipping still carries whatever the teacher had already typed or picked. */
   const handleQuestionsSubmit = () => {
-    const answers: PlanningAnswer[] = planningQuestions.map((q) => {
-      const selected = questionSelections[q.id] ?? []
-      return {
-        questionId: q.id,
-        questionPrompt: q.prompt,
-        answer: selected.join(", "),
-      }
-    })
-    callGenerateLesson(answers)
+    callGenerateLesson(buildPlanningAnswers())
   }
 
-  const advanceQuestion = (qId: string, selectedOpts?: string[]) => {
-    const finalSelections = { ...questionSelections }
-    if (selectedOpts !== undefined) {
-      finalSelections[qId] = selectedOpts
-    } else if (showingOpenResponse[qId] && openResponseValues[qId]?.trim()) {
-      finalSelections[qId] = [openResponseValues[qId].trim()]
-    }
-    setQuestionSelections(finalSelections)
-
+  const advanceQuestion = () => {
     if (currentQuestionIndex < planningQuestions.length - 1) {
       setCurrentQuestionIndex((i) => i + 1)
     } else {
-      const answers: PlanningAnswer[] = planningQuestions.map((q) => ({
-        questionId: q.id,
-        questionPrompt: q.prompt,
-        answer: (finalSelections[q.id] ?? []).join(", "),
-      }))
       setShowQuestionsStep(false)
-      callGenerateLesson(answers)
+      callGenerateLesson(buildPlanningAnswers())
     }
   }
 

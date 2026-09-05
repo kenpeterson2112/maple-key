@@ -90,6 +90,18 @@ Driven from `--radius: 0.875rem`:
 --radius-xl: calc(var(--radius) + 4px)   /* ~18px */
 ```
 
+### Motion
+
+```
+--animate-fade-in: fade-in 0.35s ease-out   /* utility: animate-fade-in */
+```
+
+The `fade-in` keyframes live in `src/index.css` alongside the tokens. Tailwind
+v4 here ships **no** animate plugin, so `animate-in` / `fade-in-0` and friends
+resolve to nothing — only core Tailwind animations (`animate-pulse`,
+`animate-spin`) and the named keyframes above actually render. Wrap entrance
+animation in `motion-safe:`.
+
 ### Spacing scale
 
 Tailwind v4 default 4px scale. Common steps used in this app:
