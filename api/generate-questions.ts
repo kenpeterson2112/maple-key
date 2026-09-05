@@ -30,6 +30,13 @@ import { provinceLabel } from "./_lib/provinces.js"
  *    rather than trusted blindly.
  *  - answerFormat is a CLOSED enum. The model picks per question, but only from
  *    a set the renderer is guaranteed to support.
+ *  - The output surfaces the *reasoning*, not just the choices: each question
+ *    carries `reasoning_bullets` (the pedagogical considerations the teacher
+ *    should weigh before answering) and each option carries a one-sentence
+ *    `reasoning`. The UI shows the bullets up front and hides the options
+ *    behind a deliberate delay, so the teacher commits to their own thinking
+ *    first. Bullets grounded in the teacher's own assessment data are typed
+ *    "assessment" so the renderer can mark them as "this is about YOUR class".
  */
 
 interface ResourceInput {
@@ -43,6 +50,13 @@ interface ResourceInput {
   usage_notes?: string
 }
 
+interface LevelCounts {
+  level1: number
+  level2: number
+  level3: number
+  level4: number
+}
+
 interface GenerateQuestionsRequest {
   resources: ResourceInput[]
   lessonLength: string
@@ -50,6 +64,9 @@ interface GenerateQuestionsRequest {
   teacherNotes: string
   classroomResources?: string[]
   noTechMode?: boolean
+  /** Mirrors generate-lesson: class assessment data is only used when opted in. */
+  includeAssessmentData?: boolean
+  classProgress?: Record<string, LevelCounts>
   // Class context from the planner's first step; authoritative when present.
   // grade/subject otherwise fall back to the first resource, province to Ontario.
   province?: string
@@ -62,6 +79,26 @@ interface GenerateQuestionsRequest {
 const ANSWER_FORMATS = ["single-select", "this-that-both", "multi-select"] as const
 type AnswerFormat = (typeof ANSWER_FORMATS)[number]
 
+/**
+ * Bullet flavours. "assessment" bullets are grounded in the teacher's own class
+ * data and get highlighted differently — they are about THIS class, not
+ * pedagogy in general.
+ */
+const BULLET_TYPES = ["pedagogical", "assessment"] as const
+type ReasoningBulletType = (typeof BULLET_TYPES)[number]
+
+interface ReasoningBullet {
+  type: ReasoningBulletType
+  /** One plain-text nudge. No links, no markup — the UI renders it as text. */
+  text: string
+}
+
+/** One suggested answer, with why choosing it changes the lesson. */
+interface PlanningOption {
+  label: string
+  reasoning: string
+}
+
 interface PlanningQuestion {
   /** Stable id (q1..qN) so the lesson call can map answers back to questions. */
   id: string
@@ -70,8 +107,10 @@ interface PlanningQuestion {
   /** Why this choice matters — one short line, helps the teacher decide. */
   rationale: string
   answerFormat: AnswerFormat
-  /** Option labels. 2 for this-that-both; 2-5 otherwise. */
-  options: string[]
+  /** Considerations shown before the teacher answers. May be empty. */
+  reasoning_bullets: ReasoningBullet[]
+  /** Suggested answers. 2 for this-that-both; 2-5 otherwise. */
+  options: PlanningOption[]
 }
 
 /** Bounds — keep the call cheap and the UI fast. */
@@ -79,6 +118,8 @@ const MIN_QUESTIONS = 3
 const MAX_QUESTIONS = 4
 /** How many resources get described in the prompt — separate from the hard MAX_RESOURCES reject cap in _lib/limits. */
 const RESOURCES_IN_PROMPT = 12
+/** Bullets are a nudge, not a briefing — anything past this is noise. */
+const MAX_REASONING_BULLETS = 5
 
 /** Reused verbatim from generate-assessment.ts — model-agnostic JSON rescue. */
 function extractJson(text: string): string {
@@ -101,8 +142,47 @@ function collectText(content: Anthropic.ContentBlock[]): string {
 }
 
 /**
+ * Validate one reasoning bullet. An unrecognised `type` falls back to
+ * "pedagogical" rather than dropping the bullet — the text is the payload, the
+ * type only controls how the UI tints it.
+ */
+function validateBullet(raw: unknown): ReasoningBullet | null {
+  if (typeof raw !== "object" || raw === null) return null
+  const b = raw as Record<string, unknown>
+  if (typeof b.text !== "string" || b.text.trim() === "") return null
+  const type =
+    typeof b.type === "string" && BULLET_TYPES.includes(b.type as ReasoningBulletType)
+      ? (b.type as ReasoningBulletType)
+      : "pedagogical"
+  return { type, text: b.text.trim() }
+}
+
+/**
+ * Validate one suggested option. A bare string is accepted and widened — an
+ * option the model forgot to explain is still a usable suggestion, and the UI
+ * renders a missing `reasoning` as nothing rather than as a gap.
+ */
+function validateOption(raw: unknown): PlanningOption | null {
+  if (typeof raw === "string") {
+    return raw.trim() === "" ? null : { label: raw.trim(), reasoning: "" }
+  }
+  if (typeof raw !== "object" || raw === null) return null
+  const o = raw as Record<string, unknown>
+  if (typeof o.label !== "string" || o.label.trim() === "") return null
+  return {
+    label: o.label.trim(),
+    reasoning: typeof o.reasoning === "string" ? o.reasoning.trim() : "",
+  }
+}
+
+/**
  * Validate one question from the model. Returns a clean PlanningQuestion or
  * null if it's malformed. We drop bad questions rather than trust the array.
+ *
+ * Malformed *parts* are dropped individually: a bad bullet or a bad option
+ * costs that bullet or that option, not the whole question. Only the core
+ * shape — prompt, format, and enough surviving options for the renderer — is
+ * grounds for dropping the question outright.
  */
 function validateQuestion(raw: unknown, index: number): PlanningQuestion | null {
   if (typeof raw !== "object" || raw === null) return null
@@ -116,7 +196,9 @@ function validateQuestion(raw: unknown, index: number): PlanningQuestion | null 
   const answerFormat = q.answerFormat as AnswerFormat
 
   if (!Array.isArray(q.options)) return null
-  const options = q.options.filter((o): o is string => typeof o === "string" && o.trim() !== "")
+  const options = q.options
+    .map(validateOption)
+    .filter((o): o is PlanningOption => o !== null)
 
   // this-that-both must offer exactly two real choices ("both" is implicit in
   // the format and added by the UI, not by the model).
@@ -124,13 +206,41 @@ function validateQuestion(raw: unknown, index: number): PlanningQuestion | null 
   // single-select / multi-select need at least 2 and we cap at 5 for the UI.
   if (answerFormat !== "this-that-both" && (options.length < 2 || options.length > 5)) return null
 
+  // Bullets are optional garnish — a question with none still works.
+  const reasoning_bullets = Array.isArray(q.reasoning_bullets)
+    ? q.reasoning_bullets
+        .map(validateBullet)
+        .filter((b): b is ReasoningBullet => b !== null)
+        .slice(0, MAX_REASONING_BULLETS)
+    : []
+
   return {
     id: `q${index + 1}`,
     prompt: q.prompt.trim(),
     rationale: q.rationale.trim(),
     answerFormat,
+    reasoning_bullets,
     options,
   }
+}
+
+/**
+ * Summarise the teacher's own assessment data for the prompt. Deliberately a
+ * near-twin of formatClassProgress in generate-lesson.ts — api/ routes cannot
+ * share a module with src/, and the two calls want different closing
+ * instructions (differentiate the lesson vs. name the pattern to the teacher).
+ */
+function formatClassProgress(progress: Record<string, LevelCounts>): string {
+  const lines = Object.entries(progress)
+    .filter(([, c]) => c.level1 + c.level2 + c.level3 + c.level4 > 0)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(
+      ([code, c]) =>
+        `  ${code}: ${c.level4} surpassing, ${c.level3} meeting, ${c.level2} approaching, ${c.level1} needs critical attention`,
+    )
+  if (lines.length === 0) return ""
+  return `Recent assessment data for THIS teacher's class:
+${lines.join("\n")}`
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -147,6 +257,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     teacherNotes,
     classroomResources,
     noTechMode,
+    includeAssessmentData,
+    classProgress,
     province: reqProvince,
     grade: reqGrade,
     subject: reqSubject,
@@ -198,7 +310,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const allCodes = [...new Set(resources.flatMap((r) => r.curriculum_expectations ?? []))]
 
-  const systemPrompt = `You are an experienced ${provinceName} elementary school teacher and instructional coach. Before a colleague generates a lesson plan, you ask them a few sharp planning questions so the lesson reflects THEIR professional judgment about THEIR classroom — not a generic template. You always respond with valid JSON only — no markdown fences, no extra text.`
+  const classProgressBlock =
+    includeAssessmentData && classProgress ? formatClassProgress(classProgress) : ""
+
+  const systemPrompt = `You are an experienced ${provinceName} elementary school teacher and instructional coach. Before a colleague generates a lesson plan, you ask them a few sharp planning questions so the lesson reflects THEIR professional judgment about THEIR classroom — not a generic template.
+
+The teacher answers in their own words FIRST; your suggested options stay hidden until they have thought it through. So your job is less to offer choices than to surface what is worth thinking about. You always respond with valid JSON only — no markdown fences, no extra text.`
 
   const classroomResourcesLine =
     classroomResources && classroomResources.length > 0
@@ -233,6 +350,22 @@ Write ${MIN_QUESTIONS} to ${MAX_QUESTIONS} questions. Requirements:
 - "rationale" is one short sentence telling the teacher why this choice changes the lesson.
 - Keep prompts to one or two sentences, plain language.
 
+Each question also carries "reasoning_bullets" — 2 to ${MAX_REASONING_BULLETS} short considerations the teacher should weigh BEFORE they answer. The teacher reads these, then types their own answer; they see your suggested options only afterwards, if they ask for them.
+- Draw the bullets from the resource context above: what prior knowledge the resources assume, what their instructional modes imply for how the room is set up, where the topic forks into a real differentiation decision.
+- Write them as gentle nudges, not prescriptions. "Students will need to understand X before Y makes sense" — not "teach X first."
+- Plain text only. No links, no markdown, no bold.
+- Give each bullet a "type": "pedagogical" for general instructional considerations.${
+    classProgressBlock
+      ? `\n- Assessment data for this teacher's own class is available (below). Include 2-3 bullets with "type": "assessment" that name a real pattern in THEIR data and what it might mean for this lesson — e.g. "Your Grade ${grade}s are strong with fractions but uneven on decimals — consider where scaffolding helps." Never restate the raw counts; name the pattern. Still leave the decision to the teacher.`
+      : `\n- No class assessment data is available for this teacher, so do NOT emit any "assessment" bullets.`
+  }
+
+Each option is an object, not a string:
+- "label" is the short choice text the teacher would pick.
+- "reasoning" is ONE sentence saying how picking it changes the lesson — concretely, not "this is a good approach." The teacher reads it next to the label when the suggestions are revealed.
+
+${classProgressBlock}
+
 Return ONLY a JSON object with this exact shape:
 {
   "questions": [
@@ -240,7 +373,12 @@ Return ONLY a JSON object with this exact shape:
       "prompt": "...",
       "rationale": "...",
       "answerFormat": "single-select",
-      "options": ["...", "..."]
+      "reasoning_bullets": [
+        { "type": "pedagogical", "text": "..." }
+      ],
+      "options": [
+        { "label": "...", "reasoning": "..." }
+      ]
     }
   ]
 }`
@@ -248,7 +386,7 @@ Return ONLY a JSON object with this exact shape:
   try {
     const message = await client.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 1200,
+      max_tokens: 3000,
       messages: [{ role: "user", content: userPrompt }],
       system: [
         {
@@ -299,6 +437,12 @@ Return ONLY a JSON object with this exact shape:
       resourcesCount: resources.length,
       rawQuestions: rawQuestions.length,
       validQuestions: questions.length,
+      bullets: questions.reduce((n, q) => n + q.reasoning_bullets.length, 0),
+      assessmentBullets: questions.reduce(
+        (n, q) => n + q.reasoning_bullets.filter((b) => b.type === "assessment").length,
+        0,
+      ),
+      hasClassProgress: classProgressBlock !== "",
       status,
       stop: message.stop_reason,
       tokensIn: message.usage?.input_tokens ?? 0,
