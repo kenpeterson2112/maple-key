@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
-/* Brand display face — drop AlteixsansRegulardemo-E4j1n.otf into /public/fonts/ */
+/* Brand display face — drop AlteixsansRegulardemo-E4j1n.otf into /public/fonts/
+   WARNING: this file is the foundry's DEMO cut. It ships glyphs for A-Z and
+   a-z only. Every digit and every punctuation mark is replaced by a watermark
+   reading "pedroteixeirafoundry.com", which renders at full size in the UI.
+   Use font-display for letters-and-spaces text only until a licensed cut
+   replaces this file. */
 @font-face {
   font-family: "Alteix Sans";
   src: url("/fonts/AlteixsansRegulardemo-E4j1n.otf") format("opentype");

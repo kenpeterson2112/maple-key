@@ -16,6 +16,11 @@ interface TopNavProps {
   onChangeSpace: (space: TopNavSpace) => void
   onOpenMobileFilters?: () => void
   totalActiveFilters?: number
+  /** True while the landing page is showing — the logo reads as the active tab. */
+  isHome?: boolean
+  /** Return to the landing page. The logo is the only affordance for it, which
+   *  keeps the four working spaces in the toggle and adds no extra chrome. */
+  onGoHome?: () => void
 }
 
 interface ToggleItem {
@@ -37,6 +42,8 @@ export default function TopNav({
   onChangeSpace,
   onOpenMobileFilters,
   totalActiveFilters = 0,
+  isHome = false,
+  onGoHome,
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
@@ -90,13 +97,21 @@ export default function TopNav({
           {/* Desktop */}
           <div className="hidden md:flex items-center justify-between gap-4 relative">
             <div className="flex items-center gap-3 z-10">
-              <img
-                src={withBasePath("/maple-key-logo.png")}
-                alt="Maple Key"
-                width={785}
-                height={673}
-                className="h-14 w-auto object-contain"
-              />
+              <button
+                type="button"
+                onClick={onGoHome}
+                aria-label="Maple Key home"
+                aria-current={isHome ? "page" : undefined}
+                className={`rounded-xl p-1 transition-colors hover:bg-[#FFE5CC] ${isHome ? "bg-[#FFE5CC]" : ""}`}
+              >
+                <img
+                  src={withBasePath("/maple-key-logo.png")}
+                  alt="Maple Key"
+                  width={785}
+                  height={673}
+                  className="h-14 w-auto object-contain"
+                />
+              </button>
             </div>
 
             <div className="absolute left-1/2 -translate-x-1/2">
@@ -162,13 +177,21 @@ export default function TopNav({
 
           {/* Mobile */}
           <div className="flex md:hidden items-center justify-between gap-2">
-            <img
-              src={withBasePath("/maple-key-logo.png")}
-              alt="Maple Key"
-              width={785}
-              height={673}
-              className="h-11 w-auto object-contain"
-            />
+            <button
+              type="button"
+              onClick={onGoHome}
+              aria-label="Maple Key home"
+              aria-current={isHome ? "page" : undefined}
+              className={`rounded-lg p-0.5 transition-colors ${isHome ? "bg-[#FFE5CC]" : ""}`}
+            >
+              <img
+                src={withBasePath("/maple-key-logo.png")}
+                alt="Maple Key"
+                width={785}
+                height={673}
+                className="h-11 w-auto object-contain"
+              />
+            </button>
 
             <SpaceToggle
               activeSpace={activeSpace}

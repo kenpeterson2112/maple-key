@@ -80,6 +80,16 @@ headings; body copy uses `--font-sans`.
 the browser. Any font change must be verified in the exported PDF, not just on
 screen.
 
+**Known gotcha — `--font-display` is a DEMO font.** The shipped
+`AlteixsansRegulardemo-E4j1n.otf` carries glyphs for `A-Z` and `a-z` only. Every
+digit and every punctuation mark (`. , - – — : ; ! ? ' " ( ) & / +`) is replaced
+by a watermark reading *pedroteixeirafoundry.com*, rendered at full type size.
+So `font-display` is safe **only** for letters-and-spaces text — no numerals, no
+commas, no periods. That rules it out for any string that interpolates user or
+resource content (titles, counts, dates). Replacing this file with a licensed
+cut is the real fix; until then, treat the constraint as a hard rule and verify
+any new `font-display` callsite in a browser, not just in code.
+
 ### Radii
 
 Driven from `--radius: 0.875rem`:
