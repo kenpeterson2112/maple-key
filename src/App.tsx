@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import HomeSpace from "@/components/home-space"
 import ResourcesSpace from "@/components/resources-space"
 import LessonPlannerModal from "@/components/lesson-planner-modal"
 import LessonsLibrary from "@/components/lessons-library"
@@ -13,14 +14,12 @@ import {
   clearPrefs,
   getPrefs,
   inferProvinceFromTimeZone,
-  isOnboarded,
-  isResourceTourSeen,
   setPrefs,
 } from "@/lib/personalization"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
 
-type Space = "resources" | "lessonplanner" | "assessment" | "lessons" | "insights"
+type Space = "home" | "resources" | "lessonplanner" | "assessment" | "lessons" | "insights"
 // All overlay spaces cross-fade in/out — quick and direction-neutral
 const FADE_VARIANTS = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
 const FADE_TRANSITION = { duration: 0.15, ease: "easeOut" } as const
@@ -48,7 +47,7 @@ export default function App() {
   })
   const [resultCount, setResultCount] = useState(0)
 
-  const [activeSpace, setActiveSpace] = useState<Space>("lessonplanner")
+  const [activeSpace, setActiveSpace] = useState<Space>("home")
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [showResourceTour, setShowResourceTour] = useState(false)
@@ -69,11 +68,6 @@ export default function App() {
     })
     setInferred(prefs.inferred)
     setHydrated(true)
-    if (!isResourceTourSeen()) {
-      setShowResourceTour(true)
-    } else if (!isOnboarded()) {
-      setShowOnboarding(true)
-    }
   }, [])
 
   useEffect(() => {
@@ -134,6 +128,8 @@ export default function App() {
     <div className="fixed inset-0 bg-[#FAF3E0] overflow-hidden flex flex-col">
       <TopNav
         activeSpace={topNavSpace}
+        isHome={activeSpace === "home"}
+        onGoHome={() => setActiveSpace("home")}
         onChangeSpace={(s) => {
           // Plan always starts fresh, matching the old "Plan Lesson" button.
           if (s === "lessonplanner") setPlannerLesson(null)
@@ -170,6 +166,21 @@ export default function App() {
               exit={FADE_VARIANTS.exit}
               transition={FADE_TRANSITION}
             >
+              {activeSpace === "home" && (
+                <HomeSpace
+                  onNavigate={(destination) => {
+                    if (destination === "lessonplanner") setPlannerLesson(null)
+                    setActiveSpace(destination)
+                  }}
+                  onOpenLesson={(lesson) => {
+                    setPlannerLesson(lesson)
+                    setActiveSpace("lessonplanner")
+                  }}
+                  onOpenTour={() => setShowResourceTour(true)}
+                  onOpenClassroomSetup={() => setShowOnboarding(true)}
+                />
+              )}
+
               {activeSpace === "lessonplanner" && (
                 <LessonPlannerModal
                   isOpen
@@ -227,7 +238,8 @@ export default function App() {
 
       {/* Settings lives in TopNav, which owns its own open state and modal instance. */}
 
-      {/* First-visit tour — "How Maple Key Works", leads into classroom setup */}
+      {/* Reached from the landing page's "Take the tour" — never auto-opened
+          over a space, so arrival is not gated by a dialog. */}
       <ResourceOnboardingModal
         open={showResourceTour}
         onClose={() => setShowResourceTour(false)}
@@ -237,7 +249,7 @@ export default function App() {
         }}
       />
 
-      {/* Classroom materials setup — reached from the end of the tour */}
+      {/* Classroom materials setup — from the landing page, or the tour's last step */}
       <OnboardingModal open={showOnboarding} onComplete={handleOnboardingComplete} />
     </div>
   )
