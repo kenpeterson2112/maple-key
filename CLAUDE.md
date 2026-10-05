@@ -133,6 +133,11 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 
 - Lesson generation is a **two-call flow**: planning questions first, then
   generation. Don't collapse it into one call.
+- **The lesson shape is specified in `LESSON_SPEC.md`** (three-part arc,
+  success criteria, differentiation, CRRP and equity framing, reflection
+  checkpoint, and the output rules). The prompt in `api/generate-lesson.ts` and
+  its manual-fallback copy in `src/components/lesson-planner/lesson-export.ts`
+  implement it; change all three together.
 - Planning-question answer formats use a **closed enum** — extend the enum,
   don't introduce free-form formats.
 - Resource curation is a **three-agent waterfall** (Researcher → review →

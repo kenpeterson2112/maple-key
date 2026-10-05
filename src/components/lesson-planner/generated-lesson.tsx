@@ -42,6 +42,10 @@ export interface GeneratedLessonViewProps {
   coveredCodes: string[]
   learningGoal: string
   successCriteria: string[]
+  /** CRRP and equity framing; empty on lessons saved before LESSON_SPEC.md added it. */
+  equityFraming: string
+  /** Student self-assessment moment against the success criteria. */
+  reflectionCheckpoint: string
   mindsOnContent: string
   mindsOnDifferentiation: string
   actionContent: string
@@ -97,6 +101,8 @@ export default function GeneratedLessonView({
   coveredCodes,
   learningGoal,
   successCriteria,
+  equityFraming,
+  reflectionCheckpoint,
   mindsOnContent,
   mindsOnDifferentiation,
   actionContent,
@@ -224,6 +230,24 @@ export default function GeneratedLessonView({
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* CRRP & EQUITY + REFLECTION CHECKPOINT (all templates) */}
+      {(equityFraming || reflectionCheckpoint) && (
+        <div className="bg-card rounded-xl border-2 border-border p-5 space-y-4">
+          {equityFraming && (
+            <div>
+              <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">CRRP &amp; Equity</p>
+              <p className="text-sm text-card-foreground leading-relaxed">{equityFraming}</p>
+            </div>
+          )}
+          {reflectionCheckpoint && (
+            <div>
+              <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Reflection Checkpoint</p>
+              <p className="text-sm text-card-foreground leading-relaxed">{reflectionCheckpoint}</p>
             </div>
           )}
         </div>

@@ -37,6 +37,9 @@ export interface LessonFullContent {
   materialsContent?: string
   learningGoal?: string
   successCriteria?: string[]
+  /** CRRP and equity framing, and the student self-assessment moment. See LESSON_SPEC.md. */
+  equityFraming?: string
+  reflectionCheckpoint?: string
   materials?: { resources: string[]; classroomMaterials?: string[]; preparation: string[] }
   excludedResources?: { title: string; reason: string }[]
   sections?: TemplateSection[]

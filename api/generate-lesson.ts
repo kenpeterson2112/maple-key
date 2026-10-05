@@ -15,6 +15,9 @@ import {
 } from "./_lib/limits.js"
 import { provinceLabel } from "./_lib/provinces.js"
 
+// The lesson shape and rules below are specified in LESSON_SPEC.md at the repo
+// root. Change the spec and this prompt together (and the manual-fallback copy
+// in src/components/lesson-planner/lesson-export.ts).
 const LESSON_MODEL = "claude-haiku-4-5-20251001"
 
 /** A quick check is a fast readiness signal, not a diagnostic — keep it short. */
@@ -111,6 +114,8 @@ interface LessonPlanResponse {
   actionDifferentiation: string
   consolidationContent: string
   consolidationAssessment: string
+  equityFraming: string
+  reflectionCheckpoint: string
   materials: {
     resources: string[]
     classroomMaterials: string[]
@@ -366,6 +371,8 @@ ${isThreePart ? `Return a JSON object with exactly these fields (string values a
   "actionDifferentiation": "Differentiation strategies for Action phase",
   "consolidationContent": "Closing/consolidation activity description",
   "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
+  "equityFraming": "CRRP and equity framing for this lesson (2-4 sentences, see rules below)",
+  "reflectionCheckpoint": "When students self-assess against the success criteria, and the exact prompt they respond to",
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
     "classroomMaterials": ["Exact label copied from the classroom materials list above"],
@@ -390,6 +397,8 @@ ${isThreePart ? `Return a JSON object with exactly these fields (string values a
   "sections": [
 ${sectionsSchema}
   ],
+  "equityFraming": "CRRP and equity framing for this lesson (2-4 sentences, see rules below)",
+  "reflectionCheckpoint": "When students self-assess against the success criteria, and the exact prompt they respond to",
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
     "classroomMaterials": ["Exact label copied from the classroom materials list above"],
@@ -404,7 +413,13 @@ ${sectionsSchema}
   ]
 }`}
 
-"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "materials.classroomMaterials" must list ONLY items from the classroom materials list above that this lesson actually uses, copied verbatim with the exact labels given — never invent or rename one, and never list anything that was not in that list; return an empty array if the lesson uses none (or none were provided). "excludedResources" may be an empty array if all provided resources fit the lesson.
+"successCriteria" must have 2-3 items written as student-facing "I can..." statements. "curriculumCodesCovered" and every assessment question "code" must be codes from the list provided above; never cite an expectation code you were not given. (The one exception is the concept-label fallback for quick-check questions described above, used only when "curriculumCodesCovered" is empty.)
+
+"equityFraming" applies Culturally Responsive and Relevant Pedagogy (CRRP) to THIS lesson in 2-4 sentences: how it connects to students' identities, cultures, languages, and lived experiences; whose perspectives or knowledge it brings in (including First Nations, Métis, and Inuit perspectives where they genuinely fit the content, never as a token add-on); and how it removes barriers so every student can reach the success criteria. Be specific to this content. A statement that would fit any lesson is not acceptable.
+
+"reflectionCheckpoint" is one moment, usually during the final phase, where students judge their own progress against the success criteria. Say when it happens, then give the exact student-facing prompt. It is a self-assessment, not another quiz question.
+
+"materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "materials.classroomMaterials" must list ONLY items from the classroom materials list above that this lesson actually uses, copied verbatim with the exact labels given — never invent or rename one, and never list anything that was not in that list; return an empty array if the lesson uses none (or none were provided). "excludedResources" may be an empty array if all provided resources fit the lesson.
 
 "artifacts" must list every concrete classroom artifact the teacher will need to produce or bring — examples: guided capture sheet, exit ticket, sticky-note reflection template, T-chart, observation sheet, workbook activity, reflection prompt handout. One entry per artifact. Use the artifact's most natural short name in "name". In "purpose", write one short phrase describing what students do with it. In "section", indicate which lesson section ("mindsOn", "action", "consolidation", "materials") it's used in. Do NOT list pre-existing bookmarked resources (those go in "materials.resources"); only list artifacts the teacher must produce or supply themselves. If the lesson genuinely needs no artifacts, return an empty array.
 
@@ -413,7 +428,7 @@ ${reproducibleLanguageBlock}`
   try {
     const message = await client.messages.create({
       model: LESSON_MODEL,
-      max_tokens: 5000,
+      max_tokens: 5500,
       messages: [{ role: "user", content: userPrompt }],
       system: [
         {
