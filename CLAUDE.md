@@ -140,9 +140,16 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   so don't shortcut it for convenience.
 - Static resource data ships as `public/resources.json` (~2.5 MB) and is fetched
   via SWR. Treat as read-only at runtime; a nightly Claude Code routine
-  regenerates it (see `ROUTINES.md`). **There is no database** — admin edits
-  accumulate in localStorage and land as a draft PR via `api/admin-push.ts`, so
-  git history is the audit log and the recovery path.
+  regenerates it (see `ROUTINES.md`). **Resources have no database** — admin
+  edits accumulate in localStorage and land as a draft PR via
+  `api/admin-push.ts`, so git history is the audit log and the recovery path.
+- **Supabase holds shared student activities only** (project "Maple Key",
+  `ca-central-1`, table `activities`). RLS is on with no policies, so only
+  `api/activities.ts` (holding `SUPABASE_SECRET_KEY`) can reach it. It stores
+  teacher-written content; student answers never leave the student's device
+  (local autosave, then a PDF they attach in Classroom). Keep it that way
+  unless a privacy review signs off. Don't move resources or admin edits into
+  it — the git audit trail is deliberate.
 - **The resource schema has one home: `schema/resource-schema.json`** (currently
   `schema_version` 3.0). It holds every field vocabulary, the required/optional
   split, and the admin allowlists, and all three languages read it:
