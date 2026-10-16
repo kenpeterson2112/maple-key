@@ -1,7 +1,8 @@
 import { useState } from "react"
-import { X, Printer } from "lucide-react"
+import { X, Printer, Link2, Check, ExternalLink, GraduationCap } from "lucide-react"
 import type { LessonArtifact } from "@/lib/lesson-metadata"
 import { openPrintWindow, escapeHtml, nl2br, PRINT_ON_LOAD_SCRIPT } from "@/lib/print-html"
+import { buildActivityUrl, classroomShareUrl, type StudentActivity } from "@/lib/student-activity"
 
 interface Props {
   artifact: LessonArtifact
@@ -50,6 +51,40 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
     subtitle,
     ...labels,
   })
+
+  const [copied, setCopied] = useState(false)
+
+  /** The fill-in version students open from Classroom, built from the current edits. */
+  const buildStudentActivity = (): StudentActivity => ({
+    v: 1,
+    title,
+    subtitle,
+    prompts: DEFAULT_FIELDS.map((f) => labels[`label_${f.key}`] || (isFrench ? f.labelFr : f.label)),
+    lang: isFrench ? "fr" : "en",
+  })
+
+  const handleCopyLink = async () => {
+    onSave(buildFields())
+    try {
+      await navigator.clipboard.writeText(buildActivityUrl(buildStudentActivity()))
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard can be blocked by browser policy; the preview link still exposes the URL.
+      setCopied(false)
+    }
+  }
+
+  const handleShareToClassroom = () => {
+    onSave(buildFields())
+    const url = classroomShareUrl(buildActivityUrl(buildStudentActivity()))
+    window.open(url, "classroom-share", "width=640,height=720,noopener")
+  }
+
+  const handlePreview = () => {
+    onSave(buildFields())
+    window.open(buildActivityUrl(buildStudentActivity()), "_blank", "noopener")
+  }
 
   const handleSaveAndClose = () => {
     onSave(buildFields())
@@ -122,6 +157,37 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
                 />
               </div>
             ))}
+          </div>
+
+          <div className="rounded-lg border border-border bg-muted/30 p-4">
+            <p className="text-sm font-semibold text-foreground">Share a fill-in version with students</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Students open the link, type their answers (no login), download a PDF, and attach it to
+              their Classroom assignment. Their work saves on their own device as they type.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                onClick={handleShareToClassroom}
+                className="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90"
+              >
+                <GraduationCap size={14} aria-hidden />
+                Share to Google Classroom
+              </button>
+              <button
+                onClick={handleCopyLink}
+                className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted/40"
+              >
+                {copied ? <Check size={14} aria-hidden /> : <Link2 size={14} aria-hidden />}
+                {copied ? "Link copied" : "Copy student link"}
+              </button>
+              <button
+                onClick={handlePreview}
+                className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted/40"
+              >
+                <ExternalLink size={14} aria-hidden />
+                Preview as student
+              </button>
+            </div>
           </div>
         </div>
 
