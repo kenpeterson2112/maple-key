@@ -54,6 +54,8 @@ interface LessonPlannerModalProps {
   isOpen: boolean
   onClose: () => void
   onBack: () => void
+  /** Leaves the planner for the saved-lessons library. */
+  onOpenLibrary: () => void
   bookmarkedResources: Resource[]
   asSpace?: boolean
   lesson?: LessonMetadata | null
@@ -73,6 +75,7 @@ export default function LessonPlannerModal({
   isOpen,
   onClose,
   onBack,
+  onOpenLibrary,
   bookmarkedResources,
   asSpace = false,
   lesson = null,
@@ -698,6 +701,8 @@ export default function LessonPlannerModal({
                 onOpenOrganizer={(i) => setOrganizerArtifactIndex(i)}
                 onOpenFeedback={() => setShowFeedbackDialog(true)}
                 onStartAssessment={() => setShowAssessment(true)}
+                onOpenLibrary={onOpenLibrary}
+                onPlanAnother={onBack}
               />
             ) : showQuestionsStep ? (
               <>

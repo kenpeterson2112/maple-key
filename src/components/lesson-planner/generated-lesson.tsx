@@ -1,7 +1,10 @@
 "use client"
 
 import {
+  ArrowRight,
+  BookOpen,
   CheckCircle,
+  ClipboardCheck,
   ClipboardList,
   Download,
   Lightbulb,
@@ -9,6 +12,7 @@ import {
   MessageSquareText,
   Pencil,
   RefreshCw,
+  Search,
   Target,
 } from "lucide-react"
 import ArtifactsSection from "@/components/artifacts-section"
@@ -85,6 +89,9 @@ export interface GeneratedLessonViewProps {
   onOpenOrganizer: (index: number) => void
   onOpenFeedback: () => void
   onStartAssessment: () => void
+  /** "What's next?" exits: the saved-lessons library, and Search for the next lesson. */
+  onOpenLibrary: () => void
+  onPlanAnother: () => void
 }
 
 /**
@@ -134,6 +141,8 @@ export default function GeneratedLessonView({
   onOpenOrganizer,
   onOpenFeedback,
   onStartAssessment,
+  onOpenLibrary,
+  onPlanAnother,
 }: GeneratedLessonViewProps) {
   const mindsOnTime = Math.round(lessonMinutes * 0.17)
   const actionTime = Math.round(lessonMinutes * 0.58)
@@ -646,36 +655,64 @@ export default function GeneratedLessonView({
         )
       })}
 
-      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-6 text-center">
-        <MessageSquareText size={32} className="text-[#A8998E] mx-auto mb-3" />
-        <p className="text-[#666] mb-4">Did you like this lesson? Do you have feedback?</p>
+      {/* NEXT STEPS — the plan is saved, so point the teacher somewhere useful */}
+      <section aria-labelledby="next-steps-heading" className="bg-card rounded-xl border-2 border-border p-5 sm:p-6">
+        <h4 id="next-steps-heading" className="text-lg font-semibold text-foreground">What&apos;s next?</h4>
+        <p className="text-sm text-muted-foreground mt-1">This lesson is saved to your Lessons library.</p>
+
+        {canAssess && (
+          <button
+            onClick={onStartAssessment}
+            className="mt-4 w-full flex items-center gap-4 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground p-4 text-left transition-colors"
+          >
+            <ClipboardCheck size={24} className="flex-shrink-0" />
+            <span className="flex-1 min-w-0">
+              <span className="block font-semibold">Start a quick check</span>
+              <span className="block text-sm opacity-90 mt-1">
+                {coveredCodes.length > 0
+                  ? `Formative assessment on ${coveredCodes.join(", ")}`
+                  : "Formative assessment on this lesson's learning goal"}
+              </span>
+            </span>
+            <ArrowRight size={20} className="flex-shrink-0" />
+          </button>
+        )}
+
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <button
+            onClick={onOpenLibrary}
+            className="flex items-center gap-3 rounded-xl border-2 border-border hover:bg-muted/40 p-4 text-left transition-colors"
+          >
+            <BookOpen size={20} className="text-primary flex-shrink-0" />
+            <span className="min-w-0">
+              <span className="block text-sm font-semibold text-foreground">Go to my lessons</span>
+              <span className="block text-xs text-muted-foreground mt-1">Revisit, export, or teach a saved plan</span>
+            </span>
+          </button>
+          <button
+            onClick={onPlanAnother}
+            className="flex items-center gap-3 rounded-xl border-2 border-border hover:bg-muted/40 p-4 text-left transition-colors"
+          >
+            <Search size={20} className="text-primary flex-shrink-0" />
+            <span className="min-w-0">
+              <span className="block text-sm font-semibold text-foreground">Plan another lesson</span>
+              <span className="block text-xs text-muted-foreground mt-1">Find resources for your next lesson</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      {/* FEEDBACK — deliberately last and low-key so it doesn't compete with next steps */}
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 pt-2 text-center">
+        <MessageSquareText size={18} className="text-muted-foreground flex-shrink-0" />
+        <p className="text-sm text-muted-foreground">Did you like this lesson? Do you have feedback?</p>
         <button
           onClick={onOpenFeedback}
-          className="px-6 py-2.5 bg-[#FF6B35] hover:bg-[#e55a2a] text-white font-semibold rounded-xl transition-colors"
+          className="text-sm font-semibold text-primary hover:underline"
         >
           Submit Feedback
         </button>
       </div>
-
-      {/* Assessment CTA */}
-      {canAssess && (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 flex items-center justify-between gap-4">
-          <div>
-            <p className="font-semibold text-amber-900">Check student understanding</p>
-            {coveredCodes.length > 0 && (
-              <p className="text-sm text-amber-700 mt-0.5">
-                Quick formative check on {coveredCodes.join(", ")}
-              </p>
-            )}
-          </div>
-          <button
-            onClick={onStartAssessment}
-            className="flex-shrink-0 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors"
-          >
-            Start Assessment
-          </button>
-        </div>
-      )}
 
       {/* Spacer for bottom */}
       <div className="h-6" />
