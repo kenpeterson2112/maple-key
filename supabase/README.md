@@ -2,7 +2,17 @@
 
 Schema for the Supabase project **Maple Key** (`jlsqyywvboqplvscwxbb`), which is
 taking over the resource library from `public/resources.json`. Migration is
-phased; until the read path flips, the JSON in git is still what the app serves.
+phased. Today **production builds its resource data from here**, while every
+write still lands in the JSON in git and `sync-supabase.yml` carries it in:
+
+```
+edit (admin push / routine / script) → PR → merge to main
+  → sync-supabase.yml: seed-supabase.py --prune → export --check → Vercel deploy hook + deploy.yml
+  → pnpm build: vite build && export-resources.mjs → dist/resources.json from the database
+```
+
+The Supabase env is set on Vercel **Production only**, so a PR preview still
+serves that PR's own `public/resources.json`.
 
 ## Layout
 

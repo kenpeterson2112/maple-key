@@ -27,7 +27,9 @@ Pages mirror to test or demo AI functionality.
 - Tailwind CSS v4
 - Radix UI (Popover, Dialog) for primitives
 - framer-motion for animation
-- SWR for the static `resources.json` fetch
+- SWR for the static `resources.json` fetch — on production the build writes
+  that file from Supabase (see `supabase/README.md`); locally it's the committed
+  `public/resources.json`
 - Anthropic SDK, called from Vercel serverless functions in `api/` (lesson
   planning, generation, assessment) — Vercel-only, not available on the
   GitHub Pages mirror
@@ -65,7 +67,9 @@ then tag, suppress, edit, or delete resources. Changes accumulate locally
 **Push to GitHub** sends the changeset to `api/admin-push.ts`, which applies
 it to both `public/resources.json` and `docs/resources.json` on a fresh
 `admin/resource-edits-*` branch and opens a draft PR — merging the PR is the
-review gate; nothing writes to `main` directly. **Download JSON** is the
+review gate; nothing writes to `main` directly. Once merged,
+`.github/workflows/sync-supabase.yml` loads the change into Supabase and
+redeploys, which is when it goes live. **Download JSON** is the
 no-server fallback: it downloads the edited `resources.json` for a manual
 commit.
 
