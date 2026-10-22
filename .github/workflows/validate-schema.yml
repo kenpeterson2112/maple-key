@@ -39,3 +39,29 @@ jobs:
 
       - name: Typecheck
         run: pnpm typecheck
+
+  # Applies every supabase/migrations/*.sql to a throwaway Postgres and runs
+  # supabase/tests — proves the generated constraints accept a real-shaped
+  # record, reject off-vocabulary ones, and that the audit log, revert and RLS
+  # behave. The real project is never touched from CI.
+  supabase-migrations:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Migrations + schema tests
+        run: supabase/tests/run.sh postgres://postgres:postgres@localhost:5432/postgres
