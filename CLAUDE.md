@@ -144,11 +144,16 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   accumulate in localStorage and land as a draft PR via `api/admin-push.ts`, so
   git history is the audit log and the recovery path.
 - **Supabase migration in progress** (see `supabase/README.md`). The project
-  holds the resource tables, generated constraints, audit log and RLS, seeded
-  from `public/resources.json` with exact parity (`scripts/export-resources.mjs
-  --check`). It is not yet the source of truth — until the read path flips, the
-  JSON is still what ships and what scripts edit, and the database catches up
-  via `scripts/seed-supabase.py`. Never write to the database directly.
+  holds the resource tables, generated constraints, audit log and RLS.
+  **Production reads from it:** `pnpm build` writes `dist/resources.json` from
+  the database when `SUPABASE_URL` / `SUPABASE_ANON_KEY` are set (Vercel
+  Production, `deploy.yml`), and ships the committed file otherwise (local dev,
+  CI, PR previews). **Writes still go to `public/resources.json` in git** —
+  admin push, routines and scripts edit it as before, and
+  `.github/workflows/sync-supabase.yml` carries each merge into the database
+  (`seed-supabase.py --prune`, parity check, redeploy). So an edit is live only
+  once it's merged *and* synced. Never write to the database directly until the
+  write paths move.
 - **The resource schema has one home: `schema/resource-schema.json`** (currently
   `schema_version` 3.0). It holds every field vocabulary, the required/optional
   split, and the admin allowlists, and all three languages read it:

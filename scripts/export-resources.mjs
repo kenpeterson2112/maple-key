@@ -6,6 +6,15 @@
  *   node scripts/export-resources.mjs                     # write public/resources.json
  *   node scripts/export-resources.mjs --out path.json     # write elsewhere
  *   node scripts/export-resources.mjs --check public/resources.json
+ *   node scripts/export-resources.mjs --if-configured     # the build step: skip quietly without env
+ *
+ * `pnpm build` runs this after vite with --if-configured --out dist/resources.json,
+ * so a build with SUPABASE_URL and SUPABASE_ANON_KEY set (Vercel production, the
+ * Pages workflow) ships the database's snapshot over the copy vite took from
+ * public/, and one without them (local dev, ci.yml, PR previews) ships the
+ * committed public/resources.json. Writing into dist/ means a build never dirties
+ * the tracked file. When the env is set, any failure fails the build, so
+ * Vercel keeps serving the last good deploy instead of a stale or empty file.
  *
  * --check writes nothing: it exits 1 unless the database and the file hold the
  * same records in the same order (key order and meta.generated_at aside). That
@@ -106,6 +115,10 @@ async function main() {
     const i = args.indexOf(name)
     return i === -1 ? undefined : args[i + 1]
   }
+  if (args.includes("--if-configured") && !(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY)) {
+    console.log("skip export: SUPABASE_URL / SUPABASE_ANON_KEY not set, building from the committed public/resources.json")
+    return
+  }
   const db = shape(await fetchSnapshot())
 
   const checkPath = flag("--check")
@@ -120,6 +133,10 @@ async function main() {
     console.log(`OK   database snapshot matches ${checkPath} (${db.resources.length} records)`)
     return
   }
+
+  // An empty snapshot is never a real library; it means RLS, the view or the
+  // seed went wrong. Shipping it would blank the site.
+  if (db.resources.length === 0) throw new Error("export_published_resources returned no resources; refusing to write")
 
   const out = flag("--out") ?? join(ROOT, "public", "resources.json")
   writeFileSync(out, JSON.stringify(db, null, 2) + "\n")

@@ -34,9 +34,14 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # With the Supabase secrets set, the build exports resources.json from
+      # the database (scripts/export-resources.mjs); without them it ships the
+      # committed file.
       - run: pnpm build
         env:
           VITE_BASE_PATH: /v0-maple-key-website/
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
       - name: Refresh docs/ from dist/
         run: |
