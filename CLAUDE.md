@@ -144,9 +144,11 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   accumulate in localStorage and land as a draft PR via `api/admin-push.ts`, so
   git history is the audit log and the recovery path.
 - **Supabase migration in progress** (see `supabase/README.md`). The project
-  holds the resource tables, generated constraints, audit log and RLS, but is
-  not yet the source of truth — until the read path flips, `public/resources.json`
-  is still what ships and what scripts edit. Don't write to both.
+  holds the resource tables, generated constraints, audit log and RLS, seeded
+  from `public/resources.json` with exact parity (`scripts/export-resources.mjs
+  --check`). It is not yet the source of truth — until the read path flips, the
+  JSON is still what ships and what scripts edit, and the database catches up
+  via `scripts/seed-supabase.py`. Never write to the database directly.
 - **The resource schema has one home: `schema/resource-schema.json`** (currently
   `schema_version` 3.0). It holds every field vocabulary, the required/optional
   split, and the admin allowlists, and all three languages read it:
