@@ -34,4 +34,5 @@ for migration in "$DIR"/../migrations/*.sql; do
 done
 
 "${PSQL[@]}" "$TEST_URL" -f "$DIR/resource_schema_test.sql"
+"${PSQL[@]}" "$TEST_URL" -f "$DIR/resource_import_test.sql"
 echo "OK   supabase schema tests passed"

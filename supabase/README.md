@@ -26,6 +26,24 @@ phased; until the read path flips, the JSON in git is still what the app serves.
    assigned. `pnpm validate:schema` fails while the newest constraints file is
    stale.
 
+## Seeding and parity
+
+While `public/resources.json` is still the source of truth, the database is a
+synced copy of it:
+
+```sh
+SUPABASE_DB_URL=postgres://... python3 scripts/seed-supabase.py            # upsert from the checkout
+SUPABASE_DB_URL=postgres://... python3 scripts/seed-supabase.py --prune    # …and archive rows the JSON dropped
+SUPABASE_URL=https://jlsqyywvboqplvscwxbb.supabase.co SUPABASE_ANON_KEY=<publishable key> \
+  node scripts/export-resources.mjs --check public/resources.json          # parity gate
+```
+
+The upsert is `public.import_resources()` and the row → record mapping is
+`public.resource_json()` (generated), so the round trip is defined in one place
+and covered by `tests/resource_import_test.sql`. Re-seeding an unchanged file
+writes nothing. `--link-history` loaded `link-health.json` and
+`health-changelog.json` into `link_checks` once; it refuses a second run.
+
 ## Writing to `resources`
 
 Every insert, update and delete is logged to `resource_revisions` by trigger.

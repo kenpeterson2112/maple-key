@@ -14,6 +14,10 @@ idempotent and a removed vocabulary value or renamed field cannot leave a stale
 constraint behind. It also asserts that public.resources has exactly the
 schema's fields as columns, so adding a field to the JSON without a column
 fails the migration instead of silently dropping data on export.
+
+The same file defines public.resource_json() and export_published_resources(),
+the row -> record mapping, because it depends on the schema too (which fields
+are nullable, the schema_version stamped into meta).
 """
 
 import argparse
@@ -153,7 +157,57 @@ $$;
 {drop_owned("link_checks")}
 
 {add_constraints("link_checks", link_check_constraints())}
+
+{render_export()}
 """
+
+
+def render_export() -> str:
+    """The row -> record mapping, i.e. the inverse of how import_resources() stores one.
+
+    A NULL column is an absent field and is dropped, except for the schema's
+    nullable fields, which a record carries as an explicit null. grade_level is
+    stored as text[] and its digit strings go back out as JSON numbers.
+    """
+    return f"""-- One resources row as the record resources.json carries.
+create or replace function public.resource_json(r public.resources)
+returns jsonb
+language sql
+immutable
+set search_path = ''
+as $$
+  select coalesce(jsonb_object_agg(e.key, e.value), '{{}}'::jsonb)
+  from jsonb_each(
+    to_jsonb(r) - {text_array(BOOKKEEPING_COLUMNS)}
+    || jsonb_build_object(
+      'grade_level',
+      (select jsonb_agg(case when g ~ '^[0-9]+$' then to_jsonb(g::integer) else to_jsonb(g) end order by n)
+       from unnest(r.grade_level) with ordinality u(g, n))
+    )
+  ) e
+  where e.value <> 'null'::jsonb or e.key = any ({text_array(_schema.NULLABLE_FIELDS)})
+$$;
+
+-- The published snapshot in resources.json's shape. security invoker, so a
+-- caller only ever sees what RLS lets it read.
+create or replace function public.export_published_resources()
+returns jsonb
+language sql
+stable
+security invoker
+set search_path = ''
+as $$
+  select jsonb_build_object(
+    'meta', jsonb_build_object(
+      'generated_at', to_char(now() at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'),
+      'total_count', count(*),
+      'schema_version', {q(_schema.SCHEMA_VERSION)}
+    ),
+    'resources', coalesce(jsonb_agg(public.resource_json(r) order by r.seq), '[]'::jsonb)
+  )
+  from public.resources r
+  where r.status = 'live'
+$$;"""
 
 
 def latest_migration():
