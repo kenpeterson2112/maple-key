@@ -189,6 +189,7 @@ export default function App() {
                   bookmarkedResources={bookmarkedResources}
                   onClose={goResources}
                   onBack={goResources}
+                  onOpenLibrary={() => setActiveSpace("lessons")}
                   filters={filters}
                   setFilters={setFilters}
                   sidebarFilters={sidebarFilters}
