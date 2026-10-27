@@ -17,11 +17,17 @@ const isAdmin = window.location.hash === "#admin"
 const StudentActivityRoute = lazy(() => import("@/components/student-activity/student-activity-route"))
 const isStudentActivity = window.location.hash.startsWith(ACTIVITY_HASH_PREFIX)
 
+// District Insights (#district) — the sample district-leader dashboard. Same
+// pattern again: its own lazy page with no teacher-app providers.
+const DistrictSpace = lazy(() => import("@/components/district/district-space"))
+const isDistrict = window.location.hash === "#district"
+
 // Mode is chosen once at load, so moving to or from an activity link in the
 // same tab (pasting a second link, say) needs a fresh load to switch pages.
 window.addEventListener("hashchange", (e) => {
-  const was = new URL(e.oldURL).hash.startsWith(ACTIVITY_HASH_PREFIX)
-  const now = new URL(e.newURL).hash.startsWith(ACTIVITY_HASH_PREFIX)
+  const isStandalone = (hash: string) => hash.startsWith(ACTIVITY_HASH_PREFIX) || hash === "#district"
+  const was = isStandalone(new URL(e.oldURL).hash)
+  const now = isStandalone(new URL(e.newURL).hash)
   if (was || now) window.location.reload()
 })
 
@@ -30,6 +36,10 @@ createRoot(document.getElementById("root")!).render(
     {isStudentActivity ? (
       <Suspense fallback={null}>
         <StudentActivityRoute hash={window.location.hash} />
+      </Suspense>
+    ) : isDistrict ? (
+      <Suspense fallback={null}>
+        <DistrictSpace />
       </Suspense>
     ) : isAdmin ? (
       <Suspense fallback={null}>

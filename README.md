@@ -56,6 +56,17 @@ sub-path baked in:
 VITE_BASE_PATH=/v0-maple-key-website/ pnpm build
 ```
 
+## District Insights (sample)
+
+Open the app with the `#district` hash (e.g. `https://maplekey.vercel.app/#district`)
+for a district-leader dashboard: which subjects teachers plan, which library
+resources *and* in-class materials (manipulatives, tech carts, lab space) they
+build with, expectation coverage and Quick Check results, and the lesson
+designs with the greatest impact. It runs entirely on a seeded sample for a
+fictional board (`src/lib/district-sample.ts`) — real Quick Check tallies live
+on each teacher's device, so a live roll-up needs sign-in and a shared store
+first. Aggregations live in `src/lib/district-metrics.ts`.
+
 ## Admin — Database Manager
 
 Open the app with the `#admin` hash (e.g. `https://maplekey.vercel.app/#admin`)
