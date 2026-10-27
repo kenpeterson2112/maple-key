@@ -2,6 +2,7 @@ import { useMemo, useState, type ReactNode } from "react"
 import {
   ArrowLeft,
   Award,
+  BookMarked,
   BookOpen,
   Info,
   Library,
@@ -15,11 +16,14 @@ import { withBasePath } from "@/lib/base-path"
 import type { LevelCounts } from "@/lib/assessment-results"
 import { CLASSROOM_RESOURCE_CATEGORIES, CLASSROOM_RESOURCE_OPTIONS } from "@/lib/classroom-resources"
 import {
+  BOARD_RESOURCES,
   DISTRICT_LESSONS,
   DISTRICT_SCHOOLS,
   DISTRICT_SUBJECTS,
   LIBRARY_RESOURCES,
+  RESOURCE_SOURCES,
   SAMPLE_DISTRICT,
+  type SourceKind,
 } from "@/lib/district-sample"
 import {
   MIN_DESIGN_RESPONSES,
@@ -32,11 +36,16 @@ import {
   libraryUsage,
   materialUsage,
   resourceMix,
+  sourceMixBySchool,
+  sourceUsage,
   subjectBreakdown,
   totalResponses,
   type DistrictFilter,
   type ExpectationRow,
   type ExpectationStatus,
+  type SchoolSourceRow,
+  type SourceGrouping,
+  type SourceRow,
 } from "@/lib/district-metrics"
 
 // District-leader view of how teachers plan with Maple Key — reached via
@@ -62,6 +71,15 @@ function libraryTitle(id: string): string {
   return LIBRARY_RESOURCES.find((r) => r.id === id)?.title ?? id
 }
 
+function boardResourceLabel(id: string): string {
+  const item = BOARD_RESOURCES.find((b) => b.id === id)
+  if (!item) return id
+  const source = RESOURCE_SOURCES.find((s) => s.id === item.sourceId)
+  return source && source.kind === "licensed" ? `${item.title} (${source.name})` : item.title
+}
+
+const DISTRICT_TEACHERS = DISTRICT_SCHOOLS.reduce((sum, s) => sum + s.teachers, 0)
+
 export default function DistrictSpace() {
   const [filter, setFilter] = useState<DistrictFilter>(ALL)
   const lessons = useMemo(() => filterLessons(DISTRICT_LESSONS, filter), [filter])
@@ -72,6 +90,9 @@ export default function DistrictSpace() {
   const library = useMemo(() => libraryUsage(lessons), [lessons])
   const materials = useMemo(() => materialUsage(lessons), [lessons])
   const mix = useMemo(() => resourceMix(lessons), [lessons])
+  const [grouping, setGrouping] = useState<SourceGrouping>("provider")
+  const sources = useMemo(() => sourceUsage(lessons, grouping), [lessons, grouping])
+  const schoolSources = useMemo(() => sourceMixBySchool(lessons, grouping), [lessons, grouping])
   const coverage = useMemo(() => expectationCoverage(lessons, filter), [lessons, filter])
   const designs = useMemo(() => designImpact(lessons), [lessons])
 
@@ -159,10 +180,20 @@ export default function DistrictSpace() {
           <SectionHeading
             icon={Library}
             title="Resources teachers are building with"
-            blurb="Maple Key plans around both the curated library and what is physically in each classroom — manipulatives, tech carts, lab space. That second half is invisible to every other planning tool."
+            blurb="Maple Key plans around everything a teacher can reach: the curated library, the board's licensed programs and district-made units, and what is physically in each classroom — manipulatives, tech carts, lab space. That last part is invisible to every other planning tool."
           />
           <Panel
-            title="Pairing the library with hands-on materials"
+            title="Where resources come from"
+            subtitle="Share of lessons that drew on each source"
+            action={<GroupingToggle value={grouping} onChange={setGrouping} />}
+          >
+            <SourceRows rows={sources} licenceScale={kpis.totalTeachers / DISTRICT_TEACHERS} />
+          </Panel>
+          <Panel title="Source mix by school" subtitle="Share of each school's lessons that drew on each source">
+            <SchoolSourceMatrix rows={schoolSources} columns={sources} grouping={grouping} />
+          </Panel>
+          <Panel
+            title="Pairing resources with hands-on materials"
             subtitle="Share of Quick Check responses meeting the standard, by what the lesson was built from"
           >
             <MixBars rows={mix} />
@@ -349,18 +380,26 @@ function Kpi({
 function Panel({
   title,
   subtitle,
+  action,
   className,
   children,
 }: {
   title: string
   subtitle?: string
+  /** Right-aligned control in the panel header. */
+  action?: ReactNode
   className?: string
   children: ReactNode
 }) {
   return (
     <div className={cn("min-w-0 rounded-xl border border-border bg-card p-4 md:p-6", className)}>
-      <h3 className="text-sm font-bold">{title}</h3>
-      {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div>
+          <h3 className="text-sm font-bold">{title}</h3>
+          {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+        </div>
+        {action}
+      </div>
       <div className="mt-4">{children}</div>
     </div>
   )
@@ -563,6 +602,153 @@ function ResourceTable({
   )
 }
 
+const KIND_BADGE: Record<SourceKind, string> = {
+  licensed: "Licensed",
+  district: "District-made",
+  open: "Open",
+}
+
+function GroupingToggle({ value, onChange }: { value: SourceGrouping; onChange: (g: SourceGrouping) => void }) {
+  const options: { id: SourceGrouping; label: string }[] = [
+    { id: "provider", label: "By provider" },
+    { id: "kind", label: "By type" },
+  ]
+  return (
+    <div role="radiogroup" aria-label="Group sources" className="flex rounded-full border border-border p-0.5">
+      {options.map((o) => (
+        <button
+          key={o.id}
+          type="button"
+          role="radio"
+          aria-checked={value === o.id}
+          onClick={() => onChange(o.id)}
+          className={cn(
+            "rounded-full px-3 py-1 text-xs font-semibold transition-colors",
+            value === o.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+function SourceRows({ rows, licenceScale }: { rows: SourceRow[]; licenceScale: number }) {
+  const max = Math.max(0.01, ...rows.map((r) => r.share))
+  return (
+    <div>
+      <div className="mb-2 grid grid-cols-[1fr_3.5rem_4.5rem] gap-3 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground sm:grid-cols-[minmax(0,13rem)_1fr_3.5rem_4.5rem]">
+        <span>Source</span>
+        <span className="hidden sm:block">Share of lessons</span>
+        <span className="text-right">Meeting</span>
+        <span className="text-right">Impact</span>
+      </div>
+      <ul className="divide-y divide-border">
+        {rows.map((r) => {
+          // A licence covers the whole district; scale it to the school filter.
+          const licensed = r.licensedTeachers ? Math.round(r.licensedTeachers * licenceScale) : 0
+          return (
+            <li
+              key={r.id}
+              className="grid grid-cols-[1fr_3.5rem_4.5rem] items-center gap-x-3 gap-y-1 py-2 sm:grid-cols-[minmax(0,13rem)_1fr_3.5rem_4.5rem]"
+            >
+              <div className="min-w-0">
+                <p className="flex items-center gap-1.5 text-sm font-semibold">
+                  <span className="truncate">{r.label}</span>
+                  {r.label !== KIND_BADGE[r.kind] && !r.label.startsWith(KIND_BADGE[r.kind]) && (
+                    <span className="flex-shrink-0 rounded-full bg-muted/50 px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
+                      {KIND_BADGE[r.kind]}
+                    </span>
+                  )}
+                </p>
+                <p className="truncate text-xs text-muted-foreground">
+                  {licensed > 0
+                    ? `Used by ${r.teachers} of ${licensed} licensed teachers`
+                    : `${r.teachers} ${r.teachers === 1 ? "teacher" : "teachers"} · ${r.schools} ${r.schools === 1 ? "school" : "schools"}`}
+                </p>
+              </div>
+              <div className="order-last col-span-3 flex items-center gap-2 sm:order-none sm:col-span-1">
+                <div className="h-3 flex-1">
+                  <div
+                    className="h-full rounded-r-sm bg-primary/70"
+                    style={{ width: `${(r.share / max) * 100}%` }}
+                    title={`${r.label}: ${r.lessons} of the lessons in this slice (${pct(r.share)})`}
+                  />
+                </div>
+                <span className="w-9 text-right text-xs font-semibold tabular-nums">{pct(r.share)}</span>
+              </div>
+              <span className="text-right text-sm tabular-nums">{pct(r.meeting)}</span>
+              <span className="text-right"><Lift value={r.lift} /></span>
+            </li>
+          )
+        })}
+      </ul>
+      <p className="mt-3 text-xs text-muted-foreground">
+        A lesson can draw on more than one source — a Nelson text with a GeoGebra applet — so shares don't add to 100%.
+      </p>
+    </div>
+  )
+}
+
+// Sequential single hue: deeper orange = a larger share of the school's lessons.
+function shareTile(share: number): string {
+  if (share === 0) return "bg-muted/30 text-muted-foreground"
+  if (share < 0.1) return "bg-primary/10 text-foreground"
+  if (share < 0.25) return "bg-primary/25 text-foreground"
+  if (share < 0.4) return "bg-primary/45 text-foreground"
+  if (share < 0.6) return "bg-primary/70 text-primary-foreground"
+  return "bg-primary text-primary-foreground"
+}
+
+function SchoolSourceMatrix({
+  rows,
+  columns,
+  grouping,
+}: {
+  rows: SchoolSourceRow[]
+  /** Same order as the ranked list above, so the two read together. */
+  columns: SourceRow[]
+  grouping: SourceGrouping
+}) {
+  const groups = columns
+  if (rows.length === 0) return <p className="text-sm text-muted-foreground">No lessons in this slice.</p>
+  return (
+    <div className="-mx-1 overflow-x-auto px-1">
+      <table className="w-full min-w-[36rem] table-fixed border-separate border-spacing-0.5 text-xs">
+        <thead>
+          <tr>
+            <th className="sticky left-0 w-28 bg-card" />
+            {groups.map((g) => (
+              <th key={g.id} scope="col" className="px-0.5 pb-1 align-bottom text-[10px] font-semibold leading-tight text-muted-foreground">
+                {grouping === "provider" ? g.label : KIND_BADGE[g.kind]}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.schoolId}>
+              <th scope="row" className="sticky left-0 whitespace-nowrap bg-card pr-2 text-left font-semibold">
+                {r.schoolName.replace(/ (PS|Intermediate|Senior PS)$/, "")}
+              </th>
+              {groups.map((g) => (
+                <td
+                  key={g.id}
+                  className={cn("h-8 rounded-md text-center tabular-nums", shareTile(r.shares[g.id]))}
+                  title={`${r.schoolName} · ${g.label}: ${pct(r.shares[g.id])} of ${r.lessons} lessons`}
+                >
+                  {r.shares[g.id] ? pct(r.shares[g.id]) : "—"}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
 function UntappedCallout({ rows }: { rows: ReturnType<typeof materialUsage> }) {
   if (rows.length === 0) return null
   return (
@@ -706,6 +892,12 @@ function DesignCard({ rank, row }: { rank: number; row: ReturnType<typeof design
           <span key={id} className="flex items-center gap-1 rounded-full bg-muted/50 px-2 py-0.5 text-xs">
             <Library size={11} className="text-muted-foreground" />
             {libraryTitle(id)}
+          </span>
+        ))}
+        {design.boardIds.map((id) => (
+          <span key={id} className="flex items-center gap-1 rounded-full border border-border px-2 py-0.5 text-xs">
+            <BookMarked size={11} className="text-muted-foreground" />
+            {boardResourceLabel(id)}
           </span>
         ))}
         {design.materialIds.map((id) => (

@@ -28,18 +28,20 @@ export interface DistrictSchool {
   adoption: number
   /** Nudges Quick Check results, so schools don't all look identical. */
   effect: number
+  /** Source id → how much more (or less) this school reaches for it. */
+  leans?: Record<string, number>
 }
 
 export const DISTRICT_SCHOOLS: DistrictSchool[] = [
-  { id: "birchwood", name: "Birchwood PS", teachers: 18, adoption: 0.83, effect: 0.02 },
-  { id: "cedar-ridge", name: "Cedar Ridge PS", teachers: 22, adoption: 0.64, effect: -0.04 },
-  { id: "lakeshore", name: "Lakeshore Intermediate", teachers: 34, adoption: 0.88, effect: 0.03 },
-  { id: "maple-grove", name: "Maple Grove PS", teachers: 16, adoption: 0.56, effect: -0.06 },
-  { id: "pinecrest", name: "Pinecrest Senior PS", teachers: 28, adoption: 0.79, effect: 0.01 },
-  { id: "riverside", name: "Riverside PS", teachers: 20, adoption: 0.7, effect: -0.01 },
+  { id: "birchwood", name: "Birchwood PS", teachers: 18, adoption: 0.83, effect: 0.02, leans: { knowledgehook: 2.2 } },
+  { id: "cedar-ridge", name: "Cedar Ridge PS", teachers: 22, adoption: 0.64, effect: -0.04, leans: { pearson: 2, district: 0.5 } },
+  { id: "lakeshore", name: "Lakeshore Intermediate", teachers: 34, adoption: 0.88, effect: 0.03, leans: { district: 2.2, edwin: 1.6 } },
+  { id: "maple-grove", name: "Maple Grove PS", teachers: 16, adoption: 0.56, effect: -0.06, leans: { pearson: 3, knowledgehook: 0.4 } },
+  { id: "pinecrest", name: "Pinecrest Senior PS", teachers: 28, adoption: 0.79, effect: 0.01, leans: { nelson: 2, rubicon: 2 } },
+  { id: "riverside", name: "Riverside PS", teachers: 20, adoption: 0.7, effect: -0.01, leans: { ufli: 2.5, edwin: 0.5 } },
 ]
 
-export const DISTRICT_SUBJECTS = ["Math", "Science", "History", "Geography", "Social Studies"] as const
+export const DISTRICT_SUBJECTS = ["Math", "Language", "Science", "History", "Geography", "Social Studies"] as const
 export type DistrictSubject = (typeof DISTRICT_SUBJECTS)[number]
 
 // ---- Library resources (a snapshot of real public/resources.json entries) ----
@@ -80,8 +82,90 @@ export const LIBRARY_RESOURCES: LibraryResource[] = [
   { id: "r-2042", title: "Historica Canada — Forces of Immigration Guide", publisher: "Historica Canada", type: "print" },
   { id: "r-1953", title: "Atlas of Canada — Thematic Maps Collection", publisher: "Natural Resources Canada", type: "digital" },
   { id: "r-1952", title: "Atlas of Canada — Toporama Topographic Maps", publisher: "Natural Resources Canada", type: "interactive" },
+  { id: "r-17", title: "Newsela: Leveled Current Events", publisher: "Newsela", type: "digital" },
+  { id: "r-38", title: "MediaSmarts: Digital and Media Literacy", publisher: "MediaSmarts", type: "video" },
+  { id: "r-51", title: "Quill: Writing and Grammar Tools", publisher: "Quill.org", type: "interactive" },
   { id: "r-2281", title: "UNICEF Canada — Resources for Teachers", publisher: "UNICEF Canada", type: "digital" },
   { id: "r-32", title: "My Canada Project", publisher: "The Learning Partnership", type: "interactive" },
+]
+
+// ---- Resource sources ----
+// Who a resource comes from: the board's licensed publishers and platforms,
+// what the district builds in-house, and the open-web library Maple Key
+// curates. Every library resource and board resource maps to exactly one, so
+// usage can be compared across providers (and rolled up by kind).
+
+export type SourceKind = "licensed" | "district" | "open"
+
+export const SOURCE_KIND_LABELS: Record<SourceKind, string> = {
+  licensed: "Licensed programs",
+  district: "District-made",
+  open: "Open web (Maple Key library)",
+}
+
+export interface ResourceSource {
+  id: string
+  name: string
+  kind: SourceKind
+  /** Grade 6–8 teachers the board's licence or training covers; absent when
+   *  there is no per-teacher licence (owned print, open resources). */
+  licensedTeachers?: number
+}
+
+export const RESOURCE_SOURCES: ResourceSource[] = [
+  { id: "pearson", name: "Pearson", kind: "licensed" },
+  { id: "nelson", name: "Nelson", kind: "licensed" },
+  { id: "rubicon", name: "Rubicon", kind: "licensed" },
+  { id: "knowledgehook", name: "Knowledgehook", kind: "licensed", licensedTeachers: 138 },
+  { id: "edwin", name: "Edwin", kind: "licensed", licensedTeachers: 138 },
+  { id: "ufli", name: "UFLI Foundations", kind: "licensed", licensedTeachers: 24 },
+  { id: "district", name: "Northshore DSB", kind: "district" },
+  { id: "open", name: "Maple Key library", kind: "open" },
+]
+
+// Library resources from a named provider; everything else is open web.
+const LIBRARY_SOURCE: Record<string, string> = {
+  "r-1010": "edwin",
+  "r-1909": "edwin",
+  "r-3": "nelson",
+}
+
+export function librarySourceOf(id: string): string {
+  return LIBRARY_SOURCE[id] ?? "open"
+}
+
+/** Distinct source ids behind a lesson's library and board resources. */
+export function resourceSourceIds(item: { libraryIds: string[]; boardIds: string[] }): string[] {
+  return [
+    ...new Set([
+      ...item.libraryIds.map(librarySourceOf),
+      ...item.boardIds.map((id) => BOARD_RESOURCES.find((b) => b.id === id)?.sourceId ?? "district"),
+    ]),
+  ]
+}
+
+// Board resources: licensed programs and district-made units. In the product
+// these reach a lesson through the teacher's Materials profile — Nelson Math,
+// Nelson Literacy, Knowledgehook and Edwin are already in that catalog, and
+// the rest are the custom entries a board would add once for every teacher.
+export interface BoardResource {
+  id: string
+  title: string
+  sourceId: string
+}
+
+export const BOARD_RESOURCES: BoardResource[] = [
+  { id: "pearson-mms", title: "Math Makes Sense 6–8", sourceId: "pearson" },
+  { id: "pearson-ist", title: "Investigating Science and Technology", sourceId: "pearson" },
+  { id: "nelson-math", title: "Nelson Math", sourceId: "nelson" },
+  { id: "nelson-literacy", title: "Nelson Literacy", sourceId: "nelson" },
+  { id: "rubicon-boldprint", title: "BOLDPRINT Anthologies", sourceId: "rubicon" },
+  { id: "knowledgehook", title: "Knowledgehook Missions", sourceId: "knowledgehook" },
+  { id: "edwin", title: "Edwin Lessons", sourceId: "edwin" },
+  { id: "ufli-foundations", title: "UFLI Foundations (Tier 2)", sourceId: "ufli" },
+  { id: "district-math-tasks", title: "Northshore Math Task Bank", sourceId: "district" },
+  { id: "district-treaty-kit", title: "Northshore Treaty Education Kit", sourceId: "district" },
+  { id: "district-writing", title: "Northshore Writing Continuum", sourceId: "district" },
 ]
 
 // ---- In-class materials: share of classrooms that list each one ----
@@ -138,6 +222,18 @@ const MATH_OVERALLS: Record<string, string> = {
   F1: "Money and Finances",
 }
 
+// Language (2023): the overall expectations a grade 6–8 lesson usually targets.
+const LANGUAGE_OVERALLS: Record<string, string> = {
+  B1: "Oral and Non-Verbal Communication",
+  B2: "Language Foundations for Reading and Writing",
+  C1: "Knowledge about Texts",
+  C2: "Comprehension Strategies",
+  C3: "Critical Thinking in Literacy",
+  D1: "Developing Ideas and Organizing Content",
+  D2: "Using Knowledge of Form and Style in Writing",
+  D3: "Publishing, Presenting, and Reflecting",
+}
+
 // Science & Technology (2022): each strand has a topic per grade, and every
 // strand splits into X1 (connections to society) and X2 (concepts).
 const SCIENCE_TOPICS: Record<string, Record<string, string>> = {
@@ -155,6 +251,9 @@ const SOCIAL_STUDIES_GRADES: Partial<Record<DistrictSubject, string[]>> = {
 export const DISTRICT_EXPECTATIONS: DistrictExpectation[] = [
   ...SAMPLE_DISTRICT.grades.flatMap((grade) =>
     Object.entries(MATH_OVERALLS).map(([code, title]) => ({ subject: "Math" as const, grade, code, title }))
+  ),
+  ...SAMPLE_DISTRICT.grades.flatMap((grade) =>
+    Object.entries(LANGUAGE_OVERALLS).map(([code, title]) => ({ subject: "Language" as const, grade, code, title }))
   ),
   ...SAMPLE_DISTRICT.grades.flatMap((grade) =>
     Object.entries(SCIENCE_TOPICS[grade]).flatMap(([strand, topic]) => [
@@ -186,6 +285,8 @@ export interface LessonDesign {
   grade: string
   codes: string[]
   libraryIds: string[]
+  /** Licensed programs and district-made units (BOARD_RESOURCES ids). */
+  boardIds: string[]
   materialIds: string[]
   template: "3-Part Lesson" | "5E Model" | "Madeline Hunter" | "CLAASS"
   mode: "Whole class" | "Small groups" | "Stations" | "Outdoors"
@@ -197,38 +298,45 @@ export interface LessonDesign {
 
 export const LESSON_DESIGNS: LessonDesign[] = [
   // Math
-  { id: "m6-fraction-tiles", title: "Comparing fractions with fraction tiles", subject: "Math", grade: "6", codes: ["B1", "B2"], libraryIds: ["r-1077"], materialIds: ["fraction-tiles", "whiteboards-mini"], template: "3-Part Lesson", mode: "Small groups", base: 0.82, weight: 9 },
-  { id: "m6-fractions-digital", title: "Adding fractions on a number line", subject: "Math", grade: "6", codes: ["B2"], libraryIds: ["r-1089", "r-1078"], materialIds: ["chromebook-cart"], template: "3-Part Lesson", mode: "Whole class", base: 0.61, weight: 8 },
-  { id: "m6-probability", title: "Experimental vs. theoretical probability", subject: "Math", grade: "6", codes: ["D2"], libraryIds: ["r-3"], materialIds: ["dice", "spinners"], template: "3-Part Lesson", mode: "Stations", base: 0.77, weight: 6 },
-  { id: "m6-cartesian", title: "Plotting shapes on the Cartesian plane", subject: "Math", grade: "6", codes: ["E1"], libraryIds: ["r-1061"], materialIds: ["graph-paper"], template: "Madeline Hunter", mode: "Whole class", base: 0.63, weight: 5 },
-  { id: "m6-data", title: "Reading and building double bar graphs", subject: "Math", grade: "6", codes: ["D1"], libraryIds: ["r-1"], materialIds: [], template: "Madeline Hunter", mode: "Whole class", base: 0.6, weight: 5 },
-  { id: "m6-base-ten", title: "Decimal place value with base ten blocks", subject: "Math", grade: "6", codes: ["B1"], libraryIds: [], materialIds: ["base-ten-blocks", "whiteboards-mini"], template: "3-Part Lesson", mode: "Small groups", base: 0.72, weight: 4 },
-  { id: "m7-ratio-talk", title: "Number talk: reasoning with ratios", subject: "Math", grade: "7", codes: ["B1"], libraryIds: [], materialIds: [], template: "3-Part Lesson", mode: "Whole class", base: 0.55, weight: 5 },
-  { id: "m7-algebra-tiles", title: "Solving equations with algebra tiles", subject: "Math", grade: "7", codes: ["C2"], libraryIds: ["r-1006"], materialIds: ["algebra-tiles"], template: "3-Part Lesson", mode: "Small groups", base: 0.8, weight: 3 },
-  { id: "m7-equations", title: "Solving one-step equations", subject: "Math", grade: "7", codes: ["C2"], libraryIds: ["r-1003"], materialIds: [], template: "Madeline Hunter", mode: "Whole class", base: 0.51, weight: 10 },
-  { id: "m7-growing-patterns", title: "Growing patterns with connecting cubes", subject: "Math", grade: "7", codes: ["C1"], libraryIds: ["r-1005"], materialIds: ["connecting-cubes", "graph-paper"], template: "5E Model", mode: "Small groups", base: 0.77, weight: 6 },
-  { id: "m7-integers", title: "Integer operations with two-colour counters", subject: "Math", grade: "7", codes: ["B2"], libraryIds: ["r-1010"], materialIds: ["two-colour-counters"], template: "3-Part Lesson", mode: "Small groups", base: 0.74, weight: 7 },
-  { id: "m7-number-sense", title: "Ratios and rates in everyday life", subject: "Math", grade: "7", codes: ["B1"], libraryIds: ["r-1010"], materialIds: ["calculators"], template: "Madeline Hunter", mode: "Whole class", base: 0.58, weight: 6 },
-  { id: "m8-pythagoras", title: "Discovering the Pythagorean relationship", subject: "Math", grade: "8", codes: ["E2"], libraryIds: ["r-1338"], materialIds: ["geoboards", "rulers-measuring"], template: "5E Model", mode: "Small groups", base: 0.8, weight: 5 },
-  { id: "m8-survey", title: "Designing a class survey", subject: "Math", grade: "8", codes: ["D1"], libraryIds: ["r-105", "r-1"], materialIds: ["chromebook-cart", "sticky-notes"], template: "5E Model", mode: "Small groups", base: 0.71, weight: 7 },
-  { id: "m8-interest", title: "Comparing interest and saving plans", subject: "Math", grade: "8", codes: ["F1"], libraryIds: ["r-143"], materialIds: ["calculators"], template: "3-Part Lesson", mode: "Whole class", base: 0.57, weight: 6 },
-  { id: "m8-coding", title: "Coding with conditional loops", subject: "Math", grade: "8", codes: ["C3"], libraryIds: ["r-1004"], materialIds: ["coding-kits", "chromebook-cart"], template: "5E Model", mode: "Stations", base: 0.69, weight: 3 },
-  { id: "m8-equations", title: "Multi-step equations practice", subject: "Math", grade: "8", codes: ["C2"], libraryIds: ["r-1004"], materialIds: [], template: "Madeline Hunter", mode: "Whole class", base: 0.53, weight: 7 },
+  { id: "m6-fraction-tiles", title: "Comparing fractions with fraction tiles", subject: "Math", grade: "6", codes: ["B1", "B2"], libraryIds: ["r-1077"], boardIds: ["district-math-tasks"], materialIds: ["fraction-tiles", "whiteboards-mini"], template: "3-Part Lesson", mode: "Small groups", base: 0.82, weight: 9 },
+  { id: "m6-fractions-digital", title: "Adding fractions on a number line", subject: "Math", grade: "6", codes: ["B2"], libraryIds: ["r-1089", "r-1078"], boardIds: ["knowledgehook"], materialIds: ["chromebook-cart"], template: "3-Part Lesson", mode: "Whole class", base: 0.61, weight: 8 },
+  { id: "m6-probability", title: "Experimental vs. theoretical probability", subject: "Math", grade: "6", codes: ["D2"], libraryIds: ["r-3"], boardIds: [], materialIds: ["dice", "spinners"], template: "3-Part Lesson", mode: "Stations", base: 0.77, weight: 6 },
+  { id: "m6-cartesian", title: "Plotting shapes on the Cartesian plane", subject: "Math", grade: "6", codes: ["E1"], libraryIds: ["r-1061"], boardIds: ["nelson-math"], materialIds: ["graph-paper"], template: "Madeline Hunter", mode: "Whole class", base: 0.63, weight: 5 },
+  { id: "m6-data", title: "Reading and building double bar graphs", subject: "Math", grade: "6", codes: ["D1"], libraryIds: ["r-1"], boardIds: ["nelson-math"], materialIds: [], template: "Madeline Hunter", mode: "Whole class", base: 0.6, weight: 5 },
+  { id: "m6-base-ten", title: "Decimal place value with base ten blocks", subject: "Math", grade: "6", codes: ["B1"], libraryIds: [], boardIds: [], materialIds: ["base-ten-blocks", "whiteboards-mini"], template: "3-Part Lesson", mode: "Small groups", base: 0.72, weight: 4 },
+  { id: "m7-ratio-talk", title: "Number talk: reasoning with ratios", subject: "Math", grade: "7", codes: ["B1"], libraryIds: [], boardIds: [], materialIds: [], template: "3-Part Lesson", mode: "Whole class", base: 0.55, weight: 5 },
+  { id: "m7-algebra-tiles", title: "Solving equations with algebra tiles", subject: "Math", grade: "7", codes: ["C2"], libraryIds: ["r-1006"], boardIds: [], materialIds: ["algebra-tiles"], template: "3-Part Lesson", mode: "Small groups", base: 0.8, weight: 3 },
+  { id: "m7-equations", title: "Solving one-step equations", subject: "Math", grade: "7", codes: ["C2"], libraryIds: ["r-1003"], boardIds: ["pearson-mms"], materialIds: [], template: "Madeline Hunter", mode: "Whole class", base: 0.51, weight: 10 },
+  { id: "m7-growing-patterns", title: "Growing patterns with connecting cubes", subject: "Math", grade: "7", codes: ["C1"], libraryIds: ["r-1005"], boardIds: [], materialIds: ["connecting-cubes", "graph-paper"], template: "5E Model", mode: "Small groups", base: 0.77, weight: 6 },
+  { id: "m7-integers", title: "Integer operations with two-colour counters", subject: "Math", grade: "7", codes: ["B2"], libraryIds: ["r-1010"], boardIds: ["district-math-tasks"], materialIds: ["two-colour-counters"], template: "3-Part Lesson", mode: "Small groups", base: 0.74, weight: 7 },
+  { id: "m7-number-sense", title: "Ratios and rates in everyday life", subject: "Math", grade: "7", codes: ["B1"], libraryIds: ["r-1010"], boardIds: ["knowledgehook"], materialIds: ["calculators"], template: "Madeline Hunter", mode: "Whole class", base: 0.58, weight: 6 },
+  { id: "m8-pythagoras", title: "Discovering the Pythagorean relationship", subject: "Math", grade: "8", codes: ["E2"], libraryIds: ["r-1338"], boardIds: [], materialIds: ["geoboards", "rulers-measuring"], template: "5E Model", mode: "Small groups", base: 0.8, weight: 5 },
+  { id: "m8-survey", title: "Designing a class survey", subject: "Math", grade: "8", codes: ["D1"], libraryIds: ["r-105", "r-1"], boardIds: ["edwin"], materialIds: ["chromebook-cart", "sticky-notes"], template: "5E Model", mode: "Small groups", base: 0.71, weight: 7 },
+  { id: "m8-interest", title: "Comparing interest and saving plans", subject: "Math", grade: "8", codes: ["F1"], libraryIds: ["r-143"], boardIds: ["edwin"], materialIds: ["calculators"], template: "3-Part Lesson", mode: "Whole class", base: 0.57, weight: 6 },
+  { id: "m8-coding", title: "Coding with conditional loops", subject: "Math", grade: "8", codes: ["C3"], libraryIds: ["r-1004"], boardIds: [], materialIds: ["coding-kits", "chromebook-cart"], template: "5E Model", mode: "Stations", base: 0.69, weight: 3 },
+  { id: "m8-equations", title: "Multi-step equations practice", subject: "Math", grade: "8", codes: ["C2"], libraryIds: ["r-1004"], boardIds: ["pearson-mms", "knowledgehook"], materialIds: [], template: "Madeline Hunter", mode: "Whole class", base: 0.53, weight: 7 },
+  // Language
+  { id: "l6-ufli", title: "Multisyllabic word work (intervention group)", subject: "Language", grade: "6", codes: ["B2"], libraryIds: [], boardIds: ["ufli-foundations"], materialIds: ["whiteboards-mini"], template: "3-Part Lesson", mode: "Small groups", base: 0.74, weight: 3 },
+  { id: "l6-main-idea", title: "Finding the main idea in informational text", subject: "Language", grade: "6", codes: ["C2"], libraryIds: ["r-17"], boardIds: ["rubicon-boldprint"], materialIds: [], template: "3-Part Lesson", mode: "Whole class", base: 0.66, weight: 6 },
+  { id: "l7-inference", title: "Making inferences in fiction", subject: "Language", grade: "7", codes: ["C1", "C2"], libraryIds: [], boardIds: ["nelson-literacy"], materialIds: [], template: "Madeline Hunter", mode: "Whole class", base: 0.58, weight: 7 },
+  { id: "l7-media", title: "Spotting bias in online media", subject: "Language", grade: "7", codes: ["C3"], libraryIds: ["r-38"], boardIds: ["rubicon-boldprint"], materialIds: ["chromebook-cart"], template: "CLAASS", mode: "Small groups", base: 0.71, weight: 5 },
+  { id: "l8-persuasive", title: "Writing a persuasive paragraph", subject: "Language", grade: "8", codes: ["D1", "D2"], libraryIds: ["r-51"], boardIds: ["district-writing"], materialIds: [], template: "3-Part Lesson", mode: "Small groups", base: 0.69, weight: 5 },
+  { id: "l8-lit-circles", title: "Literature circles: exploring theme", subject: "Language", grade: "8", codes: ["C1", "B1"], libraryIds: [], boardIds: ["nelson-literacy"], materialIds: ["sticky-notes"], template: "3-Part Lesson", mode: "Small groups", base: 0.65, weight: 4 },
   // Science
-  { id: "s6-glider", title: "Designing a glider: the forces of flight", subject: "Science", grade: "6", codes: ["D2"], libraryIds: ["r-1885"], materialIds: ["maker-space", "construction-paper"], template: "5E Model", mode: "Small groups", base: 0.78, weight: 4 },
-  { id: "s6-biodiversity", title: "Classifying local species", subject: "Science", grade: "6", codes: ["B2"], libraryIds: ["r-1893"], materialIds: ["projector"], template: "3-Part Lesson", mode: "Whole class", base: 0.6, weight: 5 },
-  { id: "s7-bioblitz", title: "Schoolyard BioBlitz: building food webs", subject: "Science", grade: "7", codes: ["B2", "B1"], libraryIds: ["r-44"], materialIds: ["outdoor-classroom", "ipad-cart"], template: "5E Model", mode: "Outdoors", base: 0.81, weight: 5 },
-  { id: "s7-mixtures", title: "Separating mixtures lab", subject: "Science", grade: "7", codes: ["C2"], libraryIds: ["r-1909"], materialIds: ["science-equipment", "science-lab"], template: "5E Model", mode: "Stations", base: 0.75, weight: 5 },
-  { id: "s7-insulators", title: "Insulator challenge: keeping ice frozen", subject: "Science", grade: "7", codes: ["E2"], libraryIds: [], materialIds: ["science-equipment", "construction-paper"], template: "5E Model", mode: "Small groups", base: 0.7, weight: 3 },
-  { id: "s7-heat", title: "Heat transfer in the environment", subject: "Science", grade: "7", codes: ["E2"], libraryIds: ["r-2164"], materialIds: ["projector"], template: "Madeline Hunter", mode: "Whole class", base: 0.54, weight: 6 },
-  { id: "s8-cells", title: "Cell structures and their functions", subject: "Science", grade: "8", codes: ["B2"], libraryIds: ["r-1893"], materialIds: ["document-camera"], template: "3-Part Lesson", mode: "Whole class", base: 0.56, weight: 6 },
-  { id: "s8-density", title: "Density and buoyancy simulation", subject: "Science", grade: "8", codes: ["C2"], libraryIds: ["r-56"], materialIds: ["chromebook-cart", "science-equipment"], template: "5E Model", mode: "Small groups", base: 0.71, weight: 5 },
+  { id: "s6-glider", title: "Designing a glider: the forces of flight", subject: "Science", grade: "6", codes: ["D2"], libraryIds: ["r-1885"], boardIds: [], materialIds: ["maker-space", "construction-paper"], template: "5E Model", mode: "Small groups", base: 0.78, weight: 4 },
+  { id: "s6-biodiversity", title: "Classifying local species", subject: "Science", grade: "6", codes: ["B2"], libraryIds: ["r-1893"], boardIds: [], materialIds: ["projector"], template: "3-Part Lesson", mode: "Whole class", base: 0.6, weight: 5 },
+  { id: "s7-bioblitz", title: "Schoolyard BioBlitz: building food webs", subject: "Science", grade: "7", codes: ["B2", "B1"], libraryIds: ["r-44"], boardIds: [], materialIds: ["outdoor-classroom", "ipad-cart"], template: "5E Model", mode: "Outdoors", base: 0.81, weight: 5 },
+  { id: "s7-mixtures", title: "Separating mixtures lab", subject: "Science", grade: "7", codes: ["C2"], libraryIds: ["r-1909"], boardIds: ["edwin"], materialIds: ["science-equipment", "science-lab"], template: "5E Model", mode: "Stations", base: 0.75, weight: 5 },
+  { id: "s7-insulators", title: "Insulator challenge: keeping ice frozen", subject: "Science", grade: "7", codes: ["E2"], libraryIds: [], boardIds: [], materialIds: ["science-equipment", "construction-paper"], template: "5E Model", mode: "Small groups", base: 0.7, weight: 3 },
+  { id: "s7-heat", title: "Heat transfer in the environment", subject: "Science", grade: "7", codes: ["E2"], libraryIds: ["r-2164"], boardIds: ["pearson-ist"], materialIds: ["projector"], template: "Madeline Hunter", mode: "Whole class", base: 0.54, weight: 6 },
+  { id: "s8-cells", title: "Cell structures and their functions", subject: "Science", grade: "8", codes: ["B2"], libraryIds: ["r-1893"], boardIds: ["pearson-ist"], materialIds: ["document-camera"], template: "3-Part Lesson", mode: "Whole class", base: 0.56, weight: 6 },
+  { id: "s8-density", title: "Density and buoyancy simulation", subject: "Science", grade: "8", codes: ["C2"], libraryIds: ["r-56"], boardIds: [], materialIds: ["chromebook-cart", "science-equipment"], template: "5E Model", mode: "Small groups", base: 0.71, weight: 5 },
   // History, Geography, Social Studies
-  { id: "h7-treaties", title: "Treaty perspectives in British North America", subject: "History", grade: "7", codes: ["A2", "A3"], libraryIds: ["r-47", "r-46"], materialIds: ["sticky-notes"], template: "CLAASS", mode: "Small groups", base: 0.66, weight: 5 },
-  { id: "h8-pier21", title: "Immigration stories from Pier 21", subject: "History", grade: "8", codes: ["B2", "B3"], libraryIds: ["r-61", "r-2042"], materialIds: ["library-access", "chromebook-cart"], template: "3-Part Lesson", mode: "Stations", base: 0.73, weight: 4 },
-  { id: "g7-resources", title: "Mapping Canada's natural resources", subject: "Geography", grade: "7", codes: ["B1", "B3"], libraryIds: ["r-1953"], materialIds: ["chromebook-cart"], template: "3-Part Lesson", mode: "Whole class", base: 0.62, weight: 5 },
-  { id: "g8-settlement", title: "Why people settle where they do", subject: "Geography", grade: "8", codes: ["A1", "A3"], libraryIds: ["r-1952"], materialIds: ["projector"], template: "Madeline Hunter", mode: "Whole class", base: 0.54, weight: 4 },
-  { id: "ss6-global", title: "Canada's role in global issues", subject: "Social Studies", grade: "6", codes: ["B1", "B2"], libraryIds: ["r-2281", "r-32"], materialIds: ["padlet", "chromebook-cart"], template: "CLAASS", mode: "Small groups", base: 0.64, weight: 4 },
+  { id: "h7-treaties", title: "Treaty perspectives in British North America", subject: "History", grade: "7", codes: ["A2", "A3"], libraryIds: ["r-47", "r-46"], boardIds: ["district-treaty-kit"], materialIds: ["sticky-notes"], template: "CLAASS", mode: "Small groups", base: 0.66, weight: 5 },
+  { id: "h8-pier21", title: "Immigration stories from Pier 21", subject: "History", grade: "8", codes: ["B2", "B3"], libraryIds: ["r-61", "r-2042"], boardIds: [], materialIds: ["library-access", "chromebook-cart"], template: "3-Part Lesson", mode: "Stations", base: 0.73, weight: 4 },
+  { id: "g7-resources", title: "Mapping Canada's natural resources", subject: "Geography", grade: "7", codes: ["B1", "B3"], libraryIds: ["r-1953"], boardIds: [], materialIds: ["chromebook-cart"], template: "3-Part Lesson", mode: "Whole class", base: 0.62, weight: 5 },
+  { id: "g8-settlement", title: "Why people settle where they do", subject: "Geography", grade: "8", codes: ["A1", "A3"], libraryIds: ["r-1952"], boardIds: [], materialIds: ["projector"], template: "Madeline Hunter", mode: "Whole class", base: 0.54, weight: 4 },
+  { id: "ss6-global", title: "Canada's role in global issues", subject: "Social Studies", grade: "6", codes: ["B1", "B2"], libraryIds: ["r-2281", "r-32"], boardIds: [], materialIds: ["padlet", "chromebook-cart"], template: "CLAASS", mode: "Small groups", base: 0.64, weight: 4 },
 ]
 
 // ---- Generated lessons ----
@@ -245,6 +353,7 @@ export interface DistrictLesson {
   grade: string
   codes: string[]
   libraryIds: string[]
+  boardIds: string[]
   materialIds: string[]
   week: number
   /** Null when no Quick Check was recorded for the lesson. */
@@ -274,6 +383,8 @@ function pickWeighted<T>(items: T[], weight: (item: T) => number, rand: () => nu
 
 const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n))
 
+
+
 function generateLessons(): DistrictLesson[] {
   const rand = seeded(2112)
   const lessons: DistrictLesson[] = []
@@ -294,7 +405,10 @@ function generateLessons(): DistrictLesson[] {
       for (let n = 0; n < lessonCount; n++) {
         const design = pickWeighted(
           designs,
-          (d) => d.weight * (d.materialIds.every((m) => owns.has(m)) ? 1 : 0.25),
+          (d) =>
+            d.weight *
+            (d.materialIds.every((m) => owns.has(m)) ? 1 : 0.25) *
+            resourceSourceIds(d).reduce((w, src) => w * (school.leans?.[src] ?? 1), 1),
           rand
         )
         const week = TERM_WEEKS.indexOf(pickWeighted(TERM_WEEKS, (w) => weekWeights[TERM_WEEKS.indexOf(w)], rand))
@@ -317,6 +431,7 @@ function generateLessons(): DistrictLesson[] {
           grade,
           codes: design.codes,
           libraryIds: design.libraryIds,
+          boardIds: design.boardIds,
           materialIds: design.materialIds,
           week,
           results,

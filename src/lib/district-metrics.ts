@@ -6,12 +6,16 @@ import {
   LESSON_DESIGNS,
   LIBRARY_RESOURCES,
   MATERIAL_INVENTORY,
+  RESOURCE_SOURCES,
+  SOURCE_KIND_LABELS,
   TERM_WEEKS,
+  resourceSourceIds,
   type DistrictExpectation,
   type DistrictLesson,
   type DistrictSubject,
   type LessonDesign,
   type LibraryResource,
+  type SourceKind,
 } from "./district-sample"
 
 // Aggregations behind the district dashboard. Pure functions over a filtered
@@ -219,17 +223,102 @@ export interface MixRow {
   meeting: number | null
 }
 
-/** Library resource + hands-on material vs. either alone. */
+// ---- Sources ----
+
+export type SourceGrouping = "provider" | "kind"
+
+function kindOf(sourceId: string): SourceKind {
+  return RESOURCE_SOURCES.find((s) => s.id === sourceId)?.kind ?? "open"
+}
+
+/** The groups a lesson draws on, as provider ids or source kinds. */
+export function lessonGroups(l: DistrictLesson, grouping: SourceGrouping): string[] {
+  const ids = resourceSourceIds(l)
+  return [...new Set(grouping === "provider" ? ids : ids.map(kindOf))]
+}
+
+export interface SourceGroupMeta {
+  id: string
+  label: string
+  kind: SourceKind
+  licensedTeachers?: number
+}
+
+export function sourceGroups(grouping: SourceGrouping): SourceGroupMeta[] {
+  if (grouping === "provider") {
+    return RESOURCE_SOURCES.map((s) => ({ id: s.id, label: s.name, kind: s.kind, licensedTeachers: s.licensedTeachers }))
+  }
+  return (Object.keys(SOURCE_KIND_LABELS) as SourceKind[]).map((kind) => ({
+    id: kind,
+    label: SOURCE_KIND_LABELS[kind],
+    kind,
+  }))
+}
+
+export interface SourceRow extends SourceGroupMeta {
+  lessons: number
+  /** Share of all lessons in the slice that drew on this group. */
+  share: number
+  teachers: number
+  schools: number
+  meeting: number | null
+  lift: number | null
+}
+
+// A lesson can draw on several sources (a Nelson text plus a GeoGebra
+// applet), so shares are "lessons that used it" and don't sum to 100%.
+export function sourceUsage(lessons: DistrictLesson[], grouping: SourceGrouping): SourceRow[] {
+  return sourceGroups(grouping)
+    .map((group) => {
+      const uses = (l: DistrictLesson) => lessonGroups(l, grouping).includes(group.id)
+      const rows = lessons.filter(uses)
+      return {
+        ...group,
+        lessons: rows.length,
+        share: lessons.length ? rows.length / lessons.length : 0,
+        teachers: distinct(rows.map((l) => l.teacherId)),
+        schools: distinct(rows.map((l) => l.schoolId)),
+        meeting: meetingRate(sumLevels(rows)),
+        lift: liftFor(lessons, uses),
+      }
+    })
+    .sort((a, b) => b.lessons - a.lessons)
+}
+
+export interface SchoolSourceRow {
+  schoolId: string
+  schoolName: string
+  lessons: number
+  /** group id → share of this school's lessons that drew on it. */
+  shares: Record<string, number>
+}
+
+export function sourceMixBySchool(lessons: DistrictLesson[], grouping: SourceGrouping): SchoolSourceRow[] {
+  const groups = sourceGroups(grouping)
+  return DISTRICT_SCHOOLS.map((school) => {
+    const rows = lessons.filter((l) => l.schoolId === school.id)
+    const shares = Object.fromEntries(
+      groups.map((g) => [
+        g.id,
+        rows.length ? rows.filter((l) => lessonGroups(l, grouping).includes(g.id)).length / rows.length : 0,
+      ])
+    )
+    return { schoolId: school.id, schoolName: school.name, lessons: rows.length, shares }
+  }).filter((r) => r.lessons > 0)
+}
+
+/** Text or digital resource (library or board) + hands-on material vs. either alone. */
 export function resourceMix(lessons: DistrictLesson[]): MixRow[] {
   // Projectors and doc cams are how a library resource gets shown, not a
   // hands-on material — counting them would credit "both" for a slideshow.
   const display = new Set(["projector", "document-camera", "smart-board"])
   const hasMaterial = (l: DistrictLesson) => l.materialIds.some((m) => !display.has(m))
+  const hasResource = (l: DistrictLesson) => l.libraryIds.length > 0 || l.boardIds.length > 0
   const buckets: { key: MixRow["key"]; label: string; test: (l: DistrictLesson) => boolean }[] = [
-    { key: "both", label: "Library resource + in-class materials", test: (l) => l.libraryIds.length > 0 && hasMaterial(l) },
-    { key: "library", label: "Library resource only", test: (l) => l.libraryIds.length > 0 && !hasMaterial(l) },
-    { key: "materials", label: "In-class materials only", test: (l) => l.libraryIds.length === 0 && hasMaterial(l) },
-    { key: "neither", label: "Neither", test: (l) => l.libraryIds.length === 0 && !hasMaterial(l) },
+    { key: "both", label: "Text or digital resource + in-class materials", test: (l) => hasResource(l) && hasMaterial(l) },
+    { key: "library", label: "Text or digital resource only", test: (l) => hasResource(l) && !hasMaterial(l) },
+    { key: "materials", label: "In-class materials only", test: (l) => !hasResource(l) && hasMaterial(l) },
+    { key: "neither", label: "Neither", test: (l) => !hasResource(l) && !hasMaterial(l) },
   ]
   return buckets
     .map(({ key, label, test }) => {
