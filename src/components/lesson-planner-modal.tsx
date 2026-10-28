@@ -59,6 +59,8 @@ interface LessonPlannerModalProps {
   bookmarkedResources: Resource[]
   asSpace?: boolean
   lesson?: LessonMetadata | null
+  /** Guided-wizard step to open on (index into WIZARD_STEPS). Read once on mount. */
+  initialWizardStep?: number
   filters: Filters
   setFilters: (filters: Filters) => void
   sidebarFilters: SidebarFilters
@@ -79,6 +81,7 @@ export default function LessonPlannerModal({
   bookmarkedResources,
   asSpace = false,
   lesson = null,
+  initialWizardStep = 0,
   filters,
   setFilters,
   sidebarFilters,
@@ -104,7 +107,9 @@ export default function LessonPlannerModal({
 
   // Setup layout: guided one-step-at-a-time wizard vs. everything on one page.
   const [setupMode, setSetupModeState] = useState<LessonSetupMode>(getLessonSetupMode())
-  const [wizardStep, setWizardStep] = useState(0)
+  const [wizardStep, setWizardStep] = useState(() =>
+    Math.max(0, Math.min(initialWizardStep, WIZARD_STEPS.length - 1)),
+  )
 
   const [editingSection, setEditingSection] = useState<string | null>(null)
   const [lessonTitle, setLessonTitle] = useState(lesson?.title ?? "")

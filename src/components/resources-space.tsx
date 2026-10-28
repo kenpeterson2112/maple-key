@@ -21,6 +21,8 @@ interface ResourcesSpaceProps {
   isMobileFiltersOpen: boolean
   onCloseMobileFilters: () => void
   searchSeed?: { query: string; nonce: number }
+  /** Opens the planner on its Resources step with the current selection. */
+  onPlanWithSelection?: () => void
 }
 
 export default function ResourcesSpace({
@@ -35,6 +37,7 @@ export default function ResourcesSpace({
   isMobileFiltersOpen,
   onCloseMobileFilters,
   searchSeed,
+  onPlanWithSelection,
 }: ResourcesSpaceProps) {
   const globalFilters = useGlobalFilters()
 
@@ -54,7 +57,7 @@ export default function ResourcesSpace({
       <div className="flex flex-1 min-h-0">
         <SidebarFilters onFilterChange={onSidebarFilterChange} sidebarFilters={sidebarFilters} />
         <div className="flex-1 min-w-0">
-          <ResultsSection filters={mergedFilters} sidebarFilters={sidebarFilters} onCountChange={onCountChange} searchSeed={searchSeed} />
+          <ResultsSection filters={mergedFilters} sidebarFilters={sidebarFilters} onCountChange={onCountChange} searchSeed={searchSeed} onPlanWithSelection={onPlanWithSelection} />
         </div>
       </div>
 
