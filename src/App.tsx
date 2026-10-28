@@ -54,6 +54,7 @@ export default function App() {
   const [searchSeed, setSearchSeed] = useState<{ query: string; nonce: number } | undefined>(undefined)
   const [assessmentLesson, setAssessmentLesson] = useState<LessonMetadata | null>(null)
   const [plannerLesson, setPlannerLesson] = useState<LessonMetadata | null>(null)
+  const [plannerStartStep, setPlannerStartStep] = useState(0)
 
   const { bookmarkedResources } = useBookmarks()
 
@@ -103,6 +104,14 @@ export default function App() {
 
   const goResources = () => setActiveSpace("resources")
 
+  // Every way into the planner goes through here so a start step from one entry
+  // (e.g. the results-page Plan button) never leaks into the next.
+  const openPlanner = (lesson: LessonMetadata | null, startStep = 0) => {
+    setPlannerLesson(lesson)
+    setPlannerStartStep(startStep)
+    setActiveSpace("lessonplanner")
+  }
+
   const handleOnboardingComplete = () => {
     setShowOnboarding(false)
     const prefs = getPrefs()
@@ -132,8 +141,8 @@ export default function App() {
         onGoHome={() => setActiveSpace("home")}
         onChangeSpace={(s) => {
           // Plan always starts fresh, matching the old "Plan Lesson" button.
-          if (s === "lessonplanner") setPlannerLesson(null)
-          setActiveSpace(s)
+          if (s === "lessonplanner") openPlanner(null)
+          else setActiveSpace(s)
         }}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
@@ -153,6 +162,8 @@ export default function App() {
           isMobileFiltersOpen={isMobileFiltersOpen}
           onCloseMobileFilters={() => setIsMobileFiltersOpen(false)}
           searchSeed={searchSeed}
+          // Step 2 (Resources) — the teacher has already picked their materials.
+          onPlanWithSelection={() => openPlanner(null, 1)}
         />
 
         {/* Overlay spaces — slide in over resources */}
@@ -169,13 +180,10 @@ export default function App() {
               {activeSpace === "home" && (
                 <HomeSpace
                   onNavigate={(destination) => {
-                    if (destination === "lessonplanner") setPlannerLesson(null)
-                    setActiveSpace(destination)
+                    if (destination === "lessonplanner") openPlanner(null)
+                    else setActiveSpace(destination)
                   }}
-                  onOpenLesson={(lesson) => {
-                    setPlannerLesson(lesson)
-                    setActiveSpace("lessonplanner")
-                  }}
+                  onOpenLesson={(lesson) => openPlanner(lesson)}
                   onOpenTour={() => setShowResourceTour(true)}
                   onOpenClassroomSetup={() => setShowOnboarding(true)}
                 />
@@ -186,6 +194,7 @@ export default function App() {
                   isOpen
                   asSpace
                   lesson={plannerLesson}
+                  initialWizardStep={plannerStartStep}
                   bookmarkedResources={bookmarkedResources}
                   onClose={goResources}
                   onBack={goResources}
@@ -198,7 +207,7 @@ export default function App() {
               )}
 
               {activeSpace === "lessons" && (
-                <LessonsLibrary onOpenLesson={(lesson) => { setPlannerLesson(lesson); setActiveSpace("lessonplanner") }} />
+                <LessonsLibrary onOpenLesson={(lesson) => openPlanner(lesson)} />
               )}
 
               {activeSpace === "assessment" && assessmentLesson && (
@@ -215,7 +224,7 @@ export default function App() {
                   <p className="text-lg font-semibold text-[#2C2C2C]">No lesson plan yet</p>
                   <p className="text-sm text-[#888]">Generate a lesson plan first to unlock quick checks.</p>
                   <button
-                    onClick={() => setActiveSpace("lessonplanner")}
+                    onClick={() => openPlanner(plannerLesson)}
                     className="px-5 py-2.5 bg-[#FF6B35] text-white font-semibold rounded-xl text-sm hover:bg-[#E85A24] transition-colors"
                   >
                     Open Lesson Planner
