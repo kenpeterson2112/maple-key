@@ -26,6 +26,16 @@ begin
 end
 $$;
 grant usage on schema public to anon, authenticated, service_role;
+
+-- Minimal stand-in for Supabase Auth: auth.users and auth.uid(), which reads the
+-- JWT subject from request.jwt.claims exactly as the real function does.
+create schema if not exists auth;
+create table if not exists auth.users (id uuid primary key);
+create or replace function auth.uid() returns uuid language sql stable as $$
+  select nullif(nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub', '')::uuid
+$$;
+grant usage on schema auth to anon, authenticated, service_role;
+grant execute on function auth.uid() to anon, authenticated, service_role;
 SQL
 
 for migration in "$DIR"/../migrations/*.sql; do
@@ -35,4 +45,5 @@ done
 
 "${PSQL[@]}" "$TEST_URL" -f "$DIR/resource_schema_test.sql"
 "${PSQL[@]}" "$TEST_URL" -f "$DIR/resource_import_test.sql"
+"${PSQL[@]}" "$TEST_URL" -f "$DIR/multi_tenant_rls_test.sql"
 echo "OK   supabase schema tests passed"
