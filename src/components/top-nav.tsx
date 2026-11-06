@@ -1,14 +1,13 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search, Lightbulb, BarChart3, BookOpen, Settings, LogIn, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
+import { Search, Lightbulb, BarChart3, BookOpen, Settings, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
-import { accountsEnabled } from "@/lib/supabase"
 
 export type TopNavSpace = "lessonplanner" | "resources" | "insights" | "lessons"
 
@@ -48,12 +47,6 @@ export default function TopNav({
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
-  const [showSignInHint, setShowSignInHint] = useState(false)
-  // With accounts configured, Sign in opens the #account page; without, the
-  // "coming soon" hint stays.
-  const openAccount = () => {
-    window.location.hash = "#account"
-  }
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMaterialsOpen, setIsMaterialsOpen] = useState(false)
   const [materialsTick, setMaterialsTick] = useState(0)
@@ -158,26 +151,6 @@ export default function TopNav({
               >
                 <Settings size={20} className="text-[#8B4513]" />
               </button>
-
-              <div className="relative">
-                <button
-                  onClick={() => (accountsEnabled ? openAccount() : setShowSignInHint((v) => !v))}
-                  className="flex items-center gap-1.5 rounded-xl bg-[#FF6B35] px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#E85A24] hover:shadow-md"
-                >
-                  <LogIn size={14} />
-                  Sign in
-                </button>
-                {showSignInHint && (
-                  <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-[#E8D5C4] bg-white p-4 text-sm text-[#2C2C2C] shadow-xl z-50">
-                    <p className="font-semibold text-[#8B4513]">Save across devices</p>
-                    <p className="mt-1 text-xs text-[#666]">
-                      Sign-in is optional — your filters and bookmarks already save locally. Add an email to sync them
-                      to other browsers.
-                    </p>
-                    <p className="mt-3 text-[11px] italic text-[#A8998E]">Coming soon.</p>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
 
@@ -255,17 +228,6 @@ export default function TopNav({
               >
                 <Settings size={16} />
                 Settings
-              </button>
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false)
-                  if (accountsEnabled) openAccount()
-                  else setShowSignInHint(true)
-                }}
-                className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#FF6B35] px-3.5 py-2 text-sm font-semibold text-white"
-              >
-                <LogIn size={14} />
-                Sign in
               </button>
             </div>
           )}

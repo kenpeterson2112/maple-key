@@ -1,7 +1,10 @@
 "use client"
 
-import { User, Mail, Globe, School, FlaskConical } from "lucide-react"
-import { useState } from "react"
+import { User, Mail, Globe, School, FlaskConical, LogOut, UserPlus } from "lucide-react"
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabase"
+import { isAdmin, loadProfile, signOut, type Profile } from "@/lib/account"
+import { withBasePath } from "@/lib/base-path"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import ClassroomResourcesPicker from "@/components/classroom-resources-picker"
 import { isSandboxMode, setSandboxMode } from "@/lib/assessment-results"
@@ -19,8 +22,36 @@ interface SettingsModalProps {
 }
 
 export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
-  const [name, setName] = useState("Ken Peterson")
-  const [email, setEmail] = useState("ken.peterson@maplekey.edu")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  // Signed-in account, if any: fills name/email and shows Sign out.
+  const [account, setAccount] = useState<{ email: string; profile: Profile | null } | null>(null)
+  const [signingOut, setSigningOut] = useState(false)
+
+  useEffect(() => {
+    if (!isOpen || !supabase) return
+    let active = true
+    supabase.auth.getSession().then(async ({ data }) => {
+      const user = data.session?.user
+      if (!active || !user) return
+      const profile = await loadProfile(user.id).catch(() => null)
+      if (!active) return
+      setAccount({ email: user.email ?? "", profile })
+      const meta = user.user_metadata as { full_name?: string; name?: string }
+      setName((n) => n || profile?.full_name || meta.full_name || meta.name || "")
+      setEmail((e) => e || user.email || "")
+    })
+    return () => {
+      active = false
+    }
+  }, [isOpen])
+
+  /** Ends the session and returns to the sign-in page. */
+  const handleSignOut = async () => {
+    setSigningOut(true)
+    await signOut().catch(() => undefined)
+    window.location.replace(`${withBasePath("/")}#account`)
+  }
   const [language, setLanguage] = useState("English")
   const [sandbox, setSandboxState] = useState(() => isSandboxMode())
   const [classroomResources, setClassroomResourcesState] = useState<string[]>(() =>
@@ -131,6 +162,35 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               </div>
             </label>
           </div>
+
+          {account && (
+            <div className="flex flex-col gap-3 rounded-2xl border-2 border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-card-foreground">Signed in</p>
+                <p className="truncate text-xs text-muted-foreground">{account.email}</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {isAdmin(account.profile?.role) && (
+                  <a
+                    href={`${withBasePath("/")}#account`}
+                    className="flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-card-foreground hover:bg-muted/40"
+                  >
+                    <UserPlus size={14} aria-hidden />
+                    Invite staff
+                  </a>
+                )}
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  disabled={signingOut}
+                  className="flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-destructive hover:bg-muted/40 disabled:opacity-60"
+                >
+                  <LogOut size={14} aria-hidden />
+                  {signingOut ? "Signing out…" : "Sign out"}
+                </button>
+              </div>
+            </div>
+          )}
 
           <button
             onClick={handleSave}
