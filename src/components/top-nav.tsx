@@ -8,6 +8,7 @@ import MaterialsSummary from "@/components/materials-summary"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
+import { accountsEnabled } from "@/lib/supabase"
 
 export type TopNavSpace = "lessonplanner" | "resources" | "insights" | "lessons"
 
@@ -48,6 +49,11 @@ export default function TopNav({
   const { bookmarkedResources } = useBookmarks()
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [showSignInHint, setShowSignInHint] = useState(false)
+  // With accounts configured, Sign in opens the #account page; without, the
+  // "coming soon" hint stays.
+  const openAccount = () => {
+    window.location.hash = "#account"
+  }
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMaterialsOpen, setIsMaterialsOpen] = useState(false)
   const [materialsTick, setMaterialsTick] = useState(0)
@@ -155,7 +161,7 @@ export default function TopNav({
 
               <div className="relative">
                 <button
-                  onClick={() => setShowSignInHint((v) => !v)}
+                  onClick={() => (accountsEnabled ? openAccount() : setShowSignInHint((v) => !v))}
                   className="flex items-center gap-1.5 rounded-xl bg-[#FF6B35] px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#E85A24] hover:shadow-md"
                 >
                   <LogIn size={14} />
@@ -252,8 +258,9 @@ export default function TopNav({
               </button>
               <button
                 onClick={() => {
-                  setShowSignInHint(true)
                   setIsMobileMenuOpen(false)
+                  if (accountsEnabled) openAccount()
+                  else setShowSignInHint(true)
                 }}
                 className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#FF6B35] px-3.5 py-2 text-sm font-semibold text-white"
               >

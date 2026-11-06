@@ -23,10 +23,21 @@ const isStudentActivity = activityId !== null || window.location.hash.startsWith
 const DistrictSpace = lazy(() => import("@/components/district/district-space"))
 const isDistrict = window.location.hash === "#district"
 
+// Account (#account): sign-in, joining a school from an invite, staff invites.
+// Supabase returns people here after Google or an email link.
+const AccountSpace = lazy(() => import("@/components/account/account-space"))
+// Auth redirects also land here: an emailed invite returns its session in the
+// hash (#access_token=…, replacing #account), and Google / email links return
+// a PKCE ?code=. The Supabase client picks either up on load.
+const isAccount =
+  window.location.hash.startsWith("#account") ||
+  /[#&](access_token|error_description)=/.test(window.location.hash) ||
+  new URLSearchParams(window.location.search).has("code")
+
 // Mode is chosen once at load, so moving to or from an activity link in the
 // same tab (pasting a second link, say) needs a fresh load to switch pages.
 window.addEventListener("hashchange", (e) => {
-  const isStandalone = (hash: string) => hash.startsWith(ACTIVITY_HASH_PREFIX) || hash === "#district"
+  const isStandalone = (hash: string) => hash.startsWith(ACTIVITY_HASH_PREFIX) || hash === "#district" || hash.startsWith("#account")
   const was = isStandalone(new URL(e.oldURL).hash)
   const now = isStandalone(new URL(e.newURL).hash)
   if (was || now) window.location.reload()
@@ -41,6 +52,10 @@ createRoot(document.getElementById("root")!).render(
     ) : isDistrict ? (
       <Suspense fallback={null}>
         <DistrictSpace />
+      </Suspense>
+    ) : isAccount ? (
+      <Suspense fallback={null}>
+        <AccountSpace />
       </Suspense>
     ) : isAdmin ? (
       <Suspense fallback={null}>
