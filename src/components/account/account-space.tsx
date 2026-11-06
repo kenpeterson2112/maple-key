@@ -215,7 +215,7 @@ function CreateWorkspace({ session, onDone }: { session: Session; onDone: () => 
     setBusy(true)
     setError(null)
     try {
-      await createIndependentWorkspace(workspace || `${fullName || "My"} classroom`, fullName)
+      await createIndependentWorkspace(workspace.trim() || "My class", fullName)
       onDone()
     } catch (err) {
       setError(err instanceof Error ? err.message : "Couldn't create your workspace")
@@ -231,18 +231,19 @@ function CreateWorkspace({ session, onDone }: { session: Session; onDone: () => 
         you, then sign in again. Otherwise, set up your own workspace.
       </p>
       <form onSubmit={submit} className="mt-4 flex flex-col gap-3">
-        <Field label="Your name">
+        <Field label="Your name (optional)">
           <input
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+            placeholder="First and last, or just one"
             className="w-full rounded-lg border border-border bg-input px-3 py-2 text-sm"
           />
         </Field>
-        <Field label="Workspace name">
+        <Field label="Class name">
           <input
             value={workspace}
             onChange={(e) => setWorkspace(e.target.value)}
-            placeholder={`${fullName || "My"} classroom`}
+            placeholder="e.g. Grade 7 Science"
             className="w-full rounded-lg border border-border bg-input px-3 py-2 text-sm"
           />
         </Field>
@@ -251,7 +252,7 @@ function CreateWorkspace({ session, onDone }: { session: Session; onDone: () => 
           disabled={busy}
           className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60"
         >
-          {busy ? "Creating…" : "Create my workspace"}
+          {busy ? "Getting started…" : "Get Started"}
         </button>
       </form>
       {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
