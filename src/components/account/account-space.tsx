@@ -28,7 +28,10 @@ import {
  * start a solo workspace, and, for admins, invite staff. Accounts are optional
  * for now; lessons and bookmarks still live in this browser.
  */
-export default function AccountSpace() {
+/** Into the teacher app, replacing this page in history so Back doesn't return here. */
+const enterApp = () => window.location.replace(withBasePath("/"))
+
+export default function AccountSpace({ returningFromAuth = false }: { returningFromAuth?: boolean }) {
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-2xl px-4 py-8 md:py-12">
@@ -40,7 +43,7 @@ export default function AccountSpace() {
           Back to Maple Key
         </a>
         <h1 className="mt-6 text-2xl font-bold">Your account</h1>
-        <div className="mt-6">{supabase ? <AccountFlow /> : <NotConfigured />}</div>
+        <div className="mt-6">{supabase ? <AccountFlow returningFromAuth={returningFromAuth} /> : <NotConfigured />}</div>
       </div>
     </div>
   )
@@ -64,7 +67,7 @@ type State =
   | { kind: "ready"; session: Session; profile: Profile; orgs: Organization[] }
   | { kind: "error"; message: string }
 
-function AccountFlow() {
+function AccountFlow({ returningFromAuth }: { returningFromAuth: boolean }) {
   const [state, setState] = useState<State>({ kind: "loading" })
 
   const refresh = useCallback(async (session: Session | null) => {
@@ -83,11 +86,17 @@ function AccountFlow() {
         setState({ kind: "needs-workspace", session })
         return
       }
+      // Just signed in (Google, an email link or an invite) and already set up:
+      // straight into the app. Opening #account on purpose shows this page.
+      if (returningFromAuth) {
+        enterApp()
+        return
+      }
       setState({ kind: "ready", session, profile, orgs: await loadOrganizations() })
     } catch (err) {
       setState({ kind: "error", message: err instanceof Error ? err.message : "Something went wrong" })
     }
-  }, [])
+  }, [returningFromAuth])
 
   useEffect(() => {
     if (!supabase) return
@@ -108,7 +117,7 @@ function AccountFlow() {
     case "signed-out":
       return <SignIn />
     case "needs-workspace":
-      return <CreateWorkspace session={state.session} onDone={() => refresh(state.session)} />
+      return <CreateWorkspace session={state.session} onDone={enterApp} />
     case "ready":
       return <Dashboard session={state.session} profile={state.profile} orgs={state.orgs} />
     case "error":
