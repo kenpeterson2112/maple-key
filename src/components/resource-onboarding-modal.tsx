@@ -32,8 +32,8 @@ const STEPS: {
   },
   {
     icon: <BookmarkPlus size={28} />,
-    iconBg: "bg-secondary/10",
-    iconColor: "text-secondary",
+    iconBg: "bg-secondary-tint",
+    iconColor: "text-secondary-strong",
     title: "Review & Add Your Own",
     body: "Browse the curated list, bookmark resources that resonate, and bring in materials you already love. Add notes about the lesson theme or learning goals you have in mind — this context shapes what gets generated.",
     detail: "Your bookmarks and notes travel with you into the lesson planner.",
