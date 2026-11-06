@@ -155,9 +155,11 @@ export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: Lesso
                   <button
                     type="button"
                     onClick={() => onContinueLesson(lesson)}
-                    className="ml-auto flex items-center gap-1 text-xs font-semibold text-primary hover:underline flex-shrink-0 py-1"
+                    aria-label={`Plan the next lesson after ${lesson.title || "this lesson"}`}
+                    title="Start a new lesson that picks up where this one left off"
+                    className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/40 bg-card px-3 py-1 text-xs font-semibold text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
                   >
-                    Continue
+                    Plan next lesson
                     <ArrowRight size={12} />
                   </button>
                 </div>

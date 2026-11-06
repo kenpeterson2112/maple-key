@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import {
   X,
   Loader2,
@@ -9,12 +9,11 @@ import {
   Languages,
   ChevronLeft,
   ChevronRight,
-  CornerDownRight,
 } from "lucide-react"
 import type { Resource } from "@/lib/types"
 import PageHeader from "@/components/page-header"
 import { normalizeGrades } from "@/lib/utils"
-import { logLesson, updateLessonFullContent, getLessonById } from "@/lib/lesson-metadata"
+import { logLesson, updateLessonFullContent, getLessonById, getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage, TemplateSection } from "@/lib/lesson-metadata"
 import ArtifactOrganizerModal from "@/components/artifact-organizer-modal"
 import LessonBuildingLoader from "@/components/lesson-building-loader"
@@ -40,6 +39,7 @@ import {
 } from "@/components/lesson-planner/planning-questions"
 import GeneratedLessonView, { type LessonContentPatch } from "@/components/lesson-planner/generated-lesson"
 import SetupSteps, { WIZARD_STEPS } from "@/components/lesson-planner/setup-steps"
+import PreviousLessonPicker from "@/components/lesson-planner/previous-lesson-picker"
 import GenerateErrorPanel from "@/components/lesson-planner/generate-error-panel"
 import {
   buildFullPrompt,
@@ -177,11 +177,28 @@ export default function LessonPlannerModal({
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
-  // Continuing a lesson: start from its grade and subject (once, on mount).
+  // Saved lessons a fresh plan can build on (newest first), for the picker.
+  const savedLessons = useMemo(() => (lesson ? [] : getLessonLog()), [lesson])
+
+  // Builds on `prev`: start from its class and format. Language and no-tech
+  // are set for this plan only, not saved as the teacher's remembered default.
+  const applyContinuationDefaults = (prev: LessonMetadata) => {
+    if (prev.grade && prev.grade !== globalFilters.state.grade) globalFilters.setGrade(prev.grade)
+    if (prev.subject && prev.subject !== globalFilters.state.subject) globalFilters.setSubject(prev.subject)
+    if (prev.lessonLength) setLessonLength(prev.lessonLength)
+    if (prev.lessonTemplate) setLessonTemplate(prev.lessonTemplate)
+    if (prev.fullContent?.reproducibleLanguage) setReproducibleLanguageState(prev.fullContent.reproducibleLanguage)
+    if (typeof prev.fullContent?.noTechMode === "boolean") setNoTechModeState(prev.fullContent.noTechMode)
+  }
+
+  const handleContinueFromChange = (prev: LessonMetadata | null) => {
+    setContinueFrom(prev)
+    if (prev) applyContinuationDefaults(prev)
+  }
+
+  // Opened via "Plan next lesson": apply the same defaults once, on mount.
   useEffect(() => {
-    if (!continueFrom) return
-    if (continueFrom.grade && continueFrom.grade !== globalFilters.state.grade) globalFilters.setGrade(continueFrom.grade)
-    if (continueFrom.subject && continueFrom.subject !== globalFilters.state.subject) globalFilters.setSubject(continueFrom.subject)
+    if (continueFrom) applyContinuationDefaults(continueFrom)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -776,21 +793,14 @@ export default function LessonPlannerModal({
               </>
             ) : (
               <>
-              {continueFrom && (
-                <div className="flex items-center gap-2 rounded-lg border border-border bg-muted/40 px-3 py-2 text-sm text-muted-foreground">
-                  <CornerDownRight size={16} className="text-primary flex-shrink-0" />
-                  <span className="min-w-0 flex-1 truncate">
-                    Continuing from: <span className="font-semibold text-foreground">{continueFrom.title || "Untitled lesson"}</span>
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setContinueFrom(null)}
-                    className="p-1 rounded-full hover:bg-muted transition-colors flex-shrink-0"
-                    aria-label="Don't continue from this lesson"
-                  >
-                    <X size={14} />
-                  </button>
-                </div>
+              {/* Once chosen it stays visible on every step; the empty prompt
+                  only shows where class context is set, to keep later steps quiet. */}
+              {savedLessons.length > 0 && (continueFrom || !isWizard || wizardStep === 0) && (
+                <PreviousLessonPicker
+                  lessons={savedLessons}
+                  selected={continueFrom}
+                  onSelect={handleContinueFromChange}
+                />
               )}
               <SetupSteps
                 setupMode={setupMode}

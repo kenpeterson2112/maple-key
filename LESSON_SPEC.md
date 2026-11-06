@@ -61,8 +61,9 @@ quiz question.
 
 ## Continuation lessons
 
-A teacher can start a lesson that continues an earlier one ("Continue" in the
-library, "Plan the next lesson" after generating). The request then carries a
+A teacher can start a lesson that continues an earlier one. They pick it in the
+planner ("Build on a previous lesson?"), or start from "Plan next lesson" on a
+library card or after generating. The request then carries a
 `continuation` summary of that lesson. It is built in `src/lib/lesson-sequence.ts`,
 capped field by field and formatted once in `shared/lesson-continuation.ts`.
 It holds the earlier lesson's title, learning goal, success criteria,
