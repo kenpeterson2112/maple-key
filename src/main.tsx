@@ -39,10 +39,14 @@ const AccountSpace = lazy(() => import("@/components/account/account-space"))
 // Auth redirects also land here: an emailed invite returns its session in the
 // hash (#access_token=…, replacing #account), and Google / email links return
 // a PKCE ?code=. The Supabase client picks either up on load.
+// Read before the Supabase client strips them from the URL: a sign-in that
+// just completed sends the teacher on into the app once their account is set.
+const returningFromAuth =
+  /[#&?](access_token|code)=/.test(window.location.hash) || new URLSearchParams(window.location.search).has("code")
 const isAccount =
   window.location.hash.startsWith("#account") ||
-  /[#&](access_token|error_description)=/.test(window.location.hash) ||
-  new URLSearchParams(window.location.search).has("code")
+  /[#&]error_description=/.test(window.location.hash) ||
+  returningFromAuth
 
 // Mode is chosen once at load, so moving to or from an activity link in the
 // same tab (pasting a second link, say) needs a fresh load to switch pages.
@@ -69,7 +73,7 @@ createRoot(document.getElementById("root")!).render(
       </Suspense>
     ) : isAccount ? (
       <Suspense fallback={null}>
-        <AccountSpace />
+        <AccountSpace returningFromAuth={returningFromAuth} />
       </Suspense>
     ) : isAdmin ? (
       <Suspense fallback={null}>
