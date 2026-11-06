@@ -174,9 +174,12 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   confirmed email). **Accounts are invite-only**: there is no self-serve signup.
   Schools, districts and solo teachers are set up by the operator (an org plus
   an invite, see `supabase/README.md`); admins then invite their own staff. `api/invitations.ts` inserts the invite *as the admin* so RLS
-  decides, then uses the secret key only to send the email. Accounts are
-  optional: without `VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY` the
-  app runs signed-out as before, and lessons still live in localStorage.
+  decides, then uses the secret key only to send the email. **Sign-in is
+  required**: `RequireAccount` (in `src/main.tsx`) sends anyone without a
+  profile to `#account`; only `#account`, student activity links and
+  `/privacy` / `/tos` are open. Without `VITE_SUPABASE_URL` /
+  `VITE_SUPABASE_PUBLISHABLE_KEY` (local dev, the Pages mirror) there are no
+  accounts and the app runs ungated. Lessons still live in localStorage.
 - **The resource schema has one home: `schema/resource-schema.json`** (currently
   `schema_version` 3.0). It holds every field vocabulary, the required/optional
   split, and the admin allowlists, and all three languages read it:

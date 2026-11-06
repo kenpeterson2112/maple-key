@@ -5,6 +5,7 @@ import { GlobalFiltersProvider } from "@/lib/global-filters"
 import App from "./App"
 import { ACTIVITY_HASH_PREFIX, shortLinkId } from "@/lib/student-activity"
 import { BASE_PATH } from "@/lib/base-path"
+import RequireAccount from "@/components/account/require-account"
 import "./index.css"
 
 // Admin Database Manager rides on the #admin hash so it needs no router and
@@ -68,23 +69,29 @@ createRoot(document.getElementById("root")!).render(
         <StudentActivityRoute hash={window.location.hash} activityId={activityId} />
       </Suspense>
     ) : isDistrict ? (
-      <Suspense fallback={null}>
-        <DistrictSpace />
-      </Suspense>
+      <RequireAccount>
+        <Suspense fallback={null}>
+          <DistrictSpace />
+        </Suspense>
+      </RequireAccount>
     ) : isAccount ? (
       <Suspense fallback={null}>
         <AccountSpace returningFromAuth={returningFromAuth} />
       </Suspense>
     ) : isAdmin ? (
-      <Suspense fallback={null}>
-        <AdminSpace />
-      </Suspense>
+      <RequireAccount>
+        <Suspense fallback={null}>
+          <AdminSpace />
+        </Suspense>
+      </RequireAccount>
     ) : (
-      <GlobalFiltersProvider>
-        <BookmarksProvider>
-          <App />
-        </BookmarksProvider>
-      </GlobalFiltersProvider>
+      <RequireAccount>
+        <GlobalFiltersProvider>
+          <BookmarksProvider>
+            <App />
+          </BookmarksProvider>
+        </GlobalFiltersProvider>
+      </RequireAccount>
     )}
   </StrictMode>,
 )
