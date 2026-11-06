@@ -150,10 +150,11 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   git history is the audit log and the recovery path.
 - **Supabase migration in progress** (see `supabase/README.md`). The project
   holds the resource tables, generated constraints, audit log and RLS.
-  **Production reads from it:** `pnpm build` writes `dist/resources.json` from
-  the database when `SUPABASE_URL` / `SUPABASE_ANON_KEY` are set (Vercel
-  Production, `deploy.yml`), and ships the committed file otherwise (local dev,
-  CI, PR previews). **Writes still go to `public/resources.json` in git** —
+  **The read path is built but not switched on:** `pnpm build` writes
+  `dist/resources.json` from the database only when `SUPABASE_URL` /
+  `SUPABASE_ANON_KEY` are set, and ships the committed file otherwise. As of
+  2026-11-06 Vercel has neither, so production still serves the committed
+  `public/resources.json`. Setting both on Vercel Production is the switch. **Writes still go to `public/resources.json` in git** —
   admin push, routines and scripts edit it as before, and
   `.github/workflows/sync-supabase.yml` carries each merge into the database
   (`seed-supabase.py --prune`, parity check, redeploy). So an edit is live only

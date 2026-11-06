@@ -2,8 +2,10 @@
 
 Schema for the Supabase project **Maple Key** (`jlsqyywvboqplvscwxbb`), which is
 taking over the resource library from `public/resources.json`. Migration is
-phased. Today **production builds its resource data from here**, while every
-write still lands in the JSON in git and `sync-supabase.yml` carries it in:
+phased. The pipeline below lets production build its resource data from here,
+while every write still lands in the JSON in git and `sync-supabase.yml`
+carries it in. **It is not switched on yet:** as of 2026-11-06 Vercel has no
+`SUPABASE_URL` / `SUPABASE_ANON_KEY`, so production serves the committed file.
 
 ```
 edit (admin push / routine / script) → PR → merge to main
@@ -11,8 +13,9 @@ edit (admin push / routine / script) → PR → merge to main
   → pnpm build: vite build && export-resources.mjs → dist/resources.json from the database
 ```
 
-The Supabase env is set on Vercel **Production only**, so a PR preview still
-serves that PR's own `public/resources.json`.
+To switch it on, set both on Vercel **Production only**, so a PR preview still
+serves that PR's own `public/resources.json`. Check the database is in sync
+(`export-resources.mjs --check`) before the first production deploy that reads it.
 
 ## Layout
 
