@@ -4,6 +4,7 @@ import { BookmarksProvider } from "@/lib/bookmarks-context"
 import { GlobalFiltersProvider } from "@/lib/global-filters"
 import App from "./App"
 import { ACTIVITY_HASH_PREFIX, shortLinkId } from "@/lib/student-activity"
+import { BASE_PATH } from "@/lib/base-path"
 import "./index.css"
 
 // Admin Database Manager rides on the #admin hash so it needs no router and
@@ -22,6 +23,15 @@ const isStudentActivity = activityId !== null || window.location.hash.startsWith
 // pattern again: its own lazy page with no teacher-app providers.
 const DistrictSpace = lazy(() => import("@/components/district/district-space"))
 const isDistrict = window.location.hash === "#district"
+
+// Privacy policy and terms (/privacy, /tos): real paths, because Google's
+// sign-in consent screen links to them. Plain pages, no app providers.
+const LegalPage = lazy(() => import("@/components/legal/legal-page"))
+const legalPath = (BASE_PATH && window.location.pathname.startsWith(BASE_PATH)
+  ? window.location.pathname.slice(BASE_PATH.length)
+  : window.location.pathname
+).replace(/\/$/, "")
+const legalDoc = legalPath === "/privacy" ? "privacy" : legalPath === "/tos" || legalPath === "/terms" ? "tos" : null
 
 // Account (#account): sign-in, joining a school from an invite, staff invites.
 // Supabase returns people here after Google or an email link.
@@ -45,7 +55,11 @@ window.addEventListener("hashchange", (e) => {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    {isStudentActivity ? (
+    {legalDoc ? (
+      <Suspense fallback={null}>
+        <LegalPage doc={legalDoc} />
+      </Suspense>
+    ) : isStudentActivity ? (
       <Suspense fallback={null}>
         <StudentActivityRoute hash={window.location.hash} activityId={activityId} />
       </Suspense>

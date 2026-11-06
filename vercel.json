@@ -3,7 +3,12 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
-  "rewrites": [{ "source": "/a/:id", "destination": "/index.html" }],
+  "rewrites": [
+    { "source": "/a/:id", "destination": "/index.html" },
+    { "source": "/privacy", "destination": "/index.html" },
+    { "source": "/tos", "destination": "/index.html" },
+    { "source": "/terms", "destination": "/index.html" }
+  ],
   "functions": {
     "api/admin-push.ts": {
       "maxDuration": 60
