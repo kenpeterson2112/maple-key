@@ -123,6 +123,8 @@ export default function LessonPlannerModal({
   const [materialsContent, setMaterialsContent] = useState(fc?.materialsContent ?? "")
   const [learningGoal, setLearningGoal] = useState(fc?.learningGoal ?? "")
   const [successCriteria, setSuccessCriteria] = useState<string[]>(fc?.successCriteria ?? [])
+  const [equityFraming, setEquityFraming] = useState(fc?.equityFraming ?? "")
+  const [reflectionCheckpoint, setReflectionCheckpoint] = useState(fc?.reflectionCheckpoint ?? "")
   const [materialsResources, setMaterialsResources] = useState<string[]>(fc?.materials?.resources ?? [])
   const [classroomMaterialsUsed, setClassroomMaterialsUsed] = useState<string[]>(fc?.materials?.classroomMaterials ?? [])
   const [materialsPreparation, setMaterialsPreparation] = useState<string[]>(fc?.materials?.preparation ?? [])
@@ -261,6 +263,8 @@ export default function LessonPlannerModal({
     setMaterialsContent(data.materialsContent ?? "")
     setLearningGoal(data.learningGoal ?? "")
     setSuccessCriteria(data.successCriteria ?? [])
+    setEquityFraming(data.equityFraming ?? "")
+    setReflectionCheckpoint(data.reflectionCheckpoint ?? "")
     setMaterialsResources(data.materials?.resources ?? [])
     setClassroomMaterialsUsed(data.materials?.classroomMaterials ?? [])
     setMaterialsPreparation(data.materials?.preparation ?? [])
@@ -293,6 +297,8 @@ export default function LessonPlannerModal({
         consolidationAssessment: data.consolidationAssessment ?? "",
         learningGoal: data.learningGoal ?? "",
         successCriteria: data.successCriteria ?? [],
+        equityFraming: data.equityFraming ?? "",
+        reflectionCheckpoint: data.reflectionCheckpoint ?? "",
         materials: data.materials ?? { resources: [], classroomMaterials: [], preparation: [] },
         excludedResources: data.excludedResources ?? [],
         sections: data.sections ?? [],
@@ -450,6 +456,8 @@ export default function LessonPlannerModal({
       coveredCodes,
       learningGoal,
       successCriteria,
+      equityFraming,
+      reflectionCheckpoint,
       materialsResources,
       classroomMaterialsUsed,
       materialsPreparation,
@@ -478,6 +486,8 @@ export default function LessonPlannerModal({
         lessonTitle,
         learningGoal,
         successCriteria,
+        equityFraming,
+        reflectionCheckpoint,
         coveredCodes,
         mindsOnContent,
         mindsOnDifferentiation,
@@ -669,6 +679,8 @@ export default function LessonPlannerModal({
                 coveredCodes={coveredCodes}
                 learningGoal={learningGoal}
                 successCriteria={successCriteria}
+                equityFraming={equityFraming}
+                reflectionCheckpoint={reflectionCheckpoint}
                 mindsOnContent={mindsOnContent}
                 mindsOnDifferentiation={mindsOnDifferentiation}
                 actionContent={actionContent}
