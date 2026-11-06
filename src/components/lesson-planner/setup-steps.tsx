@@ -83,6 +83,8 @@ export interface SetupStepsProps {
   reproducibleLanguage: ReproducibleLanguage
   onLanguageChange: (lang: ReproducibleLanguage) => void
   teacherNotes: string
+  /** Overrides the notes placeholder (e.g. when continuing a previous lesson). */
+  teacherNotesPlaceholder?: string
   onTeacherNotesChange: (notes: string) => void
 }
 
@@ -113,6 +115,7 @@ export default function SetupSteps({
   reproducibleLanguage,
   onLanguageChange,
   teacherNotes,
+  teacherNotesPlaceholder,
   onTeacherNotesChange,
 }: SetupStepsProps) {
   const isWizard = setupMode === "wizard"
@@ -529,7 +532,7 @@ export default function SetupSteps({
           value={teacherNotes}
           onChange={(e) => onTeacherNotesChange(e.target.value)}
           rows={4}
-          placeholder="Add any notes about your planning preferences, classroom environment, specific student needs, themes you'd like to emphasize..."
+          placeholder={teacherNotesPlaceholder ?? "Add any notes about your planning preferences, classroom environment, specific student needs, themes you'd like to emphasize..."}
           className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors resize-none"
         />
         <p className="text-xs text-gray-500 mt-2">

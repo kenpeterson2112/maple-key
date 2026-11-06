@@ -12,6 +12,7 @@ import type { Resource } from "@/lib/types"
 import type { LessonArtifact, TemplateSection } from "@/lib/lesson-metadata"
 import type { LessonTemplateDef } from "@/lib/lesson-templates"
 import type { AssessmentQuestion } from "@/lib/assessment-types"
+import { formatContinuationBlock, type ContinuationContext } from "../../../shared/lesson-continuation"
 import {
   openPrintWindow,
   escapeHtml as esc,
@@ -549,6 +550,7 @@ export interface LessonRequestInput {
   noTechMode: boolean
   classContext: Record<string, string>
   classProgress?: Record<string, unknown>
+  continuation?: ContinuationContext | null
 }
 
 /** The payload both API calls share. `generate-lesson` adds `planningAnswers` on top. */
@@ -573,6 +575,7 @@ export function buildRequestPayload(input: LessonRequestInput): Record<string, u
     noTechMode: input.noTechMode,
     ...input.classContext,
     ...(input.classProgress ? { classProgress: input.classProgress } : {}),
+    ...(input.continuation ? { continuation: input.continuation } : {}),
   }
 }
 
@@ -679,6 +682,7 @@ export function buildFullPrompt(input: {
   teacherNotes: string
   includeAssessmentData: boolean
   classroomResources: string[]
+  continuation?: ContinuationContext | null
 }): string {
   const { bookmarkedResources, lessonLength, lessonTemplate, teacherNotes, includeAssessmentData } = input
   const grade = String(bookmarkedResources[0]?.grade_level ?? "unknown")
@@ -715,6 +719,7 @@ Template: ${lessonTemplate}
 ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomLine}
 ${includeAssessmentData ? "Include targeted differentiation strategies based on recent assessment data." : ""}
+${formatContinuationBlock(input.continuation)}
 
 Resources to incorporate:
 ${resourceList}

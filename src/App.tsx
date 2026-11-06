@@ -55,6 +55,11 @@ export default function App() {
   const [assessmentLesson, setAssessmentLesson] = useState<LessonMetadata | null>(null)
   const [plannerLesson, setPlannerLesson] = useState<LessonMetadata | null>(null)
   const [plannerStartStep, setPlannerStartStep] = useState(0)
+  // "Continue from this lesson": the earlier lesson a fresh plan builds on.
+  const [plannerContinueFrom, setPlannerContinueFrom] = useState<LessonMetadata | null>(null)
+  // The planner reads its props once on mount; bump to remount on every open
+  // (e.g. "Plan the next lesson" from inside the planner itself).
+  const [plannerKey, setPlannerKey] = useState(0)
 
   const { bookmarkedResources } = useBookmarks()
 
@@ -106,9 +111,11 @@ export default function App() {
 
   // Every way into the planner goes through here so a start step from one entry
   // (e.g. the results-page Plan button) never leaks into the next.
-  const openPlanner = (lesson: LessonMetadata | null, startStep = 0) => {
+  const openPlanner = (lesson: LessonMetadata | null, startStep = 0, continueFrom: LessonMetadata | null = null) => {
     setPlannerLesson(lesson)
     setPlannerStartStep(startStep)
+    setPlannerContinueFrom(lesson ? null : continueFrom)
+    setPlannerKey((k) => k + 1)
     setActiveSpace("lessonplanner")
   }
 
@@ -191,10 +198,14 @@ export default function App() {
 
               {activeSpace === "lessonplanner" && (
                 <LessonPlannerModal
+                  key={plannerKey}
                   isOpen
                   asSpace
                   lesson={plannerLesson}
                   initialWizardStep={plannerStartStep}
+                  continueFrom={plannerContinueFrom}
+                  onContinueLesson={(prev) => openPlanner(null, 0, prev)}
+                  onOpenLesson={(l) => openPlanner(l)}
                   bookmarkedResources={bookmarkedResources}
                   onClose={goResources}
                   onBack={goResources}
@@ -207,7 +218,10 @@ export default function App() {
               )}
 
               {activeSpace === "lessons" && (
-                <LessonsLibrary onOpenLesson={(lesson) => openPlanner(lesson)} />
+                <LessonsLibrary
+                  onOpenLesson={(lesson) => openPlanner(lesson)}
+                  onContinueLesson={(lesson) => openPlanner(null, 0, lesson)}
+                />
               )}
 
               {activeSpace === "assessment" && assessmentLesson && (

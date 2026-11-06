@@ -14,6 +14,7 @@ import {
   assertMaxLength,
 } from "./_lib/limits.js"
 import { provinceLabel } from "./_lib/provinces.js"
+import { clampContinuation, formatContinuationBlock } from "../shared/lesson-continuation.js"
 
 // The lesson shape and rules below are specified in LESSON_SPEC.md at the repo
 // root. Change the spec and this prompt together (and the manual-fallback copy
@@ -65,6 +66,9 @@ interface GenerateRequest {
   grade?: string
   subject?: string
   topic?: string
+  /** "Continue from this lesson": a summary of the lesson this one follows.
+   *  Untrusted — re-clamped field by field before it reaches the prompt. */
+  continuation?: unknown
 }
 
 function formatClassProgress(progress: Record<string, LevelCounts>): string {
@@ -233,6 +237,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     grade: reqGrade,
     subject: reqSubject,
     topic,
+    continuation: rawContinuation,
   } = req.body as GenerateRequest
 
   if (!resources || resources.length === 0) {
@@ -302,6 +307,9 @@ Make deliberate, pedagogically sound use of the items that genuinely fit this co
   const classProgressBlock =
     includeAssessmentData && classProgress ? formatClassProgress(classProgress) : ""
 
+  // Context, not rules: the teacher's notes and choices take priority.
+  const continuationBlock = formatContinuationBlock(clampContinuation(rawContinuation))
+
   const planningAnswersBlock =
     planningAnswers && planningAnswers.length > 0
       ? `The teacher has made these planning decisions — honour them in the lesson:\n${planningAnswers
@@ -343,6 +351,7 @@ ${teacherNotes ? `Teacher notes: ${teacherNotes}` : ""}
 ${classroomMaterialsBlock}
 ${noTechModeBlock}
 ${classProgressBlock}
+${continuationBlock}
 ${planningAnswersBlock}
 
 Resources to incorporate:
