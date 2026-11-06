@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/export-resources.mjs --if-configured --out dist/resources.json",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.api.json",
     "preview": "vite preview",
     "validate:schema": "python3 scripts/check-schema-sync.py && python3 scripts/validate-resources.py"

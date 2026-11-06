@@ -3,9 +3,10 @@
 import type React from "react"
 import { useEffect, useMemo, useState } from "react"
 import { motion } from "framer-motion"
-import { Search, X, Plus, Compass } from "lucide-react"
+import { Search, X, Plus, Compass, Lightbulb } from "lucide-react"
 import ResourceCard from "./resource-card"
 import type { Filters } from "@/lib/types"
+import { useBookmarks } from "@/lib/bookmarks-context"
 import { useFilteredResources, keywordFilter, sortResources, type SidebarFilters } from "@/lib/use-filtered-resources"
 
 interface ResultsSectionProps {
@@ -15,9 +16,17 @@ interface ResultsSectionProps {
   /** Search text pushed in from another space. `nonce` changes on every send so
    *  asking for the same code twice re-applies it after the teacher has typed. */
   searchSeed?: { query: string; nonce: number }
+  /** Shown as a "Plan" button once the teacher has added resources. */
+  onPlanWithSelection?: () => void
 }
 
-export default function ResultsSection({ filters, sidebarFilters, onCountChange, searchSeed }: ResultsSectionProps) {
+export default function ResultsSection({
+  filters,
+  sidebarFilters,
+  onCountChange,
+  searchSeed,
+  onPlanWithSelection,
+}: ResultsSectionProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [isSearching, setIsSearching] = useState(false)
   const [showSubmitDialog, setShowSubmitDialog] = useState(false)
@@ -25,6 +34,8 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange,
   const [page, setPage] = useState(1)
 
   const { error, isLoading, filteredResources, classProgress } = useFilteredResources(filters, sidebarFilters)
+  const { bookmarkedResources } = useBookmarks()
+  const selectedCount = bookmarkedResources.length
 
   const keywordFilteredResources = useMemo(
     () => keywordFilter(filteredResources, searchQuery),
@@ -109,7 +120,7 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange,
               placeholder="Search within results…"
               value={searchQuery}
               onChange={handleSearchChange}
-              className="flex-1 bg-transparent text-sm text-[#2C2C2C] placeholder-[#A8998E] outline-none"
+              className="min-w-0 flex-1 bg-transparent text-sm text-[#2C2C2C] placeholder-[#A8998E] outline-none"
             />
             {searchQuery.length > 0 && (
               <button
@@ -151,6 +162,21 @@ export default function ResultsSection({ filters, sidebarFilters, onCountChange,
               </select>
             </div>
           </div>
+        )}
+
+        {onPlanWithSelection && selectedCount > 0 && (
+          <button
+            type="button"
+            onClick={onPlanWithSelection}
+            aria-label={`Plan a lesson with ${selectedCount} selected resource${selectedCount === 1 ? "" : "s"}`}
+            className="ml-auto flex flex-shrink-0 items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:shadow-md motion-safe:animate-fade-in"
+          >
+            <Lightbulb size={16} />
+            <span className="hidden sm:inline">Plan</span>
+            <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-foreground/25 px-1 text-[9px] font-bold">
+              {selectedCount >= 10 ? "9+" : selectedCount}
+            </span>
+          </button>
         )}
       </div>
 

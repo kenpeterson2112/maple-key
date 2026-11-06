@@ -1,0 +1,65 @@
+name: Sync resources.json into Supabase
+
+# The site builds its resource data from Supabase, but every write path (the
+# #admin push, the nightly routines, the ingest scripts) still lands as an edit
+# to public/resources.json on main. This carries each such merge into the
+# database, proves the two agree, then redeploys production from the database.
+#
+# Vercel and deploy.yml also build on the same push and may export before this
+# finishes; the last two steps rebuild both once the database has caught up.
+# That race goes away once writes go to the database first. (The Supabase vars
+# are set on Vercel Production only, so a PR preview still shows the PR's own
+# resources.json.)
+on:
+  push:
+    branches: [main]
+    paths: [public/resources.json]
+  workflow_dispatch:
+
+concurrency:
+  group: sync-supabase
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write # to re-run deploy.yml once the database has caught up
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Upsert resources.json (prune rows it dropped)
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: python3 scripts/seed-supabase.py --prune
+
+      - name: Parity check
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: node scripts/export-resources.mjs --check public/resources.json
+
+      - name: Redeploy production from the database
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "::warning::VERCEL_DEPLOY_HOOK_URL not set; production keeps the build from the push itself"
+            exit 0
+          fi
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL" > /dev/null
+          echo "deploy hook triggered"
+
+      # The Pages mirror built on the same push and has the same race.
+      - name: Rebuild the Pages mirror from the database
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main

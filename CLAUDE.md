@@ -133,6 +133,11 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 
 - Lesson generation is a **two-call flow**: planning questions first, then
   generation. Don't collapse it into one call.
+- **The lesson shape is specified in `LESSON_SPEC.md`** (three-part arc,
+  success criteria, differentiation, CRRP and equity framing, reflection
+  checkpoint, and the output rules). The prompt in `api/generate-lesson.ts` and
+  its manual-fallback copy in `src/components/lesson-planner/lesson-export.ts`
+  implement it; change all three together.
 - Planning-question answer formats use a **closed enum** — extend the enum,
   don't introduce free-form formats.
 - Resource curation is a **three-agent waterfall** (Researcher → review →
@@ -140,16 +145,26 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   so don't shortcut it for convenience.
 - Static resource data ships as `public/resources.json` (~2.5 MB) and is fetched
   via SWR. Treat as read-only at runtime; a nightly Claude Code routine
-  regenerates it (see `ROUTINES.md`). **Resources have no database** — admin
-  edits accumulate in localStorage and land as a draft PR via
-  `api/admin-push.ts`, so git history is the audit log and the recovery path.
-- **Supabase holds shared student activities only** (project "Maple Key",
-  `ca-central-1`, table `activities`). RLS is on with no policies, so only
-  `api/activities.ts` (holding `SUPABASE_SECRET_KEY`) can reach it. It stores
-  teacher-written content; student answers never leave the student's device
-  (local autosave, then a PDF they attach in Classroom). Keep it that way
-  unless a privacy review signs off. Don't move resources or admin edits into
-  it — the git audit trail is deliberate.
+  regenerates it (see `ROUTINES.md`). **There is no database** — admin edits
+  accumulate in localStorage and land as a draft PR via `api/admin-push.ts`, so
+  git history is the audit log and the recovery path.
+- **Supabase migration in progress** (see `supabase/README.md`). The project
+  holds the resource tables, generated constraints, audit log and RLS.
+  **Production reads from it:** `pnpm build` writes `dist/resources.json` from
+  the database when `SUPABASE_URL` / `SUPABASE_ANON_KEY` are set (Vercel
+  Production, `deploy.yml`), and ships the committed file otherwise (local dev,
+  CI, PR previews). **Writes still go to `public/resources.json` in git** —
+  admin push, routines and scripts edit it as before, and
+  `.github/workflows/sync-supabase.yml` carries each merge into the database
+  (`seed-supabase.py --prune`, parity check, redeploy). So an edit is live only
+  once it's merged *and* synced. Never write to the database directly until the
+  write paths move.
+- **Student activities** (short links `/a/<id>`) live in Supabase table
+  `activities`. RLS is on with no policies, so only `api/activities.ts` (holding
+  `SUPABASE_SECRET_KEY`, server-only) can reach it. It stores teacher-written
+  content; student answers never leave the student's device (local autosave,
+  then a PDF they attach in Classroom). Keep it that way unless a privacy review
+  signs off. Without the secret key, sharing falls back to hash links.
 - **The resource schema has one home: `schema/resource-schema.json`** (currently
   `schema_version` 3.0). It holds every field vocabulary, the required/optional
   split, and the admin allowlists, and all three languages read it:

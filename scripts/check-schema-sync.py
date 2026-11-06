@@ -9,12 +9,18 @@ shared/resource-schema.ts therefore have to be written out by hand. This script
 is what keeps that hand-written half honest, so adding a value to the JSON
 without adding it to the union fails CI instead of silently mis-typing the app.
 
+It also checks the Supabase CHECK constraints, which are generated from the same
+JSON by scripts/gen-supabase-constraints.py: the newest
+supabase/migrations/*_resource_constraints.sql must match what the JSON renders
+to today.
+
     python3 scripts/check-schema-sync.py
 
 Exits non-zero on any mismatch, or if a union it expects to find is missing (a
 rename should fail loudly rather than pass by matching nothing).
 """
 
+import importlib.util
 import re
 import sys
 from pathlib import Path
@@ -80,6 +86,14 @@ def compare(label: str, from_json: list, from_ts: list) -> list:
     return problems
 
 
+def load_constraint_generator():
+    path = Path(__file__).parent / "gen-supabase-constraints.py"
+    spec = importlib.util.spec_from_file_location("gen_supabase_constraints", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def main() -> int:
     source = TS_PATH.read_text(encoding="utf-8")
     problems = []
@@ -100,14 +114,22 @@ def main() -> int:
         except LookupError as exc:
             problems.append(str(exc))
 
+    generator = load_constraint_generator()
+    if not generator.is_current():
+        problems.append(
+            "supabase/migrations: the newest *_resource_constraints.sql is stale — "
+            "run python3 scripts/gen-supabase-constraints.py"
+        )
+
     if problems:
-        print("FAIL schema/resource-schema.json and shared/resource-schema.ts disagree:")
+        print("FAIL schema/resource-schema.json disagrees with a consumer:")
         for p in problems:
             print(f"  {p}")
         return 1
 
     checked = len(UNION_BY_VOCABULARY) + len(TUPLE_BY_ALLOWLIST)
     print(f"OK   shared/resource-schema.ts matches schema/resource-schema.json ({checked} lists)")
+    print("OK   supabase resource constraints match schema/resource-schema.json")
     return 0
 
 

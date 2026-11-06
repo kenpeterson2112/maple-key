@@ -27,7 +27,9 @@ Pages mirror to test or demo AI functionality.
 - Tailwind CSS v4
 - Radix UI (Popover, Dialog) for primitives
 - framer-motion for animation
-- SWR for the static `resources.json` fetch
+- SWR for the static `resources.json` fetch — on production the build writes
+  that file from Supabase (see `supabase/README.md`); locally it's the committed
+  `public/resources.json`
 - Anthropic SDK, called from Vercel serverless functions in `api/` (lesson
   planning, generation, assessment) — Vercel-only, not available on the
   GitHub Pages mirror
@@ -54,6 +56,19 @@ sub-path baked in:
 VITE_BASE_PATH=/v0-maple-key-website/ pnpm build
 ```
 
+## District Insights (sample)
+
+Open the app with the `#district` hash (e.g. `https://maplekey.vercel.app/#district`)
+for a district-leader dashboard: which subjects teachers plan, which library
+resources *and* in-class materials (manipulatives, tech carts, lab space) they
+build with, how usage splits across sources (licensed publishers like
+Pearson, Nelson, Rubicon, Knowledgehook, UFLI and Edwin; district-made units;
+the open-web library), expectation coverage and Quick Check results, and the
+lesson designs with the greatest impact. It runs entirely on a seeded sample for a
+fictional board (`src/lib/district-sample.ts`) — real Quick Check tallies live
+on each teacher's device, so a live roll-up needs sign-in and a shared store
+first. Aggregations live in `src/lib/district-metrics.ts`.
+
 ## Admin — Database Manager
 
 Open the app with the `#admin` hash (e.g. `https://maplekey.vercel.app/#admin`)
@@ -65,7 +80,9 @@ then tag, suppress, edit, or delete resources. Changes accumulate locally
 **Push to GitHub** sends the changeset to `api/admin-push.ts`, which applies
 it to both `public/resources.json` and `docs/resources.json` on a fresh
 `admin/resource-edits-*` branch and opens a draft PR — merging the PR is the
-review gate; nothing writes to `main` directly. **Download JSON** is the
+review gate; nothing writes to `main` directly. Once merged,
+`.github/workflows/sync-supabase.yml` loads the change into Supabase and
+redeploys, which is when it goes live. **Download JSON** is the
 no-server fallback: it downloads the edited `resources.json` for a manual
 commit.
 

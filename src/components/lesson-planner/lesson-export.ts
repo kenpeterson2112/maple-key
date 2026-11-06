@@ -37,6 +37,8 @@ export interface LessonResponseData {
   materialsContent?: string
   learningGoal?: string
   successCriteria?: string[]
+  equityFraming?: string
+  reflectionCheckpoint?: string
   materials?: { resources: string[]; classroomMaterials?: string[]; preparation: string[] }
   excludedResources?: { title: string; reason: string }[]
   sections?: TemplateSection[]
@@ -71,6 +73,8 @@ export interface LessonPdfInput {
   coveredCodes: string[]
   learningGoal: string
   successCriteria: string[]
+  equityFraming: string
+  reflectionCheckpoint: string
   materialsResources: string[]
   classroomMaterialsUsed: string[]
   materialsPreparation: string[]
@@ -92,7 +96,7 @@ export interface LessonPdfInput {
 export function buildLessonPdfHtml(input: LessonPdfInput): string {
   const {
     lessonTitle, lessonLength, lessonTemplate, coveredCodes, learningGoal, successCriteria,
-    materialsResources, classroomMaterialsUsed, materialsPreparation, materialsContent,
+    equityFraming, reflectionCheckpoint, materialsResources, classroomMaterialsUsed, materialsPreparation, materialsContent,
     mindsOnContent, mindsOnDifferentiation, actionContent, actionDifferentiation,
     consolidationContent, consolidationAssessment, templateSections, resources,
     isThreePart, templateDef, lessonMinutes,
@@ -411,6 +415,30 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       : ""
   }
 
+  ${
+    equityFraming || reflectionCheckpoint
+      ? `
+  <div class="card compact learning">
+    ${
+      equityFraming
+        ? `<div style="margin-bottom:${reflectionCheckpoint ? "10px" : "0"};">
+             <div class="label">CRRP &amp; Equity</div>
+             <p class="body-text" style="margin-top:4px;">${nl2br(equityFraming)}</p>
+           </div>`
+        : ""
+    }
+    ${
+      reflectionCheckpoint
+        ? `<div>
+             <div class="label">Reflection Checkpoint</div>
+             <p class="body-text" style="margin-top:4px;">${nl2br(reflectionCheckpoint)}</p>
+           </div>`
+        : ""
+    }
+  </div>`
+      : ""
+  }
+
   <div class="card compact materials">
     <div class="card-head">
       <h2 class="card-title">Materials &amp; Preparation</h2>
@@ -553,6 +581,8 @@ export interface LessonResponseInput {
   lessonTitle: string
   learningGoal: string
   successCriteria: string[]
+  equityFraming: string
+  reflectionCheckpoint: string
   coveredCodes: string[]
   mindsOnContent: string
   mindsOnDifferentiation: string
@@ -576,6 +606,8 @@ export function buildResponseJSON(input: LessonResponseInput): Record<string, un
     title: input.lessonTitle,
     learningGoal: input.learningGoal,
     successCriteria: input.successCriteria,
+    equityFraming: input.equityFraming,
+    reflectionCheckpoint: input.reflectionCheckpoint,
     curriculumCodesCovered: input.coveredCodes,
     materials: {
       resources: input.materialsResources,
@@ -638,6 +670,8 @@ export function responseFilename(lessonTitle: string): string {
  * The copyable prompt teachers paste into their own LLM when our API credits
  * run dry. Mirrors what `api/generate-lesson.ts` sends.
  */
+// Manual-fallback copy of the api/generate-lesson.ts prompt. Its shape and rules
+// are specified in LESSON_SPEC.md; keep all three in step.
 export function buildFullPrompt(input: {
   bookmarkedResources: Resource[]
   lessonLength: string
@@ -706,6 +740,8 @@ Return a JSON object with exactly these fields (string values are plain text, no
   "actionDifferentiation": "Differentiation strategies for Action phase",
   "consolidationContent": "Closing/consolidation activity description",
   "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
+  "equityFraming": "CRRP and equity framing for this lesson (2-4 sentences, see rules below)",
+  "reflectionCheckpoint": "When students self-assess against the success criteria, and the exact prompt they respond to",
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
     "preparation": ["What to print or photocopy", "What to pre-load or test on devices"]
@@ -715,7 +751,13 @@ Return a JSON object with exactly these fields (string values are plain text, no
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
     { "code": "D1.2", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
-}`
+}
+
+"curriculumCodesCovered" and every assessment question "code" must be codes from the list provided above; never cite an expectation code you were not given. (The one exception is the concept-label fallback for quick-check questions described above, used only when "curriculumCodesCovered" is empty.)
+
+"equityFraming" applies Culturally Responsive and Relevant Pedagogy (CRRP) to THIS lesson in 2-4 sentences: how it connects to students' identities, cultures, languages, and lived experiences; whose perspectives or knowledge it brings in (including First Nations, Métis, and Inuit perspectives where they genuinely fit the content, never as a token add-on); and how it removes barriers so every student can reach the success criteria. Be specific to this content. A statement that would fit any lesson is not acceptable.
+
+"reflectionCheckpoint" is one moment, usually during Consolidation, where students judge their own progress against the success criteria. Say when it happens, then give the exact student-facing prompt. It is a self-assessment, not another quiz question.`
 
   return `[SYSTEM]\n${systemPrompt}\n\n[USER]\n${userPrompt}`
 }

@@ -54,9 +54,13 @@ interface LessonPlannerModalProps {
   isOpen: boolean
   onClose: () => void
   onBack: () => void
+  /** Leaves the planner for the saved-lessons library. */
+  onOpenLibrary: () => void
   bookmarkedResources: Resource[]
   asSpace?: boolean
   lesson?: LessonMetadata | null
+  /** Guided-wizard step to open on (index into WIZARD_STEPS). Read once on mount. */
+  initialWizardStep?: number
   filters: Filters
   setFilters: (filters: Filters) => void
   sidebarFilters: SidebarFilters
@@ -73,9 +77,11 @@ export default function LessonPlannerModal({
   isOpen,
   onClose,
   onBack,
+  onOpenLibrary,
   bookmarkedResources,
   asSpace = false,
   lesson = null,
+  initialWizardStep = 0,
   filters,
   setFilters,
   sidebarFilters,
@@ -101,7 +107,9 @@ export default function LessonPlannerModal({
 
   // Setup layout: guided one-step-at-a-time wizard vs. everything on one page.
   const [setupMode, setSetupModeState] = useState<LessonSetupMode>(getLessonSetupMode())
-  const [wizardStep, setWizardStep] = useState(0)
+  const [wizardStep, setWizardStep] = useState(() =>
+    Math.max(0, Math.min(initialWizardStep, WIZARD_STEPS.length - 1)),
+  )
 
   const [editingSection, setEditingSection] = useState<string | null>(null)
   const [lessonTitle, setLessonTitle] = useState(lesson?.title ?? "")
@@ -115,6 +123,8 @@ export default function LessonPlannerModal({
   const [materialsContent, setMaterialsContent] = useState(fc?.materialsContent ?? "")
   const [learningGoal, setLearningGoal] = useState(fc?.learningGoal ?? "")
   const [successCriteria, setSuccessCriteria] = useState<string[]>(fc?.successCriteria ?? [])
+  const [equityFraming, setEquityFraming] = useState(fc?.equityFraming ?? "")
+  const [reflectionCheckpoint, setReflectionCheckpoint] = useState(fc?.reflectionCheckpoint ?? "")
   const [materialsResources, setMaterialsResources] = useState<string[]>(fc?.materials?.resources ?? [])
   const [classroomMaterialsUsed, setClassroomMaterialsUsed] = useState<string[]>(fc?.materials?.classroomMaterials ?? [])
   const [materialsPreparation, setMaterialsPreparation] = useState<string[]>(fc?.materials?.preparation ?? [])
@@ -253,6 +263,8 @@ export default function LessonPlannerModal({
     setMaterialsContent(data.materialsContent ?? "")
     setLearningGoal(data.learningGoal ?? "")
     setSuccessCriteria(data.successCriteria ?? [])
+    setEquityFraming(data.equityFraming ?? "")
+    setReflectionCheckpoint(data.reflectionCheckpoint ?? "")
     setMaterialsResources(data.materials?.resources ?? [])
     setClassroomMaterialsUsed(data.materials?.classroomMaterials ?? [])
     setMaterialsPreparation(data.materials?.preparation ?? [])
@@ -285,6 +297,8 @@ export default function LessonPlannerModal({
         consolidationAssessment: data.consolidationAssessment ?? "",
         learningGoal: data.learningGoal ?? "",
         successCriteria: data.successCriteria ?? [],
+        equityFraming: data.equityFraming ?? "",
+        reflectionCheckpoint: data.reflectionCheckpoint ?? "",
         materials: data.materials ?? { resources: [], classroomMaterials: [], preparation: [] },
         excludedResources: data.excludedResources ?? [],
         sections: data.sections ?? [],
@@ -442,6 +456,8 @@ export default function LessonPlannerModal({
       coveredCodes,
       learningGoal,
       successCriteria,
+      equityFraming,
+      reflectionCheckpoint,
       materialsResources,
       classroomMaterialsUsed,
       materialsPreparation,
@@ -470,6 +486,8 @@ export default function LessonPlannerModal({
         lessonTitle,
         learningGoal,
         successCriteria,
+        equityFraming,
+        reflectionCheckpoint,
         coveredCodes,
         mindsOnContent,
         mindsOnDifferentiation,
@@ -661,6 +679,8 @@ export default function LessonPlannerModal({
                 coveredCodes={coveredCodes}
                 learningGoal={learningGoal}
                 successCriteria={successCriteria}
+                equityFraming={equityFraming}
+                reflectionCheckpoint={reflectionCheckpoint}
                 mindsOnContent={mindsOnContent}
                 mindsOnDifferentiation={mindsOnDifferentiation}
                 actionContent={actionContent}
@@ -698,6 +718,8 @@ export default function LessonPlannerModal({
                 onOpenOrganizer={(i) => setOrganizerArtifactIndex(i)}
                 onOpenFeedback={() => setShowFeedbackDialog(true)}
                 onStartAssessment={() => setShowAssessment(true)}
+                onOpenLibrary={onOpenLibrary}
+                onPlanAnother={onBack}
               />
             ) : showQuestionsStep ? (
               <>
