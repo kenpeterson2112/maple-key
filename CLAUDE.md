@@ -166,6 +166,17 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   content; student answers never leave the student's device (local autosave,
   then a PDF they attach in Classroom). Keep it that way unless a privacy review
   signs off. Without the secret key, sharing falls back to hash links.
+- **Teacher accounts** (`#account`, `src/components/account/`) use Supabase
+  Auth (Google + email link) and the multi-tenant tables
+  (`organizations` → `profiles` → `lessons`, `invitations`). Every policy keys
+  off `private.visible_org_ids()`. Profiles are never self-inserted: a user gets
+  one from `accept_pending_invitation()` (an admin's invite, matched on their
+  confirmed email) or `create_independent_workspace()` (solo teachers, the only
+  self-serve path). Schools and districts are created by the operator with the
+  service role. `api/invitations.ts` inserts the invite *as the admin* so RLS
+  decides, then uses the secret key only to send the email. Accounts are
+  optional: without `VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY` the
+  app runs signed-out as before, and lessons still live in localStorage.
 - **The resource schema has one home: `schema/resource-schema.json`** (currently
   `schema_version` 3.0). It holds every field vocabulary, the required/optional
   split, and the admin allowlists, and all three languages read it:

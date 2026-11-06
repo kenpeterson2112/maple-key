@@ -71,3 +71,30 @@ select set_config('mk.batch_id', gen_random_uuid()::text, true);
 
 `anon` can read live rows (the `published_resources` view) and nothing else;
 every write goes through the service role.
+
+## Setting up a school or district
+
+Solo teachers sign up on their own. Schools and districts are created by us
+(SQL editor or the service role), then their first admin is invited and does
+the rest from `#account`. Run as the `postgres` role, which owns the tables:
+
+```sql
+-- A standalone private school and its first school admin.
+with s as (insert into public.organizations (name, type) values ('Maple Ridge Academy', 'school') returning id)
+insert into public.invitations (organization_id, email, role, invited_by)
+select id, 'principal@mapleridge.ca', 'school_admin', null from s;
+
+-- A district, its schools, and a district admin (who can then invite
+-- school admins and teachers into any of those schools).
+with d as (insert into public.organizations (name, type) values ('Lakeshore DSB', 'district') returning id)
+insert into public.organizations (name, type, parent_id)
+select n, 'school', d.id from d, unnest(array['Birch PS', 'Cedar MS']) n;
+insert into public.invitations (organization_id, email, role, invited_by)
+select id, 'superintendent@lakeshore.ca', 'district_admin', null
+from public.organizations where name = 'Lakeshore DSB' and type = 'district';
+```
+
+A row inserted this way creates the invite but sends no email. Send it from
+Supabase → Authentication → Users → Invite user (same address), or tell them to
+sign in at `#account` with that address. Either way the invite is picked up on
+their first sign-in.
