@@ -159,6 +159,12 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   (`seed-supabase.py --prune`, parity check, redeploy). So an edit is live only
   once it's merged *and* synced. Never write to the database directly until the
   write paths move.
+- **Student activities** (short links `/a/<id>`) live in Supabase table
+  `activities`. RLS is on with no policies, so only `api/activities.ts` (holding
+  `SUPABASE_SECRET_KEY`, server-only) can reach it. It stores teacher-written
+  content; student answers never leave the student's device (local autosave,
+  then a PDF they attach in Classroom). Keep it that way unless a privacy review
+  signs off. Without the secret key, sharing falls back to hash links.
 - **The resource schema has one home: `schema/resource-schema.json`** (currently
   `schema_version` 3.0). It holds every field vocabulary, the required/optional
   split, and the admin allowlists, and all three languages read it:

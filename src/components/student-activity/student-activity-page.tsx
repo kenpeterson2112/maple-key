@@ -74,9 +74,18 @@ function loadWork(key: string, count: number): SavedWork {
   }
 }
 
-export default function StudentActivityPage({ activity }: { activity: StudentActivity }) {
+interface Props {
+  activity: StudentActivity
+  /**
+   * Autosave key. Short links pass one based on the activity id, so answers
+   * survive a teacher editing the activity; hash links key on the content.
+   */
+  storageKey?: string
+}
+
+export default function StudentActivityPage({ activity, storageKey: keyOverride }: Props) {
   const t = STRINGS[activity.lang]
-  const storageKey = useMemo(() => activityStorageKey(activity), [activity])
+  const storageKey = useMemo(() => keyOverride ?? activityStorageKey(activity), [keyOverride, activity])
   const [work, setWork] = useState<SavedWork>(() => loadWork(storageKey, activity.prompts.length))
   const [savedOk, setSavedOk] = useState(false)
   const [status, setStatus] = useState<"idle" | "working" | "error">("idle")

@@ -1,28 +1,25 @@
 import { BASE_PATH } from "@/lib/base-path"
 
+import {
+  ACTIVITY_ID_PATTERN,
+  normalizeActivity,
+  type StudentActivity,
+} from "../../shared/student-activity"
+
+export type { StudentActivity }
+
 /**
  * A student activity is a fill-in version of a teacher's graphic organizer.
+ * It reaches students by one of two links:
  *
- * There is no database, so the whole activity travels inside the link itself:
- * `/#activity=<base64url JSON>`. That keeps the link stable (same organizer →
- * same URL), works on both Vercel and the static GitHub Pages mirror, and
- * needs no student login. The hash never reaches a server, so nothing a
- * teacher writes is logged in request URLs.
+ * - Short link `/a/<id>`: the activity is stored in Supabase via
+ *   api/activities.ts. Teachers can fix a typo after sharing and students
+ *   see it. Only works on Vercel, where the API runs.
+ * - Hash link `/#activity=<base64url JSON>`: the whole activity travels in the
+ *   link. The fallback whenever storage isn't reachable (the GitHub Pages
+ *   mirror, an outage), and every link shared before storage existed.
  */
-export interface StudentActivity {
-  /** Payload version, so the format can evolve without breaking old links. */
-  v: 1
-  title: string
-  subtitle: string
-  /** Prompt shown above each response box, in order. */
-  prompts: string[]
-  lang: "en" | "fr"
-}
-
 export const ACTIVITY_HASH_PREFIX = "#activity="
-
-const MAX_PROMPTS = 8
-const MAX_TEXT = 500
 
 function toBase64Url(text: string): string {
   const bytes = new TextEncoder().encode(text)
@@ -47,30 +44,76 @@ export function buildActivityUrl(activity: StudentActivity): string {
   return `${window.location.origin}${BASE_PATH}/${ACTIVITY_HASH_PREFIX}${encodeActivity(activity)}`
 }
 
-/**
- * Parse an activity out of a location hash. Returns null for anything
- * malformed; the link is untrusted input, so every field is checked and
- * clamped rather than cast.
- */
+/** Parse an activity out of a hash link, or null for anything malformed. */
 export function decodeActivity(hash: string): StudentActivity | null {
   if (!hash.startsWith(ACTIVITY_HASH_PREFIX)) return null
   try {
-    const raw: unknown = JSON.parse(fromBase64Url(hash.slice(ACTIVITY_HASH_PREFIX.length)))
-    if (typeof raw !== "object" || raw === null) return null
-    const r = raw as Record<string, unknown>
-    if (r.v !== 1 || typeof r.title !== "string" || !Array.isArray(r.prompts)) return null
-    const prompts = r.prompts
-      .filter((p): p is string => typeof p === "string")
-      .slice(0, MAX_PROMPTS)
-      .map((p) => p.slice(0, MAX_TEXT))
-    if (prompts.length === 0) return null
-    return {
-      v: 1,
-      title: r.title.slice(0, MAX_TEXT),
-      subtitle: typeof r.subtitle === "string" ? r.subtitle.slice(0, MAX_TEXT) : "",
-      prompts,
-      lang: r.lang === "fr" ? "fr" : "en",
+    return normalizeActivity(JSON.parse(fromBase64Url(hash.slice(ACTIVITY_HASH_PREFIX.length))))
+  } catch {
+    return null
+  }
+}
+
+// ---- Short links -----------------------------------------------------------
+
+const SHORT_PATH = /^\/a\/([^/]+)\/?$/
+
+/** The activity id from a short-link path (`/a/x7k2p9`), if this is one. */
+export function shortLinkId(pathname: string): string | null {
+  const path = BASE_PATH && pathname.startsWith(BASE_PATH) ? pathname.slice(BASE_PATH.length) : pathname
+  const m = SHORT_PATH.exec(path)
+  return m && ACTIVITY_ID_PATTERN.test(m[1]) ? m[1] : null
+}
+
+export function buildShortUrl(id: string): string {
+  return `${window.location.origin}${BASE_PATH}/a/${id}`
+}
+
+/** Fetch a stored activity. Null when it doesn't exist; throws when storage is unreachable. */
+export async function fetchStoredActivity(id: string): Promise<StudentActivity | null> {
+  const r = await fetch(`${BASE_PATH}/api/activities?id=${encodeURIComponent(id)}`)
+  if (r.status === 404) return null
+  if (!r.ok) throw new Error(`activity fetch failed: ${r.status}`)
+  const body: unknown = await r.json()
+  return normalizeActivity((body as { activity?: unknown }).activity)
+}
+
+/** Where a teacher's copy of an activity lives in storage, kept with the lesson. */
+export interface StoredActivityRef {
+  id: string
+  editToken: string
+}
+
+/**
+ * Store (or update) an activity and return its reference, or null when
+ * storage isn't available, in which case callers fall back to a hash link.
+ * An update whose token no longer matches creates a fresh activity instead.
+ */
+export async function saveStoredActivity(
+  activity: StudentActivity,
+  existing?: StoredActivityRef | null,
+): Promise<StoredActivityRef | null> {
+  const post = (body: object) =>
+    fetch(`${BASE_PATH}/api/activities`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-MK-Api-Key": import.meta.env.VITE_MK_API_KEY ?? "",
+      },
+      body: JSON.stringify(body),
+    })
+  try {
+    if (existing) {
+      const r = await post({ id: existing.id, editToken: existing.editToken, activity })
+      if (r.ok) return existing
+      if (r.status !== 403) return null
     }
+    const r = await post({ activity })
+    if (!r.ok) return null
+    const body = (await r.json()) as Partial<StoredActivityRef>
+    return typeof body.id === "string" && typeof body.editToken === "string"
+      ? { id: body.id, editToken: body.editToken }
+      : null
   } catch {
     return null
   }

@@ -2,7 +2,14 @@ import { useState } from "react"
 import { X, Printer, Link2, Check, ExternalLink, GraduationCap } from "lucide-react"
 import type { LessonArtifact } from "@/lib/lesson-metadata"
 import { openPrintWindow, escapeHtml, nl2br, PRINT_ON_LOAD_SCRIPT } from "@/lib/print-html"
-import { buildActivityUrl, classroomShareUrl, type StudentActivity } from "@/lib/student-activity"
+import {
+  buildActivityUrl,
+  buildShortUrl,
+  classroomShareUrl,
+  saveStoredActivity,
+  type StoredActivityRef,
+  type StudentActivity,
+} from "@/lib/student-activity"
 
 interface Props {
   artifact: LessonArtifact
@@ -46,13 +53,21 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
     ),
   )
 
-  const buildFields = (): Record<string, string> => ({
+  // Where the shared copy of this organizer is stored, if it has been shared.
+  // Kept in the organizer's saved fields so it lives with the lesson.
+  const [shareRef, setShareRef] = useState<StoredActivityRef | null>(() =>
+    initial.share_id && initial.share_token ? { id: initial.share_id, editToken: initial.share_token } : null,
+  )
+  const [shortUrl, setShortUrl] = useState<string | null>(() => (shareRef ? buildShortUrl(shareRef.id) : null))
+  const [sharing, setSharing] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const buildFields = (ref: StoredActivityRef | null = shareRef): Record<string, string> => ({
     title,
     subtitle,
     ...labels,
+    ...(ref ? { share_id: ref.id, share_token: ref.editToken } : {}),
   })
-
-  const [copied, setCopied] = useState(false)
 
   /** The fill-in version students open from Classroom, built from the current edits. */
   const buildStudentActivity = (): StudentActivity => ({
@@ -63,31 +78,60 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
     lang: isFrench ? "fr" : "en",
   })
 
+  /**
+   * Store the current edits and return the student link: a short link when
+   * storage is reachable (updating the existing copy, so students already
+   * holding the link see the change), otherwise a self-contained hash link.
+   */
+  const resolveStudentLink = async (): Promise<string> => {
+    const activity = buildStudentActivity()
+    setSharing(true)
+    const ref = await saveStoredActivity(activity, shareRef)
+    setSharing(false)
+    if (ref) {
+      setShareRef(ref)
+      setShortUrl(buildShortUrl(ref.id))
+    }
+    onSave(buildFields(ref ?? shareRef))
+    return ref ? buildShortUrl(ref.id) : buildActivityUrl(activity)
+  }
+
+  /**
+   * Popup blockers only allow windows opened directly from the click, so the
+   * window opens first and is pointed at the link once it is ready.
+   */
+  const openWhenReady = async (name: string, features: string | undefined, toUrl: (link: string) => string) => {
+    const win = window.open("", name, features)
+    const link = await resolveStudentLink()
+    if (win) {
+      win.opener = null
+      win.location.href = toUrl(link)
+    } else {
+      window.open(toUrl(link), name, features)
+    }
+  }
+
+  const handleShareToClassroom = () =>
+    openWhenReady("classroom-share", "width=640,height=720", classroomShareUrl)
+
+  const handlePreview = () => openWhenReady("_blank", undefined, (link) => link)
+
   const handleCopyLink = async () => {
-    onSave(buildFields())
+    const link = await resolveStudentLink()
     try {
-      await navigator.clipboard.writeText(buildActivityUrl(buildStudentActivity()))
+      await navigator.clipboard.writeText(link)
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2000)
     } catch {
-      // Clipboard can be blocked by browser policy; the preview link still exposes the URL.
+      // Clipboard can be blocked by browser policy; the short link is shown in the panel.
       setCopied(false)
     }
   }
 
-  const handleShareToClassroom = () => {
-    onSave(buildFields())
-    const url = classroomShareUrl(buildActivityUrl(buildStudentActivity()))
-    window.open(url, "classroom-share", "width=640,height=720,noopener")
-  }
-
-  const handlePreview = () => {
-    onSave(buildFields())
-    window.open(buildActivityUrl(buildStudentActivity()), "_blank", "noopener")
-  }
-
   const handleSaveAndClose = () => {
     onSave(buildFields())
+    // Already shared: push the edits so students holding the link see them.
+    if (shareRef) void saveStoredActivity(buildStudentActivity(), shareRef)
     onClose()
   }
 
@@ -168,26 +212,36 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
             <div className="mt-3 flex flex-wrap gap-2">
               <button
                 onClick={handleShareToClassroom}
-                className="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90"
+                disabled={sharing}
+                className="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60"
               >
                 <GraduationCap size={14} aria-hidden />
                 Share to Google Classroom
               </button>
               <button
                 onClick={handleCopyLink}
-                className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted/40"
+                disabled={sharing}
+                className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted/40 disabled:opacity-60"
               >
                 {copied ? <Check size={14} aria-hidden /> : <Link2 size={14} aria-hidden />}
                 {copied ? "Link copied" : "Copy student link"}
               </button>
               <button
                 onClick={handlePreview}
-                className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted/40"
+                disabled={sharing}
+                className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted/40 disabled:opacity-60"
               >
                 <ExternalLink size={14} aria-hidden />
                 Preview as student
               </button>
             </div>
+            {shortUrl && (
+              <p className="mt-3 text-xs text-muted-foreground">
+                Student link: <span className="font-mono text-foreground select-all">{shortUrl}</span>
+                <br />
+                Edits you save here update this link for everyone.
+              </p>
+            )}
           </div>
         </div>
 
