@@ -170,10 +170,10 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   Auth (Google + email link) and the multi-tenant tables
   (`organizations` → `profiles` → `lessons`, `invitations`). Every policy keys
   off `private.visible_org_ids()`. Profiles are never self-inserted: a user gets
-  one from `accept_pending_invitation()` (an admin's invite, matched on their
-  confirmed email) or `create_independent_workspace()` (solo teachers, the only
-  self-serve path). Schools and districts are created by the operator with the
-  service role. `api/invitations.ts` inserts the invite *as the admin* so RLS
+  one only from `accept_pending_invitation()` (an invite, matched on their
+  confirmed email). **Accounts are invite-only**: there is no self-serve signup.
+  Schools, districts and solo teachers are set up by the operator (an org plus
+  an invite, see `supabase/README.md`); admins then invite their own staff. `api/invitations.ts` inserts the invite *as the admin* so RLS
   decides, then uses the secret key only to send the email. Accounts are
   optional: without `VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY` the
   app runs signed-out as before, and lessons still live in localStorage.

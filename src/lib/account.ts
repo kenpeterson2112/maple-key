@@ -106,15 +106,6 @@ export async function acceptPendingInvitation(): Promise<string | null> {
   return (data as string | null) ?? null
 }
 
-export async function createIndependentWorkspace(workspaceName: string, fullName: string): Promise<string> {
-  const { data, error } = await client().rpc("create_independent_workspace", {
-    p_workspace_name: workspaceName,
-    p_full_name: fullName,
-  })
-  if (error) throw error
-  return data as string
-}
-
 export async function updateFullName(userId: string, fullName: string) {
   const { error } = await client().from("profiles").update({ full_name: fullName.trim() || null }).eq("id", userId)
   if (error) throw error

@@ -1,5 +1,5 @@
--- Tests for invitations, accept_pending_invitation() and
--- create_independent_workspace(). Runs after multi_tenant_rls_test.sql and
+-- Tests for invitations and accept_pending_invitation() (accounts are
+-- invite-only). Runs after multi_tenant_rls_test.sql and
 -- reuses its fixture: district D0 (schools A1, A2), private school B0, solo C0;
 -- users 10 = district admin, 11 = school admin A1, 12 = teacher A1, 16 = solo.
 \set ON_ERROR_STOP 1
@@ -27,7 +27,7 @@ begin
   if n > 0 then raise exception 'FAIL %: % row(s) affected, want denial', p_label, n; end if;
 end $$;
 
--- New, profile-less auth users: 20 confirmed, 21 unconfirmed, 22 confirmed (solo).
+-- New, profile-less auth users: 20 confirmed, 21 unconfirmed, 22 confirmed, never invited.
 insert into auth.users (id, email, email_confirmed_at, raw_user_meta_data) values
   ('00000000-0000-0000-0000-000000000020', 'new.teacher@school.test', now(), '{"full_name": "New Teacher"}'),
   ('00000000-0000-0000-0000-000000000021', 'unconfirmed@school.test', null, '{}'),
@@ -97,26 +97,19 @@ begin; select pg_temp.act_as('21');
   select pg_temp.expect('expired invite accepts nothing', (select count(*) from (select public.accept_pending_invitation() as o) x where o is not null), 0);
 rollback;
 
--- Solo signup.
+-- Invite-only: a confirmed user with no invite gets nothing, and the old
+-- self-serve signup function no longer exists.
 begin; select pg_temp.act_as('22');
-  select public.create_independent_workspace('Solo Studio', 'Solo Person');
-commit;
-select pg_temp.expect('solo workspace created',
-  (select count(*) from public.profiles p join public.organizations o on o.id = p.organization_id
-    where p.id = '00000000-0000-0000-0000-000000000022' and o.type = 'independent' and p.role = 'teacher'), 1);
-begin; select pg_temp.act_as('22'); select pg_temp.expect_denied('second workspace refused',
-  $$select public.create_independent_workspace('Again')$$); rollback;
-begin; select pg_temp.act_as('22');
-  select pg_temp.expect('solo sees only own org', (select count(*) from public.organizations), 1);
+  select pg_temp.expect('no invite, no profile', (select count(*) from (select public.accept_pending_invitation() as o) x where o is not null), 0);
 rollback;
+select pg_temp.expect('solo signup function removed',
+  (select count(*) from pg_proc where proname = 'create_independent_workspace'), 0);
 
--- A user with a pending invite is pointed at it instead of starting alone.
+-- A pending invite for a user who signs in later.
 insert into auth.users (id, email, email_confirmed_at) values ('00000000-0000-0000-0000-000000000023', 'pending@school.test', now());
 begin; select pg_temp.act_as('11');
   insert into public.invitations (organization_id, email) values ('00000000-0000-0000-0000-0000000000a1', 'pending@school.test');
 commit;
-begin; select pg_temp.act_as('23'); select pg_temp.expect_denied('solo signup with pending invite',
-  $$select public.create_independent_workspace('Mine')$$); rollback;
 
 -- Revoking a pending invite works; anon cannot call the functions.
 begin; select pg_temp.act_as('11');

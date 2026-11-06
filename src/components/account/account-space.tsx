@@ -6,7 +6,6 @@ import { withBasePath } from "@/lib/base-path"
 import {
   ROLE_LABEL,
   acceptPendingInvitation,
-  createIndependentWorkspace,
   invitableRoles,
   inviteMember,
   isAdmin,
@@ -63,7 +62,7 @@ function NotConfigured() {
 type State =
   | { kind: "loading" }
   | { kind: "signed-out" }
-  | { kind: "needs-workspace"; session: Session }
+  | { kind: "no-invite"; session: Session }
   | { kind: "ready"; session: Session; profile: Profile; orgs: Organization[] }
   | { kind: "error"; message: string }
 
@@ -83,7 +82,7 @@ function AccountFlow({ returningFromAuth }: { returningFromAuth: boolean }) {
         profile = await loadProfile(session.user.id)
       }
       if (!profile) {
-        setState({ kind: "needs-workspace", session })
+        setState({ kind: "no-invite", session })
         return
       }
       // Just signed in (Google, an email link or an invite) and already set up:
@@ -116,8 +115,8 @@ function AccountFlow({ returningFromAuth }: { returningFromAuth: boolean }) {
       return <Loader2 className="mx-auto animate-spin text-muted-foreground" aria-label="Loading" />
     case "signed-out":
       return <SignIn />
-    case "needs-workspace":
-      return <CreateWorkspace session={state.session} onDone={enterApp} />
+    case "no-invite":
+      return <NoInvite session={state.session} />
     case "ready":
       return <Dashboard session={state.session} profile={state.profile} orgs={state.orgs} />
     case "error":
@@ -212,59 +211,18 @@ function SignIn() {
   )
 }
 
-function CreateWorkspace({ session, onDone }: { session: Session; onDone: () => void }) {
-  const meta = session.user.user_metadata as { full_name?: string; name?: string }
-  const [fullName, setFullName] = useState(meta.full_name ?? meta.name ?? "")
-  const [workspace, setWorkspace] = useState("")
-  const [busy, setBusy] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const submit = async (e: FormEvent) => {
-    e.preventDefault()
-    setBusy(true)
-    setError(null)
-    try {
-      await createIndependentWorkspace(workspace.trim() || "My class", fullName)
-      onDone()
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't create your workspace")
-      setBusy(false)
-    }
-  }
-
+/** Signed in, but no invite for this address. Accounts are invite-only. */
+function NoInvite({ session }: { session: Session }) {
   return (
     <Card>
-      <p className="font-semibold">Welcome, {session.user.email}</p>
-      <p className="mt-1 text-sm text-muted-foreground">
-        We didn't find an invite for this address. If your school uses Maple Key, ask your school admin to invite
-        you, then sign in again. Otherwise, set up your own workspace.
+      <p className="font-semibold">We couldn't find an invite for {session.user.email}</p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Maple Key accounts are by invitation. Ask your school admin to invite this address, then sign in again
+        from the link in the invite email.
       </p>
-      <form onSubmit={submit} className="mt-4 flex flex-col gap-3">
-        <Field label="Your name (optional)">
-          <input
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            placeholder="First and last, or just one"
-            className="w-full rounded-lg border border-border bg-input px-3 py-2 text-sm"
-          />
-        </Field>
-        <Field label="Class name">
-          <input
-            value={workspace}
-            onChange={(e) => setWorkspace(e.target.value)}
-            placeholder="e.g. Grade 7 Science"
-            className="w-full rounded-lg border border-border bg-input px-3 py-2 text-sm"
-          />
-        </Field>
-        <button
-          type="submit"
-          disabled={busy}
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-60"
-        >
-          {busy ? "Getting started…" : "Get Started"}
-        </button>
-      </form>
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
+      <p className="mt-2 text-sm text-muted-foreground">
+        Signed in with a different account than the one you were invited at? Sign out and try that one.
+      </p>
       <SignOutButton />
     </Card>
   )

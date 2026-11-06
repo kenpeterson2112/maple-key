@@ -72,11 +72,11 @@ select set_config('mk.batch_id', gen_random_uuid()::text, true);
 `anon` can read live rows (the `published_resources` view) and nothing else;
 every write goes through the service role.
 
-## Setting up a school or district
+## Setting up a school, district or solo teacher
 
-Solo teachers sign up on their own. Schools and districts are created by us
-(SQL editor or the service role), then their first admin is invited and does
-the rest from `#account`. Run as the `postgres` role, which owns the tables:
+Accounts are invite-only. Every organization is created by us (SQL editor or
+the service role) along with an invite for its first person; school and
+district admins then invite the rest from `#account`. Run as the `postgres` role, which owns the tables:
 
 ```sql
 -- A standalone private school and its first school admin.
@@ -92,6 +92,11 @@ select n, 'school', d.id from d, unnest(array['Birch PS', 'Cedar MS']) n;
 insert into public.invitations (organization_id, email, role, invited_by)
 select id, 'superintendent@lakeshore.ca', 'district_admin', null
 from public.organizations where name = 'Lakeshore DSB' and type = 'district';
+
+-- A solo teacher with their own workspace.
+with i as (insert into public.organizations (name, type) values ('Grade 7 Science', 'independent') returning id)
+insert into public.invitations (organization_id, email, role, invited_by)
+select id, 'teacher@example.ca', 'teacher', null from i;
 ```
 
 A row inserted this way creates the invite but sends no email. Send it from
