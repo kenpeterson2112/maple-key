@@ -51,8 +51,8 @@ export default function ResourcesSpace({
   }
 
   return (
-    <div className="flex flex-col h-full bg-[#FAF3E0] overflow-hidden">
-      <PageHeader icon={Compass} title="Resources" iconColor="#C65D3B" iconBg="bg-[#FFE5CC]" />
+    <div className="flex flex-col h-full bg-background overflow-hidden">
+      <PageHeader icon={Compass} title="Resources" iconColor="text-primary-strong" iconBg="bg-primary-tint" />
 
       <div className="flex flex-1 min-h-0">
         <SidebarFilters onFilterChange={onSidebarFilterChange} sidebarFilters={sidebarFilters} />

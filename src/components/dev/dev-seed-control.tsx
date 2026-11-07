@@ -73,8 +73,8 @@ export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedSco
           type="button"
           className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold transition-colors ${
             sandbox
-              ? "border-[#FF6B35] bg-[#FFE5CC] text-[#C65D3B]"
-              : "border-dashed border-[#C8B6A6] bg-white/70 text-[#8B7355] hover:border-[#FF6B35] hover:text-[#C65D3B]"
+              ? "border-primary bg-primary-tint text-primary-strong"
+              : "border-dashed border-border-strong bg-card/70 text-muted-foreground hover:border-primary hover:text-primary-strong"
           }`}
           title="Sample-data sandbox: generate fake data, or flip back to your real data"
         >
@@ -92,24 +92,24 @@ export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedSco
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -6, scale: 0.96 }}
                 transition={{ type: "spring", stiffness: 420, damping: 32 }}
-                className="z-[100] w-72 rounded-2xl border-2 border-[#E8D5C4] bg-white p-4 shadow-xl"
+                className="z-[100] w-72 rounded-2xl border-2 border-border bg-card p-4 shadow-xl"
               >
                 <div className="mb-3 flex items-center gap-1.5">
-                  <FlaskConical size={14} className="text-[#C65D3B]" />
-                  <p className="text-xs font-bold text-[#2C2C2C]">Sample data</p>
-                  <span className="ml-auto rounded-full bg-[#FFE5CC] px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#C65D3B]">
+                  <FlaskConical size={14} className="text-primary-strong" />
+                  <p className="text-xs font-bold text-foreground">Sample data</p>
+                  <span className="ml-auto rounded-full bg-primary-tint px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-primary-strong">
                     Dev
                   </span>
                 </div>
 
                 {/* Data-source toggle: real localStorage vs. the sample-data sandbox */}
-                <div className="mb-1.5 text-[11px] font-semibold text-[#8B4513]">Data source</div>
-                <div className="grid grid-cols-2 gap-1 rounded-xl border border-[#E8D5C4] bg-[#FAF3E0] p-0.5">
+                <div className="mb-1.5 text-[11px] font-semibold text-foreground">Data source</div>
+                <div className="grid grid-cols-2 gap-1 rounded-xl border border-border bg-muted p-0.5">
                   <button
                     type="button"
                     onClick={() => switchMode(false)}
                     className={`flex items-center justify-center gap-1.5 rounded-lg px-2 py-1.5 text-[11px] font-semibold transition-colors ${
-                      !sandbox ? "bg-white text-[#2C2C2C] shadow-sm" : "text-[#888] hover:text-[#2C2C2C]"
+                      !sandbox ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     <Database size={12} />
@@ -119,14 +119,14 @@ export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedSco
                     type="button"
                     onClick={() => switchMode(true)}
                     className={`flex items-center justify-center gap-1.5 rounded-lg px-2 py-1.5 text-[11px] font-semibold transition-colors ${
-                      sandbox ? "bg-[#FF6B35] text-white shadow-sm" : "text-[#888] hover:text-[#2C2C2C]"
+                      sandbox ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     <FlaskConical size={12} />
                     Sandbox
                   </button>
                 </div>
-                <p className="mb-3 mt-2 text-[10px] leading-snug text-[#888]">
+                <p className="mb-3 mt-2 text-[10px] leading-snug text-muted-foreground">
                   {sandbox
                     ? "Showing a sandbox of sample data. Your real data is untouched — flip to Actual to return to it."
                     : "Showing your real saved data. Switch to Sandbox to generate and explore sample data safely."}
@@ -138,12 +138,12 @@ export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedSco
                       <>
                         <div className="mb-3">
                           <div className="mb-1 flex items-center justify-between">
-                            <span className="text-[11px] font-semibold text-[#8B4513]">Subject</span>
+                            <span className="text-[11px] font-semibold text-foreground">Subject</span>
                           </div>
                           <select
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
-                            className="w-full rounded-lg border border-[#E8D5C4] bg-white px-2 py-1.5 text-[11px] text-[#2C2C2C]"
+                            className="w-full rounded-lg border border-border bg-card px-2 py-1.5 text-[11px] text-foreground"
                           >
                             <option value="all">All subjects</option>
                             {SANDBOX_SUBJECTS.map((s) => (
@@ -190,7 +190,7 @@ export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedSco
                       <button
                         type="button"
                         onClick={handleGenerate}
-                        className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:shadow-md"
+                        className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-primary to-primary-hover px-3 py-2 text-xs font-semibold text-primary-foreground shadow-sm transition-all hover:shadow-md"
                       >
                         <Wand2 size={13} />
                         Generate
@@ -198,7 +198,7 @@ export default function DevSeedControl({ scope, onChanged }: { scope: DevSeedSco
                       <button
                         type="button"
                         onClick={handleReset}
-                        className="flex items-center justify-center gap-1.5 rounded-xl border border-[#E8D5C4] px-3 py-2 text-xs font-semibold text-[#888] transition-colors hover:bg-[#FAF3E0] hover:text-[#C65D3B]"
+                        className="flex items-center justify-center gap-1.5 rounded-xl border border-border px-3 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-primary-strong"
                         title="Clear the sandbox"
                       >
                         <Trash2 size={13} />
@@ -236,8 +236,8 @@ function SliderRow({
   return (
     <div className="mb-3">
       <div className="mb-1 flex items-center justify-between">
-        <span className="text-[11px] font-semibold text-[#8B4513]">{label}</span>
-        <span className="text-[11px] font-medium text-[#888]">{display}</span>
+        <span className="text-[11px] font-semibold text-foreground">{label}</span>
+        <span className="text-[11px] font-medium text-muted-foreground">{display}</span>
       </div>
       <input
         type="range"
@@ -246,7 +246,7 @@ function SliderRow({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full cursor-pointer accent-[#FF6B35]"
+        className="w-full cursor-pointer accent-primary"
       />
     </div>
   )

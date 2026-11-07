@@ -76,10 +76,10 @@ export default function ClassInsightsSpace({ onFindResources }: ClassInsightsSpa
 
   if (tallies.length === 0) {
     return (
-      <div className="flex flex-col h-full bg-[#FAF3E0]">
+      <div className="flex flex-col h-full bg-background">
         <PageHeader icon={BarChart3} title="Class Insights">
           {isSandboxMode() && (
-            <span className="rounded-full bg-[#FFE5CC] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#C65D3B]">
+            <span className="rounded-full bg-primary-tint px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary-strong">
               Sandbox
             </span>
           )}
@@ -90,8 +90,8 @@ export default function ClassInsightsSpace({ onFindResources }: ClassInsightsSpa
             <BarChart3 size={26} className="text-amber-600" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-[#2C2C2C]">No quick check data yet</p>
-            <p className="text-xs text-[#888] max-w-sm mt-1">
+            <p className="text-sm font-semibold text-foreground">No quick check data yet</p>
+            <p className="text-xs text-muted-foreground max-w-sm mt-1">
               Plan a lesson, run the quick check, and record student responses — aggregated results will appear here.
             </p>
           </div>
@@ -101,12 +101,12 @@ export default function ClassInsightsSpace({ onFindResources }: ClassInsightsSpa
   }
 
   return (
-    <div className="flex flex-col h-full bg-[#FAF3E0]">
+    <div className="flex flex-col h-full bg-background">
 
       {/* Header */}
       <PageHeader icon={BarChart3} title="Class Insights">
         {isSandboxMode() && (
-          <span className="rounded-full bg-[#FFE5CC] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#C65D3B]">
+          <span className="rounded-full bg-primary-tint px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary-strong">
             Sandbox
           </span>
         )}
@@ -132,32 +132,32 @@ export default function ClassInsightsSpace({ onFindResources }: ClassInsightsSpa
           {filtered.length > 0 ? (
             <CurriculumOrbDashboard tallies={filtered} />
           ) : (
-            <div className="rounded-xl border-2 border-dashed border-[#E8D5C4] bg-white p-8 text-center">
-              <p className="text-sm font-medium text-[#2C2C2C]">No results for this view</p>
-              <p className="mt-1 text-xs text-[#888]">Try another grade or subject tab above.</p>
+            <div className="rounded-xl border-2 border-dashed border-border bg-card p-8 text-center">
+              <p className="text-sm font-medium text-foreground">No results for this view</p>
+              <p className="mt-1 text-xs text-muted-foreground">Try another grade or subject tab above.</p>
             </div>
           )}
 
           {/* Lesson history */}
           {filtered.length > 0 && (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B4513] mb-2">
+              <p className="text-xs font-semibold uppercase tracking-wide text-foreground mb-2">
                 Lesson History
               </p>
-              <div className="rounded-xl border border-[#E8D5C4] bg-white overflow-hidden divide-y divide-[#F0E6D8]">
+              <div className="rounded-xl border border-border bg-card overflow-hidden divide-y divide-border">
                 {[...filtered].sort((a, b) => b.updatedAt - a.updatedAt).map(t => (
                   <div key={t.lessonId} className="flex items-center gap-3 px-4 py-3">
                     <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-amber-50">
                       <BookOpen size={14} className="text-amber-600" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-[#2C2C2C] truncate">{t.title}</p>
-                      <p className="text-xs text-[#888]">
+                      <p className="text-sm font-medium text-foreground truncate">{t.title}</p>
+                      <p className="text-xs text-muted-foreground">
                         Gr {normalizeGrade(t.grade)} · {normalizeSubject(t.subject)} · {t.attempts}{" "}
                         {t.attempts === 1 ? "response" : "responses"}
                       </p>
                     </div>
-                    <p className="text-xs text-[#A8998E] flex-shrink-0">{formatDate(t.updatedAt)}</p>
+                    <p className="text-xs text-muted-foreground flex-shrink-0">{formatDate(t.updatedAt)}</p>
                   </div>
                 ))}
               </div>

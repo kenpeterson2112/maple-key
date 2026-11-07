@@ -702,25 +702,25 @@ export default function LessonPlannerModal({
       {!asSpace && <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />}
 
       {/* Content */}
-      <div className={asSpace ? "w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden" : "relative w-[95vw] h-[90vh] bg-[#FAF3E0] rounded-3xl shadow-2xl flex flex-col overflow-hidden"}>
+      <div className={asSpace ? "w-full h-full bg-background flex flex-col overflow-hidden" : "relative w-[95vw] h-[90vh] bg-muted rounded-3xl shadow-2xl flex flex-col overflow-hidden"}>
         {/* Header */}
         <PageHeader
           icon={Lightbulb}
           title={lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
-          iconColor="#16A34A"
-          iconBg="bg-green-100"
+          iconColor="text-secondary-strong"
+          iconBg="bg-secondary-tint"
           hideTitleOnMobile={!lessonGenerated}
         >
-          <span className="hidden sm:inline whitespace-nowrap text-xs text-[#888]">
+          <span className="hidden sm:inline whitespace-nowrap text-xs text-muted-foreground">
             {resources.length} resource{resources.length !== 1 ? "s" : ""} selected
           </span>
           {!asSpace && (
             <button
               onClick={onClose}
-              className="p-1.5 hover:bg-[#FFE5CC] rounded-full transition-colors"
+              className="p-1.5 hover:bg-primary-tint rounded-full transition-colors"
               aria-label="Close modal"
             >
-              <X size={20} className="text-[#8B4513]" />
+              <X size={20} className="text-foreground" />
             </button>
           )}
         </PageHeader>
@@ -841,11 +841,11 @@ export default function LessonPlannerModal({
         </div>
 
         {!lessonGenerated && showQuestionsStep && (
-          <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
+          <div className="sticky bottom-0 border-t-2 border-border bg-card px-6 py-4">
             <div className={`${contentWidthClass} mx-auto`}>
               <button
                 onClick={handleQuestionsSubmit}
-                className="w-full py-2 text-sm text-[#888] hover:text-violet-700 transition-colors"
+                className="w-full py-2 text-sm text-muted-foreground hover:text-violet-700 transition-colors"
               >
                 Skip questions &amp; generate now
               </button>
@@ -854,7 +854,7 @@ export default function LessonPlannerModal({
         )}
 
         {!lessonGenerated && !showQuestionsStep && !isGenerating && !isWizard && (
-          <div className="hidden md:block sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
+          <div className="hidden md:block sticky bottom-0 border-t-2 border-border bg-card px-6 py-4">
             <div className={`${contentWidthClass} mx-auto space-y-3`}>
               {generateErrorPanel}
               {frenchHandoutsNotice}
@@ -864,7 +864,7 @@ export default function LessonPlannerModal({
         )}
 
         {!lessonGenerated && !showQuestionsStep && !isGenerating && isWizard && (
-          <div className="sticky bottom-0 border-t-2 border-[#E8D5C4] bg-white px-6 py-4">
+          <div className="sticky bottom-0 border-t-2 border-border bg-card px-6 py-4">
             <div className={`${contentWidthClass} mx-auto space-y-3`}>
               {isLastWizardStep && generateErrorPanel}
               {isLastWizardStep && frenchHandoutsNotice}
@@ -873,7 +873,7 @@ export default function LessonPlannerModal({
                   <button
                     type="button"
                     onClick={() => goToWizardStep(wizardStep - 1)}
-                    className="flex-shrink-0 flex items-center gap-1.5 px-4 py-3 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-semibold rounded-xl transition-colors"
+                    className="flex-shrink-0 flex items-center gap-1.5 px-4 py-3 border-2 border-border hover:bg-accent text-secondary-strong text-sm font-semibold rounded-xl transition-colors"
                   >
                     <ChevronLeft size={16} />
                     Back
@@ -885,7 +885,7 @@ export default function LessonPlannerModal({
                   <button
                     type="button"
                     onClick={() => goToWizardStep(wizardStep + 1)}
-                    className="w-full py-3 bg-[#FF6B35] hover:bg-[#e55a2a] text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-colors"
+                    className="w-full py-3 bg-primary hover:bg-primary-hover text-primary-foreground font-semibold rounded-xl flex items-center justify-center gap-2 transition-colors"
                   >
                     Next: {WIZARD_STEPS[wizardStep + 1].label}
                     <ChevronRight size={16} />
@@ -924,7 +924,7 @@ export default function LessonPlannerModal({
       {showFeedbackDialog && (
         <div className="fixed inset-0 z-[300] flex items-center justify-center">
           <div className="absolute inset-0 bg-black/50" onClick={() => setShowFeedbackDialog(false)} />
-          <div className="relative bg-white rounded-2xl shadow-2xl p-6 max-w-md mx-4">
+          <div className="relative bg-card rounded-2xl shadow-2xl p-6 max-w-md mx-4">
             <button
               onClick={() => setShowFeedbackDialog(false)}
               className="absolute top-4 right-4 p-1 hover:bg-gray-100 rounded-full transition-colors"
@@ -933,11 +933,11 @@ export default function LessonPlannerModal({
               <X size={20} className="text-gray-500" />
             </button>
             <div className="text-center pt-2">
-              <MessageSquareText size={40} className="text-[#FF6B35] mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-[#2C2C2C] mb-3">Feedback Form</h3>
-              <p className="text-sm text-[#666] leading-relaxed">
+              <MessageSquareText size={40} className="text-primary mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-foreground mb-3">Feedback Form</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 Feedback form under construction. Please mail us at{" "}
-                <a href="mailto:feedback@maplekey.ca" className="text-[#FF6B35] hover:underline font-medium">
+                <a href="mailto:feedback@maplekey.ca" className="text-primary hover:underline font-medium">
                   feedback@maplekey.ca
                 </a>
               </p>

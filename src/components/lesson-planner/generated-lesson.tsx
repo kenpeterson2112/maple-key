@@ -171,20 +171,20 @@ export default function GeneratedLessonView({
       </div>
 
       {/* LESSON HEADER */}
-      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+      <div className="bg-card rounded-xl border-2 border-border p-5">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-xl font-bold text-[#2C2C2C]">
+            <h3 className="text-xl font-bold text-foreground">
               {lessonTitle}
             </h3>
-            <p className="text-sm text-[#666] mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               {resources[0]?.grade_level?.[0] ? `Grade ${resources[0].grade_level[0]}` : ""}
               {resources[0]?.grade_level?.[0] && " • "}
               {lessonLength} • {lessonTemplate.split(" (")[0]}
             </p>
             {follows && <FollowsLink follows={follows} className="mt-1" />}
             {coveredCodes.length > 0 && (
-              <p className="text-xs text-[#888] mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Curriculum: {coveredCodes.join(", ")}
               </p>
             )}
@@ -203,7 +203,7 @@ export default function GeneratedLessonView({
               onClick={onExportJSON}
               disabled={!allStagesApproved}
               title={allStagesApproved ? "Save the full lesson JSON (including quiz questions) so you can reload it later without using API credits" : "Approve every lesson stage before saving"}
-              className="px-4 py-2 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-medium rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+              className="px-4 py-2 border-2 border-border hover:bg-accent text-secondary-strong text-sm font-medium rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
             >
               <Download size={16} />
               Save JSON
@@ -211,7 +211,7 @@ export default function GeneratedLessonView({
             {canRegenerate && (
               <button
                 onClick={onRegenerate}
-                className="px-4 py-2 border-2 border-[#E8D5C4] hover:bg-[#FAF3E0] text-[#8B4513] text-sm font-medium rounded-lg flex items-center gap-2 transition-colors"
+                className="px-4 py-2 border-2 border-border hover:bg-accent text-secondary-strong text-sm font-medium rounded-lg flex items-center gap-2 transition-colors"
               >
                 <RefreshCw size={16} />
                 Regenerate
@@ -230,19 +230,19 @@ export default function GeneratedLessonView({
 
       {/* LEARNING GOAL & SUCCESS CRITERIA */}
       {(learningGoal || successCriteria.length > 0) && (
-        <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+        <div className="bg-card rounded-xl border-2 border-border p-5">
           {learningGoal && (
             <div className={successCriteria.length > 0 ? "mb-4" : ""}>
-              <p className="text-xs font-semibold text-[#8B4513] uppercase tracking-wide mb-1">Learning Goal</p>
-              <p className="text-sm text-[#2C2C2C] leading-relaxed">{learningGoal}</p>
+              <p className="text-xs font-semibold text-foreground uppercase tracking-wide mb-1">Learning Goal</p>
+              <p className="text-sm text-foreground leading-relaxed">{learningGoal}</p>
             </div>
           )}
           {successCriteria.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-[#8B4513] uppercase tracking-wide mb-2">Success Criteria</p>
+              <p className="text-xs font-semibold text-foreground uppercase tracking-wide mb-2">Success Criteria</p>
               <ul className="space-y-1.5">
                 {successCriteria.map((sc, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-[#444]">
+                  <li key={i} className="flex items-start gap-2 text-sm text-foreground">
                     <CheckCircle size={14} className="text-emerald-500 flex-shrink-0 mt-0.5" />
                     <span>{sc}</span>
                   </li>
@@ -286,12 +286,12 @@ export default function GeneratedLessonView({
       )}
 
       {/* MATERIALS & PREPARATION SECTION - Moved above Minds On */}
-      <div className="bg-white rounded-xl border-l-4 border-stone-400 shadow-sm overflow-hidden">
+      <div className="bg-card rounded-xl border-l-4 border-stone-400 shadow-sm overflow-hidden">
         <div className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
               <ClipboardList size={20} className="text-stone-600" />
-              <h4 className="text-lg font-semibold text-[#2C2C2C]">Materials & Preparation</h4>
+              <h4 className="text-lg font-semibold text-foreground">Materials & Preparation</h4>
             </div>
             <button
               onClick={() => onEditSection(editingSection === "materials" ? null : "materials")}
@@ -308,7 +308,7 @@ export default function GeneratedLessonView({
                 <p className="text-xs font-medium text-stone-600 mb-2">
                   Resources (auto-generated from bookmarks)
                 </p>
-                <p className="text-sm text-[#444] bg-stone-50 p-2 rounded-lg">
+                <p className="text-sm text-foreground bg-stone-50 p-2 rounded-lg">
                   {(materialsResources.length > 0 ? materialsResources : resources.map((r) => r.topic_title)).join(", ")}
                 </p>
               </div>
@@ -317,7 +317,7 @@ export default function GeneratedLessonView({
                   <p className="text-xs font-medium text-stone-600 mb-2">
                     Classroom materials used
                   </p>
-                  <p className="text-sm text-[#444] bg-stone-50 p-2 rounded-lg">
+                  <p className="text-sm text-foreground bg-stone-50 p-2 rounded-lg">
                     {classroomMaterialsUsed.join(", ")}
                   </p>
                 </div>
@@ -330,7 +330,7 @@ export default function GeneratedLessonView({
                   value={materialsPreparation.join("\n")}
                   onChange={(e) => onChange({ materialsPreparation: e.target.value.split("\n") })}
                   rows={6}
-                  className="w-full px-3 py-2 border-2 border-stone-300 rounded-lg bg-white text-sm focus:outline-none focus:border-stone-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 border-2 border-stone-300 rounded-lg bg-card text-sm focus:outline-none focus:border-stone-500 transition-colors resize-none"
                 />
               </div>
               <button
@@ -345,7 +345,7 @@ export default function GeneratedLessonView({
               {/* Left box - Resources + classroom materials (1/4 width) */}
               <div className="w-1/4 bg-stone-50 border border-stone-200 rounded-lg p-3">
                 <p className="text-xs font-semibold text-stone-700 mb-2">Materials</p>
-                <ul className="text-xs text-[#444] space-y-1.5">
+                <ul className="text-xs text-foreground space-y-1.5">
                   {(materialsResources.length > 0 ? materialsResources.map((t) => ({ topic_title: t })) : resources).map((r, index) => (
                     <li key={index} className="flex items-start gap-1.5">
                       <span className="text-stone-400 flex-shrink-0">•</span>
@@ -358,7 +358,7 @@ export default function GeneratedLessonView({
                     <p className="text-[10px] font-semibold uppercase tracking-wide text-stone-500 mt-3 mb-1.5">
                       From your classroom
                     </p>
-                    <ul className="text-xs text-[#444] space-y-1.5">
+                    <ul className="text-xs text-foreground space-y-1.5">
                       {classroomMaterialsUsed.map((m, index) => (
                         <li key={index} className="flex items-start gap-1.5">
                           <span className="text-emerald-500 flex-shrink-0">▪</span>
@@ -373,7 +373,7 @@ export default function GeneratedLessonView({
               {/* Right box - Preparation steps (3/4 width) */}
               <div className="flex-1 bg-stone-50 border border-stone-200 rounded-lg p-3">
                 <p className="text-xs font-semibold text-stone-700 mb-2">Preparation</p>
-                <ul className="text-sm text-[#444] space-y-2">
+                <ul className="text-sm text-foreground space-y-2">
                   {(materialsPreparation.length > 0
                     ? materialsPreparation
                     : materialsContent.split("\n").filter(Boolean)
@@ -401,12 +401,12 @@ export default function GeneratedLessonView({
 
       {isThreePart && (<>
       {/* SECTION A - MINDS ON */}
-      <div className="bg-white rounded-xl border-l-4 border-blue-500 shadow-sm overflow-hidden">
+      <div className="bg-card rounded-xl border-l-4 border-blue-500 shadow-sm overflow-hidden">
         <div className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
               <Lightbulb size={20} className="text-blue-600" />
-              <h4 className="text-lg font-semibold text-[#2C2C2C]">Minds On</h4>
+              <h4 className="text-lg font-semibold text-foreground">Minds On</h4>
               <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
                 {mindsOnTime} minutes
               </span>
@@ -422,7 +422,7 @@ export default function GeneratedLessonView({
                 value={mindsOnContent}
                 onChange={(e) => onChange({ mindsOnContent: e.target.value })}
                 rows={4}
-                className="w-full px-3 py-2 border-2 border-blue-300 rounded-lg bg-white text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                className="w-full px-3 py-2 border-2 border-blue-300 rounded-lg bg-card text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none"
               />
               <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
                 <p className="text-xs font-medium text-amber-800 mb-2">Differentiation</p>
@@ -430,7 +430,7 @@ export default function GeneratedLessonView({
                   value={mindsOnDifferentiation}
                   onChange={(e) => onChange({ mindsOnDifferentiation: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-white text-xs focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-card text-xs focus:outline-none focus:border-amber-500 transition-colors resize-none"
                 />
               </div>
               <button
@@ -442,7 +442,7 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
-              <p className="text-sm text-[#444] leading-relaxed">{mindsOnContent}</p>
+              <p className="text-sm text-foreground leading-relaxed">{mindsOnContent}</p>
               <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3">
                 <p className="text-xs font-medium text-amber-800 mb-1">Differentiation</p>
                 <p className="text-xs text-amber-700">{mindsOnDifferentiation}</p>
@@ -460,12 +460,12 @@ export default function GeneratedLessonView({
       </div>
 
       {/* SECTION B - ACTION */}
-      <div className="bg-white rounded-xl border-l-4 border-emerald-500 shadow-sm overflow-hidden">
+      <div className="bg-card rounded-xl border-l-4 border-emerald-500 shadow-sm overflow-hidden">
         <div className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
               <Target size={20} className="text-emerald-600" />
-              <h4 className="text-lg font-semibold text-[#2C2C2C]">Action</h4>
+              <h4 className="text-lg font-semibold text-foreground">Action</h4>
               <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">
                 {actionTime} minutes
               </span>
@@ -481,7 +481,7 @@ export default function GeneratedLessonView({
                 value={actionContent}
                 onChange={(e) => onChange({ actionContent: e.target.value })}
                 rows={4}
-                className="w-full px-3 py-2 border-2 border-emerald-300 rounded-lg bg-white text-sm focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+                className="w-full px-3 py-2 border-2 border-emerald-300 rounded-lg bg-card text-sm focus:outline-none focus:border-emerald-500 transition-colors resize-none"
               />
               <div className="bg-stone-50 border border-stone-200 rounded-lg p-3">
                 <p className="text-xs font-medium text-stone-700 mb-2">Resources Used</p>
@@ -505,7 +505,7 @@ export default function GeneratedLessonView({
                   value={actionDifferentiation}
                   onChange={(e) => onChange({ actionDifferentiation: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-white text-xs focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-card text-xs focus:outline-none focus:border-amber-500 transition-colors resize-none"
                 />
               </div>
               <button
@@ -517,7 +517,7 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
-              <p className="text-sm text-[#444] leading-relaxed">{actionContent}</p>
+              <p className="text-sm text-foreground leading-relaxed">{actionContent}</p>
               <div className="mt-4 bg-stone-50 border border-stone-200 rounded-lg p-3">
                 <p className="text-xs font-medium text-stone-700 mb-2">Resources Used</p>
                 <div className="space-y-1">
@@ -551,12 +551,12 @@ export default function GeneratedLessonView({
       </div>
 
       {/* SECTION C - CONSOLIDATION */}
-      <div className="bg-white rounded-xl border-l-4 border-violet-500 shadow-sm overflow-hidden">
+      <div className="bg-card rounded-xl border-l-4 border-violet-500 shadow-sm overflow-hidden">
         <div className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
               <MessageCircle size={20} className="text-violet-600" />
-              <h4 className="text-lg font-semibold text-[#2C2C2C]">Consolidation</h4>
+              <h4 className="text-lg font-semibold text-foreground">Consolidation</h4>
               <span className="text-xs bg-violet-100 text-violet-700 px-2 py-1 rounded-full font-medium">
                 {consolidationTime} minutes
               </span>
@@ -572,7 +572,7 @@ export default function GeneratedLessonView({
                 value={consolidationContent}
                 onChange={(e) => onChange({ consolidationContent: e.target.value })}
                 rows={4}
-                className="w-full px-3 py-2 border-2 border-violet-300 rounded-lg bg-white text-sm focus:outline-none focus:border-violet-500 transition-colors resize-none"
+                className="w-full px-3 py-2 border-2 border-violet-300 rounded-lg bg-card text-sm focus:outline-none focus:border-violet-500 transition-colors resize-none"
               />
               <div className="bg-violet-50 border border-violet-200 rounded-lg p-3">
                 <p className="text-xs font-medium text-violet-800 mb-2">Assessment Note</p>
@@ -580,7 +580,7 @@ export default function GeneratedLessonView({
                   value={consolidationAssessment}
                   onChange={(e) => onChange({ consolidationAssessment: e.target.value })}
                   rows={2}
-                  className="w-full px-3 py-2 border border-violet-300 rounded-lg bg-white text-xs focus:outline-none focus:border-violet-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 border border-violet-300 rounded-lg bg-card text-xs focus:outline-none focus:border-violet-500 transition-colors resize-none"
                 />
               </div>
               <button
@@ -592,7 +592,7 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
-              <p className="text-sm text-[#444] leading-relaxed">{consolidationContent}</p>
+              <p className="text-sm text-foreground leading-relaxed">{consolidationContent}</p>
               <div className="mt-4 bg-violet-50 border border-violet-200 rounded-lg p-3">
                 <p className="text-xs font-medium text-violet-800 mb-1">Assessment Note</p>
                 <p className="text-xs text-violet-700">{consolidationAssessment}</p>
@@ -617,11 +617,11 @@ export default function GeneratedLessonView({
         const sectionTime = Math.round(lessonMinutes * sectionDef.timeWeight)
         const editKey = `section-${section.id}`
         return (
-          <div key={section.id} className={`bg-white rounded-xl border-l-4 ${sectionDef.colors.border} shadow-sm overflow-hidden`}>
+          <div key={section.id} className={`bg-card rounded-xl border-l-4 ${sectionDef.colors.border} shadow-sm overflow-hidden`}>
             <div className="p-5">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <h4 className={`text-lg font-semibold text-[#2C2C2C]`}>{section.label}</h4>
+                  <h4 className={`text-lg font-semibold text-foreground`}>{section.label}</h4>
                   <span className={`text-xs ${sectionDef.colors.pillBg} ${sectionDef.colors.pillText} px-2 py-1 rounded-full font-medium`}>
                     {sectionTime} minutes
                   </span>
@@ -639,7 +639,7 @@ export default function GeneratedLessonView({
                       prev.map((s) => s.id === section.id ? { ...s, content: e.target.value } : s)
                     )}
                     rows={5}
-                    className={`w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none ${sectionDef.colors.focusBorder} transition-colors resize-none`}
+                    className={`w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none ${sectionDef.colors.focusBorder} transition-colors resize-none`}
                   />
                   <div className={`${sectionDef.calloutIsAssessment ? "bg-violet-50 border border-violet-200" : "bg-amber-50 border border-amber-200"} rounded-lg p-3`}>
                     <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-violet-800" : "text-amber-800"} mb-2`}>
@@ -651,7 +651,7 @@ export default function GeneratedLessonView({
                         prev.map((s) => s.id === section.id ? { ...s, callout: e.target.value } : s)
                       )}
                       rows={2}
-                      className={`w-full px-3 py-2 border ${sectionDef.calloutIsAssessment ? "border-violet-300" : "border-amber-300"} rounded-lg bg-white text-xs focus:outline-none transition-colors resize-none`}
+                      className={`w-full px-3 py-2 border ${sectionDef.calloutIsAssessment ? "border-violet-300" : "border-amber-300"} rounded-lg bg-card text-xs focus:outline-none transition-colors resize-none`}
                     />
                   </div>
                   <button
@@ -663,7 +663,7 @@ export default function GeneratedLessonView({
                 </div>
               ) : (
                 <>
-                  <p className="text-sm text-[#444] leading-relaxed">{section.content}</p>
+                  <p className="text-sm text-foreground leading-relaxed">{section.content}</p>
                   {section.callout && (
                     <div className={`mt-4 ${sectionDef.calloutIsAssessment ? "bg-violet-50 border border-violet-200" : "bg-amber-50 border border-amber-200"} rounded-lg p-3`}>
                       <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-violet-800" : "text-amber-800"} mb-1`}>

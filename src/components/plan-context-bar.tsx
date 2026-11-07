@@ -78,13 +78,13 @@ function ChipPicker({
 }) {
   const [open, setOpen] = useState(false)
 
-  const baseClasses = "inline-flex flex-shrink-0 items-center gap-1 rounded-full px-3 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
+  const baseClasses = "inline-flex flex-shrink-0 items-center gap-1 rounded-full px-3 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
   const variantClasses =
     variant === "solid"
-      ? "bg-[#FFE5CC] text-[#8B4513] hover:bg-[#FFD9B8]"
+      ? "bg-primary-tint text-primary-strong hover:bg-primary-tint"
       : variant === "outline-set"
-        ? "border border-[#D8C7B8] text-[#2C2C2C] hover:border-[#FF6B35] hover:text-[#FF6B35]"
-        : "border border-dashed border-[#D8C7B8] text-[#8B4513]/70 hover:border-[#FF6B35] hover:text-[#FF6B35]"
+        ? "border border-border-strong text-foreground hover:border-primary hover:text-primary"
+        : "border border-dashed border-border-strong text-muted-foreground hover:border-primary hover:text-primary"
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
@@ -104,7 +104,7 @@ function ChipPicker({
                 exit={{ opacity: 0, y: -6, scale: 0.96 }}
                 transition={{ type: "spring", stiffness: 420, damping: 32 }}
                 role="listbox"
-                className="z-[60] min-w-[200px] max-w-[280px] rounded-2xl border-2 border-[#E8D5C4] bg-white p-2 shadow-xl"
+                className="z-[60] min-w-[200px] max-w-[280px] rounded-2xl border-2 border-border bg-card p-2 shadow-xl"
               >
                 <div className="max-h-[280px] overflow-y-auto">
                   {options.map((opt) => {
@@ -119,7 +119,7 @@ function ChipPicker({
                           setOpen(false)
                         }}
                         className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-medium transition-colors duration-150 ${
-                          isSelected ? "bg-[#FFE5CC] text-[#8B4513]" : "text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                          isSelected ? "bg-primary-tint text-primary-strong" : "text-foreground hover:bg-muted"
                         }`}
                       >
                         {opt.label}
@@ -147,7 +147,7 @@ function TopicInput({ value, onChange }: { value: string; onChange: (value: stri
       onChange={(e) => onChange(e.target.value)}
       placeholder="Topic (e.g. fractions)"
       aria-label="Topic you're teaching (optional)"
-      className="inline-flex h-[34px] w-40 flex-shrink-0 rounded-full border border-dashed border-[#D8C7B8] bg-transparent px-3 text-sm font-medium text-[#2C2C2C] placeholder:text-[#8B4513]/60 focus-visible:border-[#FF6B35] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
+      className="inline-flex h-[34px] w-40 flex-shrink-0 rounded-full border border-dashed border-border-strong bg-transparent px-3 text-sm font-medium text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
     />
   )
 }
@@ -168,7 +168,7 @@ function DistrictBadge() {
         <Popover.Content
           sideOffset={8}
           align="end"
-          className="z-[60] w-60 rounded-xl border border-indigo-200 bg-white p-3 text-xs leading-relaxed text-indigo-900 shadow-xl"
+          className="z-[60] w-60 rounded-xl border border-indigo-200 bg-card p-3 text-xs leading-relaxed text-indigo-900 shadow-xl"
         >
           <p className="mb-1 font-semibold">District Settings Active</p>
           <p>

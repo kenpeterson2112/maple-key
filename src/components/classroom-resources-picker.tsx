@@ -121,7 +121,7 @@ export default function ClassroomResourcesPicker({
                     type="button"
                     onClick={() => toggle(opt.id)}
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-all duration-150 cursor-pointer ${
-                      isSelected ? styles.chipSelected : `bg-white ${styles.chip}`
+                      isSelected ? styles.chipSelected : `bg-card ${styles.chip}`
                     }`}
                   >
                     <Check
@@ -154,15 +154,15 @@ export default function ClassroomResourcesPicker({
         )
       })}
 
-      <div className="border-t border-[#E8D5C4] pt-4">
-        <p className="text-xs font-semibold uppercase tracking-wide mb-2 text-[#8B4513]">
+      <div className="border-t border-border pt-4">
+        <p className="text-xs font-semibold uppercase tracking-wide mb-2 text-foreground">
           Add a custom material
         </p>
         <div className="flex flex-col sm:flex-row gap-2">
           <select
             value={customCategory}
             onChange={(e) => setCustomCategory(e.target.value)}
-            className="px-3 py-1.5 bg-white border-2 border-[#E8D5C4] rounded-full text-[#2C2C2C] text-xs focus:outline-none focus:border-[#8B4513] transition-colors cursor-pointer"
+            className="px-3 py-1.5 bg-card border-2 border-border rounded-full text-foreground text-xs focus:outline-none focus:border-ring transition-colors cursor-pointer"
           >
             {CLASSROOM_RESOURCE_CATEGORIES.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -181,13 +181,13 @@ export default function ClassroomResourcesPicker({
               }
             }}
             placeholder="e.g. abacus, dot paper, Quizlet"
-            className="flex-1 px-3 py-1.5 bg-white border-2 border-[#E8D5C4] rounded-full text-[#2C2C2C] text-xs focus:outline-none focus:border-[#8B4513] transition-colors"
+            className="flex-1 px-3 py-1.5 bg-card border-2 border-border rounded-full text-foreground text-xs focus:outline-none focus:border-ring transition-colors"
           />
           <button
             type="button"
             onClick={addCustom}
             disabled={!customInput.trim()}
-            className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-full bg-[#8B4513] hover:bg-[#6B3410] disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-semibold transition-colors"
+            className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-full bg-primary hover:bg-primary-hover disabled:opacity-40 disabled:cursor-not-allowed text-primary-foreground text-xs font-semibold transition-colors"
           >
             <Plus size={12} />
             Add
@@ -196,7 +196,7 @@ export default function ClassroomResourcesPicker({
       </div>
 
       {totalSelected > 0 && (
-        <p className="text-xs text-[#888]">
+        <p className="text-xs text-muted-foreground">
           {totalSelected} material{totalSelected !== 1 ? "s" : ""} selected — these will be used to inform lesson suggestions.
         </p>
       )}

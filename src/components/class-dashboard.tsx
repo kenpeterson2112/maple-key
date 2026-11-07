@@ -10,6 +10,7 @@ import {
   strandLabel,
 } from "@/lib/curriculum-codes"
 import { LEVEL_ORDER, LEVEL_META, type ProficiencyLevel } from "@/lib/assessment-types"
+import { READINESS_TOKENS, pillSurface, pillText } from "@/components/ui/readiness-pill"
 import {
   computeReadinessLevel,
   type AggregatedResults,
@@ -59,22 +60,24 @@ const ON_BAR_TEXT: Record<ProficiencyLevel, string> = {
   level4: "text-white",
 }
 
-const READINESS_META: Record<ReadinessLevel, { label: string; dot: string; bg: string; fg: string }> = {
-  great: { label: "Excelling", dot: "#166534", bg: "#DCFCE7", fg: "#14532D" },
-  good: { label: "Strong", dot: "#16A34A", bg: "#F0FDF4", fg: "#15803D" },
-  okay: { label: "Developing", dot: "#D97706", bg: "#FFFBEB", fg: "#B45309" },
-  poor: { label: "Needs attention", dot: "#B45309", bg: "#FEF3C7", fg: "#92400E" },
+// Same signal scale as the readiness pills (READINESS_TOKENS); only the
+// "poor" label differs here.
+const READINESS_META: Record<ReadinessLevel, { label: string; token: string }> = {
+  great: { label: "Excelling", token: READINESS_TOKENS.great.token },
+  good: { label: "Strong", token: READINESS_TOKENS.good.token },
+  okay: { label: "Developing", token: READINESS_TOKENS.okay.token },
+  poor: { label: "Needs attention", token: READINESS_TOKENS.poor.token },
 }
 
 function ReadinessBadge({ counts }: { counts: LevelCounts }) {
-  if (total(counts) === 0) return <span className="text-[11px] font-medium text-[#A8998E]">No data</span>
+  if (total(counts) === 0) return <span className="text-[11px] font-medium text-muted-foreground">No data</span>
   const meta = READINESS_META[computeReadinessLevel(counts)]
   return (
     <span
       className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold flex-shrink-0"
-      style={{ backgroundColor: meta.bg, color: meta.fg }}
+      style={{ ...pillSurface(meta.token), color: pillText(meta.token) }}
     >
-      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: meta.dot }} />
+      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: `var(${meta.token})` }} />
       {meta.label}
     </span>
   )
@@ -127,10 +130,10 @@ function SpecificRow({ code, counts, subject, grade }: { code: string; counts: L
   return (
     <div className="px-4 py-3 space-y-2">
       <div className="flex items-start gap-2">
-        <span className="flex-shrink-0 rounded-full border border-[#E8D5C4] bg-white px-1.5 py-0.5 text-[11px] font-bold text-stone-600 mt-px">
+        <span className="flex-shrink-0 rounded-full border border-border bg-card px-1.5 py-0.5 text-[11px] font-bold text-stone-600 mt-px">
           {code}
         </span>
-        <p className="text-xs leading-snug text-[#555] flex-1">
+        <p className="text-xs leading-snug text-foreground flex-1">
           {describeCode(subject, code, grade) ?? code}
         </p>
       </div>
@@ -139,7 +142,7 @@ function SpecificRow({ code, counts, subject, grade }: { code: string; counts: L
         <LevelSummary counts={counts} />
         <button
           type="button"
-          className="inline-flex items-center gap-1.5 rounded-full border border-[#E8D5C4] bg-white px-2.5 py-1 text-[11px] font-medium text-[#8B4513] transition-colors hover:bg-[#FFF5ED] flex-shrink-0"
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-secondary-strong transition-colors hover:bg-accent flex-shrink-0"
         >
           <Flag size={12} />
           Flag for re-teaching
@@ -166,21 +169,21 @@ function OverallRow({
 }) {
   const specifics = Object.entries(agg.specifics).sort(([a], [b]) => a.localeCompare(b))
   return (
-    <div className={nested ? "rounded-lg border border-[#F0E6D8] bg-white overflow-hidden" : "rounded-xl border border-[#E8D5C4] bg-white overflow-hidden"}>
+    <div className={nested ? "rounded-lg border border-border bg-card overflow-hidden" : "rounded-xl border border-border bg-card overflow-hidden"}>
       <button onClick={onToggle} className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left">
         <div className="flex items-center gap-2 min-w-0 flex-1">
           {expanded ? (
-            <ChevronDown size={16} className="text-[#A8998E] flex-shrink-0" />
+            <ChevronDown size={16} className="text-muted-foreground flex-shrink-0" />
           ) : (
-            <ChevronRight size={16} className="text-[#A8998E] flex-shrink-0" />
+            <ChevronRight size={16} className="text-muted-foreground flex-shrink-0" />
           )}
           <span className="flex-shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs font-bold text-stone-600">
             {agg.overall}
           </span>
-          <span className="text-sm font-semibold text-[#2C2C2C] truncate">{overallTitle(subject, agg.overall, grade)}</span>
+          <span className="text-sm font-semibold text-foreground truncate">{overallTitle(subject, agg.overall, grade)}</span>
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
-          <span className="text-[11px] text-[#888]">
+          <span className="text-[11px] text-muted-foreground">
             {total(agg.bands)} {total(agg.bands) === 1 ? "response" : "responses"}
           </span>
           <div className="w-32 sm:w-44"><Bar counts={agg.bands} /></div>
@@ -189,7 +192,7 @@ function OverallRow({
       </button>
 
       {expanded && specifics.length > 0 && (
-        <div className="border-t border-[#F0E6D8] divide-y divide-[#F5EDE4] bg-[#FDFAF4]">
+        <div className="border-t border-border divide-y divide-border bg-muted">
           {specifics.map(([code, counts]) => (
             <SpecificRow key={code} code={code} counts={counts} subject={subject} grade={grade} />
           ))}
@@ -230,21 +233,21 @@ function StrandAccordion({
         const key = `strand:${strand.code}`
         const isOpen = expanded.has(key)
         return (
-          <div key={key} className="rounded-xl border border-[#E8D5C4] bg-white overflow-hidden">
+          <div key={key} className="rounded-xl border border-border bg-card overflow-hidden">
             <button onClick={() => toggle(key)} className="w-full flex items-center justify-between gap-3 px-4 py-4 text-left">
               <div className="flex items-center gap-2 min-w-0 flex-1">
                 {isOpen ? (
-                  <ChevronDown size={16} className="text-[#A8998E] flex-shrink-0" />
+                  <ChevronDown size={16} className="text-muted-foreground flex-shrink-0" />
                 ) : (
-                  <ChevronRight size={16} className="text-[#A8998E] flex-shrink-0" />
+                  <ChevronRight size={16} className="text-muted-foreground flex-shrink-0" />
                 )}
                 <span className="flex-shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs font-bold text-stone-600">
                   {strand.code}
                 </span>
-                <span className="text-sm font-semibold text-[#2C2C2C] truncate">{strandLabel(subject, strand.code, grade)}</span>
+                <span className="text-sm font-semibold text-foreground truncate">{strandLabel(subject, strand.code, grade)}</span>
               </div>
               <div className="flex items-center gap-3 flex-shrink-0">
-                <span className="text-[11px] text-[#888]">
+                <span className="text-[11px] text-muted-foreground">
                   {total(strand.bands)} {total(strand.bands) === 1 ? "response" : "responses"}
                 </span>
                 <div className="w-32 sm:w-44"><Bar counts={strand.bands} thick /></div>
@@ -253,7 +256,7 @@ function StrandAccordion({
             </button>
 
             {isOpen && (
-              <div className="border-t border-[#F0E6D8] bg-[#FDFAF4] px-2 py-2 space-y-2">
+              <div className="border-t border-border bg-muted px-2 py-2 space-y-2">
                 {strand.children.map((agg) => {
                   const overallKey = `overall:${agg.overall}`
                   return (
@@ -308,7 +311,7 @@ export default function ClassDashboard({
 
   return (
     <div className="space-y-3">
-      {caption && <p className="text-[11px] font-medium text-[#888]">{caption}</p>}
+      {caption && <p className="text-[11px] font-medium text-muted-foreground">{caption}</p>}
       {hasStrandData ? (
         <StrandAccordion overalls={overalls} expanded={expanded} toggle={toggle} subject={subject} grade={grade} />
       ) : (

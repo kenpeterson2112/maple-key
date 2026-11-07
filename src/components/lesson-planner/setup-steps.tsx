@@ -126,7 +126,7 @@ export default function SetupSteps({
   // (highlighting as you advance); All options collapses them to a single page.
   const setupNav = (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-      <div className="inline-flex flex-shrink-0 rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white" role="group" aria-label="Setup layout">
+      <div className="inline-flex flex-shrink-0 rounded-lg border-2 border-border p-0.5 bg-card" role="group" aria-label="Setup layout">
         {([["wizard", "Guided"], ["full", "All options"]] as const).map(([mode, label]) => {
           const selected = setupMode === mode
           return (
@@ -136,7 +136,7 @@ export default function SetupSteps({
               onClick={() => onSetupModeChange(mode)}
               aria-pressed={selected}
               className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
-                selected ? "bg-[#FF6B35] text-white shadow-sm" : "text-[#888] hover:text-[#FF6B35]"
+                selected ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-primary"
               }`}
             >
               {label}
@@ -160,10 +160,10 @@ export default function SetupSteps({
                 aria-label={`Step ${i + 1}: ${s.label}`}
                 className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${
                   current
-                    ? "bg-[#FF6B35]/10 text-[#FF6B35] ring-1 ring-inset ring-[#FF6B35]/30"
+                    ? "bg-primary/10 text-primary ring-1 ring-inset ring-ring/30"
                     : done
-                    ? "text-[#8B4513] hover:bg-[#FFF5ED] cursor-pointer"
-                    : "text-[#C8B8AA]"
+                    ? "text-secondary-strong hover:bg-accent cursor-pointer"
+                    : "text-muted-foreground"
                 }`}
               >
                 {done ? (
@@ -177,7 +177,7 @@ export default function SetupSteps({
           })}
         </nav>
       ) : (
-        <span className="text-xs font-medium text-[#A8998E]">Everything on one page</span>
+        <span className="text-xs font-medium text-muted-foreground">Everything on one page</span>
       )}
     </div>
   )
@@ -217,22 +217,22 @@ export default function SetupSteps({
   ]
 
   const wizardReviewCard = (
-    <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+    <div className="bg-card rounded-xl border-2 border-border p-5">
       <div className="flex items-center gap-2 mb-2">
-        <ClipboardList size={18} className="text-[#8B4513]" />
-        <h3 className="text-lg font-semibold text-[#2C2C2C]">Your lesson setup</h3>
+        <ClipboardList size={18} className="text-foreground" />
+        <h3 className="text-lg font-semibold text-foreground">Your lesson setup</h3>
       </div>
-      <dl className="divide-y divide-[#F0E4D6]">
+      <dl className="divide-y divide-border">
         {reviewRows.map((row) => (
           <div key={row.label} className="flex items-start justify-between gap-4 py-2.5">
             <div className="min-w-0">
-              <dt className="text-xs font-semibold text-[#8B4513] uppercase tracking-wide">{row.label}</dt>
-              <dd className="text-sm text-[#444] mt-0.5 break-words">{row.value}</dd>
+              <dt className="text-xs font-semibold text-foreground uppercase tracking-wide">{row.label}</dt>
+              <dd className="text-sm text-foreground mt-0.5 break-words">{row.value}</dd>
             </div>
             <button
               type="button"
               onClick={() => onGoToStep(row.step)}
-              className="flex-shrink-0 flex items-center gap-1 text-xs font-medium text-[#888] hover:text-[#FF6B35] transition-colors mt-0.5"
+              className="flex-shrink-0 flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-primary transition-colors mt-0.5"
               aria-label={`Edit ${row.label}`}
             >
               <Pencil size={12} />
@@ -268,12 +268,12 @@ export default function SetupSteps({
           are threaded into lesson generation, instead of guessing from the
           first bookmarked resource. */}
       {(!isWizard || wizardStep === 0) && (
-      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+      <div className="bg-card rounded-xl border-2 border-border p-5">
         <div className="flex items-center gap-2 mb-1">
-          <GraduationCap size={16} className="text-[#8B4513]" />
-          <h3 className="text-lg font-semibold text-[#2C2C2C]">What are you teaching?</h3>
+          <GraduationCap size={16} className="text-foreground" />
+          <h3 className="text-lg font-semibold text-foreground">What are you teaching?</h3>
         </div>
-        <p className="text-sm text-[#666] mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           This scopes your recommendations and tailors the generated lesson. Topic is optional —
           it nudges the best matches to the top without hiding anything.
         </p>
@@ -296,10 +296,10 @@ export default function SetupSteps({
 
       {/* Student Progress Data Section — temporarily hidden; will be re-enabled later */}
       {false && (
-      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+      <div className="bg-card rounded-xl border-2 border-border p-5">
         <div className="flex items-center gap-2 mb-4">
-          <Users size={20} className="text-[#8B4513]" />
-          <h3 className="font-semibold text-[#2C2C2C]">Student Progress Data</h3>
+          <Users size={20} className="text-foreground" />
+          <h3 className="font-semibold text-foreground">Student Progress Data</h3>
           <span className="text-xs bg-stone-200 text-stone-600 px-2 py-0.5 rounded-full">Optional</span>
         </div>
 
@@ -312,8 +312,8 @@ export default function SetupSteps({
             className="mt-1 w-4 h-4 rounded border-stone-300 text-orange-500 focus:ring-orange-500"
           />
           <div>
-            <span className="text-sm font-medium text-[#2C2C2C]">Include recent assessment data</span>
-            <p className="text-xs text-[#666] mt-0.5">
+            <span className="text-sm font-medium text-foreground">Include recent assessment data</span>
+            <p className="text-xs text-muted-foreground mt-0.5">
               {hasClassProgress
                 ? `Found ${Object.values(classProgress).reduce((sum, c) => sum + c.level1 + c.level2 + c.level3 + c.level4, 0)} responses across ${Object.keys(classProgress).length} of these expectations — used to target differentiation.`
                 : "No prior quick check responses for these expectations yet."}
@@ -331,10 +331,10 @@ export default function SetupSteps({
                 return (
                   <div key={code}>
                     <div className="flex items-start gap-2 mb-1.5">
-                      <span className="flex-shrink-0 rounded-full bg-white border border-stone-200 px-1.5 py-0.5 text-[11px] font-bold text-stone-700">
+                      <span className="flex-shrink-0 rounded-full bg-card border border-stone-200 px-1.5 py-0.5 text-[11px] font-bold text-stone-700">
                         {code}
                       </span>
-                      <span className="text-xs leading-snug text-[#666]">
+                      <span className="text-xs leading-snug text-muted-foreground">
                         {describeCode(bookmarkedResources[0]?.subject ?? "", code, bookmarkedResources[0]?.grade_level?.[0]?.toString()) ?? code}
                       </span>
                     </div>
@@ -349,8 +349,8 @@ export default function SetupSteps({
                       {LEVEL_ORDER.filter((level) => counts[level] > 0).map((level, i, arr) => (
                         <span key={level}>
                           <span className={`font-semibold ${LEVEL_META[level].textClass}`}>{counts[level]}</span>
-                          <span className="text-[#888]"> {LEVEL_META[level].phrase}</span>
-                          {i < arr.length - 1 && <span className="text-[#C8B8AA]"> · </span>}
+                          <span className="text-muted-foreground"> {LEVEL_META[level].phrase}</span>
+                          {i < arr.length - 1 && <span className="text-muted-foreground"> · </span>}
                         </span>
                       ))}
                     </p>
@@ -366,21 +366,21 @@ export default function SetupSteps({
 
       {/* Step 3 — lesson format */}
       {(!isWizard || wizardStep === 2) && (
-      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+      <div className="bg-card rounded-xl border-2 border-border p-5">
         <div className="flex items-center gap-2 mb-4">
-          <Layout size={16} className="text-[#8B4513]" />
-          <h3 className="text-lg font-semibold text-[#2C2C2C]">Lesson Configuration</h3>
+          <Layout size={16} className="text-foreground" />
+          <h3 className="text-lg font-semibold text-foreground">Lesson Configuration</h3>
         </div>
 
         <div className="space-y-4">
           {/* Lesson Length */}
           <div>
-            <label className="flex items-center justify-between gap-2 text-sm font-medium text-[#2C2C2C] mb-2">
+            <label className="flex items-center justify-between gap-2 text-sm font-medium text-foreground mb-2">
               <span className="flex items-center gap-2">
-                <Clock size={16} className="text-[#8B4513]" />
+                <Clock size={16} className="text-foreground" />
                 Lesson Length
               </span>
-              <span className="text-sm font-semibold text-[#FF6B35]">{lessonMinutes} minutes</span>
+              <span className="text-sm font-semibold text-primary">{lessonMinutes} minutes</span>
             </label>
             <input
               type="range"
@@ -389,10 +389,10 @@ export default function SetupSteps({
               step={5}
               value={lessonMinutes}
               onChange={(e) => onLessonLengthChange(`${e.target.value} minutes`)}
-              className="w-full accent-[#FF6B35]"
+              className="w-full accent-primary"
               aria-label="Lesson length in minutes"
             />
-            <div className="flex justify-between text-xs text-[#8B4513]/60 mt-1">
+            <div className="flex justify-between text-xs text-muted-foreground mt-1">
               <span>10 min</span>
               <span>120 min</span>
             </div>
@@ -400,8 +400,8 @@ export default function SetupSteps({
 
           {/* Lesson Template Card Picker */}
           <div>
-            <label className="flex items-center gap-2 text-sm font-medium text-[#2C2C2C] mb-3">
-              <Layout size={16} className="text-[#8B4513]" />
+            <label className="flex items-center gap-2 text-sm font-medium text-foreground mb-3">
+              <Layout size={16} className="text-foreground" />
               Lesson Template
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -413,22 +413,22 @@ export default function SetupSteps({
                     onClick={() => onLessonTemplateChange(tmpl.apiKey)}
                     className={`relative text-left p-3.5 rounded-xl border-2 transition-all ${
                       isSelected
-                        ? "border-[#FF6B35] bg-[#FFF6EC]"
-                        : "border-[#E8D5C4] bg-white hover:border-[#FF6B35]/50 hover:bg-[#FFFAF5]"
+                        ? "border-primary bg-muted"
+                        : "border-border bg-card hover:border-primary/50 hover:bg-muted"
                     }`}
                   >
                     {isSelected && (
                       <div className="absolute top-2.5 right-2.5">
-                        <CheckCircle size={14} className="text-[#FF6B35]" />
+                        <CheckCircle size={14} className="text-primary" />
                       </div>
                     )}
                     <div className="flex items-baseline gap-2 mb-1 pr-5">
-                      <p className="font-semibold text-[#2C2C2C] text-sm">{tmpl.displayName}</p>
+                      <p className="font-semibold text-foreground text-sm">{tmpl.displayName}</p>
                       {tmpl.displayName !== tmpl.name && (
-                        <span className="text-[10px] text-[#aaa] font-medium">{tmpl.name}</span>
+                        <span className="text-[10px] text-muted-foreground font-medium">{tmpl.name}</span>
                       )}
                     </div>
-                    <p className="text-xs text-[#888] leading-snug mb-2.5">{tmpl.description}</p>
+                    <p className="text-xs text-muted-foreground leading-snug mb-2.5">{tmpl.description}</p>
                     <div className="flex flex-wrap gap-1">
                       {tmpl.sections.map((s) => (
                         <span
@@ -451,14 +451,14 @@ export default function SetupSteps({
               type="checkbox"
               checked={noTechMode}
               onChange={(e) => onNoTechModeChange(e.target.checked)}
-              className="mt-0.5 w-5 h-5 rounded-lg border-2 border-[#E8D5C4] cursor-pointer accent-[#FF6B35]"
+              className="mt-0.5 w-5 h-5 rounded-lg border-2 border-border cursor-pointer accent-primary"
             />
             <div className="flex-1">
-              <span className="flex items-center gap-2 text-sm font-medium text-[#2C2C2C]">
-                <MonitorOff size={16} className="text-[#8B4513]" />
+              <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+                <MonitorOff size={16} className="text-foreground" />
                 No-Tech Mode
               </span>
-              <p className="text-xs text-[#888] mt-0.5">
+              <p className="text-xs text-muted-foreground mt-0.5">
                 Keep students completely off screens. Planning and a projector for whole-class display are still fine — nothing for students to hold or operate themselves.
               </p>
             </div>
@@ -469,13 +469,13 @@ export default function SetupSteps({
 
       {/* Step 4 — personalize */}
       {(!isWizard || wizardStep === 3) && (<>
-      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+      <div className="bg-card rounded-xl border-2 border-border p-5">
         <div className="flex items-center justify-between gap-2 mb-3">
           <div className="flex items-center gap-2">
-            <School size={18} className="text-[#8B4513]" />
-            <h3 className="text-sm font-semibold text-[#2C2C2C]">Your Classroom Materials</h3>
+            <School size={18} className="text-foreground" />
+            <h3 className="text-sm font-semibold text-foreground">Your Classroom Materials</h3>
             {materialsSnapshot.total > 0 && (
-              <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground">
                 {materialsSnapshot.total}
               </span>
             )}
@@ -485,26 +485,26 @@ export default function SetupSteps({
           snapshot={materialsSnapshot}
           onEdit={onOpenMaterialsEditor}
         />
-        <p className="text-xs text-[#888] mt-3">
+        <p className="text-xs text-muted-foreground mt-3">
           Hover a row to see what's selected. Editing here doesn't reset your planning progress.
         </p>
       </div>
 
-      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+      <div className="bg-card rounded-xl border-2 border-border p-5">
         <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
           <div className="flex items-center gap-2">
-            <FileText size={20} className="text-[#8B4513]" />
-            <h3 className="text-lg font-semibold text-[#2C2C2C]">Additional Notes</h3>
+            <FileText size={20} className="text-foreground" />
+            <h3 className="text-lg font-semibold text-foreground">Additional Notes</h3>
             <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Optional</span>
           </div>
 
           {/* Language for student reproducibles (artifacts + printable organizer) */}
           <div className="flex items-center gap-1.5">
-            <Languages size={15} className="text-[#8B4513]" />
-            <span className="text-xs font-medium text-[#888] mr-1 hidden sm:inline">
+            <Languages size={15} className="text-foreground" />
+            <span className="text-xs font-medium text-muted-foreground mr-1 hidden sm:inline">
               Student handouts
             </span>
-            <div className="inline-flex rounded-lg border-2 border-[#E8D5C4] p-0.5 bg-white">
+            <div className="inline-flex rounded-lg border-2 border-border p-0.5 bg-card">
               {(["English", "French"] as const).map((lang) => {
                 const selected = reproducibleLanguage === lang
                 const label = lang === "French" ? "Français" : "English"
@@ -516,8 +516,8 @@ export default function SetupSteps({
                     aria-pressed={selected}
                     className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
                       selected
-                        ? "bg-[#FF6B35] text-white shadow-sm"
-                        : "text-[#888] hover:text-[#FF6B35]"
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-primary"
                     }`}
                   >
                     {label}
@@ -533,7 +533,7 @@ export default function SetupSteps({
           onChange={(e) => onTeacherNotesChange(e.target.value)}
           rows={4}
           placeholder={teacherNotesPlaceholder ?? "Add any notes about your planning preferences, classroom environment, specific student needs, themes you'd like to emphasize..."}
-          className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors resize-none"
+          className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none focus:border-ring transition-colors resize-none"
         />
         <p className="text-xs text-gray-500 mt-2">
           Example: "My class loves competition and games. Marcus and James could lead small groups."
