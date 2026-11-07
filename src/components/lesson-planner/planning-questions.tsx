@@ -215,12 +215,12 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
           {currentQuestionIndex > 0 && (
             <button
               onClick={() => setCurrentQuestionIndex((i) => i - 1)}
-              className="text-sm text-violet-600 hover:text-violet-800 font-medium transition-colors"
+              className="text-sm text-secondary-strong hover:text-foreground font-medium transition-colors"
             >
               ← Back
             </button>
           )}
-          <p className="text-sm font-medium text-violet-700">
+          <p className="text-sm font-medium text-secondary-strong">
             Question {currentQuestionIndex + 1} of {planningQuestions.length}
           </p>
         </div>
@@ -230,10 +230,10 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
               key={i}
               className={`h-1.5 w-6 rounded-full transition-colors ${
                 i < currentQuestionIndex
-                  ? "bg-violet-400"
+                  ? "bg-secondary"
                   : i === currentQuestionIndex
-                  ? "bg-violet-600"
-                  : "bg-gray-200"
+                  ? "bg-secondary-strong"
+                  : "bg-border-strong"
               }`}
             />
           ))}
@@ -254,12 +254,12 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
                 key={i}
                 className={`text-sm rounded-lg px-3 py-2 border ${
                   bullet.type === "assessment"
-                    ? "bg-sky-50 border-sky-200 text-sky-900"
+                    ? "bg-secondary-tint border-secondary/40 text-foreground"
                     : "bg-muted/30 border-border text-foreground"
                 }`}
               >
                 {bullet.type === "assessment" && (
-                  <span className="block text-xs font-semibold text-sky-700 mb-0.5">
+                  <span className="block text-xs font-semibold text-secondary-strong mb-0.5">
                     Your class
                   </span>
                 )}
@@ -270,7 +270,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
         )}
 
         {/* Open text — the primary interaction. No auto-submit. */}
-        <label htmlFor={`planning-answer-${q.id}`} className="block text-xs font-medium text-violet-700 mb-2">
+        <label htmlFor={`planning-answer-${q.id}`} className="block text-xs font-medium text-secondary-strong mb-2">
           Your answer
         </label>
         <textarea
@@ -279,7 +279,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
           onChange={(e) => setOpenResponseValues((prev) => ({ ...prev, [q.id]: e.target.value }))}
           placeholder="Type your answer or approach here…"
           rows={3}
-          className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm text-foreground resize-y focus:outline-none focus:border-violet-500"
+          className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm text-foreground resize-y focus:outline-none focus:border-ring"
         />
 
         {/* Suggestions — collapsed by default, revealed on a timer. */}
@@ -287,7 +287,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
           {!isExpanded ? (
             <button
               onClick={() => setShowingSuggestions((prev) => ({ ...prev, [q.id]: true }))}
-              className="text-sm font-medium text-violet-600 hover:text-violet-800 transition-colors"
+              className="text-sm font-medium text-secondary-strong hover:text-foreground transition-colors"
             >
               Show suggestions
             </button>
@@ -309,14 +309,14 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
                     onClick={() => handleSelect(opt.label)}
                     className={`w-full text-left px-4 py-3 rounded-lg text-sm border-2 transition-colors motion-safe:animate-fade-in ${
                       isSelected
-                        ? "bg-violet-600 border-violet-600 text-white"
-                        : "bg-card border-border text-foreground hover:border-violet-400"
+                        ? "bg-secondary border-secondary text-secondary-foreground"
+                        : "bg-card border-border text-foreground hover:border-secondary"
                     }`}
                   >
                     <span className="block font-medium">{opt.label}</span>
                     {opt.reasoning && (
                       <span
-                        className={`block text-xs mt-1 ${isSelected ? "text-white/80" : "text-muted-foreground"}`}
+                        className={`block text-xs mt-1 ${isSelected ? "text-secondary-foreground/80" : "text-muted-foreground"}`}
                       >
                         {opt.reasoning}
                       </span>
@@ -343,7 +343,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
         <button
           onClick={() => onAdvance(q.id)}
           disabled={!hasAnswer}
-          className="mt-4 w-full py-2.5 bg-violet-600 hover:bg-violet-700 disabled:bg-gray-200 disabled:text-muted-foreground disabled:cursor-not-allowed text-white font-semibold rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+          className="mt-4 w-full py-2.5 bg-primary hover:bg-primary-hover disabled:bg-border-strong disabled:text-muted-foreground disabled:cursor-not-allowed text-primary-foreground font-semibold rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
         >
           {isLastQuestion ? "Generate Lesson Plan" : "Continue →"}
         </button>

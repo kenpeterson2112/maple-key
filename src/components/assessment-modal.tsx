@@ -251,8 +251,8 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-muted">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center">
-              <ClipboardCheck size={18} className="text-amber-600" />
+            <div className="w-9 h-9 rounded-full bg-pop-tint flex items-center justify-center">
+              <ClipboardCheck size={18} className="text-pop-strong" />
             </div>
             <div>
               <h2 className="font-bold text-foreground text-base">Quick Check</h2>
@@ -265,10 +265,10 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         </div>
 
         {/* Progress bar (administer only) */}
-        <div className="h-1 bg-stone-100">
+        <div className="h-1 bg-muted">
           {phase === "administer" && (
             <div
-              className="h-full bg-amber-400 transition-all duration-500"
+              className="h-full bg-pop transition-all duration-500"
               style={{ width: totalCount > 0 ? `${(answeredCount / totalCount) * 100}%` : "0%" }}
             />
           )}
@@ -278,7 +278,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         <div ref={scrollBodyRef} className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
           {phase === "loading" && (
             <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
-              <Loader2 size={28} className="animate-spin text-amber-500" />
+              <Loader2 size={28} className="animate-spin text-pop" />
               <p className="text-sm font-medium text-foreground">Building your quick check…</p>
               <p className="text-xs text-muted-foreground">Tailoring questions to this lesson.</p>
             </div>
@@ -289,14 +289,14 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
               {currentQuestionIndex >= totalCount ? (
                 /* All questions answered — prompt to record */
                 <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <CheckCircle size={24} className="text-emerald-600" />
+                  <div className="w-12 h-12 rounded-full bg-success-tint flex items-center justify-center">
+                    <CheckCircle size={24} className="text-success" />
                   </div>
                   <p className="font-semibold text-foreground">All done!</p>
                   <p className="text-sm text-muted-foreground">Use the button below to record this student's results.</p>
                   <button
                     onClick={handleBack}
-                    className="text-xs text-amber-600 hover:text-amber-800 font-medium transition-colors"
+                    className="text-xs text-pop-strong hover:text-foreground font-medium transition-colors"
                   >
                     ← Review answers
                   </button>
@@ -305,7 +305,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                 <>
                   {/* Info banner — only on first question */}
                   {currentQuestionIndex === 0 && !isGraded && (
-                    <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700">
+                    <p className="rounded-lg border border-pop/50 bg-pop-tint px-3 py-2 text-xs text-pop-strong">
                       Showing reflection prompts — tailored quiz questions weren't generated for this lesson. Re-generate the lesson with AI to get auto-graded questions.
                     </p>
                   )}
@@ -316,7 +316,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                       {currentQuestionIndex > 0 && (
                         <button
                           onClick={handleBack}
-                          className="text-xs text-muted-foreground hover:text-amber-700 font-medium transition-colors"
+                          className="text-xs text-muted-foreground hover:text-foreground font-medium transition-colors"
                         >
                           ← Back
                         </button>
@@ -335,10 +335,10 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                             key={i}
                             className={`h-1.5 w-4 rounded-full transition-colors ${
                               i === currentQuestionIndex
-                                ? "bg-amber-600"
+                                ? "bg-pop-strong"
                                 : isAnswered
-                                ? "bg-amber-400"
-                                : "bg-stone-200"
+                                ? "bg-pop"
+                                : "bg-border-strong"
                             }`}
                           />
                         )
@@ -391,7 +391,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
             <>
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <BarChart3 size={16} className="text-amber-600" />
+                  <BarChart3 size={16} className="text-pop-strong" />
                   <span className="text-sm font-semibold text-foreground">Class results</span>
                 </div>
                 <DevSeedControl scope={{ kind: "lesson", lesson }} onChanged={() => setRecordedCount((n) => n + 1)} />
@@ -445,7 +445,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                     placeholder={`Other (max ${MAX_GROUP_SIZE})`}
                     value={groupOther}
                     onChange={(e) => { setGroupOther(e.target.value); setGroupSelection(null) }}
-                    className="w-36 rounded-lg border border-border bg-card px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-300"
+                    className="w-36 rounded-lg border border-border bg-card px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                   />
                 </div>
                 <div className="mt-3 flex items-center gap-2">
@@ -536,7 +536,7 @@ function CodeHeader({ code, subject, grade }: { code: string | null; subject: st
   const description = describeCode(subject, code, grade)
   return (
     <div className="flex items-center gap-2 mb-2">
-      <span className="text-xs font-bold bg-stone-100 text-stone-700 px-2 py-0.5 rounded-full">{code}</span>
+      <span className="text-xs font-bold bg-muted text-foreground px-2 py-0.5 rounded-full">{code}</span>
       {description && <span className="text-xs text-muted-foreground line-clamp-1">{description}</span>}
     </div>
   )
@@ -553,8 +553,8 @@ function Prompt({ text }: { text: string }) {
 
 function Explanation({ text }: { text: string }) {
   return (
-    <div className="mt-3 flex items-start gap-2 rounded-lg bg-stone-50 border border-stone-200 px-3 py-2">
-      <Info size={14} className="text-stone-400 flex-shrink-0 mt-0.5" />
+    <div className="mt-3 flex items-start gap-2 rounded-lg bg-muted border border-border px-3 py-2">
+      <Info size={14} className="text-muted-foreground flex-shrink-0 mt-0.5" />
       <p className="text-xs text-muted-foreground">{text}</p>
     </div>
   )
@@ -584,8 +584,8 @@ function MultipleChoiceCard({
           const isCorrect = i === q.correctIndex
           let cls = "border-border bg-card hover:bg-muted text-foreground"
           if (answered) {
-            if (isCorrect) cls = "border-emerald-400 bg-emerald-50 text-emerald-800"
-            else if (isSelected) cls = "border-red-300 bg-red-50 text-red-700"
+            if (isCorrect) cls = "border-success/40 bg-success-tint text-success"
+            else if (isSelected) cls = "border-destructive/40 bg-destructive/10 text-destructive"
             else cls = "border-border bg-card text-muted-foreground"
           }
           return (
@@ -596,8 +596,8 @@ function MultipleChoiceCard({
               className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-sm transition-colors ${cls} ${answered ? "cursor-default" : ""}`}
             >
               <span className="flex-1">{opt}</span>
-              {answered && isCorrect && <CheckCircle size={15} className="text-emerald-500 flex-shrink-0" />}
-              {answered && isSelected && !isCorrect && <XCircle size={15} className="text-red-400 flex-shrink-0" />}
+              {answered && isCorrect && <CheckCircle size={15} className="text-success flex-shrink-0" />}
+              {answered && isSelected && !isCorrect && <XCircle size={15} className="text-destructive flex-shrink-0" />}
             </button>
           )
         })}
@@ -631,8 +631,8 @@ function TrueFalseCard({
           const isCorrect = val === q.correct
           let cls = "border-border bg-card hover:bg-muted text-foreground"
           if (answered) {
-            if (isCorrect) cls = "border-emerald-400 bg-emerald-50 text-emerald-800"
-            else if (isSelected) cls = "border-red-300 bg-red-50 text-red-700"
+            if (isCorrect) cls = "border-success/40 bg-success-tint text-success"
+            else if (isSelected) cls = "border-destructive/40 bg-destructive/10 text-destructive"
             else cls = "border-border bg-card text-muted-foreground"
           }
           return (
@@ -673,9 +673,9 @@ function SelfRatingCard({
     <div
       className={`rounded-xl border-2 p-4 transition-colors ${
         state === "understood"
-          ? "border-emerald-300 bg-emerald-50"
+          ? "border-success/40 bg-success-tint"
           : state === "working-on-it"
-            ? "border-amber-300 bg-amber-50"
+            ? "border-pop/50 bg-pop-tint"
             : "border-border bg-card"
       }`}
     >
@@ -686,8 +686,8 @@ function SelfRatingCard({
           onClick={() => onRespond(state === "understood" ? "unanswered" : "understood")}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
             state === "understood"
-              ? "bg-emerald-500 text-white border-emerald-500"
-              : "border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+              ? "bg-success text-success-foreground border-success"
+              : "border-success/40 text-success hover:bg-success-tint"
           }`}
         >
           <CheckCircle size={13} />
@@ -697,8 +697,8 @@ function SelfRatingCard({
           onClick={() => onRespond(state === "working-on-it" ? "unanswered" : "working-on-it")}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
             state === "working-on-it"
-              ? "bg-amber-500 text-white border-amber-500"
-              : "border-amber-300 text-amber-700 hover:bg-amber-50"
+              ? "bg-pop text-pop-foreground border-pop"
+              : "border-pop/50 text-pop-strong hover:bg-pop-tint"
           }`}
         >
           Still working on it
@@ -707,7 +707,7 @@ function SelfRatingCard({
       {state !== "unanswered" && (
         <button
           onClick={onAdvance}
-          className="mt-3 w-full py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors"
+          className="mt-3 w-full py-2 bg-primary hover:bg-primary-hover text-primary-foreground text-sm font-semibold rounded-lg transition-colors"
         >
           Next →
         </button>

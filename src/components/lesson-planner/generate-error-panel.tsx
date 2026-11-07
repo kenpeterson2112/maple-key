@@ -45,10 +45,10 @@ export default function GenerateErrorPanel({
   }
 
   return (
-    <div className={`rounded-lg px-4 py-3 border ${isBalanceLow ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
+    <div className={`rounded-lg px-4 py-3 border ${isBalanceLow ? "bg-pop-tint border-pop/50" : "bg-destructive/10 border-destructive/40"}`}>
       <div className="flex items-start gap-2">
-        <AlertTriangle size={16} className={`flex-shrink-0 mt-0.5 ${isBalanceLow ? "text-amber-500" : "text-red-500"}`} />
-        <p className={`text-sm ${isBalanceLow ? "text-amber-800" : "text-red-700"}`}>
+        <AlertTriangle size={16} className={`flex-shrink-0 mt-0.5 ${isBalanceLow ? "text-pop" : "text-destructive"}`} />
+        <p className={`text-sm ${isBalanceLow ? "text-pop-strong" : "text-destructive"}`}>
           {isBalanceLow
             ? "The AI service is temporarily unavailable while we top up our API credits. Please try again shortly — we're working on it!"
             : error}
@@ -59,35 +59,35 @@ export default function GenerateErrorPanel({
           <div className="flex flex-wrap gap-2">
             <button
               onClick={onDownloadRequest}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-pop-tint hover:bg-pop/25 text-pop-strong rounded-lg transition-colors border border-pop/50"
             >
               <Download size={13} />
               Download request JSON
             </button>
             <button
               onClick={async () => { await onCopyRequest(); flashCopied("request") }}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-pop-tint hover:bg-pop/25 text-pop-strong rounded-lg transition-colors border border-pop/50"
             >
               {copiedState === "request" ? <Check size={13} /> : <Copy size={13} />}
               {copiedState === "request" ? "Copied!" : "Copy request JSON"}
             </button>
             <button
               onClick={async () => { await onCopyPrompt(); flashCopied("prompt") }}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-pop-tint hover:bg-pop/25 text-pop-strong rounded-lg transition-colors border border-pop/50"
             >
               {copiedState === "prompt" ? <Check size={13} /> : <Copy size={13} />}
               {copiedState === "prompt" ? "Copied!" : "Copy prompt for LLM"}
             </button>
             <button
               onClick={() => { setShowPastePanel((v) => !v); onClearPasteError() }}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-pop-tint hover:bg-pop/25 text-pop-strong rounded-lg transition-colors border border-pop/50"
             >
               <ClipboardList size={13} />
               Paste response JSON
             </button>
             <button
               onClick={() => importInputRef.current?.click()}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg transition-colors border border-amber-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-pop-tint hover:bg-pop/25 text-pop-strong rounded-lg transition-colors border border-pop/50"
             >
               <Upload size={13} />
               Import file
@@ -107,15 +107,15 @@ export default function GenerateErrorPanel({
                 onChange={(e) => { setPasteText(e.target.value); onClearPasteError() }}
                 rows={6}
                 placeholder={'Paste the JSON response from the LLM here, e.g.:\n{\n  "title": "...",\n  "mindsOnContent": "...",\n  ...\n}'}
-                className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-card text-xs font-mono text-foreground focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                className="w-full px-3 py-2 border border-pop/50 rounded-lg bg-card text-xs font-mono text-foreground focus:outline-none focus:border-ring transition-colors resize-none"
               />
               {pasteError && (
-                <p className="text-xs text-red-600">{pasteError}</p>
+                <p className="text-xs text-destructive">{pasteError}</p>
               )}
               <button
                 onClick={() => onPasteLoad(pasteText)}
                 disabled={!pasteText.trim()}
-                className="px-4 py-1.5 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 text-white text-xs font-medium rounded-lg transition-colors"
+                className="px-4 py-1.5 bg-primary hover:bg-primary-hover disabled:opacity-50 text-primary-foreground text-xs font-medium rounded-lg transition-colors"
               >
                 Load lesson
               </button>

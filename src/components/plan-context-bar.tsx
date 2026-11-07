@@ -159,7 +159,7 @@ function DistrictBadge() {
         <button
           type="button"
           aria-label="District settings active — tap for details"
-          className="ml-auto flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-indigo-600 transition-colors hover:bg-indigo-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-1"
+          className="ml-auto flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-secondary-strong transition-colors hover:bg-secondary-tint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
         >
           <Building2 size={16} aria-hidden="true" />
         </button>
@@ -168,7 +168,7 @@ function DistrictBadge() {
         <Popover.Content
           sideOffset={8}
           align="end"
-          className="z-[60] w-60 rounded-xl border border-indigo-200 bg-card p-3 text-xs leading-relaxed text-indigo-900 shadow-xl"
+          className="z-[60] w-60 rounded-xl border border-secondary/40 bg-card p-3 text-xs leading-relaxed text-foreground shadow-xl"
         >
           <p className="mb-1 font-semibold">District Settings Active</p>
           <p>

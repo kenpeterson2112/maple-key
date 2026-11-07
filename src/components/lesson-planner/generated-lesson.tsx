@@ -165,9 +165,9 @@ export default function GeneratedLessonView({
   return (
     <>
       {/* SUCCESS BANNER */}
-      <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 flex items-center gap-3">
-        <CheckCircle size={24} className="text-emerald-600 flex-shrink-0" />
-        <span className="text-emerald-800 font-medium">Lesson plan generated successfully!</span>
+      <div className="bg-success-tint border border-success/40 rounded-lg p-4 flex items-center gap-3">
+        <CheckCircle size={24} className="text-success flex-shrink-0" />
+        <span className="text-success font-medium">Lesson plan generated successfully!</span>
       </div>
 
       {/* LESSON HEADER */}
@@ -194,7 +194,7 @@ export default function GeneratedLessonView({
               onClick={onExportPDF}
               disabled={!allStagesApproved}
               title={allStagesApproved ? undefined : "Approve every lesson stage before exporting"}
-              className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-orange-500"
+              className="px-4 py-2 bg-primary hover:bg-primary-hover text-primary-foreground text-sm font-medium rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary"
             >
               <Download size={16} />
               Export PDF
@@ -218,7 +218,7 @@ export default function GeneratedLessonView({
               </button>
             )}
             {unapprovedCount > 0 && (
-              <p className="basis-full text-right text-xs font-medium text-amber-700">
+              <p className="basis-full text-right text-xs font-medium text-pop-strong">
                 {unapprovedCount === 1
                   ? "1 stage still needs review before export"
                   : `${unapprovedCount} stages still need review before export`}
@@ -243,7 +243,7 @@ export default function GeneratedLessonView({
               <ul className="space-y-1.5">
                 {successCriteria.map((sc, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-                    <CheckCircle size={14} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle size={14} className="text-success flex-shrink-0 mt-0.5" />
                     <span>{sc}</span>
                   </li>
                 ))}
@@ -273,11 +273,11 @@ export default function GeneratedLessonView({
 
       {/* EXCLUDED RESOURCES NOTICE */}
       {excludedResources.length > 0 && (
-        <div className="bg-stone-50 border border-stone-200 rounded-lg px-4 py-3">
-          <p className="text-xs font-semibold text-stone-600 mb-2">Resources not used in this lesson</p>
+        <div className="bg-muted border border-border rounded-lg px-4 py-3">
+          <p className="text-xs font-semibold text-muted-foreground mb-2">Resources not used in this lesson</p>
           <ul className="space-y-1">
             {excludedResources.map((ex, i) => (
-              <li key={i} className="text-xs text-stone-600">
+              <li key={i} className="text-xs text-muted-foreground">
                 <span className="font-medium">{ex.title}:</span> {ex.reason}
               </li>
             ))}
@@ -286,56 +286,56 @@ export default function GeneratedLessonView({
       )}
 
       {/* MATERIALS & PREPARATION SECTION - Moved above Minds On */}
-      <div className="bg-card rounded-xl border-l-4 border-stone-400 shadow-sm overflow-hidden">
+      <div className="bg-card rounded-xl border-l-4 border-muted-foreground shadow-sm overflow-hidden">
         <div className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              <ClipboardList size={20} className="text-stone-600" />
+              <ClipboardList size={20} className="text-muted-foreground" />
               <h4 className="text-lg font-semibold text-foreground">Materials & Preparation</h4>
             </div>
             <button
               onClick={() => onEditSection(editingSection === "materials" ? null : "materials")}
-              className="p-1.5 hover:bg-stone-100 rounded-lg transition-colors"
+              className="p-1.5 hover:bg-muted rounded-lg transition-colors"
               aria-label="Edit Materials section"
             >
-              <Pencil size={16} className="text-stone-600" />
+              <Pencil size={16} className="text-muted-foreground" />
             </button>
           </div>
 
           {editingSection === "materials" ? (
             <div className="space-y-3">
               <div>
-                <p className="text-xs font-medium text-stone-600 mb-2">
+                <p className="text-xs font-medium text-muted-foreground mb-2">
                   Resources (auto-generated from bookmarks)
                 </p>
-                <p className="text-sm text-foreground bg-stone-50 p-2 rounded-lg">
+                <p className="text-sm text-foreground bg-muted p-2 rounded-lg">
                   {(materialsResources.length > 0 ? materialsResources : resources.map((r) => r.topic_title)).join(", ")}
                 </p>
               </div>
               {classroomMaterialsUsed.length > 0 && (
                 <div>
-                  <p className="text-xs font-medium text-stone-600 mb-2">
+                  <p className="text-xs font-medium text-muted-foreground mb-2">
                     Classroom materials used
                   </p>
-                  <p className="text-sm text-foreground bg-stone-50 p-2 rounded-lg">
+                  <p className="text-sm text-foreground bg-muted p-2 rounded-lg">
                     {classroomMaterialsUsed.join(", ")}
                   </p>
                 </div>
               )}
               <div>
-                <p className="text-xs font-medium text-stone-600 mb-2">
+                <p className="text-xs font-medium text-muted-foreground mb-2">
                   Preparation steps (one per line)
                 </p>
                 <textarea
                   value={materialsPreparation.join("\n")}
                   onChange={(e) => onChange({ materialsPreparation: e.target.value.split("\n") })}
                   rows={6}
-                  className="w-full px-3 py-2 border-2 border-stone-300 rounded-lg bg-card text-sm focus:outline-none focus:border-stone-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 border-2 border-border-strong rounded-lg bg-card text-sm focus:outline-none focus:border-ring transition-colors resize-none"
                 />
               </div>
               <button
                 onClick={() => onEditSection(null)}
-                className="px-3 py-1.5 bg-stone-500 hover:bg-stone-600 text-white text-xs font-medium rounded-lg transition-colors"
+                className="px-3 py-1.5 bg-foreground hover:bg-foreground/85 text-background text-xs font-medium rounded-lg transition-colors"
               >
                 Done Editing
               </button>
@@ -343,25 +343,25 @@ export default function GeneratedLessonView({
           ) : (
             <div className="flex gap-4">
               {/* Left box - Resources + classroom materials (1/4 width) */}
-              <div className="w-1/4 bg-stone-50 border border-stone-200 rounded-lg p-3">
-                <p className="text-xs font-semibold text-stone-700 mb-2">Materials</p>
+              <div className="w-1/4 bg-muted border border-border rounded-lg p-3">
+                <p className="text-xs font-semibold text-foreground mb-2">Materials</p>
                 <ul className="text-xs text-foreground space-y-1.5">
                   {(materialsResources.length > 0 ? materialsResources.map((t) => ({ topic_title: t })) : resources).map((r, index) => (
                     <li key={index} className="flex items-start gap-1.5">
-                      <span className="text-stone-400 flex-shrink-0">•</span>
+                      <span className="text-muted-foreground flex-shrink-0">•</span>
                       <span>{r.topic_title}</span>
                     </li>
                   ))}
                 </ul>
                 {classroomMaterialsUsed.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold uppercase tracking-wide text-stone-500 mt-3 mb-1.5">
+                    <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground mt-3 mb-1.5">
                       From your classroom
                     </p>
                     <ul className="text-xs text-foreground space-y-1.5">
                       {classroomMaterialsUsed.map((m, index) => (
                         <li key={index} className="flex items-start gap-1.5">
-                          <span className="text-emerald-500 flex-shrink-0">▪</span>
+                          <span className="text-success flex-shrink-0">▪</span>
                           <span>{m}</span>
                         </li>
                       ))}
@@ -371,15 +371,15 @@ export default function GeneratedLessonView({
               </div>
 
               {/* Right box - Preparation steps (3/4 width) */}
-              <div className="flex-1 bg-stone-50 border border-stone-200 rounded-lg p-3">
-                <p className="text-xs font-semibold text-stone-700 mb-2">Preparation</p>
+              <div className="flex-1 bg-muted border border-border rounded-lg p-3">
+                <p className="text-xs font-semibold text-foreground mb-2">Preparation</p>
                 <ul className="text-sm text-foreground space-y-2">
                   {(materialsPreparation.length > 0
                     ? materialsPreparation
                     : materialsContent.split("\n").filter(Boolean)
                   ).map((item, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <span className="text-stone-400 flex-shrink-0">{index + 1}.</span>
+                      <span className="text-muted-foreground flex-shrink-0">{index + 1}.</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -401,18 +401,18 @@ export default function GeneratedLessonView({
 
       {isThreePart && (<>
       {/* SECTION A - MINDS ON */}
-      <div className="bg-card rounded-xl border-l-4 border-blue-500 shadow-sm overflow-hidden">
+      <div className="bg-card rounded-xl border-l-4 border-hue-blue shadow-sm overflow-hidden">
         <div className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              <Lightbulb size={20} className="text-blue-600" />
+              <Lightbulb size={20} className="text-hue-blue" />
               <h4 className="text-lg font-semibold text-foreground">Minds On</h4>
-              <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
+              <span className="text-xs bg-hue-blue/10 text-hue-blue px-2 py-1 rounded-full font-medium">
                 {mindsOnTime} minutes
               </span>
             </div>
           </div>
-          <p className="text-xs text-blue-600 font-medium uppercase tracking-wide mb-3">
+          <p className="text-xs text-hue-blue font-medium uppercase tracking-wide mb-3">
             Activating Prior Knowledge
           </p>
 
@@ -422,20 +422,20 @@ export default function GeneratedLessonView({
                 value={mindsOnContent}
                 onChange={(e) => onChange({ mindsOnContent: e.target.value })}
                 rows={4}
-                className="w-full px-3 py-2 border-2 border-blue-300 rounded-lg bg-card text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                className="w-full px-3 py-2 border-2 border-hue-blue/40 rounded-lg bg-card text-sm focus:outline-none focus:border-hue-blue transition-colors resize-none"
               />
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                <p className="text-xs font-medium text-amber-800 mb-2">Differentiation</p>
+              <div className="bg-pop-tint border border-pop/50 rounded-lg p-3">
+                <p className="text-xs font-medium text-pop-strong mb-2">Differentiation</p>
                 <textarea
                   value={mindsOnDifferentiation}
                   onChange={(e) => onChange({ mindsOnDifferentiation: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-card text-xs focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 border border-pop/50 rounded-lg bg-card text-xs focus:outline-none focus:border-ring transition-colors resize-none"
                 />
               </div>
               <button
                 onClick={() => onEditSection(null)}
-                className="px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded-lg transition-colors"
+                className="px-3 py-1.5 bg-hue-blue hover:bg-hue-blue/90 text-hue-foreground text-xs font-medium rounded-lg transition-colors"
               >
                 Done Editing
               </button>
@@ -443,9 +443,9 @@ export default function GeneratedLessonView({
           ) : (
             <>
               <p className="text-sm text-foreground leading-relaxed">{mindsOnContent}</p>
-              <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3">
-                <p className="text-xs font-medium text-amber-800 mb-1">Differentiation</p>
-                <p className="text-xs text-amber-700">{mindsOnDifferentiation}</p>
+              <div className="mt-4 bg-pop-tint border border-pop/50 rounded-lg p-3">
+                <p className="text-xs font-medium text-pop-strong mb-1">Differentiation</p>
+                <p className="text-xs text-pop-strong">{mindsOnDifferentiation}</p>
               </div>
             </>
           )}
@@ -460,18 +460,18 @@ export default function GeneratedLessonView({
       </div>
 
       {/* SECTION B - ACTION */}
-      <div className="bg-card rounded-xl border-l-4 border-emerald-500 shadow-sm overflow-hidden">
+      <div className="bg-card rounded-xl border-l-4 border-hue-green shadow-sm overflow-hidden">
         <div className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              <Target size={20} className="text-emerald-600" />
+              <Target size={20} className="text-hue-green" />
               <h4 className="text-lg font-semibold text-foreground">Action</h4>
-              <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">
+              <span className="text-xs bg-hue-green/10 text-hue-green px-2 py-1 rounded-full font-medium">
                 {actionTime} minutes
               </span>
             </div>
           </div>
-          <p className="text-xs text-emerald-600 font-medium uppercase tracking-wide mb-3">
+          <p className="text-xs text-hue-green font-medium uppercase tracking-wide mb-3">
             Exploring & Applying
           </p>
 
@@ -481,10 +481,10 @@ export default function GeneratedLessonView({
                 value={actionContent}
                 onChange={(e) => onChange({ actionContent: e.target.value })}
                 rows={4}
-                className="w-full px-3 py-2 border-2 border-emerald-300 rounded-lg bg-card text-sm focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+                className="w-full px-3 py-2 border-2 border-hue-green/40 rounded-lg bg-card text-sm focus:outline-none focus:border-hue-green transition-colors resize-none"
               />
-              <div className="bg-stone-50 border border-stone-200 rounded-lg p-3">
-                <p className="text-xs font-medium text-stone-700 mb-2">Resources Used</p>
+              <div className="bg-muted border border-border rounded-lg p-3">
+                <p className="text-xs font-medium text-foreground mb-2">Resources Used</p>
                 <div className="space-y-1">
                   {resources.slice(0, 3).map((resource) => (
                     <a
@@ -492,25 +492,25 @@ export default function GeneratedLessonView({
                       href={resource.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-blue-600 hover:underline block truncate"
+                      className="text-xs text-secondary-strong hover:underline block truncate"
                     >
                       • {resource.topic_title}
                     </a>
                   ))}
                 </div>
               </div>
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                <p className="text-xs font-medium text-amber-800 mb-2">Differentiation</p>
+              <div className="bg-pop-tint border border-pop/50 rounded-lg p-3">
+                <p className="text-xs font-medium text-pop-strong mb-2">Differentiation</p>
                 <textarea
                   value={actionDifferentiation}
                   onChange={(e) => onChange({ actionDifferentiation: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-card text-xs focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 border border-pop/50 rounded-lg bg-card text-xs focus:outline-none focus:border-ring transition-colors resize-none"
                 />
               </div>
               <button
                 onClick={() => onEditSection(null)}
-                className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-medium rounded-lg transition-colors"
+                className="px-3 py-1.5 bg-hue-green hover:bg-hue-green/90 text-hue-foreground text-xs font-medium rounded-lg transition-colors"
               >
                 Done Editing
               </button>
@@ -518,8 +518,8 @@ export default function GeneratedLessonView({
           ) : (
             <>
               <p className="text-sm text-foreground leading-relaxed">{actionContent}</p>
-              <div className="mt-4 bg-stone-50 border border-stone-200 rounded-lg p-3">
-                <p className="text-xs font-medium text-stone-700 mb-2">Resources Used</p>
+              <div className="mt-4 bg-muted border border-border rounded-lg p-3">
+                <p className="text-xs font-medium text-foreground mb-2">Resources Used</p>
                 <div className="space-y-1">
                   {resources.slice(0, 3).map((resource) => (
                     <a
@@ -527,16 +527,16 @@ export default function GeneratedLessonView({
                       href={resource.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-blue-600 hover:underline block truncate"
+                      className="text-xs text-secondary-strong hover:underline block truncate"
                     >
                       • {resource.topic_title}
                     </a>
                   ))}
                 </div>
               </div>
-              <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3">
-                <p className="text-xs font-medium text-amber-800 mb-1">Differentiation</p>
-                <p className="text-xs text-amber-700">{actionDifferentiation}</p>
+              <div className="mt-4 bg-pop-tint border border-pop/50 rounded-lg p-3">
+                <p className="text-xs font-medium text-pop-strong mb-1">Differentiation</p>
+                <p className="text-xs text-pop-strong">{actionDifferentiation}</p>
               </div>
             </>
           )}
@@ -551,18 +551,18 @@ export default function GeneratedLessonView({
       </div>
 
       {/* SECTION C - CONSOLIDATION */}
-      <div className="bg-card rounded-xl border-l-4 border-violet-500 shadow-sm overflow-hidden">
+      <div className="bg-card rounded-xl border-l-4 border-hue-violet shadow-sm overflow-hidden">
         <div className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              <MessageCircle size={20} className="text-violet-600" />
+              <MessageCircle size={20} className="text-hue-violet" />
               <h4 className="text-lg font-semibold text-foreground">Consolidation</h4>
-              <span className="text-xs bg-violet-100 text-violet-700 px-2 py-1 rounded-full font-medium">
+              <span className="text-xs bg-hue-violet/10 text-hue-violet px-2 py-1 rounded-full font-medium">
                 {consolidationTime} minutes
               </span>
             </div>
           </div>
-          <p className="text-xs text-violet-600 font-medium uppercase tracking-wide mb-3">
+          <p className="text-xs text-hue-violet font-medium uppercase tracking-wide mb-3">
             Reflecting & Connecting
           </p>
 
@@ -572,20 +572,20 @@ export default function GeneratedLessonView({
                 value={consolidationContent}
                 onChange={(e) => onChange({ consolidationContent: e.target.value })}
                 rows={4}
-                className="w-full px-3 py-2 border-2 border-violet-300 rounded-lg bg-card text-sm focus:outline-none focus:border-violet-500 transition-colors resize-none"
+                className="w-full px-3 py-2 border-2 border-hue-violet/40 rounded-lg bg-card text-sm focus:outline-none focus:border-hue-violet transition-colors resize-none"
               />
-              <div className="bg-violet-50 border border-violet-200 rounded-lg p-3">
-                <p className="text-xs font-medium text-violet-800 mb-2">Assessment Note</p>
+              <div className="bg-hue-violet/10 border border-hue-violet/40 rounded-lg p-3">
+                <p className="text-xs font-medium text-hue-violet mb-2">Assessment Note</p>
                 <textarea
                   value={consolidationAssessment}
                   onChange={(e) => onChange({ consolidationAssessment: e.target.value })}
                   rows={2}
-                  className="w-full px-3 py-2 border border-violet-300 rounded-lg bg-card text-xs focus:outline-none focus:border-violet-500 transition-colors resize-none"
+                  className="w-full px-3 py-2 border border-hue-violet/40 rounded-lg bg-card text-xs focus:outline-none focus:border-hue-violet transition-colors resize-none"
                 />
               </div>
               <button
                 onClick={() => onEditSection(null)}
-                className="px-3 py-1.5 bg-violet-500 hover:bg-violet-600 text-white text-xs font-medium rounded-lg transition-colors"
+                className="px-3 py-1.5 bg-hue-violet hover:bg-hue-violet/90 text-hue-foreground text-xs font-medium rounded-lg transition-colors"
               >
                 Done Editing
               </button>
@@ -593,9 +593,9 @@ export default function GeneratedLessonView({
           ) : (
             <>
               <p className="text-sm text-foreground leading-relaxed">{consolidationContent}</p>
-              <div className="mt-4 bg-violet-50 border border-violet-200 rounded-lg p-3">
-                <p className="text-xs font-medium text-violet-800 mb-1">Assessment Note</p>
-                <p className="text-xs text-violet-700">{consolidationAssessment}</p>
+              <div className="mt-4 bg-hue-violet/10 border border-hue-violet/40 rounded-lg p-3">
+                <p className="text-xs font-medium text-hue-violet mb-1">Assessment Note</p>
+                <p className="text-xs text-hue-violet">{consolidationAssessment}</p>
               </div>
             </>
           )}
@@ -641,8 +641,8 @@ export default function GeneratedLessonView({
                     rows={5}
                     className={`w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none ${sectionDef.colors.focusBorder} transition-colors resize-none`}
                   />
-                  <div className={`${sectionDef.calloutIsAssessment ? "bg-violet-50 border border-violet-200" : "bg-amber-50 border border-amber-200"} rounded-lg p-3`}>
-                    <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-violet-800" : "text-amber-800"} mb-2`}>
+                  <div className={`${sectionDef.calloutIsAssessment ? "bg-hue-violet/10 border border-hue-violet/40" : "bg-pop-tint border border-pop/50"} rounded-lg p-3`}>
+                    <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-hue-violet" : "text-pop-strong"} mb-2`}>
                       {sectionDef.calloutLabel}
                     </p>
                     <textarea
@@ -651,12 +651,12 @@ export default function GeneratedLessonView({
                         prev.map((s) => s.id === section.id ? { ...s, callout: e.target.value } : s)
                       )}
                       rows={2}
-                      className={`w-full px-3 py-2 border ${sectionDef.calloutIsAssessment ? "border-violet-300" : "border-amber-300"} rounded-lg bg-card text-xs focus:outline-none transition-colors resize-none`}
+                      className={`w-full px-3 py-2 border ${sectionDef.calloutIsAssessment ? "border-hue-violet/40" : "border-pop/50"} rounded-lg bg-card text-xs focus:outline-none transition-colors resize-none`}
                     />
                   </div>
                   <button
                     onClick={() => onEditSection(null)}
-                    className={`px-3 py-1.5 ${sectionDef.colors.doneBg} ${sectionDef.colors.doneHover} text-white text-xs font-medium rounded-lg transition-colors`}
+                    className={`px-3 py-1.5 ${sectionDef.colors.doneBg} ${sectionDef.colors.doneHover} text-hue-foreground text-xs font-medium rounded-lg transition-colors`}
                   >
                     Done Editing
                   </button>
@@ -665,11 +665,11 @@ export default function GeneratedLessonView({
                 <>
                   <p className="text-sm text-foreground leading-relaxed">{section.content}</p>
                   {section.callout && (
-                    <div className={`mt-4 ${sectionDef.calloutIsAssessment ? "bg-violet-50 border border-violet-200" : "bg-amber-50 border border-amber-200"} rounded-lg p-3`}>
-                      <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-violet-800" : "text-amber-800"} mb-1`}>
+                    <div className={`mt-4 ${sectionDef.calloutIsAssessment ? "bg-hue-violet/10 border border-hue-violet/40" : "bg-pop-tint border border-pop/50"} rounded-lg p-3`}>
+                      <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-hue-violet" : "text-pop-strong"} mb-1`}>
                         {sectionDef.calloutLabel}
                       </p>
-                      <p className={`text-xs ${sectionDef.calloutIsAssessment ? "text-violet-700" : "text-amber-700"}`}>
+                      <p className={`text-xs ${sectionDef.calloutIsAssessment ? "text-hue-violet" : "text-pop-strong"}`}>
                         {section.callout}
                       </p>
                     </div>

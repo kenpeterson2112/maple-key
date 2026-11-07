@@ -4,13 +4,13 @@ import { Pencil } from "lucide-react"
 import type { MaterialsSnapshot } from "@/lib/classroom-resources"
 
 const CATEGORY_DOT: Record<string, string> = {
-  "math-manipulatives": "bg-emerald-500",
-  technology: "bg-blue-500",
-  spaces: "bg-amber-500",
-  supplies: "bg-violet-500",
-  "print-resources": "bg-orange-500",
-  "digital-resources": "bg-rose-500",
-  "digital-tools": "bg-cyan-500",
+  "math-manipulatives": "bg-hue-green",
+  technology: "bg-hue-blue",
+  spaces: "bg-hue-amber",
+  supplies: "bg-hue-violet",
+  "print-resources": "bg-hue-orange",
+  "digital-resources": "bg-hue-rose",
+  "digital-tools": "bg-hue-cyan",
 }
 
 interface MaterialsSummaryProps {
@@ -29,7 +29,7 @@ export default function MaterialsSummary({ snapshot, onEdit, size = "md" }: Mate
     <div>
       <div className="space-y-0.5">
         {snapshot.byCategory.map((cat) => {
-          const dot = CATEGORY_DOT[cat.id] ?? "bg-stone-400"
+          const dot = CATEGORY_DOT[cat.id] ?? "bg-muted-foreground"
           const empty = cat.items.length === 0
           return (
             <div

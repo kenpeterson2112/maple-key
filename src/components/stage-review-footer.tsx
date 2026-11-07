@@ -14,14 +14,14 @@ interface Props {
 export default function StageReviewFooter({ approved, onApprove, onEdit }: Props) {
   if (approved) {
     return (
-      <div className="mt-4 flex items-center justify-between border-t border-stone-100 pt-4">
-        <span className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-50 px-3 py-1.5 text-sm font-medium text-emerald-700">
+      <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+        <span className="inline-flex items-center gap-1.5 rounded-lg bg-success-tint px-3 py-1.5 text-sm font-medium text-success">
           <Check size={16} />
           Approved
         </span>
         <button
           onClick={onEdit}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-orange-200 px-3 py-1.5 text-sm font-medium text-orange-600 transition-colors hover:bg-orange-50"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-primary/30 px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:bg-primary-tint"
         >
           <Pencil size={14} />
           Edit
@@ -31,17 +31,17 @@ export default function StageReviewFooter({ approved, onApprove, onEdit }: Props
   }
 
   return (
-    <div className="mt-4 flex items-center gap-2 border-t border-stone-100 pt-4">
+    <div className="mt-4 flex items-center gap-2 border-t border-border pt-4">
       <button
         onClick={onApprove}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-600"
+        className="inline-flex items-center gap-1.5 rounded-lg bg-success px-4 py-2 text-sm font-medium text-success-foreground transition-colors hover:bg-success/90"
       >
         <Check size={16} />
         Approve
       </button>
       <button
         onClick={onEdit}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-orange-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-orange-600"
+        className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
       >
         <Pencil size={16} />
         Edit

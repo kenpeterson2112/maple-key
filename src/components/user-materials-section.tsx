@@ -213,7 +213,7 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
       </p>
 
       {error && !draft && (
-        <div className="flex items-start gap-2 mb-3 p-3 rounded-lg bg-amber-50 border border-amber-300 text-sm text-amber-800">
+        <div className="flex items-start gap-2 mb-3 p-3 rounded-lg bg-pop-tint border border-pop/50 text-sm text-pop-strong">
           <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
           <span>{error}</span>
         </div>
@@ -246,7 +246,7 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
           {draft.kind === "link" && (
             <div className="mb-3">
               <label className="block text-xs font-medium text-foreground mb-1">
-                URL <span className="text-red-600">*</span>
+                URL <span className="text-destructive">*</span>
               </label>
               <input
                 type="url"
@@ -261,7 +261,7 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
             <div>
               <label className="block text-xs font-medium text-foreground mb-1">
-                Subject <span className="text-red-600">*</span>
+                Subject <span className="text-destructive">*</span>
               </label>
               <select
                 value={draft.subject}
@@ -292,7 +292,7 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
 
           <div className="mb-3">
             <label className="block text-xs font-medium text-foreground mb-1">
-              Description <span className="text-red-600">*</span>
+              Description <span className="text-destructive">*</span>
             </label>
             <textarea
               value={draft.description}
@@ -304,7 +304,7 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
           </div>
 
           {error && (
-            <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-50 border border-amber-300 text-xs text-amber-800">
+            <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-pop-tint border border-pop/50 text-xs text-pop-strong">
               <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -330,11 +330,11 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
       )}
 
       {materials.length > 0 && (
-        <div className="bg-stone-50 rounded-lg p-3 space-y-2 mb-3">
+        <div className="bg-muted rounded-lg p-3 space-y-2 mb-3">
           {materials.map((m) => (
             <div
               key={m.id}
-              className="flex items-start gap-3 py-2 px-3 bg-card rounded-lg border border-stone-200"
+              className="flex items-start gap-3 py-2 px-3 bg-card rounded-lg border border-border"
             >
               <div className="w-6 h-6 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center flex-shrink-0">
                 {m.kind === "file" ? <FileText size={12} /> : <Link2 size={12} />}
@@ -357,7 +357,7 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
               <button
                 type="button"
                 onClick={() => removeMaterial(m.id)}
-                className="text-muted-foreground hover:text-red-600 flex-shrink-0"
+                className="text-muted-foreground hover:text-destructive flex-shrink-0"
                 aria-label={`Remove ${m.name}`}
               >
                 <X size={16} />

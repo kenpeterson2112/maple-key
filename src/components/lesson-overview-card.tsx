@@ -86,9 +86,9 @@ export default function LessonOverviewCard({
       <div className="px-4 pb-3 space-y-2">
         {codes.length > 0 && (
           <div className="flex items-start gap-1.5">
-            <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" strokeWidth={3} />
+            <Check className="w-3.5 h-3.5 text-success mt-0.5 flex-shrink-0" strokeWidth={3} />
             <p className="text-[11px] text-foreground leading-relaxed">
-              <span className="font-semibold text-emerald-700">{codes.length}</span> curriculum{" "}
+              <span className="font-semibold text-success">{codes.length}</span> curriculum{" "}
               {codes.length === 1 ? "expectation" : "expectations"}
               <span className="text-muted-foreground">
                 {" — "}
@@ -122,7 +122,7 @@ export default function LessonOverviewCard({
           <div className="rounded-xl bg-card/70 border border-border px-3 py-2.5 space-y-1.5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <ClipboardCheck size={13} className="text-amber-600" />
+                <ClipboardCheck size={13} className="text-pop-strong" />
                 <span className="text-[11px] font-semibold text-foreground">Assessment results</span>
               </div>
               <span className="text-[11px] text-muted-foreground">
@@ -152,7 +152,7 @@ export default function LessonOverviewCard({
       <div className="bg-card px-4 py-2.5 border-t border-border flex items-center justify-between gap-2">
         <button
           onClick={onOpenAssessment}
-          className="flex items-center gap-1.5 text-xs font-semibold text-amber-700 hover:text-amber-800 transition-colors"
+          className="flex items-center gap-1.5 text-xs font-semibold text-pop-strong hover:text-foreground transition-colors"
         >
           <ClipboardCheck size={14} />
           {agg.hasData ? "View checks" : "Quick check"}

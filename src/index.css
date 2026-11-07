@@ -63,6 +63,7 @@
   /* Status: "added", "saved", "done". Text on success-tint uses success. */
   --success: oklch(0.4479 0.1083 151.3);           /* #166534 */
   --success-tint: oklch(0.962 0.043 156.7);        /* #DCFCE7 */
+  --success-foreground: oklch(1 0 0);              /* #FFFFFF */
 
   /* Subject colours. One value per subject works as a fill (with
      subject-foreground on it), as label text, and at low opacity as a tint
@@ -77,6 +78,22 @@
   --subject-arts: oklch(0.518 0.226 323.9);        /* #A21CAF */
   --subject-history: oklch(0.4732 0.1247 46.2);    /* #92400E */
   --subject-geography: oklch(0.5198 0.0936 223.1); /* #0E7490 */
+
+  /* Categorical hues: colour-coding with no meaning attached (lesson sections,
+     classroom-resource categories, artifact types). Same contract as the
+     subject colours: fill + hue-foreground, label text, /10 tint, /40 border.
+     Never use them for state or emphasis; that's what the families above do. */
+  --hue-foreground: oklch(1 0 0);                  /* #FFFFFF */
+  --hue-blue: oklch(0.488 0.217 264.4);            /* #1D4ED8 */
+  --hue-green: oklch(0.511 0.1362 150.2);          /* #0B7B39 */
+  --hue-violet: oklch(0.491 0.241 292.6);          /* #6D28D9 */
+  --hue-amber: oklch(0.54 0.146 48.6);             /* #AF4E00 */
+  --hue-teal: oklch(0.511 0.086 186.4);            /* #0F766E */
+  --hue-cyan: oklch(0.5198 0.0936 223.1);          /* #0E7490 */
+  --hue-orange: oklch(0.545 0.174 38.5);           /* #BF3E05 */
+  --hue-rose: oklch(0.5143 0.1978 16.9);           /* #BE123C */
+  --hue-indigo: oklch(0.457 0.215 277);            /* #4338CA */
+  --hue-slate: oklch(0.446 0.037 257.3);           /* #475569 */
 
   /* Signal-distribution levels (proficiency Level 1-4) */
   --signal-1: oklch(0.62 0.19 45);   /* burnt orange — needs critical attention */
@@ -119,7 +136,7 @@
   --muted-foreground: oklch(0.728 0.024 61.1);     /* #B3A498 */
   --accent: var(--secondary-tint);
   --accent-foreground: var(--secondary-strong);
-  --destructive: oklch(0.676 0.181 24.7);          /* #F2605C */
+  --destructive: oklch(0.693 0.171 24.6);          /* #F46A65 */
   --destructive-foreground: oklch(0.209 0.01 52.9);/* #1C1714 */
   --border: oklch(0.318 0.019 57);                 /* #3A3029 */
   --border-strong: oklch(0.374 0.022 58.9);        /* #4A3E35 */
@@ -128,6 +145,7 @@
 
   --success: oklch(0.8 0.182 151.7);               /* #4ADE80 */
   --success-tint: oklch(0.281 0.047 155.2);        /* #14301F */
+  --success-foreground: oklch(0.209 0.01 52.9);    /* #1C1714 */
 
   --subject-foreground: oklch(0.209 0.01 52.9);    /* #1C1714 */
   --subject-math: oklch(0.8 0.182 151.7);          /* #4ADE80 */
@@ -139,6 +157,18 @@
   --subject-arts: oklch(0.748 0.207 322.2);        /* #E879F9 */
   --subject-history: oklch(0.76 0.103 61.9);       /* #E0A26B */
   --subject-geography: oklch(0.7971 0.1339 211.5); /* #22D3EE */
+
+  --hue-foreground: oklch(0.209 0.01 52.9);        /* #1C1714 */
+  --hue-blue: oklch(0.714 0.143 254.6);            /* #60A5FA */
+  --hue-green: oklch(0.8 0.182 151.7);             /* #4ADE80 */
+  --hue-violet: oklch(0.709 0.159 293.5);          /* #A78BFA */
+  --hue-amber: oklch(0.8369 0.1644 84.4);          /* #FBBF24 */
+  --hue-teal: oklch(0.7845 0.1325 181.9);          /* #2DD4BF */
+  --hue-cyan: oklch(0.7971 0.1339 211.5);          /* #22D3EE */
+  --hue-orange: oklch(0.758 0.159 55.9);           /* #FB923C */
+  --hue-rose: oklch(0.719 0.169 13.4);             /* #FB7185 */
+  --hue-indigo: oklch(0.68 0.158 276.9);           /* #818CF8 */
+  --hue-slate: oklch(0.711 0.035 256.8);           /* #94A3B8 */
 
   --signal-1: oklch(0.62 0.19 45);
   --signal-1-foreground: oklch(0.3 0.15 40);
@@ -184,6 +214,7 @@
   --color-ring: var(--ring);
   --color-success: var(--success);
   --color-success-tint: var(--success-tint);
+  --color-success-foreground: var(--success-foreground);
   --color-subject-foreground: var(--subject-foreground);
   --color-subject-math: var(--subject-math);
   --color-subject-science: var(--subject-science);
@@ -194,6 +225,17 @@
   --color-subject-arts: var(--subject-arts);
   --color-subject-history: var(--subject-history);
   --color-subject-geography: var(--subject-geography);
+  --color-hue-foreground: var(--hue-foreground);
+  --color-hue-blue: var(--hue-blue);
+  --color-hue-green: var(--hue-green);
+  --color-hue-violet: var(--hue-violet);
+  --color-hue-amber: var(--hue-amber);
+  --color-hue-teal: var(--hue-teal);
+  --color-hue-cyan: var(--hue-cyan);
+  --color-hue-orange: var(--hue-orange);
+  --color-hue-rose: var(--hue-rose);
+  --color-hue-indigo: var(--hue-indigo);
+  --color-hue-slate: var(--hue-slate);
   --color-signal-1: var(--signal-1);
   --color-signal-1-foreground: var(--signal-1-foreground);
   --color-signal-2: var(--signal-2);
