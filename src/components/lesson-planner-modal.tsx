@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import {
   X,
   Loader2,
@@ -13,7 +13,7 @@ import {
 import type { Resource } from "@/lib/types"
 import PageHeader from "@/components/page-header"
 import { normalizeGrades } from "@/lib/utils"
-import { logLesson, updateLessonFullContent } from "@/lib/lesson-metadata"
+import { logLesson, updateLessonFullContent, getLessonById, getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata, LessonArtifact, ArtifactStatus, ReproducibleLanguage, TemplateSection } from "@/lib/lesson-metadata"
 import ArtifactOrganizerModal from "@/components/artifact-organizer-modal"
 import LessonBuildingLoader from "@/components/lesson-building-loader"
@@ -23,7 +23,8 @@ import { cacheQuestions, getCachedQuestions } from "@/lib/assessment-questions-c
 import AssessmentModal from "@/components/assessment-modal"
 import { readMaterialsSnapshot, getAllSelectedMaterialLabels } from "@/lib/classroom-resources"
 import MaterialsEditorModal from "@/components/materials-editor-modal"
-import { getProgressForCodes, type LevelCounts } from "@/lib/assessment-results"
+import { getProgressForCodes, getLessonTally, type LevelCounts } from "@/lib/assessment-results"
+import { buildContinuationContext } from "@/lib/lesson-sequence"
 import { getTemplate, resolveTemplateId } from "@/lib/lesson-templates"
 import { type UserMaterial } from "@/components/user-materials-section"
 import { getUserEmail, getReproducibleLanguage, setReproducibleLanguage, getNoTechMode, setNoTechMode, getLessonSetupMode, setLessonSetupMode, type LessonSetupMode } from "@/lib/personalization"
@@ -38,6 +39,7 @@ import {
 } from "@/components/lesson-planner/planning-questions"
 import GeneratedLessonView, { type LessonContentPatch } from "@/components/lesson-planner/generated-lesson"
 import SetupSteps, { WIZARD_STEPS } from "@/components/lesson-planner/setup-steps"
+import PreviousLessonPicker from "@/components/lesson-planner/previous-lesson-picker"
 import GenerateErrorPanel from "@/components/lesson-planner/generate-error-panel"
 import {
   buildFullPrompt,
@@ -65,6 +67,12 @@ interface LessonPlannerModalProps {
   setFilters: (filters: Filters) => void
   sidebarFilters: SidebarFilters
   onSidebarFilterChange: (group: string, items: string[]) => void
+  /** "Continue from this lesson": a fresh plan that builds on this earlier one. */
+  continueFrom?: LessonMetadata | null
+  /** Opens the planner on a fresh plan that continues from `lesson`. */
+  onContinueLesson?: (lesson: LessonMetadata) => void
+  /** Opens a saved lesson (used by the "Follows" link). */
+  onOpenLesson?: (lesson: LessonMetadata) => void
 }
 
 /**
@@ -85,20 +93,26 @@ export default function LessonPlannerModal({
   filters,
   setFilters,
   sidebarFilters,
+  continueFrom: continueFromProp = null,
+  onContinueLesson,
+  onOpenLesson,
 }: LessonPlannerModalProps) {
   const { clearBookmarks } = useBookmarks()
   const globalFilters = useGlobalFilters()
   const fc = lesson?.fullContent
+  // Continuation only applies to a fresh plan; reopening a saved lesson ignores it.
+  const [continueFrom, setContinueFrom] = useState<LessonMetadata | null>(lesson ? null : continueFromProp)
+  const prevFc = continueFrom?.fullContent
 
   const [includeAssessmentData, setIncludeAssessmentData] = useState(false)
-  const [lessonLength, setLessonLength] = useState(lesson?.lessonLength ?? "60 minutes")
-  const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? "3-Part Lesson")
+  const [lessonLength, setLessonLength] = useState(lesson?.lessonLength ?? continueFrom?.lessonLength ?? "60 minutes")
+  const [lessonTemplate, setLessonTemplate] = useState(lesson?.lessonTemplate ?? continueFrom?.lessonTemplate ?? "3-Part Lesson")
   const [teacherNotes, setTeacherNotes] = useState("")
   // Language for student-facing reproducibles only (artifacts + printable organizer).
   // Reopening a saved lesson prefers its stored value; otherwise the remembered preference.
   const [reproducibleLanguage, setReproducibleLanguageState] =
-    useState<ReproducibleLanguage>(fc?.reproducibleLanguage ?? getReproducibleLanguage())
-  const [noTechMode, setNoTechModeState] = useState<boolean>(fc?.noTechMode ?? getNoTechMode())
+    useState<ReproducibleLanguage>(fc?.reproducibleLanguage ?? prevFc?.reproducibleLanguage ?? getReproducibleLanguage())
+  const [noTechMode, setNoTechModeState] = useState<boolean>(fc?.noTechMode ?? prevFc?.noTechMode ?? getNoTechMode())
   const [userMaterials, setUserMaterials] = useState<UserMaterial[]>([])
   const [isMaterialsEditorOpen, setIsMaterialsEditorOpen] = useState(false)
   const [materialsTick, setMaterialsTick] = useState(0)
@@ -162,6 +176,31 @@ export default function LessonPlannerModal({
   const [pasteError, setPasteError] = useState<string | null>(null)
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  // Saved lessons a fresh plan can build on (newest first), for the picker.
+  const savedLessons = useMemo(() => (lesson ? [] : getLessonLog()), [lesson])
+
+  // Builds on `prev`: start from its class and format. Language and no-tech
+  // are set for this plan only, not saved as the teacher's remembered default.
+  const applyContinuationDefaults = (prev: LessonMetadata) => {
+    if (prev.grade && prev.grade !== globalFilters.state.grade) globalFilters.setGrade(prev.grade)
+    if (prev.subject && prev.subject !== globalFilters.state.subject) globalFilters.setSubject(prev.subject)
+    if (prev.lessonLength) setLessonLength(prev.lessonLength)
+    if (prev.lessonTemplate) setLessonTemplate(prev.lessonTemplate)
+    if (prev.fullContent?.reproducibleLanguage) setReproducibleLanguageState(prev.fullContent.reproducibleLanguage)
+    if (typeof prev.fullContent?.noTechMode === "boolean") setNoTechModeState(prev.fullContent.noTechMode)
+  }
+
+  const handleContinueFromChange = (prev: LessonMetadata | null) => {
+    setContinueFrom(prev)
+    if (prev) applyContinuationDefaults(prev)
+  }
+
+  // Opened via "Plan next lesson": apply the same defaults once, on mount.
+  useEffect(() => {
+    if (continueFrom) applyContinuationDefaults(continueFrom)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: "smooth" })
@@ -233,7 +272,23 @@ export default function LessonPlannerModal({
     ...(filters.topic ? { topic: filters.topic } : {}),
   }
 
-  const requestPayload = () =>
+  // Header "Follows" link: the saved lesson's own back-link, else the one this
+  // fresh plan is continuing (once generated).
+  const followsRef = activeLesson?.continuesFrom ?? null
+  const followsSource = followsRef ? getLessonById(followsRef.id) : null
+  const followsInfo = followsRef
+    ? {
+        title: followsSource?.title ?? followsRef.title,
+        onOpen: followsSource && onOpenLesson ? () => onOpenLesson(followsSource) : undefined,
+      }
+    : null
+
+  const continuationContext = continueFrom
+    ? buildContinuationContext(continueFrom, getLessonTally(continueFrom.id)?.byExpectation)
+    : null
+
+  // generate-questions doesn't use continuation, so only the lesson call sends it.
+  const requestPayload = (withContinuation = false) =>
     buildRequestPayload({
       bookmarkedResources,
       lessonLength,
@@ -245,6 +300,7 @@ export default function LessonPlannerModal({
       noTechMode,
       classContext: classContextPayload,
       ...(includeAssessmentData && hasClassProgress ? { classProgress } : {}),
+      ...(withContinuation ? { continuation: continuationContext } : {}),
     })
 
   /**
@@ -283,6 +339,7 @@ export default function LessonPlannerModal({
       resources: bookmarkedResources,
       lessonLength,
       lessonTemplate,
+      ...(continueFrom ? { continuesFrom: { id: continueFrom.id, title: continueFrom.title } } : {}),
       lessonContent: {
         mindsOn: (data.mindsOnContent ?? data.sections?.[0]?.content ?? "").slice(0, 600),
         action: (data.actionContent ?? data.sections?.[1]?.content ?? "").slice(0, 600),
@@ -354,7 +411,7 @@ export default function LessonPlannerModal({
           ...(userEmail ? { "X-User-Email": userEmail } : {}),
         },
         body: JSON.stringify({
-          ...requestPayload(),
+          ...requestPayload(true),
           ...(planningAnswers.length > 0 ? { planningAnswers } : {}),
         }),
       })
@@ -597,6 +654,7 @@ export default function LessonPlannerModal({
             teacherNotes,
             includeAssessmentData,
             classroomResources: classroomResourceLabels,
+            continuation: continuationContext,
           }),
         )
       }
@@ -720,6 +778,12 @@ export default function LessonPlannerModal({
                 onStartAssessment={() => setShowAssessment(true)}
                 onOpenLibrary={onOpenLibrary}
                 onPlanAnother={onBack}
+                onPlanNext={
+                  onContinueLesson && (latestLesson ?? lesson)
+                    ? () => onContinueLesson((latestLesson ?? lesson)!)
+                    : undefined
+                }
+                follows={followsInfo}
               />
             ) : showQuestionsStep ? (
               <>
@@ -728,6 +792,16 @@ export default function LessonPlannerModal({
                 <div className="h-6" />
               </>
             ) : (
+              <>
+              {/* Once chosen it stays visible on every step; the empty prompt
+                  only shows where class context is set, to keep later steps quiet. */}
+              {savedLessons.length > 0 && (continueFrom || !isWizard || wizardStep === 0) && (
+                <PreviousLessonPicker
+                  lessons={savedLessons}
+                  selected={continueFrom}
+                  onSelect={handleContinueFromChange}
+                />
+              )}
               <SetupSteps
                 setupMode={setupMode}
                 wizardStep={wizardStep}
@@ -756,7 +830,11 @@ export default function LessonPlannerModal({
                 onLanguageChange={handleLanguageChange}
                 teacherNotes={teacherNotes}
                 onTeacherNotesChange={setTeacherNotes}
+                teacherNotesPlaceholder={
+                  continueFrom ? "Where did the class leave off? Anything you didn't get to?" : undefined
+                }
               />
+              </>
             )}
           </div>
           )}

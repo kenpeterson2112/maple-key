@@ -59,6 +59,25 @@ their own progress against the success criteria. It states when it happens and
 gives the exact student-facing prompt. It is a self-assessment, not another
 quiz question.
 
+## Continuation lessons
+
+A teacher can start a lesson that continues an earlier one. They pick it in the
+planner ("Build on a previous lesson?"), or start from "Plan next lesson" on a
+library card or after generating. The request then carries a
+`continuation` summary of that lesson. It is built in `src/lib/lesson-sequence.ts`,
+capped field by field and formatted once in `shared/lesson-continuation.ts`.
+It holds the earlier lesson's title, learning goal, success criteria,
+expectations, short activity excerpts, planned consolidation, reflection
+checkpoint, resources used, and any quick-check results.
+
+The prompt presents this as **context, not rules**. The model builds naturally
+from what the class just did. Nothing forces how the lesson opens, which codes it
+targets, or which activities it avoids. **The teacher's notes win.** If they say
+the class got somewhere other than the planned consolidation, the lesson follows
+the notes. The planning questions don't change for a continuation. The saved
+lesson keeps a `continuesFrom` link, which the library uses to nest lessons into
+sequences.
+
 ## Rules the output must follow
 
 - **Cite only provided expectations.** `curriculumCodesCovered` and every

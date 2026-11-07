@@ -8,6 +8,7 @@
     "build": "vite build && node scripts/export-resources.mjs --if-configured --out dist/resources.json",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.api.json",
     "preview": "vite preview",
+    "test": "node --experimental-strip-types --no-warnings --import ./scripts/ts-resolve.mjs --test \"src/**/*.test.ts\"",
     "validate:schema": "python3 scripts/check-schema-sync.py && python3 scripts/validate-resources.py"
   },
   "dependencies": {

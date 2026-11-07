@@ -1,9 +1,11 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { Calendar, Check, BookOpen, ClipboardCheck, ArrowRight, Library } from "lucide-react"
+import { Calendar, Check, BookOpen, ClipboardCheck, ArrowRight, Library, CornerDownRight } from "lucide-react"
 import { getLessonLog } from "@/lib/lesson-metadata"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
+import { groupLessonsBySequence } from "@/lib/lesson-sequence"
+import FollowsLink from "@/components/follows-link"
 import { getLessonTally } from "@/lib/assessment-results"
 import { useGlobalFilters } from "@/lib/global-filters"
 import DevSeedControl from "@/components/dev/dev-seed-control"
@@ -11,7 +13,12 @@ import PageHeader from "@/components/page-header"
 
 interface LessonsLibraryProps {
   onOpenLesson: (lesson: LessonMetadata) => void
+  /** Starts a fresh plan that continues from this lesson. */
+  onContinueLesson: (lesson: LessonMetadata) => void
 }
+
+/** Indent per sequence level, as Tailwind classes (kept static for the JIT). */
+const INDENT_CLASS = ["", "ml-4 md:ml-6", "ml-8 md:ml-12", "ml-12 md:ml-18"]
 
 type SortKey = "newest" | "oldest" | "title"
 
@@ -19,7 +26,7 @@ function formatDate(timestamp: number): string {
   return new Date(timestamp).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })
 }
 
-export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
+export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: LessonsLibraryProps) {
   const lessons = useMemo(() => getLessonLog(), [])
   const globalFilters = useGlobalFilters()
   // The sample-data control bumps this to re-read per-lesson tallies (read inline on render).
@@ -41,8 +48,10 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
     if (sort === "newest") list.sort((a, b) => b.timestamp - a.timestamp)
     else if (sort === "oldest") list.sort((a, b) => a.timestamp - b.timestamp)
     else list.sort((a, b) => a.title.localeCompare(b.title))
-    return list
+    // Follow-ups sit beneath the lesson they build on; roots keep the sort.
+    return groupLessonsBySequence(list)
   }, [lessons, globalFilters.state.subject, globalFilters.state.grade, sort])
+  const byId = useMemo(() => new Map(lessons.map((l) => [l.id, l])), [lessons])
 
   return (
     <div className="w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden">
@@ -79,7 +88,7 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
               <p className="text-sm mt-1">Try a different subject filter, or generate a new lesson.</p>
             </div>
           ) : (
-            visible.map((lesson) => {
+            visible.map(({ lesson, depth }) => {
               const tally = getLessonTally(lesson.id)
               const meta = [
                 formatDate(lesson.timestamp),
@@ -88,9 +97,20 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
               ]
                 .filter(Boolean)
                 .join(" · ")
+              const source = lesson.continuesFrom ? byId.get(lesson.continuesFrom.id) : undefined
               return (
-                <button
+                <div
                   key={lesson.id}
+                  className={`relative ${INDENT_CLASS[depth] ?? INDENT_CLASS[INDENT_CLASS.length - 1]}`}
+                >
+                {depth > 0 && (
+                  <CornerDownRight
+                    size={14}
+                    aria-hidden
+                    className="absolute -left-4 top-4 text-muted-foreground/50 hidden md:block"
+                  />
+                )}
+                <button
                   onClick={() => onOpenLesson(lesson)}
                   className="w-full text-left rounded-2xl bg-white border border-[#E8D5C4] px-4 py-3.5 shadow-sm hover:shadow-md hover:border-[#FF6B35]/40 transition-all active:scale-[0.99]"
                 >
@@ -121,6 +141,29 @@ export default function LessonsLibrary({ onOpenLesson }: LessonsLibraryProps) {
                     <ArrowRight size={13} className="ml-auto text-[#A8998E]" />
                   </div>
                 </button>
+                {/* Siblings of the card button, not nested inside it. */}
+                <div className="flex items-center gap-3 px-4 pt-1.5">
+                  {lesson.continuesFrom && (
+                    <FollowsLink
+                      follows={{
+                        title: source?.title ?? lesson.continuesFrom.title,
+                        onOpen: source ? () => onOpenLesson(source) : undefined,
+                      }}
+                      className="flex-1"
+                    />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => onContinueLesson(lesson)}
+                    aria-label={`Plan the next lesson after ${lesson.title || "this lesson"}`}
+                    title="Start a new lesson that picks up where this one left off"
+                    className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/40 bg-card px-3 py-1 text-xs font-semibold text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
+                  >
+                    Plan next lesson
+                    <ArrowRight size={12} />
+                  </button>
+                </div>
+                </div>
               )
             })
           )}

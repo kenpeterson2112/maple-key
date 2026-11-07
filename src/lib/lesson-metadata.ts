@@ -67,6 +67,9 @@ export interface LessonMetadata {
   lessonTemplate?: string
   fullContent?: LessonFullContent
   resources?: Resource[]
+  /** The earlier lesson this one continues from. The title is kept so the link
+   *  still reads sensibly after the source drops out of the 20-lesson log. */
+  continuesFrom?: { id: string; title: string }
 }
 
 export function logLesson(meta: Omit<LessonMetadata, "id" | "timestamp">): LessonMetadata {
@@ -121,4 +124,8 @@ export function getLessonLog(): LessonMetadata[] {
 export function getLatestLesson(): LessonMetadata | null {
   const log = getLessonLog()
   return log[0] ?? null
+}
+
+export function getLessonById(id: string): LessonMetadata | null {
+  return getLessonLog().find((l) => l.id === id) ?? null
 }

@@ -1,5 +1,6 @@
 "use client"
 
+import FollowsLink from "@/components/follows-link"
 import {
   ArrowRight,
   BookOpen,
@@ -13,6 +14,7 @@ import {
   Pencil,
   RefreshCw,
   Search,
+  CornerDownRight,
   Target,
 } from "lucide-react"
 import ArtifactsSection from "@/components/artifacts-section"
@@ -96,6 +98,10 @@ export interface GeneratedLessonViewProps {
   /** "What's next?" exits: the saved-lessons library, and Search for the next lesson. */
   onOpenLibrary: () => void
   onPlanAnother: () => void
+  /** "Continue from this lesson": starts a fresh plan that builds on this one. */
+  onPlanNext?: () => void
+  /** The lesson this one continues from. `onOpen` is absent once it has dropped out of the log. */
+  follows?: { title: string; onOpen?: () => void } | null
 }
 
 /**
@@ -149,6 +155,8 @@ export default function GeneratedLessonView({
   onStartAssessment,
   onOpenLibrary,
   onPlanAnother,
+  onPlanNext,
+  follows,
 }: GeneratedLessonViewProps) {
   const mindsOnTime = Math.round(lessonMinutes * 0.17)
   const actionTime = Math.round(lessonMinutes * 0.58)
@@ -174,6 +182,7 @@ export default function GeneratedLessonView({
               {resources[0]?.grade_level?.[0] && " • "}
               {lessonLength} • {lessonTemplate.split(" (")[0]}
             </p>
+            {follows && <FollowsLink follows={follows} className="mt-1" />}
             {coveredCodes.length > 0 && (
               <p className="text-xs text-[#888] mt-1">
                 Curriculum: {coveredCodes.join(", ")}
@@ -699,6 +708,20 @@ export default function GeneratedLessonView({
               </span>
             </span>
             <ArrowRight size={20} className="flex-shrink-0" />
+          </button>
+        )}
+
+        {onPlanNext && (
+          <button
+            onClick={onPlanNext}
+            className="mt-3 w-full flex items-center gap-3 rounded-xl border-2 border-primary/40 bg-primary/5 hover:bg-primary/10 p-4 text-left transition-colors"
+          >
+            <CornerDownRight size={20} className="text-primary flex-shrink-0" />
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm font-semibold text-foreground">Plan the next lesson</span>
+              <span className="block text-xs text-muted-foreground mt-1">Pick up where this lesson leaves off</span>
+            </span>
+            <ArrowRight size={18} className="text-primary flex-shrink-0" />
           </button>
         )}
 
