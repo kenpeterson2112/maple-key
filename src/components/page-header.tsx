@@ -11,15 +11,15 @@ import CurriculumFilterBar from "@/components/curriculum-filter-bar"
 export default function PageHeader({
   icon: Icon,
   title,
-  iconColor = "#D97706",
-  iconBg = "bg-amber-100",
+  iconColor = "text-pop-strong",
+  iconBg = "bg-pop-tint",
   leading,
   children,
   hideTitleOnMobile = false,
 }: {
   icon: LucideIcon
   title: string
-  /** Hex color for the icon glyph. */
+  /** Tailwind text-colour class for the icon glyph (a token, e.g. "text-primary-strong"). */
   iconColor?: string
   /** Tailwind background class for the icon circle. */
   iconBg?: string
@@ -31,15 +31,15 @@ export default function PageHeader({
   hideTitleOnMobile?: boolean
 }) {
   return (
-    <header className="relative flex-shrink-0 flex items-center gap-2 border-b border-[#E8D5C4] bg-white px-4 md:px-6 py-3">
+    <header className="relative flex-shrink-0 flex items-center gap-2 border-b border-border bg-card px-4 md:px-6 py-3">
       {/* Left zone: back · icon · title. flex-1 balances the right zone so the
           centered filter cluster sits in the true middle of the bar. */}
       <div className="flex flex-1 min-w-0 items-center gap-2">
         {leading}
         <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full ${iconBg}`}>
-          <Icon size={18} style={{ color: iconColor }} />
+          <Icon size={18} className={iconColor} />
         </div>
-        <h1 className={`text-base font-bold text-[#2C2C2C] truncate min-w-0 ${hideTitleOnMobile ? "hidden sm:block" : ""}`}>{title}</h1>
+        <h1 className={`text-base font-bold text-foreground truncate min-w-0 ${hideTitleOnMobile ? "hidden sm:block" : ""}`}>{title}</h1>
       </div>
 
       {/* Center zone: the curriculum filter cluster (see CurriculumFilterBar). */}

@@ -64,7 +64,16 @@ comments carry the same hex, and `pnpm check:contrast` fails if they drift).
 | `border` / `border-strong` | `#F1E2D6` / `#E3CDBC` | `#3A3029` / `#4A3E35` | dividers / stronger dividers |
 | `input` | `#FFFFFF` | `#2D2620` | input fill |
 | `ring` | `#0F8A70` | `#2DD4AE` | teal focus ring |
-| `signal-1..4` | unchanged | unchanged | assessment levels (orange, yellow, light green, dark green). Carries meaning: never retune for the palette |
+| `success` / `success-tint` | `#166534` / `#DCFCE7` | `#4ADE80` / `#14301F` | status: "added", "saved". Text on `success-tint` uses `success` |
+| `signal-1..4` | unchanged | unchanged | assessment levels (orange, yellow, light green, dark green). Carries meaning: never retune for the palette. Student-readiness levels use these too (`READINESS_TOKENS` in `ui/readiness-pill.tsx`) |
+
+**Subject colours.** `--subject-math`, `-science`, `-fsl`, `-language`, `-social`,
+`-health`, `-arts`, `-history`, `-geography`, plus `--subject-foreground` for text
+on a subject fill (white in light mode, dark in dark mode). One value per subject
+does every job: fill (`bg-subject-math text-subject-foreground`), label text
+(`text-subject-math`), and tint at low opacity (`bg-subject-math/10`,
+`border-subject-math/40`). Cards get their subject classes from
+`getSubjectTheme()` in `src/lib/subject-theme.ts`; don't build a second map.
 
 `--radius: 0.875rem`.
 
@@ -73,7 +82,7 @@ that sits on that fill (`primary-foreground`), a soft background (`primary-tint`
 and, for text in that hue on a light surface, a `-strong` variant. So:
 
 - Text on a `*-tint` or on `muted` uses the family's `-strong` (`bg-primary-tint text-primary-strong`), or `text-foreground`. Never `text-primary`, `text-secondary` or `text-pop` there: they fail AA.
-- `text-secondary` and `text-pop` are never text colours; use `text-secondary-strong` / `text-pop-strong`.
+- `text-secondary` and `text-pop` are never colours for text; use `text-secondary-strong` / `text-pop-strong`. They are fine on a decorative icon that sits beside its own label (the modality icons do this).
 - Goldenrod is **pop only**. Never use it for body text, and never let a goldenrod dot be the only thing that carries meaning (it is 1.6:1 on the light background).
 - Borders are decorative (about 1.3:1). An input or control that needs a visible boundary must get it from something else (`border-strong` plus a fill, or the focus ring).
 
@@ -89,9 +98,16 @@ the System / Light / Dark setting lands with the theme switcher
 **Rule:** never hardcode hex values in components. Always reference via Tailwind
 utilities backed by `@theme inline` (e.g. `bg-primary`, `text-muted-foreground`,
 `border-border`). `bg-white` and `text-black` count as hardcoded: they break dark
-mode, so use `bg-card` and `text-foreground`. Hundreds of legacy arbitrary hex
-values (`text-[#8B4513]` and friends) still exist; they are being replaced in the
-hex-cleanup pass (`REDESIGN_HANDOFF.md` §3). Don't add more, and don't copy them.
+mode, so use `bg-card` and `text-foreground`. Inline styles follow the same rule:
+`style={{ color: "var(--subject-math)" }}`, never a hex string. `grep -rnE
+"\[#[0-9A-Fa-f]{3,8}\]" src` must stay empty. The only hex left in `src/` is in
+export code that renders outside the app's CSS (`lesson-planner/lesson-export.ts`,
+the print `<style>` in `artifact-organizer-modal.tsx`, the jsPDF constants in
+`lib/student-activity-pdf.ts`).
+
+Tailwind's built-in palette (`text-emerald-700`, `bg-amber-500`, `stone-*` and so
+on) counts as hardcoded too: it doesn't follow dark mode. About 350 uses remain
+and are being swept separately; don't add more.
 
 ### Type stack
 

@@ -33,12 +33,12 @@ export default function ArtifactsSection({ artifacts, onStatusChange, onOpenOrga
   const untriaged = artifacts.filter((a) => a.status === "unset").length
 
   return (
-    <div className="bg-white rounded-xl border-l-4 border-amber-500 shadow-sm overflow-hidden">
+    <div className="bg-card rounded-xl border-l-4 border-amber-500 shadow-sm overflow-hidden">
       <div className="p-5">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
             <ClipboardCheck size={20} className="text-amber-600" />
-            <h4 className="text-lg font-semibold text-[#2C2C2C]">Classroom Artifacts</h4>
+            <h4 className="text-lg font-semibold text-foreground">Classroom Artifacts</h4>
             <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">
               {untriaged > 0 ? `${untriaged} to decide` : "All set"}
             </span>
@@ -57,7 +57,7 @@ export default function ArtifactsSection({ artifacts, onStatusChange, onOpenOrga
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-semibold text-[#2C2C2C]">{artifact.name}</span>
+                    <span className="text-sm font-semibold text-foreground">{artifact.name}</span>
                     <span
                       className={`text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded ${SECTION_BADGE[artifact.section]}`}
                     >
@@ -65,7 +65,7 @@ export default function ArtifactsSection({ artifacts, onStatusChange, onOpenOrga
                     </span>
                   </div>
                   {artifact.purpose && (
-                    <p className="text-xs text-[#555] mt-1 leading-relaxed">{artifact.purpose}</p>
+                    <p className="text-xs text-foreground mt-1 leading-relaxed">{artifact.purpose}</p>
                   )}
                 </div>
               </div>
@@ -86,7 +86,7 @@ export default function ArtifactsSection({ artifacts, onStatusChange, onOpenOrga
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                         selected
                           ? "bg-amber-500 border-amber-500 text-white"
-                          : "bg-white border-stone-300 text-stone-700 hover:border-amber-400 hover:text-amber-700"
+                          : "bg-card border-stone-300 text-stone-700 hover:border-amber-400 hover:text-amber-700"
                       }`}
                       aria-pressed={selected}
                     >

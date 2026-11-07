@@ -38,16 +38,16 @@ export default function MaterialsEditorModal({ isOpen, onClose, onSaved }: Mater
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => { if (!open) onClose() }}>
-      <SheetContent side="top" className="bg-[#FAF3E0] border-b-2 border-[#E8D5C4] max-h-[85vh] overflow-y-auto z-[70]">
-        <SheetHeader className="pb-3 border-b border-[#E8D5C4]">
-          <SheetTitle className="text-xl font-bold text-[#2C2C2C] flex items-center gap-2">
-            <School size={18} className="text-[#8B4513]" />
+      <SheetContent side="top" className="bg-muted border-b-2 border-border max-h-[85vh] overflow-y-auto z-[70]">
+        <SheetHeader className="pb-3 border-b border-border">
+          <SheetTitle className="text-xl font-bold text-foreground flex items-center gap-2">
+            <School size={18} className="text-foreground" />
             My Classroom Materials
           </SheetTitle>
         </SheetHeader>
 
         <div className="p-4 space-y-5">
-          <p className="text-xs text-[#888]">
+          <p className="text-xs text-muted-foreground">
             Edits here update your classroom materials immediately. Closing this panel keeps you in the lesson planner — your planning progress isn't lost.
           </p>
           <ClassroomResourcesPicker
@@ -57,16 +57,16 @@ export default function MaterialsEditorModal({ isOpen, onClose, onSaved }: Mater
             onCustomChange={setCustom}
           />
 
-          <div className="flex justify-end gap-2 border-t border-[#E8D5C4] pt-4">
+          <div className="flex justify-end gap-2 border-t border-border pt-4">
             <button
               onClick={onClose}
-              className="px-4 py-2 bg-white border-2 border-[#E8D5C4] text-[#8B4513] text-sm font-semibold rounded-xl hover:bg-[#FFF5ED] transition-colors"
+              className="px-4 py-2 bg-card border-2 border-border text-secondary-strong text-sm font-semibold rounded-xl hover:bg-accent transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-2 bg-[#8B4513] hover:bg-[#6B3410] text-white text-sm font-semibold rounded-xl transition-colors"
+              className="px-6 py-2 bg-primary hover:bg-primary-hover text-primary-foreground text-sm font-semibold rounded-xl transition-colors"
             >
               Save
             </button>

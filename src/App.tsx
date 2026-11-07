@@ -141,7 +141,7 @@ export default function App() {
       : null
 
   return (
-    <div className="fixed inset-0 bg-[#FAF3E0] overflow-hidden flex flex-col">
+    <div className="fixed inset-0 bg-background overflow-hidden flex flex-col">
       <TopNav
         activeSpace={topNavSpace}
         isHome={activeSpace === "home"}
@@ -234,16 +234,16 @@ export default function App() {
               )}
 
               {activeSpace === "assessment" && !assessmentLesson && (
-                <div className="absolute inset-0 z-[60] bg-white flex flex-col items-center justify-center gap-4 p-8 text-center">
-                  <p className="text-lg font-semibold text-[#2C2C2C]">No lesson plan yet</p>
-                  <p className="text-sm text-[#888]">Generate a lesson plan first to unlock quick checks.</p>
+                <div className="absolute inset-0 z-[60] bg-card flex flex-col items-center justify-center gap-4 p-8 text-center">
+                  <p className="text-lg font-semibold text-foreground">No lesson plan yet</p>
+                  <p className="text-sm text-muted-foreground">Generate a lesson plan first to unlock quick checks.</p>
                   <button
                     onClick={() => openPlanner(plannerLesson)}
-                    className="px-5 py-2.5 bg-[#FF6B35] text-white font-semibold rounded-xl text-sm hover:bg-[#E85A24] transition-colors"
+                    className="px-5 py-2.5 bg-primary text-primary-foreground font-semibold rounded-xl text-sm hover:bg-primary-hover transition-colors"
                   >
                     Open Lesson Planner
                   </button>
-                  <button onClick={goResources} className="text-sm text-[#888] underline">Back to resources</button>
+                  <button onClick={goResources} className="text-sm text-muted-foreground underline">Back to resources</button>
                 </div>
               )}
 

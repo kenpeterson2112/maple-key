@@ -27,6 +27,7 @@ import { withBasePath } from "@/lib/base-path"
 import { type LevelCounts } from "@/lib/assessment-results"
 import { ReadinessPillRow } from "@/components/ui/readiness-pill"
 import type { Resource } from "@/lib/types"
+import { getSubjectTheme } from "@/lib/subject-theme"
 
 // Tips affordance — keeps usage_notes prose off the card face but rewards the
 // hover/tap with the full note. Same hover-into-panel pattern as the pill.
@@ -86,41 +87,19 @@ function TipsPopover({ notes }: { notes: string }) {
   )
 }
 
-// ── Subject-based card theme ───────────────────────────────────────────────
-// Subject palette stays on hex for now — there are no per-subject tokens in
-// :root (logged as remaining design-system debt in the handoff). Only `dot`
-// (accent bar) and `badge` (View button) are used on the card today.
-function getSubjectTheme(subject: string) {
-  const s = (subject || "").toLowerCase()
-  if (s.includes("math"))
-    return { dot: "bg-[#166534]", badge: "bg-gradient-to-r from-[#166534] to-[#14532D] text-white" }
-  if (s.includes("science"))
-    return { dot: "bg-[#1E40AF]", badge: "bg-gradient-to-r from-[#1E3A8A] to-[#1E293B] text-white" }
-  if (s.includes("fsl"))
-    return { dot: "bg-[#0D9488]", badge: "bg-gradient-to-r from-[#0D9488] to-[#0F766E] text-white" }
-  if (s.includes("language") || s.includes("english") || s.includes("french") || s.includes("literacy"))
-    return { dot: "bg-[#CA8A04]", badge: "bg-gradient-to-r from-[#CA8A04] to-[#A16207] text-white" }
-  if (s.includes("social") || s.includes("history") || s.includes("geo"))
-    return { dot: "bg-[#7C3AED]", badge: "bg-gradient-to-r from-[#7C3AED] to-[#6D28D9] text-white" }
-  if (s.includes("health") || s.includes("physical"))
-    return { dot: "bg-[#EA580C]", badge: "bg-gradient-to-r from-[#EA580C] to-[#C2410C] text-white" }
-  if (s.includes("art") || s.includes("music") || s.includes("drama") || s.includes("dance"))
-    return { dot: "bg-[#A21CAF]", badge: "bg-gradient-to-r from-[#A21CAF] to-[#86198F] text-white" }
-  return { dot: "bg-[#FF6B35]", badge: "bg-gradient-to-r from-[#FF6B35] to-[#C65D3B] text-white" }
-}
-
 // ── Primary modality icon ──────────────────────────────────────────────────
+// Decorative: the modality label sits beside it, so goldenrod is fine here.
 function getPrimaryIcon(modality: string) {
   const m = (modality || "").toLowerCase()
-  if (m.includes("interactive")) return { Icon: MousePointerClick, color: "#849657" }
-  if (m.includes("video") || m.includes("film")) return { Icon: Video, color: "#FFC107" }
-  if (m.includes("book") || m.includes("print")) return { Icon: BookOpen, color: "#D9742A" }
-  if (m.includes("audio") || m.includes("podcast")) return { Icon: Headphones, color: "#FFC107" }
-  if (m.includes("trip") || m.includes("field")) return { Icon: MapPin, color: "#4CAFB5" }
-  if (m.includes("guest") || m.includes("speaker") || m.includes("workshop")) return { Icon: Users, color: "#849657" }
-  if (m.includes("project")) return { Icon: Hammer, color: "#D9742A" }
-  if (m.includes("podcast")) return { Icon: Mic, color: "#849657" }
-  return { Icon: Globe, color: "#4CAFB5" }
+  if (m.includes("interactive")) return { Icon: MousePointerClick, className: "text-secondary-strong" }
+  if (m.includes("video") || m.includes("film")) return { Icon: Video, className: "text-pop" }
+  if (m.includes("book") || m.includes("print")) return { Icon: BookOpen, className: "text-primary" }
+  if (m.includes("audio") || m.includes("podcast")) return { Icon: Headphones, className: "text-pop" }
+  if (m.includes("trip") || m.includes("field")) return { Icon: MapPin, className: "text-secondary" }
+  if (m.includes("guest") || m.includes("speaker") || m.includes("workshop")) return { Icon: Users, className: "text-secondary-strong" }
+  if (m.includes("project")) return { Icon: Hammer, className: "text-primary" }
+  if (m.includes("podcast")) return { Icon: Mic, className: "text-secondary-strong" }
+  return { Icon: Globe, className: "text-secondary" }
 }
 
 // ── Accessibility indicator ────────────────────────────────────────────────
@@ -187,7 +166,7 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
   const contextParts = [gradeRange, subject, strandStr].filter(Boolean) as string[]
 
   const primaryModality = resource.modality?.[0]
-  const { Icon: ModalityIcon, color: iconColor } = getPrimaryIcon(
+  const { Icon: ModalityIcon, className: iconClass } = getPrimaryIcon(
     Array.isArray(resource.modality) ? resource.modality.join(", ") : (resource.modality ?? ""),
   )
   const accessLevel = getAccessibilityStyle(resource.accessibility)
@@ -264,7 +243,7 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
           <div className="mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 border-t border-border/60 pt-2.5">
             {primaryModality && (
               <span className="flex items-center gap-1 text-[11px] font-medium text-foreground/80">
-                <ModalityIcon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: iconColor }} />
+                <ModalityIcon className={`w-3.5 h-3.5 flex-shrink-0 ${iconClass}`} />
                 {primaryModality}
               </span>
             )}

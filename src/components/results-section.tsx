@@ -85,9 +85,9 @@ export default function ResultsSection({
   if (error) {
     return (
       <div className="w-full px-8 py-6">
-        <div className="rounded-2xl border border-[#E8D5C4] bg-white py-12 text-center shadow-md">
+        <div className="rounded-2xl border border-border bg-card py-12 text-center shadow-md">
           <p className="text-lg font-semibold text-red-600">Failed to load resources</p>
-          <p className="mt-2 text-[#A8998E]">Please refresh the page to try again.</p>
+          <p className="mt-2 text-muted-foreground">Please refresh the page to try again.</p>
         </div>
       </div>
     )
@@ -100,7 +100,7 @@ export default function ResultsSection({
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
-              className="h-32 animate-pulse rounded-2xl border border-[#E8D5C4] bg-white/60"
+              className="h-32 animate-pulse rounded-2xl border border-border bg-card/60"
             />
           ))}
         </div>
@@ -113,37 +113,37 @@ export default function ResultsSection({
       {/* Search bar + count + per-page dropdown — all on one sticky row */}
       <div className="flex-shrink-0 px-3 md:px-6 pt-3 md:pt-4 pb-2 flex items-center gap-3">
         <div className="relative flex-1 min-w-0 max-w-md">
-          <div className="relative flex items-center rounded-xl border border-[#E8D5C4] bg-white px-3 py-2 shadow-sm transition-colors focus-within:border-[#FF6B35]">
-            <Search size={16} className="mr-2 flex-shrink-0 text-[#A8998E]" />
+          <div className="relative flex items-center rounded-xl border border-border bg-card px-3 py-2 shadow-sm transition-colors focus-within:border-ring">
+            <Search size={16} className="mr-2 flex-shrink-0 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search within results…"
               value={searchQuery}
               onChange={handleSearchChange}
-              className="min-w-0 flex-1 bg-transparent text-sm text-[#2C2C2C] placeholder-[#A8998E] outline-none"
+              className="min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder-muted-foreground outline-none"
             />
             {searchQuery.length > 0 && (
               <button
                 onClick={handleClearSearch}
-                className="rounded-full p-0.5 transition-colors hover:bg-[#FFE5CC]"
+                className="rounded-full p-0.5 transition-colors hover:bg-primary-tint"
                 title="Clear search"
               >
-                <X size={14} className="text-[#A8998E]" />
+                <X size={14} className="text-muted-foreground" />
               </button>
             )}
             {isSearching && searchQuery.length >= 3 && (
-              <span className="ml-2 text-xs font-medium text-[#FF6B35]">Searching…</span>
+              <span className="ml-2 text-xs font-medium text-primary">Searching…</span>
             )}
           </div>
           {searchQuery.length > 0 && searchQuery.length < 3 && (
-            <p className="absolute left-0 top-full mt-1 rounded border border-[#E8D5C4] bg-white px-2 py-0.5 text-xs text-[#A8998E] shadow-sm z-10">
+            <p className="absolute left-0 top-full mt-1 rounded border border-border bg-card px-2 py-0.5 text-xs text-muted-foreground shadow-sm z-10">
               Type at least 3 characters to search
             </p>
           )}
         </div>
 
         {sortedResources.length > 0 && (
-          <div className="flex flex-shrink-0 items-center gap-2 text-xs text-[#888]">
+          <div className="flex flex-shrink-0 items-center gap-2 text-xs text-muted-foreground">
             <span className="hidden sm:inline whitespace-nowrap">
               Showing {showingFrom}–{showingTo} of {sortedResources.length} results
             </span>
@@ -153,7 +153,7 @@ export default function ResultsSection({
               <select
                 value={pageSize}
                 onChange={(e) => { setPageSize(Number(e.target.value)); setPage(1) }}
-                className="rounded-lg border border-[#E8D5C4] bg-white px-2 py-1 text-xs text-[#666] cursor-pointer hover:border-[#FF6B35]/50 transition-colors"
+                className="rounded-lg border border-border bg-card px-2 py-1 text-xs text-muted-foreground cursor-pointer hover:border-primary/50 transition-colors"
               >
                 <option value={10}>10</option>
                 <option value={25}>25</option>
@@ -185,13 +185,13 @@ export default function ResultsSection({
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mx-auto mt-6 max-w-md rounded-2xl border-2 border-dashed border-[#E8D5C4] bg-white/60 p-8 text-center"
+            className="mx-auto mt-6 max-w-md rounded-2xl border-2 border-dashed border-border bg-card/60 p-8 text-center"
           >
-            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#FFE5CC]">
-              <Compass size={22} className="text-[#C65D3B]" />
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary-tint">
+              <Compass size={22} className="text-primary-strong" />
             </div>
-            <p className="text-base font-semibold text-[#2C2C2C]">No matches yet — try widening your search.</p>
-            <p className="mt-1 text-sm text-[#8B4513]/70">
+            <p className="text-base font-semibold text-foreground">No matches yet — try widening your search.</p>
+            <p className="mt-1 text-sm text-muted-foreground">
               Drop a filter above, switch to a different grade, or clear the search box.
             </p>
           </motion.div>
@@ -226,17 +226,17 @@ export default function ResultsSection({
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-3 py-1.5 rounded-lg border border-[#E8D5C4] text-sm text-[#666] hover:bg-[#FAF3E0] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="px-3 py-1.5 rounded-lg border border-border text-sm text-muted-foreground hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               ← Prev
             </button>
-            <span className="text-sm text-[#888]">
+            <span className="text-sm text-muted-foreground">
               Page {page} of {totalPages}
             </span>
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              className="px-3 py-1.5 rounded-lg border border-[#E8D5C4] text-sm text-[#666] hover:bg-[#FAF3E0] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="px-3 py-1.5 rounded-lg border border-border text-sm text-muted-foreground hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               Next →
             </button>
@@ -244,13 +244,13 @@ export default function ResultsSection({
         )}
 
         <div className="mt-8 mb-4 flex justify-center">
-          <div className="mx-3 max-w-md rounded-2xl border-2 border-[#E8D5C4] bg-white p-4 text-center shadow-sm md:p-6">
-            <p className="mb-3 text-sm font-medium text-[#2C2C2C] md:mb-4 md:text-base">
+          <div className="mx-3 max-w-md rounded-2xl border-2 border-border bg-card p-4 text-center shadow-sm md:p-6">
+            <p className="mb-3 text-sm font-medium text-foreground md:mb-4 md:text-base">
               Couldn't find a resource? Know of a good one?
             </p>
             <button
               onClick={() => setShowSubmitDialog(true)}
-              className="mx-auto flex min-h-[44px] items-center gap-2 rounded-xl bg-gradient-to-r from-[#FF6B35] to-[#F4845F] px-5 py-2 text-sm font-medium text-white transition-all duration-200 hover:from-[#E85A24] hover:to-[#E37350] md:px-6 md:text-base"
+              className="mx-auto flex min-h-[44px] items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-all duration-200 hover:from-primary-hover hover:to-primary-hover md:px-6 md:text-base"
             >
               <Plus size={18} />
               Submit Resource
@@ -261,7 +261,7 @@ export default function ResultsSection({
 
       {showSubmitDialog && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+          <div className="relative mx-4 w-full max-w-md rounded-2xl bg-card p-6 shadow-2xl">
             <button
               onClick={() => setShowSubmitDialog(false)}
               className="absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-stone-100"
@@ -269,7 +269,7 @@ export default function ResultsSection({
               <X size={20} className="text-stone-600" />
             </button>
             <div className="pt-2 text-center">
-              <p className="text-base leading-relaxed text-[#2C2C2C]">
+              <p className="text-base leading-relaxed text-foreground">
                 This is where you would usually submit a great resource for other teachers to use but we aren't
                 accepting submissions at this time. Come back later!
               </p>

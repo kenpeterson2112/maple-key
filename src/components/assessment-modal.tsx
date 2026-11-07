@@ -236,7 +236,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
     <div
       className={
         asSpace
-          ? "fixed inset-0 z-[60] bg-white flex flex-col overflow-hidden"
+          ? "fixed inset-0 z-[60] bg-card flex flex-col overflow-hidden"
           : "fixed inset-0 z-[60] flex items-center justify-center p-4"
       }
     >
@@ -245,21 +245,21 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         className={
           asSpace
             ? "w-full h-full flex flex-col overflow-hidden"
-            : "relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
+            : "relative bg-card rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
         }
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8D5C4] bg-[#FAF3E0]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-muted">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center">
               <ClipboardCheck size={18} className="text-amber-600" />
             </div>
             <div>
-              <h2 className="font-bold text-[#2C2C2C] text-base">Quick Check</h2>
-              <p className="text-xs text-[#888] leading-tight">{lesson.title}</p>
+              <h2 className="font-bold text-foreground text-base">Quick Check</h2>
+              <p className="text-xs text-muted-foreground leading-tight">{lesson.title}</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-[#E8D5C4] rounded-lg transition-colors text-[#666]">
+          <button onClick={onClose} className="p-2 hover:bg-border rounded-lg transition-colors text-muted-foreground">
             <X size={18} />
           </button>
         </div>
@@ -279,8 +279,8 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
           {phase === "loading" && (
             <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
               <Loader2 size={28} className="animate-spin text-amber-500" />
-              <p className="text-sm font-medium text-[#2C2C2C]">Building your quick check…</p>
-              <p className="text-xs text-[#888]">Tailoring questions to this lesson.</p>
+              <p className="text-sm font-medium text-foreground">Building your quick check…</p>
+              <p className="text-xs text-muted-foreground">Tailoring questions to this lesson.</p>
             </div>
           )}
 
@@ -292,8 +292,8 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
                     <CheckCircle size={24} className="text-emerald-600" />
                   </div>
-                  <p className="font-semibold text-[#2C2C2C]">All done!</p>
-                  <p className="text-sm text-[#888]">Use the button below to record this student's results.</p>
+                  <p className="font-semibold text-foreground">All done!</p>
+                  <p className="text-sm text-muted-foreground">Use the button below to record this student's results.</p>
                   <button
                     onClick={handleBack}
                     className="text-xs text-amber-600 hover:text-amber-800 font-medium transition-colors"
@@ -316,12 +316,12 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                       {currentQuestionIndex > 0 && (
                         <button
                           onClick={handleBack}
-                          className="text-xs text-[#888] hover:text-amber-700 font-medium transition-colors"
+                          className="text-xs text-muted-foreground hover:text-amber-700 font-medium transition-colors"
                         >
                           ← Back
                         </button>
                       )}
-                      <span className="text-xs text-[#888]">
+                      <span className="text-xs text-muted-foreground">
                         Question {currentQuestionIndex + 1} of {totalCount}
                       </span>
                     </div>
@@ -392,20 +392,20 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <BarChart3 size={16} className="text-amber-600" />
-                  <span className="text-sm font-semibold text-[#2C2C2C]">Class results</span>
+                  <span className="text-sm font-semibold text-foreground">Class results</span>
                 </div>
                 <DevSeedControl scope={{ kind: "lesson", lesson }} onChanged={() => setRecordedCount((n) => n + 1)} />
               </div>
-              <div className="inline-flex rounded-lg border border-[#E8D5C4] bg-white p-0.5 text-xs font-medium">
+              <div className="inline-flex rounded-lg border border-border bg-card p-0.5 text-xs font-medium">
                 <button
                   onClick={() => setDashView("lesson")}
-                  className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "lesson" ? "bg-[#FF6B35] text-white" : "text-[#666] hover:bg-[#FAF3E0]"}`}
+                  className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "lesson" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}
                 >
                   This lesson
                 </button>
                 <button
                   onClick={() => setDashView("all")}
-                  className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "all" ? "bg-[#FF6B35] text-white" : "text-[#666] hover:bg-[#FAF3E0]"}`}
+                  className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "all" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}
                 >
                   Grade {lesson.grade} {lesson.subject}
                 </button>
@@ -416,12 +416,12 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         </div>
 
         {/* Footer */}
-        <div className="border-t border-[#E8D5C4] bg-[#FAF3E0]">
+        <div className="border-t border-border bg-muted">
           {/* Group response picker — expands when "Group" is active */}
           {phase === "administer" && showGroupPicker && (
             <div className="px-6 pt-4 pb-2">
-              <div className="rounded-xl border border-[#E8D5C4] bg-white p-3">
-                <p className="mb-2 text-xs font-semibold text-[#2C2C2C]">
+              <div className="rounded-xl border border-border bg-card p-3">
+                <p className="mb-2 text-xs font-semibold text-foreground">
                   How many students gave these same answers?
                 </p>
                 <div className="flex flex-wrap items-center gap-2">
@@ -431,8 +431,8 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                       onClick={() => { setGroupSelection(n); setGroupOther("") }}
                       className={`rounded-lg border px-3 py-1.5 text-sm font-semibold transition-colors ${
                         groupSelection === n && !groupOther
-                          ? "border-[#2C2C2C] bg-[#2C2C2C] text-white"
-                          : "border-[#E8D5C4] text-[#666] hover:bg-[#FAF3E0]"
+                          ? "border-foreground bg-foreground text-background"
+                          : "border-border text-muted-foreground hover:bg-muted"
                       }`}
                     >
                       {n}
@@ -445,20 +445,20 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                     placeholder={`Other (max ${MAX_GROUP_SIZE})`}
                     value={groupOther}
                     onChange={(e) => { setGroupOther(e.target.value); setGroupSelection(null) }}
-                    className="w-36 rounded-lg border border-[#E8D5C4] bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-300"
+                    className="w-36 rounded-lg border border-border bg-card px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-300"
                   />
                 </div>
                 <div className="mt-3 flex items-center gap-2">
                   <button
                     onClick={() => handleRecord(getGroupCount())}
                     disabled={!isGroupCountValid()}
-                    className="rounded-lg bg-[#FF6B35] px-4 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#e55a2a] disabled:cursor-not-allowed disabled:opacity-40"
+                    className="rounded-lg bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     Record {isGroupCountValid() ? getGroupCount() : ""} students
                   </button>
                   <button
                     onClick={() => { setShowGroupPicker(false); resetGroupPicker() }}
-                    className="px-3 py-1.5 text-xs text-[#888] hover:text-[#666]"
+                    className="px-3 py-1.5 text-xs text-muted-foreground hover:text-muted-foreground"
                   >
                     Cancel
                   </button>
@@ -471,19 +471,19 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
           <div className="flex items-center justify-between gap-3 px-6 py-4">
             {phase === "dashboard" ? (
               <>
-                <span className="text-sm text-[#888]">
+                <span className="text-sm text-muted-foreground">
                   {dashboardData ? `${dashboardData.attempts} ${dashboardData.attempts === 1 ? "response" : "responses"} recorded` : ""}
                 </span>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={onClose}
-                    className="rounded-xl border border-[#E8D5C4] px-4 py-2 text-sm font-semibold text-[#666] transition-colors hover:bg-white"
+                    className="rounded-xl border border-border px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-card"
                   >
                     Done
                   </button>
                   <button
                     onClick={goAdminister}
-                    className="rounded-xl bg-[#FF6B35] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e55a2a]"
+                    className="rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
                   >
                     Record another student
                   </button>
@@ -491,7 +491,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
               </>
             ) : (
               <>
-                <span className="text-sm text-[#888]">
+                <span className="text-sm text-muted-foreground">
                   {answeredCount} of {totalCount} answered
                   {recordedCount > 0 && ` · ${recordedCount} ${recordedCount === 1 ? "response" : "responses"} recorded`}
                 </span>
@@ -499,7 +499,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   <button
                     onClick={() => setPhase("dashboard")}
                     disabled={phase === "loading"}
-                    className="rounded-xl border border-[#E8D5C4] px-4 py-2 text-sm font-semibold text-[#666] transition-colors hover:bg-white disabled:opacity-50"
+                    className="rounded-xl border border-border px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-card disabled:opacity-50"
                   >
                     View results
                   </button>
@@ -508,8 +508,8 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                     disabled={!canRecord}
                     className={`rounded-xl border px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
                       showGroupPicker
-                        ? "border-[#2C2C2C] bg-[#2C2C2C] text-white"
-                        : "border-[#E8D5C4] text-[#666] hover:bg-white"
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border text-muted-foreground hover:bg-card"
                     }`}
                   >
                     Group
@@ -517,7 +517,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   <button
                     onClick={() => handleRecord(1)}
                     disabled={!canRecord}
-                    className="rounded-xl bg-[#FF6B35] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e55a2a] disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Record &amp; next
                   </button>
@@ -537,7 +537,7 @@ function CodeHeader({ code, subject, grade }: { code: string | null; subject: st
   return (
     <div className="flex items-center gap-2 mb-2">
       <span className="text-xs font-bold bg-stone-100 text-stone-700 px-2 py-0.5 rounded-full">{code}</span>
-      {description && <span className="text-xs text-[#888] line-clamp-1">{description}</span>}
+      {description && <span className="text-xs text-muted-foreground line-clamp-1">{description}</span>}
     </div>
   )
 }
@@ -545,8 +545,8 @@ function CodeHeader({ code, subject, grade }: { code: string | null; subject: st
 function Prompt({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-2 mb-3">
-      <HelpCircle size={16} className="text-[#A8998E] flex-shrink-0 mt-0.5" />
-      <p className="text-sm text-[#2C2C2C]">{text}</p>
+      <HelpCircle size={16} className="text-muted-foreground flex-shrink-0 mt-0.5" />
+      <p className="text-sm text-foreground">{text}</p>
     </div>
   )
 }
@@ -555,7 +555,7 @@ function Explanation({ text }: { text: string }) {
   return (
     <div className="mt-3 flex items-start gap-2 rounded-lg bg-stone-50 border border-stone-200 px-3 py-2">
       <Info size={14} className="text-stone-400 flex-shrink-0 mt-0.5" />
-      <p className="text-xs text-[#666]">{text}</p>
+      <p className="text-xs text-muted-foreground">{text}</p>
     </div>
   )
 }
@@ -575,18 +575,18 @@ function MultipleChoiceCard({
 }) {
   const answered = answer?.selectedIndex !== undefined
   return (
-    <div className="rounded-xl border-2 border-[#E8D5C4] bg-white p-4">
+    <div className="rounded-xl border-2 border-border bg-card p-4">
       <CodeHeader code={q.code} subject={subject} grade={grade} />
       <Prompt text={q.prompt} />
       <div className="space-y-2">
         {q.options.map((opt, i) => {
           const isSelected = answer?.selectedIndex === i
           const isCorrect = i === q.correctIndex
-          let cls = "border-[#E8D5C4] bg-white hover:bg-[#FAF3E0] text-[#2C2C2C]"
+          let cls = "border-border bg-card hover:bg-muted text-foreground"
           if (answered) {
             if (isCorrect) cls = "border-emerald-400 bg-emerald-50 text-emerald-800"
             else if (isSelected) cls = "border-red-300 bg-red-50 text-red-700"
-            else cls = "border-[#E8D5C4] bg-white text-[#999]"
+            else cls = "border-border bg-card text-muted-foreground"
           }
           return (
             <button
@@ -622,18 +622,18 @@ function TrueFalseCard({
 }) {
   const answered = answer?.selectedBool !== undefined
   return (
-    <div className="rounded-xl border-2 border-[#E8D5C4] bg-white p-4">
+    <div className="rounded-xl border-2 border-border bg-card p-4">
       <CodeHeader code={q.code} subject={subject} grade={grade} />
       <Prompt text={q.prompt} />
       <div className="flex gap-2">
         {[true, false].map((val) => {
           const isSelected = answer?.selectedBool === val
           const isCorrect = val === q.correct
-          let cls = "border-[#E8D5C4] bg-white hover:bg-[#FAF3E0] text-[#2C2C2C]"
+          let cls = "border-border bg-card hover:bg-muted text-foreground"
           if (answered) {
             if (isCorrect) cls = "border-emerald-400 bg-emerald-50 text-emerald-800"
             else if (isSelected) cls = "border-red-300 bg-red-50 text-red-700"
-            else cls = "border-[#E8D5C4] bg-white text-[#999]"
+            else cls = "border-border bg-card text-muted-foreground"
           }
           return (
             <button
@@ -676,7 +676,7 @@ function SelfRatingCard({
           ? "border-emerald-300 bg-emerald-50"
           : state === "working-on-it"
             ? "border-amber-300 bg-amber-50"
-            : "border-[#E8D5C4] bg-white"
+            : "border-border bg-card"
       }`}
     >
       <CodeHeader code={code} subject={subject} grade={grade} />

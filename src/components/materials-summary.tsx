@@ -38,10 +38,10 @@ export default function MaterialsSummary({ snapshot, onEdit, size = "md" }: Mate
               className={`flex items-center gap-3 rounded-lg ${rowPad}`}
             >
               <span className={`${dotSize} rounded-full flex-shrink-0 ${dot} ${empty ? "opacity-30" : ""}`} />
-              <span className={`${labelText} flex-1 ${empty ? "text-[#A8998E]" : "text-[#2C2C2C]"}`}>
+              <span className={`${labelText} flex-1 ${empty ? "text-muted-foreground" : "text-foreground"}`}>
                 {cat.label}
               </span>
-              <span className={`${countText} ${empty ? "text-[#C8B8AA]" : "text-[#8B4513]"}`}>
+              <span className={`${countText} ${empty ? "text-muted-foreground" : "text-foreground"}`}>
                 {cat.items.length}
               </span>
             </div>
@@ -51,7 +51,7 @@ export default function MaterialsSummary({ snapshot, onEdit, size = "md" }: Mate
       {onEdit && (
         <button
           onClick={onEdit}
-          className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FFF5ED] hover:bg-[#FFE5CC] px-3 py-2 text-sm font-semibold text-[#8B4513] transition-colors"
+          className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg bg-muted hover:bg-primary-tint px-3 py-2 text-sm font-semibold text-secondary-strong transition-colors"
         >
           <Pencil size={14} />
           Edit materials
