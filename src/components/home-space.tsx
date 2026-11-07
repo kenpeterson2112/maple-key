@@ -98,11 +98,7 @@ export default function HomeSpace({
             <span className="text-xs font-semibold uppercase tracking-widest">Maple Key</span>
           </div>
 
-          {/* Letters and spaces only — the licensed Alteix Sans file is a DEMO
-              cut whose digits and punctuation are all replaced by the foundry's
-              watermark glyph. Any comma, hyphen, period or numeral here renders
-              as "pedroteixeirafoundry.com". See CLAUDE.md → Type stack. */}
-          <h1 className="font-display text-3xl md:text-5xl leading-tight tracking-tight text-foreground">
+          <h1 className="font-display text-3xl font-semibold md:text-5xl leading-tight tracking-tight text-foreground">
             Plan the lesson
             <br className="hidden sm:block" /> your class actually needs
           </h1>
