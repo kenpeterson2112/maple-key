@@ -30,6 +30,7 @@
       "usage_notes",
       "pedagogical_function",
       "estimated_minutes",
+      "granularity",
       "is_collection",
       "suppressed",
       "decomposed",
@@ -128,6 +129,8 @@
       "assessment",
       "extension"
     ],
+    "$comment_granularity": "How much of a teacher's search a resource has already done, judged from the page the URL opens (not the publisher). activity: one thing students do in a single sitting (a simulation, game, video, interactive, worksheet, problem set, article). lesson: a teacher-facing plan for one lesson, with its materials. unit: a bounded set on ONE topic or overall expectation (a unit plan, a short series, a one-topic playlist or workbook) whose contents are visible on the page. collection: an index, hub, course, library or site front page spanning several topics, where the teacher still has to find the thing to use. tool: an open-ended tool or data source with no lesson content of its own (a graphing calculator, map viewer, data portal, writing platform). reference: background for the teacher rather than something to teach with (curriculum documents, encyclopedia articles, PD frameworks). When torn between two, choose the broader. Written by the enrichment routine from the fetched page and by the refresh routine's review stage; see intake for the gate on new records.",
+    "granularity": ["activity", "lesson", "unit", "collection", "tool", "reference"],
     "$comment_link_status": "Union of the link-check ledger vocabulary (scripts/link-check.py) and the enrichment verdicts (scripts/enrich-resources.py). The dead/dead_domain vs error/blocked split is load-bearing: 'the site said so' must never collapse into 'our request failed' — a denied egress proxy once recorded 580 live URLs as blocked. Advisory only; nothing is auto-suppressed on a link verdict.",
     "link_status": [
       "live",
@@ -148,6 +151,12 @@
       "QC": "quebec",
       "SK": "saskatchewan"
     }
+  },
+
+  "intake": {
+    "$comment": "The gate on new records, enforced by scripts/validate-resources.py in CI. Most of the catalog is hubs, courses and front pages tagged as if they taught one expectation, which hands a teacher a website to dig through instead of a resource. So every record added on or after granularity_required_from must carry an accepted granularity and a URL deeper than a site's front page. Older records are classified by the enrichment routine as it reaches them, and are not held to this.",
+    "granularity_required_from": "2026-11-07",
+    "accepted_granularity": ["activity", "lesson", "unit"]
   },
 
   "admin": {

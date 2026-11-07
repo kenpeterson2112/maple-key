@@ -4,8 +4,9 @@ validate-resources.py
 Validates public/resources.json against schema/resource-schema.json.
 
 Checks the field contract (required present, nothing undeclared), the closed
-vocabularies, and the cross-field invariants the schema declares. Run in CI so a
-bad ingest fails the build rather than landing in the dataset.
+vocabularies, the cross-field invariants the schema declares, and the intake
+gate on new records (schema.intake). Run in CI so a bad ingest fails the build
+rather than landing in the dataset.
 
     python3 scripts/validate-resources.py [path ...]
 
@@ -15,6 +16,7 @@ Exits non-zero and prints one line per problem if anything fails.
 import json
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 sys.path.insert(0, str(Path(__file__).parent))
 import _schema  # noqa: E402
@@ -27,6 +29,36 @@ DEFAULT_TARGETS = [
 
 KNOWN_FIELDS = set(_schema.ALL_FIELDS)
 KNOWN_METADATA_FIELDS = set(_schema.ALL_METADATA_FIELDS)
+
+INTAKE_FROM = _schema.INTAKE["granularity_required_from"]
+ACCEPTED_GRANULARITY = _schema.INTAKE["accepted_granularity"]
+
+
+def is_front_page(url: str) -> bool:
+    """True for a bare site root (https://quill.org/), which is never one resource."""
+    parsed = urlparse(url or "")
+    return parsed.path.strip("/") == "" and not parsed.query and not parsed.fragment
+
+
+def intake_problems(resource: dict, rid: str) -> list:
+    """The gate on records added on or after intake.granularity_required_from.
+
+    A hub tagged with two expectation codes looks focused and isn't, so new
+    records must say what they are, and be specific enough to teach from.
+    """
+    added_at = str((resource.get("metadata") or {}).get("added_at") or "")
+    if added_at[:10] < INTAKE_FROM:
+        return []
+    problems = []
+    granularity = resource.get("granularity")
+    if granularity not in ACCEPTED_GRANULARITY:
+        problems.append(
+            f"{rid}: added {added_at[:10]} with granularity {granularity!r}; new records must be "
+            f"one of {ACCEPTED_GRANULARITY} — link the specific resource, not the hub that lists it"
+        )
+    if is_front_page(resource.get("url", "")):
+        problems.append(f"{rid}: added {added_at[:10]} with a site front page as its url ({resource.get('url')})")
+    return problems
 
 
 def validate_resource(resource: dict, index: int) -> list:
@@ -58,6 +90,8 @@ def validate_resource(resource: dict, index: int) -> list:
     for grade in resource.get("grade_level", []):
         if not _schema.is_valid_grade_level(grade):
             problems.append(f"{rid}: invalid grade_level {grade!r}")
+
+    problems.extend(intake_problems(resource, rid))
 
     # ── Invariants ──────────────────────────────────────────────────────────
     if "is_paid" in resource and "access_type" in resource:

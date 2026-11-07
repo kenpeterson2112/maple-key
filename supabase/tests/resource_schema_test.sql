@@ -62,6 +62,7 @@ select pg_temp.insert_rec(rec) from good;
 
 select pg_temp.expect_reject('off-vocabulary subject', '{"subject": "Astrology"}');
 select pg_temp.expect_reject('off-vocabulary strand element', '{"strand": ["Data Literacy", "Juggling"]}');
+select pg_temp.expect_reject('off-vocabulary granularity', '{"granularity": "playlist"}');
 select pg_temp.expect_reject('grade 13', '{"grade_level": ["13"]}');
 select pg_temp.expect_reject('is_paid out of step with access_type', '{"is_paid": true}');
 select pg_temp.expect_reject('jurisdiction out of step with province', '{"jurisdiction": "quebec"}');

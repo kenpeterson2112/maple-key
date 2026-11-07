@@ -82,7 +82,8 @@ Refresh the Maple Key resource library for tonight's rotating subject. Use the
 pick one yourself. Follow the Researcher → review → Assessor waterfall exactly:
 run the skill's seed searches for that subject, curate 3-8 resources that
 genuinely fit the subject's Ontario grade scope and match the schema, verify
-every URL loads, then in the Assessor pass assign real Ontario curriculum
+every URL loads and keep only specific activities, lessons or units (the skill's
+granularity gate — never a hub, course, tool or front page), then in the Assessor pass assign real Ontario curriculum
 expectation codes and grade levels. Append them to public/resources.json and
 mirror the change to docs/resources.json (updating meta.total_count and
 meta.generated_at). Skip any URL already present. Commit to a claude/ branch and
@@ -131,8 +132,8 @@ junior Science pilot PR has been read and merged.**
 Unlike the other two, this routine rewrites *existing* rows. It replaces the
 templated `usage_notes` and `instructional_modes` — 23 distinct strings across
 1,743 records, keyed off `resource_type` — with per-resource guidance grounded in
-each resource's actual page, and adds `pedagogical_function` and
-`estimated_minutes`. It matters because `api/generate-lesson.ts` feeds those
+each resource's actual page, and adds `pedagogical_function`,
+`estimated_minutes` and `granularity`. It matters because `api/generate-lesson.ts` feeds those
 fields to the prompt as "Deployment note" and "Best used as" and structures the
 lesson around them, so today 23 canned strings are steering every generated
 lesson.
@@ -140,7 +141,11 @@ lesson.
 Batches are bounded (~120/night) and resumable via `metadata.enriched_at`, so the
 catalog completes in ~12 nights and new resources are picked up automatically.
 The same WebFetch that grounds the note also yields a link verdict, so this does
-not re-walk the URLs link-health already walks.
+not re-walk the URLs link-health already walks — and a `granularity`
+(activity · lesson · unit · collection · tool · reference). That last one is how
+the catalog measures how much of it is really hubs and whole courses tagged as if
+they taught one expectation; each PR reports the running split. Until this
+routine runs, every record reads `unclassified`.
 
 Run the pilot **manually** first:
 
@@ -151,7 +156,8 @@ Follow the Stage 0.5 egress preflight and stop with an environment fault if the
 control fetch fails. Fetch every resource's page before writing its note — do not
 write a note for a page you could not read. Open a draft PR that includes four
 full before/after usage_notes pairs so the quality can be judged without reading
-the diff, and state that catalog-wide runs are gated on this review.
+the diff, plus the granularity split apply prints, and state that catalog-wide
+runs are gated on this review.
 ```
 
 Then, once merged, the nightly prompt:
@@ -164,7 +170,8 @@ environment fault if the control fetch fails. Never write a note for a page you
 could not read — omit the record and let the next run pick it up. Apply with
 scripts/enrich-resources.py apply, then open a draft PR titled
 "data: enrich resource guidance" with the counts, any records flagged
-needs_review from a link verdict, and four before/after usage_notes pairs. If
+needs_review from a link verdict, the granularity split apply prints (naming any
+record classed collection or tool), and four before/after usage_notes pairs. If
 select prints NOTHING_TO_ENRICH, make no commit and stop.
 ```
 
