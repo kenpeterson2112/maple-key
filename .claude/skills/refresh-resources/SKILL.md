@@ -172,6 +172,7 @@ matching this schema **exactly**:
   "access_type": "one of: free | purchase | licensed",
   "is_paid": false,
   "curriculum_expectations": ["1-5 codes — set in Stage 3"],
+  "granularity": "activity | lesson | unit — see below",
   "accessibility": ["No Concerns"],
   "instructional_modes": [],
   "usage_notes": null
@@ -187,14 +188,26 @@ Curation rules:
 - Clearly educational and appropriate for the subject's grade scope. Prefer
   **free, online, Canadian / Ontario-specific** resources.
 - Skip duplicates, ads, low-quality pages, and bare search-engine homepages.
-- **No hub/category/homepage links.** A teacher who already knows TVO Learn,
-  PhET, or STAO exist gets nothing from a link to their front page or a
-  category listing (e.g. `phet.colorado.edu/`, `stao.ca/category/free/`,
-  `tvolearn.com/`). Drill down one level further and link the specific
-  lesson, unit, activity, or simulation page a teacher could open and use in
-  a single class — e.g. `phet.colorado.edu/en/simulations/gravity-and-orbits`,
-  not `phet.colorado.edu/`. If a search turns up a repository, search again
-  *within* it for the individual resource before giving up on that source.
+- **Keep only `activity`, `lesson` or `unit`.** Classify every candidate from
+  the page you fetch to verify it, using the table under *Judging granularity*
+  in `.claude/skills/enrich-resources/SKILL.md` (the same six values the
+  enrichment routine uses), and write it into `granularity`. A `collection`,
+  `tool` or `reference` is never kept. This is how most of the catalog came to
+  be hubs and whole courses tagged as if they taught one expectation, and it is
+  now **enforced**: `scripts/validate-resources.py` fails any record added from
+  2026-11-07 on that lacks an accepted `granularity` or whose `url` is a bare
+  site front page.
+- **Drill down instead of dropping a good source.** A teacher who already knows
+  TVO Learn, PhET, or STAO exist gets nothing from a link to their front page or
+  a category listing (e.g. `phet.colorado.edu/`, `stao.ca/category/free/`,
+  `tvolearn.com/`). Link the specific lesson, unit, activity, or simulation page
+  a teacher could open and use — e.g.
+  `phet.colorado.edu/en/simulations/gravity-and-orbits`, not
+  `phet.colorado.edu/`. If a search turns up a hub, search again *within* it for
+  the individual resource, and keep that instead.
+- **When torn between two granularities, choose the broader** — and so drop the
+  candidate if the broader one is `collection`. A hub that slips in as a `unit`
+  is exactly the problem this gate exists to stop.
 - `grade_level` is a JSON array of integers (e.g. `[6, 7, 8]`) or the strings
   `"K"` / `"PreK"` — never strings like `"[6]"`.
 - **Verify each URL is reachable** with `WebFetch` before keeping it (a 2xx/3xx
@@ -206,6 +219,9 @@ Curation rules:
 This is a **separate review pass** over the resources you just curated. For each:
 - Assign 1–5 real Ontario curriculum expectation codes for the subject and
   grade(s), each of the form `<LETTER><DIGIT>.<DIGIT>` (e.g. `D1.1`, `B2.3`).
+  Tag what the resource itself teaches, not everything its topic touches: a
+  single activity usually earns 1–3 codes, and five codes across several
+  strands is a sign Stage 2 kept a hub.
   Use only codes that genuinely exist for that subject/grade. If you cannot
   align a resource to at least one real code, **drop it** rather than invent one.
 - Confirm `grade_level` is sensible (1–3 most likely grades); fix if Stage 2
@@ -231,7 +247,9 @@ Then append to `resources`, and update `meta`:
 - leave `meta.schema_version` as it is
 
 Finally run `python3 scripts/validate-resources.py` and fix anything it reports
-before opening the PR.
+before opening the PR. An intake failure (`granularity` missing or not
+activity/lesson/unit, or a front-page `url`) means drop that resource or replace
+it with the specific page — never relabel it to get past the check.
 
 Write `public/resources.json`, then mirror to `docs/resources.json` if it exists.
 

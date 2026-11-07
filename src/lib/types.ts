@@ -11,6 +11,7 @@ import type {
   LinkStatus,
   Modality,
   PedagogicalFunction,
+  Granularity,
   Province,
   ResourceType,
   Strand,
@@ -27,6 +28,7 @@ export type {
   LinkStatus,
   Modality,
   PedagogicalFunction,
+  Granularity,
   Province,
   ResourceType,
   Strand,
@@ -93,6 +95,9 @@ export interface Resource {
   usage_notes?: string | null
   pedagogical_function?: PedagogicalFunction
   estimated_minutes?: number
+  // How focused the resource is, from a single activity up to a whole-site
+  // collection. Classified from the page by the enrich-resources routine.
+  granularity?: Granularity
   // Curation state. These three are flags: written only when true and omitted
   // otherwise, never written as false. diffFields() in admin-changes.ts coerces
   // an absent flag to false so toggling one off on a record that never carried

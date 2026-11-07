@@ -76,6 +76,18 @@ export type PedagogicalFunction =
   | "assessment"
   | "extension"
 
+// How much of a teacher's search a resource has already done — from a single
+// activity up to a whole-site collection. Definitions live with the vocabulary
+// in schema/resource-schema.json; the intake gate there admits only the first
+// three for new records.
+export type Granularity =
+  | "activity"
+  | "lesson"
+  | "unit"
+  | "collection"
+  | "tool"
+  | "reference"
+
 // Last link-health verdict. The dead/dead_domain vs blocked/error split is
 // load-bearing: "the site said so" must never collapse into "our request
 // failed". Advisory only — nothing is auto-suppressed on a link verdict.
@@ -112,6 +124,7 @@ export const INSTRUCTIONAL_MODES =
   schema.vocabularies.instructional_modes as readonly InstructionalMode[]
 export const PEDAGOGICAL_FUNCTIONS =
   schema.vocabularies.pedagogical_function as readonly PedagogicalFunction[]
+export const GRANULARITIES = schema.vocabularies.granularity as readonly Granularity[]
 export const LINK_STATUSES = schema.vocabularies.link_status as readonly LinkStatus[]
 export const JURISDICTION_BY_PROVINCE = schema.vocabularies.jurisdiction_by_province
 export const PROVINCES = Object.keys(JURISDICTION_BY_PROVINCE) as readonly Province[]
@@ -170,6 +183,7 @@ const VOCABULARY_BY_FIELD: Record<string, readonly string[]> = {
   accessibility: ACCESSIBILITY_RATINGS,
   instructional_modes: INSTRUCTIONAL_MODES,
   pedagogical_function: PEDAGOGICAL_FUNCTIONS,
+  granularity: GRANULARITIES,
   link_status: LINK_STATUSES,
   province: PROVINCES,
 }

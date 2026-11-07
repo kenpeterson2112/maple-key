@@ -4,8 +4,8 @@ description: >-
   Replaces the templated usage_notes and instructional_modes in
   public/resources.json with real per-resource guidance, grounded in each
   resource's actual page via WebFetch. Emits usage_notes,
-  pedagogical_function, estimated_minutes and regenerated instructional_modes,
-  and reuses the same fetch as a link verdict. Runs in bounded, resumable
+  pedagogical_function, estimated_minutes, granularity and regenerated
+  instructional_modes, and reuses the same fetch as a link verdict. Runs in bounded, resumable
   batches and lands a draft PR. Runs on the Claude subscription — no
   Anthropic API key.
 ---
@@ -23,6 +23,14 @@ Neither is cosmetic. `api/generate-lesson.ts` injects them into the prompt as
 `Deployment note:` and `Best used as`, and line ~284 instructs the model to
 structure the lesson around them. **23 canned strings are steering every
 generated lesson.** That is what this routine fixes.
+
+The same fetch also answers a second question: **is this one resource at all?**
+A hand-classified sample of the visible catalog found only ~45% were a single
+activity or lesson; ~35% were hubs, whole courses, data portals or bare front
+pages (`newsela.com/`, "Khan Academy — 7th Grade Math"), each still tagged with
+two narrow expectation codes as if it taught them. So every record you enrich
+also gets a `granularity` — the measurement the cleanup of those hubs works
+from.
 
 The deterministic plumbing is `scripts/enrich-resources.py` (select / apply,
 no API key, no network). **You** supply the only part that needs judgement:
@@ -100,7 +108,9 @@ not re-walk the same 1,743 URLs that link-health already walks:
 
 > Describe this specific educational resource for a teacher's lesson plan.
 > Report: (1) what the resource actually is and what a student does with it;
-> (2) whether the page is live, a 404/expired page, a redirect to unrelated
+> (2) whether this page *is* one activity or lesson, or lists, links to or
+> contains several — and if several, whether they are all on one topic;
+> (3) whether the page is live, a 404/expired page, a redirect to unrelated
 > content, or a login/bot wall.
 
 From the page content, produce one result object per resource:
@@ -111,7 +121,32 @@ From the page content, produce one result object per resource:
 | `pedagogical_function` | Exactly one of `hook` · `core_teaching` · `guided_practice` · `independent_practice` · `assessment` · `extension`. Closed enum — never invent a value. |
 | `estimated_minutes` | Integer 1–600, for the student-facing activity only, based on the resource's actual length/scope. |
 | `instructional_modes` | Non-empty subset of `whole-class` · `small-group` · `individual` · `station-rotation`. Judge from the resource, not the old value. Only claim `station-rotation` when the resource genuinely suits a centre. |
+| `granularity` | Exactly one of `activity` · `lesson` · `unit` · `collection` · `tool` · `reference` — see *Judging granularity* below. Closed enum. |
 | `link_status` | `live` · `dead` · `moved` · `blocked` · `error`. |
+
+### Judging granularity
+
+Judge **the page the URL opens**, not the publisher or the title. The same site
+yields every level: a single Khan Academy video is an `activity`, a Khan unit
+page is a `unit`, "Khan Academy — 7th Grade Math (Ontario)" is a `collection`.
+
+| Value | The page is… | From the catalog |
+| --- | --- | --- |
+| `activity` | One thing students do in a single sitting: a simulation, game, video, interactive, worksheet, problem set, article. | PhET *Ohm's Law*; a Desmos Activity Builder activity; one TVO Learn learning activity; IXL *Solve one-step inequalities* |
+| `lesson` | A teacher-facing plan for one lesson, with its materials. | Métis Nation of Ontario *Louis Riel* lesson plan PDF; an EconEdLink lesson |
+| `unit` | A bounded set on **one** topic or overall expectation whose contents you can see on the page: a unit plan, a short series, a one-topic playlist or workbook. | Khan Academy *Solving equations & inequalities* unit; STAO *Mars Rover* design-challenge unit; a 156-page *New France* workbook |
+| `collection` | An index, hub, course, library or site front page spanning **several** topics — the teacher would still have to find the thing to use. | `newsela.com/`; TIPS4RM index; *UNICEF Canada — Resources for Teachers*; a full TVO course |
+| `tool` | An open-ended tool or data source with no lesson content of its own. | World Bank Open Data; Atlas of Canada Toporama; Code.org App Lab; Actively Learn |
+| `reference` | Background for the teacher, not something to teach with. | Ontario curriculum documents; a Wikipedia article; a PD framework |
+
+- **One topic or several** is what separates `unit` from `collection`. A page of
+  twelve coordinate-grid starters is a `unit`; a page of starters across the
+  whole math curriculum is a `collection`.
+- **When torn, choose the broader value.** A hub mislabelled `unit` hides from
+  the cleanup that would break it into real resources; a unit mislabelled
+  `collection` just gets looked at again.
+- A **front page** is `collection` or `tool`, never `activity`, however the
+  record is titled.
 
 Link verdict rules — identical in spirit to `check-links`, and for the same
 reason:
@@ -143,6 +178,7 @@ Write `/tmp/en-results.json` as a JSON array:
     "pedagogical_function": "guided_practice",
     "estimated_minutes": 20,
     "instructional_modes": ["individual", "whole-class"],
+    "granularity": "activity",
     "link_status": "live"
   }
 ]
@@ -154,8 +190,8 @@ Write `/tmp/en-results.json` as a JSON array:
 python3 scripts/enrich-resources.py apply --plan /tmp/en-plan.json --results /tmp/en-results.json
 ```
 
-This validates every field (closed enum, integer range, mode subset, note
-length), rejects malformed records individually, writes
+This validates every field (closed enums including `granularity`, integer
+range, mode subset, note length), rejects malformed records individually, writes
 `public/resources.json` + mirrors `docs/`, and stamps `metadata.enriched_at`.
 A `dead` or `moved` verdict also sets `metadata.needs_review` so the record
 surfaces in the admin review queue — **nothing is ever auto-suppressed on a link
@@ -179,6 +215,9 @@ Open a **draft** PR. In the body:
 
 - The scope and counts (`applied`, `rejected`, `remaining un-enriched`).
 - Any records flagged `needs_review` from a link verdict, with the verdict.
+- The two **granularity** lines `apply` prints (this batch, and the whole
+  catalog so far). Name any batch record you classed `collection` or `tool`:
+  those are the queue for breaking hubs into specific resources.
 - **Three or four full before/after `usage_notes` pairs**, so a reviewer can
   judge the quality without reading the diff. This is the most useful thing in
   the PR — the point of the change is note quality, and the diff is too large to
@@ -189,6 +228,9 @@ Open a **draft** PR. In the body:
 ## Guardrails
 
 - **Never write a note for a page you could not read.** Omit the record instead.
+- **`granularity` is judged from the page you fetched**, never from the title,
+  the description or the publisher. If you could not see what the page holds,
+  omit the record.
 - **`pedagogical_function` is a closed enum.** It now has one home:
   `schema/resource-schema.json`. Extend it there (and in the matching union in
   `shared/resource-schema.ts`, which `scripts/check-schema-sync.py` enforces), in

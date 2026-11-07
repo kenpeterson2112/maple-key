@@ -217,6 +217,14 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   The literal unions in `shared/resource-schema.ts` are hand-written because a
   JSON import widens to `string[]`; `scripts/check-schema-sync.py` fails CI if
   they drift. Validate the dataset with `pnpm validate:schema`.
+- **Resources must be specific.** `granularity` (activity · lesson · unit ·
+  collection · tool · reference) records how focused a resource is; most of the
+  catalog has been hubs and whole courses tagged as if they taught one
+  expectation. The schema's `intake` gate fails CI for any record added from
+  2026-11-07 on that isn't an activity, lesson or unit, or that links a site's
+  front page — so any ingest path (routine, script or admin) must drill down to
+  the specific page rather than relabel. Older records are classified by the
+  enrich-resources routine.
 - `usage_notes` and `instructional_modes` are **not display-only**:
   `api/generate-lesson.ts` injects them as "Deployment note" / "Best used as" and
   structures the lesson around them. Changing how they're generated changes

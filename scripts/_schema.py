@@ -44,6 +44,7 @@ ACCESS_TYPES = _VOCAB["access_type"]
 ACCESSIBILITY_RATINGS = _VOCAB["accessibility"]
 INSTRUCTIONAL_MODES = _VOCAB["instructional_modes"]
 PEDAGOGICAL_FUNCTIONS = _VOCAB["pedagogical_function"]
+GRANULARITIES = _VOCAB["granularity"]
 LINK_STATUSES = _VOCAB["link_status"]
 JURISDICTION_BY_PROVINCE = _VOCAB["jurisdiction_by_province"]
 PROVINCES = list(JURISDICTION_BY_PROVINCE)
@@ -61,10 +62,12 @@ VOCABULARY_BY_FIELD = {
     "accessibility": ACCESSIBILITY_RATINGS,
     "instructional_modes": INSTRUCTIONAL_MODES,
     "pedagogical_function": PEDAGOGICAL_FUNCTIONS,
+    "granularity": GRANULARITIES,
     "province": PROVINCES,
 }
 
 ADMIN = SCHEMA["admin"]
+INTAKE = SCHEMA["intake"]
 INVARIANTS = SCHEMA["invariants"]
 
 

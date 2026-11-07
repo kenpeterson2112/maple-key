@@ -23,7 +23,7 @@ create temp table doc as select $json$
    "province": "BC", "jurisdiction": "british_columbia", "modality": ["Video"], "resource_type": "video",
    "access_type": "purchase", "is_paid": true, "curriculum_expectations": [], "accessibility": ["Some Concerns"],
    "instructional_modes": ["whole-class"], "usage_notes": "Use it.", "language": "fr", "is_collection": true,
-   "estimated_minutes": 20, "year_published": 2019, "pedagogical_function": "hook", "tags": ["x"],
+   "estimated_minutes": 20, "year_published": 2019, "pedagogical_function": "hook", "granularity": "unit", "tags": ["x"],
    "metadata": {"added_at": "2025-11-10", "added_by": "Ken", "verified": true, "needs_review": false,
                 "link_status": "dead_domain", "link_checked_at": "2026-09-12T07:11:28Z", "review_priority": 2}},
   {"id": "r-3", "topic_title": "C", "description": "d", "url": "https://c.example/", "publisher_creator": "p",

@@ -18,7 +18,8 @@ This script does the parts that don't need an LLM, so they cost nothing against 
 subscription and can't be got subtly wrong in prose:
 
     select  — pick the next bounded batch of un-enriched records, emit a plan
-    apply   — validate the model's output and merge it, stamping enriched_at
+    apply   — validate the model's output and merge it, stamping enriched_at,
+              and report how the catalog splits by granularity so far
 
 **You** (via the `enrich-resources` skill) do the part that needs judgement:
 reading each resource's actual page and writing notes grounded in it.
@@ -59,6 +60,7 @@ OUTPUTS = [
 # there; never let a free-form value in here.
 PEDAGOGICAL_FUNCTIONS = set(_schema.PEDAGOGICAL_FUNCTIONS)
 INSTRUCTIONAL_MODES = set(_schema.INSTRUCTIONAL_MODES)
+GRANULARITIES = _schema.GRANULARITIES
 
 # The subset of link verdicts this routine's fetch can actually produce — the
 # full vocabulary also covers the ledger-only verdicts from link-check.py.
@@ -179,6 +181,12 @@ def validate_result(item: dict, known_ids: set[str]) -> tuple[dict | None, str |
     if not isinstance(modes, list) or not modes or not set(modes) <= INSTRUCTIONAL_MODES:
         return None, f"{rid}: instructional_modes must be a non-empty subset of {sorted(INSTRUCTIONAL_MODES)}"
 
+    # Read off the same page as the notes. It is how the catalog finds out how
+    # much of it is hubs and front pages tagged as if they were one resource.
+    granularity = item.get("granularity")
+    if granularity not in GRANULARITIES:
+        return None, f"{rid}: granularity {granularity!r} not in {GRANULARITIES}"
+
     verdict = item.get("link_status")
     if verdict is not None and verdict not in LINK_VERDICTS:
         return None, f"{rid}: link_status {verdict!r} not in {sorted(LINK_VERDICTS)}"
@@ -189,8 +197,15 @@ def validate_result(item: dict, known_ids: set[str]) -> tuple[dict | None, str |
         "pedagogical_function": func,
         "estimated_minutes": minutes,
         "instructional_modes": sorted(set(modes)),
+        "granularity": granularity,
         "link_status": verdict,
     }, None
+
+
+def granularity_summary(counts: Counter) -> str:
+    total = sum(counts.values()) or 1
+    order = [*GRANULARITIES, "unclassified"]
+    return " · ".join(f"{g} {counts[g]} ({counts[g] / total:.0%})" for g in order if counts[g])
 
 
 def cmd_apply(args: argparse.Namespace) -> int:
@@ -262,6 +277,7 @@ def cmd_apply(args: argparse.Namespace) -> int:
         resource["pedagogical_function"] = record["pedagogical_function"]
         resource["estimated_minutes"] = record["estimated_minutes"]
         resource["instructional_modes"] = record["instructional_modes"]
+        resource["granularity"] = record["granularity"]
 
         metadata = resource.setdefault("metadata", {})
         metadata["enriched_at"] = stamp
@@ -289,9 +305,14 @@ def cmd_apply(args: argparse.Namespace) -> int:
     still = sum(1 for r in resources if not is_enriched(r))
     print(f"\napplied {len(clean)} record(s); {flagged} flagged needs_review from a link verdict")
     print(f"{still} records remain un-enriched")
+    print("\nGranularity — this batch:")
+    print("  " + granularity_summary(Counter(r["granularity"] for r in clean)))
+    catalog = Counter(r.get("granularity") or "unclassified" for r in resources)
+    print("Granularity — whole catalog so far:")
+    print("  " + granularity_summary(catalog))
     print("\nSample of what landed:")
     for record in clean[:3]:
-        print(f"  {record['id']} [{record['pedagogical_function']}, {record['estimated_minutes']}m]")
+        print(f"  {record['id']} [{record['granularity']}, {record['pedagogical_function']}, {record['estimated_minutes']}m]")
         print(f"    {record['usage_notes'][:150]}")
     return 0
 

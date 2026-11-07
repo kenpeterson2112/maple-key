@@ -41,6 +41,7 @@ UNION_BY_VOCABULARY = {
     "accessibility": "AccessibilityRating",
     "instructional_modes": "InstructionalMode",
     "pedagogical_function": "PedagogicalFunction",
+    "granularity": "Granularity",
     "link_status": "LinkStatus",
 }
 
