@@ -151,45 +151,45 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <div className="bg-card rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-4 border-b border-stone-200">
+        <div className="flex items-center justify-between p-4 border-b border-border">
           <h3 className="text-lg font-semibold text-foreground">Editable Graphic Organizer</h3>
           <button
             onClick={handleSaveAndClose}
-            className="p-1.5 hover:bg-stone-100 rounded-lg transition-colors"
+            className="p-1.5 hover:bg-muted rounded-lg transition-colors"
             aria-label="Close organizer"
           >
-            <X size={18} className="text-stone-600" />
+            <X size={18} className="text-muted-foreground" />
           </button>
         </div>
 
         <div className="p-5 space-y-4">
-          <p className="text-xs text-stone-600">
+          <p className="text-xs text-muted-foreground">
             Customize the title, subtitle, and section prompts. The printed handout leaves student
             response areas blank — students write in them by hand.
           </p>
 
           <div>
-            <label className="block text-xs font-medium text-stone-600 mb-1">Title</label>
+            <label className="block text-xs font-medium text-muted-foreground mb-1">Title</label>
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3 py-2 border-2 border-stone-300 rounded-lg text-sm focus:outline-none focus:border-amber-500"
+              className="w-full px-3 py-2 border-2 border-border-strong rounded-lg text-sm focus:outline-none focus:border-ring"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-stone-600 mb-1">Subtitle / context</label>
+            <label className="block text-xs font-medium text-muted-foreground mb-1">Subtitle / context</label>
             <input
               value={subtitle}
               onChange={(e) => setSubtitle(e.target.value)}
-              className="w-full px-3 py-2 border-2 border-stone-300 rounded-lg text-sm focus:outline-none focus:border-amber-500"
+              className="w-full px-3 py-2 border-2 border-border-strong rounded-lg text-sm focus:outline-none focus:border-ring"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             {DEFAULT_FIELDS.map((f) => (
               <div key={f.key}>
-                <label className="block text-xs font-medium text-stone-600 mb-1">
+                <label className="block text-xs font-medium text-muted-foreground mb-1">
                   Prompt for box {f.key.slice(1)}
                 </label>
                 <input
@@ -197,7 +197,7 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
                   onChange={(e) =>
                     setLabels((prev) => ({ ...prev, [`label_${f.key}`]: e.target.value }))
                   }
-                  className="w-full px-3 py-2 border-2 border-stone-300 rounded-lg text-sm focus:outline-none focus:border-amber-500"
+                  className="w-full px-3 py-2 border-2 border-border-strong rounded-lg text-sm focus:outline-none focus:border-ring"
                 />
               </div>
             ))}
@@ -245,16 +245,16 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-2 p-4 border-t border-stone-200 bg-stone-50">
+        <div className="flex items-center justify-end gap-2 p-4 border-t border-border bg-muted">
           <button
             onClick={handleSaveAndClose}
-            className="px-3 py-1.5 text-sm font-medium text-stone-700 hover:bg-stone-100 rounded-lg"
+            className="px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted rounded-lg"
           >
             Save &amp; close
           </button>
           <button
             onClick={handlePrint}
-            className="flex items-center gap-2 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium rounded-lg transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 bg-primary hover:bg-primary-hover text-primary-foreground text-sm font-medium rounded-lg transition-colors"
           >
             <Printer size={14} />
             Print / Export PDF

@@ -666,9 +666,9 @@ export default function LessonPlannerModal({
   )
 
   const frenchHandoutsNotice = reproducibleLanguage === "French" && (
-    <div className="mb-3 flex items-center gap-2 rounded-xl border-2 border-blue-300 bg-blue-50 px-4 py-2.5">
-      <Languages size={18} className="text-blue-600 shrink-0" />
-      <p className="text-sm font-medium text-blue-800">
+    <div className="mb-3 flex items-center gap-2 rounded-xl border-2 border-secondary/40 bg-secondary-tint px-4 py-2.5">
+      <Languages size={18} className="text-secondary-strong shrink-0" />
+      <p className="text-sm font-medium text-secondary-strong">
         Student handouts will be generated in <strong>French</strong> — the lesson
         plan itself stays in English.
       </p>
@@ -684,7 +684,7 @@ export default function LessonPlannerModal({
           ? "Generating your lesson plan"
           : `Generate lesson plan with ${bookmarkedResources.length} selected resource${bookmarkedResources.length === 1 ? "" : "s"}`
       }
-      className="w-full py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70"
+      className="w-full py-3 bg-primary hover:bg-primary-hover text-primary-foreground font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70"
     >
       {isGenerating ? (
         <>
@@ -845,7 +845,7 @@ export default function LessonPlannerModal({
             <div className={`${contentWidthClass} mx-auto`}>
               <button
                 onClick={handleQuestionsSubmit}
-                className="w-full py-2 text-sm text-muted-foreground hover:text-violet-700 transition-colors"
+                className="w-full py-2 text-sm text-muted-foreground hover:text-secondary-strong transition-colors"
               >
                 Skip questions &amp; generate now
               </button>
@@ -927,10 +927,10 @@ export default function LessonPlannerModal({
           <div className="relative bg-card rounded-2xl shadow-2xl p-6 max-w-md mx-4">
             <button
               onClick={() => setShowFeedbackDialog(false)}
-              className="absolute top-4 right-4 p-1 hover:bg-gray-100 rounded-full transition-colors"
+              className="absolute top-4 right-4 p-1 hover:bg-muted rounded-full transition-colors"
               aria-label="Close dialog"
             >
-              <X size={20} className="text-gray-500" />
+              <X size={20} className="text-muted-foreground" />
             </button>
             <div className="text-center pt-2">
               <MessageSquareText size={40} className="text-primary mx-auto mb-4" />

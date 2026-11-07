@@ -86,8 +86,8 @@ export default function ClassInsightsSpace({ onFindResources }: ClassInsightsSpa
           <DevSeedControl scope={{ kind: "global" }} onChanged={() => setReloadNonce((n) => n + 1)} />
         </PageHeader>
         <div className="flex flex-col items-center justify-center gap-4 flex-1 text-center px-6">
-          <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center">
-            <BarChart3 size={26} className="text-amber-600" />
+          <div className="w-14 h-14 rounded-2xl bg-pop-tint flex items-center justify-center">
+            <BarChart3 size={26} className="text-pop-strong" />
           </div>
           <div>
             <p className="text-sm font-semibold text-foreground">No quick check data yet</p>
@@ -147,8 +147,8 @@ export default function ClassInsightsSpace({ onFindResources }: ClassInsightsSpa
               <div className="rounded-xl border border-border bg-card overflow-hidden divide-y divide-border">
                 {[...filtered].sort((a, b) => b.updatedAt - a.updatedAt).map(t => (
                   <div key={t.lessonId} className="flex items-center gap-3 px-4 py-3">
-                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-amber-50">
-                      <BookOpen size={14} className="text-amber-600" />
+                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-pop-tint">
+                      <BookOpen size={14} className="text-pop-strong" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-foreground truncate">{t.title}</p>

@@ -9,10 +9,10 @@ const SECTION_LABEL: Record<ArtifactSection, string> = {
 }
 
 const SECTION_BADGE: Record<ArtifactSection, string> = {
-  mindsOn: "bg-blue-100 text-blue-700",
-  action: "bg-emerald-100 text-emerald-700",
-  consolidation: "bg-violet-100 text-violet-700",
-  materials: "bg-stone-100 text-stone-700",
+  mindsOn: "bg-hue-blue/10 text-hue-blue",
+  action: "bg-hue-green/10 text-hue-green",
+  consolidation: "bg-hue-violet/10 text-hue-violet",
+  materials: "bg-muted text-foreground",
 }
 
 const CHOICES: { value: ArtifactStatus; label: string; icon: typeof Check }[] = [
@@ -33,18 +33,18 @@ export default function ArtifactsSection({ artifacts, onStatusChange, onOpenOrga
   const untriaged = artifacts.filter((a) => a.status === "unset").length
 
   return (
-    <div className="bg-card rounded-xl border-l-4 border-amber-500 shadow-sm overflow-hidden">
+    <div className="bg-card rounded-xl border-l-4 border-pop shadow-sm overflow-hidden">
       <div className="p-5">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
-            <ClipboardCheck size={20} className="text-amber-600" />
+            <ClipboardCheck size={20} className="text-pop-strong" />
             <h4 className="text-lg font-semibold text-foreground">Classroom Artifacts</h4>
-            <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">
+            <span className="text-xs bg-pop-tint text-pop-strong px-2 py-1 rounded-full font-medium">
               {untriaged > 0 ? `${untriaged} to decide` : "All set"}
             </span>
           </div>
         </div>
-        <p className="text-xs text-amber-700 font-medium uppercase tracking-wide mb-3">
+        <p className="text-xs text-pop-strong font-medium uppercase tracking-wide mb-3">
           Decide what you'll bring
         </p>
 
@@ -52,7 +52,7 @@ export default function ArtifactsSection({ artifacts, onStatusChange, onOpenOrga
           {artifacts.map((artifact, i) => (
             <li
               key={`${artifact.name}-${i}`}
-              className="border border-stone-200 rounded-lg p-3 bg-stone-50"
+              className="border border-border rounded-lg p-3 bg-muted"
             >
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div className="flex-1 min-w-0">
@@ -85,8 +85,8 @@ export default function ArtifactsSection({ artifacts, onStatusChange, onOpenOrga
                       }}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                         selected
-                          ? "bg-amber-500 border-amber-500 text-white"
-                          : "bg-card border-stone-300 text-stone-700 hover:border-amber-400 hover:text-amber-700"
+                          ? "bg-pop border-pop text-pop-foreground"
+                          : "bg-card border-border-strong text-foreground hover:border-pop hover:text-foreground"
                       }`}
                       aria-pressed={selected}
                     >
@@ -98,7 +98,7 @@ export default function ArtifactsSection({ artifacts, onStatusChange, onOpenOrga
                 {artifact.status === "help-me" && (
                   <button
                     onClick={() => onOpenOrganizer(i)}
-                    className="ml-auto text-xs text-amber-700 hover:underline font-medium"
+                    className="ml-auto text-xs text-pop-strong hover:underline font-medium"
                   >
                     {artifact.organizer ? "Edit organizer" : "Open organizer"}
                   </button>

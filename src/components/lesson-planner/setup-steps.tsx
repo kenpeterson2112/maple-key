@@ -242,14 +242,14 @@ export default function SetupSteps({
         ))}
       </dl>
       {bookmarkedResources.length === 0 && (
-        <div className="mt-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5">
-          <AlertTriangle size={14} className="text-amber-500 flex-shrink-0 mt-0.5" />
-          <p className="text-xs text-amber-800">
+        <div className="mt-4 flex items-start gap-2 rounded-lg border border-pop/50 bg-pop-tint px-3 py-2.5">
+          <AlertTriangle size={14} className="text-pop flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-pop-strong">
             No resources are selected yet — you can still generate, but the plan won't build on curated resources.{" "}
             <button
               type="button"
               onClick={() => onGoToStep(1)}
-              className="font-semibold underline hover:text-amber-900"
+              className="font-semibold underline hover:text-foreground"
             >
               Pick resources
             </button>
@@ -300,7 +300,7 @@ export default function SetupSteps({
         <div className="flex items-center gap-2 mb-4">
           <Users size={20} className="text-foreground" />
           <h3 className="font-semibold text-foreground">Student Progress Data</h3>
-          <span className="text-xs bg-stone-200 text-stone-600 px-2 py-0.5 rounded-full">Optional</span>
+          <span className="text-xs bg-border-strong text-muted-foreground px-2 py-0.5 rounded-full">Optional</span>
         </div>
 
         <label className={`flex items-start gap-3 ${hasClassProgress ? "cursor-pointer" : "cursor-not-allowed opacity-60"}`}>
@@ -309,7 +309,7 @@ export default function SetupSteps({
             checked={includeAssessmentData}
             disabled={!hasClassProgress}
             onChange={(e) => onIncludeAssessmentDataChange(e.target.checked)}
-            className="mt-1 w-4 h-4 rounded border-stone-300 text-orange-500 focus:ring-orange-500"
+            className="mt-1 w-4 h-4 rounded border-border-strong text-primary focus:ring-ring"
           />
           <div>
             <span className="text-sm font-medium text-foreground">Include recent assessment data</span>
@@ -322,7 +322,7 @@ export default function SetupSteps({
         </label>
 
         {includeAssessmentData && hasClassProgress && (
-          <div className="mt-4 bg-stone-50 rounded-lg p-4 border border-stone-200 space-y-3">
+          <div className="mt-4 bg-muted rounded-lg p-4 border border-border space-y-3">
             {Object.entries(classProgress)
               .filter(([, c]) => c.level1 + c.level2 + c.level3 + c.level4 > 0)
               .sort(([a], [b]) => a.localeCompare(b))
@@ -331,14 +331,14 @@ export default function SetupSteps({
                 return (
                   <div key={code}>
                     <div className="flex items-start gap-2 mb-1.5">
-                      <span className="flex-shrink-0 rounded-full bg-card border border-stone-200 px-1.5 py-0.5 text-[11px] font-bold text-stone-700">
+                      <span className="flex-shrink-0 rounded-full bg-card border border-border px-1.5 py-0.5 text-[11px] font-bold text-foreground">
                         {code}
                       </span>
                       <span className="text-xs leading-snug text-muted-foreground">
                         {describeCode(bookmarkedResources[0]?.subject ?? "", code, bookmarkedResources[0]?.grade_level?.[0]?.toString()) ?? code}
                       </span>
                     </div>
-                    <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-stone-200">
+                    <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-border-strong">
                       {LEVEL_ORDER.map((level) => {
                         const v = counts[level]
                         if (v === 0) return null
@@ -495,7 +495,7 @@ export default function SetupSteps({
           <div className="flex items-center gap-2">
             <FileText size={20} className="text-foreground" />
             <h3 className="text-lg font-semibold text-foreground">Additional Notes</h3>
-            <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Optional</span>
+            <span className="text-xs bg-border-strong text-muted-foreground px-2 py-0.5 rounded-full">Optional</span>
           </div>
 
           {/* Language for student reproducibles (artifacts + printable organizer) */}
@@ -535,7 +535,7 @@ export default function SetupSteps({
           placeholder={teacherNotesPlaceholder ?? "Add any notes about your planning preferences, classroom environment, specific student needs, themes you'd like to emphasize..."}
           className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none focus:border-ring transition-colors resize-none"
         />
-        <p className="text-xs text-gray-500 mt-2">
+        <p className="text-xs text-muted-foreground mt-2">
           Example: "My class loves competition and games. Marcus and James could lead small groups."
           {" "}The <strong>Student handouts</strong> toggle only translates the printable activity sheets — your lesson plan stays in English.
         </p>

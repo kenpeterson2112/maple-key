@@ -60,11 +60,11 @@ comments carry the same hex, and `pnpm check:contrast` fails if they drift).
 | `pop-tint` | `#FFF3D1` | `#3A2F14` | highlight background |
 | `muted` / `muted-foreground` | `#F7EFE8` / `#75655C` | `#2D2620` / `#B3A498` | quiet surfaces / secondary text |
 | `accent` / `accent-foreground` | = `secondary-tint` / `secondary-strong` | same | hover and active surfaces |
-| `destructive` / `destructive-foreground` | `#C62828` / `#FFFFFF` | `#F2605C` / `#1C1714` | errors, delete |
+| `destructive` / `destructive-foreground` | `#C62828` / `#FFFFFF` | `#F46A65` / `#1C1714` | errors, delete, a wrong answer. Text on `destructive/10` uses `destructive` |
 | `border` / `border-strong` | `#F1E2D6` / `#E3CDBC` | `#3A3029` / `#4A3E35` | dividers / stronger dividers |
 | `input` | `#FFFFFF` | `#2D2620` | input fill |
 | `ring` | `#0F8A70` | `#2DD4AE` | teal focus ring |
-| `success` / `success-tint` | `#166534` / `#DCFCE7` | `#4ADE80` / `#14301F` | status: "added", "saved". Text on `success-tint` uses `success` |
+| `success` / `success-tint` / `success-foreground` | `#166534` / `#DCFCE7` / `#FFFFFF` | `#4ADE80` / `#14301F` / `#1C1714` | status: "added", "approved", a correct answer. Text on `success-tint` uses `success` |
 | `signal-1..4` | unchanged | unchanged | assessment levels (orange, yellow, light green, dark green). Carries meaning: never retune for the palette. Student-readiness levels use these too (`READINESS_TOKENS` in `ui/readiness-pill.tsx`) |
 
 **Subject colours.** `--subject-math`, `-science`, `-fsl`, `-language`, `-social`,
@@ -74,6 +74,25 @@ does every job: fill (`bg-subject-math text-subject-foreground`), label text
 (`text-subject-math`), and tint at low opacity (`bg-subject-math/10`,
 `border-subject-math/40`). Cards get their subject classes from
 `getSubjectTheme()` in `src/lib/subject-theme.ts`; don't build a second map.
+
+**Categorical hues.** `--hue-blue`, `-green`, `-violet`, `-amber`, `-teal`, `-cyan`,
+`-orange`, `-rose`, `-indigo`, `-slate`, plus `--hue-foreground`. Same contract as
+the subject colours (fill + `hue-foreground`, label text, `/10` tint, `/40`
+border). They are for colour-coding that carries no meaning: lesson sections
+(`SECTION_HUES` in `src/lib/lesson-templates.ts`), classroom-resource categories,
+the materials dots. Never use a hue for state or emphasis.
+
+**Which colour, by job.**
+
+- **Main action:** `primary`.
+- **Secondary action, link, selected option, info panel:** the teal `secondary` family.
+- **Success, added, approved, correct:** `success`.
+- **Error, delete, incorrect:** `destructive`.
+- **Assessment accent, differentiation callouts, warnings, star ratings, "needs work":** goldenrod `pop` (`pop-tint` panel, `pop-strong` text, `pop` fill with `pop-foreground`).
+- **Proficiency and readiness levels:** `signal-*`.
+- **Subjects:** `subject-*`.
+- **Categories with no meaning:** `hue-*`.
+- **Everything else:** neutrals: `muted`, `border`, `muted-foreground`, `foreground`.
 
 `--radius: 0.875rem`.
 
@@ -106,8 +125,8 @@ the print `<style>` in `artifact-organizer-modal.tsx`, the jsPDF constants in
 `lib/student-activity-pdf.ts`).
 
 Tailwind's built-in palette (`text-emerald-700`, `bg-amber-500`, `stone-*` and so
-on) counts as hardcoded too: it doesn't follow dark mode. About 350 uses remain
-and are being swept separately; don't add more.
+on) counts as hardcoded too: it doesn't follow dark mode. None is left in `src/`;
+keep it that way. Reach for the token that names the job (list above).
 
 ### Type stack
 

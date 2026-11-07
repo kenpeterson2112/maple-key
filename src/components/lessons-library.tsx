@@ -122,7 +122,7 @@ export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: Lesso
                   <div className="flex items-center gap-3 mt-2 text-[11px] text-muted-foreground">
                     {lesson.curriculumCodesCovered?.length > 0 && (
                       <span className="flex items-center gap-1">
-                        <Check size={12} className="text-emerald-500" strokeWidth={3} />
+                        <Check size={12} className="text-success" strokeWidth={3} />
                         {lesson.curriculumCodesCovered.length} expectations
                       </span>
                     )}
@@ -133,7 +133,7 @@ export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: Lesso
                       </span>
                     )}
                     {tally && tally.attempts > 0 && (
-                      <span className="flex items-center gap-1 text-amber-600">
+                      <span className="flex items-center gap-1 text-pop-strong">
                         <ClipboardCheck size={12} />
                         {tally.attempts} checks
                       </span>

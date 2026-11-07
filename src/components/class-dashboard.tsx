@@ -52,11 +52,13 @@ const SHORT_LABEL: Record<ProficiencyLevel, string> = {
   level4: "surpassing",
 }
 
-// Text color for the percentage labels rendered inside each bar segment.
+// Text color for the percentage labels rendered inside each bar segment. The
+// signal fills are the same in both modes, so these are too: white reads best
+// on levels 1 and 4, the signal's own foreground on the pale levels 2 and 3.
 const ON_BAR_TEXT: Record<ProficiencyLevel, string> = {
   level1: "text-white",
-  level2: "text-stone-700",
-  level3: "text-stone-700",
+  level2: "text-signal-2-foreground",
+  level3: "text-signal-3-foreground",
   level4: "text-white",
 }
 
@@ -87,9 +89,9 @@ function ReadinessBadge({ counts }: { counts: LevelCounts }) {
 function Bar({ counts, thick = false }: { counts: LevelCounts; thick?: boolean }) {
   const t = total(counts)
   const h = thick ? "h-3.5" : "h-2.5"
-  if (t === 0) return <div className={`${h} w-full rounded-full bg-stone-100`} />
+  if (t === 0) return <div className={`${h} w-full rounded-full bg-muted`} />
   return (
-    <div className={`flex ${h} w-full overflow-hidden rounded-full bg-stone-100`}>
+    <div className={`flex ${h} w-full overflow-hidden rounded-full bg-muted`}>
       {LEVEL_ORDER.map((level) => {
         const value = counts[level]
         if (!value) return null
@@ -130,7 +132,7 @@ function SpecificRow({ code, counts, subject, grade }: { code: string; counts: L
   return (
     <div className="px-4 py-3 space-y-2">
       <div className="flex items-start gap-2">
-        <span className="flex-shrink-0 rounded-full border border-border bg-card px-1.5 py-0.5 text-[11px] font-bold text-stone-600 mt-px">
+        <span className="flex-shrink-0 rounded-full border border-border bg-card px-1.5 py-0.5 text-[11px] font-bold text-muted-foreground mt-px">
           {code}
         </span>
         <p className="text-xs leading-snug text-foreground flex-1">
@@ -177,7 +179,7 @@ function OverallRow({
           ) : (
             <ChevronRight size={16} className="text-muted-foreground flex-shrink-0" />
           )}
-          <span className="flex-shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs font-bold text-stone-600">
+          <span className="flex-shrink-0 rounded-full bg-muted px-2 py-0.5 text-xs font-bold text-muted-foreground">
             {agg.overall}
           </span>
           <span className="text-sm font-semibold text-foreground truncate">{overallTitle(subject, agg.overall, grade)}</span>
@@ -241,7 +243,7 @@ function StrandAccordion({
                 ) : (
                   <ChevronRight size={16} className="text-muted-foreground flex-shrink-0" />
                 )}
-                <span className="flex-shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs font-bold text-stone-600">
+                <span className="flex-shrink-0 rounded-full bg-muted px-2 py-0.5 text-xs font-bold text-muted-foreground">
                   {strand.code}
                 </span>
                 <span className="text-sm font-semibold text-foreground truncate">{strandLabel(subject, strand.code, grade)}</span>

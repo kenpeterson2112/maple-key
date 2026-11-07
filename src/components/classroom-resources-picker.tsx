@@ -17,46 +17,46 @@ interface ClassroomResourcesPickerProps {
 
 const CATEGORY_STYLES: Record<string, { chip: string; chipSelected: string; header: string; customPill: string }> = {
   "math-manipulatives": {
-    chip: "border-emerald-200 text-emerald-800 hover:bg-emerald-50",
-    chipSelected: "bg-emerald-100 border-emerald-400 text-emerald-900",
-    header: "text-emerald-800",
-    customPill: "bg-emerald-50 border-emerald-300 text-emerald-900",
+    chip: "border-hue-green/40 text-hue-green hover:bg-hue-green/10",
+    chipSelected: "bg-hue-green/10 border-hue-green text-hue-green",
+    header: "text-hue-green",
+    customPill: "bg-hue-green/10 border-hue-green/40 text-hue-green",
   },
   technology: {
-    chip: "border-blue-200 text-blue-800 hover:bg-blue-50",
-    chipSelected: "bg-blue-100 border-blue-400 text-blue-900",
-    header: "text-blue-800",
-    customPill: "bg-blue-50 border-blue-300 text-blue-900",
+    chip: "border-hue-blue/40 text-hue-blue hover:bg-hue-blue/10",
+    chipSelected: "bg-hue-blue/10 border-hue-blue text-hue-blue",
+    header: "text-hue-blue",
+    customPill: "bg-hue-blue/10 border-hue-blue/40 text-hue-blue",
   },
   spaces: {
-    chip: "border-amber-200 text-amber-800 hover:bg-amber-50",
-    chipSelected: "bg-amber-100 border-amber-400 text-amber-900",
-    header: "text-amber-800",
-    customPill: "bg-amber-50 border-amber-300 text-amber-900",
+    chip: "border-hue-amber/40 text-hue-amber hover:bg-hue-amber/10",
+    chipSelected: "bg-hue-amber/10 border-hue-amber text-hue-amber",
+    header: "text-hue-amber",
+    customPill: "bg-hue-amber/10 border-hue-amber/40 text-hue-amber",
   },
   supplies: {
-    chip: "border-violet-200 text-violet-800 hover:bg-violet-50",
-    chipSelected: "bg-violet-100 border-violet-400 text-violet-900",
-    header: "text-violet-800",
-    customPill: "bg-violet-50 border-violet-300 text-violet-900",
+    chip: "border-hue-violet/40 text-hue-violet hover:bg-hue-violet/10",
+    chipSelected: "bg-hue-violet/10 border-hue-violet text-hue-violet",
+    header: "text-hue-violet",
+    customPill: "bg-hue-violet/10 border-hue-violet/40 text-hue-violet",
   },
   "print-resources": {
-    chip: "border-orange-200 text-orange-800 hover:bg-orange-50",
-    chipSelected: "bg-orange-100 border-orange-400 text-orange-900",
-    header: "text-orange-800",
-    customPill: "bg-orange-50 border-orange-300 text-orange-900",
+    chip: "border-hue-orange/40 text-hue-orange hover:bg-hue-orange/10",
+    chipSelected: "bg-hue-orange/10 border-hue-orange text-hue-orange",
+    header: "text-hue-orange",
+    customPill: "bg-hue-orange/10 border-hue-orange/40 text-hue-orange",
   },
   "digital-resources": {
-    chip: "border-rose-200 text-rose-800 hover:bg-rose-50",
-    chipSelected: "bg-rose-100 border-rose-400 text-rose-900",
-    header: "text-rose-800",
-    customPill: "bg-rose-50 border-rose-300 text-rose-900",
+    chip: "border-hue-rose/40 text-hue-rose hover:bg-hue-rose/10",
+    chipSelected: "bg-hue-rose/10 border-hue-rose text-hue-rose",
+    header: "text-hue-rose",
+    customPill: "bg-hue-rose/10 border-hue-rose/40 text-hue-rose",
   },
   "digital-tools": {
-    chip: "border-cyan-200 text-cyan-800 hover:bg-cyan-50",
-    chipSelected: "bg-cyan-100 border-cyan-400 text-cyan-900",
-    header: "text-cyan-800",
-    customPill: "bg-cyan-50 border-cyan-300 text-cyan-900",
+    chip: "border-hue-cyan/40 text-hue-cyan hover:bg-hue-cyan/10",
+    chipSelected: "bg-hue-cyan/10 border-hue-cyan text-hue-cyan",
+    header: "text-hue-cyan",
+    customPill: "bg-hue-cyan/10 border-hue-cyan/40 text-hue-cyan",
   },
 }
 
@@ -142,7 +142,7 @@ export default function ClassroomResourcesPicker({
                   <button
                     type="button"
                     onClick={() => removeCustom(c.label, c.category)}
-                    className="hover:text-red-600 transition-colors"
+                    className="hover:text-destructive transition-colors"
                     aria-label={`Remove ${c.label}`}
                   >
                     <X size={12} />

@@ -97,7 +97,7 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
             onClick={() => resource.url && window.open(resource.url, "_blank", "noopener,noreferrer")}
             disabled={!resource.url}
             aria-label={`View ${title} resource`}
-            className="flex items-center gap-1 rounded-md bg-violet-600 px-2.5 py-1 text-xs font-medium text-white transition-colors hover:bg-violet-700 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-600 focus-visible:ring-offset-1"
+            className="flex items-center gap-1 rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary-hover disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
           >
             View
             <ExternalLink size={11} aria-hidden="true" />

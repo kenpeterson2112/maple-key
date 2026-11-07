@@ -86,7 +86,7 @@ export default function ResultsSection({
     return (
       <div className="w-full px-8 py-6">
         <div className="rounded-2xl border border-border bg-card py-12 text-center shadow-md">
-          <p className="text-lg font-semibold text-red-600">Failed to load resources</p>
+          <p className="text-lg font-semibold text-destructive">Failed to load resources</p>
           <p className="mt-2 text-muted-foreground">Please refresh the page to try again.</p>
         </div>
       </div>
@@ -264,9 +264,9 @@ export default function ResultsSection({
           <div className="relative mx-4 w-full max-w-md rounded-2xl bg-card p-6 shadow-2xl">
             <button
               onClick={() => setShowSubmitDialog(false)}
-              className="absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-stone-100"
+              className="absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-muted"
             >
-              <X size={20} className="text-stone-600" />
+              <X size={20} className="text-muted-foreground" />
             </button>
             <div className="pt-2 text-center">
               <p className="text-base leading-relaxed text-foreground">

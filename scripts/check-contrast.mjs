@@ -25,6 +25,7 @@ const UI = 3
 
 const LIGHT_SURFACES = ["background", "card", "muted", "popover"]
 const TINTS = ["primary-tint", "secondary-tint", "pop-tint"]
+const HUES = ["blue", "green", "violet", "amber", "teal", "cyan", "orange", "rose", "indigo", "slate"].map((h) => `hue-${h}`)
 const SUBJECTS = ["math", "science", "fsl", "language", "social", "health", "arts", "history", "geography"].map(
   (s) => `subject-${s}`,
 )
@@ -51,9 +52,15 @@ const PAIRS = [
   ["secondary", ["background", "card", "muted"], UI, "teal indicator / outline"],
   ["primary", ["muted"], UI, "red fill on muted"],
   ["success", ["background", "card", "success-tint"], TEXT, "status text"],
+  ["success-foreground", ["success"], TEXT, "text on a success fill"],
+  ["destructive", ["destructive/10"], TEXT, "error text on its own tint"],
   ...SUBJECTS.flatMap((s) => [
     ["subject-foreground", [s], TEXT, "text on a subject fill"],
     [s, ["background", "card", `${s}/10`], TEXT, "subject label text"],
+  ]),
+  ...HUES.flatMap((h) => [
+    ["hue-foreground", [h], TEXT, "text on a hue fill"],
+    [h, ["background", "card", `${h}/10`], TEXT, "hue label text"],
   ]),
 ]
 
