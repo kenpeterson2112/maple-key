@@ -241,9 +241,9 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
       </div>
 
       {/* Question card */}
-      <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
-        <p className="font-medium text-[#2C2C2C] mb-1">{q.prompt}</p>
-        <p className="text-xs text-[#888] mb-4">{q.rationale}</p>
+      <div className="bg-card rounded-xl border-2 border-border p-5">
+        <p className="font-medium text-foreground mb-1">{q.prompt}</p>
+        <p className="text-xs text-muted-foreground mb-4">{q.rationale}</p>
 
         {/* Reasoning bullets — what to weigh before answering. Assessment
             bullets are about THIS class, so they get their own tint. */}
@@ -255,7 +255,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
                 className={`text-sm rounded-lg px-3 py-2 border ${
                   bullet.type === "assessment"
                     ? "bg-sky-50 border-sky-200 text-sky-900"
-                    : "bg-muted/30 border-border text-[#2C2C2C]"
+                    : "bg-muted/30 border-border text-foreground"
                 }`}
               >
                 {bullet.type === "assessment" && (
@@ -279,7 +279,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
           onChange={(e) => setOpenResponseValues((prev) => ({ ...prev, [q.id]: e.target.value }))}
           placeholder="Type your answer or approach here…"
           rows={3}
-          className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm text-[#2C2C2C] resize-y focus:outline-none focus:border-violet-500"
+          className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm text-foreground resize-y focus:outline-none focus:border-violet-500"
         />
 
         {/* Suggestions — collapsed by default, revealed on a timer. */}
@@ -293,7 +293,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
             </button>
           ) : (
             <div className="flex flex-col gap-2">
-              <p className="text-xs font-medium text-[#888]">
+              <p className="text-xs font-medium text-muted-foreground">
                 {isRevealing ? "Thinking through the options…" : "What others tried"}
               </p>
 
@@ -310,13 +310,13 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
                     className={`w-full text-left px-4 py-3 rounded-lg text-sm border-2 transition-colors motion-safe:animate-fade-in ${
                       isSelected
                         ? "bg-violet-600 border-violet-600 text-white"
-                        : "bg-white border-[#E8D5C4] text-[#2C2C2C] hover:border-violet-400"
+                        : "bg-card border-border text-foreground hover:border-violet-400"
                     }`}
                   >
                     <span className="block font-medium">{opt.label}</span>
                     {opt.reasoning && (
                       <span
-                        className={`block text-xs mt-1 ${isSelected ? "text-white/80" : "text-[#888]"}`}
+                        className={`block text-xs mt-1 ${isSelected ? "text-white/80" : "text-muted-foreground"}`}
                       >
                         {opt.reasoning}
                       </span>
@@ -330,7 +330,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
               {isRevealing && (
                 <div
                   aria-hidden="true"
-                  className="w-full px-4 py-3 rounded-lg border-2 border-dashed border-[#E8D5C4] motion-safe:animate-pulse"
+                  className="w-full px-4 py-3 rounded-lg border-2 border-dashed border-border motion-safe:animate-pulse"
                 >
                   <div className="h-3 w-1/3 rounded bg-muted" />
                   <div className="h-2.5 w-2/3 rounded bg-muted mt-2" />
@@ -343,7 +343,7 @@ export function PlanningQuestionsStep({ state, onAdvance }: PlanningQuestionsSte
         <button
           onClick={() => onAdvance(q.id)}
           disabled={!hasAnswer}
-          className="mt-4 w-full py-2.5 bg-violet-600 hover:bg-violet-700 disabled:bg-gray-200 disabled:text-[#888] disabled:cursor-not-allowed text-white font-semibold rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+          className="mt-4 w-full py-2.5 bg-violet-600 hover:bg-violet-700 disabled:bg-gray-200 disabled:text-muted-foreground disabled:cursor-not-allowed text-white font-semibold rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
         >
           {isLastQuestion ? "Generate Lesson Plan" : "Continue →"}
         </button>

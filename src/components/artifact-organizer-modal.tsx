@@ -150,9 +150,9 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-card rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-4 border-b border-stone-200">
-          <h3 className="text-lg font-semibold text-[#2C2C2C]">Editable Graphic Organizer</h3>
+          <h3 className="text-lg font-semibold text-foreground">Editable Graphic Organizer</h3>
           <button
             onClick={handleSaveAndClose}
             className="p-1.5 hover:bg-stone-100 rounded-lg transition-colors"

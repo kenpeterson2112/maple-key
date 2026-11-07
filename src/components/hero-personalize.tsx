@@ -35,14 +35,14 @@ export const GRADES: PickerOption[] = [
 
 export const SUBJECTS: PickerOption[] = [
   { value: "", label: "any subject" },
-  { value: "Math", label: "Math", color: "#166534" },
-  { value: "Science", label: "Science", color: "#1E40AF" },
-  { value: "Language", label: "Language", color: "#CA8A04" },
-  { value: "Social Studies", label: "Social Studies", color: "#7C3AED" },
-  { value: "FSL", label: "FSL", color: "#0D9488" },
-  { value: "Health & Physical Education", label: "Health & PE", color: "#EA580C" },
-  { value: "History", label: "History", color: "#92400E" },
-  { value: "Geography", label: "Geography", color: "#0E7490" },
+  { value: "Math", label: "Math", color: "var(--subject-math)" },
+  { value: "Science", label: "Science", color: "var(--subject-science)" },
+  { value: "Language", label: "Language", color: "var(--subject-language)" },
+  { value: "Social Studies", label: "Social Studies", color: "var(--subject-social)" },
+  { value: "FSL", label: "FSL", color: "var(--subject-fsl)" },
+  { value: "Health & Physical Education", label: "Health & PE", color: "var(--subject-health)" },
+  { value: "History", label: "History", color: "var(--subject-history)" },
+  { value: "Geography", label: "Geography", color: "var(--subject-geography)" },
 ]
 
 // Grade-stable subjects only — History and Geography rename their strands
@@ -141,7 +141,7 @@ export default function HeroPersonalize({
     : []
 
   return (
-    <section className="relative overflow-hidden border-b border-[#E8D5C4] bg-gradient-to-b from-[#FFF8F0] via-[#FAF3E0] to-[#FAF3E0]">
+    <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-muted via-muted to-muted">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-60"
@@ -157,7 +157,7 @@ export default function HeroPersonalize({
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="relative mx-auto max-w-[1500px] px-4 md:px-6 py-2 md:py-3"
       >
-        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 md:gap-x-2 text-lg md:text-2xl font-semibold tracking-tight text-[#2C2C2C] leading-tight">
+        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 md:gap-x-2 text-lg md:text-2xl font-semibold tracking-tight text-foreground leading-tight">
           <span>I teach</span>
           <InlinePicker
             value={primaryGrade}
@@ -183,7 +183,7 @@ export default function HeroPersonalize({
           />
           {filters.subject && (
             <>
-              <span className="text-[#A8998E]">·</span>
+              <span className="text-muted-foreground">·</span>
               <InlinePicker
                 value={filters.strand || ""}
                 placeholder="any strand"
@@ -207,7 +207,7 @@ export default function HeroPersonalize({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -6 }}
                 onClick={onReset}
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#E8D5C4] bg-white/70 px-3 py-1 text-xs font-medium text-[#8B4513] backdrop-blur transition-colors hover:bg-white"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium text-secondary-strong backdrop-blur transition-colors hover:bg-card"
                 title="We guessed your province from your timezone. Click to clear."
               >
                 <RotateCcw size={12} />
@@ -223,17 +223,17 @@ export default function HeroPersonalize({
 
 function ResultsCounter({ count }: { count: number }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border-2 border-[#FF6B35]/30 bg-white px-3 py-1.5 shadow-sm">
+    <div className="inline-flex items-center gap-2 rounded-full border-2 border-primary/30 bg-card px-3 py-1.5 shadow-sm">
       <motion.span
         key={count}
         initial={{ opacity: 0, y: -4 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25 }}
-        className="text-sm font-bold text-[#FF6B35] tabular-nums"
+        className="text-sm font-bold text-primary tabular-nums"
       >
         {count}
       </motion.span>
-      <span className="text-sm font-medium text-[#8B4513]">
+      <span className="text-sm font-medium text-foreground">
         resource{count === 1 ? "" : "s"} match
       </span>
     </div>

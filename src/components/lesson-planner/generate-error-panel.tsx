@@ -107,7 +107,7 @@ export default function GenerateErrorPanel({
                 onChange={(e) => { setPasteText(e.target.value); onClearPasteError() }}
                 rows={6}
                 placeholder={'Paste the JSON response from the LLM here, e.g.:\n{\n  "title": "...",\n  "mindsOnContent": "...",\n  ...\n}'}
-                className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-white text-xs font-mono text-[#444] focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                className="w-full px-3 py-2 border border-amber-300 rounded-lg bg-card text-xs font-mono text-foreground focus:outline-none focus:border-amber-500 transition-colors resize-none"
               />
               {pasteError && (
                 <p className="text-xs text-red-600">{pasteError}</p>

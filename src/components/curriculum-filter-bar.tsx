@@ -55,7 +55,7 @@ export default function CurriculumFilterBar() {
       {/* Desktop: a single centered "segmented control" pill holding all four
           filters (province · grade · subject · strand), divided by hairlines. */}
       <div className="hidden md:flex items-center flex-shrink-0">
-        <div className="inline-flex items-center gap-0.5 rounded-full border border-[#E8D5C4] bg-white/70 px-1.5 py-1 shadow-sm">
+        <div className="inline-flex items-center gap-0.5 rounded-full border border-border bg-card/70 px-1.5 py-1 shadow-sm">
           <InlinePicker
             variant="compact"
             value={state.province}
@@ -64,7 +64,7 @@ export default function CurriculumFilterBar() {
             onChange={setProvince}
             ariaLabel="Choose province"
           />
-          <span className="h-4 w-px flex-shrink-0 bg-[#E8D5C4]" aria-hidden="true" />
+          <span className="h-4 w-px flex-shrink-0 bg-border" aria-hidden="true" />
           <InlinePicker
             variant="compact"
             value={state.grade}
@@ -73,7 +73,7 @@ export default function CurriculumFilterBar() {
             onChange={setGrade}
             ariaLabel="Choose grade"
           />
-          <span className="h-4 w-px flex-shrink-0 bg-[#E8D5C4]" aria-hidden="true" />
+          <span className="h-4 w-px flex-shrink-0 bg-border" aria-hidden="true" />
           <InlinePicker
             variant="compact"
             value={state.subject}
@@ -84,7 +84,7 @@ export default function CurriculumFilterBar() {
           />
           {!isStrandDisabled && (
             <>
-              <span className="h-4 w-px flex-shrink-0 bg-[#E8D5C4]" aria-hidden="true" />
+              <span className="h-4 w-px flex-shrink-0 bg-border" aria-hidden="true" />
               <InlinePicker
                 variant="compact"
                 value={state.strand}
@@ -103,7 +103,7 @@ export default function CurriculumFilterBar() {
       <div className="flex md:hidden items-center gap-1.5 flex-shrink-0">
         <button
           onClick={() => setMobileOpenFilter(mobileOpenFilter === "province" ? null : "province")}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-muted border border-border text-secondary-strong hover:bg-primary-tint transition-colors flex-shrink-0"
           title="Choose province"
         >
           <Leaf size={18} />
@@ -111,7 +111,7 @@ export default function CurriculumFilterBar() {
 
         <button
           onClick={() => setMobileOpenFilter(mobileOpenFilter === "grade" ? null : "grade")}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors text-xs font-semibold flex-shrink-0"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-muted border border-border text-secondary-strong hover:bg-primary-tint transition-colors text-xs font-semibold flex-shrink-0"
           title="Choose grade"
         >
           {getGradeLabel()}
@@ -119,7 +119,7 @@ export default function CurriculumFilterBar() {
 
         <button
           onClick={() => setMobileOpenFilter(mobileOpenFilter === "subject" ? null : "subject")}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5ED] border border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC] transition-colors flex-shrink-0"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-muted border border-border text-secondary-strong hover:bg-primary-tint transition-colors flex-shrink-0"
           title="Choose subject"
         >
           {getSubjectIcon()}
@@ -129,8 +129,8 @@ export default function CurriculumFilterBar() {
           onClick={() => setMobileOpenFilter(mobileOpenFilter === "strand" ? null : "strand")}
           className={`flex h-10 w-10 items-center justify-center rounded-full border text-xs font-semibold transition-colors flex-shrink-0 ${
             isStrandDisabled
-              ? "bg-[#F5F5F5] border-[#E0E0E0] text-[#A8998E] cursor-not-allowed opacity-50"
-              : "bg-[#FFF5ED] border-[#E8D5C4] text-[#8B4513] hover:bg-[#FFE5CC]"
+              ? "bg-muted border-border text-muted-foreground cursor-not-allowed opacity-50"
+              : "bg-muted border-border text-secondary-strong hover:bg-primary-tint"
           }`}
           disabled={isStrandDisabled}
           title={isStrandDisabled ? "Select a subject first" : "Choose strand"}
@@ -141,12 +141,12 @@ export default function CurriculumFilterBar() {
 
       {/* Mobile: full-width dropdown panel anchored below the header bar */}
       {mobileOpenFilter && (
-        <div className="md:hidden absolute left-3 right-3 top-full z-50 mt-1 rounded-2xl border border-[#E8D5C4] bg-white shadow-lg">
+        <div className="md:hidden absolute left-3 right-3 top-full z-50 mt-1 rounded-2xl border border-border bg-card shadow-lg">
           {mobileOpenFilter === "province" && (
             <div className="p-3 space-y-2">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-[#2C2C2C]">Province</h3>
-                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-[#F5F5F5] rounded-lg">
+                <h3 className="text-sm font-semibold text-foreground">Province</h3>
+                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-muted rounded-lg">
                   <X size={16} />
                 </button>
               </div>
@@ -160,8 +160,8 @@ export default function CurriculumFilterBar() {
                     }}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                       state.province === opt.value
-                        ? "bg-[#FFE5CC] text-[#8B4513]"
-                        : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                        ? "bg-primary-tint text-primary-strong"
+                        : "bg-muted text-foreground hover:bg-muted"
                     }`}
                   >
                     {opt.value || "All"}
@@ -174,8 +174,8 @@ export default function CurriculumFilterBar() {
           {mobileOpenFilter === "grade" && (
             <div className="p-3 space-y-2">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-[#2C2C2C]">Grade</h3>
-                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-[#F5F5F5] rounded-lg">
+                <h3 className="text-sm font-semibold text-foreground">Grade</h3>
+                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-muted rounded-lg">
                   <X size={16} />
                 </button>
               </div>
@@ -189,8 +189,8 @@ export default function CurriculumFilterBar() {
                     }}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                       state.grade === opt.value
-                        ? "bg-[#FFE5CC] text-[#8B4513]"
-                        : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                        ? "bg-primary-tint text-primary-strong"
+                        : "bg-muted text-foreground hover:bg-muted"
                     }`}
                   >
                     {opt.value || "All"}
@@ -203,8 +203,8 @@ export default function CurriculumFilterBar() {
           {mobileOpenFilter === "subject" && (
             <div className="p-3 space-y-2">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-[#2C2C2C]">Subject</h3>
-                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-[#F5F5F5] rounded-lg">
+                <h3 className="text-sm font-semibold text-foreground">Subject</h3>
+                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-muted rounded-lg">
                   <X size={16} />
                 </button>
               </div>
@@ -218,8 +218,8 @@ export default function CurriculumFilterBar() {
                     }}
                     className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       state.subject === opt.value
-                        ? "bg-[#FFE5CC] text-[#8B4513]"
-                        : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                        ? "bg-primary-tint text-primary-strong"
+                        : "bg-muted text-foreground hover:bg-muted"
                     }`}
                   >
                     {opt.label}
@@ -232,8 +232,8 @@ export default function CurriculumFilterBar() {
           {mobileOpenFilter === "strand" && !isStrandDisabled && (
             <div className="p-3 space-y-2">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-[#2C2C2C]">Strand</h3>
-                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-[#F5F5F5] rounded-lg">
+                <h3 className="text-sm font-semibold text-foreground">Strand</h3>
+                <button onClick={() => setMobileOpenFilter(null)} className="p-1 hover:bg-muted rounded-lg">
                   <X size={16} />
                 </button>
               </div>
@@ -247,8 +247,8 @@ export default function CurriculumFilterBar() {
                     }}
                     className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       state.strand === opt.value
-                        ? "bg-[#FFE5CC] text-[#8B4513]"
-                        : "bg-[#F5F5F5] text-[#2C2C2C] hover:bg-[#FFF5ED]"
+                        ? "bg-primary-tint text-primary-strong"
+                        : "bg-muted text-foreground hover:bg-muted"
                     }`}
                   >
                     {opt.label}

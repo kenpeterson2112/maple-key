@@ -28,11 +28,11 @@ const GROUP_LABELS: Record<string, string> = {
 }
 
 const READINESS_OPTIONS = [
-  { value: "no-data", label: "No class data yet", dot: "#9CA3AF" },
-  { value: "poor",    label: "Needs Support",      dot: "#B45309" },
-  { value: "okay",    label: "Developing",          dot: "#D97706" },
-  { value: "good",    label: "Strong",              dot: "#16A34A" },
-  { value: "great",   label: "Excelling",           dot: "#166534" },
+  { value: "no-data", label: "No class data yet", dot: "var(--muted-foreground)" },
+  { value: "poor",    label: "Needs Support",      dot: "var(--signal-1)" },
+  { value: "okay",    label: "Developing",          dot: "var(--signal-2)" },
+  { value: "good",    label: "Strong",              dot: "var(--signal-3)" },
+  { value: "great",   label: "Excelling",           dot: "var(--signal-4)" },
 ]
 
 export default function SidebarFilters({ onFilterChange, sidebarFilters: externalFilters }: SidebarFiltersProps) {
@@ -103,19 +103,19 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
 
     switch (modality) {
       case "Books & Print Media":
-        return <BookOpen {...iconProps} style={{ color: "#D9742A" }} />
+        return <BookOpen {...iconProps} className="flex-shrink-0 text-primary" />
       case "Online":
-        return <Globe {...iconProps} style={{ color: "#4CAFB5" }} />
+        return <Globe {...iconProps} className="flex-shrink-0 text-secondary" />
       case "Interactive":
-        return <MousePointerClick {...iconProps} style={{ color: "#849657" }} />
+        return <MousePointerClick {...iconProps} className="flex-shrink-0 text-secondary-strong" />
       case "Video":
-        return <Video {...iconProps} style={{ color: "#FFC107" }} />
+        return <Video {...iconProps} className="flex-shrink-0 text-pop" />
       case "Audio/Podcast":
-        return <Headphones {...iconProps} style={{ color: "#D9742A" }} />
+        return <Headphones {...iconProps} className="flex-shrink-0 text-primary" />
       case "Trip":
-        return <MapPin {...iconProps} style={{ color: "#4CAFB5" }} />
+        return <MapPin {...iconProps} className="flex-shrink-0 text-secondary" />
       case "Guest Speaker":
-        return <Mic {...iconProps} style={{ color: "#849657" }} />
+        return <Mic {...iconProps} className="flex-shrink-0 text-secondary-strong" />
       default:
         return null
     }
@@ -126,9 +126,9 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
 
     switch (cost) {
       case "Free Only":
-        return <CheckCircle2 {...iconProps} style={{ color: "#849657" }} />
+        return <CheckCircle2 {...iconProps} className="flex-shrink-0 text-secondary-strong" />
       case "Paid":
-        return <DollarSign {...iconProps} style={{ color: "#D9742A" }} />
+        return <DollarSign {...iconProps} className="flex-shrink-0 text-primary" />
       default:
         return null
     }
@@ -170,12 +170,12 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
   }
 
   return (
-    <aside className="hidden md:block w-[20%] bg-[#FAF3E0] border-r border-[#E8D5C4] p-4 overflow-y-auto shadow-md">
+    <aside className="hidden md:block w-[20%] bg-muted border-r border-border p-4 overflow-y-auto shadow-md">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <h2 className="text-base font-bold text-[#8B4513]">Filters</h2>
+          <h2 className="text-base font-bold text-foreground">Filters</h2>
           {totalActiveFilters > 0 && (
-            <span className="px-2 py-0.5 bg-[#FF6B35] text-white text-xs font-semibold rounded-full">
+            <span className="px-2 py-0.5 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
               {totalActiveFilters}
             </span>
           )}
@@ -183,7 +183,7 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
         {totalActiveFilters > 0 && (
           <button
             onClick={handleClearAll}
-            className="text-sm text-[#8B4513] hover:text-[#FF6B35] underline cursor-pointer transition-colors duration-150"
+            className="text-sm text-secondary-strong hover:text-primary underline cursor-pointer transition-colors duration-150"
           >
             Clear All
           </button>
@@ -191,21 +191,21 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
       </div>
 
       {Object.entries(filterOptions).map(([groupKey, options]) => (
-        <div key={groupKey} className="mb-4 pb-4 border-b border-[#E8D5C4]">
+        <div key={groupKey} className="mb-4 pb-4 border-b border-border">
           <button onClick={() => toggleGroup(groupKey)} className="flex items-center justify-between w-full mb-3 group">
-            <h3 className="text-sm font-semibold text-[#8B4513] group-hover:text-[#FF6B35] transition-colors duration-150">
+            <h3 className="text-sm font-semibold text-secondary-strong group-hover:text-primary transition-colors duration-150">
               {GROUP_LABELS[groupKey] ?? groupKey}
             </h3>
             <ChevronDown
               size={16}
-              className={`text-[#A8998E] transition-transform duration-200 ${expandedGroups[groupKey] ? "" : "-rotate-90"}`}
+              className={`text-muted-foreground transition-transform duration-200 ${expandedGroups[groupKey] ? "" : "-rotate-90"}`}
             />
           </button>
 
           {expandedGroups[groupKey] && (
             <div className="space-y-2">
               {options.length === 0 ? (
-                <p className="text-xs text-[#A8998E] italic">Loading...</p>
+                <p className="text-xs text-muted-foreground italic">Loading...</p>
               ) : (
                 options.map((option) => (
                   <label key={option} className="flex items-center gap-2 cursor-pointer group/item">
@@ -213,12 +213,12 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
                       type="checkbox"
                       checked={selectedFilters[groupKey]?.includes(option) || false}
                       onChange={() => toggleFilter(groupKey, option)}
-                      className="w-4 h-4 rounded-lg border-[#E8D5C4] text-[#FF6B35] bg-white cursor-pointer transition-all duration-150 accent-[#FF6B35]"
+                      className="w-4 h-4 rounded-lg border-border text-primary bg-card cursor-pointer transition-all duration-150 accent-primary"
                     />
                     {groupKey === "modality" && getModalityIcon(option)}
                     {groupKey === "cost" && getCostIcon(option)}
                     {groupKey === "accessibility" && getAccessibilityIcon(option)}
-                    <span className="text-sm text-[#555] group-hover/item:text-[#8B4513] transition-colors duration-150">
+                    <span className="text-sm text-foreground group-hover/item:text-secondary-strong transition-colors duration-150">
                       {option}
                     </span>
                   </label>
@@ -232,12 +232,12 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
       {/* Student Readiness filter */}
       <div className="mb-4 pb-4">
         <button onClick={() => toggleGroup("readiness")} className="flex items-center justify-between w-full mb-3 group">
-          <h3 className="text-sm font-semibold text-[#8B4513] group-hover:text-[#FF6B35] transition-colors duration-150">
+          <h3 className="text-sm font-semibold text-secondary-strong group-hover:text-primary transition-colors duration-150">
             Student Readiness
           </h3>
           <ChevronDown
             size={16}
-            className={`text-[#A8998E] transition-transform duration-200 ${expandedGroups.readiness ? "" : "-rotate-90"}`}
+            className={`text-muted-foreground transition-transform duration-200 ${expandedGroups.readiness ? "" : "-rotate-90"}`}
           />
         </button>
         {expandedGroups.readiness && (
@@ -248,10 +248,10 @@ export default function SidebarFilters({ onFilterChange, sidebarFilters: externa
                   type="checkbox"
                   checked={selectedFilters.readiness?.includes(value) || false}
                   onChange={() => toggleFilter("readiness", value)}
-                  className="w-4 h-4 rounded-lg border-[#E8D5C4] text-[#FF6B35] bg-white cursor-pointer transition-all duration-150 accent-[#FF6B35]"
+                  className="w-4 h-4 rounded-lg border-border text-primary bg-card cursor-pointer transition-all duration-150 accent-primary"
                 />
                 <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: dot }} />
-                <span className="text-sm text-[#555] group-hover/item:text-[#8B4513] transition-colors duration-150">
+                <span className="text-sm text-foreground group-hover/item:text-secondary-strong transition-colors duration-150">
                   {label}
                 </span>
               </label>

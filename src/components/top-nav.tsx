@@ -91,7 +91,7 @@ export default function TopNav({
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-[#E8D5C4] bg-[#FAF3E0]/90 backdrop-blur-md supports-[backdrop-filter]:bg-[#FAF3E0]/80">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
         <div className="mx-auto max-w-[1500px] px-4 md:px-6 py-2.5">
           {/* Desktop */}
           <div className="hidden md:flex items-center justify-between gap-4 relative">
@@ -101,7 +101,7 @@ export default function TopNav({
                 onClick={onGoHome}
                 aria-label="Maple Key home"
                 aria-current={isHome ? "page" : undefined}
-                className={`rounded-xl p-1 transition-colors hover:bg-[#FFE5CC] ${isHome ? "bg-[#FFE5CC]" : ""}`}
+                className={`rounded-xl p-1 transition-colors hover:bg-primary-tint ${isHome ? "bg-primary-tint" : ""}`}
               >
                 <img
                   src={withBasePath("/maple-key-logo.png")}
@@ -125,20 +125,20 @@ export default function TopNav({
               <div ref={materialsRef} className="relative">
                 <button
                   onClick={openMaterialsPopover}
-                  className="flex items-center gap-1.5 rounded-full border border-[#E8D5C4] bg-white px-3.5 py-2 text-sm font-semibold text-[#8B4513] shadow-sm transition-all hover:bg-[#FFF5ED]"
+                  className="flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold text-secondary-strong shadow-sm transition-all hover:bg-accent"
                   title="Classroom materials"
                 >
-                  <SlidersHorizontal size={14} className="text-[#C65D3B]" />
+                  <SlidersHorizontal size={14} className="text-primary-strong" />
                   <span>Materials</span>
                   {materials.total > 0 && (
-                    <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                    <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground">
                       {materials.total}
                     </span>
                   )}
-                  <ChevronDown size={14} className="text-[#A8998E]" />
+                  <ChevronDown size={14} className="text-muted-foreground" />
                 </button>
                 {isMaterialsOpen && (
-                  <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-[#E8D5C4] bg-white shadow-xl z-50 p-2">
+                  <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-border bg-card shadow-xl z-50 p-2">
                     <MaterialsSummary snapshot={materials} onEdit={openSettingsFromMaterials} />
                   </div>
                 )}
@@ -146,10 +146,10 @@ export default function TopNav({
 
               <button
                 onClick={() => setIsSettingsOpen(true)}
-                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#FFE5CC]"
+                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-primary-tint"
                 title="Settings"
               >
-                <Settings size={20} className="text-[#8B4513]" />
+                <Settings size={20} className="text-foreground" />
               </button>
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function TopNav({
               onClick={onGoHome}
               aria-label="Maple Key home"
               aria-current={isHome ? "page" : undefined}
-              className={`rounded-lg p-0.5 transition-colors ${isHome ? "bg-[#FFE5CC]" : ""}`}
+              className={`rounded-lg p-0.5 transition-colors ${isHome ? "bg-primary-tint" : ""}`}
             >
               <img
                 src={withBasePath("/maple-key-logo.png")}
@@ -183,13 +183,13 @@ export default function TopNav({
               {showResourceFilters && (
                 <button
                   onClick={onOpenMobileFilters}
-                  className="flex items-center gap-1 rounded-full border border-[#E8D5C4] bg-white px-2.5 py-1.5 text-xs font-semibold text-[#8B4513] shadow-sm"
+                  className="flex items-center gap-1 rounded-full border border-border bg-card px-2.5 py-1.5 text-xs font-semibold text-secondary-strong shadow-sm"
                   title="Filters"
                 >
                   <SlidersHorizontal size={12} />
                   Filters
                   {totalActiveFilters > 0 && (
-                    <span className="rounded-full bg-[#FF6B35] px-1.5 text-[10px] font-bold text-white">
+                    <span className="rounded-full bg-primary px-1.5 text-[10px] font-bold text-primary-foreground">
                       {totalActiveFilters >= 10 ? "9+" : totalActiveFilters}
                     </span>
                   )}
@@ -197,22 +197,22 @@ export default function TopNav({
               )}
               <button
                 onClick={() => setIsMobileMenuOpen((v) => !v)}
-                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#FFE5CC]"
+                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-primary-tint"
                 aria-label="Menu"
               >
-                {isMobileMenuOpen ? <X size={18} className="text-[#8B4513]" /> : <Menu size={18} className="text-[#8B4513]" />}
+                {isMobileMenuOpen ? <X size={18} className="text-foreground" /> : <Menu size={18} className="text-foreground" />}
               </button>
             </div>
           </div>
 
           {isMobileMenuOpen && (
-            <div className="md:hidden mt-3 rounded-2xl border-2 border-[#E8D5C4] bg-white p-3 shadow-lg space-y-2">
-              <div className="rounded-lg bg-[#FFF5ED] px-3 py-2">
-                <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#8B4513]">
+            <div className="md:hidden mt-3 rounded-2xl border-2 border-border bg-card p-3 shadow-lg space-y-2">
+              <div className="rounded-lg bg-muted px-3 py-2">
+                <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-foreground">
                   <SlidersHorizontal size={16} />
                   Materials
                   {materials.total > 0 && (
-                    <span className="rounded-full bg-[#FF6B35] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                    <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground">
                       {materials.total}
                     </span>
                   )}
@@ -224,7 +224,7 @@ export default function TopNav({
                   setIsSettingsOpen(true)
                   setIsMobileMenuOpen(false)
                 }}
-                className="flex w-full items-center gap-2 rounded-lg bg-[#FFF5ED] px-3 py-2 text-sm font-semibold text-[#8B4513]"
+                className="flex w-full items-center gap-2 rounded-lg bg-muted px-3 py-2 text-sm font-semibold text-secondary-strong"
               >
                 <Settings size={16} />
                 Settings
@@ -255,7 +255,7 @@ function SpaceToggle({
     <div
       role="tablist"
       aria-label="View"
-      className="flex items-center gap-1 rounded-full border border-[#E8D5C4] bg-white p-1 shadow-sm"
+      className="flex items-center gap-1 rounded-full border border-border bg-card p-1 shadow-sm"
     >
       {TOGGLE_ITEMS.map((item) => {
         const Icon = item.icon
@@ -269,8 +269,8 @@ function SpaceToggle({
             onClick={() => onChangeSpace(item.id)}
             className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition-all ${
               isActive
-                ? "bg-[#FF6B35] text-white shadow-sm"
-                : "text-[#8B4513] hover:bg-[#FFF5ED]"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-secondary-strong hover:bg-accent"
             }`}
           >
             <Icon size={compact ? 14 : 16} />
@@ -279,7 +279,7 @@ function SpaceToggle({
             {showBadge && (
               <span
                 className={`flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold ${
-                  isActive ? "bg-white/25 text-white" : "bg-[#FF6B35] text-white"
+                  isActive ? "bg-primary-foreground/25 text-primary-foreground" : "bg-primary text-primary-foreground"
                 }`}
               >
                 {planBadge >= 10 ? "9+" : planBadge}

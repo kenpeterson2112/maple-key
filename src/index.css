@@ -60,6 +60,24 @@
   --ring: oklch(0.5661 0.1059 172.8);              /* #0F8A70 teal focus ring */
   --radius: 0.875rem;
 
+  /* Status: "added", "saved", "done". Text on success-tint uses success. */
+  --success: oklch(0.4479 0.1083 151.3);           /* #166534 */
+  --success-tint: oklch(0.962 0.043 156.7);        /* #DCFCE7 */
+
+  /* Subject colours. One value per subject works as a fill (with
+     subject-foreground on it), as label text, and at low opacity as a tint
+     (bg-subject-math/10, border-subject-math/40). */
+  --subject-foreground: oklch(1 0 0);              /* #FFFFFF */
+  --subject-math: oklch(0.4479 0.1083 151.3);      /* #166534 */
+  --subject-science: oklch(0.424 0.181 265.6);     /* #1E40AF */
+  --subject-fsl: oklch(0.511 0.086 186.4);         /* #0F766E */
+  --subject-language: oklch(0.5343 0.1195 65.4);   /* #9B5C00 */
+  --subject-social: oklch(0.541 0.247 293);        /* #7C3AED */
+  --subject-health: oklch(0.545 0.174 38.5);       /* #BF3E05 */
+  --subject-arts: oklch(0.518 0.226 323.9);        /* #A21CAF */
+  --subject-history: oklch(0.4732 0.1247 46.2);    /* #92400E */
+  --subject-geography: oklch(0.5198 0.0936 223.1); /* #0E7490 */
+
   /* Signal-distribution levels (proficiency Level 1-4) */
   --signal-1: oklch(0.62 0.19 45);   /* burnt orange — needs critical attention */
   --signal-1-foreground: oklch(0.3 0.15 40);
@@ -108,6 +126,20 @@
   --input: oklch(0.274 0.015 62.7);                /* #2D2620 */
   --ring: oklch(0.7796 0.1414 172.7);              /* #2DD4AE */
 
+  --success: oklch(0.8 0.182 151.7);               /* #4ADE80 */
+  --success-tint: oklch(0.281 0.047 155.2);        /* #14301F */
+
+  --subject-foreground: oklch(0.209 0.01 52.9);    /* #1C1714 */
+  --subject-math: oklch(0.8 0.182 151.7);          /* #4ADE80 */
+  --subject-science: oklch(0.714 0.143 254.6);     /* #60A5FA */
+  --subject-fsl: oklch(0.7845 0.1325 181.9);       /* #2DD4BF */
+  --subject-language: oklch(0.8606 0.1731 91.9);   /* #FACC15 */
+  --subject-social: oklch(0.709 0.159 293.5);      /* #A78BFA */
+  --subject-health: oklch(0.758 0.159 55.9);       /* #FB923C */
+  --subject-arts: oklch(0.748 0.207 322.2);        /* #E879F9 */
+  --subject-history: oklch(0.76 0.103 61.9);       /* #E0A26B */
+  --subject-geography: oklch(0.7971 0.1339 211.5); /* #22D3EE */
+
   --signal-1: oklch(0.62 0.19 45);
   --signal-1-foreground: oklch(0.3 0.15 40);
   --signal-2: oklch(0.84 0.15 95);
@@ -150,6 +182,18 @@
   --color-border-strong: var(--border-strong);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-tint: var(--success-tint);
+  --color-subject-foreground: var(--subject-foreground);
+  --color-subject-math: var(--subject-math);
+  --color-subject-science: var(--subject-science);
+  --color-subject-fsl: var(--subject-fsl);
+  --color-subject-language: var(--subject-language);
+  --color-subject-social: var(--subject-social);
+  --color-subject-health: var(--subject-health);
+  --color-subject-arts: var(--subject-arts);
+  --color-subject-history: var(--subject-history);
+  --color-subject-geography: var(--subject-geography);
   --color-signal-1: var(--signal-1);
   --color-signal-1-foreground: var(--signal-1-foreground);
   --color-signal-2: var(--signal-2);

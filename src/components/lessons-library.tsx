@@ -54,27 +54,27 @@ export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: Lesso
   const byId = useMemo(() => new Map(lessons.map((l) => [l.id, l])), [lessons])
 
   return (
-    <div className="w-full h-full bg-[#FAF3E0] flex flex-col overflow-hidden">
+    <div className="w-full h-full bg-background flex flex-col overflow-hidden">
       {/* Title strip */}
-      <PageHeader icon={Library} title="All Lessons" iconColor="#166534" iconBg="bg-green-100">
+      <PageHeader icon={Library} title="All Lessons" iconColor="text-secondary-strong" iconBg="bg-secondary-tint">
         <DevSeedControl scope={{ kind: "lessons", lessons }} onChanged={() => setReloadNonce((n) => n + 1)} />
       </PageHeader>
 
       {/* Controls */}
-      <div className="px-4 md:px-6 py-3 border-b border-[#E8D5C4] bg-[#FAF3E0] flex flex-wrap items-center gap-3">
+      <div className="px-4 md:px-6 py-3 border-b border-border bg-muted flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-2">
-          <label className="text-xs font-semibold uppercase tracking-wider text-[#A8998E]">Sort</label>
+          <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Sort</label>
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
-            className="px-3 py-1.5 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors"
+            className="px-3 py-1.5 border-2 border-border rounded-lg bg-card text-sm focus:outline-none focus:border-ring transition-colors"
           >
             <option value="newest">Newest first</option>
             <option value="oldest">Oldest first</option>
             <option value="title">Title (A–Z)</option>
           </select>
         </div>
-        <span className="ml-auto text-sm text-[#888]">
+        <span className="ml-auto text-sm text-muted-foreground">
           {visible.length} lesson{visible.length !== 1 ? "s" : ""}
         </span>
       </div>
@@ -83,8 +83,8 @@ export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: Lesso
       <div className="flex-1 overflow-y-auto px-5 md:px-8 py-6">
         <div key={reloadNonce} className="max-w-3xl mx-auto space-y-3">
           {visible.length === 0 ? (
-            <div className="text-center py-16 text-[#888]">
-              <p className="font-semibold text-[#2C2C2C]">No lessons found</p>
+            <div className="text-center py-16 text-muted-foreground">
+              <p className="font-semibold text-foreground">No lessons found</p>
               <p className="text-sm mt-1">Try a different subject filter, or generate a new lesson.</p>
             </div>
           ) : (
@@ -112,14 +112,14 @@ export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: Lesso
                 )}
                 <button
                   onClick={() => onOpenLesson(lesson)}
-                  className="w-full text-left rounded-2xl bg-white border border-[#E8D5C4] px-4 py-3.5 shadow-sm hover:shadow-md hover:border-[#FF6B35]/40 transition-all active:scale-[0.99]"
+                  className="w-full text-left rounded-2xl bg-card border border-border px-4 py-3.5 shadow-sm hover:shadow-md hover:border-primary/40 transition-all active:scale-[0.99]"
                 >
-                  <div className="flex items-center gap-1.5 text-[11px] text-[#888]">
+                  <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
                     <Calendar size={12} />
                     <span className="truncate">{meta}</span>
                   </div>
-                  <h3 className="text-sm font-bold text-[#2C2C2C] mt-1 leading-snug">{lesson.title}</h3>
-                  <div className="flex items-center gap-3 mt-2 text-[11px] text-[#888]">
+                  <h3 className="text-sm font-bold text-foreground mt-1 leading-snug">{lesson.title}</h3>
+                  <div className="flex items-center gap-3 mt-2 text-[11px] text-muted-foreground">
                     {lesson.curriculumCodesCovered?.length > 0 && (
                       <span className="flex items-center gap-1">
                         <Check size={12} className="text-emerald-500" strokeWidth={3} />
@@ -128,7 +128,7 @@ export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: Lesso
                     )}
                     {(lesson.resources?.length ?? lesson.resourceIds?.length ?? 0) > 0 && (
                       <span className="flex items-center gap-1">
-                        <BookOpen size={12} className="text-[#D9742A]" />
+                        <BookOpen size={12} className="text-primary" />
                         {lesson.resources?.length ?? lesson.resourceIds?.length} resources
                       </span>
                     )}
@@ -138,7 +138,7 @@ export default function LessonsLibrary({ onOpenLesson, onContinueLesson }: Lesso
                         {tally.attempts} checks
                       </span>
                     )}
-                    <ArrowRight size={13} className="ml-auto text-[#A8998E]" />
+                    <ArrowRight size={13} className="ml-auto text-muted-foreground" />
                   </div>
                 </button>
                 {/* Siblings of the card button, not nested inside it. */}

@@ -165,17 +165,17 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
   }
 
   return (
-    <div className="bg-white rounded-xl border-2 border-[#E8D5C4] p-5">
+    <div className="bg-card rounded-xl border-2 border-border p-5">
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
-          <FilePlus2 size={20} className="text-[#8B4513]" />
-          <h3 className="text-lg font-semibold text-[#2C2C2C]">Your Own Materials</h3>
+          <FilePlus2 size={20} className="text-foreground" />
+          <h3 className="text-lg font-semibold text-foreground">Your Own Materials</h3>
         </div>
-        <span className="text-xs text-[#666]">
+        <span className="text-xs text-muted-foreground">
           {materials.length}/{MAX_FILES}
         </span>
       </div>
-      <p className="text-sm text-[#666] mb-4">
+      <p className="text-sm text-muted-foreground mb-4">
         Add files or links you'd like this lesson to draw from.
       </p>
 
@@ -184,18 +184,18 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
           type="button"
           onClick={handleFileButton}
           disabled={atLimit}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-[#E8D5C4] bg-white text-sm font-medium text-[#2C2C2C] hover:bg-[#FFF6EC] hover:border-[#FF6B35] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-border bg-card text-sm font-medium text-foreground hover:bg-muted hover:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <FilePlus2 size={16} className="text-[#8B4513]" />
+          <FilePlus2 size={16} className="text-foreground" />
           Upload File
         </button>
         <button
           type="button"
           onClick={handleLinkButton}
           disabled={atLimit}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-[#E8D5C4] bg-white text-sm font-medium text-[#2C2C2C] hover:bg-[#FFF6EC] hover:border-[#FF6B35] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-border bg-card text-sm font-medium text-foreground hover:bg-muted hover:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <Link2 size={16} className="text-[#8B4513]" />
+          <Link2 size={16} className="text-foreground" />
           Add Link
         </button>
         <input
@@ -207,7 +207,7 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
         />
       </div>
 
-      <p className="text-xs text-[#888] mb-3">
+      <p className="text-xs text-muted-foreground mb-3">
         PDF, DOC/DOCX, or image (PNG, JPG, GIF, WEBP). Up to {MAX_FILE_SIZE_MB} MB per file,{" "}
         {MAX_FILES} files total.
       </p>
@@ -220,16 +220,16 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
       )}
 
       {draft && (
-        <div className="border-2 border-[#FF6B35] rounded-lg p-4 mb-3 bg-[#FFF9F4]">
+        <div className="border-2 border-primary rounded-lg p-4 mb-3 bg-muted">
           <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2 text-sm font-medium text-[#2C2C2C]">
+            <div className="flex items-center gap-2 text-sm font-medium text-foreground">
               {draft.kind === "file" ? <FileText size={16} /> : <Link2 size={16} />}
               {draft.kind === "file" ? "Describe this file" : "Add a link"}
             </div>
             <button
               type="button"
               onClick={cancelDraft}
-              className="text-[#666] hover:text-[#2C2C2C]"
+              className="text-muted-foreground hover:text-foreground"
               aria-label="Cancel"
             >
               <X size={18} />
@@ -237,15 +237,15 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
           </div>
 
           {draft.kind === "file" && (
-            <div className="mb-3 text-sm text-[#2C2C2C]">
+            <div className="mb-3 text-sm text-foreground">
               <span className="font-medium">{draft.name}</span>{" "}
-              <span className="text-[#888]">({formatBytes(draft.fileSize)})</span>
+              <span className="text-muted-foreground">({formatBytes(draft.fileSize)})</span>
             </div>
           )}
 
           {draft.kind === "link" && (
             <div className="mb-3">
-              <label className="block text-xs font-medium text-[#2C2C2C] mb-1">
+              <label className="block text-xs font-medium text-foreground mb-1">
                 URL <span className="text-red-600">*</span>
               </label>
               <input
@@ -253,20 +253,20 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
                 value={draft.url}
                 onChange={(e) => setDraft({ ...draft, url: e.target.value })}
                 placeholder="https://example.com/resource"
-                className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors"
+                className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none focus:border-ring transition-colors"
               />
             </div>
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
             <div>
-              <label className="block text-xs font-medium text-[#2C2C2C] mb-1">
+              <label className="block text-xs font-medium text-foreground mb-1">
                 Subject <span className="text-red-600">*</span>
               </label>
               <select
                 value={draft.subject}
                 onChange={(e) => setDraft({ ...draft, subject: e.target.value })}
-                className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors"
+                className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none focus:border-ring transition-colors"
               >
                 <option value="">Select a subject…</option>
                 {SUBJECTS.map((s) => (
@@ -277,21 +277,21 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-[#2C2C2C] mb-1">
-                Curriculum expectations <span className="text-[#888]">(optional)</span>
+              <label className="block text-xs font-medium text-foreground mb-1">
+                Curriculum expectations <span className="text-muted-foreground">(optional)</span>
               </label>
               <input
                 type="text"
                 value={draft.expectations}
                 onChange={(e) => setDraft({ ...draft, expectations: e.target.value })}
                 placeholder="e.g. D1.1, D1.2"
-                className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors"
+                className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none focus:border-ring transition-colors"
               />
             </div>
           </div>
 
           <div className="mb-3">
-            <label className="block text-xs font-medium text-[#2C2C2C] mb-1">
+            <label className="block text-xs font-medium text-foreground mb-1">
               Description <span className="text-red-600">*</span>
             </label>
             <textarea
@@ -299,7 +299,7 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
               onChange={(e) => setDraft({ ...draft, description: e.target.value })}
               rows={2}
               placeholder="What is this material and how should it be used in the lesson?"
-              className="w-full px-3 py-2 border-2 border-[#E8D5C4] rounded-lg bg-white text-sm focus:outline-none focus:border-[#FF6B35] transition-colors resize-none"
+              className="w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none focus:border-ring transition-colors resize-none"
             />
           </div>
 
@@ -314,14 +314,14 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
             <button
               type="button"
               onClick={cancelDraft}
-              className="px-3 py-1.5 rounded-lg text-sm text-[#666] hover:text-[#2C2C2C]"
+              className="px-3 py-1.5 rounded-lg text-sm text-muted-foreground hover:text-foreground"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={saveDraft}
-              className="px-4 py-1.5 rounded-lg bg-[#FF6B35] text-white text-sm font-medium hover:bg-[#E85A24] transition-colors"
+              className="px-4 py-1.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-hover transition-colors"
             >
               Add material
             </button>
@@ -334,30 +334,30 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
           {materials.map((m) => (
             <div
               key={m.id}
-              className="flex items-start gap-3 py-2 px-3 bg-white rounded-lg border border-stone-200"
+              className="flex items-start gap-3 py-2 px-3 bg-card rounded-lg border border-stone-200"
             >
-              <div className="w-6 h-6 rounded-full bg-[#8B4513] text-white flex items-center justify-center flex-shrink-0">
+              <div className="w-6 h-6 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center flex-shrink-0">
                 {m.kind === "file" ? <FileText size={12} /> : <Link2 size={12} />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm font-medium text-[#2C2C2C] truncate">{m.name}</span>
-                  <span className="inline-block px-2 py-0.5 bg-[#FFF6EC] border border-[#E8D5C4] rounded-full text-xs text-[#8B4513]">
+                  <span className="text-sm font-medium text-foreground truncate">{m.name}</span>
+                  <span className="inline-block px-2 py-0.5 bg-muted border border-border rounded-full text-xs text-foreground">
                     {m.subject}
                   </span>
                   {m.expectations && (
-                    <span className="text-xs text-[#666]">{m.expectations}</span>
+                    <span className="text-xs text-muted-foreground">{m.expectations}</span>
                   )}
                   {m.kind === "file" && m.fileSize && (
-                    <span className="text-xs text-[#888]">{formatBytes(m.fileSize)}</span>
+                    <span className="text-xs text-muted-foreground">{formatBytes(m.fileSize)}</span>
                   )}
                 </div>
-                <p className="text-xs text-[#666] mt-0.5 line-clamp-2">{m.description}</p>
+                <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{m.description}</p>
               </div>
               <button
                 type="button"
                 onClick={() => removeMaterial(m.id)}
-                className="text-[#888] hover:text-red-600 flex-shrink-0"
+                className="text-muted-foreground hover:text-red-600 flex-shrink-0"
                 aria-label={`Remove ${m.name}`}
               >
                 <X size={16} />
@@ -367,11 +367,11 @@ export default function UserMaterialsSection({ materials, onChange }: UserMateri
         </div>
       )}
 
-      <div className="flex items-start gap-2 text-xs text-[#666] bg-[#FFF6EC] border border-[#E8D5C4] rounded-lg px-3 py-2">
-        <Info size={14} className="text-[#8B4513] flex-shrink-0 mt-0.5" />
+      <div className="flex items-start gap-2 text-xs text-muted-foreground bg-muted border border-border rounded-lg px-3 py-2">
+        <Info size={14} className="text-foreground flex-shrink-0 mt-0.5" />
         <span>
           These materials will be saved to your Maple Key account under{" "}
-          <span className="font-medium text-[#2C2C2C]">My Materials</span>, alongside the resources
+          <span className="font-medium text-foreground">My Materials</span>, alongside the resources
           and tools available in your class.
         </span>
       </div>

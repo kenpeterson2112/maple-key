@@ -25,8 +25,13 @@ const UI = 3
 
 const LIGHT_SURFACES = ["background", "card", "muted", "popover"]
 const TINTS = ["primary-tint", "secondary-tint", "pop-tint"]
+const SUBJECTS = ["math", "science", "fsl", "language", "social", "health", "arts", "history", "geography"].map(
+  (s) => `subject-${s}`,
+)
 
 // [foreground token, background tokens, minimum ratio, what the pair is for]
+// A background written "token/10" means that token at 10% opacity over --card,
+// blended in OKLab the way Tailwind's opacity modifier does.
 const PAIRS = [
   ["foreground", [...LIGHT_SURFACES, ...TINTS], TEXT, "body text"],
   ["card-foreground", ["card"], TEXT, "text on cards"],
@@ -45,6 +50,11 @@ const PAIRS = [
   ["ring", [...LIGHT_SURFACES, ...TINTS], UI, "focus ring"],
   ["secondary", ["background", "card", "muted"], UI, "teal indicator / outline"],
   ["primary", ["muted"], UI, "red fill on muted"],
+  ["success", ["background", "card", "success-tint"], TEXT, "status text"],
+  ...SUBJECTS.flatMap((s) => [
+    ["subject-foreground", [s], TEXT, "text on a subject fill"],
+    [s, ["background", "card", `${s}/10`], TEXT, "subject label text"],
+  ]),
 ]
 
 // Reported for information only. Borders are decorative (cards, dividers) and
@@ -84,12 +94,14 @@ function resolve(map, name, seen = new Set()) {
   return resolve(map, ref[1], seen)
 }
 
-function oklchToRgb(value) {
+function oklchToLab(value) {
   const m = value.match(/^oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\)$/)
   if (!m) throw new Error(`Not a plain oklch() value: ${value}`)
   const [L, C, H] = m.slice(1).map(Number)
-  const a = C * Math.cos((H * Math.PI) / 180)
-  const b = C * Math.sin((H * Math.PI) / 180)
+  return [L, C * Math.cos((H * Math.PI) / 180), C * Math.sin((H * Math.PI) / 180)]
+}
+
+function labToRgb([L, a, b]) {
   const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3
   const mm = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3
   const s = (L - 0.0894841775 * a - 1.291485548 * b) ** 3
@@ -129,7 +141,14 @@ let failures = 0
 const log = (s) => !quiet && console.log(s)
 
 for (const [mode, map] of Object.entries(modes)) {
-  const rgb = (name) => oklchToRgb(resolve(map, name))
+  const lab = (name) => oklchToLab(resolve(map, name))
+  const rgb = (spec) => {
+    const [name, pct] = spec.split("/")
+    if (!pct) return labToRgb(lab(name))
+    const t = Number(pct) / 100
+    const [fg, bg] = [lab(name), lab("card")]
+    return labToRgb(fg.map((v, i) => v * t + bg[i] * (1 - t)))
+  }
   log(`\n${mode.toUpperCase()}`)
 
   for (const [name, tok] of Object.entries(map)) {

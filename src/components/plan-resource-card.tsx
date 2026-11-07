@@ -7,11 +7,11 @@ import { type LevelCounts } from "@/lib/assessment-results"
 import { ReadinessPillRow } from "@/components/ui/readiness-pill"
 import type { Resource } from "@/lib/types"
 
-const TYPE_STYLES: { match: (modality: string, resourceType: string) => boolean; label: string; color: string }[] = [
-  { match: (m, t) => m.includes("curriculum") || t.includes("curriculum"), label: "Curriculum Document", color: "#16A34A" },
-  { match: (m, t) => m.includes("interactive") || t.includes("interactive"), label: "Interactive Tool", color: "#D4621A" },
-  { match: (m, t) => m.includes("video") || m.includes("film") || t.includes("video"), label: "Video", color: "#9333EA" },
-  { match: (m, t) => m.includes("activity") || m.includes("game") || m.includes("project") || t.includes("activity"), label: "Classroom Activity", color: "#2563EB" },
+const TYPE_STYLES: { match: (modality: string, resourceType: string) => boolean; label: string; className: string }[] = [
+  { match: (m, t) => m.includes("curriculum") || t.includes("curriculum"), label: "Curriculum Document", className: "text-success" },
+  { match: (m, t) => m.includes("interactive") || t.includes("interactive"), label: "Interactive Tool", className: "text-primary" },
+  { match: (m, t) => m.includes("video") || m.includes("film") || t.includes("video"), label: "Video", className: "text-pop-strong" },
+  { match: (m, t) => m.includes("activity") || m.includes("game") || m.includes("project") || t.includes("activity"), label: "Classroom Activity", className: "text-secondary-strong" },
 ]
 
 function getResourceTypeInfo(resource: Resource) {
@@ -19,7 +19,7 @@ function getResourceTypeInfo(resource: Resource) {
   const resourceType = (resource.resource_type ?? "").toLowerCase()
   const found = TYPE_STYLES.find((t) => t.match(modality, resourceType))
   if (found) return found
-  return { label: resource.resource_type || resource.modality?.[0] || "Resource", color: "#8B4513" }
+  return { label: resource.resource_type || resource.modality?.[0] || "Resource", className: "text-muted-foreground" }
 }
 
 interface PlanResourceCardProps {
@@ -38,7 +38,7 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
   return (
     <div
       className={`rounded-2xl border p-3 transition-colors ${
-        isAdded ? "border-[#86EFAC] bg-[#F0FDF4]" : "border-[#E8D5C4] bg-white hover:border-[#D8C7B8]"
+        isAdded ? "border-success/40 bg-success-tint/50" : "border-border bg-card hover:border-border-strong"
       }`}
     >
       {/* Title row: title on the left with the accordion toggle sitting just to
@@ -46,22 +46,22 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
           description is collapsed by default to keep the card vertically tight. */}
       <div className="flex items-start justify-between gap-1.5">
         <div className="flex min-w-0 items-baseline gap-1.5">
-          <h3 className="min-w-0 text-sm font-semibold leading-snug text-[#2C2C2C]">{title}</h3>
+          <h3 className="min-w-0 text-sm font-semibold leading-snug text-foreground">{title}</h3>
           {hasDescription && (
             <button
               type="button"
               onClick={() => setExpanded((prev) => !prev)}
               aria-expanded={expanded}
               aria-label={expanded ? "Hide description" : "Show description"}
-              className="flex-shrink-0 rounded-md p-0.5 text-[#A8998E] transition-colors hover:bg-[#FFF5ED] hover:text-[#8B4513] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35] focus-visible:ring-offset-1"
+              className="flex-shrink-0 rounded-md p-0.5 text-muted-foreground transition-colors hover:bg-muted hover:text-secondary-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
             >
               <ChevronDown size={16} className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
             </button>
           )}
         </div>
         <span
-          className="mt-0.5 flex-shrink-0 text-[10px] font-semibold uppercase tracking-wide"
-          style={{ color: typeInfo.color, fontFamily: "var(--font-mono, monospace)" }}
+          className={`mt-0.5 flex-shrink-0 text-[10px] font-semibold uppercase tracking-wide ${typeInfo.className}`}
+          style={{ fontFamily: "var(--font-mono, monospace)" }}
         >
           {typeInfo.label}
         </span>
@@ -76,7 +76,7 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="overflow-hidden"
           >
-            <p className="pt-1.5 text-xs leading-relaxed text-[#888]">{resource.description}</p>
+            <p className="pt-1.5 text-xs leading-relaxed text-muted-foreground">{resource.description}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -110,8 +110,8 @@ export default function PlanResourceCard({ resource, codeProgress, isAdded, onTo
             disabled={isAdded}
             className={`flex min-w-[62px] items-center justify-center gap-1 rounded-md border px-2.5 py-1 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ${
               isAdded
-                ? "cursor-default border-[#86EFAC] bg-[#DCFCE7] text-[#15803D] focus-visible:ring-[#86EFAC]"
-                : "border-[#FF6B35] bg-white text-[#FF6B35] hover:bg-[#FF6B35] hover:text-white focus-visible:ring-[#FF6B35]"
+                ? "cursor-default border-success/40 bg-success-tint text-success focus-visible:ring-ring"
+                : "border-primary bg-card text-primary hover:bg-primary hover:text-primary-foreground focus-visible:ring-ring"
             }`}
           >
             {isAdded ? (
