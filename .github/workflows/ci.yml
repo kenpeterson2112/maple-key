@@ -31,4 +31,7 @@ jobs:
       # (tsconfig.api.json) — api/ is outside the src-only include of the former.
       - run: pnpm typecheck
 
+      # WCAG AA for every design-token pairing, light and dark (CLAUDE.md, "Color tokens").
+      - run: pnpm check:contrast
+
       - run: pnpm build

@@ -32,38 +32,66 @@ Both Claude Design and Claude Code read this section. Treat it as canonical.
 Tokens live in `src/index.css` today; as we extract `src/design-system/`, the
 file moves but the names stay the same.
 
-### Color tokens (OKLCH)
+### Color tokens: "Crisp orchard"
 
-Light mode (`:root`):
-```
---background:            oklch(0.96  0.02  65)   /* warm cream */
---foreground:            oklch(0.18  0.02  25)
---card:                  oklch(0.99  0.005 70)
---card-foreground:       oklch(0.18  0.02  25)
---popover:               oklch(0.99  0.005 70)
---popover-foreground:    oklch(0.18  0.02  25)
---primary:               oklch(0.6   0.2   30)   /* maple orange */
---primary-foreground:    oklch(0.99  0.005 70)
---secondary:             oklch(0.55  0.22  25)
---secondary-foreground:  oklch(0.99  0.005 70)
---muted:                 oklch(0.85  0.02  50)
---muted-foreground:      oklch(0.4   0.02  25)
---accent:                oklch(0.6   0.2   30)
---accent-foreground:     oklch(0.99  0.005 70)
---destructive:           oklch(0.55  0.24  15)
---destructive-foreground:oklch(0.99  0.005 70)
---border:                oklch(0.9   0.01  50)
---input:                 oklch(0.99  0.005 70)
---ring:                  oklch(0.6   0.2   30)
---radius:                0.875rem
-```
+Bright autumn: **apple red** primary, **teal** secondary, **goldenrod** pop, on a
+warm near-white. Dark mode is **warm cocoa**, not greyscale. The values live in
+`src/index.css` as OKLCH; the hex below is what each one renders as (the CSS
+comments carry the same hex, and `pnpm check:contrast` fails if they drift).
 
-Dark mode (`.dark`) is declared in `src/index.css` but not yet wired to a UI
-toggle — treat it as defined but unused until a theme switcher lands.
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `background` | `#FFFDF8` | `#1C1714` | page |
+| `foreground` | `#2A1E1A` | `#F5EDE6` | body text and headings |
+| `card` / `card-foreground` | `#FFFFFF` / `#2A1E1A` | `#262019` / `#F5EDE6` | cards, panels |
+| `popover` / `popover-foreground` | `#FFFFFF` / `#2A1E1A` | `#2D2620` / `#F5EDE6` | popovers, menus |
+| `primary` | `#D93A26` | `#FF5A43` | main actions, brand fills; text on background/card only |
+| `primary-hover` | `#C2301D` | `#FF7360` | hover/pressed state of a `primary` fill |
+| `primary-strong` | `#B82C1A` | `#FF7360` | red text/icons on muted or any tint |
+| `primary-foreground` | `#FFFFFF` | `#1C1714` | text on a `primary` fill |
+| `primary-tint` | `#FDE7E3` | `#3D211C` | selected chips and rows |
+| `secondary` | `#109A7E` | `#2DD4AE` | teal fills, outline borders, active-tab indicator |
+| `secondary-strong` | `#0D6E5A` | `#5FE3C3` | teal text and links |
+| `secondary-foreground` | `#06231C` | `#0B2A23` | text on a `secondary` fill |
+| `secondary-tint` | `#DDF5EE` | `#15332C` | soft teal background |
+| `pop` | `#FFC53D` | `#FFC53D` | goldenrod badges, "new"/bookmarked dots, small highlights |
+| `pop-strong` | `#7A5500` | `#FFC53D` | goldenrod-family text on a tint |
+| `pop-foreground` | `#5A3E00` | `#3A2800` | text on a `pop` fill |
+| `pop-tint` | `#FFF3D1` | `#3A2F14` | highlight background |
+| `muted` / `muted-foreground` | `#F7EFE8` / `#75655C` | `#2D2620` / `#B3A498` | quiet surfaces / secondary text |
+| `accent` / `accent-foreground` | = `secondary-tint` / `secondary-strong` | same | hover and active surfaces |
+| `destructive` / `destructive-foreground` | `#C62828` / `#FFFFFF` | `#F2605C` / `#1C1714` | errors, delete |
+| `border` / `border-strong` | `#F1E2D6` / `#E3CDBC` | `#3A3029` / `#4A3E35` | dividers / stronger dividers |
+| `input` | `#FFFFFF` | `#2D2620` | input fill |
+| `ring` | `#0F8A70` | `#2DD4AE` | teal focus ring |
+| `signal-1..4` | unchanged | unchanged | assessment levels (orange, yellow, light green, dark green). Carries meaning: never retune for the palette |
+
+`--radius: 0.875rem`.
+
+**How the families pair.** Each colour family has a fill (`primary`), the text
+that sits on that fill (`primary-foreground`), a soft background (`primary-tint`)
+and, for text in that hue on a light surface, a `-strong` variant. So:
+
+- Text on a `*-tint` or on `muted` uses the family's `-strong` (`bg-primary-tint text-primary-strong`), or `text-foreground`. Never `text-primary`, `text-secondary` or `text-pop` there: they fail AA.
+- `text-secondary` and `text-pop` are never text colours; use `text-secondary-strong` / `text-pop-strong`.
+- Goldenrod is **pop only**. Never use it for body text, and never let a goldenrod dot be the only thing that carries meaning (it is 1.6:1 on the light background).
+- Borders are decorative (about 1.3:1). An input or control that needs a visible boundary must get it from something else (`border-strong` plus a fill, or the focus ring).
+
+**Contrast is enforced.** `pnpm check:contrast` (`scripts/check-contrast.mjs`,
+run in CI) checks WCAG AA for every pairing above in both modes: 4.5:1 for text,
+3:1 for focus rings and indicators. Add a row to its `PAIRS` list when you
+introduce a new pairing, and rerun it after changing any value.
+
+Dark mode (`.dark`) has its full palette but is not yet wired to a UI toggle;
+the System / Light / Dark setting lands with the theme switcher
+(`REDESIGN_HANDOFF.md` §5). Until then, `.dark` only applies if you set it by hand.
 
 **Rule:** never hardcode hex values in components. Always reference via Tailwind
 utilities backed by `@theme inline` (e.g. `bg-primary`, `text-muted-foreground`,
-`border-border`).
+`border-border`). `bg-white` and `text-black` count as hardcoded: they break dark
+mode, so use `bg-card` and `text-foreground`. Hundreds of legacy arbitrary hex
+values (`text-[#8B4513]` and friends) still exist; they are being replaced in the
+hex-cleanup pass (`REDESIGN_HANDOFF.md` §3). Don't add more, and don't copy them.
 
 ### Type stack
 

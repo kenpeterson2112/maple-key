@@ -16,26 +16,48 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Crisp orchard palette. Apple red primary, teal secondary, goldenrod pop.
+   Every value is the OKLCH form of the sRGB hex in its comment and converts
+   back to exactly that hex. Contrast is checked by scripts/check-contrast.mjs
+   (`pnpm check:contrast`); rerun it after touching any value here.
+
+   Families: <name> is the fill, <name>-foreground is text ON the fill,
+   <name>-tint is a soft background, <name>-strong is text/icons in that hue
+   on any light surface (background, card, muted, any -tint). */
 :root {
-  --background: oklch(0.96 0.02 65);
-  --foreground: oklch(0.18 0.02 25);
-  --card: oklch(0.99 0.005 70);
-  --card-foreground: oklch(0.18 0.02 25);
-  --popover: oklch(0.99 0.005 70);
-  --popover-foreground: oklch(0.18 0.02 25);
-  --primary: oklch(0.6 0.2 30);
-  --primary-foreground: oklch(0.99 0.005 70);
-  --secondary: oklch(0.55 0.22 25);
-  --secondary-foreground: oklch(0.99 0.005 70);
-  --muted: oklch(0.85 0.02 50);
-  --muted-foreground: oklch(0.4 0.02 25);
-  --accent: oklch(0.6 0.2 30);
-  --accent-foreground: oklch(0.99 0.005 70);
-  --destructive: oklch(0.55 0.24 15);
-  --destructive-foreground: oklch(0.99 0.005 70);
-  --border: oklch(0.9 0.01 50);
-  --input: oklch(0.99 0.005 70);
-  --ring: oklch(0.6 0.2 30);
+  --background: oklch(0.994 0.007 88.6);           /* #FFFDF8 warm near-white */
+  --foreground: oklch(0.248 0.02 39.2);            /* #2A1E1A */
+  --card: oklch(1 0 0);                            /* #FFFFFF */
+  --card-foreground: oklch(0.248 0.02 39.2);       /* #2A1E1A */
+  --popover: oklch(1 0 0);                         /* #FFFFFF */
+  --popover-foreground: oklch(0.248 0.02 39.2);    /* #2A1E1A */
+
+  --primary: oklch(0.587 0.199 30.8);              /* #D93A26 apple red */
+  --primary-hover: oklch(0.537 0.185 31);          /* #C2301D */
+  --primary-strong: oklch(0.515 0.179 30.9);       /* #B82C1A red text on tints/muted */
+  --primary-foreground: oklch(1 0 0);              /* #FFFFFF */
+  --primary-tint: oklch(0.945 0.025 29.9);         /* #FDE7E3 chips, selected rows */
+
+  --secondary: oklch(0.6133 0.1146 173.4);         /* #109A7E teal fills, borders, indicators */
+  --secondary-strong: oklch(0.4818 0.0884 173.8);  /* #0D6E5A teal text and links */
+  --secondary-foreground: oklch(0.232 0.037 174.1);/* #06231C text on a teal fill */
+  --secondary-tint: oklch(0.951 0.027 176.3);      /* #DDF5EE */
+
+  --pop: oklch(0.8537 0.1572 84.1);                /* #FFC53D goldenrod, pop only */
+  --pop-strong: oklch(0.477 0.099 79.4);           /* #7A5500 goldenrod-family text on tints */
+  --pop-foreground: oklch(0.386 0.08 79.8);        /* #5A3E00 text on a goldenrod fill */
+  --pop-tint: oklch(0.965 0.046 90.9);             /* #FFF3D1 */
+
+  --muted: oklch(0.956 0.013 63.9);                /* #F7EFE8 */
+  --muted-foreground: oklch(0.519 0.025 51.2);     /* #75655C */
+  --accent: var(--secondary-tint);
+  --accent-foreground: var(--secondary-strong);
+  --destructive: oklch(0.539 0.194 26.7);          /* #C62828 */
+  --destructive-foreground: oklch(1 0 0);          /* #FFFFFF */
+  --border: oklch(0.922 0.023 61.2);               /* #F1E2D6 */
+  --border-strong: oklch(0.862 0.034 60);          /* #E3CDBC */
+  --input: oklch(1 0 0);                           /* #FFFFFF */
+  --ring: oklch(0.5661 0.1059 172.8);              /* #0F8A70 teal focus ring */
   --radius: 0.875rem;
 
   /* Signal-distribution levels (proficiency Level 1-4) */
@@ -49,26 +71,42 @@
   --signal-4-foreground: oklch(0.97 0.02 145);
 }
 
+/* Warm cocoa dark mode, not greyscale. Nothing toggles .dark yet; the
+   System / Light / Dark setting lands with the theme switcher. */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --background: oklch(0.209 0.01 52.9);            /* #1C1714 */
+  --foreground: oklch(0.95 0.013 63.9);            /* #F5EDE6 */
+  --card: oklch(0.248 0.016 71.3);                 /* #262019 */
+  --card-foreground: oklch(0.95 0.013 63.9);       /* #F5EDE6 */
+  --popover: oklch(0.274 0.015 62.7);              /* #2D2620 */
+  --popover-foreground: oklch(0.95 0.013 63.9);    /* #F5EDE6 */
+
+  --primary: oklch(0.685 0.204 30.8);              /* #FF5A43 lifted so it stays vivid */
+  --primary-hover: oklch(0.72 0.175 29.8);         /* #FF7360 */
+  --primary-strong: oklch(0.72 0.175 29.8);        /* #FF7360 */
+  --primary-foreground: oklch(0.209 0.01 52.9);    /* #1C1714 */
+  --primary-tint: oklch(0.284 0.045 30.9);         /* #3D211C */
+
+  --secondary: oklch(0.7796 0.1414 172.7);         /* #2DD4AE */
+  --secondary-strong: oklch(0.8337 0.1253 174.5);  /* #5FE3C3 */
+  --secondary-foreground: oklch(0.259 0.039 175.7);/* #0B2A23 */
+  --secondary-tint: oklch(0.295 0.038 176.3);      /* #15332C */
+
+  --pop: oklch(0.8537 0.1572 84.1);                /* #FFC53D */
+  --pop-strong: oklch(0.8537 0.1572 84.1);         /* #FFC53D */
+  --pop-foreground: oklch(0.291 0.06 82.4);        /* #3A2800 */
+  --pop-tint: oklch(0.311 0.045 87.5);             /* #3A2F14 */
+
+  --muted: oklch(0.274 0.015 62.7);                /* #2D2620 */
+  --muted-foreground: oklch(0.728 0.024 61.1);     /* #B3A498 */
+  --accent: var(--secondary-tint);
+  --accent-foreground: var(--secondary-strong);
+  --destructive: oklch(0.676 0.181 24.7);          /* #F2605C */
+  --destructive-foreground: oklch(0.209 0.01 52.9);/* #1C1714 */
+  --border: oklch(0.318 0.019 57);                 /* #3A3029 */
+  --border-strong: oklch(0.374 0.022 58.9);        /* #4A3E35 */
+  --input: oklch(0.274 0.015 62.7);                /* #2D2620 */
+  --ring: oklch(0.7796 0.1414 172.7);              /* #2DD4AE */
 
   --signal-1: oklch(0.62 0.19 45);
   --signal-1-foreground: oklch(0.3 0.15 40);
@@ -90,9 +128,18 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-strong: var(--primary-strong);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-tint: var(--primary-tint);
   --color-secondary: var(--secondary);
+  --color-secondary-strong: var(--secondary-strong);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-tint: var(--secondary-tint);
+  --color-pop: var(--pop);
+  --color-pop-strong: var(--pop-strong);
+  --color-pop-foreground: var(--pop-foreground);
+  --color-pop-tint: var(--pop-tint);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
@@ -100,6 +147,7 @@
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-signal-1: var(--signal-1);

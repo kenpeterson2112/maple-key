@@ -306,7 +306,7 @@ export default function AdminSpace() {
                       <span className="rounded-full bg-destructive px-2 py-0.5 text-[10px] font-semibold text-destructive-foreground">delete pending</span>
                     )}
                     {r.metadata?.needs_review && (
-                      <span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[10px] font-semibold text-secondary">
+                      <span className="rounded-full bg-pop-tint px-2 py-0.5 text-[10px] font-semibold text-pop-strong">
                         needs review{(r.metadata.review_priority ?? 0) > 0 ? ` ·${r.metadata.review_priority}` : ""}
                       </span>
                     )}
