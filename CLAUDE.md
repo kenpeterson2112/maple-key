@@ -137,9 +137,15 @@ keep it that way. Reach for the token that names the job (list above).
 
 Both load from Google Fonts in one request in `index.html` with `display=swap`
 (Geist `100..900`; Bricolage Grotesque `500..700` plus its optical-size axis).
-Bricolage has no weight below 500 here, so give every `font-display` callsite a
-weight: `font-semibold` for headlines, `font-bold` for small titles. Reserve
-`--font-display` for headings and hero copy; body copy uses `--font-sans`.
+**Every heading and title is Bricolage.** A base rule in `src/index.css` puts
+`h1`–`h6` on `--font-display`, which covers Radix dialog and sheet titles (they
+render `h2`). A title built from another element (a card title in a `<span>`, an
+empty-state headline in a `<p>`, the "I teach …" sentence) adds `font-display`.
+Don't put `font-sans` on a heading. Body copy, labels, metadata and numbers
+(KPIs, counts) stay in Geist.
+
+Bricolage has no weight below 500 here, so every heading and `font-display`
+element needs a weight: `font-semibold` or `font-bold`.
 
 On phones, form fields render at 16px whatever `text-*` class they carry (an
 unlayered rule in `src/index.css`), because iOS Safari zooms into any focused

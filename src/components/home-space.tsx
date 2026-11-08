@@ -119,7 +119,7 @@ export default function HomeSpace({
             Your teaching context
           </h2>
 
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-xl md:text-3xl font-semibold tracking-tight text-card-foreground leading-tight">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-2 font-display text-xl md:text-3xl font-semibold tracking-tight text-card-foreground leading-tight">
             <span>I teach</span>
             <InlinePicker
               value={state.grade}
@@ -383,7 +383,7 @@ function DoorCard({
       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
         <Icon size={19} />
       </span>
-      <span className="text-base font-bold text-card-foreground">{title}</span>
+      <span className="font-display text-base font-bold text-card-foreground">{title}</span>
       <span className="flex-1 text-sm leading-relaxed text-muted-foreground">{body}</span>
       <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
         {action}
@@ -410,7 +410,7 @@ function HowStep({
         <Icon size={16} />
         <span className="text-xs font-semibold uppercase tracking-widest">Step {step}</span>
       </div>
-      <p className="mt-2 text-sm font-bold text-card-foreground">{title}</p>
+      <p className="mt-2 font-display text-sm font-bold text-card-foreground">{title}</p>
       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{body}</p>
     </li>
   )

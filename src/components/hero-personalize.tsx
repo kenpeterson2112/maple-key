@@ -157,7 +157,7 @@ export default function HeroPersonalize({
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="relative mx-auto max-w-[1500px] px-4 md:px-6 py-2 md:py-3"
       >
-        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 md:gap-x-2 text-lg md:text-2xl font-semibold tracking-tight text-foreground leading-tight">
+        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 md:gap-x-2 font-display text-lg md:text-2xl font-semibold tracking-tight text-foreground leading-tight">
           <span>I teach</span>
           <InlinePicker
             value={primaryGrade}

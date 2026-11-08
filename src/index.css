@@ -255,6 +255,11 @@
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
   }
+  /* Every heading, including Radix dialog and sheet titles (they render h2),
+     uses the display face. Titles built from other elements add font-display. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
 }
 
 /* iOS Safari zooms the page into any focused field set below 16px. On phones,
