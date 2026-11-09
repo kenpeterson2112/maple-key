@@ -204,6 +204,13 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `class-dashboard.tsx`, `lessons-library.tsx`).
 - **The assessment modal and sticky footer are the highest-risk reusable pieces** —
   changes here ripple through the Acorn remote.
+- **Phone shell (below `md`).**
+  - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`), the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
+  - **Tab bar:** it hides while the on-screen keyboard is up and during Quick Check.
+  - **Nav items:** desktop's pill toggle and the tab bar both read the four spaces from `src/lib/nav-items.ts`.
+  - **Account:** the header avatar opens `account-sheet.tsx` (Settings, Invite staff, Sign out). There is no hamburger menu.
+  - **Safe areas:** with `viewport-fit=cover`, the header pads the top inset, the tab bar the bottom one, and the app root the sides.
+- **Phone menus and filters use `ui/bottom-sheet.tsx`.** It's a Radix Dialog with a Framer slide-up. It closes on backdrop tap, Escape, the close button, or a swipe down on its handle; the swipe starts only on the handle, so the body scrolls freely. It takes a `footer` for a pinned primary action (the filters sheet's "Show N results").
 
 ## Architecture notes for Claude Code
 
@@ -296,8 +303,9 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - **PDF rendering:** font stack and layout diverge from browser; always check exports.
 - **Truncation:** lesson content has overflowed containers before — verify long
   generations, not just short demo content.
-- **Mobile sticky footer:** driven by IntersectionObserver; test on real viewport
-  heights, not just desktop devtools.
+- **Mobile sticky footers** (the planner's Next / Generate bar) are `sticky bottom-0`
+  inside the space's scroll container, above the tab bar. Test on real viewport
+  heights (375×667 is the tight one), not just desktop devtools.
 - **`fixed inset-0` overlays** (assessment modal, drawers): currently not
   viewport-safe on mobile. Phase C will switch to `dvh` + `safe-area-inset`.
 - **Performance:** very few `React.memo` / `useMemo` callsites today

@@ -9,6 +9,7 @@ import OnboardingModal from "@/components/onboarding-modal"
 import ResourceOnboardingModal from "@/components/resource-onboarding-modal"
 import ClassInsightsSpace from "@/components/class-insights-space"
 import TopNav, { type TopNavSpace } from "@/components/top-nav"
+import BottomTabBar from "@/components/bottom-tab-bar"
 import type { Filters } from "@/lib/types"
 import {
   clearPrefs,
@@ -18,6 +19,7 @@ import {
 } from "@/lib/personalization"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
+import { useGlobalFilters } from "@/lib/global-filters"
 
 type Space = "home" | "resources" | "lessonplanner" | "assessment" | "lessons" | "insights"
 // All overlay spaces cross-fade in/out — quick and direction-neutral
@@ -101,10 +103,13 @@ export default function App() {
     setInferred(true)
   }
 
+  // Search's results take grade/subject/strand from the global curriculum
+  // filters, so the phone header's Filters badge counts those.
+  const curriculum = useGlobalFilters().state
   const totalActiveFilters =
-    (filters.grade ? filters.grade.split(",").length : 0) +
-    (filters.subject ? 1 : 0) +
-    (filters.strand ? 1 : 0) +
+    (curriculum.grade ? 1 : 0) +
+    (curriculum.subject ? 1 : 0) +
+    (curriculum.strand ? 1 : 0) +
     Object.values(sidebarFilters).reduce((sum, arr) => sum + arr.length, 0)
 
   const goResources = () => setActiveSpace("resources")
@@ -140,17 +145,21 @@ export default function App() {
       ? activeSpace
       : null
 
+  const changeSpace = (s: TopNavSpace) => {
+    // Plan always starts fresh, matching the old "Plan Lesson" button.
+    if (s === "lessonplanner") openPlanner(null)
+    else setActiveSpace(s)
+  }
+
   return (
-    <div className="fixed inset-0 bg-background overflow-hidden flex flex-col">
+    // Sides pad by the safe-area insets (landscape notches); the header and the
+    // phone tab bar take the top and bottom ones.
+    <div className="fixed inset-0 bg-background overflow-hidden flex flex-col pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
       <TopNav
         activeSpace={topNavSpace}
         isHome={activeSpace === "home"}
         onGoHome={() => setActiveSpace("home")}
-        onChangeSpace={(s) => {
-          // Plan always starts fresh, matching the old "Plan Lesson" button.
-          if (s === "lessonplanner") openPlanner(null)
-          else setActiveSpace(s)
-        }}
+        onChangeSpace={changeSpace}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
       />
@@ -259,6 +268,14 @@ export default function App() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Phone navigation. Quick Check runs full-screen in class, so it gets the whole height. */}
+      <BottomTabBar
+        activeSpace={topNavSpace}
+        onChangeSpace={changeSpace}
+        planBadge={bookmarkedResources.length}
+        hidden={activeSpace === "assessment"}
+      />
 
       {/* Settings lives in TopNav, which owns its own open state and modal instance. */}
 

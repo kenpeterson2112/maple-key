@@ -1,15 +1,16 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search, Lightbulb, BarChart3, BookOpen, Settings, Menu, X, SlidersHorizontal, ChevronDown } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+import { Settings, SlidersHorizontal, ChevronDown } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
+import AccountSheet from "@/components/account-sheet"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
+import { SPACE_ITEMS, type TopNavSpace } from "@/lib/nav-items"
 
-export type TopNavSpace = "lessonplanner" | "resources" | "insights" | "lessons"
+export type { TopNavSpace }
 
 interface TopNavProps {
   activeSpace: TopNavSpace | null
@@ -23,20 +24,9 @@ interface TopNavProps {
   onGoHome?: () => void
 }
 
-interface ToggleItem {
-  id: TopNavSpace
-  label: string
-  icon: LucideIcon
-}
-
-const TOGGLE_ITEMS: ToggleItem[] = [
-  { id: "lessonplanner", label: "Plan",    icon: Lightbulb },
-  { id: "resources",     label: "Search",  icon: Search },
-  { id: "insights",      label: "Track",   icon: BarChart3 },
-  { id: "lessons",       label: "Lessons", icon: BookOpen },
-]
-
-
+// Desktop: logo, the four-space pill toggle, Materials, Settings.
+// Phone: a slim 56px bar with the logo, Filters (on Search), Materials and the
+// account avatar; the spaces move to the bottom tab bar (bottom-tab-bar.tsx).
 export default function TopNav({
   activeSpace,
   onChangeSpace,
@@ -47,52 +37,14 @@ export default function TopNav({
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isMaterialsOpen, setIsMaterialsOpen] = useState(false)
-  const [materialsTick, setMaterialsTick] = useState(0)
-  const materialsRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!isMaterialsOpen) return
-    const handleClickOutside = (event: MouseEvent) => {
-      if (materialsRef.current && !materialsRef.current.contains(event.target as Node)) {
-        setIsMaterialsOpen(false)
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [isMaterialsOpen])
-
-  // Re-read the store every time the popover opens or settings closes so edits land immediately.
-  const materials = useMemo(
-    () => readMaterialsSnapshot(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [materialsTick, isMaterialsOpen, isMobileMenuOpen]
-  )
-
-  const openMaterialsPopover = () => {
-    setMaterialsTick((t) => t + 1)
-    setIsMaterialsOpen((v) => !v)
-  }
-
-  const openSettingsFromMaterials = () => {
-    setIsMaterialsOpen(false)
-    setIsMobileMenuOpen(false)
-    setIsSettingsOpen(true)
-  }
-
-  // When the settings modal closes, bump the tick so the next snapshot re-reads storage.
-  const handleSettingsClose = () => {
-    setIsSettingsOpen(false)
-    setMaterialsTick((t) => t + 1)
-  }
+  const openSettings = () => setIsSettingsOpen(true)
 
   const showResourceFilters = activeSpace === "resources" && !!onOpenMobileFilters
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
-        <div className="mx-auto max-w-[1500px] px-4 md:px-6 py-2.5">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/90 pt-[env(safe-area-inset-top)] backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
+        <div className="mx-auto max-w-[1500px] px-4 md:px-6 md:py-2.5">
           {/* Desktop */}
           <div className="hidden md:flex items-center justify-between gap-4 relative">
             <div className="flex items-center gap-3 z-10">
@@ -122,30 +74,9 @@ export default function TopNav({
             </div>
 
             <div className="flex items-center gap-2 z-10">
-              <div ref={materialsRef} className="relative">
-                <button
-                  onClick={openMaterialsPopover}
-                  className="flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold text-secondary-strong shadow-sm transition-all hover:bg-accent"
-                  title="Classroom materials"
-                >
-                  <SlidersHorizontal size={14} className="text-primary-strong" />
-                  <span>Materials</span>
-                  {materials.total > 0 && (
-                    <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground">
-                      {materials.total}
-                    </span>
-                  )}
-                  <ChevronDown size={14} className="text-muted-foreground" />
-                </button>
-                {isMaterialsOpen && (
-                  <div className="absolute right-0 mt-2 w-72 rounded-2xl border border-border bg-card shadow-xl z-50 p-2">
-                    <MaterialsSummary snapshot={materials} onEdit={openSettingsFromMaterials} />
-                  </div>
-                )}
-              </div>
-
+              <MaterialsMenu onEdit={openSettings} />
               <button
-                onClick={() => setIsSettingsOpen(true)}
+                onClick={openSettings}
                 className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-primary-tint"
                 title="Settings"
               >
@@ -154,8 +85,8 @@ export default function TopNav({
             </div>
           </div>
 
-          {/* Mobile */}
-          <div className="flex md:hidden items-center justify-between gap-2">
+          {/* Phone */}
+          <div className="flex h-14 items-center justify-between gap-2 md:hidden">
             <button
               type="button"
               onClick={onGoHome}
@@ -168,74 +99,111 @@ export default function TopNav({
                 alt="Maple Key"
                 width={785}
                 height={673}
-                className="h-11 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
             </button>
-
-            <SpaceToggle
-              activeSpace={activeSpace}
-              onChangeSpace={onChangeSpace}
-              planBadge={bookmarkedResources.length}
-              compact
-            />
 
             <div className="flex items-center gap-1">
               {showResourceFilters && (
                 <button
                   onClick={onOpenMobileFilters}
-                  className="flex items-center gap-1 rounded-full border border-border bg-card px-2.5 py-1.5 text-xs font-semibold text-secondary-strong shadow-sm"
-                  title="Filters"
+                  className="flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-card px-3 text-sm font-semibold text-secondary-strong shadow-sm"
+                  aria-haspopup="dialog"
                 >
-                  <SlidersHorizontal size={12} />
+                  <SlidersHorizontal size={14} aria-hidden="true" />
                   Filters
                   {totalActiveFilters > 0 && (
                     <span className="rounded-full bg-primary px-1.5 text-[10px] font-bold text-primary-foreground">
                       {totalActiveFilters >= 10 ? "9+" : totalActiveFilters}
+                      <span className="sr-only"> active</span>
                     </span>
                   )}
                 </button>
               )}
-              <button
-                onClick={() => setIsMobileMenuOpen((v) => !v)}
-                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-primary-tint"
-                aria-label="Menu"
-              >
-                {isMobileMenuOpen ? <X size={18} className="text-foreground" /> : <Menu size={18} className="text-foreground" />}
-              </button>
+              <MaterialsMenu onEdit={openSettings} compact />
+              <AccountSheet onOpenSettings={openSettings} />
             </div>
           </div>
-
-          {isMobileMenuOpen && (
-            <div className="md:hidden mt-3 rounded-2xl border-2 border-border bg-card p-3 shadow-lg space-y-2">
-              <div className="rounded-lg bg-muted px-3 py-2">
-                <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <SlidersHorizontal size={16} />
-                  Materials
-                  {materials.total > 0 && (
-                    <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground">
-                      {materials.total}
-                    </span>
-                  )}
-                </p>
-                <MaterialsSummary snapshot={materials} onEdit={openSettingsFromMaterials} size="sm" />
-              </div>
-              <button
-                onClick={() => {
-                  setIsSettingsOpen(true)
-                  setIsMobileMenuOpen(false)
-                }}
-                className="flex w-full items-center gap-2 rounded-lg bg-muted px-3 py-2 text-sm font-semibold text-secondary-strong"
-              >
-                <Settings size={16} />
-                Settings
-              </button>
-            </div>
-          )}
         </div>
       </header>
 
-      <SettingsModal isOpen={isSettingsOpen} onClose={handleSettingsClose} />
+      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
+  )
+}
+
+/** The Materials button and its summary popover. `compact` is the phone's icon-only button. */
+function MaterialsMenu({ onEdit, compact = false }: { onEdit: () => void; compact?: boolean }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) setOpen(false)
+    }
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false)
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("keydown", handleKey)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+      document.removeEventListener("keydown", handleKey)
+    }
+  }, [open])
+
+  // Re-read the store each time the popover opens, so edits made in Settings show up.
+  const materials = useMemo(() => readMaterialsSnapshot(), [open])
+
+  const badge =
+    materials.total > 0 ? (
+      <span
+        className={`rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground ${
+          compact ? "absolute -right-0.5 -top-0.5 leading-none" : ""
+        }`}
+      >
+        {materials.total}
+      </span>
+    ) : null
+
+  return (
+    <div ref={ref} className="relative">
+      {compact ? (
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-label={`Classroom materials${materials.total > 0 ? `, ${materials.total} selected` : ""}`}
+          aria-expanded={open}
+          className="relative flex h-11 w-11 items-center justify-center rounded-full text-secondary-strong transition-colors hover:bg-accent"
+        >
+          <SlidersHorizontal size={20} aria-hidden="true" />
+          {badge}
+        </button>
+      ) : (
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold text-secondary-strong shadow-sm transition-all hover:bg-accent"
+          title="Classroom materials"
+        >
+          <SlidersHorizontal size={14} className="text-primary-strong" />
+          <span>Materials</span>
+          {badge}
+          <ChevronDown size={14} className="text-muted-foreground" />
+        </button>
+      )}
+      {open && (
+        <div className="absolute right-0 z-50 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-2xl border border-border bg-card p-2 shadow-xl">
+          <MaterialsSummary
+            snapshot={materials}
+            onEdit={() => {
+              setOpen(false)
+              onEdit()
+            }}
+          />
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -243,13 +211,11 @@ function SpaceToggle({
   activeSpace,
   onChangeSpace,
   planBadge = 0,
-  compact = false,
 }: {
   activeSpace: TopNavSpace | null
   onChangeSpace: (space: TopNavSpace) => void
   /** Bookmarked-resource count shown on the Plan tab. */
   planBadge?: number
-  compact?: boolean
 }) {
   return (
     <div
@@ -257,7 +223,7 @@ function SpaceToggle({
       aria-label="View"
       className="flex items-center gap-1 rounded-full border border-border bg-card p-1 shadow-sm"
     >
-      {TOGGLE_ITEMS.map((item) => {
+      {SPACE_ITEMS.map((item) => {
         const Icon = item.icon
         const isActive = activeSpace === item.id
         const showBadge = item.id === "lessonplanner" && planBadge > 0
@@ -273,9 +239,8 @@ function SpaceToggle({
                 : "text-secondary-strong hover:bg-accent"
             }`}
           >
-            <Icon size={compact ? 14 : 16} />
-            {!compact && <span>{item.label}</span>}
-            {compact && <span className="sr-only">{item.label}</span>}
+            <Icon size={16} />
+            <span>{item.label}</span>
             {showBadge && (
               <span
                 className={`flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold ${
