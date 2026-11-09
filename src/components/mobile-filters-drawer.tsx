@@ -12,10 +12,10 @@ import {
   Mic,
   DollarSign,
   CheckCircle2,
-  SlidersHorizontal,
 } from "lucide-react"
 import { withBasePath } from "@/lib/base-path"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet"
+import { BottomSheet } from "@/components/ui/bottom-sheet"
+import { useGlobalFilters } from "@/lib/global-filters"
 import { SUBJECTS } from "@/components/hero-personalize"
 import { getStrandValues } from "@/lib/get-strand-options"
 import type { Filters } from "@/lib/types"
@@ -26,19 +26,18 @@ const AVAILABLE_SUBJECTS = SUBJECTS.map((s) => s.value).filter(Boolean)
 interface MobileFiltersDrawerProps {
   isOpen: boolean
   onClose: () => void
-  filters: Filters
-  setFilters: (filters: Filters) => void
   sidebarFilters: { [key: string]: string[] }
   onSidebarFilterChange: (filterGroup: string, selectedItems: string[]) => void
+  /** Live count of matching resources; filters apply as they're picked. */
+  resultCount: number
 }
 
 export default function MobileFiltersDrawer({
   isOpen,
   onClose,
-  filters,
-  setFilters,
   sidebarFilters,
   onSidebarFilterChange,
+  resultCount,
 }: MobileFiltersDrawerProps) {
   const [expandedGroups, setExpandedGroups] = useState<{ [key: string]: boolean }>({
     gradeSubject: true,
@@ -47,7 +46,10 @@ export default function MobileFiltersDrawer({
     accessibility: true,
     readiness: true,
   })
-  const [selectedGrades, setSelectedGrades] = useState<string[]>(filters.grade ? filters.grade.split(",") : [])
+  // Grade, subject and strand are the same global curriculum filters as the bar
+  // under the page title: the results read those, so the sheet edits them too.
+  const curriculum = useGlobalFilters()
+  const { grade: activeGrade, subject: activeSubject, strand: activeStrand } = curriculum.state
 
   const filterOptions = {
     modality: ["Books & Print Media", "Online", "Interactive", "Video", "Audio/Podcast", "Trip", "Guest Speaker"],
@@ -68,21 +70,11 @@ export default function MobileFiltersDrawer({
     onSidebarFilterChange(group, updated)
   }
 
-  const handleGradeToggle = (grade: string) => {
-    const newSelected = selectedGrades.includes(grade)
-      ? selectedGrades.filter((g) => g !== grade)
-      : [...selectedGrades, grade]
-    setSelectedGrades(newSelected)
-    setFilters({ ...filters, grade: newSelected.join(",") })
-  }
-
-  const handleSubjectChange = (subject: string) => {
-    setFilters({ ...filters, subject, strand: "" })
-  }
-
-  const handleStrandChange = (strand: string) => {
-    setFilters({ ...filters, strand })
-  }
+  // One grade at a time, like the curriculum bar; tapping the selected one clears it.
+  const handleGradeToggle = (grade: string) => curriculum.setGrade(activeGrade === grade ? "" : grade)
+  // The reducer drops a strand that doesn't belong to the new subject.
+  const handleSubjectChange = (subject: string) => curriculum.setSubject(subject)
+  const handleStrandChange = (strand: string) => curriculum.setStrand(strand)
 
   const READINESS_OPTIONS = [
     { value: "no-data", label: "No class data yet", dot: "var(--muted-foreground)" },
@@ -93,15 +85,9 @@ export default function MobileFiltersDrawer({
   ]
 
   const handleClearAll = () => {
-    setFilters({
-      province: "",
-      grade: "",
-      subject: "",
-      strand: "",
-      topic: "",
-      learningType: "",
-    })
-    setSelectedGrades([])
+    // Province stays: it's set in the curriculum bar, not in this sheet.
+    curriculum.setGrade("")
+    curriculum.setSubject("")
     onSidebarFilterChange("modality", [])
     onSidebarFilterChange("cost", [])
     onSidebarFilterChange("accessibility", [])
@@ -109,13 +95,12 @@ export default function MobileFiltersDrawer({
   }
 
   const totalActiveFilters =
-    (filters.grade ? filters.grade.split(",").length : 0) +
-    (filters.subject ? 1 : 0) +
-    (filters.strand ? 1 : 0) +
+    (activeGrade ? 1 : 0) +
+    (activeSubject ? 1 : 0) +
+    (activeStrand ? 1 : 0) +
     Object.values(sidebarFilters).reduce((sum, arr) => sum + arr.length, 0)
 
-  const primaryGrade = (filters.grade || "").split(",").filter(Boolean)[0] ?? ""
-  const availableStrands = filters.subject ? getStrandValues(filters.subject, primaryGrade) : []
+  const availableStrands = activeSubject ? getStrandValues(activeSubject, activeGrade) : []
 
   const getModalityIcon = (modality: string) => {
     const iconProps = { size: 14, className: "flex-shrink-0" }
@@ -187,26 +172,39 @@ export default function MobileFiltersDrawer({
   }
 
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent
-        side="left"
-        className="w-[85%] sm:max-w-[400px] bg-muted p-0 flex flex-col transition-transform duration-300 ease-in-out"
-      >
-        <SheetHeader className="border-b border-border p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <SlidersHorizontal size={20} className="text-foreground" />
-              <SheetTitle className="text-lg font-bold text-foreground">Filters</SheetTitle>
-              {totalActiveFilters > 0 && (
-                <span className="px-2 py-0.5 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
-                  {totalActiveFilters}
-                </span>
-              )}
-            </div>
-          </div>
-        </SheetHeader>
-
-        <div className="flex-1 overflow-y-auto p-4">
+    <BottomSheet
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) onClose()
+      }}
+      title="Filters"
+      titleAddon={
+        totalActiveFilters > 0 ? (
+          <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">
+            {totalActiveFilters}
+            <span className="sr-only"> active</span>
+          </span>
+        ) : null
+      }
+      description="Filters apply as you pick them."
+      footer={
+        <div className="flex gap-2">
+          <button
+            onClick={handleClearAll}
+            className="min-h-12 px-4 text-sm font-semibold text-secondary-strong bg-card border-2 border-border-strong rounded-xl hover:bg-accent transition-colors"
+          >
+            Clear all
+          </button>
+          <button
+            onClick={onClose}
+            className="min-h-12 flex-1 px-4 text-sm font-semibold text-primary-foreground bg-primary rounded-xl hover:bg-primary-hover transition-colors"
+          >
+            Show {resultCount.toLocaleString()} {resultCount === 1 ? "result" : "results"}
+          </button>
+        </div>
+      }
+    >
+        <div className="p-4">
           {/* Grade, Subject, Strand Section */}
           <div className="mb-4 pb-4 border-b border-border">
             <button
@@ -231,7 +229,7 @@ export default function MobileFiltersDrawer({
                   <p className="text-xs font-semibold text-foreground mb-2">Grade</p>
                   <div className="flex flex-wrap gap-2">
                     {AVAILABLE_GRADES.map((grade) => {
-                      const isSelected = selectedGrades.includes(grade)
+                      const isSelected = activeGrade === grade
                       return (
                         <button
                           key={grade}
@@ -255,7 +253,7 @@ export default function MobileFiltersDrawer({
                   <p className="text-xs font-semibold text-foreground mb-2">Subject</p>
                   <div className="flex flex-wrap gap-2">
                     {AVAILABLE_SUBJECTS.map((subject) => {
-                      const isSelected = filters.subject === subject
+                      const isSelected = activeSubject === subject
                       return (
                         <button
                           key={subject}
@@ -275,12 +273,12 @@ export default function MobileFiltersDrawer({
                 </div>
 
                 {/* Strand */}
-                {filters.subject && availableStrands.length > 0 && (
+                {activeSubject && availableStrands.length > 0 && (
                   <div>
                     <p className="text-xs font-semibold text-foreground mb-2">Strand</p>
                     <div className="flex flex-wrap gap-2">
                       {availableStrands.map((strand) => {
-                        const isSelected = filters.strand === strand
+                        const isSelected = activeStrand === strand
                         return (
                           <button
                             key={strand}
@@ -383,23 +381,6 @@ export default function MobileFiltersDrawer({
           </div>
         </div>
 
-        <SheetFooter className="border-t border-border p-4 gap-2">
-          <button
-            onClick={handleClearAll}
-            className="flex-1 px-4 py-3 min-h-[48px] text-sm font-semibold text-secondary-strong bg-card border-2 border-border-strong rounded-xl hover:bg-accent transition-colors"
-            aria-label="Clear all filters"
-          >
-            Clear All
-          </button>
-          <button
-            onClick={onClose}
-            className="flex-1 px-4 py-3 min-h-[48px] text-sm font-semibold text-primary-foreground bg-primary rounded-xl hover:bg-primary-hover transition-colors"
-            aria-label="Apply filters and close"
-          >
-            Apply Filters
-          </button>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
+    </BottomSheet>
   )
 }

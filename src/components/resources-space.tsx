@@ -64,10 +64,9 @@ export default function ResourcesSpace({
       <MobileFiltersDrawer
         isOpen={isMobileFiltersOpen}
         onClose={onCloseMobileFilters}
-        filters={filters}
-        setFilters={setFilters}
         sidebarFilters={sidebarFilters}
         onSidebarFilterChange={onSidebarFilterChange}
+        resultCount={resultCount}
       />
 
       <BackToTopButton />
