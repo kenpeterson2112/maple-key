@@ -131,7 +131,8 @@ mode, so use `bg-card` and `text-foreground`. Inline styles follow the same rule
 "\[#[0-9A-Fa-f]{3,8}\]" src` must stay empty. The only hex left in `src/` is in
 export code that renders outside the app's CSS (`lesson-planner/lesson-export.ts`,
 the print `<style>` in `artifact-organizer-modal.tsx`, the jsPDF constants in
-`lib/student-activity-pdf.ts`).
+`lib/student-activity-pdf.ts`). Google's "G" mark keeps its brand colours in
+`public/google-g.svg`, an asset, not a component.
 
 Tailwind's built-in palette (`text-emerald-700`, `bg-amber-500`, `stone-*` and so
 on) counts as hardcoded too: it doesn't follow dark mode. None is left in `src/`;
@@ -263,6 +264,9 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `/privacy` / `/tos` are open. Without `VITE_SUPABASE_URL` /
   `VITE_SUPABASE_PUBLISHABLE_KEY` (local dev, the Pages mirror) there are no
   accounts and the app runs ungated. Lessons still live in localStorage.
+  The signed-out `#account` screen is `SignIn` in `account-space.tsx`: a red brand panel and the form, stacked on phones and split from `md`.
+  - **States:** every state (sending, link sent, error, Google redirecting) keeps its space reserved. The form and the "Check your inbox" panel share one grid cell, so swapping them moves nothing.
+  - **Testing it locally:** set the two `VITE_SUPABASE_*` variables to dummy values and stub the auth endpoints in the browser.
 - **The resource schema has one home: `schema/resource-schema.json`** (currently
   `schema_version` 3.0). It holds every field vocabulary, the required/optional
   split, and the admin allowlists, and all three languages read it:
