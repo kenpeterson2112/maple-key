@@ -6,7 +6,12 @@ import App from "./App"
 import { ACTIVITY_HASH_PREFIX, shortLinkId } from "@/lib/student-activity"
 import { BASE_PATH } from "@/lib/base-path"
 import RequireAccount from "@/components/account/require-account"
+import { watchTheme } from "@/lib/theme"
 import "./index.css"
+
+// index.html applied the saved theme before first paint; from here on, follow
+// the OS (while the setting is "System") and changes made in other tabs.
+watchTheme()
 
 // Admin Database Manager rides on the #admin hash so it needs no router and
 // stays out of the main bundle. Evaluated once at load — switching modes is a

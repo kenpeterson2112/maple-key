@@ -250,6 +250,15 @@
   }
 }
 
+/* Native controls (checkboxes, selects, scrollbars, date pickers) follow the
+   theme too. */
+:root {
+  color-scheme: light;
+}
+.dark {
+  color-scheme: dark;
+}
+
 @layer base {
   body {
     @apply bg-background text-foreground antialiased;

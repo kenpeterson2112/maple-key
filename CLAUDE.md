@@ -110,9 +110,18 @@ run in CI) checks WCAG AA for every pairing above in both modes: 4.5:1 for text,
 3:1 for focus rings and indicators. Add a row to its `PAIRS` list when you
 introduce a new pairing, and rerun it after changing any value.
 
-Dark mode (`.dark`) has its full palette but is not yet wired to a UI toggle;
-the System / Light / Dark setting lands with the theme switcher
-(`REDESIGN_HANDOFF.md` §5). Until then, `.dark` only applies if you set it by hand.
+**Dark mode is live.** Settings → Appearance offers System / Light / Dark. The
+choice is saved per browser under localStorage `mk-theme` (`src/lib/theme.ts`);
+"System" follows `prefers-color-scheme` live, and a change in one tab reaches the
+others.
+
+- **No flash on load:** an inline script in `index.html` applies the saved theme before first paint, so it works before any app JavaScript loads. It mirrors `applyTheme()` in `theme.ts`; change them together.
+- **Browser chrome:** the `theme-color` meta tag carries both values (`data-light` / `data-dark`, matching `--background`).
+- **Native controls:** `color-scheme` follows the theme, so checkboxes, selects and scrollbars match.
+
+Because every colour is a token, a new component is dark-mode ready by default.
+Reach for a `dark:` variant only when a token genuinely can't express the
+difference, and check new UI in both modes.
 
 **Rule:** never hardcode hex values in components. Always reference via Tailwind
 utilities backed by `@theme inline` (e.g. `bg-primary`, `text-muted-foreground`,

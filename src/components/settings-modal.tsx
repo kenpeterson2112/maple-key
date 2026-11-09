@@ -1,6 +1,6 @@
 "use client"
 
-import { User, Mail, Globe, School, FlaskConical, LogOut, UserPlus } from "lucide-react"
+import { User, Mail, Globe, School, FlaskConical, LogOut, UserPlus, Monitor, Sun, Moon, type LucideIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { isAdmin, loadProfile, signOut, type Profile } from "@/lib/account"
@@ -8,6 +8,7 @@ import { withBasePath } from "@/lib/base-path"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import ClassroomResourcesPicker from "@/components/classroom-resources-picker"
 import { isSandboxMode, setSandboxMode } from "@/lib/assessment-results"
+import { getThemePreference, setThemePreference, type ThemePreference } from "@/lib/theme"
 import {
   getClassroomResources,
   setClassroomResources,
@@ -20,6 +21,12 @@ interface SettingsModalProps {
   isOpen: boolean
   onClose: () => void
 }
+
+const THEME_OPTIONS: { value: ThemePreference; label: string; icon: LucideIcon }[] = [
+  { value: "system", label: "System", icon: Monitor },
+  { value: "light", label: "Light", icon: Sun },
+  { value: "dark", label: "Dark", icon: Moon },
+]
 
 export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [name, setName] = useState("")
@@ -53,6 +60,12 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
     window.location.replace(`${withBasePath("/")}#account`)
   }
   const [language, setLanguage] = useState("English")
+  // Applies the moment it's picked (no Save needed), like any OS appearance setting.
+  const [theme, setTheme] = useState<ThemePreference>(getThemePreference)
+  const chooseTheme = (next: ThemePreference) => {
+    setTheme(next)
+    setThemePreference(next)
+  }
   const [sandbox, setSandboxState] = useState(() => isSandboxMode())
   const [classroomResources, setClassroomResourcesState] = useState<string[]>(() =>
     getClassroomResources()
@@ -121,6 +134,37 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 <option value="English">English</option>
                 <option value="French">French</option>
               </select>
+            </div>
+          </div>
+
+          {/* Appearance */}
+          <div className="space-y-1.5">
+            <p id="appearance-label" className="text-sm font-semibold text-foreground">
+              Appearance
+            </p>
+            <div
+              role="radiogroup"
+              aria-labelledby="appearance-label"
+              className="inline-flex gap-1 rounded-xl border-2 border-border bg-card p-1"
+            >
+              {THEME_OPTIONS.map(({ value, label, icon: Icon }) => {
+                const selected = theme === value
+                return (
+                  <button
+                    key={value}
+                    type="button"
+                    role="radio"
+                    aria-checked={selected}
+                    onClick={() => chooseTheme(value)}
+                    className={`flex min-h-11 items-center gap-2 rounded-lg px-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                      selected ? "bg-secondary text-secondary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    <Icon size={16} aria-hidden="true" />
+                    {label}
+                  </button>
+                )
+              })}
             </div>
           </div>
 
