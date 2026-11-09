@@ -218,8 +218,12 @@ function SignIn() {
         aria-label="Maple Key"
         className="relative overflow-hidden bg-primary px-6 pb-14 pt-[calc(env(safe-area-inset-top)+2rem)] text-primary-foreground md:col-span-5 md:flex md:flex-col md:justify-center md:px-12 md:py-16"
       >
-        {/* Decoration: a soft glow and a large faint samara. CSS and SVG only. */}
-        <div aria-hidden="true" className="pointer-events-none absolute -left-24 -top-24 size-80 rounded-full bg-pop/25 blur-3xl" />
+        {/* Decoration: a soft glow and a large faint samara. CSS and SVG only.
+            Both use primary-hover, which moves away from the text colour in either
+            mode (darker red under white text, lighter red under dark text), so
+            they can only raise contrast. A goldenrod glow lightened the red
+            under the wordmark below AA. */}
+        <div aria-hidden="true" className="pointer-events-none absolute -left-24 -top-24 size-80 rounded-full bg-primary-hover/70 blur-3xl" />
         <MapleKeyIcon className="pointer-events-none absolute -bottom-28 -right-28 hidden size-112 text-primary-hover md:block" />
 
         <div className="relative flex items-center gap-2 font-display text-lg font-bold">
