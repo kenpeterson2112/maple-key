@@ -86,7 +86,7 @@ export default function ResultsSection({
     return (
       <div className="w-full px-8 py-6">
         <div className="rounded-2xl border border-border bg-card py-12 text-center shadow-md">
-          <p className="text-lg font-semibold text-destructive">Failed to load resources</p>
+          <p className="font-display text-lg font-semibold text-destructive">Failed to load resources</p>
           <p className="mt-2 text-muted-foreground">Please refresh the page to try again.</p>
         </div>
       </div>
@@ -190,7 +190,7 @@ export default function ResultsSection({
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary-tint">
               <Compass size={22} className="text-primary-strong" />
             </div>
-            <p className="text-base font-semibold text-foreground">No matches yet — try widening your search.</p>
+            <p className="font-display text-base font-semibold text-foreground">No matches yet — try widening your search.</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Drop a filter above, switch to a different grade, or clear the search box.
             </p>

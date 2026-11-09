@@ -235,7 +235,7 @@ export default function App() {
 
               {activeSpace === "assessment" && !assessmentLesson && (
                 <div className="absolute inset-0 z-[60] bg-card flex flex-col items-center justify-center gap-4 p-8 text-center">
-                  <p className="text-lg font-semibold text-foreground">No lesson plan yet</p>
+                  <p className="font-display text-lg font-semibold text-foreground">No lesson plan yet</p>
                   <p className="text-sm text-muted-foreground">Generate a lesson plan first to unlock quick checks.</p>
                   <button
                     onClick={() => openPlanner(plannerLesson)}

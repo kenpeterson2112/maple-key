@@ -132,26 +132,30 @@ keep it that way. Reach for the token that names the job (list above).
 
 ```
 --font-sans:    "Geist", system-ui, -apple-system, sans-serif
---font-display: "Alteix Sans", "Geist", system-ui, sans-serif
+--font-display: "Bricolage Grotesque", "Geist", system-ui, sans-serif
 ```
 
-`Alteix Sans` is loaded via `@font-face` from `/public/fonts/AlteixsansRegulardemo-E4j1n.otf`
-with `font-display: swap`. Reserve `--font-display` for marketing / hero
-headings; body copy uses `--font-sans`.
+Both load from Google Fonts in one request in `index.html` with `display=swap`
+(Geist `100..900`; Bricolage Grotesque `500..700` plus its optical-size axis).
+**Every heading and title is Bricolage.** A base rule in `src/index.css` puts
+`h1`–`h6` on `--font-display`, which covers Radix dialog and sheet titles (they
+render `h2`). A title built from another element (a card title in a `<span>`, an
+empty-state headline in a `<p>`, the "I teach …" sentence) adds `font-display`.
+Don't put `font-sans` on a heading. Body copy, labels, metadata and numbers
+(KPIs, counts) stay in Geist.
+
+Bricolage has no weight below 500 here, so every heading and `font-display`
+element needs a weight: `font-semibold` or `font-bold`.
+
+On phones, form fields render at 16px whatever `text-*` class they carry (an
+unlayered rule in `src/index.css`), because iOS Safari zooms into any focused
+field set smaller.
 
 **Known gotcha:** PDF rendering does not honor the same font fallback chain as
 the browser. Any font change must be verified in the exported PDF, not just on
-screen.
-
-**Known gotcha — `--font-display` is a DEMO font.** The shipped
-`AlteixsansRegulardemo-E4j1n.otf` carries glyphs for `A-Z` and `a-z` only. Every
-digit and every punctuation mark (`. , - – — : ; ! ? ' " ( ) & / +`) is replaced
-by a watermark reading *pedroteixeirafoundry.com*, rendered at full type size.
-So `font-display` is safe **only** for letters-and-spaces text — no numerals, no
-commas, no periods. That rules it out for any string that interpolates user or
-resource content (titles, counts, dates). Replacing this file with a licensed
-cut is the real fix; until then, treat the constraint as a hard rule and verify
-any new `font-display` callsite in a browser, not just in code.
+screen. Today neither export uses these fonts: the print HTML
+(`lesson-export.ts`, the organizer's print window) sets its own Helvetica stack,
+and `student-activity-pdf.ts` draws with jsPDF's built-in Helvetica.
 
 ### Radii
 

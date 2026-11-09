@@ -69,7 +69,7 @@ export default function FlagModal({ isOpen, onClose, resourceId, resourceTitle }
               <div className="animate-[scale-in_0.3s_ease-out]">
                 <CheckCircle className="w-16 h-16 text-success animate-[ping_1s_ease-out]" />
               </div>
-              <p className="text-lg font-semibold text-foreground mt-4 animate-[fade-in_0.5s_ease-in_0.3s_both]">
+              <p className="font-display text-lg font-semibold text-foreground mt-4 animate-[fade-in_0.5s_ease-in_0.3s_both]">
                 Thanks for letting us know!
               </p>
             </div>

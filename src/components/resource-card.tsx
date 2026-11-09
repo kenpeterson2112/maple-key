@@ -189,7 +189,7 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
         <div className="min-w-0 flex-1 p-3 sm:p-4">
           {/* ── Title (headline) + verified · FR · Add ── */}
           <div className="flex items-start justify-between gap-2">
-            <h3 className="min-w-0 flex-1 font-sans text-base font-semibold leading-snug text-foreground line-clamp-2">
+            <h3 className="min-w-0 flex-1 text-base font-semibold leading-snug text-foreground line-clamp-2">
               {title}
             </h3>
             <div className="flex items-center gap-1.5 flex-shrink-0">
