@@ -6,11 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maple Key — Educational Resources</title>
     <meta name="description" content="Canadian curriculum-aligned resource platform for K-12 teachers." />
+    <!-- Browser chrome colour. data-light / data-dark match --background in
+         src/index.css (a meta tag can't read CSS variables). -->
+    <meta name="theme-color" content="#FFFDF8" data-light="#FFFDF8" data-dark="#1C1714" />
+    <script>
+      // Apply the saved theme before first paint so the page never flashes the
+      // wrong one. Mirrors applyTheme() in src/lib/theme.ts; keep them in step.
+      (function () {
+        var pref = "system";
+        try { pref = localStorage.getItem("mk-theme") || "system"; } catch (e) {}
+        var dark = pref === "dark" || (pref !== "light" && !!window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", meta.getAttribute(dark ? "data-dark" : "data-light"));
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Geist:wght@100..900&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/v0-maple-key-website/assets/index-DCBXiN9F.js"></script>
-    <link rel="stylesheet" crossorigin href="/v0-maple-key-website/assets/index-UfCBUmI4.css">
+    <script type="module" crossorigin src="/v0-maple-key-website/assets/index-CT-v0Pfo.js"></script>
+    <link rel="stylesheet" crossorigin href="/v0-maple-key-website/assets/index-BMdyzMVT.css">
   </head>
   <body>
     <div id="root"></div>
