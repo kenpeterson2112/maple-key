@@ -58,14 +58,18 @@ accessed independently on student devices." (True of anything. This is one of th
 
 ## Stage 0 — Pick tonight's scope
 
-**Pilot first.** Before any catalog-wide run, do junior Science only — 85
+**Pilot first.** Before any catalog-wide run, do intermediate Math only — 85
 records — and let a human read the output. This matches the precedent set by the
-display-title naming work.
+display-title naming work. (The pilot was first scoped to junior Science, but 80
+of those 85 are TVO Learn pages, which a cloud run cannot read — see the region
+rule below — and nearly all single activities, so they would have measured
+little. Intermediate Math is readable and is where hubs and whole courses are
+most common.)
 
 ```bash
 # The pilot:
 python3 scripts/enrich-resources.py select --out /tmp/en-plan.json \
-    --subject Science --grade-band junior --limit 85
+    --subject Math --grade-band intermediate --limit 85
 
 # After the pilot is reviewed and merged, ordinary nightly batches:
 python3 scripts/enrich-resources.py select --out /tmp/en-plan.json --limit 120
@@ -154,6 +158,12 @@ reason:
 - `dead` requires **positive evidence** the page is gone (404, "no longer
   available", expired, domain parking).
 - A login wall or bot challenge is `blocked`, never `dead`.
+- A **region restriction** is `blocked` too. TVO Learn serves only Canada, and
+  cloud sessions run from outside it: a TVO page redirects to
+  `tvolearn.com/pages/restricted-content` ("not available in your area"). You
+  have not seen the resource, so **omit the record** — don't record a verdict,
+  and don't write a note from the title or the page shell. TVO records wait for
+  a run that can actually reach them.
 - **A WebFetch tool failure is `error`, never `dead`.** "Our request failed" and
   "the resource is gone" are different facts and must never be conflated — that
   conflation is what corrupted the old link data.
