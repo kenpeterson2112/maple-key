@@ -99,8 +99,7 @@ export default function HomeSpace({
           </div>
 
           <h1 className="font-display text-3xl font-semibold md:text-5xl leading-tight tracking-tight text-foreground">
-            Plan the lesson
-            <br className="hidden sm:block" /> your class actually needs
+            Let's get planning.
           </h1>
 
           <p className="max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
