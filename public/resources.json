@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-09-01T03:46:07Z",
+    "generated_at": "2026-11-15T04:44:40Z",
     "total_count": 1743,
     "schema_version": "3.0"
   },
@@ -5223,17 +5223,22 @@
         "Some Concerns"
       ],
       "instructional_modes": [
-        "small-group",
-        "station-rotation"
+        "individual"
       ],
-      "usage_notes": "Designed as a set of rotation tasks; print and set up multiple station areas before class. Works best with groups of 3–4 rotating on a timer.",
+      "usage_notes": "Maneuvering the Middle blog post of teaching tips for Grade 7 probability (hands-on experiments, why it suits the end of the year, common misconceptions), not a stations activity as this record's title says. Read it for ideas when planning D2; the linked activities are behind a paid membership.",
       "metadata": {
         "added_at": "2025-11-06",
         "added_by": "Nisrine",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 10,
+      "granularity": "reference"
     },
     {
       "id": "r-117",
@@ -5265,16 +5270,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "A whole-class on-site experience; book well in advance and build pre-trip and post-trip activities to maximise curriculum connections.",
+      "usage_notes": "YMCA of Greater Toronto's Personal Finance: I'm In Charge page: free online workshops for youth on budgeting, phone contracts, renting and credit. Aimed at older teens moving toward independence, so share it with families or senior students rather than plan a Grade 6 lesson from it.",
       "metadata": {
         "added_at": "2025-11-04",
         "added_by": "Sabrina Greupner",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "extension",
+      "estimated_minutes": 60,
+      "granularity": "collection"
     },
     {
       "id": "r-118",
@@ -5348,16 +5359,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "whole-class"
+        "small-group"
       ],
-      "usage_notes": "A whole-class on-site experience; book well in advance and build pre-trip and post-trip activities to maximise curriculum connections.",
+      "usage_notes": "Vaughan Public Library's Money and Budgeting for Kids: a multi-week in-library program introducing money and budgeting through games and activities. It is a public event families sign up for, not a classroom resource; mention it to families as an extension of the F strand.",
       "metadata": {
         "added_at": "2025-11-05",
         "added_by": "Sabrina Greupner",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "extension",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-120",
@@ -5390,17 +5407,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
         "whole-class"
       ],
-      "usage_notes": "Flexible deployment: works projected for whole-class instruction or accessed independently on student devices. No station rotation required.",
+      "usage_notes": "Front page of Money School Canada, a Toronto provider of paid in-class financial-literacy workshops for students and parents. Use it to book a visiting presenter for the money unit, not as something students use; contact them for current offerings.",
       "metadata": {
         "added_at": "2025-11-04",
         "added_by": "Sabrina Greupner",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "extension",
+      "estimated_minutes": 60,
+      "granularity": "collection"
     },
     {
       "id": "r-121",
@@ -7414,17 +7436,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 7 C1.1–C1.2: comparing repeating, growing and shrinking patterns and linear growing patterns by constant rate and initial value, then representing them with expressions and equations. Open each expectation's Teacher supports tab when unit-planning; it is teacher reference, not student-facing.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1001",
@@ -7456,17 +7483,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 7 C2.1–C2.4: adding and subtracting degree-1 monomials with tools, evaluating expressions with decimals, and solving multi-term equations and inequalities. Read the Teacher supports examples before sequencing an equations unit; not for students.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1002",
@@ -7500,17 +7532,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print textbook or unit resource; assign specific pages for individual reading or guided partner work. No technology required.",
+      "usage_notes": "Four-page accessible PDF laying out the Algebra strand (patterns, equations and inequalities, coding, modelling) as a Grades 1–8 progression table. Handy for seeing what students met in Grade 6 before starting Grade 7 algebra; print the page for your unit binder.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 10,
+      "granularity": "reference"
     },
     {
       "id": "r-1003",
@@ -7632,17 +7669,22 @@
       ],
       "instructional_modes": [
         "individual",
-        "small-group",
         "whole-class"
       ],
-      "usage_notes": "Open-ended structure supports inquiry; assign on individual devices for self-directed exploration or project whole-class to guide discussion.",
+      "usage_notes": "GeoGebra topic page for algebraic patterns: a list of short practice and exploration apps (number patterns with each operation, input–output tables, continuing visual patterns), most labelled grades 4–5. Use the input–output and visual-pattern apps as a Grade 7 warm-up review before linear growing patterns.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "guided_practice",
+      "estimated_minutes": 20,
+      "granularity": "unit"
     },
     {
       "id": "r-1006",
@@ -7676,18 +7718,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "usage_notes": "GeoGebra's algebra index: links to topic pages for patterns, equations, expressions, inequalities, ratios and rates, percentages and functions, sorted by grade band. A starting point for finding an applet, not something to assign; pick the specific app from the topic page first.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 20,
+      "granularity": "collection"
     },
     {
       "id": "r-1007",
@@ -7768,17 +7814,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: works projected for whole-class instruction or accessed independently on student devices. No station rotation required.",
+      "usage_notes": "IXL's alignment of every Grade 7 Ontario math expectation, all strands, to its practice skills; hover a skill to preview a question. Use it to find the one skill matching your lesson's expectation and assign that, rather than the page. Needs an IXL licence for unlimited practice.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 20,
+      "granularity": "collection"
     },
     {
       "id": "r-1009",
@@ -8082,17 +8133,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print textbook or unit resource; assign specific pages for individual reading or guided partner work. No technology required.",
+      "usage_notes": "Paid ($5) Grade 7 algebra summative pack: a 6-question mid-chapter quiz and a unit test on patterns and equations, as PDFs with answers plus editable Google Slides so you can tweak questions per student. Questions span all four achievement categories; give the quiz mid-unit and the test at the end.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "assessment",
+      "estimated_minutes": 45,
+      "granularity": "unit"
     },
     {
       "id": "r-1016",
@@ -8125,17 +8181,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "Distribute as an individual or partner activity during the action phase for independent practice; no technology required.",
+      "usage_notes": "Paid ($9.50) set of 5 print-or-Google worksheets with answer keys, one per expectation: comparing patterns (C1.1), pattern rules (C1.2–1.3), variables and expressions (C2.1–2.2), solving equations (C2.3) and inequalities (C2.4). Practice only, no lessons; assign one after each matching lesson.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 30,
+      "granularity": "unit"
     },
     {
       "id": "r-1017",
@@ -8171,14 +8232,20 @@
         "individual",
         "whole-class"
       ],
-      "usage_notes": "Teacher-facing lesson resource; display on the projector and work through with the class. Share the link so students can revisit independently.",
+      "usage_notes": "Paid ($12) Grade 7 patterns-and-equations unit: 5 Google Slide decks (138 editable slides), each opening with a story-based engagement question, with interactive student slides handed in through Google Classroom and a Google Form check. Follows Nelson Math chapters 4 and 8 if your board uses that text.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1018",
@@ -8214,14 +8281,20 @@
         "individual",
         "whole-class"
       ],
-      "usage_notes": "Teacher-facing lesson resource; display on the projector and work through with the class. Share the link so students can revisit independently.",
+      "usage_notes": "TPT listing ($9.75) of the My Call to Teach Grade 7 patterns-and-equations Google Slides unit with a Google Form check, covering C1 and C2; 52 reviews. Same product as the seller's own store; buy from either, then teach one deck per lesson.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1019",
@@ -8253,17 +8326,23 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
+        "small-group",
         "whole-class"
       ],
-      "usage_notes": "Best completed individually on student devices as a formative check. Review answers whole-class for consolidation.",
+      "usage_notes": "Paid ($12) Grade 7 patterning unit from Past The Potholes: 3-part lessons, activities and assessments on repeating, growing and shrinking patterns and comparing linear patterns by constant rate. The newest lessons are identical for Grades 7 and 8, so it doubles for a split class.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1020",
@@ -8339,17 +8418,23 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
+        "small-group",
         "whole-class"
       ],
-      "usage_notes": "Teacher-facing lesson resource; display on the projector and work through with the class. Share the link so students can revisit independently.",
+      "usage_notes": "OISE ESCAPE Grade 7 patterns lesson plan built for multilingual learners: students watch Binogi number-sequence videos beforehand and post one question to Padlet, then use a Concept Detective table (in English or their own language) to define terms before building linear growing patterns. Download the PDF plan and handouts.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "lesson"
     },
     {
       "id": "r-1022",
@@ -8426,17 +8511,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Best completed individually on student devices as a formative check. Review answers whole-class for consolidation.",
+      "usage_notes": "Fishtank Learning's math program overview page: its guiding principles and links to every grade's curriculum. A starting point, not a lesson. Fishtank is written to US Common Core standards, so map any unit you pull from it to the Ontario expectations yourself.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "collection"
     },
     {
       "id": "r-1024",
@@ -8471,14 +8561,20 @@
         "small-group",
         "station-rotation"
       ],
-      "usage_notes": "Designed as a set of rotation tasks; print and set up multiple station areas before class. Works best with groups of 3–4 rotating on a timer.",
+      "usage_notes": "Paid ($3) set of four Grade 7 algebra centre games in editable Google Slides: table of values, evaluating expressions, matching, and inequalities, with printable instructions and bin labels. Run as a rotation with one game per table group after the equations lessons.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "guided_practice",
+      "estimated_minutes": 40,
+      "granularity": "unit"
     },
     {
       "id": "r-1025",
@@ -8918,18 +9014,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "usage_notes": "Mathspace Ontario Grade 7 textbook section 12.01, The language of probability: defines trial, outcome and sample space with coin and die examples, then auto-marked practice questions. One section, not a unit; assign it as the first probability homework after you introduce the vocabulary.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 25,
+      "granularity": "activity"
     },
     {
       "id": "r-1035",
@@ -8964,18 +9064,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "usage_notes": "Mathspace Ontario Grade 8 textbook section 6.01, Theoretical probability: computing probability from equally likely outcomes with worked examples such as choosing a shirt at random, then auto-marked practice. Assign it after modelling a few sample-space problems.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "guided_practice",
+      "estimated_minutes": 25,
+      "granularity": "activity"
     },
     {
       "id": "r-1036",
@@ -9008,17 +9112,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: works projected for whole-class instruction or accessed independently on student devices. No station rotation required.",
+      "usage_notes": "IXL's full Grade 8 Ontario math alignment, listing practice skills under every expectation from scientific notation onward, not just probability. Search it for the D2 probability skills and assign those individually; an IXL licence is needed beyond the daily free questions.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 20,
+      "granularity": "collection"
     },
     {
       "id": "r-1037",
@@ -9185,17 +9294,23 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
+        "small-group",
         "whole-class"
       ],
-      "usage_notes": "Best completed individually on student devices as a formative check. Review answers whole-class for consolidation.",
+      "usage_notes": "Paid ($8) Grade 7 probability unit: 3-part lessons with SEL tie-ins on theoretical vs experimental probability as fractions, decimals and percents, independent and dependent events and tree diagrams, plus an editable summative. Built around real-life word problems.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1041",
@@ -9229,17 +9344,23 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "small-group",
+        "whole-class"
       ],
-      "usage_notes": "A downloadable or printable digital resource; print for individual students or display on-screen for whole-class reference.",
+      "usage_notes": "Paid ($8) Grade 8 probability unit in print and digital formats covering D2.1 and D2.2, with no-prep lessons and activities that have students run the experiments themselves; 14 reviews. Use it as the whole D2 sequence.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1042",
@@ -9546,17 +9667,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 7 E1: classifying cylinders, pyramids and prisms by symmetry, drawing top/front/side and perspective views to scale, and performing dilations to discuss similarity. Use the Teacher supports to plan a 3D-views-and-dilations sequence; teacher reference only.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1049",
@@ -9589,17 +9715,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 8 E1: tessellating shapes and the transformations inside them, building models from given views, and using scale drawings to calculate real lengths and areas. Check it when planning a transformations or scale-drawing unit; teacher reference only.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1050",
@@ -10054,17 +10185,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Show whole-class during direct instruction or assign for individual review. Pause for discussion at key moments rather than playing straight through.",
+      "usage_notes": "Mathspace Ontario Grade 8 textbook section 7.02, Measuring angles: right, acute and obtuse angles and reading a protractor, with worked examples and auto-marked practice. A single section; use it as review before the transformations investigations that follow it.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "guided_practice",
+      "estimated_minutes": 25,
+      "granularity": "activity"
     },
     {
       "id": "r-1060",
@@ -10097,17 +10233,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Best completed individually on student devices as a formative check. Review answers whole-class for consolidation.",
+      "usage_notes": "Paid ($5) Grade 7 geometry summative pack: a 7-question mid-chapter quiz and a 12-question unit test on geometric and spatial reasoning, as PDFs with answers plus editable Google Slides. Pairs with the seller's geometry unit but stands alone; differentiate by editing the slide version.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "assessment",
+      "estimated_minutes": 45,
+      "granularity": "unit"
     },
     {
       "id": "r-1061",
@@ -10275,16 +10416,22 @@
       ],
       "instructional_modes": [
         "small-group",
-        "station-rotation"
+        "whole-class"
       ],
-      "usage_notes": "Designed as a set of rotation tasks; print and set up multiple station areas before class. Works best with groups of 3–4 rotating on a timer.",
+      "usage_notes": "Fishtank Grade 8 Unit 3, Transformations and Angle Relationships: free lesson-by-lesson plans on congruence and similarity through coordinate-plane transformations, leading to angle relationships. Written to US 8.G standards; use the transformation lessons for Ontario E1.4–E1.5.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1065",
@@ -10318,17 +10465,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A downloadable or printable digital resource; print for individual students or display on-screen for whole-class reference.",
+      "usage_notes": "Paid ($12) Super Simple Sheets workbook of 441 activity sheets, PDF and digital, covering the whole Grade 7 Spatial Sense strand: both E1 geometry and E2 measurement. Far broader than one lesson; pull only the sheets for the expectation you are teaching.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 30,
+      "granularity": "collection"
     },
     {
       "id": "r-1066",
@@ -10407,17 +10559,23 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "small-group",
+        "whole-class"
       ],
-      "usage_notes": "A print textbook or unit resource; assign specific pages for individual reading or guided partner work. No technology required.",
+      "usage_notes": "Paid ($12) Grade 7 geometric-reasoning unit from Past The Potholes: lessons on classifying triangles and quadrilaterals, faces/edges/vertices, properties of prisms, pyramids and cylinders, perspective views and scale factors, plus worksheets, games, tests and report-card comments.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1068",
@@ -10450,17 +10608,23 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "small-group",
+        "whole-class"
       ],
-      "usage_notes": "A print textbook or unit resource; assign specific pages for individual reading or guided partner work. No technology required.",
+      "usage_notes": "Paid ($14) Grade 8 geometric-reasoning unit: lessons on the quadrilateral hierarchy, edges/faces/vertices, tessellations, two construction lessons and scale drawings, with worksheets, review games, tests and home-communication letters.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1069",
@@ -10493,17 +10657,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Show whole-class as a hook or review segment, or assign for independent viewing. Not designed for station use.",
+      "usage_notes": "Upper Canada DSB library guide for Grade 7 geometry and spatial sense: a list of links to videos, websites, TVO Mathify tutoring and databases for students. A link list, not a resource; open it to find a specific video, and note some links need a UCDSB login.",
       "metadata": {
         "added_at": "2026-04-12",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 15,
+      "granularity": "collection"
     },
     {
       "id": "r-1070",
@@ -10536,17 +10705,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 7 B1: whole numbers to one billion in expanded form with powers of ten, perfect squares and square roots, and comparing and ordering positive and negative fractions and decimals to thousandths. A planning reference for a number-sense unit, not a student resource.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1071",
@@ -10579,17 +10753,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 7 B2: order of operations across whole numbers, decimals, fractions, ratios, rates and percents, recall of common percent–fraction–decimal equivalents, and mental-math strategies. Use it to scope an operations unit; teacher reference only.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1072",
@@ -10622,17 +10801,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 8 B1: scientific notation for very large and small numbers, ordering rational and irrational numbers, and estimating square roots. Read the Teacher supports before planning the real-number-system lessons; not student-facing.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1073",
@@ -10939,17 +11123,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: works projected for whole-class instruction or accessed independently on student devices. No station rotation required.",
+      "usage_notes": "IXL skill plan for the whole Grade 7 Ontario math curriculum: each expectation (B1.1 onward) lists its matching skills, such as graphing integers on number lines or ordering fractions and decimals. Use it to pull targeted practice for a single expectation.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 20,
+      "granularity": "collection"
     },
     {
       "id": "r-1080",
@@ -10983,17 +11172,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: works projected for whole-class instruction or accessed independently on student devices. No station rotation required.",
+      "usage_notes": "IXL skill plan for the whole Grade 8 Ontario math curriculum, e.g. converting to scientific notation and ordering rational and irrational numbers under B1. Pick the skills for the expectation you are teaching and assign them; the plan itself covers the year.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 20,
+      "granularity": "collection"
     },
     {
       "id": "r-1081",
@@ -11027,18 +11221,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "usage_notes": "Mathspace Ontario Grade 7 textbook section 2.07, Order of operations with fractions: bracket–multiply/divide–add/subtract rules applied to fractions, with worked examples and auto-marked practice. Assign it right after you model a two-step fraction expression in class.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "guided_practice",
+      "estimated_minutes": 25,
+      "granularity": "activity"
     },
     {
       "id": "r-1082",
@@ -11163,14 +11361,20 @@
         "individual",
         "whole-class"
       ],
-      "usage_notes": "Best completed individually on student devices as a formative check. Review answers whole-class for consolidation.",
+      "usage_notes": "Paid ($12) Grade 7 number-sense unit: 5 Google Slide decks (107 editable slides) on whole numbers, decimals and integers, each starting with a story-based engagement question and ending in interactive slides students submit through Google Classroom. Tracks Nelson Math chapters 1 and 6.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1085",
@@ -11203,17 +11407,23 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
+        "small-group",
         "whole-class"
       ],
-      "usage_notes": "Best completed individually on student devices as a formative check. Review answers whole-class for consolidation.",
+      "usage_notes": "Fishtank Grade 7 Unit 2, Operations with Rational Numbers: free lesson plans on adding, subtracting, multiplying and dividing positive and negative rational numbers, starting with number-line models. Written to US 7.NS standards; it maps to Ontario B2 operations.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1086",
@@ -11474,17 +11684,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 7 F1: comparing exchange rates and converting currencies, finding reliable sources for a financial goal, and building, tracking and adjusting budgets for longer-term goals. The scope to check a financial-literacy unit against; teacher reference only.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1092",
@@ -11517,17 +11732,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 8 F1: pros and cons of payment methods across currencies, a long-term financial plan that accounts for income, expenses and tax, and tools for keeping a budget balanced. Use it to scope a Grade 8 money unit; teacher reference only.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1093",
@@ -12326,17 +12546,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print textbook or unit resource; assign specific pages for individual reading or guided partner work. No technology required.",
+      "usage_notes": "Paid ($10) Grade 7 financial-literacy workbook: explanation pages, practice sheets, a quiz, a budgeting assignment, a currency-research assignment and a unit test on budgets, currency conversion and simple interest. Print it as a student booklet; 46 reviews.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 40,
+      "granularity": "unit"
     },
     {
       "id": "r-1111",
@@ -12369,17 +12594,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print textbook or unit resource; assign specific pages for individual reading or guided partner work. No technology required.",
+      "usage_notes": "Paid ($10) Grade 8 financial-literacy workbook: explanation pages, practice, a quiz, a budgeting assignment, a methods-of-payment assignment and a unit test, covering cryptocurrency, currency conversion and simple and compound interest. Print as a booklet for the F strand.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 40,
+      "granularity": "unit"
     },
     {
       "id": "r-1112",
@@ -12457,17 +12687,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A downloadable or printable digital resource; print for individual students or display on-screen for whole-class reference.",
+      "usage_notes": "Paid ($11) Super Simple Sheets Grade 8 financial-literacy unit: 121 activity sheets, print and digital, covering every F-strand expectation with added hands-on tasks. Choose the sheets per lesson rather than assigning the set.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 30,
+      "granularity": "unit"
     },
     {
       "id": "r-1114",
@@ -12547,17 +12782,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 7 D1: why percentages describe distributions in large data sets, collecting qualitative and discrete or continuous data, and choosing among graph types. Read it before designing a data-collection project; teacher reference only.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1116",
@@ -12590,17 +12830,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 8 D1: telling one-variable from two-variable data, collecting continuous two-variable data into a table of values, and choosing graphs including scatter plots. The planning reference for a scatter-plot investigation; not student-facing.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1117",
@@ -12683,17 +12928,23 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "small-group",
+        "whole-class"
       ],
-      "usage_notes": "A print textbook or unit resource; assign specific pages for individual reading or guided partner work. No technology required.",
+      "usage_notes": "34-page OAME TIPS4RM Grade 7 data unit: a day-by-day outline (What's the Story?, designing a valid survey, organizing and presenting data, spreadsheets from a database, circle graphs) with blackline masters. It is keyed to the 2005 curriculum codes, so re-map to D1 before using; photocopy the BLMs per lesson.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 60,
+      "granularity": "unit"
     },
     {
       "id": "r-1119",
@@ -13316,17 +13567,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 7 C3: writing efficient code with defined counts, subprograms and other control structures, and reading and altering existing code to explain how changes affect outcomes. Use it to pitch coding tasks at the right level; teacher reference only.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1133",
@@ -13358,17 +13614,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A print-based resource for individual or small-group work. Distribute at the start of the activity; no technology required.",
+      "usage_notes": "Ministry page for Grade 8 C3: writing and altering code that analyses data to inform and communicate decisions, and explaining how edits change the output and efficiency. Check coding activities against it; teacher reference only.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 15,
+      "granularity": "reference"
     },
     {
       "id": "r-1134",
@@ -13722,18 +13983,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: project whole-class for guided discovery or assign on individual devices for self-paced exploration. No station setup required.",
+      "usage_notes": "Codesters Capstone Pathway: Data, a paid Python course of 15 coding lessons and 5 capstone projects (e.g. an interactive food web driven by click events) aligned to US Grade 7 math and science. A full course for Ontario C3 coding; contact Codesters for pricing.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 45,
+      "granularity": "collection"
     },
     {
       "id": "r-1142",
@@ -13767,18 +14032,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Works well on individual devices for self-paced practice or projected whole-class for competitive whole-group play. No station rotation needed.",
+      "usage_notes": "Codesters Capstone Pathway: Functions, a paid Python course of 15 lessons and 5 capstone projects (e.g. an interactive quiz that takes user input) aligned to US Grade 8 math and science. A full course rather than one coding task; use a capstone for Ontario C3.",
       "metadata": {
         "added_at": "2026-04-13",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 45,
+      "granularity": "collection"
     },
     {
       "id": "r-1143",
@@ -15986,17 +16255,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Best completed individually on student devices as a formative check. Review answers whole-class for consolidation.",
+      "usage_notes": "IXL's catalogue of hundreds of Grade 7 math skills across every topic, starting with integers and absolute value, despite the data-and-probability title on this record. Browse it for the skill you need; it is not one activity.",
       "metadata": {
         "added_at": "2026-04-15",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 20,
+      "granularity": "collection"
     },
     {
       "id": "r-1192",
@@ -16029,17 +16303,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: works projected for whole-class instruction or accessed independently on student devices. No station rotation required.",
+      "usage_notes": "IXL's catalogue of all Grade 8 math skills, from integers onward, not a scatter-plot set as this record's title suggests. Find the scatter-plot and line-of-best-fit skills inside and assign those directly.",
       "metadata": {
         "added_at": "2026-04-15",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 20,
+      "granularity": "collection"
     },
     {
       "id": "r-1193",
@@ -16306,17 +16585,22 @@
       ],
       "instructional_modes": [
         "individual",
-        "small-group",
-        "whole-class"
+        "small-group"
       ],
-      "usage_notes": "Open-ended structure supports inquiry; assign on individual devices for self-directed exploration or project whole-class to guide discussion.",
+      "usage_notes": "Mathspace Grade 7 investigation: students pick something to save for, research reliable financial advice, and build a budget to reach the goal, individually or in pairs. A one-period financial-literacy task; collect the budgets as an assessment of F1.3.",
       "metadata": {
         "added_at": "2026-04-15",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 50,
+      "granularity": "activity"
     },
     {
       "id": "r-1199",
@@ -16440,17 +16724,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "small-group"
+        "individual"
       ],
-      "usage_notes": "A downloadable or printable digital resource; print for individual students or display on-screen for whole-class reference.",
+      "usage_notes": "United for Literacy's general financial-literacy page about its adult and family programs (budgets, contracts, paycheques, online banking), not a Grade 7 resource guide as this record's title says. Background reading for the teacher at most; not student-facing.",
       "metadata": {
         "added_at": "2026-04-15",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "core_teaching",
+      "estimated_minutes": 10,
+      "granularity": "reference"
     },
     {
       "id": "r-1202",
@@ -16886,17 +17175,22 @@
         "No Concerns"
       ],
       "instructional_modes": [
-        "individual",
-        "whole-class"
+        "individual"
       ],
-      "usage_notes": "Flexible deployment: works projected for whole-class instruction or accessed independently on student devices. No station rotation required.",
+      "usage_notes": "IXL's site front page, covering every grade and subject, not a Grade 7 financial-literacy set. Teachers need to drill down to the Grade 7 money skills themselves; replace this record with the specific skill pages.",
       "metadata": {
         "added_at": "2026-04-15",
         "added_by": "maple_key_team",
         "verified": false,
-        "needs_review": false
+        "needs_review": false,
+        "enriched_at": "2026-11-15T04:44:40Z",
+        "link_status": "live",
+        "link_checked_at": "2026-11-15T04:44:40Z"
       },
-      "language": "en"
+      "language": "en",
+      "pedagogical_function": "independent_practice",
+      "estimated_minutes": 15,
+      "granularity": "collection"
     },
     {
       "id": "r-1212",
