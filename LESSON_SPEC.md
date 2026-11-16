@@ -24,6 +24,7 @@ below is required unless marked optional.
 | `learningGoal` | One student-facing sentence: what students learn today |
 | `successCriteria` | 2 to 3 student-facing "I can..." statements |
 | `curriculumCodesCovered` | Expectation codes the lesson teaches. Only codes that were provided in the prompt |
+| `mindsOnSummary` / `actionSummary` / `consolidationSummary` | One sentence per stage saying what the class does. Read in order they summarize the lesson (see "Scannable by default") |
 | `mindsOnContent` / `mindsOnDifferentiation` | Minds On (activating prior knowledge), about 17% of the time. Steps, and "Support:" / "Extend:" moves |
 | `actionContent` / `actionDifferentiation` | Action (exploring and applying), about 58% of the time. Steps, and "Support:" / "Extend:" moves |
 | `consolidationContent` / `consolidationAssessment` | Consolidation (reflecting and connecting), about 25%. Steps, plus a two-line assessment note: "Look for:" and "Next step:" |
@@ -35,7 +36,7 @@ below is required unless marked optional.
 | `assessmentQuestions` | 3 to 5 auto-graded quick-check questions, one per taught expectation |
 
 The 5E, Madeline Hunter, and CLAASS templates replace the three phase fields
-with a `sections` array. Each section's `content` is a step list and its `callout`
+with a `sections` array. Each section has its own `summary`, its `content` is a step list and its `callout`
 is the differentiation moves (the last section's is the assessment note).
 Everything else is shared across templates.
 
@@ -45,6 +46,11 @@ Teacher feedback (November 2026): the plan was too text-heavy to use. A teacher
 reads it at a glance, minutes before class, so every stage is a list of short
 steps, never a paragraph.
 
+- **Each stage opens with a one-sentence summary** (18 words or fewer) naming
+  the concrete activity. It is the most prominent line in the stage. The
+  summaries are written as a set: read top to bottom with nothing else, they
+  are a short paragraph that explains the whole lesson. So none restates the
+  stage's name or purpose, and none is a list of steps.
 - **Stage content** is 3 to 6 steps in order, each one thing the teacher or
   students do, 20 words or fewer, starting with a verb. Times in brackets where
   they help pacing. The exact question or prompt where one matters. No
@@ -61,7 +67,8 @@ is what the app stores, edits and exports. A lesson saved before this change
 holds a paragraph and still displays as one.
 
 **On screen** (`generated-lesson.tsx`) the expectations covered sit in the
-header as chips, the stages show as bullet lists, and the secondary material is
+header as chips, each stage leads with its summary in the heading face, the
+steps show as bullet lists, and the secondary material is
 collapsed until asked for: differentiation inside each stage, the equity note
 and unused resources at the foot. The reflection checkpoint shows in the last
 stage as "Student self-check". The PDF prints everything expanded, with the

@@ -5,16 +5,20 @@
 
 /** Example values for the step-list fields, as they appear in the JSON shape shown to the model. */
 export const STEPS_EXAMPLE = `["First thing the teacher does (3 min)", "Next step", "Next step"]`
+export const SUMMARY_EXAMPLE = `"One plain sentence saying what happens in this stage"`
 export const DIFFERENTIATION_EXAMPLE = `["Support: ...", "Extend: ..."]`
 export const ASSESSMENT_NOTE_EXAMPLE = `["Look for: ...", "Next step: ..."]`
 
 /**
+ * @param summaryFields the one-line stage summaries, e.g. `"mindsOnSummary", "actionSummary" and "consolidationSummary"`
  * @param stepFields how the prompt names the stage fields, e.g. `"mindsOnContent", "actionContent" and "consolidationContent"`
  * @param supportFields the differentiation fields, e.g. `"mindsOnDifferentiation" and "actionDifferentiation"`
  * @param assessmentField the closing assessment note, e.g. `"consolidationAssessment"`
  */
-export function lessonStyleRules(stepFields: string, supportFields: string, assessmentField: string): string {
+export function lessonStyleRules(summaryFields: string, stepFields: string, supportFields: string, assessmentField: string): string {
   return `WRITING STYLE. A teacher reads this plan at a glance, standing up, minutes before class. Write for scanning, not for reading. Cut anything they would skip.
+
+${summaryFields} are each ONE plain sentence, 18 words or fewer, saying what the class actually does in that stage, naming the concrete activity or material ("Students debate which of two cut bannock rounds gives the bigger share."). Write them last, as a set: read top to bottom with nothing else, they must work as a short paragraph that tells a teacher the whole lesson. So each one follows on from the one before, none repeats the stage's name or its purpose ("activates prior knowledge"), and none is a list of steps.
 
 ${stepFields} are each an array of 3 to 6 steps, in the order they happen. One step is one thing the teacher or the students do, in 20 words or fewer, starting with a verb ("Show the photo and ask...", "Pairs sort the cards..."). Put a time in brackets where it helps pacing. Give the exact question or prompt to use where one matters. No paragraphs, no rationale, no restating the learning goal.
 

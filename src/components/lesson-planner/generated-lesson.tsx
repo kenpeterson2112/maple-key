@@ -35,6 +35,9 @@ import type { LessonTemplateDef } from "@/lib/lesson-templates"
  * reducer without touching this component.
  */
 export interface LessonContentPatch {
+  mindsOnSummary?: string
+  actionSummary?: string
+  consolidationSummary?: string
   mindsOnContent?: string
   mindsOnDifferentiation?: string
   actionContent?: string
@@ -54,6 +57,10 @@ export interface GeneratedLessonViewProps {
   equityFraming: string
   /** Student self-assessment moment against the success criteria. */
   reflectionCheckpoint: string
+  /** One sentence per stage; read down the page they summarize the lesson. Empty on older lessons. */
+  mindsOnSummary: string
+  actionSummary: string
+  consolidationSummary: string
   mindsOnContent: string
   mindsOnDifferentiation: string
   actionContent: string
@@ -119,6 +126,9 @@ export default function GeneratedLessonView({
   successCriteria,
   equityFraming,
   reflectionCheckpoint,
+  mindsOnSummary,
+  actionSummary,
+  consolidationSummary,
   mindsOnContent,
   mindsOnDifferentiation,
   actionContent,
@@ -202,7 +212,7 @@ export default function GeneratedLessonView({
               </div>
             )}
           </div>
-          <div className="flex gap-2 flex-wrap sm:justify-end sm:flex-shrink-0">
+          <div className="flex gap-2 flex-wrap sm:justify-end sm:max-w-sm">
             <button
               onClick={onExportPDF}
               disabled={!allStagesApproved}
@@ -399,6 +409,14 @@ export default function GeneratedLessonView({
 
           {editingSection === "mindsOn" ? (
             <div className="space-y-3">
+              <input
+                type="text"
+                value={mindsOnSummary}
+                onChange={(e) => onChange({ mindsOnSummary: e.target.value })}
+                aria-label="Minds On summary, one sentence"
+                placeholder="One sentence: what happens in this stage"
+                className="w-full px-3 py-2 border-2 border-border-strong rounded-lg bg-card text-sm font-semibold focus:outline-none focus:border-ring transition-colors"
+              />
               <textarea
                 value={mindsOnContent}
                 onChange={(e) => onChange({ mindsOnContent: e.target.value })}
@@ -425,6 +443,7 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
+              {mindsOnSummary && <p className="text-base font-semibold font-display text-foreground leading-snug mb-3">{mindsOnSummary}</p>}
               <StepList text={mindsOnContent} className="text-sm text-foreground" />
               {mindsOnDifferentiation && (
                 <Disclosure summary="Differentiation" className="mt-4">
@@ -461,6 +480,14 @@ export default function GeneratedLessonView({
 
           {editingSection === "action" ? (
             <div className="space-y-3">
+              <input
+                type="text"
+                value={actionSummary}
+                onChange={(e) => onChange({ actionSummary: e.target.value })}
+                aria-label="Action summary, one sentence"
+                placeholder="One sentence: what happens in this stage"
+                className="w-full px-3 py-2 border-2 border-border-strong rounded-lg bg-card text-sm font-semibold focus:outline-none focus:border-ring transition-colors"
+              />
               <textarea
                 value={actionContent}
                 onChange={(e) => onChange({ actionContent: e.target.value })}
@@ -487,6 +514,7 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
+              {actionSummary && <p className="text-base font-semibold font-display text-foreground leading-snug mb-3">{actionSummary}</p>}
               <StepList text={actionContent} className="text-sm text-foreground" />
               {actionDifferentiation && (
                 <Disclosure summary="Differentiation" className="mt-4">
@@ -523,6 +551,14 @@ export default function GeneratedLessonView({
 
           {editingSection === "consolidation" ? (
             <div className="space-y-3">
+              <input
+                type="text"
+                value={consolidationSummary}
+                onChange={(e) => onChange({ consolidationSummary: e.target.value })}
+                aria-label="Consolidation summary, one sentence"
+                placeholder="One sentence: what happens in this stage"
+                className="w-full px-3 py-2 border-2 border-border-strong rounded-lg bg-card text-sm font-semibold focus:outline-none focus:border-ring transition-colors"
+              />
               <textarea
                 value={consolidationContent}
                 onChange={(e) => onChange({ consolidationContent: e.target.value })}
@@ -549,6 +585,7 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
+              {consolidationSummary && <p className="text-base font-semibold font-display text-foreground leading-snug mb-3">{consolidationSummary}</p>}
               <StepList text={consolidationContent} className="text-sm text-foreground" />
               {consolidationAssessment && (
                 <div className="mt-4 bg-hue-violet/10 border border-hue-violet/40 rounded-lg p-3">
@@ -598,6 +635,16 @@ export default function GeneratedLessonView({
 
               {editingSection === editKey ? (
                 <div className="space-y-3">
+                  <input
+                    type="text"
+                    value={section.summary ?? ""}
+                    onChange={(e) => onTemplateSectionsChange((prev) =>
+                      prev.map((s) => s.id === section.id ? { ...s, summary: e.target.value } : s)
+                    )}
+                    aria-label={`${section.label} summary, one sentence`}
+                    placeholder="One sentence: what happens in this stage"
+                    className="w-full px-3 py-2 border-2 border-border-strong rounded-lg bg-card text-sm font-semibold focus:outline-none focus:border-ring transition-colors"
+                  />
                   <textarea
                     value={section.content}
                     onChange={(e) => onTemplateSectionsChange((prev) =>
@@ -630,6 +677,7 @@ export default function GeneratedLessonView({
                 </div>
               ) : (
                 <>
+                  {section.summary && <p className="text-base font-semibold font-display text-foreground leading-snug mb-3">{section.summary}</p>}
                   <StepList text={section.content} className="text-sm text-foreground" />
                   {section.callout && (sectionDef.calloutIsAssessment ? (
                     <div className="mt-4 bg-hue-violet/10 border border-hue-violet/40 rounded-lg p-3">

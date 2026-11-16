@@ -18,6 +18,7 @@ import {
   ASSESSMENT_NOTE_EXAMPLE,
   DIFFERENTIATION_EXAMPLE,
   STEPS_EXAMPLE,
+  SUMMARY_EXAMPLE,
   lessonStyleRules,
 } from "../../../shared/lesson-prompt"
 import {
@@ -36,6 +37,9 @@ import {
 export interface LessonResponseData {
   title?: string
   curriculumCodesCovered?: string[]
+  mindsOnSummary?: string
+  actionSummary?: string
+  consolidationSummary?: string
   mindsOnContent?: string
   mindsOnDifferentiation?: string
   actionContent?: string
@@ -87,6 +91,9 @@ export interface LessonPdfInput {
   classroomMaterialsUsed: string[]
   materialsPreparation: string[]
   materialsContent: string
+  mindsOnSummary: string
+  actionSummary: string
+  consolidationSummary: string
   mindsOnContent: string
   mindsOnDifferentiation: string
   actionContent: string
@@ -107,11 +114,17 @@ function stepsHtml(text: string): string {
   return `<ul class="steps">${lines.map((l) => `<li>${esc(l)}</li>`).join("")}</ul>`
 }
 
+/** The stage's one-sentence summary, set apart so the summaries read down the page as a paragraph. */
+function summaryHtml(text: string | undefined): string {
+  return text?.trim() ? `<p class="stage-summary">${esc(text.trim())}</p>` : ""
+}
+
 /** Builds the standalone print document. Exported separately so the markup can be snapshotted. */
 export function buildLessonPdfHtml(input: LessonPdfInput): string {
   const {
     lessonTitle, lessonLength, lessonTemplate, coveredCodes, learningGoal, successCriteria,
     equityFraming, reflectionCheckpoint, materialsResources, classroomMaterialsUsed, materialsPreparation, materialsContent,
+    mindsOnSummary, actionSummary, consolidationSummary,
     mindsOnContent, mindsOnDifferentiation, actionContent, actionDifferentiation,
     consolidationContent, consolidationAssessment, templateSections, resources,
     isThreePart, templateDef, lessonMinutes,
@@ -188,6 +201,7 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       ${sectionTime > 0 ? `<span class="time-pill" style="background:${colors.pillBg}; color:${colors.pillText};">${sectionTime} min</span>` : ""}
     </div>
     <div class="subtitle" style="color:${colors.text};">${esc(section.subtitle)}</div>
+    ${summaryHtml(section.summary)}
     ${stepsHtml(section.content)}
     ${section.callout ? `<div class="callout ${calloutIsAssessment ? "assessment" : "diff"}">
       <div class="callout-title">${esc(calloutLabel)}</div>
@@ -306,6 +320,9 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       color: #3A3A3A;
       margin: 0;
     }
+
+    /* Stage summary: the line a teacher reads if they read nothing else */
+    .stage-summary { font-size: 11.5pt; font-weight: 700; color: #2C2C2C; line-height: 1.35; margin: 0 0 8px 0; }
 
     /* Stage steps: one short line each */
     .steps { margin: 0; padding-left: 16px; }
@@ -474,6 +491,7 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       <span class="time-pill">${mindsOnTime} minutes</span>
     </div>
     <div class="subtitle">Activating Prior Knowledge</div>
+    ${summaryHtml(mindsOnSummary)}
     ${stepsHtml(mindsOnContent)}
     ${
       mindsOnDifferentiation
@@ -491,6 +509,7 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       <span class="time-pill">${actionTime} minutes</span>
     </div>
     <div class="subtitle">Exploring &amp; Applying</div>
+    ${summaryHtml(actionSummary)}
     ${stepsHtml(actionContent)}
     ${
       actionDifferentiation
@@ -508,6 +527,7 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       <span class="time-pill">${consolidationTime} minutes</span>
     </div>
     <div class="subtitle">Reflecting &amp; Connecting</div>
+    ${summaryHtml(consolidationSummary)}
     ${stepsHtml(consolidationContent)}
     ${
       consolidationAssessment
@@ -593,6 +613,9 @@ export interface LessonResponseInput {
   equityFraming: string
   reflectionCheckpoint: string
   coveredCodes: string[]
+  mindsOnSummary: string
+  actionSummary: string
+  consolidationSummary: string
   mindsOnContent: string
   mindsOnDifferentiation: string
   actionContent: string
@@ -629,6 +652,9 @@ export function buildResponseJSON(input: LessonResponseInput): Record<string, un
   return input.isThreePart
     ? {
         ...shared,
+        mindsOnSummary: input.mindsOnSummary,
+        actionSummary: input.actionSummary,
+        consolidationSummary: input.consolidationSummary,
         mindsOnContent: input.mindsOnContent,
         mindsOnDifferentiation: input.mindsOnDifferentiation,
         actionContent: input.actionContent,
@@ -745,10 +771,13 @@ Return a JSON object with exactly these fields (plain text, no markdown):
   "learningGoal": "One student-facing sentence describing what students will learn today",
   "successCriteria": ["I can ...", "I can ...", "I can ..."],
   "curriculumCodesCovered": ["code1", "code2"],
+  "mindsOnSummary": ${SUMMARY_EXAMPLE},
   "mindsOnContent": ${STEPS_EXAMPLE},
   "mindsOnDifferentiation": ${DIFFERENTIATION_EXAMPLE},
+  "actionSummary": ${SUMMARY_EXAMPLE},
   "actionContent": ${STEPS_EXAMPLE},
   "actionDifferentiation": ${DIFFERENTIATION_EXAMPLE},
+  "consolidationSummary": ${SUMMARY_EXAMPLE},
   "consolidationContent": ${STEPS_EXAMPLE},
   "consolidationAssessment": ${ASSESSMENT_NOTE_EXAMPLE},
   "equityFraming": "1-2 sentences of CRRP and equity framing specific to this lesson (see rules below)",
@@ -767,6 +796,7 @@ Return a JSON object with exactly these fields (plain text, no markdown):
 "curriculumCodesCovered" and every assessment question "code" must be codes from the list provided above; never cite an expectation code you were not given. (The one exception is the concept-label fallback for quick-check questions described above, used only when "curriculumCodesCovered" is empty.)
 
 ${lessonStyleRules(
+    `"mindsOnSummary", "actionSummary" and "consolidationSummary"`,
     `"mindsOnContent", "actionContent" and "consolidationContent"`,
     `"mindsOnDifferentiation" and "actionDifferentiation"`,
     `"consolidationAssessment"`,

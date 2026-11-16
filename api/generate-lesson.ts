@@ -20,6 +20,7 @@ import {
   ASSESSMENT_NOTE_EXAMPLE,
   DIFFERENTIATION_EXAMPLE,
   STEPS_EXAMPLE,
+  SUMMARY_EXAMPLE,
   lessonStyleRules,
 } from "../shared/lesson-prompt.js"
 
@@ -151,6 +152,9 @@ interface LessonPlanResponse {
   learningGoal: string
   successCriteria: string[]
   curriculumCodesCovered: string[]
+  mindsOnSummary?: string
+  actionSummary?: string
+  consolidationSummary?: string
   mindsOnContent: string
   mindsOnDifferentiation: string
   actionContent: string
@@ -167,7 +171,7 @@ interface LessonPlanResponse {
   artifacts?: LessonArtifact[]
   excludedResources?: { title: string; reason: string }[]
   assessmentQuestions?: AssessmentQuestion[]
-  sections?: Array<{ id: string; label: string; subtitle: string; content: string; callout?: string }>
+  sections?: Array<{ id: string; label: string; subtitle: string; summary?: string; content: string; callout?: string }>
 }
 
 /**
@@ -376,18 +380,20 @@ Before finalizing your response, re-check every single artifact entry: if "name"
     ? templateSections
         .map(
           (s) =>
-            `  { "id": "${s.id}", "label": "${s.label}", "subtitle": "${s.subtitle}", "content": ${STEPS_EXAMPLE}, "callout": ${s.calloutLabel === "Assessment Note" ? ASSESSMENT_NOTE_EXAMPLE : DIFFERENTIATION_EXAMPLE} }`,
+            `  { "id": "${s.id}", "label": "${s.label}", "subtitle": "${s.subtitle}", "summary": ${SUMMARY_EXAMPLE}, "content": ${STEPS_EXAMPLE}, "callout": ${s.calloutLabel === "Assessment Note" ? ASSESSMENT_NOTE_EXAMPLE : DIFFERENTIATION_EXAMPLE} }`,
         )
         .join(",\n")
     : ""
 
   const styleRules = isThreePart
     ? lessonStyleRules(
+        `"mindsOnSummary", "actionSummary" and "consolidationSummary"`,
         `"mindsOnContent", "actionContent" and "consolidationContent"`,
         `"mindsOnDifferentiation" and "actionDifferentiation"`,
         `"consolidationAssessment"`,
       )
     : lessonStyleRules(
+        `The sections' "summary" values`,
         `Every section's "content"`,
         `Every section's "callout" (except the last section's)`,
         `The last section's "callout"`,
@@ -426,10 +432,13 @@ ${isThreePart ? `Return a JSON object with exactly these fields (plain text, no 
   "learningGoal": "One student-facing sentence describing what students will learn today",
   "successCriteria": ["I can ...", "I can ...", "I can ..."],
   "curriculumCodesCovered": ["code1", "code2"],
+  "mindsOnSummary": ${SUMMARY_EXAMPLE},
   "mindsOnContent": ${STEPS_EXAMPLE},
   "mindsOnDifferentiation": ${DIFFERENTIATION_EXAMPLE},
+  "actionSummary": ${SUMMARY_EXAMPLE},
   "actionContent": ${STEPS_EXAMPLE},
   "actionDifferentiation": ${DIFFERENTIATION_EXAMPLE},
+  "consolidationSummary": ${SUMMARY_EXAMPLE},
   "consolidationContent": ${STEPS_EXAMPLE},
   "consolidationAssessment": ${ASSESSMENT_NOTE_EXAMPLE},
   "equityFraming": "1-2 sentences of CRRP and equity framing specific to this lesson (see rules below)",
