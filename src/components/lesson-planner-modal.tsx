@@ -37,6 +37,7 @@ import {
   usePlanningQuestions,
   type PlanningAnswer,
 } from "@/components/lesson-planner/planning-questions"
+import { normalizeLessonLines } from "../../shared/lesson-lines"
 import GeneratedLessonView, { type LessonContentPatch } from "@/components/lesson-planner/generated-lesson"
 import SetupSteps, { WIZARD_STEPS } from "@/components/lesson-planner/setup-steps"
 import PreviousLessonPicker from "@/components/lesson-planner/previous-lesson-picker"
@@ -308,6 +309,8 @@ export default function LessonPlannerModal({
    * into draft state and logs it to the lesson library.
    */
   const applyLessonData = (data: LessonResponseData) => {
+    // A pasted or imported response may carry the stages as arrays of steps.
+    normalizeLessonLines(data as Record<string, unknown>)
     setLessonTitle(data.title ?? "")
     setCoveredCodes(data.curriculumCodesCovered ?? [])
     setMindsOnContent(data.mindsOnContent ?? "")

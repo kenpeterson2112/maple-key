@@ -13,6 +13,13 @@ import type { LessonArtifact, TemplateSection } from "@/lib/lesson-metadata"
 import type { LessonTemplateDef } from "@/lib/lesson-templates"
 import type { AssessmentQuestion } from "@/lib/assessment-types"
 import { formatContinuationBlock, type ContinuationContext } from "../../../shared/lesson-continuation"
+import { splitLessonLines } from "../../../shared/lesson-lines"
+import {
+  ASSESSMENT_NOTE_EXAMPLE,
+  DIFFERENTIATION_EXAMPLE,
+  STEPS_EXAMPLE,
+  lessonStyleRules,
+} from "../../../shared/lesson-prompt"
 import {
   openPrintWindow,
   escapeHtml as esc,
@@ -93,6 +100,13 @@ export interface LessonPdfInput {
   lessonMinutes: number
 }
 
+/** A stage's steps as a print list. A lesson saved before step lists is one paragraph, and prints as one. */
+function stepsHtml(text: string): string {
+  const lines = splitLessonLines(text)
+  if (lines.length <= 1) return `<p class="body-text">${nl2br(text)}</p>`
+  return `<ul class="steps">${lines.map((l) => `<li>${esc(l)}</li>`).join("")}</ul>`
+}
+
 /** Builds the standalone print document. Exported separately so the markup can be snapshotted. */
 export function buildLessonPdfHtml(input: LessonPdfInput): string {
   const {
@@ -148,14 +162,17 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
     .map((item, i) => `<li><span class="step-num">${i + 1}.</span><span>${esc(item)}</span></li>`)
     .join("")
 
-  const actionResourcesHtml = resources
-    .slice(0, 3)
-    .map((r) => `<li><span class="bullet">•</span><span>${esc(r.topic_title)}</span></li>`)
-    .join("")
-
   const successCriteriaHtml = successCriteria
     .map((sc) => `<li><span class="check">✓</span><span>${esc(sc)}</span></li>`)
     .join("")
+
+  const reflectionHtml = reflectionCheckpoint
+    ? `<div class="callout reflection">
+      <div class="callout-title">Student self-check</div>
+      <p>${nl2br(reflectionCheckpoint)}</p>
+    </div>`
+    : ""
+  const lastSectionId = templateSections[templateSections.length - 1]?.id
 
   const templateSectionsHtml = !isThreePart && templateSections.length > 0
     ? templateSections.map((section) => {
@@ -171,11 +188,12 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       ${sectionTime > 0 ? `<span class="time-pill" style="background:${colors.pillBg}; color:${colors.pillText};">${sectionTime} min</span>` : ""}
     </div>
     <div class="subtitle" style="color:${colors.text};">${esc(section.subtitle)}</div>
-    <p class="body-text">${nl2br(section.content)}</p>
+    ${stepsHtml(section.content)}
     ${section.callout ? `<div class="callout ${calloutIsAssessment ? "assessment" : "diff"}">
       <div class="callout-title">${esc(calloutLabel)}</div>
-      <p>${nl2br(section.callout)}</p>
+      ${stepsHtml(section.callout)}
     </div>` : ""}
+    ${reflectionCheckpoint && section.id === lastSectionId ? reflectionHtml : ""}
   </div>`
       }).join("\n")
     : ""
@@ -289,6 +307,17 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       margin: 0;
     }
 
+    /* Stage steps: one short line each */
+    .steps { margin: 0; padding-left: 16px; }
+    .steps li { font-size: 10.5pt; color: #3A3A3A; margin-bottom: 4px; }
+    .steps li:last-child { margin-bottom: 0; }
+    .callout .steps li { font-size: 9.5pt; color: inherit; margin-bottom: 2px; }
+
+    /* Closing note: present, but out of the way of the teaching flow */
+    .note { border-left-color: #E5E5E5; padding: 10px 14px; }
+    .note .label { color: #777; font-weight: 600; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.5px; }
+    .note p { margin: 3px 0 0 0; font-size: 9.5pt; color: #555; }
+
     /* Color variants */
     .learning  { border-left-color: #E8D5C4; background: #FFFDFB; }
     .learning .label { color: #8B4513; font-weight: 600; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -351,17 +380,15 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
 
     .callout.diff { background: #FFFBEB; border-color: #FDE68A; }
     .callout.diff .callout-title { color: #92400E; }
-    .callout.diff p { color: #78350F; }
-
-    .callout.resources { background: #FAFAF9; border-color: #E7E5E4; }
-    .callout.resources .callout-title { color: #57534E; }
-    .callout.resources ul { list-style: none; padding: 0; margin: 0; }
-    .callout.resources li { display: flex; gap: 6px; font-size: 9.5pt; color: #44403C; margin-bottom: 2px; }
-    .callout.resources .bullet { color: #A8A29E; }
+    .callout.diff p, .callout.diff .steps { color: #78350F; }
 
     .callout.assessment { background: #F5F3FF; border-color: #DDD6FE; }
     .callout.assessment .callout-title { color: #5B21B6; }
-    .callout.assessment p { color: #6D28D9; }
+    .callout.assessment p, .callout.assessment .steps { color: #6D28D9; }
+
+    .callout.reflection { background: #FAFAF9; border-color: #E7E5E4; }
+    .callout.reflection .callout-title { color: #57534E; }
+    .callout.reflection p { color: #44403C; }
 
     .footer {
       margin-top: 20px;
@@ -389,7 +416,7 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
     ${gradeSubject ? `<span class="pill">${esc(gradeSubject)}</span>` : ""}
     <span class="pill">${esc(lessonLength)}</span>
     <span class="pill">${esc(lessonTemplate.split("(")[0].trim() || "3-Part Lesson")}</span>
-    ${curriculumCodes ? `<span class="pill">${esc(curriculumCodes)}</span>` : ""}
+    ${curriculumCodes ? `<span class="pill">Expectations: ${esc(curriculumCodes)}</span>` : ""}
   </div>
 
   ${
@@ -409,30 +436,6 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
         ? `<div>
              <div class="label">Success Criteria</div>
              <ul>${successCriteriaHtml}</ul>
-           </div>`
-        : ""
-    }
-  </div>`
-      : ""
-  }
-
-  ${
-    equityFraming || reflectionCheckpoint
-      ? `
-  <div class="card compact learning">
-    ${
-      equityFraming
-        ? `<div style="margin-bottom:${reflectionCheckpoint ? "10px" : "0"};">
-             <div class="label">CRRP &amp; Equity</div>
-             <p class="body-text" style="margin-top:4px;">${nl2br(equityFraming)}</p>
-           </div>`
-        : ""
-    }
-    ${
-      reflectionCheckpoint
-        ? `<div>
-             <div class="label">Reflection Checkpoint</div>
-             <p class="body-text" style="margin-top:4px;">${nl2br(reflectionCheckpoint)}</p>
            </div>`
         : ""
     }
@@ -471,12 +474,12 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       <span class="time-pill">${mindsOnTime} minutes</span>
     </div>
     <div class="subtitle">Activating Prior Knowledge</div>
-    <p class="body-text">${nl2br(mindsOnContent)}</p>
+    ${stepsHtml(mindsOnContent)}
     ${
       mindsOnDifferentiation
         ? `<div class="callout diff">
              <div class="callout-title">Differentiation</div>
-             <p>${nl2br(mindsOnDifferentiation)}</p>
+             ${stepsHtml(mindsOnDifferentiation)}
            </div>`
         : ""
     }
@@ -488,20 +491,12 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       <span class="time-pill">${actionTime} minutes</span>
     </div>
     <div class="subtitle">Exploring &amp; Applying</div>
-    <p class="body-text">${nl2br(actionContent)}</p>
-    ${
-      actionResourcesHtml
-        ? `<div class="callout resources">
-             <div class="callout-title">Resources Used</div>
-             <ul>${actionResourcesHtml}</ul>
-           </div>`
-        : ""
-    }
+    ${stepsHtml(actionContent)}
     ${
       actionDifferentiation
         ? `<div class="callout diff">
              <div class="callout-title">Differentiation</div>
-             <p>${nl2br(actionDifferentiation)}</p>
+             ${stepsHtml(actionDifferentiation)}
            </div>`
         : ""
     }
@@ -513,17 +508,28 @@ export function buildLessonPdfHtml(input: LessonPdfInput): string {
       <span class="time-pill">${consolidationTime} minutes</span>
     </div>
     <div class="subtitle">Reflecting &amp; Connecting</div>
-    <p class="body-text">${nl2br(consolidationContent)}</p>
+    ${stepsHtml(consolidationContent)}
     ${
       consolidationAssessment
         ? `<div class="callout assessment">
              <div class="callout-title">Assessment Note</div>
-             <p>${nl2br(consolidationAssessment)}</p>
+             ${stepsHtml(consolidationAssessment)}
            </div>`
         : ""
     }
+    ${reflectionHtml}
   </div>
   ` : templateSectionsHtml}
+
+  ${
+    equityFraming
+      ? `
+  <div class="card compact note">
+    <div class="label">Equity &amp; CRRP</div>
+    <p>${nl2br(equityFraming)}</p>
+  </div>`
+      : ""
+  }
 
   <div class="footer">Maple Key • maplekey.ca</div>
   ${PRINT_ON_LOAD_SCRIPT}
@@ -733,20 +739,20 @@ You will also write "assessmentQuestions": a SHORT auto-graded formative quick c
 - Prefer "multiple-choice"; use "true-false" only when it genuinely tests the idea better. Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
 - Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions, and do NOT write more than one question for the same expectation.
 
-Return a JSON object with exactly these fields (string values are plain text, no markdown):
+Return a JSON object with exactly these fields (plain text, no markdown):
 {
   "title": "Creative lesson title",
   "learningGoal": "One student-facing sentence describing what students will learn today",
   "successCriteria": ["I can ...", "I can ...", "I can ..."],
   "curriculumCodesCovered": ["code1", "code2"],
-  "mindsOnContent": "Hook/activation activity description (2-4 sentences)",
-  "mindsOnDifferentiation": "Differentiation strategies for Minds On phase",
-  "actionContent": "Main learning activity description with any stations or tasks",
-  "actionDifferentiation": "Differentiation strategies for Action phase",
-  "consolidationContent": "Closing/consolidation activity description",
-  "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
-  "equityFraming": "CRRP and equity framing for this lesson (2-4 sentences, see rules below)",
-  "reflectionCheckpoint": "When students self-assess against the success criteria, and the exact prompt they respond to",
+  "mindsOnContent": ${STEPS_EXAMPLE},
+  "mindsOnDifferentiation": ${DIFFERENTIATION_EXAMPLE},
+  "actionContent": ${STEPS_EXAMPLE},
+  "actionDifferentiation": ${DIFFERENTIATION_EXAMPLE},
+  "consolidationContent": ${STEPS_EXAMPLE},
+  "consolidationAssessment": ${ASSESSMENT_NOTE_EXAMPLE},
+  "equityFraming": "1-2 sentences of CRRP and equity framing specific to this lesson (see rules below)",
+  "reflectionCheckpoint": "When students self-assess, then the exact prompt they respond to (one line)",
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
     "preparation": ["What to print or photocopy", "What to pre-load or test on devices"]
@@ -760,9 +766,11 @@ Return a JSON object with exactly these fields (string values are plain text, no
 
 "curriculumCodesCovered" and every assessment question "code" must be codes from the list provided above; never cite an expectation code you were not given. (The one exception is the concept-label fallback for quick-check questions described above, used only when "curriculumCodesCovered" is empty.)
 
-"equityFraming" applies Culturally Responsive and Relevant Pedagogy (CRRP) to THIS lesson in 2-4 sentences: how it connects to students' identities, cultures, languages, and lived experiences; whose perspectives or knowledge it brings in (including First Nations, Métis, and Inuit perspectives where they genuinely fit the content, never as a token add-on); and how it removes barriers so every student can reach the success criteria. Be specific to this content. A statement that would fit any lesson is not acceptable.
-
-"reflectionCheckpoint" is one moment, usually during Consolidation, where students judge their own progress against the success criteria. Say when it happens, then give the exact student-facing prompt. It is a self-assessment, not another quiz question.`
+${lessonStyleRules(
+    `"mindsOnContent", "actionContent" and "consolidationContent"`,
+    `"mindsOnDifferentiation" and "actionDifferentiation"`,
+    `"consolidationAssessment"`,
+  )}`
 
   return `[SYSTEM]\n${systemPrompt}\n\n[USER]\n${userPrompt}`
 }

@@ -19,6 +19,8 @@ import {
 } from "lucide-react"
 import ArtifactsSection from "@/components/artifacts-section"
 import StageReviewFooter from "@/components/stage-review-footer"
+import Disclosure from "@/components/ui/disclosure"
+import StepList from "@/components/lesson-planner/step-list"
 import type { Resource } from "@/lib/types"
 import type {
   ArtifactStatus,
@@ -105,9 +107,10 @@ export interface GeneratedLessonViewProps {
 }
 
 /**
- * The finished lesson plan: header + export actions, learning goal, materials,
- * handout artifacts, and the per-stage cards with their inline editors and
- * approve/edit gates. Export stays disabled until every stage is approved.
+ * The finished lesson plan: header (with the expectations covered) + export
+ * actions, learning goal, materials, handout artifacts, and the per-stage cards
+ * with their inline editors and approve/edit gates. Stages are step lists;
+ * differentiation, the equity note and unused resources are collapsed. Export stays disabled until every stage is approved.
  */
 export default function GeneratedLessonView({
   lessonTitle,
@@ -172,8 +175,8 @@ export default function GeneratedLessonView({
 
       {/* LESSON HEADER */}
       <div className="bg-card rounded-xl border-2 border-border p-5">
-        <div className="flex items-start justify-between">
-          <div>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0 flex-1">
             <h3 className="text-xl font-bold text-foreground">
               {lessonTitle}
             </h3>
@@ -184,12 +187,22 @@ export default function GeneratedLessonView({
             </p>
             {follows && <FollowsLink follows={follows} className="mt-1" />}
             {coveredCodes.length > 0 && (
-              <p className="text-xs text-muted-foreground mt-1">
-                Curriculum: {coveredCodes.join(", ")}
-              </p>
+              <div className="mt-3">
+                <p className="text-xs font-semibold text-foreground uppercase tracking-wide mb-2">Expectations covered</p>
+                <ul className="flex flex-wrap gap-2">
+                  {coveredCodes.map((code) => (
+                    <li
+                      key={code}
+                      className="rounded-full bg-secondary-tint px-3 py-1 text-xs font-semibold text-secondary-strong"
+                    >
+                      {code}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
-          <div className="flex gap-2 flex-wrap justify-end">
+          <div className="flex gap-2 flex-wrap sm:justify-end sm:flex-shrink-0">
             <button
               onClick={onExportPDF}
               disabled={!allStagesApproved}
@@ -218,7 +231,7 @@ export default function GeneratedLessonView({
               </button>
             )}
             {unapprovedCount > 0 && (
-              <p className="basis-full text-right text-xs font-medium text-pop-strong">
+              <p className="basis-full sm:text-right text-xs font-medium text-pop-strong">
                 {unapprovedCount === 1
                   ? "1 stage still needs review before export"
                   : `${unapprovedCount} stages still need review before export`}
@@ -250,38 +263,6 @@ export default function GeneratedLessonView({
               </ul>
             </div>
           )}
-        </div>
-      )}
-
-      {/* CRRP & EQUITY + REFLECTION CHECKPOINT (all templates) */}
-      {(equityFraming || reflectionCheckpoint) && (
-        <div className="bg-card rounded-xl border-2 border-border p-5 space-y-4">
-          {equityFraming && (
-            <div>
-              <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">CRRP &amp; Equity</p>
-              <p className="text-sm text-card-foreground leading-relaxed">{equityFraming}</p>
-            </div>
-          )}
-          {reflectionCheckpoint && (
-            <div>
-              <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Reflection Checkpoint</p>
-              <p className="text-sm text-card-foreground leading-relaxed">{reflectionCheckpoint}</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* EXCLUDED RESOURCES NOTICE */}
-      {excludedResources.length > 0 && (
-        <div className="bg-muted border border-border rounded-lg px-4 py-3">
-          <p className="text-xs font-semibold text-muted-foreground mb-2">Resources not used in this lesson</p>
-          <ul className="space-y-1">
-            {excludedResources.map((ex, i) => (
-              <li key={i} className="text-xs text-muted-foreground">
-                <span className="font-medium">{ex.title}:</span> {ex.reason}
-              </li>
-            ))}
-          </ul>
         </div>
       )}
 
@@ -341,9 +322,9 @@ export default function GeneratedLessonView({
               </button>
             </div>
           ) : (
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               {/* Left box - Resources + classroom materials (1/4 width) */}
-              <div className="w-1/4 bg-muted border border-border rounded-lg p-3">
+              <div className="sm:w-1/4 bg-muted border border-border rounded-lg p-3">
                 <p className="text-xs font-semibold text-foreground mb-2">Materials</p>
                 <ul className="text-xs text-foreground space-y-1.5">
                   {(materialsResources.length > 0 ? materialsResources.map((t) => ({ topic_title: t })) : resources).map((r, index) => (
@@ -421,7 +402,9 @@ export default function GeneratedLessonView({
               <textarea
                 value={mindsOnContent}
                 onChange={(e) => onChange({ mindsOnContent: e.target.value })}
-                rows={4}
+                aria-label="Steps, one per line"
+                placeholder="One step per line"
+                rows={7}
                 className="w-full px-3 py-2 border-2 border-hue-blue/40 rounded-lg bg-card text-sm focus:outline-none focus:border-hue-blue transition-colors resize-none"
               />
               <div className="bg-pop-tint border border-pop/50 rounded-lg p-3">
@@ -442,11 +425,12 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
-              <p className="text-sm text-foreground leading-relaxed">{mindsOnContent}</p>
-              <div className="mt-4 bg-pop-tint border border-pop/50 rounded-lg p-3">
-                <p className="text-xs font-medium text-pop-strong mb-1">Differentiation</p>
-                <p className="text-xs text-pop-strong">{mindsOnDifferentiation}</p>
-              </div>
+              <StepList text={mindsOnContent} className="text-sm text-foreground" />
+              {mindsOnDifferentiation && (
+                <Disclosure summary="Differentiation" className="mt-4">
+                  <StepList text={mindsOnDifferentiation} />
+                </Disclosure>
+              )}
             </>
           )}
           {editingSection !== "mindsOn" && (
@@ -480,25 +464,11 @@ export default function GeneratedLessonView({
               <textarea
                 value={actionContent}
                 onChange={(e) => onChange({ actionContent: e.target.value })}
-                rows={4}
+                aria-label="Steps, one per line"
+                placeholder="One step per line"
+                rows={7}
                 className="w-full px-3 py-2 border-2 border-hue-green/40 rounded-lg bg-card text-sm focus:outline-none focus:border-hue-green transition-colors resize-none"
               />
-              <div className="bg-muted border border-border rounded-lg p-3">
-                <p className="text-xs font-medium text-foreground mb-2">Resources Used</p>
-                <div className="space-y-1">
-                  {resources.slice(0, 3).map((resource) => (
-                    <a
-                      key={resource.url}
-                      href={resource.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-secondary-strong hover:underline block truncate"
-                    >
-                      • {resource.topic_title}
-                    </a>
-                  ))}
-                </div>
-              </div>
               <div className="bg-pop-tint border border-pop/50 rounded-lg p-3">
                 <p className="text-xs font-medium text-pop-strong mb-2">Differentiation</p>
                 <textarea
@@ -517,27 +487,12 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
-              <p className="text-sm text-foreground leading-relaxed">{actionContent}</p>
-              <div className="mt-4 bg-muted border border-border rounded-lg p-3">
-                <p className="text-xs font-medium text-foreground mb-2">Resources Used</p>
-                <div className="space-y-1">
-                  {resources.slice(0, 3).map((resource) => (
-                    <a
-                      key={resource.url}
-                      href={resource.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-secondary-strong hover:underline block truncate"
-                    >
-                      • {resource.topic_title}
-                    </a>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-4 bg-pop-tint border border-pop/50 rounded-lg p-3">
-                <p className="text-xs font-medium text-pop-strong mb-1">Differentiation</p>
-                <p className="text-xs text-pop-strong">{actionDifferentiation}</p>
-              </div>
+              <StepList text={actionContent} className="text-sm text-foreground" />
+              {actionDifferentiation && (
+                <Disclosure summary="Differentiation" className="mt-4">
+                  <StepList text={actionDifferentiation} />
+                </Disclosure>
+              )}
             </>
           )}
           {editingSection !== "action" && (
@@ -571,7 +526,9 @@ export default function GeneratedLessonView({
               <textarea
                 value={consolidationContent}
                 onChange={(e) => onChange({ consolidationContent: e.target.value })}
-                rows={4}
+                aria-label="Steps, one per line"
+                placeholder="One step per line"
+                rows={7}
                 className="w-full px-3 py-2 border-2 border-hue-violet/40 rounded-lg bg-card text-sm focus:outline-none focus:border-hue-violet transition-colors resize-none"
               />
               <div className="bg-hue-violet/10 border border-hue-violet/40 rounded-lg p-3">
@@ -592,11 +549,19 @@ export default function GeneratedLessonView({
             </div>
           ) : (
             <>
-              <p className="text-sm text-foreground leading-relaxed">{consolidationContent}</p>
-              <div className="mt-4 bg-hue-violet/10 border border-hue-violet/40 rounded-lg p-3">
-                <p className="text-xs font-medium text-hue-violet mb-1">Assessment Note</p>
-                <p className="text-xs text-hue-violet">{consolidationAssessment}</p>
-              </div>
+              <StepList text={consolidationContent} className="text-sm text-foreground" />
+              {consolidationAssessment && (
+                <div className="mt-4 bg-hue-violet/10 border border-hue-violet/40 rounded-lg p-3">
+                  <p className="text-xs font-semibold text-hue-violet mb-1">Assessment Note</p>
+                  <StepList text={consolidationAssessment} className="text-sm text-foreground" />
+                </div>
+              )}
+              {reflectionCheckpoint && (
+                <div className="mt-4 bg-muted border border-border rounded-lg p-3">
+                  <p className="text-xs font-semibold text-foreground mb-1">Student self-check</p>
+                  <p className="text-sm text-foreground">{reflectionCheckpoint}</p>
+                </div>
+              )}
             </>
           )}
           {editingSection !== "consolidation" && (
@@ -638,7 +603,9 @@ export default function GeneratedLessonView({
                     onChange={(e) => onTemplateSectionsChange((prev) =>
                       prev.map((s) => s.id === section.id ? { ...s, content: e.target.value } : s)
                     )}
-                    rows={5}
+                    aria-label="Steps, one per line"
+                    placeholder="One step per line"
+                    rows={7}
                     className={`w-full px-3 py-2 border-2 border-border rounded-lg bg-card text-sm focus:outline-none ${sectionDef.colors.focusBorder} transition-colors resize-none`}
                   />
                   <div className={`${sectionDef.calloutIsAssessment ? "bg-hue-violet/10 border border-hue-violet/40" : "bg-pop-tint border border-pop/50"} rounded-lg p-3`}>
@@ -663,17 +630,25 @@ export default function GeneratedLessonView({
                 </div>
               ) : (
                 <>
-                  <p className="text-sm text-foreground leading-relaxed">{section.content}</p>
-                  {section.callout && (
-                    <div className={`mt-4 ${sectionDef.calloutIsAssessment ? "bg-hue-violet/10 border border-hue-violet/40" : "bg-pop-tint border border-pop/50"} rounded-lg p-3`}>
-                      <p className={`text-xs font-medium ${sectionDef.calloutIsAssessment ? "text-hue-violet" : "text-pop-strong"} mb-1`}>
-                        {sectionDef.calloutLabel}
-                      </p>
-                      <p className={`text-xs ${sectionDef.calloutIsAssessment ? "text-hue-violet" : "text-pop-strong"}`}>
-                        {section.callout}
-                      </p>
+                  <StepList text={section.content} className="text-sm text-foreground" />
+                  {section.callout && (sectionDef.calloutIsAssessment ? (
+                    <div className="mt-4 bg-hue-violet/10 border border-hue-violet/40 rounded-lg p-3">
+                      <p className="text-xs font-semibold text-hue-violet mb-1">{sectionDef.calloutLabel}</p>
+                      <StepList text={section.callout} className="text-sm text-foreground" />
                     </div>
-                  )}
+                  ) : (
+                    <Disclosure summary={sectionDef.calloutLabel} className="mt-4">
+                      <StepList text={section.callout} />
+                    </Disclosure>
+                  ))}
+                  {section.id === templateSections[templateSections.length - 1]?.id && (<>
+              {reflectionCheckpoint && (
+                  <div className="mt-4 bg-muted border border-border rounded-lg p-3">
+                    <p className="text-xs font-semibold text-foreground mb-1">Student self-check</p>
+                    <p className="text-sm text-foreground">{reflectionCheckpoint}</p>
+                  </div>
+                )}
+                  </>)}
                 </>
               )}
               {editingSection !== editKey && (
@@ -687,6 +662,31 @@ export default function GeneratedLessonView({
           </div>
         )
       })}
+
+      {/* BACKGROUND — worth having, not worth reading every time, so collapsed */}
+      {(equityFraming || excludedResources.length > 0) && (
+        <div className="space-y-2">
+          {equityFraming && (
+            <Disclosure summary="Equity & CRRP notes" className="bg-card">
+              <p className="leading-relaxed">{equityFraming}</p>
+            </Disclosure>
+          )}
+          {excludedResources.length > 0 && (
+            <Disclosure
+              summary={`${excludedResources.length === 1 ? "1 resource" : `${excludedResources.length} resources`} not used in this lesson`}
+              className="bg-card"
+            >
+              <ul className="space-y-1">
+                {excludedResources.map((ex, i) => (
+                  <li key={i}>
+                    <span className="font-medium">{ex.title}:</span> {ex.reason}
+                  </li>
+                ))}
+              </ul>
+            </Disclosure>
+          )}
+        </div>
+      )}
 
       {/* NEXT STEPS — the plan is saved, so point the teacher somewhere useful */}
       <section aria-labelledby="next-steps-heading" className="bg-card rounded-xl border-2 border-border p-5 sm:p-6">
