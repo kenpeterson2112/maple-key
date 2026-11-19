@@ -2,7 +2,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Crisp orchard palette. Apple red primary, teal secondary, goldenrod pop.
+/* Crisp orchard palette. Rust primary, teal secondary, goldenrod pop.
    Every value is the OKLCH form of the sRGB hex in its comment and converts
    back to exactly that hex. Contrast is checked by scripts/check-contrast.mjs
    (`pnpm check:contrast`); rerun it after touching any value here.
@@ -18,11 +18,11 @@
   --popover: oklch(1 0 0);                         /* #FFFFFF */
   --popover-foreground: oklch(0.248 0.02 39.2);    /* #2A1E1A */
 
-  --primary: oklch(0.587 0.199 30.8);              /* #D93A26 apple red */
-  --primary-hover: oklch(0.537 0.185 31);          /* #C2301D */
-  --primary-strong: oklch(0.515 0.179 30.9);       /* #B82C1A red text on tints/muted */
+  --primary: oklch(0.57 0.126 39.9);               /* #B45A3A rust */
+  --primary-hover: oklch(0.531 0.121 40.2);        /* #A55031 */
+  --primary-strong: oklch(0.52 0.12 39.8);         /* #A14D2F rust text on tints/muted */
   --primary-foreground: oklch(1 0 0);              /* #FFFFFF */
-  --primary-tint: oklch(0.945 0.025 29.9);         /* #FDE7E3 chips, selected rows */
+  --primary-tint: oklch(0.954 0.024 40.3);         /* #FFEBE4 chips, selected rows */
 
   --secondary: oklch(0.6133 0.1146 173.4);         /* #109A7E teal fills, borders, indicators */
   --secondary-strong: oklch(0.4818 0.0884 173.8);  /* #0D6E5A teal text and links */
@@ -102,11 +102,11 @@
   --popover: oklch(0.274 0.015 62.7);              /* #2D2620 */
   --popover-foreground: oklch(0.95 0.013 63.9);    /* #F5EDE6 */
 
-  --primary: oklch(0.685 0.204 30.8);              /* #FF5A43 lifted so it stays vivid */
-  --primary-hover: oklch(0.72 0.175 29.8);         /* #FF7360 */
-  --primary-strong: oklch(0.72 0.175 29.8);        /* #FF7360 */
+  --primary: oklch(0.71 0.132 40.1);               /* #E68360 lifted for the dark page */
+  --primary-hover: oklch(0.75 0.119 40.1);         /* #EE9373 */
+  --primary-strong: oklch(0.75 0.119 40.1);        /* #EE9373 */
   --primary-foreground: oklch(0.209 0.01 52.9);    /* #1C1714 */
-  --primary-tint: oklch(0.284 0.045 30.9);         /* #3D211C */
+  --primary-tint: oklch(0.289 0.04 39.2);          /* #3C241C */
 
   --secondary: oklch(0.7796 0.1414 172.7);         /* #2DD4AE */
   --secondary-strong: oklch(0.8337 0.1253 174.5);  /* #5FE3C3 */
