@@ -4,12 +4,12 @@
  "subject": "Language",
  "grade": "6",
  "course_name": "Language",
+ "course_code": null,
  "source": {
   "publisher": "Ontario Ministry of Education",
   "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-language/grades/grade-6",
   "course_codename": "lang___fra___grade_6",
-  "last_modified": "2025-10-22T16:02:00.0349279Z",
-  "fetched_at": "2026-11-19T04:42:12Z"
+  "last_modified": "2025-10-22T16:02:00.0349279Z"
  },
  "strands": [
   {

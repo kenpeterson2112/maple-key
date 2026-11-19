@@ -1,0 +1,294 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "FSL",
+ "grade": "9",
+ "course_name": "Core French",
+ "course_code": "FSF1D",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca",
+  "course_codename": "fsf1d__copy__e4b4a9b",
+  "last_modified": "2026-11-13T18:25:01.4866384Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Listening",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Listening to Understand",
+     "text": "determine meaning in a variety of authentic and adapted oral French texts, using a range of listening strategies",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "Using Listening Comprehension Strategies",
+       "text": "identify a range of listening comprehension strategies, and use them before, during, and after listening to understand oral French texts (e.g., activate prior knowledge; preview a list of words to listen for; use context and background knowledge to make inferences while listening; take notes while listening to help them recall the information later; use a graphic organizer to help them organize ideas after listening to a text)"
+      },
+      {
+       "code": "A1.2",
+       "topic": "Demonstrating Understanding",
+       "text": "demonstrate an understanding of the purpose and meaning of oral French texts about new and familiar topics, with contextual and visual support (e.g., identify essential information from recorded messages, songs, audio webcasts, and live presentations; deduce the subjects being taught after hearing excerpts from lessons that include unfamiliar vocabulary; extract key points from an oral text about an environmental issue; compare the information or ideas in two oral texts on the same topic; listen to a dialogue set in an airport and use the context to help them determine the meaning of new words; trace the route to a location in their community while listening to directions; paraphrase an oral text)"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Listening to Interact",
+     "text": "interpret messages accurately while interacting in French for a variety of purposes and with diverse audiences",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "Using Interactive Listening Strategies",
+       "text": "identify and use interactive listening strategies to suit a variety of situations while participating in structured and guided social and academic interactions (e.g., use culturally appropriate body language and eye contact when listening during a discussion; take turns speaking and avoid interrupting others during an informal discussion or debate; clarify and confirm the messages in a presentation by commenting and asking questions afterwards; express interest during a discussion with peers; use think-pair-share sessions to discuss new topics with a peer; respond to directions by action, writing a note, or drawing on a map)"
+      },
+      {
+       "code": "A2.2",
+       "topic": "Interacting",
+       "text": "respond with understanding to what others say while participating in a variety of structured and guided interactions about new and familiar topics, in formal and informal situations (e.g., formulate questions in response to a peer’s statements about personal information, interests, and/or experiences; participate in paired and small-group conversations on familiar topics, such as healthy eating or environmental issues in their community; respond to statements and questions of others during a role play; share with a partner feelings evoked when listening to a multimedia text; provide constructive feedback during a peer conference)"
+      },
+      {
+       "code": "A2.3",
+       "topic": "Metacognition",
+       "text": "describe strategies they found helpful before, during, and after listening; identify their areas of greater and lesser strength as listeners, and plan steps they can take to improve their listening skills (e.g., identify practices that helped them to understand and allowed them to interact more effectively during a discussion; determine next steps after assessing the effectiveness of the listening strategies they use most often)"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Intercultural Understanding",
+     "text": "demonstrate an understanding of information in oral French texts about aspects of culture in diverse French-speaking communities and other communities around the world, and of French sociolinguistic conventions used in a variety of situations and communities.",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "Intercultural Awareness",
+       "text": "using information from oral French texts, identify French-speaking communities in Africa and Asia, find out about aspects of their cultures, and make connections to personal experiences and their own and other communities (e.g., listen to commercials promoting the same product in different French-speaking communities in Africa or Asia, and identify specific differences; listen to various media clips describing family habits or teens’ hopes and dreams, issues, and concerns in a French-speaking region, and draw comparisons with their own families; listen to music that would be heard at cultural festivals in French-speaking Africa or Asia, and compare it to the music played at a festival in their own community)"
+      },
+      {
+       "code": "A3.2",
+       "topic": "Awareness of Sociolinguistic Conventions",
+       "text": "using information from oral French texts, identify and demonstrate an understanding of sociolinguistic conventions used in a variety of situations in diverse French-speaking communities (e.g., identify variations in pronunciation and dialect; determine the context based on the speaker’s use of formal or informal language registers; describe the messages conveyed by the language used in relation to gender in popular music; identify politeness conventions and forms of impoliteness; manage situations of intercultural misunderstandings and conflict; listen for and identify examples of borrowed words used in different French-speaking communities)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Speaking",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Speaking to Communicate",
+     "text": "communicate information and ideas orally in French, using a variety of speaking strategies, appropriate language structures , and language appropriate to the purpose and audience",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Using Oral Communication Strategies",
+       "text": "identify a range of speaking strategies and use them to express themselves clearly and coherently in French for various purposes and to a variety of audiences (e.g., identify and clarify the purpose for speaking; record, listen to, and make adjustments to a presentation before sharing it in a large group; use appropriate intonation; repeat or paraphrase ideas to assist peers’ understanding; when planning a presentation, create an outline of the main ideas and supporting details associated with their topic; compile and refer to a personal lexicon of expressions and phrases that can be helpful in a variety of situations; introduce the subject matter to the audience at the outset of a talk, and summarize the essential points at the end)"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Producing Oral Communications",
+       "text": "produce prepared and spontaneous messages in French to communicate information, ideas, and opinions about matters of personal interest and familiar and academic topics, with contextual, auditory, and visual support as appropriate (e.g., critique a graphic novel, film, or video game; express ideas and opinions about current events and issues; express needs in everyday situations; speak about their interests and activities in school, their future plans, and/or their personal interests and pastimes outside of school)"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Speaking with Fluency",
+       "text": "speak with a smooth pace, appropriate intonation, and accurate pronunciation in prepared communications about a range of familiar topics (e.g., accurately pronounce known vocabulary when discussing personal interests; deliver a prepared and peer-assisted oral presentation at a smooth pace with appropriate phrasing and emphasis; reduce hesitations while participating in a group discussion about a researched topic; recite a piece of writing aloud, pausing as indicated by the punctuation)"
+      },
+      {
+       "code": "B1.4",
+       "topic": "Applying Language Structures",
+       "text": "communicate their meaning clearly, using parts of speech and word order appropriately (e.g., describe daily activities using appropriate verbs and time indicators and specify the time of the day; participate in informal discussions with peers about needs and wants; make a presentation using the five Ws about personal interests or familiar topics; role-play an interaction between a teacher and a student in a discussion about a problem, such as absenteeism, tardiness, or lateness of assignments)"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Speaking to Interact",
+     "text": "participate in spoken interactions in French for a variety of purposes and with diverse audiences",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Using Speaking Interaction Strategies",
+       "text": "demonstrate an understanding of appropriate speaking behaviour when interacting with others in a variety of structured, guided, formal, and informal situations (e.g., provide meaningful feedback in response to a peer’s presentation; encourage others during group discussions; bridge gaps in spoken communication with basic clarification and repair strategies, such as stopping and going back to clarify, or restating differently; use non-verbal cues, such as facial expressions and gestures, to highlight important ideas in their conversations; respond constructively to their partner’s ideas and questions in think-pair-share sessions)"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Interacting",
+       "text": "exchange information, ideas, and opinions with the teacher and their peers in structured and guided spoken interactions about matters of personal interest and academic topics, with teacher modelling as appropriate (e.g., respond to the ideas and opinions of others in a conversation; role-play a situation where negotiation is required; respond to and formulate questions about familiar topics; participate in a discussion about family traditions)"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Metacognition",
+       "text": "describe strategies they found helpful before, during, and after speaking to communicate effectively; identify their areas of greater and lesser strength as speakers, and plan steps they can take to improve their speaking skills (e.g., make and record revisions to the form and content of speech using feedback from peers and the teacher)"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Intercultural Understanding",
+     "text": "in their spoken communications, demonstrate an awareness of aspects of culture in diverse French-speaking communities and other communities around the world, and of the appropriate use of French sociolinguistic conventions in a variety of situations.",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "Intercultural Awareness",
+       "text": "communicate information orally about French-speaking communities in Africa and Asia, including aspects of their cultures and their contributions to la francophonie and the world, and make connections to personal experiences and their own and other communities (e.g., talk about cultural events in French-speaking Africa and their importance to the local community; describe countries of origin of classmates and public personalities and use that information to trace how many may have French-speaking roots; prepare a presentation on various factors that affect a particular French-speaking region in Africa or Asia, such as historical events, climate, geography, the economy, and significant individuals; share with peers the similarities and differences between their own community and one presented in a French film or video)"
+      },
+      {
+       "code": "B3.2",
+       "topic": "Awareness of Sociolinguistic Conventions",
+       "text": "identify sociolinguistic conventions associated with a variety of social situations in diverse French-speaking communities and use them appropriately in spoken interactions (e.g., contrast the appropriate uses of certain expressions of formality or politeness, such as “je veux” vs “je voudrais”; offer and respond to greetings, invitations, compliments, and apologies)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Reading",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Reading Comprehension",
+     "text": "determine meaning in a variety of authentic and adapted French texts, using a range of reading comprehension strategies",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Using Reading Comprehension Strategies",
+       "text": "identify a variety of reading comprehension strategies and use them before, during, and after reading to understand French texts in modelled, shared, guided, and independent reading contexts (e.g., skim through the first few sentences, paragraphs, or pages to activate prior learning and determine the main idea; make predictions before reading and ask questions during and after reading to test the accuracy of those predictions; make connections to other texts or to personal experiences; examine illustrations, pictures, and diagrams in the text to enhance their under- standing of its main points; identify important facts and key details; make sketches to help them visualize the action in a scene; after a shared reading activity in a small group, use placemat activities to determine the major themes of the text; extract information from titles, subtitles, headings, and sidebars in a non-fiction text)"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Reading for Meaning",
+       "text": "demonstrate an understanding of a variety of student- and teacher-selected French texts about academic and personally relevant topics (e.g., record key information and supporting details from brochures or posters; dramatize key events in a text about current events or a social or environmental issue; create an illustration depicting the main conflict in a short story or novel; summarize the opinions and evidence that a newspaper column offers to support its points about recycling electronic devices; retell a scene or chapter from an alternative point of view ; compare the experiences of a character in a story to their own experiences or to the experiences of a character in a different story; plan and budget for a trip using a bus or train schedule)"
+      },
+      {
+       "code": "C1.3",
+       "topic": "Reading with Fluency",
+       "text": "read a variety of French texts containing familiar names, words, and expressions at a sufficient rate and with sufficient ease to demonstrate that they understand the overall sense of the text (e.g., read aloud with suitable emphasis and phrasing to dramatize a text for an audience; read a statement on a current event to peers, varying expression to reinforce meaning and using intonation in keeping with the punctuation)"
+      },
+      {
+       "code": "C1.4",
+       "topic": "Developing Vocabulary",
+       "text": "use a variety of vocabulary-acquisition strategies before, during, and after reading to determine or confirm the meaning of new, unfamiliar, or recently learned words and expressions (e.g., identify familiar words used in new contexts and explain their meaning; identify slang expressions and jargon, and research their meaning; identify words borrowed from other languages; use words in context to demonstrate their meaning; construct a word web listing the personality traits of a character; use understanding of context and parts of speech to deduce the meaning of unfamiliar words and expressions; use knowledge of roots, prefixes, and suffixes to help them determine the meaning of unfamiliar words; use French–English dictionaries to confirm the meaning of unfamiliar vocabulary)"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Purpose, Form, and Style",
+     "text": "identify the purpose(s), characteristics, and aspects of style of a variety of authentic and adapted text forms in French, including fictional, informational, graphic, and media forms",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Purposes and Characteristics of Text Forms",
+       "text": "identify the purpose(s) and characteristics of a variety of text forms, including fictional, informational, graphic, and media forms, and explain how the characteristics help communicate the meaning (e.g., the episodic plot of an adventure story creates suspense; links in a website lead the reader to related information)"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Text Features and Elements of Style",
+       "text": "identify some features and stylistic elements of a variety of text forms, including fictional, informational, graphic, and media forms, and explain how they help to convey the meaning (e.g., dialogue and descriptive words help a reader visualize characters in a narrative text; descriptive language and metaphors in song lyrics, short stories, and novels add vividness and evoke an emotional response; boldface type and colours emphasize key words in an advertisement; titles and subtitles are used to organize information in an article or a report)"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Metacognition",
+       "text": "describe strategies they found helpful before, during, and after reading to understand texts; identify their areas of greater and lesser strength as readers, and plan steps they can take to improve their reading skills (e.g., keep a reading log and use it to analyse their reading trends; set goals to expand the variety of texts read; plan to incorporate newly acquired vocabulary in spoken and written contexts)"
+      }
+     ]
+    },
+    {
+     "code": "C3",
+     "title": "Intercultural Understanding",
+     "text": "demonstrate an understanding of information in French texts about aspects of culture in diverse French-speaking communities and other communities around the world, and of French sociolinguistic conventions used in a variety of situations and communities.",
+     "specifics": [
+      {
+       "code": "C3.1",
+       "topic": "Intercultural Awareness",
+       "text": "using information from a variety of French texts, identify French-speaking communities in Africa and Asia, find out about aspects of their cultures, and make connections to personal experiences and their own and other communities (e.g., conduct research to identify and describe significant landmarks in various French-speaking places in Africa and Asia; read travel brochures or information from websites about different French-speaking African or Asian regions and create a multimedia presentation on the cultural highlights of these regions; read a menu from a Moroccan or Lebanese restaurant to determine the extent to which the main dishes reflect the agriculture in the country that inspired the restaurant)"
+      },
+      {
+       "code": "C3.2",
+       "topic": "Awareness of Sociolinguistic Conventions",
+       "text": "identify, in a variety of French texts, examples of sociolinguistic conventions associated with a variety of social situations in diverse French-speaking communities (e.g., read a blog from someone in a French-speaking region to identify local colloquialisms; extract regional vocabulary from two children’s stories from different regions depicting a cultural celebration; read song lyrics by French-speaking artists to identify expressions specific to different regions)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Writing",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Purpose, Audience, and Form",
+     "text": "write French texts for different purposes and audiences, using a variety of forms and knowledge of language structures and conventions of written French appropriate for this level",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Identifying Purpose and Audience",
+       "text": "determine their purpose in writing and the audience for the French texts they plan to create (e.g., to record personal opinions and feelings in a journal entry; to inform others of the key ideas from a magazine or story in a blog; to compose a survey to find out about people’s habits and routines related to environmental concerns such as recycling; to produce a brochure explaining a new [real or imaginary] innovative technology; to create a poster to promote an event in the community; to describe a significant Canadian personality or historical event in a guide for newcomers to Canada; to compose song lyrics with a particular message)"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Writing in a Variety of Forms",
+       "text": "write a variety of French texts to convey information, ideas, and opinions about academic and personally relevant topics, applying their knowledge of the basic structural and stylistic elements of each form (e.g., a biography of an important Canadian historical figure, such as an individual from a First Nation, Métis, or Inuit community; a critique of a work by their favourite artist; an analysis of information presented in a graph or chart in a report; a letter to the editor using persuasive language to convince adults to increase their environmental awareness; an email message inquiring about student loans for summer venture projects)"
+      },
+      {
+       "code": "D1.3",
+       "topic": "Applying Language Structures",
+       "text": "communicate their meaning clearly, using parts of speech appropriately and following conventions for correct spelling, word order, and punctuation (e.g., describe daily routines using common reflexive verbs; write a diary entry including verbs conjugated with “être” in the past tense; create effective com- pound sentences using conjunctions in a personal blog entry; make suggestions that promote diversity and inclusion in the school community using the impératif ; provide instructions related to a personal hobby in a how-to manual or poster using the impératif and/or infinitif ; describe favourite and familiar activities, people, places, and things in an autobiography using a variety of adjectives; express opinions in a comic strip about a social issue using a variety of positive and negative question forms; offer advice and make recommendations in an email or in a dialogue using pronouns to avoid repetition; express likes and dislikes using verbs of emotion)"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "The Writing Process",
+     "text": "use the stages of the writing process – including pre-writing, producing drafts, revising, editing, and publishing – to develop and organize content, clarify ideas and expression, correct errors, and present their work effectively",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Generating, Developing, and Organizing Content",
+       "text": "generate, develop, and organize ideas for writing using a variety of pre-writing strategies and resources (e.g., use guiding questions to identify the purpose and audience before writing; use graphic organizers to help them structure ideas; conduct background reading to expand their knowledge of a topic; sort ideas into logical order for an informational paragraph; record information in their own words or using images; pose questions to guide research; gather supporting information, ideas, and opinions from print and electronic sources; assess the accuracy and relevance of information and the reliability of sources)"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Drafting and Revising",
+       "text": "plan and produce drafts and revise their work using a variety of teacher-directed and independent strategies (e.g., use an editing checklist; reread their writing to determine where it might be necessary to add and reorder information to improve organization and clarify the message; discuss word choices during peer and teacher conferences and use feedback to help them improve precision; use words from a class word wall or personal lexicon; ensure the appropriate placement of words in a sentence)"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Producing Finished Work",
+       "text": "make improvements to enhance the clarity and readability of their written work, and use a few elements of effective presentation to produce a polished product for publication (e.g., ensure the images and words on a cover page support the message of the text; label diagrams, illustrations, and photographs appropriately)"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Metacognition",
+       "text": "describe strategies they found helpful before, during, and after writing; identify their areas of greater and lesser strength as writers, and plan steps they can take to improve their writing skills (e.g., use exit passes to reflect on the writing they have just completed; review their past work for commonly used expressions and plan to vary word choice)"
+      }
+     ]
+    },
+    {
+     "code": "D3",
+     "title": "Intercultural Understanding",
+     "text": "in their written work, demonstrate an awareness of aspects of culture in diverse French-speaking communities and other communities around the world, and of the appropriate use of French sociolinguistic conventions in a variety of situations.",
+     "specifics": [
+      {
+       "code": "D3.1",
+       "topic": "Intercultural Awareness",
+       "text": "in their written work, communicate information about French-speaking communities in Africa and Asia, including aspects of their cultures and their contributions to la francophonie and the world, and make connections to personal experiences and their own and other communities (e.g., write an online encyclopedia article or blog entry summarizing interesting and important facts about a French-speaking African or Asian community; write a letter to an imaginary or real friend in Laos, Senegal, or Egypt asking questions about tourist destinations)"
+      },
+      {
+       "code": "D3.2",
+       "topic": "Awareness of Sociolinguistic Conventions",
+       "text": "identify sociolinguistic conventions associated with a variety of social situations in diverse French-speaking communities , and use them appropriately in their written work (e.g., create a comic strip using popular expressions particular to youth from a specific French-speaking region; create a picture book to explain the meanings of popular expressions to younger students; write notes to a friend and to a job interviewer or the school principal, adjusting the level of formality accordingly)"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

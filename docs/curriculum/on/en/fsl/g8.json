@@ -4,12 +4,12 @@
  "subject": "FSL",
  "grade": "8",
  "course_name": "Core French Program",
+ "course_code": null,
  "source": {
   "publisher": "Ontario Ministry of Education",
   "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-fsl/grades/core-g8",
   "course_codename": "fsl___core___grade_7__copy_",
-  "last_modified": "2025-03-05T18:19:12.6794857Z",
-  "fetched_at": "2026-11-19T04:42:14Z"
+  "last_modified": "2025-03-05T18:19:12.6794857Z"
  },
  "strands": [
   {

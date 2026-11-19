@@ -4,12 +4,12 @@
  "subject": "Math",
  "grade": "3",
  "course_name": "Mathematics",
+ "course_code": null,
  "source": {
   "publisher": "Ontario Ministry of Education",
   "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-math/grades/g3-math",
   "course_codename": "ele___math___grade_3",
-  "last_modified": "2023-03-17T14:33:10.9692668Z",
-  "fetched_at": "2026-11-19T04:42:11Z"
+  "last_modified": "2023-03-17T14:33:10.9692668Z"
  },
  "strands": [
   {
