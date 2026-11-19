@@ -1,11 +1,25 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
-import { Settings, SlidersHorizontal, ChevronDown } from "lucide-react"
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
+import { Settings, SlidersHorizontal, ChevronDown, Filter } from "lucide-react"
 import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
 import AccountSheet from "@/components/account-sheet"
+import { BottomSheet } from "@/components/ui/bottom-sheet"
+import { GRADES, SUBJECTS } from "@/components/hero-personalize"
+import {
+  NextStep,
+  OverallStrip,
+  StrandRows,
+  StrandTimeline,
+  SubjectStrip,
+  Gauge,
+  noProgressReason,
+  provinceName,
+  useClassProgress,
+} from "@/components/context-strip"
 import { useBookmarks } from "@/lib/bookmarks-context"
+import { useGlobalFilters } from "@/lib/global-filters"
 import { withBasePath } from "@/lib/base-path"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
 import { SPACE_ITEMS, type TopNavSpace } from "@/lib/nav-items"
@@ -17,16 +31,37 @@ interface TopNavProps {
   onChangeSpace: (space: TopNavSpace) => void
   onOpenMobileFilters?: () => void
   totalActiveFilters?: number
-  /** True while the landing page is showing — the logo reads as the active tab. */
+  /** True while the landing page is showing. The nav then wears the brand
+   *  colour and summarises every class, whatever subject is selected. */
   isHome?: boolean
-  /** Return to the landing page. The logo is the only affordance for it, which
-   *  keeps the four working spaces in the toggle and adds no extra chrome. */
+  /** Return to the landing page (the logo). */
   onGoHome?: () => void
+  /** Choosing a subject or grade from the landing page enters that class. */
+  onEnterClass?: () => void
+  /** Jump to Search seeded with an expectation code. */
+  onFindResources?: (code: string) => void
+  /** Open the planner for the current class. */
+  onPlan?: () => void
+  /** Hide the progress row (full-screen flows such as Quick Check). */
+  hideStrip?: boolean
 }
 
-// Desktop: logo, the four-space pill toggle, Materials, Settings.
-// Phone: a slim 56px bar with the logo, Filters (on Search), Materials and the
-// account avatar; the spaces move to the bottom tab bar (bottom-tab-bar.tsx).
+// Subject → its colour token. One value per subject does every job (CLAUDE.md).
+function subjectColor(subject: string): string | null {
+  return SUBJECTS.find((o) => o.value === subject)?.color ?? null
+}
+
+const SUBJECT_OPTIONS = SUBJECTS.map((o) => (o.value ? o : { ...o, label: "All subjects" }))
+const GRADE_OPTIONS = GRADES.map((o) => (o.value ? o : { ...o, label: "All grades" }))
+
+// The top nav is locked to the class being worked on (Nielsen: visibility of
+// system status, recognition over recall). Row 1 holds the subject and grade
+// pickers and the spaces; it wears the subject's colour once one is chosen, the
+// brand red on the landing page or with none. Row 2 shows where the class is:
+// a gauge, the strand timeline and what needs work, or a summary across
+// classes. Province sits in Settings: it rarely changes.
+// Phone: a 56px bar with one class chip (opening a sheet with the pickers and
+// the full picture) and a one-line progress bar under it.
 export default function TopNav({
   activeSpace,
   onChangeSpace,
@@ -34,101 +69,329 @@ export default function TopNav({
   totalActiveFilters = 0,
   isHome = false,
   onGoHome,
+  onEnterClass,
+  onFindResources,
+  onPlan,
+  hideStrip = false,
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
+  const { state, setSubject, setGrade } = useGlobalFilters()
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isClassSheetOpen, setIsClassSheetOpen] = useState(false)
   const openSettings = () => setIsSettingsOpen(true)
 
+  const progress = useClassProgress(state.subject, state.grade)
+  const color = subjectColor(state.subject)
+  const scoped = !isHome && color !== null
+  // Text and fills in the bar's own colour (subject, else brand).
+  const accent = scoped ? color : "var(--primary)"
+  const accentText = scoped ? color : "var(--primary-strong)"
+  const barStyle: CSSProperties | undefined = scoped ? { background: color, color: "var(--subject-foreground)" } : undefined
+  const barClass = scoped ? "" : "bg-primary text-primary-foreground"
+  const tintStyle: CSSProperties = {
+    background: `color-mix(in oklch, ${accent} 9%, var(--background))`,
+    borderColor: `color-mix(in oklch, ${accent} 30%, var(--background))`,
+  }
+
+  const choose = (apply: () => void) => {
+    apply()
+    if (isHome) onEnterClass?.()
+  }
+  const pickSubject = (v: string) => choose(() => setSubject(v))
+  const pickGrade = (v: string) => choose(() => setGrade(v))
+
   const showResourceFilters = activeSpace === "resources" && !!onOpenMobileFilters
+  const classLabel = state.subject
+    ? `${SUBJECTS.find((o) => o.value === state.subject)?.label ?? state.subject}${state.grade ? ` · Grade ${state.grade}` : ""}`
+    : state.grade
+      ? `Grade ${state.grade}`
+      : "All classes"
+
+  const logo = (size: "sm" | "lg") => (
+    <button
+      type="button"
+      onClick={onGoHome}
+      aria-label="Maple Key home"
+      aria-current={isHome ? "page" : undefined}
+      className={`flex flex-shrink-0 items-center justify-center rounded-xl bg-card shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+        size === "lg" ? "h-12 w-12" : "h-10 w-10"
+      }`}
+    >
+      <img
+        src={withBasePath("/maple-key-logo.png")}
+        alt=""
+        width={785}
+        height={673}
+        className={size === "lg" ? "h-10 w-auto object-contain" : "h-8 w-auto object-contain"}
+      />
+    </button>
+  )
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-border bg-background/90 pt-[env(safe-area-inset-top)] backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
-        <div className="mx-auto max-w-[1500px] px-4 md:px-6 md:py-2.5">
-          {/* Desktop */}
-          <div className="hidden md:flex items-center justify-between gap-4 relative">
-            <div className="flex items-center gap-3 z-10">
-              <button
-                type="button"
-                onClick={onGoHome}
-                aria-label="Maple Key home"
-                aria-current={isHome ? "page" : undefined}
-                className={`rounded-xl p-1 transition-colors hover:bg-primary-tint ${isHome ? "bg-primary-tint" : ""}`}
-              >
-                <img
-                  src={withBasePath("/maple-key-logo.png")}
-                  alt="Maple Key"
-                  width={785}
-                  height={673}
-                  className="h-14 w-auto object-contain"
+      <header className="z-50 flex-shrink-0 pt-[env(safe-area-inset-top)]" style={barStyle}>
+        {/* Row 1 */}
+        <div className={barClass} style={barStyle}>
+          <div className="mx-auto max-w-[1500px] px-4 md:px-6">
+            {/* Desktop */}
+            <div className="hidden items-center gap-3 py-2.5 md:flex">
+              {logo("lg")}
+              <span className="font-display text-xl font-bold max-lg:hidden">Maple Key</span>
+              <div className="ml-2 flex items-center gap-2">
+                <ContextSelect label="Subject" value={state.subject} options={SUBJECT_OPTIONS} onChange={pickSubject} color={accentText} />
+                <ContextSelect label="Grade" value={state.grade} options={GRADE_OPTIONS} onChange={pickGrade} color={accentText} />
+              </div>
+              <div className="mx-auto">
+                <SpaceToggle
+                  activeSpace={activeSpace}
+                  onChangeSpace={onChangeSpace}
+                  planBadge={bookmarkedResources.length}
+                  activeColor={accentText}
                 />
-              </button>
-            </div>
-
-            <div className="absolute left-1/2 -translate-x-1/2">
-              <SpaceToggle
-                activeSpace={activeSpace}
-                onChangeSpace={onChangeSpace}
-                planBadge={bookmarkedResources.length}
-              />
-            </div>
-
-            <div className="flex items-center gap-2 z-10">
+              </div>
               <MaterialsMenu onEdit={openSettings} />
               <button
                 onClick={openSettings}
-                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-primary-tint"
+                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-card/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 title="Settings"
+                aria-label="Settings"
               >
-                <Settings size={20} className="text-foreground" />
+                <Settings size={20} aria-hidden="true" />
               </button>
             </div>
-          </div>
 
-          {/* Phone */}
-          <div className="flex h-14 items-center justify-between gap-2 md:hidden">
-            <button
-              type="button"
-              onClick={onGoHome}
-              aria-label="Maple Key home"
-              aria-current={isHome ? "page" : undefined}
-              className={`rounded-lg p-0.5 transition-colors ${isHome ? "bg-primary-tint" : ""}`}
-            >
-              <img
-                src={withBasePath("/maple-key-logo.png")}
-                alt="Maple Key"
-                width={785}
-                height={673}
-                className="h-10 w-auto object-contain"
-              />
-            </button>
-
-            <div className="flex items-center gap-1">
-              {showResourceFilters && (
-                <button
-                  onClick={onOpenMobileFilters}
-                  className="flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-card px-3 text-sm font-semibold text-secondary-strong shadow-sm"
-                  aria-haspopup="dialog"
-                >
-                  <SlidersHorizontal size={14} aria-hidden="true" />
-                  Filters
-                  {totalActiveFilters > 0 && (
-                    <span className="rounded-full bg-primary px-1.5 text-[10px] font-bold text-primary-foreground">
-                      {totalActiveFilters >= 10 ? "9+" : totalActiveFilters}
-                      <span className="sr-only"> active</span>
-                    </span>
-                  )}
-                </button>
-              )}
-              <MaterialsMenu onEdit={openSettings} compact />
-              <AccountSheet onOpenSettings={openSettings} />
+            {/* Phone */}
+            <div className="flex h-14 items-center gap-2 md:hidden">
+              {logo("sm")}
+              <button
+                type="button"
+                onClick={() => setIsClassSheetOpen(true)}
+                aria-haspopup="dialog"
+                aria-label={`Class: ${classLabel}. Change class or see progress`}
+                className="flex min-h-11 min-w-0 items-center gap-1.5 rounded-full bg-card px-3.5 text-sm font-bold shadow-sm"
+                style={{ color: accentText }}
+              >
+                <span className="truncate">{classLabel}</span>
+                <ChevronDown size={14} className="flex-shrink-0" aria-hidden="true" />
+              </button>
+              <div className="ml-auto flex items-center gap-1">
+                {showResourceFilters && (
+                  <button
+                    onClick={onOpenMobileFilters}
+                    className="relative flex h-10 w-10 items-center justify-center rounded-full bg-card text-secondary-strong shadow-sm"
+                    aria-haspopup="dialog"
+                    aria-label="Filters"
+                  >
+                    <Filter size={18} aria-hidden="true" />
+                    {totalActiveFilters > 0 && (
+                      <span className="absolute -right-0.5 -top-0.5 rounded-full bg-primary px-1.5 text-[10px] font-bold leading-4 text-primary-foreground">
+                        {totalActiveFilters >= 10 ? "9+" : totalActiveFilters}
+                        <span className="sr-only"> active</span>
+                      </span>
+                    )}
+                  </button>
+                )}
+                <MaterialsMenu onEdit={openSettings} compact />
+                <AccountSheet onOpenSettings={openSettings} />
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Row 2: where the class is */}
+        {!hideStrip && (
+          <div className="border-b" style={tintStyle}>
+            <div className="mx-auto hidden max-w-[1500px] px-6 py-3 md:block">
+              {scoped && progress ? (
+                <SubjectStrip progress={progress} accent={accent} onFindResources={onFindResources} onPlan={onPlan} />
+              ) : (
+                <OverallStrip
+                  province={state.province}
+                  note={isHome ? "Pick a subject and grade to step into a class." : noProgressReason(state.subject, state.grade)}
+                />
+              )}
+            </div>
+
+            {/* Phone: one line, tap for the sheet. Nothing on the landing page. */}
+            {scoped && (
+              <button
+                type="button"
+                onClick={() => setIsClassSheetOpen(true)}
+                className="flex w-full flex-col gap-1.5 px-4 py-2 text-left md:hidden"
+                aria-label={
+                  progress
+                    ? `${progress.taught} of ${progress.total} expectations taught${progress.frontier ? `, now on ${progress.frontier}` : ""}. Show progress`
+                    : noProgressReason(state.subject, state.grade)
+                }
+              >
+                {progress ? (
+                  <>
+                    <span className="flex items-center gap-2 text-xs text-foreground">
+                      <strong>
+                        {progress.taught}/{progress.total} taught
+                      </strong>
+                      {progress.frontier && (
+                        <>
+                          <span className="text-muted-foreground" aria-hidden="true">·</span>
+                          <span>
+                            Now: <strong>{progress.frontier}</strong>
+                          </span>
+                        </>
+                      )}
+                      {progress.needsWork && (
+                        <span className="ml-auto font-semibold text-pop-strong">{progress.needsWork.code} needs work</span>
+                      )}
+                    </span>
+                    <StrandTimeline progress={progress} showLabels={false} height="h-2" />
+                  </>
+                ) : (
+                  <span className="text-xs text-foreground">{noProgressReason(state.subject, state.grade)}</span>
+                )}
+              </button>
+            )}
+          </div>
+        )}
       </header>
+
+      <BottomSheet
+        open={isClassSheetOpen}
+        onOpenChange={setIsClassSheetOpen}
+        title="Your class"
+        description="Choose the subject and grade, and see where the class is."
+      >
+        <div className="flex flex-col gap-5 p-5">
+          <div className="grid grid-cols-2 gap-3">
+            <SheetSelect label="Subject" value={state.subject} options={SUBJECT_OPTIONS} onChange={pickSubject} />
+            <SheetSelect label="Grade" value={state.grade} options={GRADE_OPTIONS} onChange={pickGrade} />
+          </div>
+          <p className="-mt-2 text-xs text-muted-foreground">
+            {provinceName(state.province)} curriculum.{" "}
+            <button
+              type="button"
+              onClick={() => {
+                setIsClassSheetOpen(false)
+                openSettings()
+              }}
+              className="font-semibold text-secondary-strong underline"
+            >
+              Change in Settings
+            </button>
+          </p>
+
+          {progress ? (
+            <>
+              <div className="flex items-center gap-3 rounded-2xl p-3" style={tintStyle}>
+                <Gauge taught={progress.taught} total={progress.total} accent={color ?? "var(--primary)"} size={88} />
+                <div className="flex flex-col gap-0.5 text-sm text-foreground">
+                  <span>
+                    <strong>
+                      {progress.taught} of {progress.total}
+                    </strong>{" "}
+                    expectations taught
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {progress.checked} checked · {progress.lessonCount} {progress.lessonCount === 1 ? "lesson" : "lessons"}
+                  </span>
+                </div>
+              </div>
+              <StrandRows progress={progress} />
+              {progress.ongoingStrands.length > 0 && (
+                <p className="-mt-2 text-xs text-muted-foreground">
+                  Ongoing in every lesson: {progress.ongoingStrands.map((s) => `${s.code} ${s.label}`).join(", ")}
+                </p>
+              )}
+              <NextStep
+                progress={progress}
+                onFindResources={
+                  onFindResources
+                    ? (code) => {
+                        setIsClassSheetOpen(false)
+                        onFindResources(code)
+                      }
+                    : undefined
+                }
+                onPlan={
+                  onPlan
+                    ? () => {
+                        setIsClassSheetOpen(false)
+                        onPlan()
+                      }
+                    : undefined
+                }
+              />
+            </>
+          ) : (
+            <p className="text-sm text-muted-foreground">{noProgressReason(state.subject, state.grade)}</p>
+          )}
+        </div>
+      </BottomSheet>
 
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
+  )
+}
+
+/** A pill-shaped native select on the coloured bar. */
+function ContextSelect({
+  label,
+  value,
+  options,
+  onChange,
+  color,
+}: {
+  label: string
+  value: string
+  options: { value: string; label: string }[]
+  onChange: (value: string) => void
+  color: string
+}) {
+  return (
+    <label className="relative flex items-center">
+      <span className="sr-only">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-10 cursor-pointer appearance-none rounded-full bg-card pl-4 pr-9 text-sm font-bold shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        style={{ color }}
+      >
+        {options.map((o) => (
+          <option key={o.value || "all"} value={o.value} className="text-foreground">
+            {o.label}
+          </option>
+        ))}
+      </select>
+      <ChevronDown size={14} className="pointer-events-none absolute right-3" style={{ color }} aria-hidden="true" />
+    </label>
+  )
+}
+
+/** A labelled full-width select inside the phone sheet. */
+function SheetSelect({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string
+  value: string
+  options: { value: string; label: string }[]
+  onChange: (value: string) => void
+}) {
+  return (
+    <label className="flex flex-col gap-1 text-xs font-semibold text-muted-foreground">
+      {label}
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-11 rounded-xl border border-border-strong bg-input px-3 text-base font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        {options.map((o) => (
+          <option key={o.value || "all"} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+    </label>
   )
 }
 
@@ -174,7 +437,7 @@ function MaterialsMenu({ onEdit, compact = false }: { onEdit: () => void; compac
           onClick={() => setOpen((v) => !v)}
           aria-label={`Classroom materials${materials.total > 0 ? `, ${materials.total} selected` : ""}`}
           aria-expanded={open}
-          className="relative flex h-11 w-11 items-center justify-center rounded-full text-secondary-strong transition-colors hover:bg-accent"
+          className="relative flex h-10 w-10 items-center justify-center rounded-full bg-card text-secondary-strong shadow-sm transition-colors hover:bg-accent"
         >
           <SlidersHorizontal size={20} aria-hidden="true" />
           {badge}
@@ -211,17 +474,20 @@ function SpaceToggle({
   activeSpace,
   onChangeSpace,
   planBadge = 0,
+  activeColor,
 }: {
   activeSpace: TopNavSpace | null
   onChangeSpace: (space: TopNavSpace) => void
   /** Bookmarked-resource count shown on the Plan tab. */
   planBadge?: number
+  /** Text colour of the selected tab, matching the bar. */
+  activeColor: string
 }) {
   return (
     <div
       role="tablist"
       aria-label="View"
-      className="flex items-center gap-1 rounded-full border border-border bg-card p-1 shadow-sm"
+      className="flex items-center gap-1 rounded-full bg-foreground/15 p-1"
     >
       {SPACE_ITEMS.map((item) => {
         const Icon = item.icon
@@ -233,19 +499,16 @@ function SpaceToggle({
             role="tab"
             aria-selected={isActive}
             onClick={() => onChangeSpace(item.id)}
-            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition-all ${
-              isActive
-                ? "bg-primary text-primary-foreground shadow-sm"
-                : "text-secondary-strong hover:bg-accent"
+            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              isActive ? "bg-card shadow-sm" : "hover:bg-card/20"
             }`}
+            style={isActive ? { color: activeColor } : undefined}
           >
             <Icon size={16} />
             <span>{item.label}</span>
             {showBadge && (
               <span
-                className={`flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold ${
-                  isActive ? "bg-primary-foreground/25 text-primary-foreground" : "bg-primary text-primary-foreground"
-                }`}
+                className="flex h-4 min-w-4 items-center justify-center rounded-full bg-pop px-1 text-[9px] font-bold text-pop-foreground"
               >
                 {planBadge >= 10 ? "9+" : planBadge}
               </span>

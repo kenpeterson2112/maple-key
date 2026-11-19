@@ -7,6 +7,8 @@ import ResultsSection from "@/components/results-section"
 import MobileFiltersDrawer from "@/components/mobile-filters-drawer"
 import BackToTopButton from "@/components/back-to-top-button"
 import { useGlobalFilters } from "@/lib/global-filters"
+import { getStrandOptions } from "@/lib/get-strand-options"
+import InlinePicker from "@/components/inline-picker"
 
 interface ResourcesSpaceProps {
   sidebarFilters: { modality: string[]; cost: string[]; accessibility: string[]; readiness: string[] }
@@ -32,11 +34,27 @@ export default function ResourcesSpace({
 }: ResourcesSpaceProps) {
   // The class context (province, grade, subject, strand) comes from the one
   // shared store; the sidebar facets stay local to Search.
-  const { filters } = useGlobalFilters()
+  const { filters, setStrand } = useGlobalFilters()
+  // Strand narrows Search only, so it sits in this page's header rather than
+  // the top nav. Phones set it in the filters sheet.
+  const strandOptions = getStrandOptions(filters.subject, filters.grade)
 
   return (
     <div className="flex flex-col h-full bg-background overflow-hidden">
-      <PageHeader icon={Compass} title="Resources" iconColor="text-primary-strong" iconBg="bg-primary-tint" />
+      <PageHeader icon={Compass} title="Resources" iconColor="text-primary-strong" iconBg="bg-primary-tint">
+        {filters.subject && (
+          <div className="hidden md:block">
+            <InlinePicker
+              variant="compact"
+              value={filters.strand}
+              placeholder="any strand"
+              options={strandOptions}
+              onChange={setStrand}
+              ariaLabel="Choose strand"
+            />
+          </div>
+        )}
+      </PageHeader>
 
       <div className="flex flex-1 min-h-0">
         <SidebarFilters onFilterChange={onSidebarFilterChange} sidebarFilters={sidebarFilters} />

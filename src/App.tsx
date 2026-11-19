@@ -58,6 +58,10 @@ export default function App() {
     Object.values(sidebarFilters).reduce((sum, arr) => sum + arr.length, 0)
 
   const goResources = () => setActiveSpace("resources")
+  const findResources = (code: string) => {
+    setSearchSeed({ query: code, nonce: Date.now() })
+    setActiveSpace("resources")
+  }
 
   // Every way into the planner goes through here so a start step from one entry
   // (e.g. the results-page Plan button) never leaks into the next.
@@ -96,6 +100,10 @@ export default function App() {
         onChangeSpace={changeSpace}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
+        onEnterClass={goResources}
+        onFindResources={findResources}
+        onPlan={() => openPlanner(null)}
+        hideStrip={activeSpace === "assessment"}
       />
 
       <div className="relative flex-1 min-h-0 overflow-hidden">
@@ -185,12 +193,7 @@ export default function App() {
               )}
 
               {activeSpace === "insights" && (
-                <ClassInsightsSpace
-                  onFindResources={(code) => {
-                    setSearchSeed({ query: code, nonce: Date.now() })
-                    setActiveSpace("resources")
-                  }}
-                />
+                <ClassInsightsSpace onFindResources={findResources} />
               )}
             </motion.div>
           )}
