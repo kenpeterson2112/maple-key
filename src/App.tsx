@@ -140,6 +140,7 @@ export default function App() {
                   onOpenLesson={(lesson) => openPlanner(lesson)}
                   onOpenTour={() => setShowResourceTour(true)}
                   onOpenClassroomSetup={() => setShowOnboarding(true)}
+                  onFindResources={findResources}
                 />
               )}
 

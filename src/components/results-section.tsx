@@ -7,7 +7,7 @@ import { Search, X, Plus, Compass, Lightbulb } from "lucide-react"
 import ResourceCard from "./resource-card"
 import type { Filters } from "@/lib/types"
 import { useBookmarks } from "@/lib/bookmarks-context"
-import { useFilteredResources, keywordFilter, sortResources, type SidebarFilters } from "@/lib/use-filtered-resources"
+import { useFilteredResources, keywordFilter, isCodeQuery, sortResources, type SidebarFilters } from "@/lib/use-filtered-resources"
 
 interface ResultsSectionProps {
   filters: Filters
@@ -135,7 +135,7 @@ export default function ResultsSection({
               <span className="ml-2 text-xs font-medium text-primary">Searching…</span>
             )}
           </div>
-          {searchQuery.length > 0 && searchQuery.length < 3 && (
+          {searchQuery.length > 0 && searchQuery.length < 3 && !isCodeQuery(searchQuery) && (
             <p className="absolute left-0 top-full mt-1 rounded border border-border bg-card px-2 py-0.5 text-xs text-muted-foreground shadow-sm z-10">
               Type at least 3 characters to search
             </p>
@@ -190,10 +190,23 @@ export default function ResultsSection({
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary-tint">
               <Compass size={22} className="text-primary-strong" />
             </div>
-            <p className="font-display text-base font-semibold text-foreground">No matches yet — try widening your search.</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Drop a filter above, switch to a different grade, or clear the search box.
-            </p>
+            {isCodeQuery(searchQuery) ? (
+              <>
+                <p className="font-display text-base font-semibold text-foreground">
+                  No resources tagged {searchQuery.trim().toUpperCase()} for this class yet.
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  That&rsquo;s a gap in the catalogue, not your search. Clear the search box to browse the class, or submit a resource you use for it.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-display text-base font-semibold text-foreground">No matches yet — try widening your search.</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Drop a filter above, switch to a different grade, or clear the search box.
+                </p>
+              </>
+            )}
           </motion.div>
         ) : (
           <motion.div

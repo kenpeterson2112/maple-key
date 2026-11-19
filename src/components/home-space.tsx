@@ -17,7 +17,8 @@ import type { LucideIcon } from "lucide-react"
 import MapleKeyIcon from "@/components/ui/maple-key-icon"
 import { SUBJECTS } from "@/components/hero-personalize"
 import { StrandTimeline, useClassData } from "@/components/context-strip"
-import { buildClassProgress, buildOverallSummary } from "@/lib/class-progress"
+import { buildClassProgress, buildNeedsAttention, buildOverallSummary } from "@/lib/class-progress"
+import { buildWeek } from "@/lib/week"
 import { useGlobalFilters } from "@/lib/global-filters"
 import { useFilteredResources } from "@/lib/use-filtered-resources"
 import { useBookmarks } from "@/lib/bookmarks-context"
@@ -35,6 +36,8 @@ interface HomeSpaceProps {
   onOpenTour: () => void
   /** Open classroom materials setup. */
   onOpenClassroomSetup: () => void
+  /** Search seeded with an expectation code (the class context is set first). */
+  onFindResources: (code: string) => void
 }
 
 /**
@@ -58,6 +61,7 @@ export default function HomeSpace({
   onOpenLesson,
   onOpenTour,
   onOpenClassroomSetup,
+  onFindResources,
 }: HomeSpaceProps) {
   const { state, setGrade, setSubject } = useGlobalFilters()
   const { bookmarkedResources } = useBookmarks()
@@ -150,6 +154,18 @@ export default function HomeSpace({
             )}
           </div>
         </section>
+
+        {/* ── This week / Needs attention ──────────────────────────────── */}
+        <div className="grid gap-4 lg:grid-cols-3">
+          <ThisWeek onOpenLesson={onOpenLesson} />
+          <NeedsAttention
+            onFindResources={(subject, grade, code) => {
+              setSubject(subject)
+              setGrade(grade)
+              onFindResources(code)
+            }}
+          />
+        </div>
 
         {/* ── Pick up where you left off ───────────────────────────────── */}
         {hasHistory && (
@@ -437,5 +453,132 @@ function ClassCards({ onOpen }: { onOpen: (subject: string, grade: string) => vo
         )
       })}
     </div>
+  )
+}
+
+// A subject's colour token, or the brand colour for anything unlisted.
+function subjectColor(subject: string): string {
+  return SUBJECTS.find((o) => o.value === subject)?.color ?? "var(--primary)"
+}
+
+function subjectLabel(subject: string): string {
+  return SUBJECTS.find((o) => o.value === subject)?.label ?? subject
+}
+
+/** Mon–Fri of the current week: lessons planned and Quick Checks recorded. */
+function ThisWeek({ onOpenLesson }: { onOpenLesson: (lesson: LessonMetadata) => void }) {
+  const { tallies, lessons } = useClassData()
+  const days = useMemo(() => buildWeek(lessons, tallies), [lessons, tallies])
+  const empty = days.every((d) => d.lessons.length === 0 && d.checks.length === 0)
+
+  return (
+    <section aria-labelledby="home-week-heading" className="rounded-xl border border-border bg-card p-5 shadow-sm lg:col-span-2">
+      <h2 id="home-week-heading" className="font-display text-xl font-semibold text-card-foreground">
+        This week
+      </h2>
+      {empty && (
+        <p className="mt-1 text-sm text-muted-foreground">
+          Nothing planned or checked yet this week. Lessons you plan and Quick Checks you record show up here by day.
+        </p>
+      )}
+      <ol className="mt-4 grid gap-3 md:grid-cols-5">
+        {days.map((day) => {
+          const label = new Date(day.start).toLocaleDateString("en-CA", { weekday: "short", day: "numeric" })
+          const nothing = day.lessons.length === 0 && day.checks.length === 0
+          return (
+            <li key={day.start} className={`flex flex-col gap-2 ${nothing ? "max-md:hidden" : ""}`}>
+              <span className={`text-xs font-semibold ${day.isToday ? "text-foreground" : "text-muted-foreground"}`}>
+                {label}
+                {day.isToday && " · today"}
+              </span>
+              {day.lessons.map((lesson) => {
+                const color = subjectColor(lesson.subject)
+                const codes = (lesson.curriculumCodesCovered ?? []).slice(0, 2).join(", ")
+                return (
+                  <button
+                    key={lesson.id}
+                    type="button"
+                    onClick={() => onOpenLesson(lesson)}
+                    className="rounded-lg border px-2.5 py-2 text-left text-xs transition-colors hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    style={{
+                      background: `color-mix(in oklch, ${color} 10%, var(--card))`,
+                      borderColor: `color-mix(in oklch, ${color} 40%, var(--card))`,
+                    }}
+                  >
+                    {codes && (
+                      <span className="block font-bold" style={{ color }}>
+                        {codes}
+                      </span>
+                    )}
+                    <span className="line-clamp-2 text-foreground">{lesson.title || "Untitled lesson"}</span>
+                    <span className="mt-0.5 block text-muted-foreground">
+                      Gr {lesson.grade} {subjectLabel(lesson.subject)}
+                    </span>
+                  </button>
+                )
+              })}
+              {day.checks.map((check) => (
+                <span
+                  key={check.lessonId}
+                  className="rounded-lg border border-dashed border-border-strong px-2.5 py-2 text-xs text-foreground"
+                >
+                  <span className="block font-semibold">Quick Check</span>
+                  <span className="line-clamp-2 text-muted-foreground">{check.title}</span>
+                </span>
+              ))}
+              {nothing && <span className="rounded-lg border border-dashed border-border px-2.5 py-2 text-xs text-muted-foreground">Nothing yet</span>}
+            </li>
+          )
+        })}
+      </ol>
+    </section>
+  )
+}
+
+/** The overall expectations classes are struggling with most, across classes. */
+function NeedsAttention({ onFindResources }: { onFindResources: (subject: string, grade: string, code: string) => void }) {
+  const { tallies, lessons } = useClassData()
+  const items = useMemo(() => buildNeedsAttention(tallies, lessons), [tallies, lessons])
+
+  return (
+    <section aria-labelledby="home-attention-heading" className="flex flex-col gap-3 rounded-xl bg-pop-tint p-5">
+      <h2 id="home-attention-heading" className="font-display text-xl font-semibold text-foreground">
+        Needs attention
+      </h2>
+      {items.length === 0 ? (
+        <p className="text-sm text-foreground">
+          Nothing flagged. Once a Quick Check shows a class at Level 1–2 on an expectation, it appears here.
+        </p>
+      ) : (
+        <ul className="flex flex-col gap-3">
+          {items.map(({ subject, grade, overall }) => (
+            <li key={`${subject}|${grade}|${overall.code}`} className="flex flex-col gap-1 text-sm">
+              <span className="flex items-start gap-2">
+                <span
+                  className="mt-0.5 flex-shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold"
+                  style={{ background: subjectColor(subject), color: "var(--subject-foreground)" }}
+                >
+                  {subjectLabel(subject)} {grade}
+                </span>
+                <strong className="min-w-0 text-foreground">
+                  {overall.code} {overall.title}
+                </strong>
+              </span>
+              <span className="flex items-center justify-between gap-2 text-xs text-foreground">
+                {Math.round((overall.lowShare ?? 0) * 100)}% at Level 1–2
+                <button
+                  type="button"
+                  onClick={() => onFindResources(subject, grade, overall.code)}
+                  className="min-h-8 rounded-lg px-2 font-semibold text-pop-strong underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  aria-label={`Find resources for ${subjectLabel(subject)} Grade ${grade} ${overall.code}`}
+                >
+                  Find resources
+                </button>
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   )
 }

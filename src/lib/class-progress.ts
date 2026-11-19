@@ -177,3 +177,28 @@ export function buildOverallSummary(tallies: LessonTally[], lessons: LessonMetad
     lastCheckAt: tallies.reduce<number | null>((max, t) => (max === null || t.updatedAt > max ? t.updatedAt : max), null),
   }
 }
+
+export interface AttentionItem {
+  subject: string
+  grade: string
+  overall: OverallProgress
+}
+
+/**
+ * The overall expectations classes are struggling with most, across every
+ * class: checked, rolled up to "Needs Support" or "Developing", ranked by the
+ * share of responses at Level 1–2. Feeds the landing page's "Needs attention".
+ */
+export function buildNeedsAttention(tallies: LessonTally[], lessons: LessonMetadata[], limit = 5): AttentionItem[] {
+  const items: AttentionItem[] = []
+  for (const { subject, grade } of buildOverallSummary(tallies, lessons).classes) {
+    const progress = buildClassProgress(subject, grade, tallies, lessons)
+    if (!progress) continue
+    for (const s of progress.strands) {
+      for (const o of s.overalls) {
+        if (o.lowShare !== null && (o.level === "poor" || o.level === "okay")) items.push({ subject, grade, overall: o })
+      }
+    }
+  }
+  return items.sort((a, b) => (b.overall.lowShare ?? 0) - (a.overall.lowShare ?? 0)).slice(0, limit)
+}

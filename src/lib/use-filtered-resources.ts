@@ -131,7 +131,22 @@ export function useFilteredResources(filters: Filters, sidebarFilters?: SidebarF
 }
 
 // Keyword search over the same fields used across the app's resource search UIs.
+// A query that is an expectation code ("B3", "C2.1") searches the codes
+// themselves, so the 3-character minimum doesn't apply: "B3" matches B3 and
+// every B3.x, never B30 or a title that happens to contain "b3".
+const CODE_QUERY = /^[A-Za-z]\d+(\.\d+)?$/
+
+export function isCodeQuery(query: string): boolean {
+  return CODE_QUERY.test(query.trim())
+}
+
 export function keywordFilter(resources: Resource[], query: string): Resource[] {
+  if (isCodeQuery(query)) {
+    const code = query.trim().toUpperCase()
+    return resources.filter((r) =>
+      (r.curriculum_expectations || []).some((c) => c.toUpperCase() === code || c.toUpperCase().startsWith(`${code}.`)),
+    )
+  }
   if (query.length < 3) return resources
   const q = query.toLowerCase()
   return resources.filter((resource) => {
