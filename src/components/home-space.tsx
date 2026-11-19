@@ -92,7 +92,10 @@ export default function HomeSpace({
         )}
 
         {/* ── This week, Needs attention / What's next, Materials ──────── */}
-        <div className="grid gap-4 lg:grid-cols-3">
+        {/* grid-cols-1 is minmax(0, 1fr): without it a phone's single column
+            grows to its widest content (the Materials filter row) and every
+            card runs off the screen. */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <ThisWeek onOpenLesson={onOpenLesson} />
           <NeedsAttention
             onFindResources={(subject, grade, code) => {
@@ -103,7 +106,7 @@ export default function HomeSpace({
           />
           {/* Each suggestion acts on its own class, which may not be the one
               picked, so each action sets the class first. */}
-          <div className="lg:col-span-2">
+          <div className="min-w-0 lg:col-span-2">
             <WhatsNextWidget
               subject={filters.subject}
               grade={filters.grade}
@@ -124,7 +127,7 @@ export default function HomeSpace({
               }}
             />
           </div>
-          <div>
+          <div className="min-w-0">
             <MaterialsWidget onEdit={onOpenClassroomSetup} />
           </div>
         </div>
