@@ -1,0 +1,235 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Social Studies",
+ "grade": "1",
+ "course_name": "Social Studies",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/g1",
+  "course_codename": "sshg___grade_1",
+  "last_modified": "2026-02-03T18:58:14.3261064Z",
+  "fetched_at": "2026-11-19T04:42:14Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Heritage and Identity: Our Changing Roles and Responsibilities",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Application: Why Roles and Responsibilities Change",
+     "text": "describe some of the ways in which people’s roles, relationships with, and responsibilities to others and the world around them relate to who they are and what their situation is, and how and why changes in circumstances might affect people’s roles, relationships, and responsibilities as well as their sense of self ( FOCUS ON : Continuity and Change )",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "describe how and why a person’s roles, relationships, and responsibilities, in relation to others and to the environment, may change in different places or situations and at different times (e.g., how and why a student’s relationship with a teacher is different from that with a peer; how and why a student’s relationship with the natural environment, such as taking part in harvesting or fishing, could support learning that deepens family and/or community cultural connections; how their parents’/caregivers’ roles differ at home and at work; how a child’s responsibilities at home may change as the child gets older)"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "describe how some significant events in their lives (e.g., the birth of a sibling, starting school, moving to a new home, getting a pet; participating in various cultural ceremonies and traditions specific to their family, community, or nation such as taking part in a naming ceremony, joining in seasonal ceremonies , building a personal sacred bundle, making noodles for Lunar New Year, lighting a menorah or Kwanzaa candle, collecting maple sap to make maple syrup, building a family canoe, participating in a Khalsa Day parade, setting up an ofrenda for the Day of the Dead) led to changes in their roles, relationships, and/or responsibilities"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "compare some of the significant events in their own lives and/or the lives of their family members with those in the lives of their peers"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "describe the impact that people can have on each other in some different situations (e.g., when a person helps a child who is lost, when a child upsets another child, when a teacher helps a student find the answer to a problem, when schoolmates share toys or art supplies) and some of the ways in which interactions between people can affect a person’s sense of self"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "identify some of the ways in which First Nations, Métis, and Inuit individuals and communities are reclaiming and revitalizing aspects of their identity that were lost or taken away due to colonization, including the residential school system ( e.g., traditional practices and rituals being taught and celebrated in community; strengthening of family, clan, and/or extended family relationships; language learning and revitalization; acts of resilience and healing; reclaiming of identity ), and the role that these aspects play in their sense of self ( e.g., personal pride in self and community; sense of belonging – who they are, where they come from, and how they relate to one another )"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Inquiry: Roles, Responsibilities, and Identity",
+     "text": "use the social studies inquiry process to investigate some aspects of the interrelationship between their identity/sense of self , their different roles, relationships, and responsibilities, and various situations in their daily lives ( FOCUS ON: Interrelationships )",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into some aspects of the interrelationship between events, people, and/or places in their lives and their own roles, relationships, responsibilities, and identity/sense of self (e.g., brainstorm with their peers to formulate simple questions related to an event that has affected their self-concept, to changes in their responsibilities since they started school, or to how they behave in different places)"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "gather and organize information on significant events, people, and/or places in their lives that contribute or have contributed to the development of their roles, relationships, responsibilities, and identity/sense of self (e.g., a birth or death in the family, their first day at school, a friend getting hurt at the park, getting lost in a shopping mall, their family’s place of worship, moving to a new home, joining a recreation, language, or cultural program for children and youth) , using primary and/or secondary sources that they have located themselves or that have been provided to them (e.g., photographs, family and other stories, interviews, artefacts, newspapers and magazines, educational websites for children, books written by diverse voices – including First Nations, Métis, and Inuit authors/storytellers – on identity, family, and community relationships)"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "analyse and construct simple maps as part of their investigations into places that are significant to them or to their family (e.g., construct a map that includes a title, legend, and directions to show the route from their home to their best friend’s home or to school; construct a map to show key places they visit in their community; find the school entrance, playground, and their classroom on a map of their school)"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "interpret and analyse information relevant to their investigations, using a variety of tools (e.g., use a timeline of significant events in their life to help them make connections between those events and changes in their sense of self; list the activities they like to help with at home and at school on a Venn diagram to help them determine the similarities and differences between their roles in different locations; use a graphic organizer to help them determine the relationship between the responsibilities of adults in their life and their own responsibilities; create a cyclical calendar that acknowledges the changes in responsibilities for each of the seasons)"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about some aspects of the interrelationship between events, people, and/or places in their lives and their own roles, relationships, responsibilities, and identity/sense of self"
+      },
+      {
+       "code": "A2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries, using appropriate vocabulary (e.g., role, relationship, responsibility, sense of self, community, identity) and formats (e.g., an oral presentation on the biggest change or significant event in their life and how it affected them; a map showing places that are important to them; captioned photographs of significant people in their lives)"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Understanding Context: Roles, Relationships, and Respect",
+     "text": "demonstrate an understanding that they and other people experience a range of different roles, relationships, and responsibilities, and that all people and the environment should be treated with respect ( FOCUS ON: Significance)",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "describe some of their own roles, relationships, and responsibilities (e.g., as a student, member of a family, friend, member of the community, as someone who cares for the environment, pet owner)"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "identify some of the significant people, places, and things in their life, including their life in the community (e.g., people: parent, teacher, Elder, Knowledge Keeper, Knowledge Holder, Métis Senator, doctor, cultural or youth worker; places: school, friends’ homes, the library, parks or playgrounds, their place of worship, after-school community program, sacred sites; living and non-living things: pets, culturally significant items in their home, toys and comfort items) , and describe their purpose or the role they have"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "demonstrate an understanding of simple chronology by identifying and organizing chronologically some significant events related to their personal experience (e.g., their progress from daycare to Kindergarten and then to Grade 1; learning to walk, to ride a tricycle, and then to ride a bicycle)"
+      },
+      {
+       "code": "A3.4",
+       "topic": "",
+       "text": "identify some elements of positive and inclusive behaviour and actions that they can practise in their everyday life (e.g., sharing, cooperating, being courteous, not damaging the natural or built environment, acknowledging and extending gratitude to the Earth, caring for Elders, Knowledge Holders, Knowledge Keepers, and Traditional Teachers; understanding and considering a variety of cultures and the diversity of traditions, including the diversity that exists among First Nations, Métis, and Inuit individuals) and/or that other people practise (e.g., bowing to each other as a sign of respect)"
+      },
+      {
+       "code": "A3.5",
+       "topic": "",
+       "text": "demonstrate an understanding that it is important to treat other people and the environment with respect (e.g., practise taking turns listening, make a list of ways to care for plants in the school community, make and illustrate a poster of ways to save water at home)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "People and Environments: The Local Community",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Application: Interrelationships within the Community",
+     "text": "describe some aspects of the interrelationship between people and the natural and built features of their community ( FOCUS ON : Interrelationships )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "describe some of the ways in which people interact with the natural environment and the built features of, and human services in, the local community to meet their needs, and what might happen if these features/services did not exist"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "identify some services and service-related occupations in their community (e.g., occupations such as sanitation worker, store clerk, restaurant server, repair person; services provided by the post office, the First Nation administration office, the Métis community council office, Inuit community centres, the community health clinic, the Indigenous Friendship Centre, cultural education centres, the water treatment plant, grocery stores, gas stations) , and describe how they meet people’s needs, including their own needs"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "create a plan that outlines some specific ways in which they can responsibly interact with the built and/or natural environment in the local community ( e.g., map out the location of garbage and recycling cans in parks so they can properly dispose of their waste; help plan and grow a sustainable garden at home, composting in the school, or other ways of reducing their environmental footprint; plan ways to participate in clean-up days), and describe how their actions might enhance the features of the local environment"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Inquiry: Interrelationships and Their Impact",
+     "text": "use the social studies inquiry process to investigate some aspects of the interrelationship between people and different natural and built features of their local community, with a focus on significant short- and long-term effects of this interrelationship ( FOCUS ON: Cause and Consequence )",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into some aspects of the interrelationship between people and the natural and built features of their community, with a focus on some of the short- and long-term effects of this interrelationship (e.g., brainstorm with their peers to formulate simple questions related to the effects of not using garbage cans or not cleaning up after their dogs on the playground, of a community tree-planting event, of the building of a new road or big-box store on what was once green space, or of shutting down a local store)"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "gather and organize information on the interrelationship between people and the natural and built features of their community, and on the effects of this interrelationship, using sources that they have located themselves or that have been provided to them (e.g., use a tally sheet to monitor the use of garbage cans and recycling containers around the school; use a digital camera to record the amount of garbage on the ground in the park; organize satellite images that show changes in natural or built features in their community; interview a person who works in the park; listen to people speak and teach about various Fall Harvest festivals and activities)"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "analyse maps, and construct simple maps using appropriate elements, as part of their investigations into the interrelationship between people and significant natural and built features in their community (e.g., show the location of parks, bodies of water, or shopping districts, using symbols or photographs, a legend, directions, and colour; label a map with Indigenous place names)"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "interpret and analyse information and data relevant to their investigations, using a variety of tools (e.g., plot their data on a pictograph or chart to determine ways in which an area in their community has changed; compare their own photographs or drawings of the way an area looks now to old photographs to determine changes)"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about some aspects of the interrelationship between people and natural and built features of their local community, and some of the effects of this interrelationship"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary (e.g., location, map, symbol, distance, legend, direction, scale, community) and formats (e.g., a cooperatively produced book of photos from a field study; song lyrics, a rap, a dance, or a poem about the benefits of a community garden; a poster illustrating the benefits of planting trees; a map showing the natural and built features of their neighbourhood; role play illustrating responsible and respectful treatment of the environment)"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Understanding Context: The Elements of the Local Community",
+     "text": "describe significant aspects of their community, with reference to different areas, services, and natural and built features, demonstrating an understanding of some basic ways of describing location and measuring distance ( FOCUS ON: Significance; Patterns and Trends )",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "",
+       "text": "identify the traditional Indigenous and treaty territory or territories on which their school is located"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "identify some of the natural and built features of their community (e.g., rivers, lakes, forests, parks, roads, stores, houses, apartment or condominium buildings, libraries, schools, arenas, recreation centres, places of worship, Indigenous sacred fire arbour, community and cultural centres)"
+      },
+      {
+       "code": "B3.3",
+       "topic": "",
+       "text": "identify some distinct areas in the local community (e.g., residential areas, commercial areas, high-traffic areas, different areas within the school, natural areas) , and describe some of the characteristics of these areas (e.g., high-traffic areas have wide roads and stoplights; commercial areas have lots of stores; residential areas have rows of houses or apartments and are separate from business areas; mixed-use areas may include buildings that have both businesses and housing; the school has wings of classrooms that are connected by hallways; the natural areas have trees, plants, water, and lots of animals that live there)"
+      },
+      {
+       "code": "B3.4",
+       "topic": "",
+       "text": "describe the location of some significant places in their community, using relative location (e.g., near, far, up, down) , relative distance (e.g., close, far, farther) , and relative direction (e.g., right, left, in front, behind)"
+      },
+      {
+       "code": "B3.5",
+       "topic": "",
+       "text": "demonstrate an understanding of the basic elements of a map (e.g., title, symbols in the legend, direction, scale, and colour) when reading and constructing simple maps showing places that are significant to them (e.g., their classroom, the school, their immediate neighbourhood, their library, their cultural or community centre)"
+      },
+      {
+       "code": "B3.6",
+       "topic": "",
+       "text": "demonstrate an understanding of some common non-standard units of measurement ( e.g., footsteps, tiles, blocks, houses )"
+      },
+      {
+       "code": "B3.7",
+       "topic": "",
+       "text": "demonstrate the ability to construct simple maps of places they have visited, using symbols and non-standard units (e.g., use different symbols to show the location of the play, picnic, and walking areas in a local park; use houses or blocks as units of measurement; include a scale and legend on a map showing the route and distance from their classroom to the washroom; use symbols on a sketch map of their route to school to show the built and natural features they pass by)"
+      },
+      {
+       "code": "B3.8",
+       "topic": "",
+       "text": "identify some of the services in the community for which the government and/or community is responsible ( e.g., postal service, police services, fire services, hospitals, garbage collection, ploughing snow, maintenance of public areas, water treatment, daycare centres, First Nation administration office, local Métis community council offices, Inuit community centres, community health services, Indigenous Friendship Centre, language schools ), and describe key responsibilities of people in the community in relation to those services ( e.g., to properly sort garbage and recycling and place the bins on the street for pick up; to shovel snow off their sidewalks; to dispose of hazardous waste at collection sites; to install and maintain smoke detectors; to keep noise down after hours; to provide support and care to community members; to teach language and culture )"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,329 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Math",
+ "grade": "2",
+ "course_name": "Mathematics",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-math/grades/g2-math",
+  "course_codename": "ele___math___grade_2",
+  "last_modified": "2023-03-17T14:31:58.7513671Z",
+  "fetched_at": "2026-11-19T04:42:11Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Social-Emotional Learning (SEL) Skills in Mathematics and the Mathematical Processes",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Social-Emotional Learning (SEL) Skills and the Mathematical Processes",
+     "text": "apply, to the best of their ability, a variety of social-emotional learning skills to support their use of the mathematical processes and their learning in connection with the expectations in the other five strands of the mathematics curriculum",
+     "specifics": []
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Number",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Number Sense",
+     "text": "demonstrate an understanding of numbers and make connections to the way numbers are used in everyday life",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Whole Numbers",
+       "text": "read, represent , compose , and decompose whole numbers up to and including 200, using a variety of tools and strategies, and describe various ways they are used in everyday life"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Whole Numbers",
+       "text": "compare and order whole numbers up to and including 200, in various contexts"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Whole Numbers",
+       "text": "estimate the number of objects in collections of up to 200 and verify their estimates by counting"
+      },
+      {
+       "code": "B1.4",
+       "topic": "Whole Numbers",
+       "text": "count to 200, including by 20s, 25s, and 50s, using a variety of tools and strategies"
+      },
+      {
+       "code": "B1.5",
+       "topic": "Whole Numbers",
+       "text": "describe what makes a number even or odd"
+      },
+      {
+       "code": "B1.6",
+       "topic": "Fractions",
+       "text": "use drawings to represent, solve, and compare the results of fair-share problems that involve sharing up to 10 items among 2, 3, 4, and 6 sharers, including problems that result in whole numbers, mixed numbers , and fractional amounts"
+      },
+      {
+       "code": "B1.7",
+       "topic": "Fractions",
+       "text": "recognize that one third and two sixths of the same whole are equal, in fair-sharing contexts"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Operations",
+     "text": "use knowledge of numbers and operations to solve mathematical problems encountered in everyday life",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Properties and Relationships",
+       "text": "use the properties of addition and subtraction, and the relationships between addition and multiplication and between subtraction and division, to solve problems and check calculations"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Math Facts",
+       "text": "recall and demonstrate addition facts for numbers up to 20, and related subtraction facts"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Mental Math",
+       "text": "use mental math strategies , including estimation , to add and subtract whole numbers that add up to no more than 50, and explain the strategies used"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Addition and Subtraction",
+       "text": "use objects, diagrams, and equations to represent, describe, and solve situations involving addition and subtraction of whole numbers that add up to no more than 100"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Multiplication and Division",
+       "text": "represent multiplication as repeated equal groups, including groups of one half and one fourth, and solve related problems, using various tools and drawings"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Multiplication and Division",
+       "text": "represent division of up to 12 items as the equal sharing of a quantity, and solve related problems, using various tools and drawings"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Algebra",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Patterns and Relationships",
+     "text": "identify, describe, extend, create, and make predictions about a variety of patterns, including those found in real-life contexts",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Patterns",
+       "text": "identify and describe a variety of patterns involving geometric designs, including patterns found in real-life contexts"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Patterns",
+       "text": "create and translate patterns using various representations , including shapes and numbers"
+      },
+      {
+       "code": "C1.3",
+       "topic": "Patterns",
+       "text": "determine pattern rules and use them to extend patterns, make and justify predictions, and identify missing elements in patterns represented with shapes and numbers"
+      },
+      {
+       "code": "C1.4",
+       "topic": "Patterns",
+       "text": "create and describe patterns to illustrate relationships among whole numbers up to 100"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Equations and Inequalities",
+     "text": "demonstrate an understanding of variables, expressions, equalities, and inequalities, and apply this understanding in various contexts",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Variables",
+       "text": "identify when symbols are being used as variables , and describe how they are being used"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Equalities and Inequalities",
+       "text": "determine what needs to be added to or subtracted from addition and subtraction expressions to make them equivalent"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Equalities and Inequalities",
+       "text": "identify and use equivalent relationships for whole numbers up to 100, in various contexts"
+      }
+     ]
+    },
+    {
+     "code": "C3",
+     "title": "Coding",
+     "text": "solve problems and create computational representations of mathematical situations using coding concepts and skills",
+     "specifics": [
+      {
+       "code": "C3.1",
+       "topic": "Coding Skills",
+       "text": "solve problems and create computational representations of mathematical situations by writing and executing code , including code that involves sequential and concurrent events"
+      },
+      {
+       "code": "C3.2",
+       "topic": "Coding Skills",
+       "text": "read and alter existing code, including code that involves sequential and concurrent events, and describe how changes to the code affect the outcomes"
+      }
+     ]
+    },
+    {
+     "code": "C4",
+     "title": "Mathematical Modelling",
+     "text": "apply the process of mathematical modelling to represent, analyse, make predictions, and provide insight into real-life situations This overall expectation has no specific expectations. Mathematical modelling is an iterative and interconnected process that is applied to various contexts, allowing students to bring in learning from other strands. Students’ demonstration of the process of mathematical modelling, as they apply concepts and skills learned in other strands, is assessed and evaluated. Read more about the mathematical modelling process .",
+     "specifics": []
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Data",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Data Literacy",
+     "text": "manage, analyse, and use data to make convincing arguments and informed decisions, in various contexts drawn from real life",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Data Collection and Organization",
+       "text": "sort sets of data about people or things according to two attributes , using tables and logic diagrams, including Venn and Carroll diagrams"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Data Collection and Organization",
+       "text": "collect data through observations, experiments, and interviews to answer questions of interest that focus on two pieces of information, and organize the data in two-way tally tables"
+      },
+      {
+       "code": "D1.3",
+       "topic": "Data Visualization",
+       "text": "display sets of data, using one-to-one correspondence , in concrete graphs , pictographs , line plots , and bar graphs with proper sources, titles, and labels"
+      },
+      {
+       "code": "D1.4",
+       "topic": "Data Analysis",
+       "text": "identify the mode (s), if any, for various data sets presented in concrete graphs, pictographs, line plots, bar graphs, and tables, and explain what this measure indicates about the data"
+      },
+      {
+       "code": "D1.5",
+       "topic": "Data Analysis",
+       "text": "analyse different sets of data presented in various ways, including in logic diagrams, line plots, and bar graphs, by asking and answering questions about the data and drawing conclusions, then make convincing arguments and informed decisions"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Probability",
+     "text": "describe the likelihood that events will happen, and use that information to make predictions",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Probability",
+       "text": "use mathematical language, including the terms “impossible”, “possible”, and “certain”, to describe the likelihood of complementary events happening, and use that likelihood to make predictions and informed decisions"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Probability",
+       "text": "make and test predictions about the likelihood that the mode(s) of a data set from one population will be the same for data collected from a different population"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Spatial Sense",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Geometric and Spatial Reasoning",
+     "text": "describe and represent shape, location, and movement by applying geometric properties and spatial relationships in order to navigate the world around them",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Geometric Reasoning",
+       "text": "sort and identify two-dimensional shapes by comparing number of sides, side lengths, angles , and number of lines of symmetry"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Geometric Reasoning",
+       "text": "compose and decompose two-dimensional shapes, and show that the area of a shape remains constant regardless of how its parts are rearranged"
+      },
+      {
+       "code": "E1.3",
+       "topic": "Geometric Reasoning",
+       "text": "identify congruent lengths and angles in two-dimensional shapes by mentally and physically matching them, and determine if the shapes are congruent"
+      },
+      {
+       "code": "E1.4",
+       "topic": "Location and Movement",
+       "text": "create and interpret simple maps of familiar places"
+      },
+      {
+       "code": "E1.5",
+       "topic": "Location and Movement",
+       "text": "describe the relative positions of several objects and the movements needed to get from one object to another"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Measurement",
+     "text": "compare, estimate, and determine measurements in various contexts",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "Length",
+       "text": "choose and use non-standard units appropriately to measure lengths, and describe the inverse relationship between the size of a unit and the number of units needed"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Length",
+       "text": "explain the relationship between centimetres and metres as units of length, and use benchmarks for these units to estimate lengths"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Length",
+       "text": "measure and draw lengths in centimetres and metres, using a measuring tool, and recognize the impact of starting at points other than zero"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Time",
+       "text": "use units of time, including seconds, minutes, hours, and non-standard units, to describe the duration of various events"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "F",
+   "label": "Financial Literacy",
+   "overalls": [
+    {
+     "code": "F1",
+     "title": "Money and Finances",
+     "text": "demonstrate an understanding of the value of Canadian currency",
+     "specifics": [
+      {
+       "code": "F1.1",
+       "topic": "Money Concepts",
+       "text": "identify different ways of representing the same amount of money up to Canadian 200¢ using various combinations of coins, and up to $200 using various combinations of $1 and $2 coins and $5, $10, $20, $50, and $100 bills"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

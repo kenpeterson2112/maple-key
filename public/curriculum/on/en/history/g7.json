@@ -1,0 +1,250 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "History",
+ "grade": "7",
+ "course_name": "History (effective beginning in the 2026–27 school year)",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/history-g7",
+  "course_codename": "hist___grade_7__2025_",
+  "last_modified": "2026-02-20T21:28:24.5308108Z",
+  "fetched_at": "2026-11-19T04:42:14Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "New France and British North America, 1713–1800",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Application: Colonial and Present-day Canada",
+     "text": "analyse aspects of the experiences of various groups and communities, including First Nations , Métis , and Inuit communities, in Canada between 1713 and 1800, and compare them to the lives of people in present-day Canada ( FOCUS ON: Continuity and Change; Historical Perspective )",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "analyze key similarities and differences in social values and aspects of life between people in present-day Canada and some different groups and communities, including First Nations , Métis, and Inuit communities, in Canada between 1713 and 1800"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "analyze some of the main challenges facing various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities, in Canada between 1713 and 1800 and ways in which people responded to those challenges, and assess similarities and differences between some of these challenges and responses and those of people in present-day Canada"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "analyze the displacement experienced by various groups and communities, including First Nations, Métis, and Inuit communities, who were living in or who came to Canada between 1713 and 1800, and compare it with present-day examples of displacement"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Inquiry: From New France to British North America",
+     "text": "use the historical inquiry process to investigate perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues related to the shift in power in colonial Canada from France to Britain ( FOCUS ON: Historical Significance; Historical Perspective )",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues related to the shift in power in colonial Canada from France to Britain"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "gather and organize information and evidence about perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues related to the shift in power in colonial Canada from France to Britain, using a variety of primary sources and secondary sources"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "assess the credibility of sources and information relevant to their investigations"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "analyse and construct maps as part of their investigations into significant events, developments, and/or issues related to the shift in power in colonial Canada from France to Britain, with a focus on exploring their spatial boundaries"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "interpret and analyse information and evidence relevant to their investigations, using a variety of tools"
+      },
+      {
+       "code": "A2.6",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about perspectives of different groups and communities, including First Nation, Métis, and/or Inuit communities, on some significant events, developments, or issues related to the shift in power in colonial Canada from France to Britain"
+      },
+      {
+       "code": "A2.7",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary and formats appropriate for specific audiences"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Understanding Historical Context: Events and Their Consequences",
+     "text": "describe various significant people, events, and developments, including treaties, in Canada between 1713 and 1800, and explain their impact ( FOCUS ON: Historical Significance; Cause and Consequence )",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "identify factors leading to some key events that occurred in and/or affected Canada between 1713 and 1800, and describe the historical significance of some of these events for different individuals, groups, and/or communities, including Indigenous individuals and/or communities"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "identify a few key treaties of relevance to Indigenous people during this period, including wampum belts exchanged, and explain the significance of some of these agreements for different people and communities in Canada"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "identify key political and legal changes that occurred in and/or affected Canada during this period, and explain the impact of some of these changes on various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities"
+      },
+      {
+       "code": "A3.4",
+       "topic": "",
+       "text": "identify key social and economic changes that occurred in and/or affected Canada during this period, and explain the impact of some of these changes on various individuals, groups, and/or communities, including First Nations, Métis, and/or Inuit individuals and communities"
+      },
+      {
+       "code": "A3.5",
+       "topic": "",
+       "text": "describe some significant aspects of daily life in various First Nations, Métis, and Inuit communities in Canada during this period"
+      },
+      {
+       "code": "A3.6",
+       "topic": "",
+       "text": "describe some significant aspects of daily life of different newcomer/ settler groups living in Canada during this period"
+      },
+      {
+       "code": "A3.7",
+       "topic": "",
+       "text": "describe some significant events and developments, including, but not limited to, enslavement, that had an impact on the lived experiences and settlement of various Black individuals and communities in Canada up to and including this time"
+      },
+      {
+       "code": "A3.8",
+       "topic": "",
+       "text": "describe significant interactions between various individuals, groups, and institutions in Canada during this period"
+      },
+      {
+       "code": "A3.9",
+       "topic": "",
+       "text": "identify some significant individuals and groups in Canada during this period, and explain their contribution to Canadian heritage and/or identities"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Canada, 1800–1850: Conflict and Challenges",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Application: Changes and Challenges",
+     "text": "analyse aspects of the lives of various groups and communities, including First Nations, Métis, and Inuit communities, in Canada between 1800 and 1850, and compare them to the lives of people in Canada in 1713–1800 ( FOCUS ON: Continuity and Change; Historical Perspective )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "analyze social and political values and significant aspects of life for some different groups and communities, including First Nations, Métis, and Inuit communities, in Canada between 1800 and 1850, and assess similarities and differences between these values and aspects of life and those in eighteenth-century Canada"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "analyse some of the challenges facing individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities, in Canada between 1800 and 1850 and ways in which people responded to those challenges"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "analyse the displacement experienced by various groups and communities, including Indigenous communities, who were living in or who came to Canada between 1800 and 1850 and how some of these groups dealt with their displacement"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Inquiry: Perspectives in British North America",
+     "text": "use the historical inquiry process to investigate perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada between 1800 and 1850 ( FOCUS ON: Historical Significance; Historical Perspectiv e)",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada between 1800 and 1850"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "gather and organize information and evidence about perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada during this period, using a variety of primary sources and secondary sources"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "assess the credibility of sources and information relevant to their investigations"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "analyse and construct maps as part of their investigations into some significant events, developments, and/or issues that affected Canada and/or people in Canada during this period, with a focus on exploring their spatial boundaries"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "interpret and analyse information and evidence relevant to their investigations, using a variety of tools"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about perspectives of different groups and communities , including First Nations, Métis, and/or Inuit communities, on some significant events, developments, or issues that affected Canada and/or people in Canada during this period"
+      },
+      {
+       "code": "B2.7",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary and formats appropriate for specific audiences"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Understanding Historical Context: Events and Their Consequences",
+     "text": "describe various significant people, events, and developments, including treaties between Indigenous nations and imperial powers, in Canada between 1800 and 1850, and explain their impact ( FOCUS ON: Historical Significance; Cause and Consequence )",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "",
+       "text": "identify factors contributing to some key events and/or trends that occurred in and/or affected Canada between 1800 and 1850, and describe the historical significance of some of these events/trends for different individuals, groups, and/or communities, including Indigenous individuals and/or communities"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "identify a few key treaties of relevance to Indigenous people during this period, including wampum belts exchanged, and explain the significance of some of these agreements for different people and communities in Canada"
+      },
+      {
+       "code": "B3.3",
+       "topic": "",
+       "text": "identify key political and legal changes that occurred in and/or affected Canada during this period, and explain the impact of some of these changes on various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities"
+      },
+      {
+       "code": "B3.4",
+       "topic": "",
+       "text": "identify key social and economic changes that occurred in and/or affected Canada during this period, and explain the impact of some of these changes on various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities"
+      },
+      {
+       "code": "B3.5",
+       "topic": "",
+       "text": "describe various experiences, realities, challenges, and perspectives of members of Black settlements and communities across Canada and explore how the people in these settlements fostered a sense of belonging and pride in community"
+      },
+      {
+       "code": "B3.6",
+       "topic": "",
+       "text": "describe significant interactions between different groups and communities in Canada during this period"
+      },
+      {
+       "code": "B3.7",
+       "topic": "",
+       "text": "identify some significant individuals and groups in Canada during this period, and explain their contribution to Canadian heritage and/or identities"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,343 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Science",
+ "grade": "1",
+ "course_name": "Science and Technology",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sci-tech/grades/grade-1",
+  "course_codename": "sci___tech___grade_1",
+  "last_modified": "2023-03-17T14:18:15.1781495Z",
+  "fetched_at": "2026-11-19T04:42:11Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "STEM Skills and Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "STEM Investigation and Communication Skills",
+     "text": "use a scientific research process, a scientific experimentation process, and an engineering design process to conduct investigations, following appropriate health and safety procedures",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "use a scientific research process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "use a scientific experimentation process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "use an engineering design process and associated skills to design, build, and test devices, models, structures, and/or systems"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "follow established health and safety procedures during science and technology investigations, including wearing appropriate protective equipment and clothing and safely using tools, instruments, and materials"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "communicate their findings, using science and technology vocabulary and formats that are appropriate for specific audiences and purposes"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Coding and Emerging Technologies",
+     "text": "use coding in investigations and to model concepts, and assess the impact of coding and of emerging technologies on everyday life",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "write and execute code in investigations and when modelling concepts, with a focus on creating clear and precise instructions for simple algorithms"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "identify and describe impacts of coding and of emerging technologies on everyday life"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Applications, Connections, and Contributions",
+     "text": "demonstrate an understanding of the practical applications of science and technology, and of contributions to science and technology from people with diverse lived experiences",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "describe practical applications of science and technology concepts in their home and community, and how these applications address real-world problems"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "investigate how science and technology can be used with other subject areas to address real-world problems"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "analyse contributions to science and technology from various communities"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Life Systems",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the importance of a healthy environment for living and non-living things, and the responsibilities of humans in contributing to a healthy environment",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Needs and Characteristics of Living Things",
+       "text": "describe changes or problems that could result from the loss of living and non-living things that are part of everyday life, while taking different perspectives into consideration"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Needs and Characteristics of Living Things",
+       "text": "identify actions that can be taken to contribute to a healthy environment"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the basic needs and characteristics of living things, including humans",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Needs and Characteristics of Living Things",
+       "text": "demonstrate an understanding of the natural environment as a place where living and non-living things are interconnected"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Needs and Characteristics of Living Things",
+       "text": "identify the basic needs of living things, including the need for air, water, food, heat, shelter, and space"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Needs and Characteristics of Living Things",
+       "text": "identify the physical characteristics of various plants and animals, including humans, and explain how these characteristics help the plants and animals meet their basic needs"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Needs and Characteristics of Living Things",
+       "text": "identify the location and the function of various parts of the human body, including sensory organs"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Needs and Characteristics of Living Things",
+       "text": "describe the characteristics of a healthy environment, including clean air and water and nutritious food, and how a healthy environment enables living things to meet their needs"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Needs and Characteristics of Living Things",
+       "text": "describe ways in which living things provide for the needs of other living things"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Matter and Energy",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess uses of energy at home, at school, and in the community, and suggest ways to use energy responsibly",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Energy in Our Lives",
+       "text": "describe everyday uses of energy at school and at home, and suggest ways to use energy responsibly"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Energy in Our Lives",
+       "text": "describe how the lives of people and other living things would be affected if electrical energy were no longer available"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of how energy affects their lives, and that the Sun is the principal source of energy for Earth",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Energy in Our Lives",
+       "text": "demonstrate an understanding that energy is the ability to move or change something"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Energy in Our Lives",
+       "text": "demonstrate an understanding that the Sun is Earth’s principal source of energy, including how it warms the air, land, and water; is a source of light for Earth; and makes it possible for plants to grow"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Energy in Our Lives",
+       "text": "identify food as a source of energy for living things"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Energy in Our Lives",
+       "text": "identify everyday uses of various sources of energy"
+      },
+      {
+       "code": "C2.5",
+       "topic": "Energy in Our Lives",
+       "text": "demonstrate an understanding that humans get the energy resources they need from the world around them, and that the supply of many of these resources is limited"
+      },
+      {
+       "code": "C2.6",
+       "topic": "Energy in Our Lives",
+       "text": "describe seasonal differences in how we use energy and in the forms of energy we use"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Structures and Mechanisms",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the impact on people and the environment of everyday objects, including structures, and the materials they are made of",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "identify the kinds of waste materials produced by humans, and plan and carry out a course of action for minimizing waste in the classroom or at home, explaining why each action is important"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "assess everyday objects, including structures, that have similar purposes, in terms of the materials they are made from, the source of these materials, and what happens to these objects when they are worn out or no longer needed"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding that objects, including structures, have observable characteristics and are made from materials with specific properties that determine how they are used",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "describe objects as things that are made of one or more materials"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "identify structures that are objects designed to support a load, including those acting as supporting frameworks for objects"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "identify materials that are used to make various everyday objects, including structures"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "describe observable characteristics of various everyday objects, including structures, using qualitative information gathered through their senses"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "describe purposes of everyday objects, including structures"
+      },
+      {
+       "code": "D2.6",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "identify properties of materials that enable the objects made from them to perform their intended function"
+      },
+      {
+       "code": "D2.7",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "identify different kinds of fasteners and describe uses for each"
+      },
+      {
+       "code": "D2.8",
+       "topic": "Everyday Materials, Objects, and Structures",
+       "text": "identify sources in nature of some common materials that are used to make various objects, including structures"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Earth and Space Systems",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the impact of daily and seasonal changes on living things, including humans",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Daily and Seasonal Changes",
+       "text": "assess the impact of daily and seasonal changes on human outdoor activities, and identify innovations that enable people to engage in various activities year-round"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Daily and Seasonal Changes",
+       "text": "assess ways in which daily and seasonal changes have an impact on society, the environment, and living things in the natural environment"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of daily and seasonal changes and of how living things respond to those changes",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "Daily and Seasonal Changes",
+       "text": "demonstrate an understanding of Earth’s relationship to the Sun and that this relationship results in daily and seasonal changes on Earth"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Daily and Seasonal Changes",
+       "text": "demonstrate an understanding that a cycle is a series of repeating events, and that cycles can be observed in daily and seasonal changes"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Daily and Seasonal Changes",
+       "text": "describe the changes in the amount of light and heat from the Sun that occur throughout the day and in the four seasons"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Daily and Seasonal Changes",
+       "text": "describe and compare the four seasons in terms of the weather, including precipitation and temperature, in their local area"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Daily and Seasonal Changes",
+       "text": "describe changes in the appearance or behaviour of living things that are adaptations to seasonal changes"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Daily and Seasonal Changes",
+       "text": "describe how humans prepare for, and respond to, daily and seasonal changes"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

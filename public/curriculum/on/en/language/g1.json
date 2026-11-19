@@ -1,0 +1,439 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Language",
+ "grade": "1",
+ "course_name": "Language",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-language/grades/grade-1",
+  "course_codename": "lang___fra___grade_1",
+  "last_modified": "2025-03-05T13:03:20.7639406Z",
+  "fetched_at": "2026-11-19T04:42:12Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Literacy Connections and Applications",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Transferable Skills",
+     "text": "demonstrate an understanding of how the seven transferable skills (critical thinking and problem solving; innovation, creativity, and entrepreneurship; self-directed learning; collaboration; communication; global citizenship and sustainability; and digital literacy) are used in various language and literacy contexts",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "Receptive and Expressive Communication",
+       "text": "identify how transferable skills can be used to support communication in various cultural, social, linguistic, and domain-specific contexts , and apply them when reading, listening to, viewing , and creating texts of various forms"
+      },
+      {
+       "code": "A1.2",
+       "topic": "Student Agency and Engagement",
+       "text": "demonstrate an understanding of how transferable skills help them to express their voice and be engaged in their learning"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Digital Media Literacy",
+     "text": "demonstrate and apply the knowledge and skills needed to interact safely and responsibly in online environments, use digital and media tools to construct knowledge, and demonstrate learning as critical consumers and creators of media",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "Digital Citizenship",
+       "text": "demonstrate an understanding of their rights and responsibilities when interacting online with appropriate permission, and make decisions that contribute positively to the development of their digital identity and those of their communities"
+      },
+      {
+       "code": "A2.2",
+       "topic": "Online Safety, Well-Being, and Etiquette",
+       "text": "demonstrate an understanding of how to navigate online environments safely, manage their privacy, and interact in a way that supports their well-being and that of others, including seeking appropriate permission"
+      },
+      {
+       "code": "A2.3",
+       "topic": "Research and Information Literacy",
+       "text": "gather, evaluate, and use information, considering various perspectives, to construct knowledge and demonstrate learning"
+      },
+      {
+       "code": "A2.4",
+       "topic": "Forms, Conventions, and Techniques",
+       "text": "demonstrate an understanding of the forms, conventions , and techniques of digital and media texts , and apply this understanding when analyzing texts"
+      },
+      {
+       "code": "A2.5",
+       "topic": "Media, Audience, and Production",
+       "text": "demonstrate an understanding of the interrelationships between the form, message, and context of a text, the audience, and the creator"
+      },
+      {
+       "code": "A2.6",
+       "topic": "Innovation and Design",
+       "text": "use digital and media tools to support stages of the design process and to develop creative solutions to authentic, real-world problems"
+      },
+      {
+       "code": "A2.7",
+       "topic": "Community and Cultural Awareness",
+       "text": "communicate and collaborate with various communities in a safe, respectful, responsible, and inclusive manner when using online platforms and environments, including digital and media tools, and demonstrate cultural awareness with members of the community"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Applications, Connections, and Contributions",
+     "text": "apply language and literacy skills in cross-curricular and integrated learning, and demonstrate an understanding of, and make connections to, diverse voices, experiences, perspectives, histories, and contributions, including those of First Nations, Métis, and Inuit individuals, communities, groups, and nations",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "Cross-Curricular and Integrated Learning",
+       "text": "apply the knowledge and skills developed in this grade to support learning in various subject areas and identify some ways this learning can be used in everyday life"
+      },
+      {
+       "code": "A3.2",
+       "topic": "Identity and Community",
+       "text": "demonstrate an understanding of the contributions, lived experiences, and perspectives of a diversity of individuals and communities, including those in Canada, by exploring the concepts of identity, self, and sense of belonging in culturally responsive and relevant texts"
+      },
+      {
+       "code": "A3.3",
+       "topic": "First Nations, Métis, and Inuit Perspectives and Ways of Knowing",
+       "text": "identify themes explored in First Nations, Métis, and Inuit cultures to demonstrate an understanding of the varied identities, perspectives, relationships, legacies, truths, and ways of knowing, being, and doing"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Foundations of Language",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Oral and Non-Verbal Communication",
+     "text": "apply listening, speaking, and non-verbal communication skills and strategies to understand and communicate meaning in formal and informal contexts and for various purposes and audiences",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Effective Listening Skills",
+       "text": "use effective listening skills, including listening attentively and asking relevant questions, in formal and informal contexts, including conversations and classroom activities"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Listening Strategies for Comprehension",
+       "text": "identify and use listening strategies before, during, and after listening to comprehend information communicated orally and non-verbally"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Speaking Purposes and Strategies",
+       "text": "identify the purpose and audience for speaking in formal and informal contexts, and use appropriate speaking strategies, including taking turns, understanding when to speak, and knowing how much to say, to communicate clearly and coherently"
+      },
+      {
+       "code": "B1.4",
+       "topic": "Oral and Non-Verbal Communication Strategies",
+       "text": "identify and use oral and non-verbal communication strategies, including expression, gestures, and body language, to interpret or contribute to the meaning of messages"
+      },
+      {
+       "code": "B1.5",
+       "topic": "Word Choice, Syntax, and Grammar in Oral Communication",
+       "text": "use appropriate word choice , including new vocabulary, grammar, and cohesive phrases and sentences when speaking and communicating ideas"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Language Foundations for Reading and Writing",
+     "text": "demonstrate an understanding of foundational language knowledge and skills, and apply this understanding when reading and writing",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Phonemic Awareness",
+       "text": "use understanding of the sound structure of spoken words to orally isolate, blend, and segment phonemes , from simple structures with two phonemes to structures with more phonemes"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Alphabetic Knowledge",
+       "text": "name and form the upper- and lowercase letters both in and out of order and demonstrate knowledge of alphabetic order, with automaticity"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Phonics: Grapheme-Phoneme Correspondence",
+       "text": "identify, read, and spell most common grapheme-phoneme correspondences of consonants and vowels , with automaticity"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Word-Level Reading and Spelling: Using Phonics Knowledge",
+       "text": "use phonics knowledge and phonemic blending to read words, and phonemic segmentation to spell phonetically regular words, in isolation and various text contexts"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Word-Level Reading and Spelling: Using Orthographic Knowledge",
+       "text": "use developing orthographic knowledge , including position-based tendencies , to make a spelling choice or accurately pronounce a word when reading"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Word-Level Reading and Spelling: Using Morphological Knowledge",
+       "text": "use developing knowledge of the meanings of words and common morphemes (i.e., bases , prefixes , and suffixes ) to read and spell words"
+      },
+      {
+       "code": "B2.7",
+       "topic": "Vocabulary",
+       "text": "demonstrate an understanding of commonly used words, acquire and use explicitly taught vocabulary in various contexts, including other subject areas, and use their developing morphological knowledge to analyze and understand new words in context"
+      },
+      {
+       "code": "B2.8",
+       "topic": "Reading Fluency: Accuracy, Rate, and Prosody",
+       "text": "read simple words, short sentences, and paragraphs in a variety of texts fluently , with accuracy and appropriate pacing to support comprehension, and read aloud with expression"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Language Conventions for Reading and Writing",
+     "text": "demonstrate an understanding of sentence structure, grammar, cohesive ties , and capitalization and punctuation , and apply this knowledge when reading and writing sentences, paragraphs, and a variety of texts",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "Syntax and Sentence Structure",
+       "text": "identify and construct simple and compound sentences , including declarative, imperative, interrogative, and exclamatory sentences"
+      },
+      {
+       "code": "B3.2",
+       "topic": "Grammar",
+       "text": "demonstrate an understanding of the functions of parts of speech in sentences, including common singular and plural nouns, using the pronoun “I”, the past, present, and future verb tenses, common adjectives and adverbs, and common conjunctions, and use this knowledge to support comprehension and communicate meaning clearly"
+      },
+      {
+       "code": "B3.3",
+       "topic": "Capitalization and Punctuation",
+       "text": "use their understanding of the meaning and function of capitalization and punctuation to communicate meaning clearly, including the use of a capital letter at the beginning of a sentence and the appropriate punctuation mark at the end"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Comprehension: Understanding and Responding to Texts",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Knowledge about Texts",
+     "text": "apply foundational knowledge and skills to understand a variety of texts , including digital and media texts , by creators with diverse identities, perspectives, and experience, and demonstrate an understanding of the patterns , features , and elements of style associated with various text forms and genres",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Using Foundational Knowledge and Skills to Comprehend Texts",
+       "text": "read and comprehend short, simple texts, using knowledge of words, grammar, cohesive ties, sentence structures, and background knowledge"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Text Forms and Genres",
+       "text": "identify simple literary and informational text forms and their associated genres"
+      },
+      {
+       "code": "C1.3",
+       "topic": "Text Patterns and Features",
+       "text": "identify some text patterns, such as sequencing and chronological order, and text features, including illustrations, symbols, and titles, associated with various text forms, and explain how they help readers, listeners, and viewers understand the meaning"
+      },
+      {
+       "code": "C1.4",
+       "topic": "Visual Elements of Texts",
+       "text": "demonstrate an understanding of the relationship between simple illustrations, images, and graphics and the text"
+      },
+      {
+       "code": "C1.5",
+       "topic": "Elements of Style",
+       "text": "identify some simple elements of style in texts, including voice , word choice, word patterns, and sentence structure, and describe how they help communicate meaning"
+      },
+      {
+       "code": "C1.6",
+       "topic": "Point of View",
+       "text": "identify the narrator’s point of view in a variety of texts, and suggest an alternative point of view to tell the story"
+      },
+      {
+       "code": "C1.7",
+       "topic": "Indigenous Context of Various Text Forms",
+       "text": "read, listen to, and view various forms of texts by diverse First Nations, Métis, and Inuit creators to demonstrate understanding of various aspects of First Nations, Métis, and Inuit histories, cultures, relationships, communities, groups, nations, and lived experiences"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Comprehension Strategies",
+     "text": "apply comprehension strategies before, during, and after reading, listening to, and viewing a variety of texts, including digital and media texts, by creators with diverse identities, perspectives, and experience, in order to understand and clarify the meaning of texts",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Prereading: Activating Prior Knowledge",
+       "text": "activate prior knowledge, including knowledge gained from personal and text experiences, that they can use to understand the topics of new texts"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Prereading: Identifying the Purpose for Reading, Listening, and Viewing",
+       "text": "identify purposes for engaging with texts, including enjoyment or finding information"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Monitoring of Understanding: Making and Confirming Predictions",
+       "text": "make predictions using background knowledge, text features, and evidence from the text"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Monitoring of Understanding: Ongoing Comprehension Check",
+       "text": "use strategies such as rereading, visualizing, and asking questions, to monitor their understanding of simple texts"
+      },
+      {
+       "code": "C2.5",
+       "topic": "Monitoring of Understanding: Making Connections",
+       "text": "identify connections between ideas expressed in simple texts and their knowledges and lived experiences, the ideas in other familiar texts, and the world around them"
+      },
+      {
+       "code": "C2.6",
+       "topic": "Summarizing: Identifying Relevant Information and Drawing Conclusions",
+       "text": "identify important information in a simple text, including the main idea"
+      },
+      {
+       "code": "C2.7",
+       "topic": "Reflecting on Learning",
+       "text": "identify strategies, such as activating prior knowledge and visualizing, that have helped them comprehend texts"
+      }
+     ]
+    },
+    {
+     "code": "C3",
+     "title": "Critical Thinking in Literacy",
+     "text": "apply critical thinking skills to deepen understanding of texts, and analyze how various perspectives and topics are communicated and addressed in a variety of texts, including digital, media, and cultural texts",
+     "specifics": [
+      {
+       "code": "C3.1",
+       "topic": "Literary Devices",
+       "text": "identify simple literary devices , including rhyme , alliteration , and onomatopoeia , and describe how they help communicate meaning"
+      },
+      {
+       "code": "C3.2",
+       "topic": "Making Inferences",
+       "text": "make simple inferences , using stated and implied information and ideas, to understand simple texts"
+      },
+      {
+       "code": "C3.3",
+       "topic": "Analyzing Texts",
+       "text": "analyze simple texts, including literary and informational texts, by identifying and sequencing important information and events"
+      },
+      {
+       "code": "C3.4",
+       "topic": "Analyzing Cultural Elements of Texts",
+       "text": "identify some cultural elements represented in various texts, including symbols and values, and explain how these elements contribute to the meaning"
+      },
+      {
+       "code": "C3.5",
+       "topic": "Perspectives within Texts",
+       "text": "identify explicit and implicit perspectives communicated in a text, and describe how these perspectives could influence an audience"
+      },
+      {
+       "code": "C3.6",
+       "topic": "Analysis and Response",
+       "text": "express personal thoughts and feelings about ideas presented in texts, such as ideas about diversity, inclusion, and accessibility"
+      },
+      {
+       "code": "C3.7",
+       "topic": "Indigenous Contexts",
+       "text": "identify some ways in which texts created by First Nations, Métis, and Inuit individuals, communities, groups, or nations communicate about historical periods, cultural experiences, and events, and how they relate to current lived experiences"
+      },
+      {
+       "code": "C3.8",
+       "topic": "Reflecting on Learning",
+       "text": "identify thinking skills that helped them understand simple texts"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Composition: Expressing Ideas and Creating Texts",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Developing Ideas and Organizing Content",
+     "text": "plan, develop ideas, gather information, and organize content for creating texts of various forms, including digital and media texts, on a variety of topics",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Purpose and Audience",
+       "text": "identify the topic, purpose, and audience for various simple texts they plan to create"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Developing Ideas",
+       "text": "generate ideas about given and chosen topics, using simple strategies and drawing on various resources, including their own lived experiences, and learning from other subject areas"
+      },
+      {
+       "code": "D1.3",
+       "topic": "Research",
+       "text": "gather information and content relevant to a topic, using a single source"
+      },
+      {
+       "code": "D1.4",
+       "topic": "Organizing Content",
+       "text": "sort and sequence ideas and information, taking into account the text form and genre to be used"
+      },
+      {
+       "code": "D1.5",
+       "topic": "Reflecting on Learning",
+       "text": "identify the strategies that helped them to develop ideas for texts"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Creating Texts",
+     "text": "apply knowledge and understanding of various text forms and genres to create, revise , edit , and proofread their own texts, using a variety of media, tools, and/or strategies, and reflect critically on created texts",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Producing Drafts",
+       "text": "draft short, simple texts of various forms and genres, including personal narratives, persuasive texts, and procedural texts, using a variety of media, tools, and strategies"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Printing",
+       "text": "print letters and words with appropriate formation patterns, size, placement, and spacing"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Voice",
+       "text": "demonstrate a personal voice in their texts, with a focus on using words that express their thoughts, feelings, and opinions about the topic"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Point of View",
+       "text": "identify the point of view, including first person, used in their texts"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Editing and Proofreading",
+       "text": "make simple edits to draft texts, such as changes to capitalization , punctuation , and spelling"
+      }
+     ]
+    },
+    {
+     "code": "D3",
+     "title": "Publishing, Presenting, and Reflecting",
+     "text": "select suitable and effective media, techniques, and tools to publish and present final texts, and critically analyze how well the texts address various topics",
+     "specifics": [
+      {
+       "code": "D3.1",
+       "topic": "Producing Final Texts",
+       "text": "produce final texts, using simple techniques, to achieve the intended effect"
+      },
+      {
+       "code": "D3.2",
+       "topic": "Publishing and Presenting Texts",
+       "text": "present the texts they have created using appropriate strategies, including by reading aloud with expression"
+      },
+      {
+       "code": "D3.3",
+       "topic": "Reflecting on Learning",
+       "text": "identify a strategy they found helpful when presenting texts"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

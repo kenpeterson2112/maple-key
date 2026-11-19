@@ -1,0 +1,245 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Social Studies",
+ "grade": "5",
+ "course_name": "Social Studies",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/g5-ss",
+  "course_codename": "sshg___grade_4__copy_",
+  "last_modified": "2026-02-03T19:01:09.5001011Z",
+  "fetched_at": "2026-11-19T04:42:14Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Heritage and Identity: Interactions of Indigenous Peoples and Europeans prior to 1713, in What Would Eventually Become Canada",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Application: The Impact of Interactions",
+     "text": "analyse some key short- and long-term consequences of interactions among Indigenous peoples, among Europeans, and between Indigenous and European people prior to 1713 in what would eventually become Canada ( FOCUS ON: Cause and Consequence; Continuity and Change )",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "describe some of the positive and negative consequences of contact between Indigenous peoples and European explorers and settlers in what would eventually become Canada (e.g., with reference to the impact of European diseases on First Nations; the impact of Europeans’ belief that they had the right to claim First Nations territory for themselves; intermarriage between First Nations women and European men and the ethnogenesis of the Métis ; competition between different First Nations peoples, Métis, and European settlers for land and resources; alliances among First Nations and between First Nations and European settlers; the introduction of alcohol and European weapons; the contribution of First Nation ideas about democratic community governance systems) , and analyse their significance"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "analyse aspects of contact between Indigenous peoples and European explorers and settlers in what would eventually become Canada to determine ways in which different parties benefited from each other (e.g., early European settlers, slave owners, coureurs de bois , and European fur trade company employees benefited from First Nations and Métis ways of knowing, including their knowledge of land-based subsistence with respect to hunting, medicines , foods, geography, modes of transportation appropriate for local conditions, and established trade routes; the imperial government in France benefited economically from the fur trade and from alliances with First Nations, who aided them in their conflict with the British; First Nations benefited from some of the new materials and technologies introduced by Europeans; First Nations and European peoples benefited from the cultural knowledge, social ties, and language skills of the Métis)"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "explain some of the ways in which interactions among Indigenous peoples, among European explorers and settlers, and between Indigenous and European people in what would eventually become Canada are connected to issues in present-day Canada (e.g., with reference to land claims ; treaty rights and responsibilities; treaty-making processes and people excluded from these processes; environmental stewardship and relationships with the land; resource ownership, extraction, and use)"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Inquiry: Perspectives on Interactions",
+     "text": "use the social studies inquiry process to investigate aspects of the interactions among Indigenous peoples, among Europeans, and between Indigenous and European people prior to 1713 in what would eventually become Canada, from the perspectives of the various groups involved ( FOCUS ON: Interrelationships; Perspective )",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into aspects of the interactions among Indigenous peoples, among Europeans, and between Indigenous and European people in what would eventually become Canada, from the perspectives of various groups involved (e.g., questions about interactions from the perspectives of groups such as European settlers; First Nations, Métis, and/or Inuit men and women; different First Nations, Métis, and/or Inuit communities; coureurs de bois ; missionaries; Filles du Roi ; warriors; shamans ; slaves and slave owners)"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "gather and organize information on interactions among Indigenous peoples, among Europeans, and between Indigenous and European people in what would eventually become Canada, using a variety of primary and secondary sources that present various perspectives (e.g., treaties; pictographs; petroglyphs ; paintings; maps of trade routes; artefacts and their replicas; oral histories; traditional First Nations and European stories relating to similar themes/events; census records; journals written by Jesuits, early explorers, and/or Hudson’s Bay Company employees; accurate and authentic voices from Internet resources and/or books on Canadian history; interviews with Métis Senators, Elders , and/or knowledge keepers )"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "analyse and construct maps as part of their investigations into interactions among Indigenous peoples, among Europeans, and between Indigenous and European people in what would eventually become Canada (e.g., thematic maps that show how physical features influenced settlement patterns , seasonal migration, trade routes, Indigenous social networks, agricultural practices, or the habitat of animals that sustained the fur trade; historical maps that show First Nations territory prior to and after contact; historical maps that show the emergence of Métis communities )"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "interpret and analyse information and evidence relevant to their investigations, using a variety of tools (e.g., assess evidence to ensure that its voice is authentic and the information it provides is accurate; use a graphic organizer to help them compare the views of First Nations, Métis, and European settlers on nature and resource use; examine the content of journals or diaries to determine how European settlers and explorers reacted when meeting and working with First Nations peoples; use oral histories to develop their understanding of how one or more First Nations reacted to meeting and guiding settlers; use a comparison chart to help them analyse different perspectives on the fur trade or the establishment of Christian missions)"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about aspects of the interactions among First Nations, Métis, and Inuit individuals and communities, among Europeans, and between Europeans and First Nations, Métis, and Inuit in what would eventually become Canada during this period, highlighting the perspectives of the different groups involved"
+      },
+      {
+       "code": "A2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries, using appropriate vocabulary (e.g., Elder , faith keeper , knowledge keeper, Métis Senator , shaman, oral history, wampum belt, pictograph , petroglyph, missionary, colonization , colonialism , settler, xenophobia, racism, prejudice, charter, treaty , coureur de bois, seigneur, Filles du Roi) and formats (e.g., a poem, song, or story that describes the founding of Quebec from two distinct perspectives; an annotated map that shows different perspectives on the growth of the fur trade and resulting settlements; a collection of images they have created themselves, downloaded from websites, and/or taken from printed sources, showing different perspectives on the work of missionaries)"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Understanding Context: Significant Characteristics and Interactions",
+     "text": "describe significant features of and interactions among Indigenous peoples, among Europeans, and between Indigenous and European people prior to 1713 in what would eventually become Canada ( FOCUS ON: Significance; Interrelationships )",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "identify major Indigenous nations that came into contact with European settlers and/or explorers prior to 1713 in what would become Canada (e.g., Great Lakes–St. Lawrence region : some of the many nations were Abenaki, Algonkin, Haudenosaunee, Ojibwe, Ottawa, Potawatomie, Wendat, Weskarini; northern Ontario: some of the nations were Cree and Ojibwe; Atlantic Canada: some of the many nations were Beothuk, Innu, Mi’kmaq, Passamaquoddy, Wolastoqiyik; Arctic: some of the nations were Inuit and Dene) , and describe key characteristics of selected nations (e.g., with respect to language; religious/spiritual beliefs and ceremonies; governance structures; food and clothing; roles of men, women, and children; the role and significance of arts and crafts)"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "describe some significant interactions among First Nations and between First Nations and Inuit before contact with Europeans (e.g., with reference to trade, alliances and treaties, and other instances of cooperation; competition between First Nations for control of waterways)"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "describe the main motives for Europeans’ exploration of Indigenous lands that were eventually claimed by Canada and for the establishment of permanent European settlements (e.g., with reference to Norse in Newfoundland and Labrador; the voyages of Cabot, Cartier, and/or Hudson; settlements by De Mons and/or Champlain in Quebec; exploration by Étienne Brûlé; motives such as colonization , the desire to gain control over Indigenous lands by imposing sovereignty and land ownership, missionary work to spread Christianity, the desire of European settlers to escape from oppressive European government structures, the exploitation of natural resources , including the establishment and expansion of the fur trade and the fishing industry)"
+      },
+      {
+       "code": "A3.4",
+       "topic": "",
+       "text": "identify significant offices and institutions in New France (e.g., the seigneurial system ; the Roman Catholic Church; the king, governor, bishop, and intendant; nuns, priests, missionaries) , and describe their importance to settlers in New France"
+      },
+      {
+       "code": "A3.5",
+       "topic": "",
+       "text": "describe significant aspects of the interactions between Indigenous peoples and European explorers and settlers in what would eventually become Canada (e.g., with reference to trade; sharing of beliefs, knowledge, skills, technology; disruption of Indigenous gender norms and roles; intermarriage; military alliances and conflict; the theft of Indigenous lands; spread of diseases; introduction of alcohol; the roles of First Nations, Métis, and Europeans in the fur trade; the impact of the fur trade on Indigenous peoples; loss of First Nations’ access to lands for sustenance and to support ways of life)"
+      },
+      {
+       "code": "A3.6",
+       "topic": "",
+       "text": "describe key factors that led to the ethnogenesis of the Métis people in what would eventually become Canada, with specific attention to the Great Lakes and Mattawa regions (e.g., contact between First Nations and European fur traders and explorers; the need among European traders/explorers in unfamiliar territories for help and guidance from First Nations; intermarriage between traders and First Nations women; gender imbalances in new settlements)"
+      },
+      {
+       "code": "A3.7",
+       "topic": "",
+       "text": "describe some significant differences among Indigenous peoples and between selected Indigenous and European communities in what would eventually become Canada (e.g., with reference to governance and economic organization; spiritual and/or cultural practices; land use/ownership; attitudes towards the environment; the roles of men, women, and children) , and identify some of the reasons for these differences (e.g., climate ; availability of resources and arable land ; the culture , customs, and economic and political system in the mother country; individualistic versus communal world views; familiarity with the land and its resources)"
+      },
+      {
+       "code": "A3.8",
+       "topic": "",
+       "text": "describe some significant effects of European conflicts on Indigenous peoples and on what would eventually become Canada (e.g., conflict between First Nations who were allied to different imperial powers; changes in control of Acadia between the French and British; fur trade rivalries)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "People and Environments: The Role of Government and Responsible Citizenship",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Application: Governments and Citizens Working Together",
+     "text": "assess responses of governments in Canada, including First Nations, Métis , and Inuit governments, to some significant issues, and develop plans of action for governments and citizens to address social and environmental issues ( FOCUS ON: Interrelationships; Cause and Consequence )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "assess the effectiveness of actions taken by one or more levels of government, including Indigenous governments, to address an issue of national, provincial/territorial, and/or local significance (e.g., with reference to the Far North Act in addressing concerns of Inuit and First Nations about development in northern Ontario; municipal , provincial, and/or federal programs/policies aimed at reducing child poverty; policies related to the management of the Great Lakes; actions to support nation-to-nation relationships between federal/provincial governments and First Nations, Métis, and Inuit governments; youth advisory councils within the federal and provincial governments; policies/actions intended to address issues related to drinking water in First Nations communities; policies/actions on housing in Inuit communities; the actions taken as a result of the Métis Nation of Ontario Secretariat Act [2015] from the perspective of the Métis and the federal and provincial governments)"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "create a plan of action to address a social issue of local, provincial/territorial, and/or national significance (e.g., homelessness, child poverty, bullying in schools, availability of physicians in remote communities, lack of employment opportunities within some regions, overcrowded and poorly constructed housing and/or lack of mental health and social services in First Nations and/or Inuit communities, funding for education in First Nations communities, preservation of Indigenous languages, missing and murdered Indigenous women and girls) , specifying the actions to be taken by the appropriate government or governments, including Indigenous governments, as well as by citizens"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "create a plan of action to address an environmental issue of local, provincial/territorial, and/or national significance (e.g., managing waste disposal, regulating industrial practices that damage the environment, ensuring safe drinking water, expanding availability of energy from renewable sources, reducing vehicle emissions, addressing land and water contamination on First Nations territory) , specifying the actions to be taken by the appropriate government or governments, including Indigenous governments, as well as by citizens"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Inquiry: Differing Perspectives on Social and Environmental Issues",
+     "text": "use the social studies inquiry process to investigate Canadian social and/or environmental issues from various perspectives, including those of Indigenous peoples as well as of the level (or levels) of government responsible for addressing the issues ( FOCUS ON: Perspective )",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into social and/or environmental issues in Canada from various perspectives, including the perspective of Indigenous peoples and of the level (or levels) of government responsible for addressing the issues (e.g., the perspectives of different levels of government, non-governmental organizations [NGOs] , professionals in the field, and people directly affected by an issue such as child poverty on and off reserves , preservation of traditional languages, homelessness, bullying in schools, access to health care, climate change in the Arctic, waste disposal, or deforestation )"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "gather and organize a variety of information and data that present various perspectives about Canadian social and/or environmental issues, including the perspectives of Indigenous peoples and of the level (or levels) of government responsible for addressing the issues (e.g., with respect to the issue of climate change , gather data on sources of carbon dioxide emissions affecting Canada, photographic evidence of melting polar ice and its impact on Inuit and on Arctic wildlife, information on the positions and/or actions of various NGOs working on climate change, projections from corporations on the costs of addressing greenhouse gas emissions, information on the impact of climate change on the natural world from oral history and interviews with Elders, knowledge keepers , and Métis Senators, editorials and articles from Indigenous media outlets on the impact of climate change, and/or information on the positions of the federal, provincial, and/or territorial governments)"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "analyse and construct maps in various formats, including digital formats, as part of their investigations into social and/or environmental issues (e.g., a thematic map showing the extent of the areas affected by climate change or how air pollution generated in one jurisdiction affects another; a demographic map showing levels of poverty or homelessness in different provinces; a thematic map showing the location of potential resource-extraction sites in relation to treaty territories, historic Métis settlements, and sacred sites)"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "interpret and analyse information and data relevant to their investigations, using a variety of tools (e.g., use an idea web to help them determine connections between the way in which a group is affected by climate change and its perspective on the issue; extract information from a line or bar graph to determine variations in homelessness in several municipalities; use a double bar graph to help them determine the effectiveness of recycling and waste-diversion programs)"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about social and/or environmental issues, outlining the strengths and weaknesses of different perspectives on the issues, including the perspectives of Indigenous peoples and of the level (or levels) of government responsible for addressing the issues"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries, using appropriate vocabulary (e.g., government, local, municipal, provincial/territorial, federal, chief , band council , municipal council, Parliament , member of Parliament [MP], member of provincial parliament [MPP], non-governmental organization, stakeholder) and formats (e.g., a report to present to their local MP, MPP, or city/town councillor; a photo essay on the impact of the issue; a brochure or informational poster that presents the strongest points in the position of various stakeholders ; a song, rap, or poem promoting the most convincing arguments on the issue; a map to accompany an oral presentation; a role play that other students can participate in to present differing perspectives)"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Understanding Context: Roles and Responsibilities of Government and Citizens",
+     "text": "demonstrate an understanding of the roles and key responsibilities of citizens and of the different levels of government in Canada, including First Nations, Métis, and Inuit governments ( FOCUS ON: Significance )",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "",
+       "text": "describe the major rights and responsibilities associated with citizenship in Canada (e.g., rights: equal protection under the law, freedom of speech, freedom of religion, the right to vote; responsibilities: to respect the rights of others, to participate in the electoral process and political decision making, to improve their communities)"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "describe the jurisdiction of different levels of government in Canada, as well as of some other elected bodies (i.e., federal, provincial, territorial, and municipal governments; band councils ; school boards), and some of the services provided by each (e.g., health services, education, policing, defence, social assistance, garbage collection, water services, public transit, libraries)"
+      },
+      {
+       "code": "B3.3",
+       "topic": "",
+       "text": "describe some First Nations, Métis, and Inuit governance structures that currently exist in Canada (e.g., with reference to the Métis Nation of Ontario, Inuit Tapiriit Kanatami, the Chiefs of Ontario, the Nishnawbe Aski Nation, the Union of Ontario Indians, the Haudenosaunee Confederacy )"
+      },
+      {
+       "code": "B3.4",
+       "topic": "",
+       "text": "describe the shared responsibility of various levels of government for providing some services and for dealing with selected social and environmental issues (e.g., services/issues related to transportation, health care, the environment, and/or crime and policing)"
+      },
+      {
+       "code": "B3.5",
+       "topic": "",
+       "text": "describe different processes that governments can use to solicit input from the public (e.g., elections, town hall meetings, public hearings, band council meetings, Métis general assemblies or community council meetings, commissions of inquiry, Supreme Court challenges, processes for granting easements, referendums, nation-to-nation discussions with First Nations and/or Inuit governments) , and explain why it is important for all levels of government to provide opportunities for public consultation"
+      },
+      {
+       "code": "B3.6",
+       "topic": "",
+       "text": "demonstrate a basic understanding of what is meant by the federal and provincial governments’ having a duty to consult and accommodate First Nations, Métis, and Inuit communities, and describe some circumstances in which this constitutional right for Indigenous peoples might apply (e.g., when considering proposals to run pipelines through traditional territory or mining development projects that would affect First Nations communities; when developing agreements about the extraction of natural resources on treaty land)"
+      },
+      {
+       "code": "B3.7",
+       "topic": "",
+       "text": "describe key actions taken by governments, including Indigenous governments, to solve some significant national, provincial/territorial, and/or local issues (e.g., federal policies relating to the effects of climate change in the Arctic or the issue of sovereignty in Canadian waters; provincial policies around child mental health issues; municipal recycling and waste diversion programs; government action to relocate elk from the town of Banff, Alberta; existing laws that affect traditional Indigenous harvesting, hunting, and fishing rights; First Nations, Métis, and Inuit community projects and strategies to preserve Indigenous languages)"
+      },
+      {
+       "code": "B3.8",
+       "topic": "",
+       "text": "explain why different groups may have different perspectives on specific social and environmental issues (e.g., why oil industry representatives, farmers, environmentalists, and the Alberta government might differ on development of the oil sands; why the federal government and First Nations band councils might have different perspectives on housing problems on reserves"
+      },
+      {
+       "code": "B3.9",
+       "topic": "",
+       "text": "describe some different ways in which citizens can take action to address social and environmental issues (e.g., by determining the position of their local candidates on various issues and supporting/voting for the one whose position they agree with; through the court system; by organizing petitions or boycotts; by volunteering with organizations that work on specific issues; by writing to their elected representatives or to the media; by creating or participating in art projects that bring attention to an issue)"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

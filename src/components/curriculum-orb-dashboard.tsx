@@ -8,6 +8,7 @@ import {
   type SpecificCoverage,
 } from "@/lib/assessment-results"
 import { strandCodeOf, describeCode } from "@/lib/curriculum-codes"
+import { useCurriculumText } from "@/lib/curriculum-text"
 import { urgencyScore } from "@/lib/orb-math"
 import ProficiencyOrb from "@/components/ui/proficiency-orb"
 import CurriculumOrbDetailModal from "@/components/curriculum-orb-detail-modal"
@@ -131,6 +132,7 @@ function StrandRow({
   onSelect: (target: ModalTarget) => void
   onSelectSpecific: (target: ModalTarget) => void
 }) {
+  useCurriculumText(subject, grade)
   const key = `strand:${node.code}`
   const isOpen = expanded.has(key)
 

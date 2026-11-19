@@ -1,0 +1,240 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Social Studies",
+ "grade": "3",
+ "course_name": "Social Studies",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/g3-ss",
+  "course_codename": "sshg___grade_2__copy_",
+  "last_modified": "2026-02-03T18:59:37.6201522Z",
+  "fetched_at": "2026-11-19T04:42:14Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Heritage and Identity: Communities in Canada, 1780–1850",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Application: Life in Canada – Then and Now",
+     "text": "compare ways of life among some specific groups in Canada, including a few First Nations, Métis, and Inuit communities, from around 1780 to 1850, and describe some of the changes between that era and the present day ( FOCUS ON : Continuity and Change; Perspective )",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "describe some of the similarities and differences in various aspects of everyday life ( e.g., housing, clothing, food, religious/spiritual practices, work, recreation, the role of children ) of selected groups and communities living in Canada between 1780 and 1850 (e.g., First Nations, Métis, Inuit, French, British, Black people; adults, children; people of different genders; enslaved people, indentured servants, habitants, seigneurs, farmers; people from different social classes)"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "compare what life was like between 1780 and 1850 in a few First Nations, Métis, and Inuit communities (e.g., they learned off the land; produced agriculture and fished, hunted, and/or harvested; practised their own languages, cultures, and ways of life; participated in economic trading with settler communities when possible; shared knowledge with settlers) with the ways in which later colonial policies, including the residential school system, changed life in these communities (e.g., removal of children: loss of culture and language, impacts of assimilation on identity, challenges to developing family relationships, the breakdown of community; communities: loss of land and freedom to make decisions about the use of Indigenous lands and territories; loss of sovereignty)"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "compare some of the roles of and challenges facing people living in Canada between 1780 and 1850 with those in the present day, including people in a few First Nations, Métis, and/or Inuit communities (e.g., the roles of women, men, and children; challenges related to the environment, life on the land, work, community life, the law; treaty-making between First Nations and the Crown)"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "identify some key components of identity in Canada today, including First Nations, Métis, and Inuit identity (e.g., bilingualism, multiculturalism, founding nations, religious freedom, nation-to-nation agreements) , and describe some of the ways in which communities that were in Canada between 1780 and 1850 have had an impact on this identity (e.g., with reference to treaty rights and other agreements; Canada’s official languages; cultural symbols and contributions such as the birchbark canoe, lacrosse, kayak, inukshuk, or maple syrup; place names in Ontario and the rest of Canada; observances such as National Indigenous Peoples Day or Black History Month)"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Inquiry: Community Challenges and Adaptations",
+     "text": "use the social studies inquiry process to investigate some of the major challenges that various groups and communities, including a few First Nations, Métis, and Inuit communities, faced in Canada from around 1780 to 1850, and key measures taken to address these challenges ( FOCUS ON: Significance; Cause and Consequence)",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into some of the major challenges facing various groups and communities in Canada from around 1780 to 1850 (e.g., isolation; climate; lack of access to medical care and medicine; law enforcement, or manufactured goods in isolated communities; encroachment of European settlers on First Nations territory; racism facing First Nations, Métis, and Black Loyalists; spread of diseases such as tuberculosis and smallpox among First Nations and Inuit communities; settler economics encouraging the overhunting of wildlife; unfair treaty-making processes) and measures taken to address these challenges"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "gather and organize information on major challenges facing various groups and communities, including at least one First Nation, Métis, or Inuit community, and on measures taken to address these challenges, using a variety of primary and/or secondary sources (e.g., settler journals, artefacts, newspapers, period paintings and drawings, historical fiction, oral histories)"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "analyse and construct print and digital maps, including thematic maps, as part of their investigations into challenges facing various groups and communities, including at least one First Nation, Métis, or Inuit community, in Canada during this period, and measures taken to address these challenges (e.g., find main roads and canals on a digital thematic map showing transportation routes; plot settlements on a map in order to determine their proximity to water; compare a map showing precontact territories of First Nations to a map showing reserves in 1850; use Indigenous sources to construct a map of the seasonal encampments of a First Nation, Métis, or Inuit community that moved according to the availability of food sources)"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "interpret and analyse information relevant to their investigations, using a variety of tools (e.g., use timelines and maps to help them determine how European settlement affected the location and size of First Nations and/or Métis communities; create a matrix to help them analyse the different challenges communities faced and how they adapted to them)"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about some of the major challenges facing various groups and communities in Canada, including at least one First Nation, Métis, or Inuit community, during this period, and measures taken to overcome these challenges"
+      },
+      {
+       "code": "A2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary (e.g., First Nations, Métis, Inuit, Upper Canada, Lower Canada, treaty, displacement, settler, refugee, Loyalist, allies, land grant, seigneurie, habitant, enslaved person, hardship, isolation) and formats (e.g., a comic book that shows settler life before and after the construction of roads; a poster that shows how First Nations learned from their long-standing relationship with their territories, focusing on plants or technologies; a drawing that shows how people adapted to the climate; a map showing how European settlement affected First Nations territories)"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Understanding Context: Life in Colonial Canadian Communities",
+     "text": "identify some of the communities in Canada, including a few First Nations, Métis, and Inuit communities, from around 1780 to 1850, and describe their relationships to the land and to each other ( FOCUS ON: Interrelationships )",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "identify various First Nations and some Métis communities in Upper and Lower Canada from 1780 to 1850, including those living in traditional territory and those who moved or were forced to relocate to new areas in response to European settlement, and locate the areas where they lived, using print, digital, and/or interactive maps or a mapping program (e.g., the traditional territories of the Anishinaabe around Thunder Bay; Chippewa land in southern Ontario; Drummond Island – focusing on the history of Métis settlement in the region; new Mohawk settlements in the Bay of Quinte area; the tract of land that the Six Nations gave the Mississauga; Métis communities around Lake Huron)"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "identify various settler communities in Canada during this period (e.g., French along the St. Lawrence River; English and Irish in Kingston, Bytown, and York/Toronto, Upper Canada; Black settlers in the Elgin Settlement in Buxton, Upper Canada; Scots in Nova Scotia and the Red River Valley; Mennonites in Waterloo County, Upper Canada; United Empire Loyalists in Upper and Lower Canada; Black Loyalists in Nova Scotia) , and locate the areas where they lived, using print, digital, and/or interactive maps or a mapping program"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "identify some of the main factors that helped shape the development of settlements in Canada, including First Nations, Métis, and Inuit communities, during this period (e.g., the fur trade, the establishment of trading posts based on trade routes and the knowledge of First Nations and Métis peoples; navigable lakes and rivers for trade and transportation; climate; proximity to natural resources; the origins of settlers) , and describe how the physical features of the land (e.g., topography, proximity to water, fertility of the soil) and the availability of goods and services (e.g., mills, churches, roads, proximity to sacred sites) can facilitate settlement and enhance community life"
+      },
+      {
+       "code": "A3.4",
+       "topic": "",
+       "text": "describe some of the major challenges facing communities in Canada during this period, including at least one First Nation, Métis, or Inuit community (e.g., challenges relating to the climate; isolation in rural settlements; competition for resources; European diseases among First Nations; colonial wars and other conflicts; racism; displacement; overfishing of whales)"
+      },
+      {
+       "code": "A3.5",
+       "topic": "",
+       "text": "describe the impact of some different kinds of settlements (e.g., seasonal settlements of some seminomadic First Nations, Métis, and Inuit communities; trading posts; resource towns; large-scale farms; large towns or developing cities) on the natural environment and on any existing settlements"
+      },
+      {
+       "code": "A3.6",
+       "topic": "",
+       "text": "describe some key aspects of life in selected First Nations, Métis, and settler communities in Canada during this period, including the roles of men, women, and children (e.g., with reference to diet; how food was obtained; clothing; housing; recreation; education; the division of labour between men, women, and children)"
+      },
+      {
+       "code": "A3.7",
+       "topic": "",
+       "text": "identify a few key treaties relevant to Indigenous people in their region during this period, including wampum belts exchanged (e.g., Two Row Wampum) , and explain how some of these agreements affected various peoples and communities in that region and beyond (e.g., with reference to the Treaty of Fort Stanwix, 1784; the Haldimand Proclamation, 1784; the Jay Treaty, 1794; the Treaty of Greenville, 1795; the Selkirk Treaty, 1817; the Huron Tract Treaty, 1827; the Saugeen Treaty, 1836; the Mississaugas of New Credit Land Cession Agreements; the Manitoulin Island Treaties, 1836; the Robinson-Superior and Robinson-Huron Treaties, 1850)"
+      },
+      {
+       "code": "A3.8",
+       "topic": "",
+       "text": "describe how some different communities in Canada related to each other during this period, with a focus on whether the relationships were characterized by conflict or cooperation (e.g., cooperation between First Nations and settler communities with respect to the sharing of medicines and technologies; intermarriage between First Nations women and European men; cooperative efforts to establish farms and villages; conflicts as settlers impinged on First Nations lands and Métis communities; conflicts between various religious or cultural groups)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "People and Environments: Living and Working in Ontario",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Application: Land Use and the Environment",
+     "text": "demonstrate an understanding of some key aspects of the interrelationship between the natural environment, land use, employment opportunities, and the development of municipal regions, First Nations communities , and/or Métis regions in Ontario ( FOCUS ON : Interrelationships; Patterns and Trends )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "describe some major connections between features of the natural environment of a region and the type of land use and/or the type of community that is established in that region (e.g., ports on lakes or major rivers; farming on flat land with fertile soil; resource towns in areas with ore, trees, or other natural resources)"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "describe some major connections between features of the natural environment and the type of employment that is available in a region, with reference to two or more municipal regions, including First Nations communities and/or Métis regions, in Ontario (e.g., in the District Municipality of Muskoka, which is known for its lakes, beaches, and many islands, some of the employment opportunities are seasonal jobs in the recreation industry; Dryden and its surrounding area is heavily forested, so there are a number of employment opportunities in the pulp and paper industry; the natural attraction of Niagara Falls led to the development of the area around it as a tourist centre, so the region offers many jobs in tourist and service industries; Bkejwanong Territory, also known as Walpole Island First Nation, is known for its biodiversity and some residents support their families through activities such as hunting, fishing, and trapping)"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "identify and describe some of the main patterns in population distribution and land use in two or more municipal regions in Ontario, including First Nations communities and/or Métis regions, using mapping and globe skills (e.g., read city maps to extract information on how much land is used for residential, transportation, and recreational purposes; read digital provincial land-use and/or agricultural maps to identify population patterns in agricultural areas; create a thematic map to show how land used for commercial purposes often exists in specific pockets within areas with large populations)"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Inquiry: The Impact of Land and Resource Use",
+     "text": "use the social studies inquiry process to investigate some of the environmental effects of different types of land and/or resource use in two or more Ontario municipal regions, First Nations communities , and/or Métis regions , as well as some of the measures taken to reduce the negative impact of that use ( FOCUS ON : Cause and Consequence; Perspective )",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into some of the short- and/or long-term effects on the environment of different types of land and/or resource use in two or more municipal regions of Ontario, including First Nations communities and/or Métis regions (e.g., the impact of mining, forestry, agriculture, suburban land development, First Nation[s] and Métis involvement in land-use planning) and measures taken to reduce the negative impact of that use"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "gather and organize a variety of data and information on the environmental effects of different land and/or resource use and measures taken to reduce the negative impact of that use (e.g., photographs, oral histories, resource books, magazines, online articles; information from regional conservation authorities or provincial and national park websites; information from municipalities on recycling; an interview with a First Nation, Métis, or Inuit individual or group with Indigenous ecological knowledge about a region and their observations on changes in that region; information from a website sharing Indigenous knowledges and ways of knowing)"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "analyse and construct print and digital maps, including thematic maps, as part of their investigations into the environmental impact of land and/or resource use in different municipal regions, including First Nations communities and/or Métis regions (e.g., use maps and atlases to locate information about the spatial boundaries of municipal areas / First Nation communities / Métis regions and the different land uses within them; use an interactive atlas to identify natural resources in your local area)"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "interpret and analyse information and data relevant to their investigations, using a variety of tools (e.g., use a graphic organizer to help them determine the environmental impact of an aggregate mine; plot trends in forest cover of a municipal region on a line or bar graph and compare it to a graph showing land-use trends for the same municipal region)"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about some of the short- and long-term effects on the environment of different types of land use in municipal regions of Ontario, including First Nations communities and/or Métis regions, and about key measures to reduce the negative impact of that use"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries, using appropriate vocabulary (e.g., municipality, county, reserve, traditional territory, stewardship, restoration, population, pollution, deforestation, rehabilitation, public transportation, ecological footprint, natural resources, Indigenous ecological knowledge [IEK]) and formats (e.g., a plan of action to address a local land-use issue; a cooperatively produced book of photos showing the environmental impact of a mine; with proper permission, a sketchnote of a story told by an individual with community connections and expertise, such as a local Elder, Métis Senator, Knowledge Keeper, Knowledge Holder, or Traditional Teacher, about their community’s or nation’s relationship with the land; a report on the benefits of forestry in provincial parks; song lyrics, a rap, or a poem about the effects of industrial pollution on a local waterway; an informational poster on what individuals can do to reduce their ecological footprint)"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Understanding Context: Regions and Land Use in Ontario",
+     "text": "describe major landform regions and types of land use in Ontario and some of the ways in which land use in various Ontario municipalities, including First Nations communities and/or Métis regions, addresses human needs and wants, including the need for jobs ( FOCUS ON: Significance )",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "",
+       "text": "demonstrate an understanding that Ontario is divided into different municipal or regional entities (i.e., cities, towns, townships, villages, counties, First Nations communities, Métis regions), and that local governments within these entities provide specific services and regulate development according to local needs (e.g., elected municipal governments deal with local issues and needs; First Nations have an elected chief and council and/or hereditary chiefs; the Métis Nation of Ontario has elected councillors from the Provisional Council [PCMNO], which represents the community and regional interests of Métis citizens; different municipalities have different laws or policies relating to land development)"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "demonstrate an understanding that political maps, both print and digital, use different typographical styles to indicate different types of entities (e.g., boldface capitals for a country [ CANADA ], capitals for a province [ONTARIO], and lowercase for a city [Sudbury])"
+      },
+      {
+       "code": "B3.3",
+       "topic": "",
+       "text": "identify the major landform regions in Ontario (e.g., the Canadian Shield, the Great Lakes–St. Lawrence Lowlands, the Hudson Bay Lowlands) , and describe the major characteristics that make each distinct"
+      },
+      {
+       "code": "B3.4",
+       "topic": "",
+       "text": "identify and describe the main types of employment that are available in two or more municipal regions in Ontario, including First Nations communities and/or Métis regions (e.g., jobs dependent on natural resources; jobs in manufacturing, tourism and recreation, the service sector, education, the arts, traditional and/or political government; jobs in conservation, stewardship, and/or land restoration)"
+      },
+      {
+       "code": "B3.5",
+       "topic": "",
+       "text": "describe major types of land use (e.g., for agriculture, industry, commerce, housing, recreation, transportation, conservation) and how they address human needs and wants (e.g., agricultural lands provide us with a variety of foods for local consumption and export; lakes provide traditional foods like fish and wild rice; the forest offers plant medicines; land use for recreation enables people to enjoy the outdoors and to participate in or watch sports and other activities; residential areas have different types of buildings to meet people’s housing needs; conservation lands protect ecosystems and habitat for organisms so that biodiversity is preserved for future generations; untouched wetlands help ensure clean water and a healthy habitat)"
+      },
+      {
+       "code": "B3.6",
+       "topic": "",
+       "text": "compare some aspects of land use in two or more municipalities, including First Nations communities and/or Métis regions (e.g., the number and size of roads; the size and location of commercial areas; the location and types of housing; the proximity of residential and commercial/industrial areas; the size and number of parks and other recreational spaces; space for waste disposal; the amount of agricultural land in the area; the amount of open space)"
+      },
+      {
+       "code": "B3.7",
+       "topic": "",
+       "text": "construct print and/or digital maps that show some different land uses, landform regions, and/or municipalities in Ontario, including First Nations communities and/or Métis regions, using appropriate elements of a map, including standard units of measurement (e.g., use an online atlas or mapping program to create a map showing the major cities in Ontario, with a scale in kilometres; create a map showing the location of major landform regions in the province; create a map showing traditional territory and existing First Nations communities; create a map showing the Métis regions in Ontario)"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

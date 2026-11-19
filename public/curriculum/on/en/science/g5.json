@@ -1,0 +1,333 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Science",
+ "grade": "5",
+ "course_name": "Science and Technology",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sci-tech/grades/grade-5",
+  "course_codename": "sci___tech___grade_5",
+  "last_modified": "2023-03-17T14:22:00.2933906Z",
+  "fetched_at": "2026-11-19T04:42:12Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "STEM Skills and Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "STEM Investigation and Communication Skills",
+     "text": "use a scientific research process, a scientific experimentation process, and an engineering design process to conduct investigations, following appropriate health and safety procedures",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "use a scientific research process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "use a scientific experimentation process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "use an engineering design process and associated skills to design, build, and test devices, models, structures, and/or systems"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "follow established health and safety procedures during science and technology investigations, including wearing appropriate protective equipment and clothing and safely using tools, instruments, and materials"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "communicate their findings, using science and technology vocabulary and formats that are appropriate for specific audiences and purposes"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Coding and Emerging Technologies",
+     "text": "use coding in investigations and to model concepts, and assess the impact of coding and of emerging technologies on everyday life and in STEM-related fields",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "write and execute code in investigations and when modelling concepts, with a focus on using different methods to store and process data for a variety of purposes"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "identify and describe impacts of coding and of emerging technologies on everyday life, including skilled trades"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Applications, Connections, and Contributions",
+     "text": "demonstrate an understanding of the practical applications of science and technology, and of contributions to science and technology from people with diverse lived experiences",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "describe practical applications of science and technology concepts in various occupations, including skilled trades, and how these applications address real-world problems"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "investigate how science and technology can be used with other subject areas to address real-world problems"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "analyse contributions to science and technology from various communities"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Life Systems",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "analyse impacts of various social and environmental factors, human activities, and technologies on human health",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Human Health and Body Systems",
+       "text": "assess effects of a variety of social and environmental factors on human health, and describe ways in which individuals can reduce the harmful effects of these factors and take advantage of those that are beneficial"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Human Health and Body Systems",
+       "text": "evaluate beneficial and harmful effects of various technologies on human health and body systems, while taking different perspectives into consideration"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Human Health and Body Systems",
+       "text": "explain how food literacy can support decisions that affect physical and mental health"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the structure and function of human body systems and interactions within and between systems",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Human Health and Body Systems",
+       "text": "identify systems of the human body, and describe their basic function"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Human Health and Body Systems",
+       "text": "describe the basic structure and function of vital organs in various systems in the human body"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Human Health and Body Systems",
+       "text": "describe interrelationships between human body systems"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Human Health and Body Systems",
+       "text": "identify various diseases and medical disorders in humans and the organs and/or body system or systems that they affect"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Matter and Energy",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the impacts on society and the environment of various processes and materials used in the manufacture of common products, and ways to mitigate negative impacts",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Properties of and Changes in Matter",
+       "text": "assess the impacts on society and the environment of various processes used in the manufacture of common products"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Properties of and Changes in Matter",
+       "text": "assess how the use of specific materials in the manufacture of common products affects the environment, and identify actions that society and individuals can take to mitigate negative impacts"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the properties of matter, changes of state, and physical and chemical change",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Properties of and Changes in Matter",
+       "text": "describe matter as everything that has mass and occupies volume"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Properties of and Changes in Matter",
+       "text": "identify the states of matter, and describe characteristics and properties of solids, liquids, and gases"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Properties of and Changes in Matter",
+       "text": "describe changes of state of matter observed at home, in the community, or in the natural environment"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Properties of and Changes in Matter",
+       "text": "describe physical changes in matter as changes of the state, volume, or form of the matter that do not result in the formation of a different substance"
+      },
+      {
+       "code": "C2.5",
+       "topic": "Properties of and Changes in Matter",
+       "text": "describe chemical changes in matter as changes that result in the formation of different substances, and identify signs that a chemical change has occurred"
+      },
+      {
+       "code": "C2.6",
+       "topic": "Properties of and Changes in Matter",
+       "text": "explain how changes of state can occur when matter absorbs or releases thermal energy"
+      },
+      {
+       "code": "C2.7",
+       "topic": "Properties of and Changes in Matter",
+       "text": "explain why specific physical properties of various solids, liquids, and gases make them useful for particular applications"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Structures and Mechanisms",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "analyse social and environmental impacts of forces acting on structures, and assess ways to mitigate these impacts",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Forces Acting on Structures",
+       "text": "analyse the effects of forces from natural phenomena on structures in natural and built environments"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Forces Acting on Structures",
+       "text": "assess various ways in which humans mitigate impacts of forces from natural phenomena on structures in urban, rural, and remote communities"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of forces that act on structures, and how various structures withstand them",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Forces Acting on Structures",
+       "text": "identify internal forces acting on a structure, and describe their effects on the structure"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Forces Acting on Structures",
+       "text": "identify external forces acting on a structure, and describe their effects on the structure"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Forces Acting on Structures",
+       "text": "describe forces resulting from natural phenomena that can have severe consequences for human-built structures, and identify structural features and materials that can allow such structures to withstand these forces"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Forces Acting on Structures",
+       "text": "describe ways in which physical characteristics of various animal and plant species help to protect them from potentially harmful effects of forces"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Forces Acting on Structures",
+       "text": "describe ways in which protective equipment helps to protect humans from potentially harmful effects of forces"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Earth and Space Systems",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess effects of energy and resource use on society and the environment, and suggest options for conserving energy and resources",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Conservation of Energy and Resources",
+       "text": "analyse long-term impacts of human uses of energy and natural resources, on society and the environment, including climate change, and suggest ways to mitigate these impacts"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Conservation of Energy and Resources",
+       "text": "evaluate effects of various technologies on energy consumption, and describe ways in which individuals can use technology to reduce energy consumption"
+      },
+      {
+       "code": "E1.3",
+       "topic": "Conservation of Energy and Resources",
+       "text": "analyse how First Nations, Métis, and Inuit communities use their knowledges and ways of knowing to conserve energy and resources"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the conservation of energy, and the forms, sources, and uses of energy and resources",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "Conservation of Energy and Resources",
+       "text": "identify a variety of forms of energy, and describe how each form is used in everyday life"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Conservation of Energy and Resources",
+       "text": "demonstrate an understanding of the law of conservation of energy, including how energy cannot be created or destroyed but can only be transformed from one form to another"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Conservation of Energy and Resources",
+       "text": "describe how energy is stored as potential energy and transformed in a given device or system"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Conservation of Energy and Resources",
+       "text": "demonstrate an understanding that when energy is transformed from one form to another, some energy may dissipate into the environment in the form of heat, light, and/or sound energy"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Conservation of Energy and Resources",
+       "text": "identify renewable and non-renewable sources of energy"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Conservation of Energy and Resources",
+       "text": "explain how the use of energy derived from fossil fuels changes the composition of the atmosphere and how these changes contribute to climate change"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

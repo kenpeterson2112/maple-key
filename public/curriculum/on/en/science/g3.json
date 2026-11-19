@@ -1,0 +1,343 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Science",
+ "grade": "3",
+ "course_name": "Science and Technology",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sci-tech/grades/grade-3",
+  "course_codename": "sci___tech___grade_3",
+  "last_modified": "2023-03-17T14:21:07.5229465Z",
+  "fetched_at": "2026-11-19T04:42:12Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "STEM Skills and Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "STEM Investigation and Communication Skills",
+     "text": "use a scientific research process, a scientific experimentation process, and an engineering design process to conduct investigations, following appropriate health and safety procedures",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "use a scientific research process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "use a scientific experimentation process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "use an engineering design process and associated skills to design, build, and test devices, models, structures, and/or systems"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "follow established health and safety procedures during science and technology investigations, including wearing appropriate protective equipment and clothing and safely using tools, instruments, and materials"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "communicate their findings, using science and technology vocabulary and formats that are appropriate for specific audiences and purposes"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Coding and Emerging Technologies",
+     "text": "use coding in investigations and to model concepts, and assess the impact of coding and of emerging technologies on everyday life",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "write and execute code in investigations and when modelling concepts, with a focus on testing, debugging, and refining programs"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "identify and describe impacts of coding and of emerging technologies on everyday life"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Applications, Connections, and Contributions",
+     "text": "demonstrate an understanding of the practical applications of science and technology, and of contributions to science and technology from people with diverse lived experiences",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "describe practical applications of science and technology concepts in their home and community, and how these applications address real-world problems"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "investigate how science and technology can be used with other subject areas to address real-world problems"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "analyse contributions to science and technology from various communities"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Life Systems",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess ways in which plants are beneficial to society and the environment, and ways in which human activity has an impact on plants and plant habitats",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Growth and Changes in Plants",
+       "text": "assess ways in which plants are important to humans and other living things, taking different perspectives into consideration, and identify ways in which humans can protect native plant species and their habitats"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Growth and Changes in Plants",
+       "text": "assess ways in which human activities have an impact on plants and plant habitats, and identify personal actions that they could take to minimize harmful effects and enhance positive ones"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Growth and Changes in Plants",
+       "text": "assess the benefits and limitations of locally grown food"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of characteristics and uses of plants and of plants’ responses to the natural environment",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Growth and Changes in Plants",
+       "text": "describe the basic needs of plants, including the need for air, water, light, heat, nutrients, and space, and identify environmental conditions that may threaten plant survival"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Growth and Changes in Plants",
+       "text": "identify different parts of plants, including the root, stem, flower, stamen, pistil, leaf, seed, cone, and fruit, and describe how each part contributes to plants’ survival within their environment"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Growth and Changes in Plants",
+       "text": "describe changes that different plants undergo in their life cycles"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Growth and Changes in Plants",
+       "text": "describe ways in which a variety of plants adapt and/or react to their environment and to changes in their environment"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Growth and Changes in Plants",
+       "text": "demonstrate an understanding that most plants get energy directly from the Sun through the process of photosynthesis, which involves the absorption of carbon dioxide and the release of oxygen"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Growth and Changes in Plants",
+       "text": "describe ways in which people, including Indigenous peoples, from various cultures around the world use plants for food, shelter, medicine, and clothing"
+      },
+      {
+       "code": "B2.7",
+       "topic": "Growth and Changes in Plants",
+       "text": "describe various plants used for food, including those grown by First Nations, Métis, and Inuit, and identify local settings where these plants are grown or found"
+      },
+      {
+       "code": "B2.8",
+       "topic": "Growth and Changes in Plants",
+       "text": "describe ways in which plants and animals, including humans, depend on each other"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Matter and Energy",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the impacts of various forces on society and the environment",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Forces and Motion",
+       "text": "assess the effects of the action of forces from natural phenomena on natural and built environments, and identify ways in which human activities can reduce or enhance these effects"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Forces and Motion",
+       "text": "assess harmful effects of forces that may result from various human activities, and describe how health and safety devices can minimize these effects"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of how forces cause motion and changes in motion",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Forces and Motion",
+       "text": "describe different types of contact forces and non-contact forces"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Forces and Motion",
+       "text": "describe different ways a force can be exerted on an object"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Forces and Motion",
+       "text": "describe how different forces applied to an object, including forces of varying magnitude, can cause the object to start, stop, or change its direction, speed, or shape"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Forces and Motion",
+       "text": "identify ways in which forces are used in their daily lives"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Structures and Mechanisms",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the importance of form, function, strength, and stability in structures to society and the environment",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Strong and Stable Structures",
+       "text": "assess effects on society and the environment of strong and stable structures"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Strong and Stable Structures",
+       "text": "assess the environmental impact of structures built by various animals, including structures built by humans"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the concepts of strength and stability as they relate to structures with various forms and functions, and of the factors that affect structures’ strength and stability",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Strong and Stable Structures",
+       "text": "describe a structure as a supporting framework that holds a load and has a definite size, shape, and function, and identify structures in the natural environment and in the built environment"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Strong and Stable Structures",
+       "text": "demonstrate an understanding of the relationship between form and function for various structures"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Strong and Stable Structures",
+       "text": "identify the strength of a structure as its ability to support a load and describe ways to increase the strength of structures, including ways to increase the strength of different materials used to build them"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Strong and Stable Structures",
+       "text": "describe the stability of a structure as its ability to keep its shape, maintain balance, float, and/or stay fixed in one spot when a force is applied to the structure, and describe ways to improve a structure’s stability"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Strong and Stable Structures",
+       "text": "identify properties of materials that need to be considered when building structures"
+      },
+      {
+       "code": "D2.6",
+       "topic": "Strong and Stable Structures",
+       "text": "describe ways in which different forces can affect the shape, balance, or position of structures"
+      },
+      {
+       "code": "D2.7",
+       "topic": "Strong and Stable Structures",
+       "text": "explain the role of struts and ties in structures under load"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Earth and Space Systems",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the importance of soils for society and the environment, and the impact of human activity on soils",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Soils in the Environment",
+       "text": "assess the importance of soils for society and the environment"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Soils in the Environment",
+       "text": "assess the impact of human activity on soils, and describe ways in which humans can improve the quality of soils and/or lessen or prevent harmful effects on soils"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the composition of soils, of different types of soils, and of processes and practices that can affect the health of soil",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "Soils in the Environment",
+       "text": "identify the living and non-living components of soil, and describe the characteristics of healthy soil"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Soils in the Environment",
+       "text": "identify different substances that are commonly added to, or absorbed by, the soil, and describe their effects on soil health"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Soils in the Environment",
+       "text": "examine different types of soils found in Ontario, and describe how different soils are suited to growing different types of food, including crops"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Soils in the Environment",
+       "text": "explain the process of erosion, including its causes and its impact on soils"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Soils in the Environment",
+       "text": "identify various strategies used to maintain and improve soil health in Ontario"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Soils in the Environment",
+       "text": "describe the process of composting, and explain some benefits of composting"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
