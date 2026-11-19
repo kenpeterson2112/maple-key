@@ -7,17 +7,12 @@ import ResultsSection from "@/components/results-section"
 import MobileFiltersDrawer from "@/components/mobile-filters-drawer"
 import BackToTopButton from "@/components/back-to-top-button"
 import { useGlobalFilters } from "@/lib/global-filters"
-import type { Filters } from "@/lib/types"
 
 interface ResourcesSpaceProps {
-  filters: Filters
-  setFilters: (filters: Filters) => void
   sidebarFilters: { modality: string[]; cost: string[]; accessibility: string[]; readiness: string[] }
   onSidebarFilterChange: (group: string, items: string[]) => void
   resultCount: number
   onCountChange: (count: number) => void
-  inferred: boolean
-  onReset: () => void
   isMobileFiltersOpen: boolean
   onCloseMobileFilters: () => void
   searchSeed?: { query: string; nonce: number }
@@ -26,29 +21,18 @@ interface ResourcesSpaceProps {
 }
 
 export default function ResourcesSpace({
-  filters,
-  setFilters,
   sidebarFilters,
   onSidebarFilterChange,
   resultCount,
   onCountChange,
-  inferred,
-  onReset,
   isMobileFiltersOpen,
   onCloseMobileFilters,
   searchSeed,
   onPlanWithSelection,
 }: ResourcesSpaceProps) {
-  const globalFilters = useGlobalFilters()
-
-  // Combine global curriculum filters with local sidebar filters for results
-  const mergedFilters: Filters = {
-    ...filters,
-    province: globalFilters.state.province,
-    grade: globalFilters.state.grade,
-    subject: globalFilters.state.subject,
-    strand: globalFilters.state.strand,
-  }
+  // The class context (province, grade, subject, strand) comes from the one
+  // shared store; the sidebar facets stay local to Search.
+  const { filters } = useGlobalFilters()
 
   return (
     <div className="flex flex-col h-full bg-background overflow-hidden">
@@ -57,7 +41,7 @@ export default function ResourcesSpace({
       <div className="flex flex-1 min-h-0">
         <SidebarFilters onFilterChange={onSidebarFilterChange} sidebarFilters={sidebarFilters} />
         <div className="flex-1 min-w-0">
-          <ResultsSection filters={mergedFilters} sidebarFilters={sidebarFilters} onCountChange={onCountChange} searchSeed={searchSeed} onPlanWithSelection={onPlanWithSelection} />
+          <ResultsSection filters={filters} sidebarFilters={sidebarFilters} onCountChange={onCountChange} searchSeed={searchSeed} onPlanWithSelection={onPlanWithSelection} />
         </div>
       </div>
 
