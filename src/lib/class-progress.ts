@@ -18,6 +18,16 @@ import type { LessonMetadata } from "./lesson-metadata"
 import { normalizeSubject } from "./subjects"
 import { normalizeGrades } from "./utils"
 
+export interface SpecificProgress {
+  code: string
+  /** A saved lesson covered it, or a Quick Check recorded it. */
+  taught: boolean
+  /** Readiness over this expectation's recorded responses; null when none. */
+  level: ReadinessLevel | null
+  /** Quick Check responses recorded against it. */
+  responses: number
+}
+
 export interface OverallProgress {
   code: string
   title: string
@@ -28,6 +38,8 @@ export interface OverallProgress {
   level: ReadinessLevel | null
   /** Share of recorded responses at Level 1 or 2, 0–1; null when none checked. */
   lowShare: number | null
+  /** Each specific expectation under it, in curriculum order. */
+  specifics: SpecificProgress[]
 }
 
 export interface StrandProgress {
@@ -131,6 +143,15 @@ export function buildClassProgress(
           checked,
           level: n > 0 ? computeReadinessLevel(sum) : null,
           lowShare: n > 0 ? (sum.level1 + sum.level2) / n : null,
+          specifics: o.specifics.map((code) => {
+            const r = counts[code] ? total(counts[code]) : 0
+            return {
+              code,
+              taught: taught.has(code),
+              level: r > 0 ? computeReadinessLevel(counts[code]) : null,
+              responses: r,
+            }
+          }),
         }
       })
     if (overalls.length === 0) {

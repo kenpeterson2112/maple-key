@@ -51,7 +51,7 @@ export function useClassProgress(subject: string, grade: string): ClassProgress 
 export const UNTAUGHT = "color-mix(in oklch, var(--foreground) 12%, transparent)"
 const TAUGHT_UNCHECKED = "color-mix(in oklch, var(--foreground) 38%, transparent)"
 
-function levelColor(level: ReadinessLevel | null): string {
+export function levelColor(level: ReadinessLevel | null): string {
   return level ? `var(${READINESS_TOKENS[level].token})` : TAUGHT_UNCHECKED
 }
 

@@ -232,11 +232,15 @@ Tailwind v4 default 4px scale. Common steps used in this app:
        rather than truncating. The blocks are coloured by `signal-*`
        readiness, with "now" at the overall the last lesson reached. The
        class's "N/M taught" sits at the end beside the Details toggle, never
-       before the strands. Clicking the bar opens a drop-down: the gauge,
-       totals, legend and **Analyze** (to Track) on one line, then every overall
-       expectation in strand columns. The timeline and the columns share one
-       grid (`strandGrid` in `subject-data-bar.tsx`), so each strand's details
-       sit straight under it. It closes on Escape, an outside click or the bar.
+       before the strands. Clicking the bar slides a drawer open: every
+       overall expectation in strand columns, then the gauge, totals, legend
+       and **Analyze** (to Track) on one line pinned to the bottom. The
+       timeline and the columns share one grid (`strandGrid` in
+       `subject-data-bar.tsx`), so each strand's details sit straight under it.
+       An overall opens in place to fill its strand's column with its specific
+       expectations (wording, readiness, responses), with an X to go back.
+       Escape steps back one level (specifics, then the drawer); an outside
+       click or the bar closes it.
        All from `buildClassProgress` (`src/lib/class-progress.ts`).
      - **Otherwise** (no subject, no grade, or no curriculum data): the
        subjects the teacher has worked on (subject and grade) as chips under
