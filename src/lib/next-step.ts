@@ -24,6 +24,13 @@ export type NextStep =
       code: string
     }
   | {
+      /** No lessons in Maple Key, but Quick Checks show where the class is. */
+      kind: "continue"
+      code: string
+      /** The furthest expectation with results, in the sequence. */
+      furthest: string
+    }
+  | {
       kind: "next"
       code: string
       /** The lesson it follows. */
@@ -66,8 +73,13 @@ export function buildNextStep(sequence: ScopeSequence, lessons: LessonMetadata[]
 
   const last = [...lessons].sort((a, b) => b.timestamp - a.timestamp)[0]
   if (!last) {
-    const first = order.find((c) => !taught.has(c))
-    return first ? { kind: "start", code: first } : { kind: "done" }
+    // No lessons, but checks may still show how far the class has come.
+    const furthestIdx = Math.max(-1, ...[...taught].map((c) => order.indexOf(c)))
+    if (furthestIdx >= 0) {
+      const next = order.slice(furthestIdx + 1).find((c) => !taught.has(c)) ?? order.find((c) => !taught.has(c))
+      return next ? { kind: "continue", code: next, furthest: order[furthestIdx] } : { kind: "done" }
+    }
+    return { kind: "start", code: order[0] }
   }
 
   const lastSpecifics = order.filter((s) => (last.curriculumCodesCovered ?? []).some((c) => covers(c, s)))

@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { Settings, SlidersHorizontal, ChevronDown, Filter } from "lucide-react"
-import SettingsModal from "@/components/settings-modal"
 import MaterialsSummary from "@/components/materials-summary"
 import AccountSheet from "@/components/account-sheet"
 import { BottomSheet } from "@/components/ui/bottom-sheet"
@@ -37,6 +36,10 @@ interface TopNavProps {
   onGoHome?: () => void
   /** What the next-step suggestion's buttons do (layer 3). */
   nextStepHandlers: NextStepHandlers
+  /** Open the Settings page. */
+  onOpenSettings: () => void
+  /** Open the Classroom profile page (materials, lesson defaults). */
+  onOpenClassroomProfile: () => void
   /** Hide the progress and next-step rows (full-screen flows such as Quick Check). */
   hideStrip?: boolean
 }
@@ -67,13 +70,14 @@ export default function TopNav({
   isHome = false,
   onGoHome,
   nextStepHandlers,
+  onOpenSettings,
+  onOpenClassroomProfile,
   hideStrip = false,
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
   const { state, setSubject, setGrade } = useGlobalFilters()
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [isClassSheetOpen, setIsClassSheetOpen] = useState(false)
-  const openSettings = () => setIsSettingsOpen(true)
+  const openSettings = onOpenSettings
 
   const progress = useClassProgress(state.subject, state.grade)
   const color = subjectColor(state.subject)
@@ -150,7 +154,7 @@ export default function TopNav({
                 onChangeSpace={onChangeSpace}
                 planBadge={bookmarkedResources.length}
               />
-              <MaterialsMenu onEdit={openSettings} />
+              <MaterialsMenu onEdit={onOpenClassroomProfile} />
               <button
                 onClick={openSettings}
                 className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-card/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -192,8 +196,8 @@ export default function TopNav({
                     )}
                   </button>
                 )}
-                <MaterialsMenu onEdit={openSettings} compact />
-                <AccountSheet onOpenSettings={openSettings} />
+                <MaterialsMenu onEdit={onOpenClassroomProfile} compact />
+                <AccountSheet onOpenSettings={openSettings} onOpenClassroomProfile={onOpenClassroomProfile} />
               </div>
             </div>
           </div>
@@ -338,7 +342,6 @@ export default function TopNav({
         </div>
       </BottomSheet>
 
-      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
   )
 }

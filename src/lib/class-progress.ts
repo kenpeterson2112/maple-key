@@ -148,17 +148,14 @@ export function buildClassProgress(
 
   const all = strands.flatMap((s) => s.overalls)
   // Where the class is: the furthest overall the most recent lesson reached
-  // (the same point the next-step suggestion works from), else the first
-  // overall started but not yet secure, else the first not started.
+  // (the same point the next-step suggestion works from).
   const lastLesson = [...myLessons].sort((a, b) => b.timestamp - a.timestamp)[0]
   const lastOveralls = new Set((lastLesson?.curriculumCodesCovered ?? []).map((c) => overallCodeOf(c)))
   const reached = all.filter((o) => lastOveralls.has(o.code)).pop()
-  const started = all.filter((o) => o.taught > 0)
-  const frontier =
-    reached?.code ??
-    started.find((o) => o.taught < o.total || o.level === "poor" || o.level === "okay")?.code ??
-    all.find((o) => o.taught === 0)?.code ??
-    null
+  // With no lessons, the furthest overall anything has been taught in: checks
+  // happen as teaching goes, with gaps, so the first gap isn't where the class is.
+  const furthestTaught = all.filter((o) => o.taught > 0).pop()
+  const frontier = reached?.code ?? furthestTaught?.code ?? all[0]?.code ?? null
   const struggling = all
     .filter((o) => o.lowShare !== null && (o.level === "poor" || o.level === "okay"))
     .sort((a, b) => (b.lowShare ?? 0) - (a.lowShare ?? 0))
