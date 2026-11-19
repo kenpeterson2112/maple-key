@@ -1,0 +1,368 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Math",
+ "grade": "9",
+ "course_name": "Mathematics",
+ "course_code": "MTH1W",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca",
+  "course_codename": "math___grade_9_course",
+  "last_modified": "2025-05-13T12:13:00.9966796Z"
+ },
+ "strands": [
+  {
+   "code": "AA",
+   "label": "Social-Emotional Learning (SEL) Skills in Mathematics",
+   "overalls": [
+    {
+     "code": "AA1",
+     "title": "Social-Emotional Learning Skills",
+     "text": "develop and explore a variety of social-emotional learning skills in a context that supports and reflects this learning in connection with the expectations across all other strands",
+     "specifics": []
+    }
+   ]
+  },
+  {
+   "code": "A",
+   "label": "Mathematical Thinking and Making Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Mathematical Processes",
+     "text": "apply the mathematical processes to develop a conceptual understanding of, and procedural fluency with, the mathematics they are learning",
+     "specifics": []
+    },
+    {
+     "code": "A2",
+     "title": "Making Connections",
+     "text": "make connections between mathematics and various knowledge systems , their lived experiences, and various real-life applications of mathematics, including careers",
+     "specifics": []
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Number",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Development of Numbers and Number Sets",
+     "text": "demonstrate an understanding of the development and use of numbers, and make connections between sets of numbers",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Development and Use of Numbers",
+       "text": "research a number concept to tell a story about its development and use in a specific culture, and describe its relevance in a current context"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Number Sets",
+       "text": "describe how various subsets of a number system are defined, and describe similarities and differences between these subsets"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Number Sets",
+       "text": "use patterns and number relationships to explain density , infinity , and limit as they relate to number sets"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Powers",
+     "text": "represent numbers in various ways, evaluate powers , and simplify expressions by using the relationships between powers and their exponents",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Powers",
+       "text": "analyse, through the use of patterning, the relationship between the sign and size of an exponent and the value of a power, and use this relationship to express numbers in scientific notation and evaluate powers"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "analyse, through the use of patterning, the relationships between the exponents of powers and the operations with powers, and use these relationships to simplify numeric and algebraic expressions"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Number Sense and Operations",
+     "text": "apply an understanding of rational numbers , ratios , rates , percentages , and proportions , in various mathematical contexts, and to solve problems",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "Rational Numbers",
+       "text": "apply an understanding of integers to describe location, direction, amount, and changes in any of these, in various contexts"
+      },
+      {
+       "code": "B3.2",
+       "topic": "Rational Numbers",
+       "text": "apply an understanding of unit fractions and their relationship to other fractional amounts, in various contexts, including the use of measuring tools"
+      },
+      {
+       "code": "B3.3",
+       "topic": "Rational Numbers",
+       "text": "apply an understanding of integers to explain the effects that positive and negative signs have on the values of ratios, rates, fractions, and decimals, in various contexts"
+      },
+      {
+       "code": "B3.4",
+       "topic": "Applications",
+       "text": "solve problems involving operations with positive and negative fractions and mixed numbers , including problems involving formulas, measurements, and linear relations, using technology when appropriate"
+      },
+      {
+       "code": "B3.5",
+       "topic": "Applications",
+       "text": "pose and solve problems involving rates, percentages, and proportions in various contexts, including contexts connected to real-life applications of data, measurement, geometry, linear relations, and financial literacy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Algebra",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Algebraic Expressions and Equations",
+     "text": "demonstrate an understanding of the development and use of algebraic concepts and of their connection to numbers, using various tools and representations",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Development and Use of Algebra",
+       "text": "research an algebraic concept to tell a story about its development and use in a specific culture, and describe its relevance in a current context"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Algebraic Expressions and Equations",
+       "text": "create algebraic expressions to generalize relationships expressed in words, numbers, and visual representations, in various contexts"
+      },
+      {
+       "code": "C1.3",
+       "topic": "Algebraic Expressions and Equations",
+       "text": "compare algebraic expressions using concrete, numerical, graphical, and algebraic methods to identify those that are equivalent, and justify their choices"
+      },
+      {
+       "code": "C1.4",
+       "topic": "",
+       "text": "simplify algebraic expressions by applying properties of operations of numbers, using various representations and tools, in different contexts"
+      },
+      {
+       "code": "C1.5",
+       "topic": "",
+       "text": "create and solve equations for various contexts, and verify their solutions"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Coding",
+     "text": "apply coding skills to represent mathematical concepts and relationships dynamically, and to solve problems, in algebra and across the other strands",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Coding",
+       "text": "use coding to demonstrate an understanding of algebraic concepts including variables , parameters , equations , and inequalities"
+      },
+      {
+       "code": "C2.2",
+       "topic": "",
+       "text": "create code by decomposing situations into computational steps in order to represent mathematical concepts and relationships, and to solve problems"
+      },
+      {
+       "code": "C2.3",
+       "topic": "",
+       "text": "read code to predict its outcome, and alter code to adjust constraints , parameters, and outcomes to represent a similar or new mathematical situation"
+      }
+     ]
+    },
+    {
+     "code": "C3",
+     "title": "Application of Relations",
+     "text": "represent and compare linear and non-linear relations that model real-life situations, and use these representations to make predictions",
+     "specifics": [
+      {
+       "code": "C3.1",
+       "topic": "Application of Linear and Non-Linear Relations",
+       "text": "compare the shapes of graphs of linear and non-linear relations to describe their rates of change , to make connections to growing and shrinking patterns , and to make predictions"
+      },
+      {
+       "code": "C3.2",
+       "topic": "",
+       "text": "represent linear relations using concrete materials, tables of values, graphs, and equations, and make connections between the various representations to demonstrate an understanding of rates of change and initial values"
+      },
+      {
+       "code": "C3.3",
+       "topic": "",
+       "text": "compare two linear relations of the form y = a x + b graphically and algebraically, and interpret the meaning of their point of intersection in terms of a given context"
+      }
+     ]
+    },
+    {
+     "code": "C4",
+     "title": "Characteristics of Relations",
+     "text": "demonstrate an understanding of the characteristics of various representations of linear and non-linear relations, using tools, including coding when appropriate",
+     "specifics": [
+      {
+       "code": "C4.1",
+       "topic": "Characteristics of Linear and Non-Linear Relations",
+       "text": "compare characteristics of graphs, tables of values, and equations of linear and non-linear relations"
+      },
+      {
+       "code": "C4.2",
+       "topic": "",
+       "text": "graph relations represented as algebraic equations of the forms x = k, y = k, x + y = k, x – y = k, a x + b y = k, and xy = k, and their associated inequalities, where a, b, and k are constants , to identify various characteristics and the points and/or regions defined by these equations and inequalities"
+      },
+      {
+       "code": "C4.3",
+       "topic": "",
+       "text": "translate , reflect , and rotate lines defined by y = a x , where a is a constant, and describe how each transformation affects the graphs and equations of the defined lines"
+      },
+      {
+       "code": "C4.4",
+       "topic": "",
+       "text": "determine the equations of lines from graphs, tables of values, and concrete representations of linear relations by making connections between rates of change and slopes , and between initial values and y -intercepts , and use these equations to solve problems"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Data",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Collection, Representation, and Analysis of Data",
+     "text": "describe the collection and use of data, and represent and analyse data involving one and two variables",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Application of Data",
+       "text": "identify a current context involving a large amount of data, and describe potential implications and consequences of its collection, storage, representation, and use"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Representation and Analysis of Data",
+       "text": "represent and statistically analyse data from a real-life situation involving a single variable in various ways, including the use of quartile values and box plots"
+      },
+      {
+       "code": "D1.3",
+       "topic": "Representation and Analysis of Data",
+       "text": "create a scatter plot to represent the relationship between two variables, determine the correlation between these variables by testing different regression models using technology, and use a model to make predictions when appropriate"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Mathematical Modelling",
+     "text": "apply the process of mathematical modelling , using data and mathematical concepts from other strands, to represent, analyse, make predictions, and provide insight into real-life situations",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Application of Mathematical Modelling",
+       "text": "describe the value of mathematical modelling and how it is used in real life to inform decisions"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Process of Mathematical Modelling",
+       "text": "identify a question of interest requiring the collection and analysis of data, and identify the information needed to answer the question"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Process of Mathematical Modelling",
+       "text": "create a plan to collect the necessary data on the question of interest from an appropriate source , identify assumptions , identify what may vary and what may remain the same in the situation, and then carry out the plan"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Process of Mathematical Modelling",
+       "text": "determine ways to display and analyse the data in order to create a mathematical model to answer the original question of interest, taking into account the nature of the data, the context, and the assumptions made"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Process of Mathematical Modelling",
+       "text": "report how the model can be used to answer the question of interest, how well the model fits the context, potential limitations of the model, and what predictions can be made based on the model"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Geometry and Measurement",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Geometric and Measurement Relationships",
+     "text": "demonstrate an understanding of the development and use of geometric and measurement relationships, and apply these relationships to solve problems, including problems involving real-life situations",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Geometric and Measurement Relationships",
+       "text": "research a geometric concept or a measurement system to tell a story about its development and use in a specific culture or community, and describe its relevance in connection to careers and to other disciplines"
+      },
+      {
+       "code": "E1.2",
+       "topic": "",
+       "text": "create and analyse designs involving geometric relationships and circle and triangle properties, using various tools"
+      },
+      {
+       "code": "E1.3",
+       "topic": "",
+       "text": "solve problems involving different units within a measurement system and between measurement systems, including those from various cultures or communities, using various representations and technology, when appropriate"
+      },
+      {
+       "code": "E1.4",
+       "topic": "",
+       "text": "show how changing one or more dimensions of a two-dimensional shape and a three-dimensional object affects perimeter/circumference, area, surface area, and volume, using technology when appropriate"
+      },
+      {
+       "code": "E1.5",
+       "topic": "",
+       "text": "solve problems involving the side-length relationship for right triangles in real-life situations, including problems that involve composite shapes"
+      },
+      {
+       "code": "E1.6",
+       "topic": "",
+       "text": "solve problems using the relationships between the volume of prisms and pyramids and between the volume of cylinders and cones , involving various units of measure"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "F",
+   "label": "Financial Literacy",
+   "overalls": [
+    {
+     "code": "F1",
+     "title": "Financial Decisions",
+     "text": "demonstrate the knowledge and skills needed to make informed financial decisions",
+     "specifics": [
+      {
+       "code": "F1.1",
+       "topic": "Financial Decisions",
+       "text": "identify a past or current financial situation and explain how it can inform financial decisions, by applying an understanding of the context of the situation and related mathematical knowledge"
+      },
+      {
+       "code": "F1.2",
+       "topic": "",
+       "text": "identify financial situations that involve appreciation and depreciation , and use associated graphs to answer related questions"
+      },
+      {
+       "code": "F1.3",
+       "topic": "",
+       "text": "compare the effects that different interest rates, lengths of borrowing time, ways in which interest is calculated, and amounts of down payments have on the overall costs associated with purchasing goods or services, using appropriate tools"
+      },
+      {
+       "code": "F1.4",
+       "topic": "",
+       "text": "modify budgets displayed in various ways to reflect specific changes in circumstances, and provide a rationale for the modifications"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

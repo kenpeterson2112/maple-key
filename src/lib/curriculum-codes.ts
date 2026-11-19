@@ -34,8 +34,10 @@ export function overallCodeOf(code: string): string {
   return code.split(".")[0]
 }
 
+// The strand is the code's leading letters: "D1" → "D", and Grade 9 Math's
+// SEL strand "AA1" → "AA" (not "A", which is a different strand there).
 export function strandCodeOf(overall: string): string {
-  return overall.charAt(0)
+  return overall.match(/^[A-Za-z]+/)?.[0] ?? overall.charAt(0)
 }
 
 // Real expectation codes are always <strand letter(s)><overall number>[.<specific

@@ -291,7 +291,7 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   they drift. Validate the dataset with `pnpm validate:schema`.
 - **The curriculum is fetched, not hand-written.** `scripts/fetch-curriculum.py`
   pulls Ontario Grades 1–8 (every subject in the schema; FSL is Core French
-  4–8) from the Ministry's public curriculum content service and writes two
+  4–8) plus the Grade 9 courses (MTH1W, SNC1W, ENL1W, CGC1W, PPL1O, FSF1D) from the Ministry's public curriculum content service and writes two
   layers. The **outline** (`src/data/curriculum/on.en.outline.json`: strand
   labels, overall titles, every expectation code, no wording) is bundled, so
   `strandLabel`, `overallTitle`, `expectationCodes` and the rest of
@@ -302,6 +302,16 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   Province and language are path segments (`on/en`), so French or another
   province is another run of the script, not a new format. Never type
   curriculum labels or wording into a component; rerun the script.
+- **No orphan expectation codes.** Every code in a resource's
+  `curriculum_expectations` must exist in the curriculum data for its subject
+  and one of its grades, whatever its province (the catalogue tags against the
+  Ontario curriculum). A resource whose subject and grade have no curriculum
+  data carries no codes. One rule, `shared/curriculum-check.ts`, used by the
+  admin editor (blocks save) and `api/admin-push.ts` (rejects the push), and
+  mirrored in `scripts/validate-resources.py` (fails CI on any write path:
+  routines, scripts, admin PRs). Never add codes by hand; to cover a new grade
+  or subject, extend `scripts/fetch-curriculum.py` (Grade 9 courses come in
+  through its `secondary` map).
 - **Resources must be specific.** `granularity` (activity · lesson · unit ·
   collection · tool · reference) records how focused a resource is; most of the
   catalog has been hubs and whole courses tagged as if they taught one

@@ -1,0 +1,366 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Science",
+ "grade": "9",
+ "course_name": "Science",
+ "course_code": "SNC1W",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca",
+  "course_codename": "snc1w",
+  "last_modified": "2023-08-29T12:49:21.2943193Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "STEM Skills, Careers, and Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "STEM Investigation Skills",
+     "text": "apply scientific processes and an engineering design process in their investigations to develop a conceptual understanding of the science they are learning, and apply coding skills to model scientific concepts and relationships",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "apply a scientific research process and associated skills to conduct investigations, making connections between their research and the scientific concepts they are learning"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "apply a scientific experimentation process and associated skills to conduct investigations, making connections between their observations and findings and the scientific concepts they are learning"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "apply an engineering design process and associated skills to design, build, and test devices, models, structures, and/or systems"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "apply coding skills to investigate and to model scientific concepts and relationships"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "apply their knowledge and understanding of safe practices and procedures, including the Workplace Hazardous Materials Information System (WHMIS), while planning and carrying out hands-on investigations"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Applications, Careers, and Connections",
+     "text": "analyse how scientific concepts and processes can be applied in practical ways to address real-world issues and in various careers, and describe contributions to science from people with diverse lived experiences",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "design an experiment or a prototype to explore a problem relevant to a STEM-related occupation, such as a skilled trade, using findings from research"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "describe how scientific innovations and emerging technologies, including artificial intelligence systems, impact society and careers"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "analyse how the development and application of science is economically, culturally, and socially contextualized, by investigating real-world issues"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "apply scientific literacy skills when investigating social and environmental issues that have personal, local, and/or global impacts"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "analyse contributions to science by people from various communities, including communities in Canada"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Biology",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Relating Science to Our Changing World",
+     "text": "assess impacts of climate change on ecosystem sustainability and on various communities, and describe ways to mitigate these impacts",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "assess impacts of climate change on the sustainability of local and global ecosystems, describe local or global initiatives for combatting climate change, and identify solutions to address some of the impacts"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "assess impacts of climate change on communities in Canada, including First Nations, Métis, and Inuit communities"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "investigate and explain how sustainable practices used by various communities, including First Nations, Métis, and Inuit communities, reflect an understanding of the importance of the dynamic equilibrium of ecosystems"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Investigating and Understanding Concepts",
+     "text": "demonstrate an understanding of the dynamic and interconnected nature of ecosystems, including how matter cycles and energy flows through ecosystems",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "investigate interactions between the biosphere, hydrosphere, lithosphere, and atmosphere, and explain why these interactions are important for ecosystem sustainability"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "explain how naturally occurring phenomena, including the cycling of matter and the flow of energy, contribute to the dynamic equilibrium within and between ecosystems"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "compare and contrast the processes of cellular respiration and photosynthesis, and explain how their complementary relationship contributes to the dynamic equilibrium of ecosystems"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "investigate factors and processes, including biodiversity, air and water quality, soil health, and succession, and explain how they contribute to ecosystem sustainability"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "explain the effects of various human activities on the dynamic equilibrium of ecosystems"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "identify and use various indicators of climate change to describe the impacts of climate change on local and global ecosystems, and analyse how human activities contribute to climate change"
+      },
+      {
+       "code": "B2.7",
+       "topic": "",
+       "text": "explain how sustainable practices related to the cycling of matter and the flow of energy can be applied in agricultural innovations"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Chemistry",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Relating Science to Our Changing World",
+     "text": "assess social, environmental, and economic impacts of the use of elements, compounds, and associated technologies",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "",
+       "text": "assess social, environmental, and economic impacts of processes associated with the life cycle of consumer products, considering the elements and compounds used to make them, and suggest ways to enhance positive impacts and/or minimize negative impacts"
+      },
+      {
+       "code": "C1.2",
+       "topic": "",
+       "text": "analyse impacts of using emerging chemical technologies in various fields, including in the skilled trades, and assess factors that influence the development of these technologies"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Investigating and Understanding Concepts",
+     "text": "demonstrate an understanding of the nature of matter, including the structure of the atom, physical and chemical properties of common elements and compounds, and the organization of elements in the periodic table",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "",
+       "text": "investigate properties, changes, and interactions of matter that are important for the dynamic equilibrium of ecosystems and their sustainability"
+      },
+      {
+       "code": "C2.2",
+       "topic": "",
+       "text": "research the role of experimental evidence in the development of various atomic models, and compare and contrast different models of the atom"
+      },
+      {
+       "code": "C2.3",
+       "topic": "",
+       "text": "identify the location, relative mass, and charge of subatomic particles within an atom, using the Bohr-Rutherford model"
+      },
+      {
+       "code": "C2.4",
+       "topic": "",
+       "text": "explain the relationship between the position of an element in the periodic table and the structure of its atoms, using models"
+      },
+      {
+       "code": "C2.5",
+       "topic": "",
+       "text": "investigate the physical and chemical properties of elements, and use their findings to relate these properties to the organization of the periodic table, classify elements, and identify patterns in the periodic table"
+      },
+      {
+       "code": "C2.6",
+       "topic": "",
+       "text": "investigate and describe physical and chemical properties of elements and compounds, including those that make up common household products"
+      },
+      {
+       "code": "C2.7",
+       "topic": "",
+       "text": "describe the relationship between the structure of simple compounds and their chemical formulas"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Physics",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Relating Science to Our Changing World",
+     "text": "assess social, environmental, and economic impacts of electrical energy production and consumption, and describe ways to achieve sustainable practices",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "",
+       "text": "assess social, environmental, and economic benefits and challenges resulting from the production of electrical energy from various sources"
+      },
+      {
+       "code": "D1.2",
+       "topic": "",
+       "text": "evaluate how electrical energy production and consumption impact various communities locally or globally, and describe ways to achieve sustainable practices"
+      },
+      {
+       "code": "D1.3",
+       "topic": "",
+       "text": "develop a plan of action to address a local or global electrical energy production or consumption issue, including strategies for energy conservation"
+      },
+      {
+       "code": "D1.4",
+       "topic": "",
+       "text": "analyse social, environmental, and economic impacts of emerging technologies related to electrical energy production, consumption, storage, and conservation"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Investigating and Understanding Concepts",
+     "text": "demonstrate an understanding of the nature of electric charges, including properties of static and current electricity",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "",
+       "text": "conduct investigations to explain the behaviour of electric charges in static and current electricity, and to relate the observed behaviour to the properties of subatomic particles and atomic structure"
+      },
+      {
+       "code": "D2.2",
+       "topic": "",
+       "text": "determine the conductivity of various materials by investigating their ability to hold or transfer electric charges"
+      },
+      {
+       "code": "D2.3",
+       "topic": "",
+       "text": "identify the components of a direct current (DC) circuit and explain their functions, and identify electrical quantities, their symbols, and their corresponding International System of Units (SI) units"
+      },
+      {
+       "code": "D2.4",
+       "topic": "",
+       "text": "investigate the relationships between electric current, potential difference, and resistance in electrical circuits, and develop a mathematical model to represent the relationships"
+      },
+      {
+       "code": "D2.5",
+       "topic": "",
+       "text": "apply a mathematical model to calculate electric current, potential difference, and resistance in real-world situations"
+      },
+      {
+       "code": "D2.6",
+       "topic": "",
+       "text": "construct series and parallel circuits to compare electric current, potential difference, and resistance in both types of circuits"
+      },
+      {
+       "code": "D2.7",
+       "topic": "",
+       "text": "explain the difference between electricity and electrical energy"
+      },
+      {
+       "code": "D2.8",
+       "topic": "",
+       "text": "determine the efficiency of various electrical devices that consume or produce electrical energy, and identify the energy transformations in each device"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Earth and Space Science",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Relating Science to Our Changing World",
+     "text": "evaluate social, environmental, and economic impacts of space exploration and of technological innovations derived from space exploration",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "",
+       "text": "evaluate social, environmental, and economic impacts of space observation and exploration"
+      },
+      {
+       "code": "E1.2",
+       "topic": "",
+       "text": "evaluate how space observation and exploration technologies contribute to our understanding of climate change, natural disasters, and other phenomena"
+      },
+      {
+       "code": "E1.3",
+       "topic": "",
+       "text": "assess ways in which technological innovations related to space observation and exploration are applied in various fields, including their contributions to sustainable practices on Earth"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Investigating and Understanding Concepts",
+     "text": "demonstrate an understanding of the components, characteristics, and associated phenomena of the solar system and the universe, and the importance of the Sun to processes on Earth",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "",
+       "text": "describe the importance of the Sun and its characteristics, including its role in the solar system and in sustaining life on Earth"
+      },
+      {
+       "code": "E2.2",
+       "topic": "",
+       "text": "explain how the Sun’s energy causes natural phenomena on Earth, and how these phenomena contribute to renewable energy production"
+      },
+      {
+       "code": "E2.3",
+       "topic": "",
+       "text": "summarize observational evidence used to support theories about the origin and evolution of the universe and the solar system, considering diverse ways of knowing"
+      },
+      {
+       "code": "E2.4",
+       "topic": "",
+       "text": "describe major components of the solar system and the universe and compare their characteristics"
+      },
+      {
+       "code": "E2.5",
+       "topic": "",
+       "text": "quantify distances in the solar system and the universe by applying an understanding of relative distances and sizes and using appropriate units of measure"
+      },
+      {
+       "code": "E2.6",
+       "topic": "",
+       "text": "conduct investigations to explain the causes of various astronomical phenomena that can be observed from Earth"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

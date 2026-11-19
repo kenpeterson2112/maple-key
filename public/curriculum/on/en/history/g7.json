@@ -4,12 +4,12 @@
  "subject": "History",
  "grade": "7",
  "course_name": "History (effective beginning in the 2026–27 school year)",
+ "course_code": null,
  "source": {
   "publisher": "Ontario Ministry of Education",
   "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/history-g7",
   "course_codename": "hist___grade_7__2025_",
-  "last_modified": "2026-02-20T21:28:24.5308108Z",
-  "fetched_at": "2026-11-19T04:42:14Z"
+  "last_modified": "2026-02-20T21:28:24.5308108Z"
  },
  "strands": [
   {

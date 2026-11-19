@@ -5,9 +5,9 @@ Validates public/resources.json against schema/resource-schema.json.
 
 Checks the field contract (required present, nothing undeclared), the closed
 vocabularies, the cross-field invariants the schema declares, the intake
-gate on new records (schema.intake), and that every expectation code on an
-Ontario Grade 1-8 resource exists in the Ontario curriculum for one of its
-grades (src/data/curriculum, from scripts/fetch-curriculum.py). Run in CI so a bad ingest fails the build
+gate on new records (schema.intake), and that every expectation code on every
+resource exists in the curriculum data for its subject and one of its grades
+(src/data/curriculum, from scripts/fetch-curriculum.py). No orphans. Run in CI so a bad ingest fails the build
 rather than landing in the dataset.
 
     python3 scripts/validate-resources.py [path ...]
@@ -75,22 +75,28 @@ def intake_problems(resource: dict, rid: str) -> list:
 
 
 def curriculum_problems(resource: dict, rid: str) -> list:
-    """Codes that exist in none of the resource's Ontario grades.
-
-    Only Ontario resources at grades the curriculum data covers are checked; a
-    code valid in any one of the resource's grades passes (a Grade 6-8
-    resource may carry a Grade 6-only code)."""
-    if resource.get("province") != "ON":
+    """Every expectation code must exist in the curriculum data
+    (src/data/curriculum, the Ministry's own expectations) for the resource's
+    subject and one of its grades. No exceptions: a code on a subject/grade the
+    data doesn't cover is an orphan too, and so is a code on a non-Ontario
+    resource that isn't an Ontario expectation (the catalogue tags against the
+    Ontario curriculum only). A code valid in any one of the resource's grades
+    passes, since a Grade 6-8 resource may carry a Grade 6-only code."""
+    codes = resource.get("curriculum_expectations") or []
+    if not codes:
         return []
+    subject = resource.get("subject")
     grades = [str(g) for g in resource.get("grade_level") or []]
-    covered = [CURRICULUM_CODES[(resource.get("subject"), g)] for g in grades if (resource.get("subject"), g) in CURRICULUM_CODES]
+    covered = [CURRICULUM_CODES[(subject, g)] for g in grades if (subject, g) in CURRICULUM_CODES]
     if not covered:
-        return []
+        return [
+            f"{rid}: expectation codes {codes} but there is no {subject} curriculum data for grade(s) "
+            f"{', '.join(grades) or '(none)'}: remove the codes, or fetch that curriculum first"
+        ]
     return [
-        f"{rid}: expectation {code!r} is not in the Ontario {resource.get('subject')} curriculum "
-        f"for grade(s) {', '.join(grades)}"
-        for code in resource.get("curriculum_expectations") or []
-        if not any(code in codes for codes in covered)
+        f"{rid}: expectation {code!r} is not in the Ontario {subject} curriculum for grade(s) {', '.join(grades)}"
+        for code in codes
+        if not any(code in c for c in covered)
     ]
 
 

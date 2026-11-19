@@ -1,0 +1,371 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Geography",
+ "grade": "9",
+ "course_name": "Exploring Canadian Geography",
+ "course_code": "CGC1W",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca",
+  "course_codename": "cgd3m__copy_",
+  "last_modified": "2025-05-06T14:52:40.5994105Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Geographic Inquiry and Skill Development",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Geographic Inquiry",
+     "text": "use the geographic inquiry process and the concepts of geographic thinking when investigating issues relating to Canadian geography",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "formulate different types of questions to guide investigations into issues in Canadian geography"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "select and organize relevant data and information on geographic issues from a variety of primary and secondary sources, ensuring that their sources reflect multiple and diverse perspectives"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "apply critical-thinking skills to assess the credibility and biases of relevant sources from a wide variety of media forms, including print, online, and social media as well as content produced using current innovations and technologies, including artificial intelligence"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "use geospatial technologies to construct and analyze datasets, including digital maps, graphs, charts and images, as part of their investigations into issues relating to Canadian geography"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "use the concepts of geographic thinking when interpreting and analyzing evidence, data, and information relevant to their investigations; evaluating and synthesizing their findings; and formulating conclusions, predictions, and judgements about geographic issues relating to Canada"
+      },
+      {
+       "code": "A1.6",
+       "topic": "",
+       "text": "communicate their ideas, arguments, and conclusions using geographic and other terminology, formats, and styles appropriate for specific audiences and purposes, and use accepted forms of documentation to acknowledge different types of sources"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Developing Transferable Skills",
+     "text": "apply in everyday contexts skills, including geospatial technology skills, developed through the investigation of Canadian geography, and identify some careers, including those in the skilled trades, in which a background in geography might be an asset",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "describe some ways in which geographic investigation can help them develop skills, including transferable skills and those related to science, engineering, technology, and mathematics (STEM), including geospatial technology skills, that can be applied to the world of work, and/or to everyday life"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "apply communication skills, showing consideration for diverse perspectives and experiences, when engaging in discussion of complex geographic issues and sensitive topics"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "apply the concepts of geographic thinking when analyzing current events involving geographic issues within Canada in order to enhance their understanding of these issues and their role as informed citizens"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "identify some careers in which a geography background and related skills might be an asset, including in geospatial technology–related careers and within the skilled trades"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Physical Geography and Physical Processes in Canada",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Characteristics of Canada’s Natural Environment and the Impact of Physical Processes",
+     "text": "describe various characteristics of the natural environment and the spatial distribution of physical features in Canada, and analyze the role of physical processes, phenomena, and events in shaping them ( FOCUS ON: Spatial Significance; Patterns and Trends )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "identify the characteristics of Canada’s landscapes and landforms, and explain how these characteristics can be used to differentiate the various physical regions of the country"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "analyze how geological, hydrological, and climatic processes formed, and continue to shape, Canada’s landscape"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "analyze and describe patterns and trends in the frequency, severity, and distribution of a variety of physical processes, phenomena, and events in Canada"
+      },
+      {
+       "code": "B1.4",
+       "topic": "",
+       "text": "analyze patterns and trends related to various global physical systems, and assess their impact on physical processes, phenomena, and events in Canada"
+      },
+      {
+       "code": "B1.5",
+       "topic": "",
+       "text": "explain how various features of Canada’s unique physical geography, including landscapes and landforms, can contribute to Canadian identity, and analyze the significance of the related symbols and images used in Canada and internationally"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Interactions between the Natural Environment and Human Activities",
+     "text": "analyze interrelationships between physical processes, phenomena, and events and the ways in which various communities in Canada respond to and interact with them ( FOCUS ON: Interrelationships; Geographic Perspective )",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "analyze interrelationships between physical characteristics in specific regions of Canada and various human activities and communities that these characteristics support"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "explain how human activities can alter physical processes and affect natural events and phenomena in Canada, including in their local region"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "analyze the risks that various physical processes and natural events, including disasters, present to communities in Canada, and assess ways of responding to these risks"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "analyze environmental, economic, social, and/or political consequences for Canada of changes in some of the Earth’s physical processes, including the impact of climate change, and assess local and regional mitigation and adaptation strategies"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "analyze how various communities value Canada’s natural environment, and how their practices and perspectives influence the use and protection of Canada’s natural environment"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Managing Canada’s Resources and Industries",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Natural Resources and Industries in Canada",
+     "text": "analyze characteristics of natural resources and industries in Canada, and factors that affect the accessibility and use of natural resources and the location of industries ( FOCUS ON: Spatial Significance; Interrelationships )",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "",
+       "text": "describe the characteristics of various renewable, non-renewable, and flow resources that are found in Canada"
+      },
+      {
+       "code": "C1.2",
+       "topic": "",
+       "text": "explain how the spatial distribution of key natural resources, including water, in Canada is related to the physical geography of the country"
+      },
+      {
+       "code": "C1.3",
+       "topic": "",
+       "text": "analyze interrelationships between the location/accessibility and the mode of extraction/harvesting and use of various natural resources in Canada, including methods for clean energy production such as nuclear, wind, and solar, with reference to some innovative approaches to various modes of responsible resource development"
+      },
+      {
+       "code": "C1.4",
+       "topic": "",
+       "text": "identify knowledge-based industries, and other industries based on human capital, and analyze their economic importance for Canada"
+      },
+      {
+       "code": "C1.5",
+       "topic": "",
+       "text": "analyze the interrelationship between the main factors that determine the location of sites for different types of industries in Canada"
+      },
+      {
+       "code": "C1.6",
+       "topic": "",
+       "text": "assess the importance of different industries in the Canadian economy, and analyze interconnections between Canadian industries and those of other countries"
+      },
+      {
+       "code": "C1.7",
+       "topic": "",
+       "text": "identify some careers in Canadian industries, including the marine sector, the natural resource sector, and tourism, and explain how the use and application of geospatial technologies is an asset in these careers"
+      },
+      {
+       "code": "C1.8",
+       "topic": "",
+       "text": "explain forms of land tenure and ownership in Canada, including Indigenous land claims and land rights, and examine the interplay between resource accessibility, extraction, and use in this country; Indigenous land rights; and economic reconciliation"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Sustainability and Economic Development",
+     "text": "analyze issues related to the sustainable development of resources and industries in Canada ( FOCUS ON: Patterns and Trends; Geographic Perspective )",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "",
+       "text": "analyze various innovative models of and approaches to sustainable development and how they are designed to foster a healthy environment, society, and economy"
+      },
+      {
+       "code": "C2.2",
+       "topic": "",
+       "text": "analyze issues related to the sustainable development of various resources and industries in Canada from a variety of perspectives"
+      },
+      {
+       "code": "C2.3",
+       "topic": "",
+       "text": "describe strategies that industries and governments have implemented to increase the sustainability of Canada’s natural resources, and evaluate their effectiveness from a variety of perspectives"
+      },
+      {
+       "code": "C2.4",
+       "topic": "",
+       "text": "analyze the influence of governments, industries, advocacy groups, local community organizations, and individuals on the sustainable development and use of selected natural resources in Canada"
+      },
+      {
+       "code": "C2.5",
+       "topic": "",
+       "text": "analyze issues related to sustainability, with a focus on the resources extracted for, and the production, distribution, consumption, and disposal of, a few products that people living in Canada use in their everyday lives"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Changing Populations",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Demographic Patterns and Trends",
+     "text": "analyze key patterns and trends in demographics and population movement and settlement, and factors that affect these patterns and trends, nationally and for various populations in Canada ( FOCUS ON: Patterns and Trends; Interrelationships )",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "",
+       "text": "analyze the major demographic characteristics of, and trends within, the population in Canada, and compare them to their community, local area, or province and/or to other communities, provinces, or territories"
+      },
+      {
+       "code": "D1.2",
+       "topic": "",
+       "text": "analyze interrelationships between factors that contribute to quality of life and human well-being in Canada, using a variety of skills, including data analysis"
+      },
+      {
+       "code": "D1.3",
+       "topic": "",
+       "text": "analyze trends in the migration of people within Canada and in immigration to Canada"
+      },
+      {
+       "code": "D1.4",
+       "topic": "",
+       "text": "describe patterns of population settlement in Canada, and assess the importance of various factors in determining population size, distribution, and density"
+      },
+      {
+       "code": "D1.5",
+       "topic": "",
+       "text": "compare settlement and population characteristics of selected communities in Canada with those in other parts of the country and the world"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Population Issues",
+     "text": "analyze selected national and global population issues and their implications for Canada and for various people who live in Canada ( FOCUS ON: Spatial Significance; Geographic Perspective )",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "",
+       "text": "analyze current economic, social, cultural, political, and environmental effects that changes in Canada’s population are having on people living in various communities in Canada, and predict future impacts of these changes"
+      },
+      {
+       "code": "D2.2",
+       "topic": "",
+       "text": "evaluate various strategies used by governments and organizations to address the needs of Canada’s changing population"
+      },
+      {
+       "code": "D2.3",
+       "topic": "",
+       "text": "describe ways in which population growth and demographic shifts within communities in Canada can create opportunities and challenges for individuals and groups within those communities"
+      },
+      {
+       "code": "D2.4",
+       "topic": "",
+       "text": "identify global population issues that are of concern to people living in Canada, and analyze the roles of individuals, organizations, and governments in Canada, and the actions they take, in addressing those issues"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Liveable Communities",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Land Use in Communities",
+     "text": "analyze characteristics and impacts of land use in various communities in Canada, including urban communities, and factors affecting land use and land-use planning ( FOCUS ON: Spatial Significance; Patterns and Trends )",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "",
+       "text": "analyze the characteristics of different land uses in various communities in Canada, and explain how these characteristics and their spatial distribution affect those communities"
+      },
+      {
+       "code": "E1.2",
+       "topic": "",
+       "text": "analyze the impact of the natural environment and physical processes, phenomena, and events, including climate change, on land use in the built environment as well as on land-use planning"
+      },
+      {
+       "code": "E1.3",
+       "topic": "",
+       "text": "analyze some ways in which economic, social, cultural, and political forces affect various communities in Canada, including their land use and land-use planning"
+      },
+      {
+       "code": "E1.4",
+       "topic": "",
+       "text": "assess the impacts of urban sprawl, compact urban growth, and other types of urban growth on the natural and built environment, and analyze various strategies used to control urban sprawl and/or mitigate its effects"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Sustainability of Human Systems and Communities",
+     "text": "analyze issues relating to, and strategies for improving, the sustainability of human systems and communities in Canada ( FOCUS ON: Interrelationships; Geographic Perspective )",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "",
+       "text": "analyze issues related to the sustainability of Canada’s food system and strategies for managing and/or mitigating these issues"
+      },
+      {
+       "code": "E2.2",
+       "topic": "",
+       "text": "analyze existing and proposed transportation systems, locally, provincially, nationally, and internationally, with a focus on their sustainability, and assess options for their future development"
+      },
+      {
+       "code": "E2.3",
+       "topic": "",
+       "text": "analyze the effects of government policies and corporate and individual decisions on energy consumption and production, and assess the implications of these policies/decisions for the sustainability of communities in Canada"
+      },
+      {
+       "code": "E2.4",
+       "topic": "",
+       "text": "analyze issues related to the social, environmental, and economic sustainability of communities in Canada and various government and community-based strategies developed to address them"
+      },
+      {
+       "code": "E2.5",
+       "topic": "",
+       "text": "analyze innovative methods and practices being applied in the planning of communities in Canada and around the world that use culturally informed design elements to enhance the sustainability of these communities"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
