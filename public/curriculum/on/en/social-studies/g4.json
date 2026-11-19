@@ -1,0 +1,250 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Social Studies",
+ "grade": "4",
+ "course_name": "Social Studies",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/g4-ss",
+  "course_codename": "sshg___grade_3__copy_",
+  "last_modified": "2026-02-03T19:00:40.2714546Z",
+  "fetched_at": "2026-11-19T04:42:14Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Heritage and Identity: Early Societies to 1500 CE",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Application: Past and Present Societies",
+     "text": "compare key aspects of life in a few early societies (to 1500), including at least one First Nation and one Inuit society, each from a different region and era and representing a different culture , and describe some key similarities and differences between these early societies and present-day Canadian society ( FOCUS ON: Continuity and Change; Perspective )",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "compare social organization (e.g., social classes, general political structure, inherited privilege, the status of women) in a few early societies, including at least one First Nation and one Inuit society (e.g., a slave-owning and a feudal society; a matrilineal First Nation and a society in medieval Asia)"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "compare aspects of the daily lives of different groups within a few early societies, including at least one First Nation and one Inuit society (e.g., the work, family life, education, food, dress, and/or housing of a slave and a senator in ancient Rome; women of different castes in medieval India; a serf and lord in feudal England; a man and a woman in medieval China or in early Mohawk society; a merchant and noble in Renaissance Italy) , and explain how differences were related to the social organization of that society (e.g., the caste system in India; the matrilineal organization of Haudenosaunee society; classes in imperial Rome or in feudal societies in Europe or Asia; the emergence of a wealthy merchant class in Renaissance Italy)"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "describe some of the ways in which their daily life differs from the lives of young people from different backgrounds (e.g., wealthy, poor, slave, urban, rural) in a few early societies, including at least one First Nation and one Inuit society (e.g., with reference to family life, education, leisure time and recreation, responsibilities, work)"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "compare a few early societies, including at least one First Nation and one Inuit society, in terms of their relationship with the environment (e.g., with reference to seasonal rhythms, use of land and resources , differences between urban and rural communities, religious and spiritual practices/beliefs with respect to the environment) , and describe some key similarities and differences in environmental practices between these societies and present-day Canada"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Inquiry: Ways of Life and Relationships with the Environment",
+     "text": "use the social studies inquiry process to investigate ways of life and relationships with the environment in a few early societies (to 1500), including at least one First Nation and one Inuit society, with an emphasis on aspects of the interrelationship between the environment and life in those societies ( FOCUS ON: Interrelationships )",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into ways of life and relationships with the environment in a few early societies, including at least one First Nation and one Inuit society, with an emphasis on aspects of the interrelationship between the environment and life in those societies (e.g., connections between the local environment and settlement, art, medicine, religion, spirituality, types of work; the impact on the environment of agriculture or the development of towns, cities, settlements, communities, and/or villages)"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "gather and organize information on ways of life and relationships with the environment in a few early societies, including at least one First Nation and one Inuit society, using a variety of primary and secondary sources in both print and electronic formats (e.g., images depicting the daily life of different social classes; religious or spiritual stories that provide evidence of a society’s view of the environment; agricultural artefacts; traditional stories, creation stories, legends, and/or oral history shared by Elders , community members, and/or knowledge keepers ; virtual field trips to museums and to First Nations cultural centres to view artefacts and images)"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "analyse and construct print and/or digital maps , including thematic maps, as part of their investigations into interrelationships between the environment and life in a few early societies, including at least one First Nation and one Inuit society (e.g., analyse thematic and/or physical maps showing rivers, vegetation, volcanoes, soil types; create a thematic map showing traditional trade routes of the Cree, Algonquin, or Haudenosaunee; analyse a climate map to determine the climatic challenges facing early settlements; construct soil and vegetation maps to determine the connection between soil type and agricultural activity; analyse maps to determine the proximity of early settlements to water; construct a map showing the location of some traditional First Nations and/or Inuit territories; use a decolonial map or atlas to determine the Indigenous names of the places they are investigating)"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "interpret and analyse information relevant to their investigations, using a variety of tools (e.g., use a graphic organizer to help them determine the relationship between soil type, availability of water, and agricultural activity; analyse the content of paintings on the Internet or at a local gallery for information on a society’s religious practices; analyse artefacts found in a museum or on a website for information on a society’s daily life and relationship with the environment; use a Venn diagram or a T-chart to help them compare historic hunting customs, including giving thanks to animals, between an early First Nation and an early Inuit society; analyse petroglyphs and rock formations for information on sacred sites and their location)"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about ways of life and relationships with the environment in a few early societies, including at least one First Nation and one Inuit society, with an emphasis on aspects of the interrelationship between the environment and life in those societies"
+      },
+      {
+       "code": "A2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries, using appropriate vocabulary (e.g., peasant, serf, merchant, noble, Elder , clan mother , faith keeper , knowledge keeper, Inuk shaman, medicine man , healer, healer’s helper, feudalism , god/goddess, privilege, hierarchy , culture, civilization, rural, urban, resources/gifts) and formats (e.g., an annotated map showing how a society situated on a flood plain was affected by and responded to its environment; an interactive map that highlights traditional territories of some early Indigenous societies in what would become North America, along with key natural features of the environment; an oral presentation on the impact of medieval cities on the environment; a stop-animation video on the lives of children in a society that followed seasonal migration routes or lived in different locations during different seasons; a chart and presentation comparing farming techniques of different societies)"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Understanding Context: Characteristics of Early Societies",
+     "text": "demonstrate an understanding of key aspects of a few early societies (to 1500), including at least one First Nation and one Inuit society, each from a different region and era and representing a different culture, with reference to their political and social organization, daily life, and relationships with the environment and with each other ( FOCUS ON: Significance )",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "identify the location of some early societies, including at least one First Nation and one Inuit society, on a globe or on print, digital, and/or interactive maps, and demonstrate the ability to extract information on early societies’ relationship with the environment from thematic maps (e.g., climate, physical, topographical, vegetation maps)"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "demonstrate the ability to extract information on daily life in a few early societies, including at least one First Nation and one Inuit society, from visual evidence (e.g., art works such as paintings, sculptures, carvings, masks, mosaics, hide paintings, beadwork, quillwork, soapstone carvings; clothing; ceremonial dress; regalia; petroglyphs; monuments; rock/earth mounds; artefacts such as tools, household utensils, pottery, religious articles, weapons)"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "describe significant aspects of daily life in a few early societies, including at least one First Nation and one Inuit society (e.g., with reference to food, housing, clothing, education, recreation, spiritual/religious life, family life, transportation, ceremonies, ways of giving thanks and acknowledgement)"
+      },
+      {
+       "code": "A3.4",
+       "topic": "",
+       "text": "describe significant physical features and natural processes and events in a few early societies, including at least one First Nation and one Inuit society (e.g., physical features: rivers, flood plains, mountains, volcanoes, barren lands, tundra, ocean shore, fertile soil; natural processes: seasonal changes in climate , animal migration, erosion; natural events: earthquakes, floods, volcanic eruptions) and how they affected these societies, with a focus on the societies’ sustainability and food production (e.g., how flooding of rivers in ancient Egypt, India, and China enriched agricultural land, making it possible to sustain large populations; how the thin topsoil of Central America, Mesopotamia, and Easter Island limited population growth; how volcanoes threatened the survival of communities in ancient Greece and parts of the Roman Empire; how fluctuations in temperature led early Inuit societies to develop techniques like igunaq [meat fermentation] to prevent food spoilage, Cree societies to develop sphagnum moss bags to prolong meat freshness, or Anishinaabe societies to develop techniques to smoke fish)"
+      },
+      {
+       "code": "A3.5",
+       "topic": "",
+       "text": "describe the importance of the environment for a few early societies, including at least one First Nation and one Inuit society, with a particular focus on how the local environment affected the ways in which people met their physical needs (e.g., food, housing, clothing)"
+      },
+      {
+       "code": "A3.6",
+       "topic": "",
+       "text": "identify and describe some of the major scientific and technological developments in the ancient and medieval world, including some from at least one First Nation and one Inuit society (e.g., calendars; the printing press; developments in agriculture, architecture, medicine, transportation, weaponry, navigation)"
+      },
+      {
+       "code": "A3.7",
+       "topic": "",
+       "text": "describe how a few early societies, including at least one First Nation and one Inuit society, were governed (e.g., early democracy in Greece or Haudenosaunee society; city states on the Swahili Coast; emperors in China; the roles of nobles, priests, and the military in Aztec society, of kings, nobles, and knights in medieval France, or of chiefs in the Haida nation)"
+      },
+      {
+       "code": "A3.8",
+       "topic": "",
+       "text": "describe the social organization of a few different types of early societies, including at least one First Nation and one Inuit society (e.g., a slave-owning society, a feudal society, an agrarian society) , and the role and status of some significant social and work-related groups in these societies (e.g., women, men, children, slaves, peasants , nobles, monarchs, warriors, knights, priests/priestesses, druids, shamans , imams, monks, nuns, merchants, artisans, apprentices, scribes, midwives, healers)"
+      },
+      {
+       "code": "A3.9",
+       "topic": "",
+       "text": "describe some key reasons why different groups in a few early societies, including at least one First Nation and one Inuit society, cooperated or came into conflict at different times (e.g., to explore; to expand territory; to make decisions, govern, and administer; to promote trade; to wage war or make peace; to acquire wealth, power, and control; to rebel; to spread religious beliefs and/or enforce the power of particular religious institutions; to protect spiritual beliefs, ceremonies and other cultural practices, and traditional lands)"
+      },
+      {
+       "code": "A3.10",
+       "topic": "",
+       "text": "describe some attempts within a few early societies, including at least one First Nation and one Inuit society, to deal with conflict and to establish greater cooperation (e.g., democratic developments in ancient Greece; establishment of religious rights in medieval Islam; matrilineal structures among some First Nations; the Magna Carta; guilds; intermarriage between royal houses; treaties and alliances; the Great Law of Peace; the resolution of conflict with drumming, dancing, poetry, and/or humour among Inuit; the role of lacrosse games; the use of marriage and the ceremonial sharing of food and skins to symbolize alliances and the building of relationships in Inuit societies)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "People and Environments: Political and Physical Regions of Canada",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Application: Industrial Development and the Environment",
+     "text": "assess some key ways in which industrial development and the natural environment affect each other in two or more political and/or physical regions of Canada ( FOCUS ON: Cause and Consequence; Interrelationships )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "analyse some of the general ways in which the natural environment of regions in Canada has affected the development of industry (e.g., how the characteristics of the Canadian Shield made possible the development of mining and smelting, forestry, fresh water fisheries, pulp and paper; how the characteristics of the Maritime provinces made possible the development of fisheries, coal mining, agriculture, off-shore oil drilling; how the topography and climate of the Prairies make the region suitable for large-scale farming and ranching)"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "assess aspects of the environmental impact of different industries in two or more physical and/or political regions of Canada (e.g., hydroelectric development in Quebec, the development of the oil sands in northern Alberta, fishing in Atlantic Canada, steel production in Nova Scotia, forestry and fishing in British Columbia, coal-powered electrical plants in Ontario, smelting in northern Ontario, shipping in the Great Lakes–St. Lawrence region)"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "describe some key actions taken by both industries and citizens to address the need for more sustainable use of land and resources (e.g., controlling industrial tailings ; putting solar panels on houses or other buildings; ensuring responsible hunting and fishing practices; consulting with First Nations, Métis , and/or Inuit communities about resource development in their territories) , and assess their effectiveness"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Inquiry: Balancing Human Needs and Environmental Stewardship",
+     "text": "use the social studies inquiry process to investigate some issues and challenges associated with balancing human needs/wants and activities with environmental stewardship in one or more of the political and/or physical regions of Canada ( FOCUS ON: Perspective )",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into some of the issues and challenges associated with balancing human needs/wants and activities with environmental stewardship in one or more of the political and/or physical regions of Canada"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "gather and organize information and data from various sources to investigate issues and challenges associated with balancing human needs/wants and activities with environmental stewardship in one or more of the political and/or physical regions of Canada (e.g., spatial technologies and satellite images showing physical features; print and digital thematic maps showing land use or population; climate graphs for various regions; writer views with peers from different regions using electronic communications; an interview with a First Nation or Inuk Elder or a Métis Senator )"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "analyse and construct print and/or digital maps , including thematic maps, as part of their investigations into balancing human needs/wants and activities with environmental stewardship in Canada (e.g., analyse population settlement maps; construct natural resource maps, using symbols to represent different resources; construct physical region maps, using shading to represent elevation change)"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "interpret and analyse information and data related to their investigations, using a variety of tools (e.g., use a graphic organizer to help them determine the interrelationship between a region’s physical features and tourism or recreation; plot population trends in a specific region and compare them to a graph showing industrial development in the same region; use a decision-making chart to determine the best location for a new hydroelectric dam; use a double bar graph to help them determine the effect of an increase in tourism on waste production in a region)"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about issues and challenges associated with balancing human needs/wants and activities with environmental stewardship in Canada"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary (e.g., mountains, foothills, prairies, tundra, wetlands, forestry, mining, agriculture, fish farming, tourism, commerce, hydroelectricity, wind farms) and formats (e.g., a poster explaining the chosen location for a hydroelectric project; a cooperatively produced big book of photos from a field study or from the Internet about how companies are responding to their role as environmental stewards; a brochure outlining the steps an industry is taking to help protect the local area; a song, rap, or poem from the perspective of an animal that is losing its habitat because of a new housing development)"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Understanding Context: Regions in Canada",
+     "text": "identify Canada’s political and physical regions, and describe their main characteristics and some significant activities that take place in them ( FOCUS ON: Significance; Patterns and Trends )",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "",
+       "text": "identify various physical regions in Canada (e.g., landform , vegetation, and climatic regions) , and describe their location and some of the major ways in which they are distinct from and similar to each other (e.g., the location of the Western Cordillera and the Appalachian regions and the characteristics of the mountains in each region; characteristics of boreal forest and tundra regions; similarities and differences between agricultural areas in the Niagara region, the Annapolis Valley, and the western plains; climatic differences between the rainforest of Vancouver Island and arid areas such as the Canadian badlands)"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "identify some of the main human activities, including industrial development and recreational activities, in various physical regions of Canada (e.g., large-scale farming in the plains and lowlands; mining and smelting in the Canadian Shield; cattle ranching in grasslands and plains; development of transportation routes along rivers and in valleys and mountain passes; fisheries in oceans, lakes, and rivers; skiing in mountain regions; boating on waterways; hiking on forest or coastal trails)"
+      },
+      {
+       "code": "B3.3",
+       "topic": "",
+       "text": "describe the four main economic sectors (i.e., the primary sector is resource based, the secondary sector is based on manufacturing and processing, the tertiary sector is service based, the quaternary sector is information based), and identify some industries that are commonly associated with each sector (e.g., primary : logging, fishing, mining; secondary: pulp and paper, car manufacturing; tertiary: banks, stores, transportation; quaternary: education, research and development)"
+      },
+      {
+       "code": "B3.4",
+       "topic": "",
+       "text": "identify various types of political regions in Canada (e.g., provinces, territories, municipalities, First Nations bands and reserves ) , and describe some of their basic similarities and differences (e.g., the powers of a province versus those of a territory)"
+      },
+      {
+       "code": "B3.5",
+       "topic": "",
+       "text": "identify Canada’s provinces and territories and their capital cities, and describe them with reference to their location and some of the peoples who live in them (e.g., New Brunswick, which is in Atlantic Canada, is the only bilingual province and has a large Acadian population; Toronto, which is the capital of Ontario, has a large immigrant population, which includes people from China, South Asia, Europe, and Latin America as well as Indigenous Canadians; the majority of people in Nunavut, in Arctic Canada, are Inuit)"
+      },
+      {
+       "code": "B3.6",
+       "topic": "",
+       "text": "describe significant opportunities and challenges related to quality of life in some of Canada’s political regions (e.g., job opportunities in Alberta’s booming resource sector; loss of jobs in the fishing industry in Newfoundland and Labrador; pollution generated in the Alberta oil sands; challenges related to employment and housing on First Nations reserves; urban sprawl in the Greater Toronto Area)"
+      },
+      {
+       "code": "B3.7",
+       "topic": "",
+       "text": "demonstrate an understanding of cardinal and intermediate directions (i.e., NW, SW, NE, and SE), and use these directions as well as number and letter grids to locate selected political and physical regions of Canada on a variety of print and digital/interactive maps"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

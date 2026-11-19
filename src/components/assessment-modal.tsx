@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { X, CheckCircle, XCircle, HelpCircle, ClipboardCheck, Loader2, Info, BarChart3 } from "lucide-react"
 import { describeCode } from "@/lib/curriculum-codes"
+import { useCurriculumText } from "@/lib/curriculum-text"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import {
   sanitizeQuestions,
@@ -532,6 +533,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
 }
 
 function CodeHeader({ code, subject, grade }: { code: string | null; subject: string; grade?: string }) {
+  useCurriculumText(subject, grade)
   if (!code) return null
   const description = describeCode(subject, code, grade)
   return (

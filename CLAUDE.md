@@ -278,6 +278,19 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   The literal unions in `shared/resource-schema.ts` are hand-written because a
   JSON import widens to `string[]`; `scripts/check-schema-sync.py` fails CI if
   they drift. Validate the dataset with `pnpm validate:schema`.
+- **The curriculum is fetched, not hand-written.** `scripts/fetch-curriculum.py`
+  pulls Ontario Grades 1–8 (every subject in the schema; FSL is Core French
+  4–8) from the Ministry's public curriculum content service and writes two
+  layers. The **outline** (`src/data/curriculum/on.en.outline.json`: strand
+  labels, overall titles, every expectation code, no wording) is bundled, so
+  `strandLabel`, `overallTitle`, `expectationCodes` and the rest of
+  `src/lib/curriculum-codes.ts` stay synchronous. The **text**
+  (`public/curriculum/on/en/<subject>/g<grade>.json`) is fetched only when a
+  subject and grade is open, through `useCurriculumText` in
+  `src/lib/curriculum-text.ts`; `describeCode` returns undefined until then.
+  Province and language are path segments (`on/en`), so French or another
+  province is another run of the script, not a new format. Never type
+  curriculum labels or wording into a component; rerun the script.
 - **Resources must be specific.** `granularity` (activity · lesson · unit ·
   collection · tool · reference) records how focused a resource is; most of the
   catalog has been hubs and whole courses tagged as if they taught one

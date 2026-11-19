@@ -1,0 +1,383 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Science",
+ "grade": "8",
+ "course_name": "Science and Technology",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sci-tech/grades/grade-8",
+  "course_codename": "sci___tech___grade_8",
+  "last_modified": "2023-03-17T14:25:20.8955596Z",
+  "fetched_at": "2026-11-19T04:42:12Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "STEM Skills and Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "STEM Investigation and Communication Skills",
+     "text": "use a scientific research process, a scientific experimentation process, and an engineering design process to conduct investigations, following appropriate health and safety procedures",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "use a scientific research process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "use a scientific experimentation process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "use an engineering design process and associated skills to design, build, and test devices, models, structures, and/or systems"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "follow established health and safety procedures during science and technology investigations, including wearing appropriate protective equipment and clothing and safely using tools, instruments, and materials"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "communicate their findings, using science and technology vocabulary and formats that are appropriate for specific audiences and purposes"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Coding and Emerging Technologies",
+     "text": "use coding in investigations and to model concepts, and assess the impact of coding and of emerging technologies on everyday life and in STEM-related fields",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "write and execute code in investigations and when modelling concepts, with a focus on automating large systems in action"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "identify and describe impacts of coding and of emerging technologies, such as artificial intelligence systems, on everyday life, including skilled trades"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Applications, Connections, and Contributions",
+     "text": "demonstrate an understanding of the practical applications of science and technology, and of contributions to science and technology from people with diverse lived experiences",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "describe practical applications of science and technology concepts in various occupations, including skilled trades, and how these applications address real-world problems"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "investigate how science and technology can be used with other subject areas to address real-world problems"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "analyse contributions to science and technology from various communities"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Life Systems",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess developments in cell biology and their impact on individuals, society, and the environment",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Cells",
+       "text": "assess how various technologies have enhanced our understanding of cells and cellular processes"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Cells",
+       "text": "analyse beneficial and harmful effects of developments in cell biology and associated emerging technologies on human health and the environment, while taking different perspectives into consideration"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the basic structure and function of plant and animal cells and cell processes",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Cells",
+       "text": "demonstrate an understanding of cells, using cell theory"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Cells",
+       "text": "identify organelles and other cell components, including the nucleus, cell membrane, cell wall, chloroplasts, vacuole, mitochondria, and cytoplasm, and explain their basic functions"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Cells",
+       "text": "compare the structure and function of plant and animal cells"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Cells",
+       "text": "explain the processes of diffusion and osmosis within a cell"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Cells",
+       "text": "describe various unicellular and multicellular organisms, and compare ways in which these two types of organisms meet their basic needs"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Cells",
+       "text": "describe the organization of cells into tissues, organs, and systems"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Matter and Energy",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "analyse uses of various technologies that rely on the properties of fluids, and assess the impact of these technologies on society and the environment",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Fluids",
+       "text": "assess the environmental, social, and economic impacts of various innovations and technologies that are based on the properties of fluids"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Fluids",
+       "text": "assess the environmental and social impacts of fluid spills, including impacts on First Nations, Métis, and Inuit communities, and including the cost and technical challenges related to cleanup and remediation efforts"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of basic fluid mechanics, including the properties and uses of fluids",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Fluids",
+       "text": "demonstrate an understanding of the factors that affect viscosity, and compare the viscosity of various fluids, including volumetric flow rate"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Fluids",
+       "text": "demonstrate an understanding of the relationship between mass, volume, and density"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Fluids",
+       "text": "explain the difference between solids, liquids, and gases in terms of their density, using the particle theory of matter"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Fluids",
+       "text": "explain the difference between liquids and gases in terms of their compressibility and how their compressibility affects their technological applications"
+      },
+      {
+       "code": "C2.5",
+       "topic": "Fluids",
+       "text": "determine the buoyancy of an object, given its density, in a variety of fluids"
+      },
+      {
+       "code": "C2.6",
+       "topic": "Fluids",
+       "text": "explain in qualitative terms the relationship between pressure, volume, and temperature when a liquid or a gas is compressed or heated"
+      },
+      {
+       "code": "C2.7",
+       "topic": "Fluids",
+       "text": "describe how forces are transferred in all directions in fluids, including using Pascal’s law to quantify the transfer of forces in fluids"
+      },
+      {
+       "code": "C2.8",
+       "topic": "Fluids",
+       "text": "describe factors that affect the flow of fluids"
+      },
+      {
+       "code": "C2.9",
+       "topic": "Fluids",
+       "text": "describe the differences between pneumatic and hydraulic systems"
+      },
+      {
+       "code": "C2.10",
+       "topic": "Fluids",
+       "text": "compare how fluids are used and how their flow is regulated in living organisms and in mechanical devices or systems"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Structures and Mechanisms",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the social and environmental impacts of various systems, and evaluate improvements to the systems or alternative ways of meeting the same needs",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Systems in Action",
+       "text": "assess the social, economic, and environmental impacts of automating systems"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Systems in Action",
+       "text": "assess the impact on individuals, society, and the environment of alternative ways of meeting needs that are currently met by existing systems, taking different points of view into consideration"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of different types of systems and the factors that contribute to their safe and efficient operation",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Systems in Action",
+       "text": "identify various types of systems"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Systems in Action",
+       "text": "describe the purpose, inputs, and outputs of various systems, including systems related to food processing"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Systems in Action",
+       "text": "identify the various processes and components of a system that allow it to perform its function efficiently and safely"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Systems in Action",
+       "text": "use the scientific terms displacement , force , work , energy , and efficiency to describe everyday experiences"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Systems in Action",
+       "text": "demonstrate an understanding of the relationships between work, force, and displacement in simple systems"
+      },
+      {
+       "code": "D2.6",
+       "topic": "Systems in Action",
+       "text": "explain the relationship between input and output forces and determine the mechanical advantage of various mechanical systems, including simple machines"
+      },
+      {
+       "code": "D2.7",
+       "topic": "Systems in Action",
+       "text": "identify ways in which energy can dissipate from mechanical systems, and describe technological innovations that make these systems more efficient"
+      },
+      {
+       "code": "D2.8",
+       "topic": "Systems in Action",
+       "text": "explain how providing information and support to consumers helps to ensure that the systems they use run safely and efficiently"
+      },
+      {
+       "code": "D2.9",
+       "topic": "Systems in Action",
+       "text": "describe technological innovations involving mechanical systems that have increased productivity in various industries"
+      },
+      {
+       "code": "D2.10",
+       "topic": "Systems in Action",
+       "text": "identify social factors that influence the evolution of a system"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Earth and Space Systems",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the impact of human activities and technologies on the sustainability of water resources",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Water Systems",
+       "text": "assess the social and environmental impact of the scarcity of fresh water, and propose a plan of action to help address fresh water sustainability issues"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Water Systems",
+       "text": "demonstrate an understanding of First Nations, Métis, and Inuit knowledges and values about water, connections to water, and ways of managing water resources sustainably"
+      },
+      {
+       "code": "E1.3",
+       "topic": "Water Systems",
+       "text": "assess the impact of scientific discoveries and technological innovations on local and global water systems"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the characteristics of Earth’s water systems and of factors that affect these systems",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "Water Systems",
+       "text": "identify the states of water on Earth’s surface, their distribution, relative amounts, and circulation, and the conditions under which they exist"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Water Systems",
+       "text": "demonstrate an understanding of a watershed, and explain its importance to water management and planning"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Water Systems",
+       "text": "explain how human activity and natural phenomena cause changes in the water table"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Water Systems",
+       "text": "identify factors, including climate change, that have contributed to the melting of glaciers and polar ice-caps, and describe the effects of this phenomenon on local and global water systems"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Water Systems",
+       "text": "explain changes in atmospheric conditions caused by the presence of bodies of water"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Water Systems",
+       "text": "describe various indicators of water quality, and explain the impact of human activity on those indicators"
+      },
+      {
+       "code": "E2.7",
+       "topic": "Water Systems",
+       "text": "explain how municipalities process water and manage water usage"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

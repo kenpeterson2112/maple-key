@@ -2,6 +2,7 @@
 
 import { Calendar, Check, ArrowRight, BookOpen, ClipboardCheck } from "lucide-react"
 import { describeCode } from "@/lib/curriculum-codes"
+import { useCurriculumText } from "@/lib/curriculum-text"
 import { getLessonTally, aggregateLesson } from "@/lib/assessment-results"
 import { LEVEL_ORDER, LEVEL_META } from "@/lib/assessment-types"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
@@ -26,6 +27,7 @@ export default function LessonOverviewCard({
   onOpenAssessment,
 }: LessonOverviewCardProps) {
   const theme = getSubjectTheme(lesson.subject)
+  useCurriculumText(lesson.subject, lesson.grade)
 
   const headerLine = [
     formatDate(lesson.timestamp),

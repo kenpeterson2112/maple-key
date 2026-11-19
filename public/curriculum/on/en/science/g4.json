@@ -1,0 +1,343 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Science",
+ "grade": "4",
+ "course_name": "Science and Technology",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sci-tech/grades/grade-4",
+  "course_codename": "sci___tech___grade_4",
+  "last_modified": "2023-03-17T14:21:29.0125545Z",
+  "fetched_at": "2026-11-19T04:42:12Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "STEM Skills and Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "STEM Investigation and Communication Skills",
+     "text": "use a scientific research process, a scientific experimentation process, and an engineering design process to conduct investigations, following appropriate health and safety procedures",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "use a scientific research process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "use a scientific experimentation process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "use an engineering design process and associated skills to design, build, and test devices, models, structures, and/or systems"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "follow established health and safety procedures during science and technology investigations, including wearing appropriate protective equipment and clothing and safely using tools, instruments, and materials"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "communicate their findings, using science and technology vocabulary and formats that are appropriate for specific audiences and purposes"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Coding and Emerging Technologies",
+     "text": "use coding in investigations and to model concepts, and assess the impact of coding and of emerging technologies on everyday life and in STEM-related fields",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "write and execute code in investigations and when modelling concepts, with a focus on producing different types of output for a variety of purposes"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "identify and describe impacts of coding and of emerging technologies on everyday life, including skilled trades"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Applications, Connections, and Contributions",
+     "text": "demonstrate an understanding of the practical applications of science and technology, and of contributions to science and technology from people with diverse lived experiences",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "describe practical applications of science and technology concepts in various occupations, including skilled trades, and how these applications address real-world problems"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "investigate how science and technology can be used with other subject areas to address real-world problems"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "analyse contributions to science and technology from various communities"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Life Systems",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess impacts of human activities on habitats and communities, and analyse actions for minimizing negative impacts and enhancing positive ones",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Habitats and Communities",
+       "text": "assess positive and negative impacts of human activities on habitats and communities, while taking different perspectives into account"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Habitats and Communities",
+       "text": "analyse the impact of the depletion or extinction of a species on its habitat and community, and describe possible actions to prevent such depletions or extinctions"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of habitats and communities and of interrelationships among the organisms that live in them",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Habitats and Communities",
+       "text": "describe habitats as areas that provide organisms, including plants and animals, with the necessities of life, and identify ways in which a local habitat provides these necessities"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Habitats and Communities",
+       "text": "describe a community as a group of interacting species sharing a common habitat, and identify factors that affect the ability of a community of plants and animals to survive in a local habitat"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Habitats and Communities",
+       "text": "describe the relationship of organisms in a food chain, and classify organisms as producers, consumers, or decomposers"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Habitats and Communities",
+       "text": "demonstrate an understanding of a food web as the interconnection of multiple food chains in a natural community"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Habitats and Communities",
+       "text": "describe how animals are categorized according to their diet, and categorize various animals as carnivores, herbivores, or omnivores"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Habitats and Communities",
+       "text": "describe structural adaptations of a variety of plants and animals and how these adaptations allow the organisms to survive in specific habitats"
+      },
+      {
+       "code": "B2.7",
+       "topic": "Habitats and Communities",
+       "text": "explain why all habitats have limits to the number of plants and animals they can support"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Matter and Energy",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the impacts on society and the environment of technological innovations related to light and sound",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Light and Sound",
+       "text": "assess the impacts on society of devices that use the properties of light or sound, or both"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Light and Sound",
+       "text": "assess the impacts on the environment of light energy and sound energy produced by various technologies, while taking different perspectives into account"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of light and sound as forms of energy that have specific characteristics and properties",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Light and Sound",
+       "text": "identify a variety of natural and artificial light sources"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Light and Sound",
+       "text": "distinguish between objects and living things that emit their own light and those that reflect light from other sources"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Light and Sound",
+       "text": "describe properties of light, including that light travels in a straight path and that light can be absorbed, reflected, and refracted"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Light and Sound",
+       "text": "describe properties of sound, including that sound travels through a medium as a wave and that sound can be absorbed or reflected and modified"
+      },
+      {
+       "code": "C2.5",
+       "topic": "Light and Sound",
+       "text": "explain how vibrations cause sound waves"
+      },
+      {
+       "code": "C2.6",
+       "topic": "Light and Sound",
+       "text": "describe how different objects and materials interact with light and sound energy"
+      },
+      {
+       "code": "C2.7",
+       "topic": "Light and Sound",
+       "text": "distinguish between sources of light that emit both light and heat and those that emit light but little heat"
+      },
+      {
+       "code": "C2.8",
+       "topic": "Light and Sound",
+       "text": "identify sensory organs and devices that make use of the properties of light and sound"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Structures and Mechanisms",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "evaluate the impacts of various machines and their mechanisms on society and the environment",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Machines and Their Mechanisms",
+       "text": "assess the impacts of machines and their mechanisms on the daily lives of people in various communities"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Machines and Their Mechanisms",
+       "text": "assess and compare the environmental impacts of using different machines designed for similar purposes"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the basic principles and functions of machines and their mechanisms",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Machines and Their Mechanisms",
+       "text": "identify machines that are used in daily life, and describe their purposes"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Machines and Their Mechanisms",
+       "text": "identify the parts of various mechanisms and describe the purpose of each part"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Machines and Their Mechanisms",
+       "text": "describe how different mechanisms transmit various types of motion, including rotary motion, from one system to another"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Machines and Their Mechanisms",
+       "text": "describe how mechanisms transform motion, including how they can change the geometric plane in which the motion occurs and the speed and/or direction of motion"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Machines and Their Mechanisms",
+       "text": "explain how forces are changed in a variety of machines"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Earth and Space Systems",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the social and environmental impacts of geological processes and of human uses of rocks and minerals",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Rocks, Minerals, and Geological Processes",
+       "text": "analyse ways in which geological processes impact society and the environment"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Rocks, Minerals, and Geological Processes",
+       "text": "assess social and environmental impacts of extracting and refining rocks and minerals and of manufacturing, recycling, and disposing of products derived from rocks and minerals, while taking various perspectives into account"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of rocks, minerals, and Earth’s geological processes",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "Rocks, Minerals, and Geological Processes",
+       "text": "explain geological processes that result in the formation of igneous, sedimentary, and metamorphic rocks, using the rock cycle"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Rocks, Minerals, and Geological Processes",
+       "text": "describe the physical properties of igneous, sedimentary, and metamorphic rocks"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Rocks, Minerals, and Geological Processes",
+       "text": "classify different rocks and minerals according to their composition and physical properties, using various tests and criteria"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Rocks, Minerals, and Geological Processes",
+       "text": "describe everyday uses of rocks and minerals"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Rocks, Minerals, and Geological Processes",
+       "text": "describe how fossils are formed and what information they can provide about Earth’s history"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Rocks, Minerals, and Geological Processes",
+       "text": "demonstrate an understanding of First Nations, Métis, and Inuit geological knowledges that are used in the selection of different rocks and minerals for specific purposes"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

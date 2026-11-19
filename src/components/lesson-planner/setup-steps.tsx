@@ -22,6 +22,7 @@ import { type UserMaterial } from "@/components/user-materials-section"
 import { LESSON_TEMPLATES, getTemplate, resolveTemplateId } from "@/lib/lesson-templates"
 import { LEVEL_META, LEVEL_ORDER } from "@/lib/assessment-types"
 import { describeCode } from "@/lib/curriculum-codes"
+import { useCurriculumText } from "@/lib/curriculum-text"
 import type { LevelCounts } from "@/lib/assessment-results"
 import type { MaterialsSnapshot } from "@/lib/classroom-resources"
 import type { ReproducibleLanguage } from "@/lib/lesson-metadata"
@@ -119,6 +120,7 @@ export default function SetupSteps({
   onTeacherNotesChange,
 }: SetupStepsProps) {
   const isWizard = setupMode === "wizard"
+  useCurriculumText(bookmarkedResources[0]?.subject, bookmarkedResources[0]?.grade_level?.[0]?.toString())
   const templateDef = getTemplate(lessonTemplate)
 
   // Unified setup nav: the Guided/All-options toggle and the stage progress are

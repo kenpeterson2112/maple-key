@@ -1,0 +1,255 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Geography",
+ "grade": "7",
+ "course_name": "Geography",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/g7-geo",
+  "course_codename": "sshg___grade_6__copy_",
+  "last_modified": "2026-02-03T19:03:40.32108Z",
+  "fetched_at": "2026-11-19T04:42:14Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Physical Patterns in a Changing World",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Application: Interrelationships between People and the Physical Environment",
+     "text": "analyse some challenges and opportunities presented by the physical environment and ways in which people have responded to them ( FOCUS ON: Spatial Significance; Interrelationships )",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "describe various ways in which people have responded to challenges and opportunities presented by the physical environment (e.g., building dams, levees, or dikes to contain water and/or reclaim land; building terraces or irrigation systems to permit farming on inhospitable land; designing buildings suited to local climatic conditions or natural events such as earthquakes; specialized economic development such as resource towns in areas rich with ore, or tourism in areas of natural beauty or with a desirable climate ) , and analyse short- and long-term effects of some of these responses (e.g., water pollution from industry and agriculture; loss of animal habitat and wilderness areas as human settlement expands; deforestation and its consequences; the development of provincial or national parks to protect wilderness areas)"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "compare and contrast the perspectives of some different groups (e.g., Indigenous peoples living on the land, organic versus large-scale farmers, industrial and agrarian societies, owners of resource-extraction companies, environmental organizations, land developers) on the challenges and opportunities presented by the natural environment"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "assess the physical environment in various locations around the world to determine which environment or environments have the greatest impact on people (e.g., develop criteria for ranking the challenges and opportunities presented by physical environments such as deserts, tropical rainforests, mountains, volcanic islands, regions with cold climates , floodplains, coastal regions)"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "assess ways in which different peoples living in similar physical environments have responded to challenges and opportunities presented by these environments, and assess the sustainability of these responses (e.g., land reclamation and flood control in low-lying areas such as the Netherlands, the Mississippi delta, the Mekong River; nomadic lifestyles of peoples in the Gobi or Sahara Desert versus extensive irrigation to create cities such as Las Vegas in the Mojave Desert; the development of ecotourism in the Costa Rican rainforest versus the clear-cutting of rainforests in the Amazon or Madagascar)"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Inquiry: Investigating Physical Features and Processes",
+     "text": "use the geographic inquiry process to investigate the impact of natural events and/or human activities that change the physical environment, exploring the impact from a geographic perspective ( FOCUS ON: Geographic Perspective )",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into the impact of natural events and/or human activities that change the physical environment (e.g., the social, political, economic, and environmental impact of natural events such as earthquakes, volcanic eruptions, drought, floods, hurricanes, typhoons, or tsunamis; the economic and environmental impact of industrial pollution on a river system; the social, economic, and environmental impact of agricultural practices; the social, political, economic, and environmental impact of land-reclamation projects; the political, economic, and environmental impact of transportation systems) , ensuring that their questions reflect a geographic perspective"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "gather and organize data and information from a variety of sources, and using various technologies, on the impact of natural events and/or human activities that change the physical environment, ensuring that their sources reflect more than one perspective (e.g., data and information as well as online maps on climate change from the International Panel on Climate Change and the United Nations ; digital representations showing changes to a river system as a result of irrigation, data on agricultural productivity on irrigated lands, and information from wildlife advocacy groups on the impact of the loss of wetlands; data and information from the U.S. National Hurricane Center on the number and severity of hurricanes over the past few years, documentaries on the impact of Hurricane Katrina, and photographs of New Orleans before and after the hurricane)"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "analyse and construct maps as part of their investigations into the impact of natural events and/or human activities that change the physical environment, with a focus on investigating the spatial boundaries of the impact (e.g., construct a map showing sources of pollution along a river system and the communities that rely on the water source; analyse thematic maps to help them determine the interrelationship between soil erosion and loss of habitat in some parts of the world; select appropriate data for a GIS online map that shows areas that may be affected by rising sea levels)"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "interpret and analyse data and information relevant to their investigations, using various tools and spatial technologies (e.g., analyse photographs and thematic maps to determine the impact of invasive species in Australia; interpret graphs, charts, and/or diagrams in order to extract data on changes in agricultural production and population patterns as a result of long-term drought in Africa; interpret information from GIS to determine potential population shifts in response to rising sea levels)"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about the impact of natural events and/or human activities that change the physical environment"
+      },
+      {
+       "code": "A2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries, using appropriate vocabulary (e.g., climate, land use, landforms , vegetation, drought, flood, climate change, agriculture, ecotourism, land reclamation) and formats appropriate for specific audiences (e.g., an editorial outlining the impact of increasing settlement on a floodplain and arguing for or against increased settlement; an oral presentation or photo essay for a specific audience about how the construction of a dam affected a river system; a newspaper article for the local or school paper on the impact of pollution on their local community)"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Understanding Geographic Context: Patterns in the Physical Environment",
+     "text": "demonstrate an understanding of significant patterns in Earth’s physical features and of some natural processes and human activities that create and change those features ( FOCUS ON: Patterns and Trends; Spatial Significance )",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "identify the location and describe the physical characteristics of various landforms (e.g., mountains, plateaus, plains, valleys)"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "describe some key natural processes and human activities (e.g., tectonic forces , weathering and erosion, deposition, glaciation, mining, land-reclamation projects) that create and change landforms"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "demonstrate the ability to extract information from and analyse topographical maps (e.g., construct a cross-section of a landform based on the information from a topographical map)"
+      },
+      {
+       "code": "A3.4",
+       "topic": "",
+       "text": "describe patterns and physical characteristics of some major water bodies and systems around the world (e.g., river systems, drainage basins , lakes, oceans)"
+      },
+      {
+       "code": "A3.5",
+       "topic": "",
+       "text": "describe some key natural processes and human activities (e.g., changes in rainfall, melting of glaciers, erosion, rising sea levels, climate change, constructing dams, irrigation, bottling water from aquifers) that create and change water bodies and systems"
+      },
+      {
+       "code": "A3.6",
+       "topic": "",
+       "text": "describe patterns and characteristics of major climate regions around the world (e.g., characteristics and location of tropical, dry, temperate, continental, and polar climate regions)"
+      },
+      {
+       "code": "A3.7",
+       "topic": "",
+       "text": "describe some key natural processes and other factors, including human activities (e.g., ocean currents, wind systems, latitude , elevation , bodies of water, landforms, deforestation , human activities that result in greenhouse gas emissions) that create and change climate patterns"
+      },
+      {
+       "code": "A3.8",
+       "topic": "",
+       "text": "analyse and construct climate graphs to gather information on and illustrate climate patterns for a specific location (e.g., to analyse the trend in precipitation and temperature in Singapore, Khartoum, or Warsaw over the course of a year)"
+      },
+      {
+       "code": "A3.9",
+       "topic": "",
+       "text": "describe patterns and characteristics of major natural vegetation regions around the world (e.g., the location and characteristics of grasslands, boreal forests , tropical rain forests, tundra)"
+      },
+      {
+       "code": "A3.10",
+       "topic": "",
+       "text": "describe some key natural processes and human activities (e.g., natural and human-influenced climate change, erosion of top soil, deforestation, the use of chemical fertilizers and practice of monoculture, grazing of domestic animals, activities that introduce invasive species into an environment) that create and change natural vegetation patterns"
+      },
+      {
+       "code": "A3.11",
+       "topic": "",
+       "text": "describe how different aspects of the physical environment interact with each other in two or more regions of the world (e.g., the interrelationship between vegetation, landforms, and climate in desert regions; between landforms and vegetation in a volcanic region)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Natural Resources Around the World: Use and Sustainability",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Application: Natural Resources and Sustainability",
+     "text": "analyse aspects of the extraction/harvesting and use of natural resources in different regions of the world, and assess ways of preserving these resources ( FOCUS ON: Spatial Significance; Interrelationships )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "analyse interrelationships between the location/accessibility, mode of extraction/harvesting, and use of various natural resources (e.g., with reference to the relationship between mining techniques and the type and location of the deposit; types of electrical power generation in different regions of Europe; methods of harvesting trees)"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "analyse natural resource extraction/harvesting and use in some specific regions of the world (e.g., forestry practices in the Amazon or in Sweden; international trawlers fishing off the coast of West Africa; coal-fired electricity production in China) , including the sustainability of these practices"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "assess the efforts of some groups, agencies, and/or organizations (e.g., the United Nations Environment Programme; non-governmental organizations [NGOs] such as Friends of the Earth International, Rainforest Alliance, or the Nature Conservancy; indigenous groups; different national governments) in helping to preserve natural resources"
+      },
+      {
+       "code": "B1.4",
+       "topic": "",
+       "text": "create a personal plan of action outlining how they can contribute to more sustainable natural resource extraction/harvesting and/or use (e.g., a plan to use FSC-certified wood or reclaimed lumber in a construction project, to reduce energy use in their home or school, to publicize more sustainable approaches to extraction/harvesting, or to reduce personal consumption of consumer goods)"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Inquiry: Investigating Issues Related to Natural Resources",
+     "text": "use the geographic inquiry process to investigate issues related to the impact of the extraction/harvesting and/or use of natural resources around the world from a geographic perspective ( FOCUS ON: Geographic Perspective )",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into issues related to the impact of the extraction/harvesting and/or use of natural resources around the world from a geographic perspective (e.g., the social, economic, political, and environmental impact of overfishing; the economic, social, and environmental impact of deforestation and the adequacy of reforestation programs; the social and economic impact on indigenous people of resource extraction in their traditional territories; the economic, political, and environmental impact of developments in the alternative energy sector; the economic, political, and environmental impact of using fossil fuels )"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "gather and organize data and information from a variety of sources on the impact of resource extraction/harvesting and/or use, ensuring that their sources reflect more than one perspective (e.g., satellite imagery showing the area flooded after the construction of a hydroelectric dam and data on the amount of hydroelectricity generated; news stories on the positions of various countries and/or NGOs with respect to the environmental and economic impact of ocean fishing or whaling; documentaries and government data on the impact of climate change ; information on the impact of resource extraction from indigenous people in the area and employment data from the corporation(s) involved)"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "analyse and construct maps as part of their investigations, with a particular focus on exploring the spatial boundaries of and, where applicable, patterns relating to their topics (e.g., interpret layers of information in a GIS related to air pollution generated by coal-fired electrical plants; analyse thematic maps to determine the extent of clear-cutting and reforestation; construct a map to show the spread of the emerald ash borer in American forests; construct a thematic or annotated map to show the short- and long-term impact of a resource industry on a local ecosystem )"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "interpret and analyse data and information relevant to their investigations, using various tools and spatial technologies (e.g., extract information from graphs and diagrams on declining fish stocks and their impact on various regions; interpret photographs or other images to determine how mining has affected an area; analyse data to determine the economic and environmental impact of resource extraction and/or processing in a community; use a computer-based geographic tool to determine changes in rivers, lakes, and/or aquifers as a result of agricultural irrigation or commercial use of water)"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about issues related to the impact of natural resource extraction/harvesting and/or use around the world"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary (e.g., non-renewable , renewable, flow resources ; extraction; sustainability; deforestation; fossil fuels; aquifer) and formats appropriate for specific audiences (e.g., an essay on the impact of water use, concluding with a plan of action to preserve the world’s fresh water; a thematic or annotated map showing the extent of damage to a water system from mine tailings ; a fictionalized narrative about a person or animal affected by a natural resource extraction processes; a web page that includes links to sites providing varying opinions on the development of alternative energy; a public service announcement educating people about the economic and environmental impact of invasive species)"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Understanding Geographic Context: Using Natural Resources",
+     "text": "demonstrate an understanding of the sources and use of different types of natural resources and of some of the effects of the extraction/harvesting and use of these resources ( FOCUS ON: Spatial Significance; Geographic Perspective )",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "",
+       "text": "identify Earth’s renewable, non-renewable , and flow resources (e.g., renewable: trees, natural fish stocks, soil, plants; non-renewable: fossil fuels, metallic minerals; flow: solar, running water, ocean currents, tides, wind) , and explain their relationship to Earth’s physical features"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "describe ways in which people use the natural environment, including specific elements within it, to meet their needs and wants (e.g., rock is quarried to make building materials, roads; trees are used for lumber for buildings, wood for furniture, pulp for paper, logs for fuel; fossil fuels are used for heating and cooling, to generate energy for industry, to power vehicles, to make plastics; water is used for drinking, irrigation, to produce electricity, to cool nuclear reactors; animals are used for food, clothing, recreation; the natural environment enables people to live off the land and provides opportunities for relaxation, education, and/or recreation)"
+      },
+      {
+       "code": "B3.3",
+       "topic": "",
+       "text": "identify significant short- and long-term effects of natural resource extraction/harvesting and use on people and the environment (e.g., deforestation , desertification , smog, acid rain, climate change, soil contamination, habitat destruction, flooding)"
+      },
+      {
+       "code": "B3.4",
+       "topic": "",
+       "text": "describe the perspectives of different groups (e.g., a traditional indigenous community, an environmental organization, a multinational mining or forestry company, the residents of a resource town) regarding the use of the natural environment to meet human needs"
+      },
+      {
+       "code": "B3.5",
+       "topic": "",
+       "text": "describe some responses to social and/or environmental challenges arising from the use of natural resources (e.g., the increased use of wind, solar, or tidal energy; reduced consumption; promotion of energy-saving strategies such as the use of energy-efficient appliances; promotion of fair trade ; marketing of “ethical” products such as “ethical oil” or “ethical diamonds”; boycotting less sustainable products or companies using unsustainable practices)"
+      },
+      {
+       "code": "B3.6",
+       "topic": "",
+       "text": "demonstrate the ability to extract information from, analyse, and construct GIS maps relating to natural resources around the world (e.g., to determine the location of oil refineries and their proximity to population centres and agricultural land; to show areas of deforestation and current land use on previously forested land)"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

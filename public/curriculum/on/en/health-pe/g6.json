@@ -1,0 +1,283 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Health & Physical Education",
+ "grade": "6",
+ "course_name": "Health and Physical Education",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-health-physical-education/grades/grade-6",
+  "course_codename": "hpe___grade_6",
+  "last_modified": "2025-10-22T15:59:50.5384724Z",
+  "fetched_at": "2026-11-19T04:42:13Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Social-Emotional Learning Skills",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Social-Emotional Learning Skills",
+     "text": "apply, to the best of their ability, a range of social-emotional learning skills as they acquire knowledge and skills in connection with the expectations in the Active Living, Movement Competence, and Healthy Living strands for this grade.",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "Identification and Management of Emotions",
+       "text": "apply skills that help them identify and manage emotions as they participate in learning experiences in health and physical education, in order to improve their ability to express their own feelings and understand and respond to the feelings of others (e.g., Active Living: identify what they feel when participating in different activities – their energy level and level of engagement, for example – and describe how these feelings affect their enjoyment of the activities; Movement Competence: explain how their feelings differ when performing an activity that is fairly easy, such as stationary throwing and catching, and when doing something more challenging, such as throwing and catching a smaller object while on the move; Healthy Living: explain how feelings can impact eating habits and food choices and how a person’s awareness of this impact can help them make healthier choices)"
+      },
+      {
+       "code": "A1.2",
+       "topic": "Stress Management and Coping",
+       "text": "apply skills that help them to recognize sources of stress and to cope with challenges, including help-seeking behaviours, as they participate in learning experiences in health and physical education, in order to support the development of personal resilience (e.g., Active Living: explain why properly fitted helmets and well-secured straps on wheelchairs allow them to participate in physical activities with a greater sense of safety, comfort, security, and confidence; Movement Competence: use tactical solutions to improve play or alleviate discomfort, such as adjusting pace or stride when running; Healthy Living: when preparing to babysit a younger child, explain the strategies they might use to manage any challenging situations that could arise)"
+      },
+      {
+       "code": "A1.3",
+       "topic": "Positive Motivation and Perseverance",
+       "text": "apply skills that help them develop habits of mind that support positive motivation and perseverance as they participate in learning experiences in health and physical education, in order to promote a sense of optimism and hope (e.g., Active Living: when faced with transportation challenges in a rural community, use creative solutions such as ride sharing to access recreational activities ; Movement Competence: demonstrate awareness both of strengths and of skills that need more work, such as using their non-dominant hand or foot when working on retaining objects, then focus on ways to build on the strengths and to stretch the limits; Healthy Living: show understanding of how healthy eating habits contribute to raising energy levels and improving self-image)"
+      },
+      {
+       "code": "A1.4",
+       "topic": "Healthy Relationships",
+       "text": "apply skills that help them build relationships, develop empathy, and communicate with others as they participate in learning experiences in health and physical education, in order to support healthy relationships, a sense of belonging, and respect for diversity (e.g., Active Living: use encouraging words to support other students when participating in physical activities; show respect for the decisions and calls of teammates when they are serving as referees; Movement Competence: contribute ideas when working in a group to accomplish a collaborative task; Healthy Living: show awareness of how best to help others by asking questions and then helping in the way the person prefers; describe how you can let someone know how you feel about them in both verbal and non-verbal ways)"
+      },
+      {
+       "code": "A1.5",
+       "topic": "Self-Awareness and Sense of Identity",
+       "text": "apply skills that help them develop self-awareness and self-confidence as they participate in learning experiences in health and physical education, in order to support the development of a sense of identity and a sense of belonging (e.g., Active Living: identify which of the factors known to motivate participation in physical activity in most people are the strongest motivators for them; Movement Competence: assess their awareness of the technique they are using when catching throws of different speeds – are they remembering to move farther away when a ball is thrown hard and fast?; Healthy Living: reflect on how stereotypes affect their self-concept , and identify other factors, including acceptance by others, that influence their sense of themselves)"
+      },
+      {
+       "code": "A1.6",
+       "topic": "Critical and Creative Thinking",
+       "text": "apply skills that help them think critically and creatively as they participate in learning experiences in health and physical education, in order to support making connections, analysing, evaluating, problem solving, and decision making (e.g., Active Living: describe the steps that should be taken when responding to minor injuries; Movement Competence: plan a variety of offensive and defensive tactics that could be used in different situations in striking/fielding games ; Healthy Living: describe what can be done to challenge stereotypes and false assumptions, and to encourage respectful interaction, acceptance of differences, and inclusion of all people in social activities)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Active Living",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Active Participation",
+     "text": "participate actively and regularly in a wide variety of physical activities, and demonstrate an understanding of how physical activity can be incorporated into their daily lives;",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Active Participation",
+       "text": "actively participate in a wide variety of program activities (e.g., lead-up games, recreational activities , fitness activities, dance) , according to their capabilities, while applying behaviours that enhance their readiness and ability to take part (e.g., being engaged and moving throughout the activity, using time effectively, being open to new activities, displaying fair play by taking turns and sharing, listening to others, not blaming or taking advantage of others) [ A1.3 Motivation , 1.5 Self ]"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Active Participation",
+       "text": "demonstrate an understanding of factors that contribute to their personal enjoyment of being active (e.g., having the opportunity to participate in activities in various sizes of groups and using various types of equipment, having a choice of activities, being able to take part in activities that are modified to suit their individual needs, being able to participate actively in a game or activity rather than having to sit it out, having a chance to take part in both team games and individual activities , experiencing pleasure in both the physical experiences and the aesthetic aspects of movement) , as they participate in a wide variety of individual and small-group activities and lead-up games [ A1.1 Emotions , 1.3 Motivation , 1.4 Relationships ]"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Active Participation",
+       "text": "describe factors that motivate them to participate in physical activity every day, at school and during leisure time, and that influence their choice of activities (e.g., influence of friends, enthusiasm for the outdoors, a preference for either team or individual activities, encouragement from others, increased time with friends, availability and affordability of a program, enjoyment of healthy competition, influence of media role models) [ A1.1 Emotions , 1.2 Coping , 1.3 Motivation , 1.5 Self ]"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Physical Fitness",
+     "text": "demonstrate an understanding of the importance of being physically active, and apply physical fitness concepts and practices that contribute to healthy, active living;",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Physical Fitness",
+       "text": "Daily physical activity (DPA): participate in moderate to vigorous physical activity , with appropriate warm-up and cool-down activities, to the best of their ability for a minimum of twenty minutes each day (e.g., hiking, playing lead-up soccer, doing fitness circuits , doing aerobic routines, orienteering; walking to reduce heart rate after activity, holding stretches after running) [ A1.3 Motivation , 1.5 Self ]"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Physical Fitness",
+       "text": "explain how participation in physical activities affects personal health-related fitness (e.g., muscular strength and endurance activities help tone and strengthen muscles, flexibility activities can help prevent injuries, cardiorespiratory activities can improve the immune system) [ A1.6 Thinking ]"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Physical Fitness",
+       "text": "assess their level of health-related fitness (i.e., cardiorespiratory endurance, muscular strength, muscular endurance, flexibility) as they participate in various physical activities (e.g., comparing how they feel before, during, and after an activity or simple fitness tasks) , and monitor changes in their physical fitness over time (e.g., comparing their personal results and physical activity participation over a period of time, such as the beginning, middle, and end of the school term) [ A1.3 Motivation, 1.5 Self, 1.6 Thinking ]"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Physical Fitness",
+       "text": "develop and implement plans of action based on both their assessments of their health-related components of fitness (i.e., cardiorespiratory endurance, muscular strength, muscular endurance, flexibility) and their interests, in order to achieve personal fitness goals (e.g., improving cardiorespiratory fitness by doing activities that increase the heart rate in order to be able to walk or run faster or wheel a specified distance; enhancing flexibility by holding a stretch for a designated amount of time) [ A1.3 Motivation, 1.6 Thinking ]"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Safety",
+     "text": "demonstrate responsibility for their own safety and the safety of others as they participate in physical activities.",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "Safety",
+       "text": "demonstrate behaviours and apply procedures that maximize safety and lessen the risk of injury, including the risk of concussion , for themselves and others during physical activity (e.g., demonstrating personal responsibility and compliance with the school board’s concussion protocol; checking that equipment is in good working order; wearing an appropriate and properly fitting helmet when taking part in activities such as bike riding, playing on community sports teams, tobogganing, snowboarding, downhill skiing, or skateboarding; helping someone adjust the straps on their wheelchair) [ A1.4 Relationships , 1.5 Self ]"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "describe appropriate methods for treating minor injuries that may occur while participating in physical activity (e.g., applying pressure and ice to reduce swelling, cleaning and bandaging minor cuts, applying pressure to reduce bleeding, treating injuries quickly so they do not become worse) [ A1.6 Thinking ]"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Movement Competence: Skills, Concepts, and Strategies",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Movement Skills and Concepts",
+     "text": "perform movement skills , demonstrating an understanding of the basic requirements of the skills and applying movement concepts as appropriate, as they engage in a variety of physical activities;",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Stability",
+       "text": "perform smooth transfers of weight in relation to others and equipment in a variety of situations involving static and dynamic balance (e.g., shift weight smoothly during hip hop dancing; perform twists and balances on a stability ball; with a partner, use resistance [pushing] and counter-tension [pulling] by shifting and adjusting their weight and position to create a stable partner balance; move smoothly from a downward dog pose in yoga to a standing pose) [ A1.4 Relationships , 1.5 Self ]"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Locomotion",
+       "text": "perform a wide variety of locomotor movements , in combination, at different speeds , in different directions, and using different pathways, while moving around others and/or equipment (e.g., wheel their wheelchair around objects and at different speeds in a fitness circuit ; create a developmental gymnastics sequence with a partner that uses a range of movements and shows changes in speed, level, and formation) [ A1.4 Relationships, 1.5 Self ]"
+      },
+      {
+       "code": "C1.3",
+       "topic": "Manipulation",
+       "text": "send and receive a variety of objects (e.g., rubber chickens, rings, beanbags, soft foam balls, discs, tennis balls, utility balls) , adjusting for speed and distance, while applying basic principles of movement (e.g., use different amounts of force to send an object to a teammate, with an awareness of the weight of the object thrown and the force of its impact when the teammate receives it, depending on relative positions and type of object being thrown, batted, or kicked; send an object through a hoop, into a bucket, to a target on a wall, to a specific spot on the other side of a net, to a partner; bend knees, keeping arms out and head up in a ready position to prepare to receive an object; use the body to absorb an object that is sent with greater force; follow through in the direction of the target to improve aim and accuracy) [ A1.1 Emotions , 1.4 Relationships , 1.5 Self ]"
+      },
+      {
+       "code": "C1.4",
+       "topic": "Manipulation",
+       "text": "retain objects in a variety of situations while travelling in different pathways and at different speeds in relation to others and equipment (e.g., run a “down and out” pattern, catch the football, then use “dekes” [deceptive manoeuvres, typically involving changes in direction] to retain the ball; stickhandle a felt disc slowly and then quickly while keeping their head up) [ A1.3 Motivation , 1.4 Relationships , 1.5 Self ]"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Movement Strategies",
+     "text": "apply movement strategies appropriately, demonstrating an understanding of the components of a variety of physical activities, in order to enhance their ability to participate successfully in those activities.",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Movement Strategies",
+       "text": "demonstrate an understanding of the basic components of physical activities (e.g., movement skills, game structures, basic rules and guidelines, conventions of fair play and etiquette) , and apply this understanding as they participate in a variety of physical activities (e.g., lead-up games such as four-on-four rubber-chicken keep-away, basketball shooting games, and two-base softball; recreational activities such as mini-triathlons, hiking, skipping rope, and cooperative games; fitness activities such as t’ai chi, activities with exercise bands and exercise balls, and personal fitness challenges; dance activities such as cultural dance, creative movement, and jazz steps) [ A1.5 Self, 1.6 Thinking ]"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Movement Strategies",
+       "text": "describe common features of specific categories of physical activities (e.g., individual, target, net/wall, striking/fielding , territory) , and describe strategies that they found effective while participating in a variety of physical activities in different categories [ A1.6 Thinking ]"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Movement Strategies",
+       "text": "apply a variety of tactical solutions to increase their chances of success as they participate in physical activities (e.g., individual activities : find a comfortable pace when running, wheeling a wheelchair, or speed-walking; work with a partner to develop different ways of using an exercise ball to improve core strength; target activities : in a game like bocce , hit opponents’ balls out of the way in order to make space for their own ball closer to the target; net/wall activities : assume a position of readiness to move to receive an object; practise sending the ball to specific parts of the opposite court; striking/fielding activities : throw the ball promptly to teammates after retrieving it to stop opponents from scoring; territory activities : defend territory by anticipating an opponent’s actions; bounce a utility ball at different heights to keep it from an opponent in a keep-away game; throw a disc to a stationary partner, then move down the field to receive a return pass) [ A1.2 Coping , 1.4 Relationships , 1.6 Thinking ]"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Healthy Living",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Understanding Health Concepts",
+     "text": "demonstrate an understanding of factors that contribute to healthy development;",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Personal Safety and Injury Prevention",
+       "text": "demonstrate ways of being inclusive, respectful, and accepting, and describe how this benefits everyone, including themselves [ A1.1 Emotions , 1.4 Relationships , 1.5 Self ]"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Substance Use, Addictions, and Related Behaviours",
+       "text": "describe the range of effects associated with using cannabis, other drugs (e.g., prescription medications such as opioids; illicit opioids such as heroin, crack, cocaine, Ecstasy, crystal methamphetamine), and intoxicating substances (e.g., gas, glue) [ A1.6 Thinking ]"
+      },
+      {
+       "code": "D1.3",
+       "topic": "Human Development and Sexual Health",
+       "text": "demonstrate an understanding of the impacts of viewing sexually explicit media, including pornography (e.g., leads to a limited or distorted understanding of relationships; reinforces harmful gender norms; promotes an unrealistic or idealized body image)"
+      },
+      {
+       "code": "D1.4",
+       "topic": "Mental Health Literacy",
+       "text": "identify people, resources, and services in the school and the community (e.g., mental health and addiction workers, family members, social workers, psychologists, community agencies, churches, mosques, synagogues, public health units, telephone help lines, recreation facilities) that can provide support when a person is dealing with mental health issues and choices or situations involving substance use and addictive behaviours, and describe how to access these supports [ A1.1 Emotions , 1.2 Coping , 1.6 Thinking ]"
+      },
+      {
+       "code": "D1.5",
+       "topic": "",
+       "text": "demonstrate an understanding of the interconnections between a person’s thoughts, emotions, and actions, and of the potential impact of positive and negative thinking on mental health [ A1.1 Emotions , 1.5 Self, 1.6 Thinking ]"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Making Healthy Choices",
+     "text": "demonstrate the ability to apply health knowledge and social-emotional learning skills to make reasoned decisions and take appropriate actions relating to their personal health and well-being;",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Healthy Eating",
+       "text": "apply their knowledge of medical, emotional, practical, and societal factors that influence eating habits and food choices (e.g., allergies and sensitivities , likes and dislikes, feelings of stress, dental health, food availability, media influence, cultural influence of family and friends, school food and beverage policies, environmental impact, cost) to develop personal guidelines for healthier eating [ A1.1 Emotions , 1.2 Coping , 1.4 Relationships , 1.6 Thinking ]"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Healthy Eating",
+       "text": "apply their recognition of internal hunger and thirst cues and their knowledge of physical factors that influence the desire to eat and drink (e.g., stage of development, growth spurts, level of physical activity, eating larger portions) to develop personal guidelines for healthier eating [ A1.1 Emotions, 1.5 Self, 1.6 Thinking ]"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Personal Safety and Injury Prevention",
+       "text": "apply social-emotional learning skills (e.g., self-awareness and self-management skills, including anger management; communication skills, including listening skills and assertiveness skills) to promote positive interaction and avoid or manage conflict in social situations, in person or online (e.g., classroom groups, groups of friends, sports teams, school clubs, social media sites, online games) [ A1.1 Emotions , 1.2 Coping , 1.4 Relationships , 1.5 Self ]"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Substance Use, Addictions, and Related Behaviours",
+       "text": "use decision-making strategies and skills and an understanding of factors influencing drug use (e.g., personal values, peer pressure, media influence, curiosity, legal restrictions, cultural, religious, and spiritual teachings) to make safe personal choices about the use of drugs such as alcohol, tobacco , and cannabis, and about activities such as vaping , including the choice to abstain [ A1.2 Coping , 1.4 Relationships , 1.5 Self, 1.6 Thinking]"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Human Development and Sexual Health",
+       "text": "describe how they can build confidence and lay a foundation for healthy relationships by acquiring a clearer understanding of the physical, social, and emotional changes that occur during adolescence (e.g., physical: voice changes, skin changes, body growth; social: changing social relationships, increasing influence of peers; emotional: increased intensity of feelings, new interest in relationships, confusion and questions about changes) [ A1.1 Emotions , 1.4 Relationships , 1.5 Self ]"
+      },
+      {
+       "code": "D2.6",
+       "topic": "Human Development and Sexual Health",
+       "text": "make informed decisions that demonstrate respect for themselves and others and an understanding of the concept of consent to help build healthier relationships, using a variety of social-emotional learning skills (e.g., self-awareness and identity skills; emotion management skills; critical and creative thinking skills; skills based on First Nations, Métis, and Inuit cultural teachings, such as medicine wheel teachings connected to the life cycle, the seven-grandfather teachings , or other cultural teachings) [ A1.1 Emotions , 1.4 Relationships , 1.5 Self , 1.6 Thinking ]"
+      }
+     ]
+    },
+    {
+     "code": "D3",
+     "title": "Making Connections for Healthy Living",
+     "text": "demonstrate the ability to make connections that relate to health and well-being – how their choices and behaviours affect both themselves and others, and how factors in the world around them affect their own and others’ health and well-being.",
+     "specifics": [
+      {
+       "code": "D3.1",
+       "topic": "Healthy Eating",
+       "text": "explain how healthy eating and active living work together to improve a person’s overall physical and mental health and well-being (e.g., both provide more energy and contribute to improved self-concept and body image, greater resistance to disease, and better overall health; both help a person to maintain a weight that is healthy for them) and how the benefits of both can be promoted to others [ A1.2 Coping , 1.3 Motivation , 1.5 Self , 1.6 Thinking ]"
+      },
+      {
+       "code": "D3.2",
+       "topic": "Personal Safety and Injury Prevention",
+       "text": "recognize the responsibilities and risks associated with caring for themselves and others (e.g., while babysitting, staying home alone, running errands for a senior relative or neighbour, caring for pets, volunteering in the community, assisting someone with a disability, preparing meals, travelling to and from school and other locations) , and demonstrate an understanding of related safety practices and appropriate procedures for responding to dangerous situations (e.g., safe practices for preparing food; responses to allergic reactions, fire, sports injuries, dental emergencies, hypothermia, bullying, abuse) [ A1.4 Relationships , 1.5 Self , 1.6 Thinking ]"
+      },
+      {
+       "code": "D3.3",
+       "topic": "Human Development and Sexual Health",
+       "text": "assess the effects of stereotypes and assumptions regarding gender roles and expectations, sexual orientation , race, ethnicity, culture, mental health, and abilities on an individual’s self-concept, social inclusion, and relationships with others, and propose appropriate ways of responding to and changing harmful assumptions and stereotypes that can lead to destructive social attitudes including homophobia and racism [ A1.1 Emotions , 1.4 Relationships , 1.5 Self , 1.6 Thinking ]"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

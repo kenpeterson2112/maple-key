@@ -9,6 +9,7 @@ import {
   strandCodeOf,
   strandLabel,
 } from "@/lib/curriculum-codes"
+import { useCurriculumText } from "@/lib/curriculum-text"
 import { LEVEL_ORDER, LEVEL_META, type ProficiencyLevel } from "@/lib/assessment-types"
 import { READINESS_TOKENS, pillSurface, pillText } from "@/components/ui/readiness-pill"
 import {
@@ -129,6 +130,7 @@ function LevelSummary({ counts }: { counts: LevelCounts }) {
 }
 
 function SpecificRow({ code, counts, subject, grade }: { code: string; counts: LevelCounts; subject: string; grade?: string }) {
+  useCurriculumText(subject, grade)
   return (
     <div className="px-4 py-3 space-y-2">
       <div className="flex items-start gap-2">

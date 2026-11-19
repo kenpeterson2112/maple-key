@@ -1,0 +1,343 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Science",
+ "grade": "6",
+ "course_name": "Science and Technology",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sci-tech/grades/grade-6",
+  "course_codename": "sci___tech___grade_6",
+  "last_modified": "2023-03-17T14:22:19.9382096Z",
+  "fetched_at": "2026-11-19T04:42:12Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "STEM Skills and Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "STEM Investigation and Communication Skills",
+     "text": "use a scientific research process, a scientific experimentation process, and an engineering design process to conduct investigations, following appropriate health and safety procedures",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "use a scientific research process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "use a scientific experimentation process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "use an engineering design process and associated skills to design, build, and test devices, models, structures, and/or systems"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "follow established health and safety procedures during science and technology investigations, including wearing appropriate protective equipment and clothing and safely using tools, instruments, and materials"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "communicate their findings, using science and technology vocabulary and formats that are appropriate for specific audiences and purposes"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Coding and Emerging Technologies",
+     "text": "use coding in investigations and to model concepts, and assess the impact of coding and of emerging technologies on everyday life and in STEM-related fields",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "write and execute code in investigations and when modelling concepts, with a focus on obtaining input in different ways for a variety of purposes"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "identify and describe impacts of coding and of emerging technologies on everyday life, including skilled trades"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Applications, Connections, and Contributions",
+     "text": "demonstrate an understanding of the practical applications of science and technology, and of contributions to science and technology from people with diverse lived experiences",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "describe practical applications of science and technology concepts in various occupations, including skilled trades, and how these applications address real-world problems"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "investigate how science and technology can be used with other subject areas to address real-world problems"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "analyse contributions to science and technology from various communities"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Life Systems",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the importance of biodiversity, and describe ways of protecting biodiversity",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Biodiversity",
+       "text": "assess the benefits of biodiversity and the consequences of the diminishing of biodiversity"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Biodiversity",
+       "text": "analyse a local issue related to biodiversity while considering different perspectives; plan a course of action in response to the issue; and act on their plan"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of biodiversity, its contributions to the stability of natural systems, and its benefits to humans",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Biodiversity",
+       "text": "describe the distinguishing characteristics of different groups of organisms, and use these characteristics to further classify these organisms using a classification system"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Biodiversity",
+       "text": "demonstrate an understanding of biodiversity as the diversity of life on Earth, including the diversity of organisms within species, among species in a community, and among communities and the habitats that support them"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Biodiversity",
+       "text": "describe ways in which biodiversity within species is essential for their survival"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Biodiversity",
+       "text": "describe ways in which biodiversity within and among communities is essential for maintaining the resilience of these communities"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Biodiversity",
+       "text": "describe interrelationships within species, between species, and between species and their natural environment, and explain how these interrelationships sustain biodiversity"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Biodiversity",
+       "text": "explain how invasive species reduce biodiversity in local environments"
+      },
+      {
+       "code": "B2.7",
+       "topic": "Biodiversity",
+       "text": "explain how climate change contributes to a loss of biodiversity, and describe the impact of this loss"
+      },
+      {
+       "code": "B2.8",
+       "topic": "Biodiversity",
+       "text": "describe the importance of biodiversity in supporting agriculture, including Indigenous agriculture around the world"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Matter and Energy",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "evaluate the impact of the use and generation of electrical energy on society and the environment, and suggest ways to use electrical energy responsibly",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "assess the short- and long-term impacts of electrical energy generation technologies in Canada on society and the environment, including impacts on First Nations, Métis, and Inuit communities, and on climate change"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "assess choices that reduce personal use of electrical energy from both renewable and non-renewable sources, and advocate for the responsible use of electrical energy by the school community"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the principles of electrical energy and its transformation into and from other forms of energy",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "explain commonly observed electrostatic phenomena, using the principles of static electricity"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "describe current electricity, and compare and contrast current electricity with static electricity"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "identify materials that are good conductors of electric current and materials that are good insulators"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "describe how technologies transform various forms of energy into electrical energy"
+      },
+      {
+       "code": "C2.5",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "describe ways in which electrical energy is transformed into other forms of energy"
+      },
+      {
+       "code": "C2.6",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "explain the functions of the components of a simple electrical circuit"
+      },
+      {
+       "code": "C2.7",
+       "topic": "Electrical Phenomena, Energy, and Devices",
+       "text": "distinguish between series and parallel circuits, and identify common uses of each type of circuit"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Structures and Mechanisms",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the environmental impacts of flying machines",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Flight",
+       "text": "assess the impacts on society of aviation technologies, while considering both local and global perspectives"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the ways in which properties of air can be applied to the principles of flight and flying machines",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Flight",
+       "text": "identify flight-related applications of the properties of air"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Flight",
+       "text": "describe the relationships between the four forces of flight – lift, weight, thrust, and drag – that make flight possible"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Flight",
+       "text": "describe ways in which flying machines and various organisms use balanced and unbalanced forces to control their flight"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Flight",
+       "text": "describe ways in which the four forces of flight can be altered"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Flight",
+       "text": "describe characteristics and adaptations that enable organisms to fly"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Earth and Space Systems",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the impact of space exploration on humans, society, and the environment",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Space",
+       "text": "analyse the impact that conditions in space have on humans engaged in space exploration, and explain how humans meet their social, emotional, and physiological needs in space"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Space",
+       "text": "assess the role of space exploration technology in observing and understanding environmental changes on Earth, including climate change"
+      },
+      {
+       "code": "E1.3",
+       "topic": "Space",
+       "text": "evaluate the social and environmental impacts of space exploration, while taking various perspectives into consideration"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the solar system, the phenomena that result from the movement of different bodies within it, and the technologies used in space exploration",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "Space",
+       "text": "identify components of the solar system, including the Sun, Earth and other planets, natural satellites, comets, asteroids, and meteoroids, and describe their main physical characteristics"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Space",
+       "text": "distinguish between the concepts of mass and weight"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Space",
+       "text": "describe the relationship between the force of gravity and the weight of a body"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Space",
+       "text": "identify the types of bodies in space that emit light and those that reflect light"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Space",
+       "text": "describe various effects of the relative positions and motions of Earth, the Moon, and the Sun"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Space",
+       "text": "identify various technologies used in space exploration, and describe how technological innovations have contributed to our understanding of space"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

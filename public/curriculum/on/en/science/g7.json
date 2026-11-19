@@ -1,0 +1,373 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Science",
+ "grade": "7",
+ "course_name": "Science and Technology",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sci-tech/grades/grade-7",
+  "course_codename": "sci___tech___grade_7",
+  "last_modified": "2023-03-17T14:23:31.5911238Z",
+  "fetched_at": "2026-11-19T04:42:12Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "STEM Skills and Connections",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "STEM Investigation and Communication Skills",
+     "text": "use a scientific research process, a scientific experimentation process, and an engineering design process to conduct investigations, following appropriate health and safety procedures",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "use a scientific research process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "use a scientific experimentation process and associated skills to conduct investigations"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "use an engineering design process and associated skills to design, build, and test devices, models, structures, and/or systems"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "follow established health and safety procedures during science and technology investigations, including wearing appropriate protective equipment and clothing and safely using tools, instruments, and materials"
+      },
+      {
+       "code": "A1.5",
+       "topic": "",
+       "text": "communicate their findings, using science and technology vocabulary and formats that are appropriate for specific audiences and purposes"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Coding and Emerging Technologies",
+     "text": "use coding in investigations and to model concepts, and assess the impact of coding and of emerging technologies on everyday life and in STEM-related fields",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "write and execute code in investigations and when modelling concepts, with a focus on planning and designing programs"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "identify and describe impacts of coding and of emerging technologies, such as artificial intelligence systems, on everyday life, including skilled trades"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Applications, Connections, and Contributions",
+     "text": "demonstrate an understanding of the practical applications of science and technology, and of contributions to science and technology from people with diverse lived experiences",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "describe practical applications of science and technology concepts in various occupations, including skilled trades, and how these applications address real-world problems"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "investigate how science and technology can be used with other subject areas to address real-world problems"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "analyse contributions to science and technology from various communities"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Life Systems",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the impact of human activities and technologies on the environment, and analyse ways to mitigate negative impacts and contribute to environmental sustainability",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Interactions in the Environment",
+       "text": "assess the impact of various technologies on the environment"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Interactions in the Environment",
+       "text": "assess the effectiveness of various ways of mitigating the negative and enhancing the positive impact of human activities on the environment"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Interactions in the Environment",
+       "text": "analyse how diverse First Nations, Métis, and Inuit practices and perspectives contribute to environmental sustainability"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of interactions between and among biotic and abiotic components in the environment",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Interactions in the Environment",
+       "text": "explain that an ecosystem is a network of interactions among living organisms and their environment"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Interactions in the Environment",
+       "text": "identify biotic and abiotic components in an ecosystem, and describe the interactions between them"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Interactions in the Environment",
+       "text": "describe roles and relationships between producers, consumers, and decomposers within an ecosystem"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Interactions in the Environment",
+       "text": "describe the transfer of energy in a food chain, and explain the effects of altering any part of the chain"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Interactions in the Environment",
+       "text": "describe how matter is cycled within the environment, and explain how the cycling of matter promotes sustainability"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Interactions in the Environment",
+       "text": "explain the differences between primary succession and secondary succession in ecosystems"
+      },
+      {
+       "code": "B2.7",
+       "topic": "Interactions in the Environment",
+       "text": "explain how biotic and abiotic factors limit the number of organisms an ecosystem can sustain"
+      },
+      {
+       "code": "B2.8",
+       "topic": "Interactions in the Environment",
+       "text": "describe how different approaches to agriculture and to harvesting food from the natural environment can impact an ecosystem, and identify strategies that can be used to maintain and/or restore balance to ecosystems"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Matter and Energy",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "evaluate the environmental and social impacts of the use and disposal of various pure substances and mixtures",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Pure Substances and Mixtures",
+       "text": "analyse the social and environment impacts of the use and disposal of pure substances found in technological devices, considering local and global perspectives"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Pure Substances and Mixtures",
+       "text": "assess environmental and social impacts of different industrial methods used to separate mixtures"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the nature of matter, including the properties of pure substances and mixtures, and describe these properties using particle theory",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Pure Substances and Mixtures",
+       "text": "demonstrate an understanding of the particle theory of matter"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Pure Substances and Mixtures",
+       "text": "use particle theory to distinguish between pure substances and mixtures"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Pure Substances and Mixtures",
+       "text": "distinguish between homogeneous and heterogeneous mixtures"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Pure Substances and Mixtures",
+       "text": "use the particle theory to describe how different factors affect the solubility of a substance and the rate at which it dissolves"
+      },
+      {
+       "code": "C2.5",
+       "topic": "Pure Substances and Mixtures",
+       "text": "describe the concentration of a saturated solution in both qualitative and quantitative terms, and differentiate between saturated and unsaturated solutions"
+      },
+      {
+       "code": "C2.6",
+       "topic": "Pure Substances and Mixtures",
+       "text": "explain why water is referred to as the universal solvent"
+      },
+      {
+       "code": "C2.7",
+       "topic": "Pure Substances and Mixtures",
+       "text": "explain various processes used to separate mixtures, including solutions, into their components, and identify some applications of these processes"
+      },
+      {
+       "code": "C2.8",
+       "topic": "Pure Substances and Mixtures",
+       "text": "describe pure substances as elements and compounds consisting of atoms and combinations of atoms"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Structures and Mechanisms",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "analyse personal, social, economic, and environmental factors that should be considered when designing and building structures",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "evaluate environmental, social, and economic factors that should be considered when designing and building structures to meet specific needs for individuals and communities"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "evaluate the impact of the ergonomic design of various tools, objects, and work spaces on a user’s health, safety, and ability to work efficiently, and use this information to describe changes that could be made in their own spaces and activities"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of the relationship between structural forms and the forces acting on them",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "classify structures as solid structures, frame structures, or shell structures"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "describe ways in which the centre of gravity of a structure affects the structure’s stability"
+      },
+      {
+       "code": "D2.3",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "identify the magnitude, direction, point of application, and plane of application of the forces applied to a structure"
+      },
+      {
+       "code": "D2.4",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "describe the role of symmetry in structures, and identify instances of symmetry in various structures"
+      },
+      {
+       "code": "D2.5",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "describe factors that can cause a structure to fail"
+      },
+      {
+       "code": "D2.6",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "identify the factors that determine the suitability of materials for use in manufacturing a product or constructing a structure"
+      },
+      {
+       "code": "D2.7",
+       "topic": "Form, Function, and Design of Structures",
+       "text": "describe methods engineers and other professionals use to assess, improve, and maintain the safety of structures"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Earth and Space Systems",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Relating Science and Technology to Our Changing World",
+     "text": "assess the benefits of technologies that reduce heat loss, and analyse various social and environmental impacts of the use of energy from renewable and non-renewable sources",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Heat in the Environment",
+       "text": "assess the social and environmental benefits of technologies that reduce heat loss in enclosed spaces or heat transfer to surrounding spaces"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Heat in the Environment",
+       "text": "analyse various social, economic, and environmental impacts, including impacts related to climate change, of using non-renewable and renewable sources of energy"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Exploring and Understanding Concepts",
+     "text": "demonstrate an understanding of heat as a form of energy that is associated with the movement of particles and is essential for many natural processes within Earth’s systems",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "Heat in the Environment",
+       "text": "use particle theory to explain how heat affects the motion of particles in a solid, a liquid, and a gas"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Heat in the Environment",
+       "text": "demonstrate an understanding of various ways in which heat is generated"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Heat in the Environment",
+       "text": "use particle theory to explain the effects of heat on volume in solids, liquids, and gases, including during changes of states of matter"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Heat in the Environment",
+       "text": "explain how heat is transmitted through conduction, and describe natural processes that are affected by conduction"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Heat in the Environment",
+       "text": "explain how heat is transmitted in liquids and gases through convection, and describe natural processes that depend on convection"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Heat in the Environment",
+       "text": "explain how heat is transmitted through radiation, and describe the effects of radiation from the Sun on different kinds of surfaces"
+      },
+      {
+       "code": "E2.7",
+       "topic": "Heat in the Environment",
+       "text": "describe the role of radiation in heating and cooling Earth, and explain how greenhouse gases affect the transmission of radiated heat through the atmosphere"
+      },
+      {
+       "code": "E2.8",
+       "topic": "Heat in the Environment",
+       "text": "identify common sources of greenhouse gases, including sources resulting from human activity, and describe how humans can reduce emissions of these gases"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

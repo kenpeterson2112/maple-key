@@ -3,6 +3,7 @@ import { AlertTriangle, ArrowRight, CircleHelp, Search } from "lucide-react"
 import type { CoverageNode, LessonTally } from "@/lib/assessment-results"
 import { buildTriage, MOVE_META, type TriageItem } from "@/lib/triage"
 import { describeCode, overallCodeOf, overallTitle } from "@/lib/curriculum-codes"
+import { useCurriculumText } from "@/lib/curriculum-text"
 import EvidenceCapsule from "@/components/ui/evidence-capsule"
 
 interface AssessmentTriageProps {
@@ -32,9 +33,10 @@ function TriageRow({
   grade: string
   onFindResources: (code: string) => void
 }) {
-  // Specific-expectation descriptions exist for only a few subjects, so fall
-  // back to the overall's title (itself degrading to the strand name, then the
-  // bare code) rather than printing a placeholder word on every Science row.
+  useCurriculumText(subject, grade)
+  // Until the wording loads (or for a code the curriculum doesn't have), fall
+  // back to the overall's title, itself degrading to the strand name, then the
+  // bare code.
   const description = describeCode(subject, item.code, grade) ?? overallTitle(subject, overallCodeOf(item.code), grade)
   const meta = MOVE_META[item.move]
 
@@ -85,6 +87,7 @@ function TriageRow({
  * "57% covered" would state something the data cannot support.
  */
 export default function AssessmentTriage({ nodes, latest, subject, grade, onFindResources }: AssessmentTriageProps) {
+  useCurriculumText(subject, grade)
   const { attention, unchecked, onTrack } = useMemo(() => buildTriage(nodes), [nodes])
 
   if (attention.length === 0 && unchecked.length === 0 && onTrack.length === 0) return null
