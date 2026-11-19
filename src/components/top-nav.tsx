@@ -1,15 +1,14 @@
 "use client"
 
 import { useState, type CSSProperties } from "react"
-import { Settings, ChevronDown, Filter } from "lucide-react"
+import { BarChart3, Settings, ChevronDown, Filter } from "lucide-react"
 import AccountSheet from "@/components/account-sheet"
+import SubjectDataBar from "@/components/subject-data-bar"
 import { BottomSheet } from "@/components/ui/bottom-sheet"
 import { GRADES, SUBJECTS } from "@/components/hero-personalize"
 import {
-  OverallStrip,
   StrandRows,
   StrandTimeline,
-  SubjectStrip,
   Gauge,
   noProgressReason,
   provinceName,
@@ -52,8 +51,9 @@ const GRADE_OPTIONS = GRADES.map((o) => (o.value ? o : { ...o, label: "All grade
 //   1. Navigation: the logo, the subject and grade pickers and the province,
 //      the spaces as quiet links, and the gear, on a bar in the subject's
 //      colour (brand rust with none).
-//   2. Subject data: where the class is (a gauge, the strand timeline, a link
-//      into Track), or a summary across classes.
+//   2. Subject data (subject-data-bar.tsx): the subject's curriculum timeline
+//      by strand, opening into details with Analyze (to Track); or, with no
+//      class picked, the teacher's classes as chips.
 // Suggestions and materials live on the landing page as widgets, not here.
 // Phone: a 56px bar with one class chip (opening a sheet with the pickers and
 // the full picture) and a one-line progress bar under it.
@@ -193,15 +193,21 @@ export default function TopNav({
           </div>
         </div>
 
-        {/* Row 2: where the class is */}
+        {/* Row 2: subject data. The timeline, or the class chips with none picked. */}
         {!hideStrip && (
-          <div className="border-b" style={tintStyle}>
-            <div className="mx-auto hidden h-20 max-w-[1500px] items-center overflow-hidden px-6 md:flex [&>*]:w-full">
-              {scoped && progress ? (
-                <SubjectStrip progress={progress} accent={accent} onOpenTrack={() => onChangeSpace("insights")} />
-              ) : (
-                <OverallStrip province={state.province} note={noProgressReason(state.subject, state.grade)} />
-              )}
+          <div className="relative border-b" style={tintStyle}>
+            <div className="mx-auto hidden h-20 max-w-[1500px] items-center px-6 md:flex">
+              <SubjectDataBar
+                subject={state.subject}
+                grade={state.grade}
+                progress={progress}
+                accent={accent}
+                onOpenTrack={() => onChangeSpace("insights")}
+                onPickClass={(subject, grade) => {
+                  setSubject(subject)
+                  setGrade(grade)
+                }}
+              />
             </div>
 
             {/* Phone: one line, tap for the sheet. Nothing on the landing page. */}
@@ -287,6 +293,17 @@ export default function TopNav({
                 </div>
               </div>
               <StrandRows progress={progress} />
+              <button
+                type="button"
+                onClick={() => {
+                  setIsClassSheetOpen(false)
+                  onChangeSpace("insights")
+                }}
+                className="flex h-11 items-center justify-center gap-2 rounded-xl border border-border-strong bg-card text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <BarChart3 size={18} aria-hidden="true" />
+                Analyze in Track
+              </button>
               {progress.ongoingStrands.length > 0 && (
                 <p className="-mt-2 text-xs text-muted-foreground">
                   Ongoing in every lesson: {progress.ongoingStrands.map((s) => `${s.code} ${s.label}`).join(", ")}

@@ -224,10 +224,23 @@ Tailwind v4 default 4px scale. Common steps used in this app:
        colour: the bar's `--foreground`, so dark in light mode and light in dark
        mode. `public/maple-key-lockup.png` is alpha only, used as a CSS mask over
        `currentColor`. 64px tall in the 80px desktop bar, 48px on phones.
-  2. **Subject data, where the class is:** a gauge (taught of the grade's real expectation
-     count), the strand timeline coloured by `signal-*` readiness with "now"
-     at the overall the last lesson reached, and a link into Track. All from
-     `buildClassProgress` (`src/lib/class-progress.ts`).
+  2. **Subject data** (`subject-data-bar.tsx`), switching with the class:
+     - **A subject and grade with curriculum data:** the whole curriculum as a
+       timeline, one section per strand sized by its expectation count, each
+       labelled with its code, name and taught count. The blocks are coloured
+       by `signal-*` readiness, with "now" at the overall the last lesson
+       reached. Small strands get a minimum width and their names wrap to two
+       lines rather than truncating. Clicking the bar opens a drop-down with the
+       gauge and every overall expectation by strand, with **Analyze** (to
+       Track) at the far end. It closes on Escape, an outside click or the bar.
+       All from `buildClassProgress` (`src/lib/class-progress.ts`).
+     - **Otherwise** (no subject, no grade, or no curriculum data): the
+       teacher's classes as chips, most recently active first
+       (`src/lib/recent-classes.ts`), each with a taught meter. Picking one
+       sets the subject and grade. With no classes yet, one plain prompt to pick
+       a subject and grade. No summary stats here: they repeat the widgets.
+     - **Phones** keep a one-line progress row that opens the class sheet; the
+       sheet carries the strand rows and "Analyze in Track".
 
   **The next step with its rationale** is no longer in the header (it was a
   third bar). `next-step-bar.tsx` is unused until it becomes a landing-page
