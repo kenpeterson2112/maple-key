@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, type CSSProperties } from "react"
-import { BarChart3, Settings, ChevronDown, Filter } from "lucide-react"
+import * as Popover from "@radix-ui/react-popover"
+import { BarChart3, Check, Settings, ChevronDown, Filter, Globe } from "lucide-react"
 import AccountSheet from "@/components/account-sheet"
 import SubjectDataBar from "@/components/subject-data-bar"
 import { BottomSheet } from "@/components/ui/bottom-sheet"
-import { GRADES, SUBJECTS } from "@/components/hero-personalize"
+import { GRADES, PROVINCES, SUBJECTS } from "@/components/hero-personalize"
 import {
   StrandRows,
   StrandTimeline,
@@ -48,9 +49,9 @@ const GRADE_OPTIONS = GRADES.map((o) => (o.value ? o : { ...o, label: "All grade
 
 // The top nav is locked to the class being worked on (Nielsen: visibility of
 // system status, recognition over recall). It is exactly two bars:
-//   1. Navigation: the logo, the subject and grade pickers and the province,
-//      the spaces as quiet links, and the gear, on a bar in the subject's
-//      colour (brand rust with none).
+//   1. Navigation: the logo, the subject and grade pickers, the spaces as
+//      quiet links, the province (a globe with its abbreviation) and the gear,
+//      on a bar in the subject's colour (brand rust with none).
 //   2. Subject data (subject-data-bar.tsx): the subject's curriculum timeline
 //      by strand, opening into details with Analyze (to Track); or, with no
 //      class picked, the teacher's classes as chips.
@@ -69,7 +70,7 @@ export default function TopNav({
   hideStrip = false,
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
-  const { state, setSubject, setGrade } = useGlobalFilters()
+  const { state, setSubject, setGrade, setProvince } = useGlobalFilters()
   const [isClassSheetOpen, setIsClassSheetOpen] = useState(false)
   const openSettings = onOpenSettings
 
@@ -132,20 +133,13 @@ export default function TopNav({
               <div className="ml-3 flex items-center gap-2">
                 <ContextSelect label="Subject" value={state.subject} options={SUBJECT_OPTIONS} onChange={pickSubject} color={accentText} />
                 <ContextSelect label="Grade" value={state.grade} options={GRADE_OPTIONS} onChange={pickGrade} color={accentText} />
-                <button
-                  type="button"
-                  onClick={openSettings}
-                  title="Province is set in Settings"
-                  className="rounded-full px-2 py-1 text-sm font-semibold underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  {provinceName(state.province)}
-                </button>
               </div>
               <SpaceLinks
                 activeSpace={activeSpace}
                 onChangeSpace={onChangeSpace}
                 planBadge={bookmarkedResources.length}
               />
+              <ProvincePicker value={state.province} onChange={setProvince} backdrop={barStyle.background as string} />
               <button
                 onClick={openSettings}
                 className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-card/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -340,8 +334,10 @@ function ContextSelect({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="h-10 cursor-pointer appearance-none rounded-full bg-card pl-4 pr-9 text-sm font-bold shadow-sm focus-visible:outline-none keyboard:focus-visible:ring-2 keyboard:focus-visible:ring-ring"
-        style={{ color }}
+        // Equal padding both sides (the chevron sits in the right-hand one), so
+        // the value reads centred in the pill.
+        className="h-10 cursor-pointer appearance-none rounded-full bg-card px-9 text-center text-sm font-bold shadow-sm focus-visible:outline-none keyboard:focus-visible:ring-2 keyboard:focus-visible:ring-ring"
+        style={{ color, textAlignLast: "center" }}
       >
         {options.map((o) => (
           <option key={o.value || "all"} value={o.value} className="text-foreground">
@@ -351,6 +347,85 @@ function ContextSelect({
       </select>
       <ChevronDown size={14} className="pointer-events-none absolute right-3" style={{ color }} aria-hidden="true" />
     </label>
+  )
+}
+
+/** The province, low key: a globe with its abbreviation, opening a short list.
+ *  It's rarely changed, so it sits quietly beside the gear rather than with
+ *  the subject and grade. Settings carries the same choice. */
+function ProvincePicker({
+  value,
+  onChange,
+  backdrop,
+}: {
+  value: string
+  onChange: (value: string) => void
+  /** The bar's colour, behind the abbreviation so the globe's lines don't cross it. */
+  backdrop: string
+}) {
+  const [open, setOpen] = useState(false)
+  const name = provinceName(value)
+  return (
+    <Popover.Root open={open} onOpenChange={setOpen}>
+      <Popover.Trigger asChild>
+        <button
+          type="button"
+          title={`Province: ${name}`}
+          aria-label={`Province: ${name}. Change province`}
+          className="relative flex h-10 w-10 items-center justify-center rounded-full opacity-80 transition hover:bg-card/50 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <Globe size={26} strokeWidth={1.5} aria-hidden="true" />
+          {value && (
+            <span
+              className="absolute rounded-sm px-0.5 text-[10px] font-bold leading-none"
+              style={{ background: backdrop }}
+              aria-hidden="true"
+            >
+              {value}
+            </span>
+          )}
+        </button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          align="end"
+          sideOffset={8}
+          // Open on the current province rather than the top of the list.
+          onOpenAutoFocus={(e) => {
+            const current = (e.currentTarget as HTMLElement | null)?.querySelector<HTMLElement>("[aria-current]")
+            if (!current) return
+            e.preventDefault()
+            current.focus()
+          }}
+          className="z-[60] w-64 rounded-2xl border border-border bg-popover p-2 text-popover-foreground shadow-xl motion-safe:animate-fade-in"
+        >
+          <p className="px-3 pb-1 pt-1.5 text-xs font-semibold text-muted-foreground">Province</p>
+          <ul className="max-h-128 overflow-y-auto">
+            {PROVINCES.map((p) => {
+              const selected = p.value === value
+              return (
+                <li key={p.value || "any"}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onChange(p.value)
+                      setOpen(false)
+                    }}
+                    aria-current={selected ? "true" : undefined}
+                    className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                      selected ? "bg-primary-tint font-semibold text-primary-strong" : "text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {p.value ? p.label : "Anywhere in Canada"}
+                    {selected && <Check size={16} aria-hidden="true" />}
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   )
 }
 

@@ -208,9 +208,10 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - **The top nav is the class context** (`top-nav.tsx`, `context-strip.tsx`).
   It is **exactly two bars**; don't add a third. Suggestions and materials
   live on the landing page as widgets, not in the header.
-  1. **Navigation:** the logo, the Subject and Grade selects, the province (a
-     link to Settings), the four spaces as quiet text links and the gear, on a
-     bar in the subject's colour (`--subject-*` via `SUBJECTS[].color`), brand
+  1. **Navigation:** the logo, the Subject and Grade selects (their values
+     centred in the pill), the four spaces as quiet text links, the province
+     (a low-key globe with its abbreviation over it, opening a list of
+     provinces) and the gear, on a bar in the subject's colour (`--subject-*` via `SUBJECTS[].color`), brand
      `primary` with none (on every page, the landing page included).
      - **The bar** is that colour mixed 30% into the page,
        `color-mix(in oklab, <colour> 30%, var(--background))`, with its text in
@@ -226,21 +227,30 @@ Tailwind v4 default 4px scale. Common steps used in this app:
        `currentColor`. 64px tall in the 80px desktop bar, 48px on phones.
   2. **Subject data** (`subject-data-bar.tsx`), switching with the class:
      - **A subject and grade with curriculum data:** the whole curriculum as a
-       timeline, one section per strand sized by its expectation count, each
-       labelled with its code, name and taught count. The blocks are coloured
-       by `signal-*` readiness, with "now" at the overall the last lesson
-       reached. Small strands get a minimum width and their names wrap to two
-       lines rather than truncating. Clicking the bar opens a drop-down with the
-       gauge and every overall expectation by strand, with **Analyze** (to
-       Track) at the far end. It closes on Escape, an outside click or the bar.
+       timeline, one equal-width section per strand on a single row, each
+       labelled with its code, name and taught count; names wrap to two lines
+       rather than truncating. The blocks are coloured by `signal-*`
+       readiness, with "now" at the overall the last lesson reached. The
+       class's "N/M taught" sits at the end beside the Details toggle, never
+       before the strands. Clicking the bar opens a drop-down: the gauge,
+       totals, legend and **Analyze** (to Track) on one line, then every overall
+       expectation in strand columns. The timeline and the columns share one
+       grid (`strandGrid` in `subject-data-bar.tsx`), so each strand's details
+       sit straight under it. It closes on Escape, an outside click or the bar.
        All from `buildClassProgress` (`src/lib/class-progress.ts`).
      - **Otherwise** (no subject, no grade, or no curriculum data): the
-       teacher's classes as chips, most recently active first
+       subjects the teacher has worked on (subject and grade) as chips under
+       the label "Subjects", not "classes", most recently active first
        (`src/lib/recent-classes.ts`), each with a taught meter. Picking one
        sets the subject and grade. With no classes yet, one plain prompt to pick
        a subject and grade. No summary stats here: they repeat the widgets.
      - **Phones** keep a one-line progress row that opens the class sheet; the
        sheet carries the strand rows and "Analyze in Track".
+
+  **The landing page** is This week across the top (Mon–Fri of lessons
+  planned and Quick Checks recorded, with previous / next week and a way back
+  to today), then What's next with **Needs attention** as a slim bar under
+  it, beside Materials.
 
   **The What's next widget** (`whats-next-widget.tsx`, on the landing page
   beside Materials) carries the next step with its rationale; it was a third
@@ -284,8 +294,9 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   yet, so art supplies are General.
 
   **The Materials widget** (`materials-widget.tsx`, on the landing page beside
-  This week and Needs attention) replaces the header's Materials button. It
-  lists what the teacher has, browsable in place with type filters, arranged
+  What's next) replaces the header's Materials button. It shows what the
+  teacher has as a wrapping tag cloud (never a sideways scroll), browsable in
+  place with type filters, under the heading alone (no subtitle), arranged
   by `groupMaterials` (`src/lib/materials-for-subject.ts`, unit-tested): with a
   subject picked, "For <subject>" first, then "Every subject" (General), then
   "Other subjects", each in that subject's category order (Math: manipulatives
@@ -294,7 +305,7 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   Classroom profile. The save functions in `classroom-resources.ts` announce
   changes; read them through `subscribeMaterials` so open views refresh.
 
-  Province is in Settings. The class context has **one store**,
+  Province is in Settings and behind the nav's globe. The class context has **one store**,
   `src/lib/global-filters.ts` (province, grade, subject, strand, plus the
   session-only planner topic); never keep a second copy in a component or
   `App.tsx`. Strand is a Search-only filter, picked in that page's header.

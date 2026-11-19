@@ -1,10 +1,7 @@
 "use client"
 
-import { useMemo } from "react"
-import {
-  BookOpen,
-  Bookmark,
-} from "lucide-react"
+import { useMemo, useState } from "react"
+import { AlertTriangle, BookOpen, Bookmark, ChevronLeft, ChevronRight } from "lucide-react"
 import { SUBJECTS } from "@/components/hero-personalize"
 import MaterialsWidget from "@/components/materials-widget"
 import WhatsNextWidget from "@/components/whats-next-widget"
@@ -91,22 +88,14 @@ export default function HomeSpace({
           </p>
         )}
 
-        {/* ── This week, Needs attention / What's next, Materials ──────── */}
+        {/* ── This week; What's next with Needs attention under it; Materials ── */}
         {/* grid-cols-1 is minmax(0, 1fr): without it a phone's single column
-            grows to its widest content (the Materials filter row) and every
-            card runs off the screen. */}
+            grows to its widest content and every card runs off the screen. */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <ThisWeek onOpenLesson={onOpenLesson} />
-          <NeedsAttention
-            onFindResources={(subject, grade, code) => {
-              setSubject(subject)
-              setGrade(grade)
-              onFindResources(code)
-            }}
-          />
           {/* Each suggestion acts on its own class, which may not be the one
               picked, so each action sets the class first. */}
-          <div className="min-w-0 lg:col-span-2">
+          <div className="flex min-w-0 flex-col gap-3 lg:col-span-2">
             <WhatsNextWidget
               subject={filters.subject}
               grade={filters.grade}
@@ -124,6 +113,13 @@ export default function HomeSpace({
                 onQuickCheck,
                 onPlanBlank: () => onNavigate("lessonplanner"),
                 onOpenTrack: () => onNavigate("insights"),
+              }}
+            />
+            <NeedsAttention
+              onFindResources={(subject, grade, code) => {
+                setSubject(subject)
+                setGrade(grade)
+                onFindResources(code)
               }}
             />
           </div>
@@ -215,20 +211,63 @@ function subjectLabel(subject: string): string {
   return SUBJECTS.find((o) => o.value === subject)?.label ?? subject
 }
 
-/** Mon–Fri of the current week: lessons planned and Quick Checks recorded. */
+const DAY_MS = 24 * 60 * 60 * 1000
+
+/** "Nov 16 – 20", or across months "Nov 30 – Dec 4". */
+function weekRange(days: { start: number }[]): string {
+  const first = new Date(days[0].start)
+  const last = new Date(days[days.length - 1].start)
+  const month = (d: Date) => d.toLocaleDateString("en-CA", { month: "short" })
+  return first.getMonth() === last.getMonth()
+    ? `${month(first)} ${first.getDate()} – ${last.getDate()}`
+    : `${month(first)} ${first.getDate()} – ${month(last)} ${last.getDate()}`
+}
+
+/** Mon–Fri of a week: lessons planned and Quick Checks recorded, stepping back
+ *  and forward a week at a time. */
 function ThisWeek({ onOpenLesson }: { onOpenLesson: (lesson: LessonMetadata) => void }) {
   const { tallies, lessons } = useSelectedClassData()
-  const days = useMemo(() => buildWeek(lessons, tallies), [lessons, tallies])
+  const [offset, setOffset] = useState(0)
+  const days = useMemo(() => buildWeek(lessons, tallies, Date.now(), offset), [lessons, tallies, offset])
   const empty = days.every((d) => d.lessons.length === 0 && d.checks.length === 0)
+  const isFuture = days[0].start > Date.now() + DAY_MS
+  const heading = offset === 0 ? "This week" : offset === -1 ? "Last week" : offset === 1 ? "Next week" : `Week of ${weekRange(days)}`
+  const navButton =
+    "flex size-9 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
 
   return (
-    <section aria-labelledby="home-week-heading" className="rounded-xl border border-border bg-card p-5 shadow-sm lg:col-span-2">
-      <h2 id="home-week-heading" className="font-display text-xl font-semibold text-card-foreground">
-        This week
-      </h2>
+    <section aria-labelledby="home-week-heading" className="rounded-xl border border-border bg-card p-5 shadow-sm lg:col-span-3">
+      <div className="flex items-center gap-3">
+        <h2 id="home-week-heading" className="font-display text-xl font-semibold text-card-foreground">
+          {heading}
+        </h2>
+        {Math.abs(offset) <= 1 && <span className="text-sm text-muted-foreground max-sm:hidden">{weekRange(days)}</span>}
+        <div className="ml-auto flex items-center gap-1">
+          {/* Space for "Today" is kept, so the arrows don't move under the pointer. */}
+          <button
+            type="button"
+            onClick={() => setOffset(0)}
+            aria-hidden={offset === 0 ? true : undefined}
+            tabIndex={offset === 0 ? -1 : undefined}
+            className={`min-h-9 rounded-lg px-2.5 text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${offset === 0 ? "invisible" : ""}`}
+          >
+            Today
+          </button>
+          <button type="button" onClick={() => setOffset((o) => o - 1)} aria-label="Previous week" className={navButton}>
+            <ChevronLeft size={18} aria-hidden="true" />
+          </button>
+          <button type="button" onClick={() => setOffset((o) => o + 1)} aria-label="Next week" className={navButton}>
+            <ChevronRight size={18} aria-hidden="true" />
+          </button>
+        </div>
+      </div>
       {empty && (
         <p className="mt-1 text-sm text-muted-foreground">
-          Nothing planned or checked yet this week. Lessons you plan and Quick Checks you record show up here by day.
+          {isFuture
+            ? "Nothing here yet. This is a record of lessons planned and Quick Checks recorded, so it fills in as the week happens."
+            : offset === 0
+              ? "Nothing planned or checked yet this week. Lessons you plan and Quick Checks you record show up here by day."
+              : "Nothing planned or checked that week."}
         </p>
       )}
       <ol className="mt-4 grid gap-3 md:grid-cols-5">
@@ -285,48 +324,50 @@ function ThisWeek({ onOpenLesson }: { onOpenLesson: (lesson: LessonMetadata) => 
   )
 }
 
-/** The overall expectations classes are struggling with most, across classes. */
+/** The overall expectations classes are struggling with most, across classes:
+ *  a slim bar under What's next, one line per expectation. */
 function NeedsAttention({ onFindResources }: { onFindResources: (subject: string, grade: string, code: string) => void }) {
   const { tallies, lessons } = useSelectedClassData()
-  const items = useMemo(() => buildNeedsAttention(tallies, lessons), [tallies, lessons])
+  const items = useMemo(() => buildNeedsAttention(tallies, lessons, 3), [tallies, lessons])
 
   return (
-    <section aria-labelledby="home-attention-heading" className="flex flex-col gap-3 rounded-xl bg-pop-tint p-5">
-      <h2 id="home-attention-heading" className="font-display text-xl font-semibold text-foreground">
+    <section aria-labelledby="home-attention-heading" className="flex flex-col gap-2 rounded-xl bg-pop-tint px-4 py-3">
+      <h2 id="home-attention-heading" className="flex items-center gap-2 font-display text-sm font-semibold text-foreground">
+        <AlertTriangle size={16} className="flex-shrink-0 text-pop-strong" aria-hidden="true" />
         Needs attention
+        {items.length === 0 && (
+          <span className="font-sans font-normal text-foreground">
+            · Nothing flagged. A Quick Check with a class at Level 1–2 shows up here.
+          </span>
+        )}
       </h2>
-      {items.length === 0 ? (
-        <p className="text-sm text-foreground">
-          Nothing flagged. Once a Quick Check shows a class at Level 1–2 on an expectation, it appears here.
-        </p>
-      ) : (
-        <ul className="flex flex-col gap-3">
-          {items.map(({ subject, grade, overall }) => (
-            <li key={`${subject}|${grade}|${overall.code}`} className="flex flex-col gap-1 text-sm">
-              <span className="flex items-start gap-2">
+      {items.length > 0 && (
+        <ul className="flex flex-col gap-1">
+          {items.map(({ subject, grade, overall }) => {
+            const pct = Math.round((overall.lowShare ?? 0) * 100)
+            return (
+              <li key={`${subject}|${grade}|${overall.code}`} className="flex min-w-0 items-center gap-2 text-sm">
                 <span
-                  className="mt-0.5 flex-shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold"
+                  className="flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-bold"
                   style={{ background: subjectColor(subject), color: "var(--subject-foreground)" }}
                 >
                   {subjectLabel(subject)} {grade}
                 </span>
-                <strong className="min-w-0 text-foreground">
-                  {overall.code} {overall.title}
-                </strong>
-              </span>
-              <span className="flex items-center justify-between gap-2 text-xs text-foreground">
-                {Math.round((overall.lowShare ?? 0) * 100)}% at Level 1–2
+                <span className="min-w-0 flex-1 truncate text-foreground" title={`${overall.code} ${overall.title}`}>
+                  <strong>{overall.code}</strong> {overall.title}
+                </span>
+                <span className="flex-shrink-0 text-xs text-foreground max-sm:hidden">{pct}% at Level 1–2</span>
                 <button
                   type="button"
                   onClick={() => onFindResources(subject, grade, overall.code)}
-                  className="min-h-8 rounded-lg px-2 font-semibold text-pop-strong underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  aria-label={`Find resources for ${subjectLabel(subject)} Grade ${grade} ${overall.code}`}
+                  className="min-h-8 flex-shrink-0 rounded-lg px-2 text-xs font-semibold text-pop-strong underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  aria-label={`Find resources for ${subjectLabel(subject)} Grade ${grade} ${overall.code}, ${pct}% at Level 1–2`}
                 >
                   Find resources
                 </button>
-              </span>
-            </li>
-          ))}
+              </li>
+            )
+          })}
         </ul>
       )}
     </section>
