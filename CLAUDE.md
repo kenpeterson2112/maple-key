@@ -268,6 +268,15 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   sheet and the planner's materials step. Both apply changes as they're made; there is no
   Save button.
 
+  **Classroom materials carry subject tags** (`src/lib/classroom-resources.ts`):
+  each built-in material has `subjects`, one or more schema subjects
+  (`Subject` from `shared/resource-schema.ts`), or `["General"]` for what
+  serves every subject. General is never mixed with a subject. Custom materials
+  a teacher types in may carry `subjects`; untagged ones count as General
+  (`customMaterialSubjects`). A new built-in material must be tagged, or
+  `classroom-resources.test.ts` fails. There's no Arts subject in the schema
+  yet, so art supplies are General.
+
   Province is in Settings. The class context has **one store**,
   `src/lib/global-filters.ts` (province, grade, subject, strand, plus the
   session-only planner topic); never keep a second copy in a component or
