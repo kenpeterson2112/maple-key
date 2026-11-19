@@ -30,6 +30,11 @@ const isStudentActivity = activityId !== null || window.location.hash.startsWith
 const DistrictSpace = lazy(() => import("@/components/district/district-space"))
 const isDistrict = window.location.hash === "#district"
 
+// Header mock-ups (#header-preview): a design preview for the landing-page
+// handoff. Static tokens and no data, so it's open like the legal pages.
+const HeaderPreview = lazy(() => import("@/components/dev/header-preview"))
+const isHeaderPreview = window.location.hash === "#header-preview"
+
 // Privacy policy and terms (/privacy, /tos): real paths, because Google's
 // sign-in consent screen links to them. Plain pages, no app providers.
 const LegalPage = lazy(() => import("@/components/legal/legal-page"))
@@ -57,7 +62,8 @@ const isAccount =
 // Mode is chosen once at load, so moving to or from an activity link in the
 // same tab (pasting a second link, say) needs a fresh load to switch pages.
 window.addEventListener("hashchange", (e) => {
-  const isStandalone = (hash: string) => hash.startsWith(ACTIVITY_HASH_PREFIX) || hash === "#district" || hash.startsWith("#account")
+  const isStandalone = (hash: string) =>
+    hash.startsWith(ACTIVITY_HASH_PREFIX) || hash === "#district" || hash === "#header-preview" || hash.startsWith("#account")
   const was = isStandalone(new URL(e.oldURL).hash)
   const now = isStandalone(new URL(e.newURL).hash)
   if (was || now) window.location.reload()
@@ -68,6 +74,10 @@ createRoot(document.getElementById("root")!).render(
     {legalDoc ? (
       <Suspense fallback={null}>
         <LegalPage doc={legalDoc} />
+      </Suspense>
+    ) : isHeaderPreview ? (
+      <Suspense fallback={null}>
+        <HeaderPreview />
       </Suspense>
     ) : isStudentActivity ? (
       <Suspense fallback={null}>

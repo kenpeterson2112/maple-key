@@ -9,15 +9,21 @@
 //
 //   node scripts/check-contrast.mjs          table of every pair, exit 1 on a failure
 //   node scripts/check-contrast.mjs --quiet  print failures only
+//   node scripts/check-contrast.mjs --css=path/to/candidate.css
+//                                            check a proposed palette instead
 //
 // AA thresholds: 4.5:1 for text, 3:1 for UI parts (focus rings, indicators,
 // outline borders). The --signal-* assessment scale is out of scope: it carries
 // meaning and stays fixed, so it is not tuned here.
 
 import { readFileSync } from "node:fs"
+import { resolve as resolvePath } from "node:path"
 import { fileURLToPath } from "node:url"
 
-const CSS_PATH = fileURLToPath(new URL("../src/index.css", import.meta.url))
+const cssArg = process.argv.find((a) => a.startsWith("--css="))
+const CSS_PATH = cssArg
+  ? resolvePath(cssArg.slice("--css=".length))
+  : fileURLToPath(new URL("../src/index.css", import.meta.url))
 const quiet = process.argv.includes("--quiet")
 
 const TEXT = 4.5
