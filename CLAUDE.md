@@ -277,6 +277,17 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `classroom-resources.test.ts` fails. There's no Arts subject in the schema
   yet, so art supplies are General.
 
+  **The Materials widget** (`materials-widget.tsx`, on the landing page beside
+  This week and Needs attention) replaces the header's Materials button. It
+  lists what the teacher has, browsable in place with type filters, arranged
+  by `groupMaterials` (`src/lib/materials-for-subject.ts`, unit-tested): with a
+  subject picked, "For <subject>" first, then "Every subject" (General), then
+  "Other subjects", each in that subject's category order (Math: manipulatives
+  first; Language: books, then the reading spaces; Science: the lab, then
+  equipment). It also offers quick adds for that subject. Edits stay in the
+  Classroom profile. The save functions in `classroom-resources.ts` announce
+  changes; read them through `subscribeMaterials` so open views refresh.
+
   Province is in Settings. The class context has **one store**,
   `src/lib/global-filters.ts` (province, grade, subject, strand, plus the
   session-only planner topic); never keep a second copy in a component or

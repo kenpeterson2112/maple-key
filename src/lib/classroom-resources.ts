@@ -98,6 +98,27 @@ export const CLASSROOM_RESOURCE_OPTIONS: ClassroomResourceOption[] = [
 const STORAGE_KEY = "maplekey_classroom"
 const CUSTOM_STORAGE_KEY = "maplekey_classroom_custom"
 
+/** Fired on window whenever this tab saves materials, so views that show them
+ *  (the landing page's Materials widget) can refresh. Other tabs get the
+ *  browser's own "storage" event; `subscribeMaterials` covers both. */
+const MATERIALS_CHANGED = "mk-materials-changed"
+
+function announce(): void {
+  window.dispatchEvent(new Event(MATERIALS_CHANGED))
+}
+
+export function subscribeMaterials(onChange: () => void): () => void {
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY || e.key === CUSTOM_STORAGE_KEY) onChange()
+  }
+  window.addEventListener(MATERIALS_CHANGED, onChange)
+  window.addEventListener("storage", onStorage)
+  return () => {
+    window.removeEventListener(MATERIALS_CHANGED, onChange)
+    window.removeEventListener("storage", onStorage)
+  }
+}
+
 export function getClassroomResources(): string[] {
   if (typeof window === "undefined") return []
   try {
@@ -116,6 +137,7 @@ export function setClassroomResources(ids: string[]): void {
   } catch {
     // ignore quota / privacy errors
   }
+  announce()
 }
 
 export function getClassroomResourceLabels(ids: string[]): string[] {
@@ -179,6 +201,7 @@ export function setCustomClassroomResources(items: CustomClassroomResource[]): v
   } catch {
     // ignore quota / privacy errors
   }
+  announce()
 }
 
 export interface MaterialsSnapshotRow {

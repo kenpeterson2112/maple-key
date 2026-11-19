@@ -6,6 +6,7 @@ import {
   Bookmark,
 } from "lucide-react"
 import { SUBJECTS } from "@/components/hero-personalize"
+import MaterialsWidget from "@/components/materials-widget"
 import { useClassData, useSelectedClassData } from "@/components/context-strip"
 import { buildNeedsAttention } from "@/lib/class-progress"
 import { buildWeek } from "@/lib/week"
@@ -83,7 +84,7 @@ export default function HomeSpace({
           </p>
         )}
 
-        {/* ── This week / Needs attention ──────────────────────────────── */}
+        {/* ── This week / Needs attention / Materials ──────────────────── */}
         <div className="grid gap-4 lg:grid-cols-3">
           <ThisWeek onOpenLesson={onOpenLesson} />
           <NeedsAttention
@@ -93,6 +94,11 @@ export default function HomeSpace({
               onFindResources(code)
             }}
           />
+          {/* Right-hand column of the second row; What's next takes the two
+              columns beside it. */}
+          <div className="lg:col-start-3">
+            <MaterialsWidget onEdit={onOpenClassroomSetup} />
+          </div>
         </div>
 
         {/* ── Pick up where you left off ───────────────────────────────── */}
