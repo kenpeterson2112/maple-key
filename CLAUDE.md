@@ -242,18 +242,24 @@ Tailwind v4 default 4px scale. Common steps used in this app:
      - **Phones** keep a one-line progress row that opens the class sheet; the
        sheet carries the strand rows and "Analyze in Track".
 
-  **The next step with its rationale** is no longer in the header (it was a
-  third bar). `next-step-bar.tsx` is unused until it becomes a landing-page
-  widget. The rules stay, with no model call (`src/lib/next-step.ts`,
-  unit-tested): reteach when a Quick Check since the last lesson has ≥50% at
+  **The What's next widget** (`whats-next-widget.tsx`, on the landing page
+  beside Materials) carries the next step with its rationale; it was a third
+  header bar. With a subject and grade picked it's that class's step; otherwise
+  up to three across the teacher's classes, revisits first (worst first), then
+  each class's next lesson, most recently active first. Each suggestion acts on
+  its own class, so its buttons set the subject and grade first. The labels
+  name the expectation: "Plan the B1.2 lesson", "Plan a B1.1 review lesson",
+  "Browse 32 B1.1 resources" (or "Search for B1.2 resources" when none are
+  tagged), "Run a Quick Check first". The rules have no model call
+  (`src/lib/next-step.ts`, unit-tested): reteach when a Quick Check since the last lesson has ≥50% at
   Level 1–2 on its expectations, else the next untaught expectation after the
   last lesson in the scope and sequence (`src/lib/scope-sequence.ts`: a file in
   `src/data/sequences/` if one exists for the subject and grade, else the
   curriculum order). Every clause of the rationale must point at data the
   teacher can see.
 
-  The landing page follows the same selection: This week, Needs attention and
-  Pick up where you left off show only what matches the subject and grade
+  The landing page follows the same selection: This week, Needs attention,
+  What's next and Pick up where you left off show only what matches the subject and grade
   picked (`useSelectedClassData`), and an empty picker means all. A teacher has
   one class on the go, shown in the nav, so the page doesn't repeat it as cards.
   The strand timeline splits each overall into checked (readiness colour),
