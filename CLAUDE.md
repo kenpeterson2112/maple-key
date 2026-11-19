@@ -205,13 +205,13 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `class-dashboard.tsx`, `lessons-library.tsx`).
 - **The assessment modal and sticky footer are the highest-risk reusable pieces** —
   changes here ripple through the Acorn remote.
-- **The top nav is the class context** (`top-nav.tsx`, `context-strip.tsx`,
-  `next-step-bar.tsx`). Desktop has three layers:
-  1. **Settings:** the Subject and Grade selects and the province (a link to
-     Settings) on a bar in the subject's colour (`--subject-*` via
-     `SUBJECTS[].color`), brand `primary` with none (on every page, the landing
-     page included). The four spaces sit here as quiet text links; the layers
-     below lead into them too.
+- **The top nav is the class context** (`top-nav.tsx`, `context-strip.tsx`).
+  It is **exactly two bars**; don't add a third. Suggestions and materials
+  live on the landing page as widgets, not in the header.
+  1. **Navigation:** the logo, the Subject and Grade selects, the province (a
+     link to Settings), the four spaces as quiet text links and the gear, on a
+     bar in the subject's colour (`--subject-*` via `SUBJECTS[].color`), brand
+     `primary` with none (on every page, the landing page included).
      - **The bar** is that colour mixed 30% into the page,
        `color-mix(in oklab, <colour> 30%, var(--background))`, with its text in
        `--foreground`. Mix in OKLab, not OKLCH: OKLCH swings the hue through the
@@ -224,17 +224,20 @@ Tailwind v4 default 4px scale. Common steps used in this app:
        colour: the bar's `--foreground`, so dark in light mode and light in dark
        mode. `public/maple-key-lockup.png` is alpha only, used as a CSS mask over
        `currentColor`. 64px tall in the 80px desktop bar, 48px on phones.
-  2. **Where the class is:** a gauge (taught of the grade's real expectation
+  2. **Subject data, where the class is:** a gauge (taught of the grade's real expectation
      count), the strand timeline coloured by `signal-*` readiness with "now"
      at the overall the last lesson reached, and a link into Track. All from
      `buildClassProgress` (`src/lib/class-progress.ts`).
-  3. **Next step with rationale:** rules only, no model call
-     (`src/lib/next-step.ts`, unit-tested): reteach when a Quick Check since
-     the last lesson has ≥50% at Level 1–2 on its expectations, else the next
-     untaught expectation after the last lesson in the scope and sequence
-     (`src/lib/scope-sequence.ts`: a file in `src/data/sequences/` if one exists
-     for the subject and grade, else the curriculum order). Every clause of
-     the rationale must point at data the teacher can see.
+
+  **The next step with its rationale** is no longer in the header (it was a
+  third bar). `next-step-bar.tsx` is unused until it becomes a landing-page
+  widget. The rules stay, with no model call (`src/lib/next-step.ts`,
+  unit-tested): reteach when a Quick Check since the last lesson has ≥50% at
+  Level 1–2 on its expectations, else the next untaught expectation after the
+  last lesson in the scope and sequence (`src/lib/scope-sequence.ts`: a file in
+  `src/data/sequences/` if one exists for the subject and grade, else the
+  curriculum order). Every clause of the rationale must point at data the
+  teacher can see.
 
   The landing page follows the same selection: This week, Needs attention and
   Pick up where you left off show only what matches the subject and grade
@@ -247,8 +250,9 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   **Settings** (`settings-page.tsx`: account, province, appearance, help and the
   tour, test mode) and the **Classroom profile** (`classroom-profile.tsx`:
   materials and spaces, lesson defaults such as handout language, no-tech mode
-  and planner layout) are full pages, opened from the gear, the Materials menu
-  and the phone account sheet. Both apply changes as they're made; there is no
+  and planner layout) are full pages. Settings opens from the gear and the
+  phone account sheet; the Classroom profile from Settings, the phone account
+  sheet and the planner's materials step. Both apply changes as they're made; there is no
   Save button.
 
   Province is in Settings. The class context has **one store**,
@@ -261,6 +265,12 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   - **Nav items:** desktop's pill toggle and the tab bar both read the four spaces from `src/lib/nav-items.ts`.
   - **Account:** the header avatar opens `account-sheet.tsx` (Settings, Classroom profile, Invite staff, Sign out). There is no hamburger menu.
   - **Safe areas:** with `viewport-fit=cover`, the header pads the top inset, the tab bar the bottom one, and the app root the sides.
+- **Focus rings on `<select>` use `keyboard:focus-visible:ring-2
+  keyboard:focus-visible:ring-ring`.** Chrome keeps `:focus-visible` on a
+  select after a mouse pick, so a plain ring lingers after every choice. The
+  `keyboard:` variant (`src/index.css`, fed by `src/lib/input-modality.ts`)
+  shows it unless the last input was a mouse or touch. Never remove a ring
+  outright.
 - **Phone menus and filters use `ui/bottom-sheet.tsx`.** It's a Radix Dialog with a Framer slide-up. It closes on backdrop tap, Escape, the close button, or a swipe down on its handle; the swipe starts only on the handle, so the body scrolls freely. It takes a `footer` for a pinned primary action (the filters sheet's "Show N results").
 
 ## Architecture notes for Claude Code

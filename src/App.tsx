@@ -11,7 +11,6 @@ import ClassInsightsSpace from "@/components/class-insights-space"
 import SettingsPage from "@/components/settings-page"
 import ClassroomProfile from "@/components/classroom-profile"
 import TopNav, { type TopNavSpace } from "@/components/top-nav"
-import type { NextStepHandlers } from "@/components/next-step-bar"
 import BottomTabBar from "@/components/bottom-tab-bar"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
@@ -87,26 +86,6 @@ export default function App() {
       ? activeSpace
       : null
 
-  // The next-step suggestion (top nav layer 3) acts on its own class, which on
-  // the landing page may not be the one selected, so each action sets it first.
-  const nextStepHandlers: NextStepHandlers = {
-    onPlan: (subject, grade, code, label) => {
-      globalFilters.setSubject(subject)
-      globalFilters.setGrade(grade)
-      globalFilters.setTopic(`${code} ${label}`)
-      openPlanner(null)
-    },
-    onFindResources: (subject, grade, code) => {
-      globalFilters.setSubject(subject)
-      globalFilters.setGrade(grade)
-      findResources(code)
-    },
-    onQuickCheck: (lesson) => {
-      setAssessmentLesson(lesson)
-      setActiveSpace("assessment")
-    },
-  }
-
   const changeSpace = (s: TopNavSpace) => {
     // Plan always starts fresh, matching the old "Plan Lesson" button.
     if (s === "lessonplanner") openPlanner(null)
@@ -124,7 +103,6 @@ export default function App() {
         onChangeSpace={changeSpace}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
-        nextStepHandlers={nextStepHandlers}
         onOpenSettings={() => setActiveSpace("settings")}
         onOpenClassroomProfile={() => setActiveSpace("classroom")}
         hideStrip={activeSpace === "assessment"}

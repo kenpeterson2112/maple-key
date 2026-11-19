@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
+/* Focus rings that only show for keyboard use: on unless the last input was a
+   mouse or touch (src/lib/input-modality.ts). For controls such as <select>
+   where the browser keeps :focus-visible after a click. */
+@custom-variant keyboard (&:where(:root:not([data-input="pointer"]) *));
 
 /* Crisp orchard palette. Rust primary, teal secondary, goldenrod pop.
    Every value is the OKLCH form of the sRGB hex in its comment and converts
