@@ -222,8 +222,12 @@ This is a **separate review pass** over the resources you just curated. For each
   Tag what the resource itself teaches, not everything its topic touches: a
   single activity usually earns 1–3 codes, and five codes across several
   strands is a sign Stage 2 kept a hub.
-  Use only codes that genuinely exist for that subject/grade. If you cannot
-  align a resource to at least one real code, **drop it** rather than invent one.
+  Use only codes that genuinely exist for that subject/grade: pick them from
+  `public/curriculum/on/en/<subject>/g<grade>.json` (the Ministry's own
+  wording), never from memory. `scripts/validate-resources.py` fails CI on any
+  Ontario Grade 1–8 code that isn't in that file for one of the resource's
+  grades. If you cannot align a resource to at least one real code, **drop
+  it** rather than invent one.
 - Confirm `grade_level` is sensible (1–3 most likely grades); fix if Stage 2
   guessed wrong.
 - Write the codes into `curriculum_expectations`. `curriculum_expectations`

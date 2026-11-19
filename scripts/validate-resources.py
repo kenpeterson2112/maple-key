@@ -4,8 +4,10 @@ validate-resources.py
 Validates public/resources.json against schema/resource-schema.json.
 
 Checks the field contract (required present, nothing undeclared), the closed
-vocabularies, the cross-field invariants the schema declares, and the intake
-gate on new records (schema.intake). Run in CI so a bad ingest fails the build
+vocabularies, the cross-field invariants the schema declares, the intake
+gate on new records (schema.intake), and that every expectation code on an
+Ontario Grade 1-8 resource exists in the Ontario curriculum for one of its
+grades (src/data/curriculum, from scripts/fetch-curriculum.py). Run in CI so a bad ingest fails the build
 rather than landing in the dataset.
 
     python3 scripts/validate-resources.py [path ...]
@@ -29,6 +31,17 @@ DEFAULT_TARGETS = [
 
 KNOWN_FIELDS = set(_schema.ALL_FIELDS)
 KNOWN_METADATA_FIELDS = set(_schema.ALL_METADATA_FIELDS)
+
+# Every Ontario expectation code (overall and specific) per subject and grade.
+# The docs/ mirror is a build output refreshed after merge, so only the
+# source file is held to it.
+_OUTLINE = json.loads((REPO_ROOT / "src" / "data" / "curriculum" / "on.en.outline.json").read_text(encoding="utf-8"))
+CURRICULUM_CODES = {
+    (subject, grade): {o["code"] for s in g["strands"] for o in s["overalls"]}
+    | {c for s in g["strands"] for o in s["overalls"] for c in o["specifics"]}
+    for subject, entry in _OUTLINE["subjects"].items()
+    for grade, g in entry["grades"].items()
+}
 
 INTAKE_FROM = _schema.INTAKE["granularity_required_from"]
 ACCEPTED_GRANULARITY = _schema.INTAKE["accepted_granularity"]
@@ -59,6 +72,26 @@ def intake_problems(resource: dict, rid: str) -> list:
     if is_front_page(resource.get("url", "")):
         problems.append(f"{rid}: added {added_at[:10]} with a site front page as its url ({resource.get('url')})")
     return problems
+
+
+def curriculum_problems(resource: dict, rid: str) -> list:
+    """Codes that exist in none of the resource's Ontario grades.
+
+    Only Ontario resources at grades the curriculum data covers are checked; a
+    code valid in any one of the resource's grades passes (a Grade 6-8
+    resource may carry a Grade 6-only code)."""
+    if resource.get("province") != "ON":
+        return []
+    grades = [str(g) for g in resource.get("grade_level") or []]
+    covered = [CURRICULUM_CODES[(resource.get("subject"), g)] for g in grades if (resource.get("subject"), g) in CURRICULUM_CODES]
+    if not covered:
+        return []
+    return [
+        f"{rid}: expectation {code!r} is not in the Ontario {resource.get('subject')} curriculum "
+        f"for grade(s) {', '.join(grades)}"
+        for code in resource.get("curriculum_expectations") or []
+        if not any(code in codes for codes in covered)
+    ]
 
 
 def validate_resource(resource: dict, index: int) -> list:
@@ -157,9 +190,12 @@ def validate_file(path: Path) -> list:
             f"{len(resources)} resources"
         )
 
+    check_codes = path.parent.name != "docs"
     seen = {}
     for i, resource in enumerate(resources):
         problems.extend(validate_resource(resource, i))
+        if check_codes:
+            problems.extend(curriculum_problems(resource, resource.get("id", f"<index {i}>")))
         rid = resource.get("id")
         if rid in seen:
             problems.append(f"{rid}: duplicate id (also at index {seen[rid]})")

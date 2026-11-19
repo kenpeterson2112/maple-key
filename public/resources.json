@@ -834,7 +834,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.3",
+        "A1",
         "B1.3"
       ],
       "accessibility": [
@@ -1058,8 +1058,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "D1.1",
-        "D1.2",
-        "D1.4"
+        "D1"
       ],
       "accessibility": [
         "No Concerns"
@@ -1104,8 +1103,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "D1.1",
-        "D1.2",
-        "D1.4"
+        "D1"
       ],
       "accessibility": [
         "Some Concerns"
@@ -1148,8 +1146,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "D1.1",
-        "D1.2",
-        "D1.4"
+        "D1"
       ],
       "accessibility": [
         "No Concerns"
@@ -1193,8 +1190,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "D1.1",
-        "D1.2",
-        "D1.4"
+        "D1"
       ],
       "accessibility": [
         "No Concerns"
@@ -1370,11 +1366,7 @@
       "resource_type": "interactive",
       "access_type": "free",
       "is_paid": false,
-      "curriculum_expectations": [
-        "C1.1",
-        "C2.1",
-        "C3.1"
-      ],
+      "curriculum_expectations": [],
       "accessibility": [
         "No Concerns"
       ],
@@ -1644,8 +1636,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "O1.1",
-        "O1.2"
+        "B1"
       ],
       "accessibility": [
         "No Concerns"
@@ -1741,7 +1732,7 @@
       "curriculum_expectations": [
         "D1.1",
         "D1.2",
-        "D1.4"
+        "D1"
       ],
       "accessibility": [
         "Some Concerns"
@@ -1783,7 +1774,7 @@
       "curriculum_expectations": [
         "D1.1",
         "D1.2",
-        "D1.4"
+        "D1"
       ],
       "accessibility": [
         "No Concerns"
@@ -1827,7 +1818,7 @@
       "curriculum_expectations": [
         "D1.1",
         "D1.2",
-        "D1.4"
+        "D1"
       ],
       "accessibility": [
         "No Concerns"
@@ -1959,8 +1950,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B2.1",
-        "B2.2",
-        "B3.1"
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -2092,8 +2082,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "A1.2",
-        "A2.2",
-        "C1.1"
+        "A2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -2226,8 +2215,8 @@
       "curriculum_expectations": [
         "A1.1",
         "A2.1",
-        "W1.1",
-        "W2.1"
+        "D1",
+        "D2"
       ],
       "accessibility": [
         "No Concerns"
@@ -2270,9 +2259,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "W2.1",
-        "W2.2",
-        "W2.3"
+        "D2.5",
+        "D2.6",
+        "B3.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -2318,7 +2307,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B2.1",
-        "W1.1"
+        "D3.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -2361,9 +2350,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "W1.1",
-        "W1.2",
-        "W3.1"
+        "D1",
+        "D2",
+        "D3"
       ],
       "accessibility": [
         "No Concerns"
@@ -2409,8 +2398,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "C1.1",
-        "C2.1",
-        "C3.1"
+        "C2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -2637,8 +2625,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "A1.2",
-        "A2.3",
-        "C1.2"
+        "A2.3"
       ],
       "accessibility": [
         "Some Concerns"
@@ -9058,7 +9045,7 @@
       "curriculum_expectations": [
         "D2.1",
         "D2.2",
-        "D2.3"
+        "D2"
       ],
       "accessibility": [
         "No Concerns"
@@ -9106,7 +9093,7 @@
       "curriculum_expectations": [
         "D2.1",
         "D2.2",
-        "D2.3"
+        "D2"
       ],
       "accessibility": [
         "No Concerns"
@@ -9199,7 +9186,7 @@
         "D1.1",
         "D2.1",
         "D2.2",
-        "D2.3"
+        "D2"
       ],
       "accessibility": [
         "No Concerns"
@@ -9244,7 +9231,7 @@
       "curriculum_expectations": [
         "D2.1",
         "D2.2",
-        "D2.3"
+        "D2"
       ],
       "accessibility": [
         "No Concerns"
@@ -10321,7 +10308,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.4",
-        "E1.5"
+        "E1"
       ],
       "accessibility": [
         "No Concerns"
@@ -10409,7 +10396,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.4",
-        "E1.5"
+        "E1"
       ],
       "accessibility": [
         "No Concerns"
@@ -10602,7 +10589,7 @@
       "curriculum_expectations": [
         "E1.1",
         "E1.4",
-        "E1.5"
+        "E1"
       ],
       "accessibility": [
         "No Concerns"
@@ -12586,9 +12573,12 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "F2.1",
-        "F2.2",
-        "F2.3"
+        "F1.1",
+        "F1.2",
+        "F1.3",
+        "F1.4",
+        "F1.5",
+        "F1.6"
       ],
       "accessibility": [
         "No Concerns"
@@ -12679,9 +12669,9 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "F2.1",
-        "F2.2",
-        "F2.3"
+        "F1.1",
+        "F1.3",
+        "F1.4"
       ],
       "accessibility": [
         "No Concerns"
@@ -12731,9 +12721,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "F1.1",
-        "F1.2",
-        "F2.1",
-        "F2.2"
+        "F1.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -13975,9 +13963,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14024,9 +14010,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
-        "A2.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14074,9 +14058,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14118,10 +14100,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1",
-        "A2.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14164,8 +14143,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14251,9 +14229,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14296,9 +14272,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14342,9 +14316,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14480,9 +14452,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14523,10 +14493,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1",
-        "A2.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -14983,7 +14950,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1"
       ],
@@ -15032,7 +14999,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -15216,7 +15183,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -16115,7 +16082,7 @@
       "curriculum_expectations": [
         "D2.1",
         "D2.2",
-        "D2.3"
+        "D2"
       ],
       "accessibility": [
         "No Concerns"
@@ -17124,8 +17091,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -17167,9 +17133,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A1.3"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -17222,7 +17186,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -17273,7 +17237,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -17319,7 +17283,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -17414,7 +17378,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -17459,7 +17423,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1"
       ],
@@ -17504,7 +17468,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1"
       ],
@@ -17549,7 +17513,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -17599,7 +17563,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "D1.1",
         "E1.1"
@@ -17648,7 +17612,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "D1.1",
         "E1.1"
@@ -17693,7 +17657,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "D1.1",
         "E1.1"
@@ -17740,7 +17704,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "D1.1",
         "E1.1"
@@ -17787,7 +17751,8 @@
       "curriculum_expectations": [
         "E1.1",
         "E2.1",
-        "E3.1"
+        "E2.3",
+        "E2.7"
       ],
       "accessibility": [
         "No Concerns"
@@ -17878,7 +17843,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "D1.1",
         "E1.1"
@@ -18015,7 +17980,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "D1.1",
         "E1.1"
@@ -18114,7 +18079,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -18165,7 +18130,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -18216,7 +18181,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -18268,7 +18233,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -18359,7 +18324,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "D1.1",
         "D1.2"
       ],
@@ -19137,7 +19102,7 @@
       "curriculum_expectations": [
         "D2.1",
         "D2.2",
-        "D3.1"
+        "D1"
       ],
       "accessibility": [
         "No Concerns"
@@ -19186,7 +19151,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -19232,7 +19197,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -19285,7 +19250,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -19337,7 +19302,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -19390,7 +19355,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -19436,7 +19401,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -19481,7 +19446,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -19528,10 +19493,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1",
-        "A2.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -19619,7 +19581,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -19664,7 +19626,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -19710,8 +19672,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -19759,7 +19720,7 @@
       "curriculum_expectations": [
         "B1.1",
         "C1.1",
-        "A1.1",
+        "A1",
         "D1.1"
       ],
       "accessibility": [
@@ -19808,7 +19769,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B2.1",
-        "A1.1",
+        "A1",
         "C1.1"
       ],
       "accessibility": [
@@ -19854,8 +19815,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "D1.1"
       ],
       "accessibility": [
@@ -19902,8 +19862,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "B1.1",
         "C1.1"
       ],
@@ -20425,9 +20384,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3"
+        "B1"
       ],
       "accessibility": [
         "No Concerns"
@@ -20471,10 +20428,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3",
-        "N2.1"
+        "B1",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -20516,9 +20471,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3"
+        "B1",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -20563,9 +20517,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3"
+        "B1.1",
+        "B1.2",
+        "B1.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -20612,9 +20566,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3"
+        "B1",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -20659,9 +20612,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3"
+        "B1"
       ],
       "accessibility": [
         "No Concerns"
@@ -20705,9 +20656,9 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3"
+        "B1.2",
+        "B1.3",
+        "B1.4"
       ],
       "accessibility": [
         "No Concerns"
@@ -20750,9 +20701,8 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3"
+        "B1",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -20794,9 +20744,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.1",
-        "N1.2",
-        "N1.3"
+        "B1.2",
+        "B1.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -20839,8 +20788,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.2",
-        "N1.3"
+        "B1.4",
+        "B1.7"
       ],
       "accessibility": [
         "No Concerns"
@@ -21883,7 +21832,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -21940,7 +21889,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -21987,7 +21936,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22032,7 +21981,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22122,7 +22071,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22173,7 +22122,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22218,7 +22167,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22263,7 +22212,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22308,7 +22257,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22354,7 +22303,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22398,7 +22347,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22445,7 +22394,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22492,7 +22441,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22538,7 +22487,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22585,7 +22534,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22633,7 +22582,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -22679,7 +22628,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -22726,7 +22675,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -22774,7 +22723,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -22823,7 +22772,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -22873,7 +22822,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -23574,7 +23523,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E2.2",
-        "E3.1"
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -23617,8 +23566,8 @@
       "curriculum_expectations": [
         "E1.1",
         "E2.2",
-        "E3.1",
-        "E3.2"
+        "E2.3",
+        "E2.4"
       ],
       "accessibility": [
         "No Concerns"
@@ -23664,8 +23613,8 @@
         "E1.2",
         "E2.1",
         "E2.2",
-        "E3.1",
-        "E3.2"
+        "E2.3",
+        "E2.4"
       ],
       "accessibility": [
         "No Concerns"
@@ -23796,8 +23745,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E2.2",
-        "E3.1",
-        "E3.2"
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -23929,9 +23877,9 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E2.2",
-        "E3.1",
-        "E3.2",
-        "E1.1"
+        "E1.1",
+        "E2.3",
+        "E2.4"
       ],
       "accessibility": [
         "No Concerns"
@@ -23977,7 +23925,7 @@
         "E2.1",
         "E2.2",
         "E2.3",
-        "E3.1"
+        "E2"
       ],
       "accessibility": [
         "No Concerns"
@@ -24953,7 +24901,7 @@
       "curriculum_expectations": [
         "E1.1",
         "E2.1",
-        "E3.1"
+        "E2"
       ],
       "accessibility": [
         "No Concerns"
@@ -24997,7 +24945,8 @@
       "curriculum_expectations": [
         "E1.1",
         "E2.1",
-        "E3.1"
+        "E2.2",
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -25042,7 +24991,8 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E2.1",
-        "E3.1"
+        "E2.3",
+        "E2.5"
       ],
       "accessibility": [
         "No Concerns"
@@ -25088,7 +25038,7 @@
       "curriculum_expectations": [
         "E1.1",
         "E2.1",
-        "E3.1"
+        "E2"
       ],
       "accessibility": [
         "No Concerns"
@@ -25133,7 +25083,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "E2.1",
-        "E3.1"
+        "E2"
       ],
       "accessibility": [
         "No Concerns"
@@ -25178,7 +25128,7 @@
       "curriculum_expectations": [
         "E1.1",
         "E2.1",
-        "E3.1"
+        "E2"
       ],
       "accessibility": [
         "No Concerns"
@@ -25221,7 +25171,8 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E2.1",
-        "E3.1"
+        "E2.2",
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -25265,7 +25216,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "E3.1"
+        "E2.7",
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -25309,7 +25261,7 @@
       "curriculum_expectations": [
         "E1.1",
         "E2.1",
-        "E3.1"
+        "E2"
       ],
       "accessibility": [
         "No Concerns"
@@ -25489,8 +25441,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B1.2",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -28828,9 +28779,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -28872,8 +28821,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -31964,7 +31912,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32007,7 +31955,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32052,7 +32000,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32095,7 +32043,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32140,7 +32088,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32184,7 +32132,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32227,7 +32175,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32272,7 +32220,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32316,7 +32264,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32360,7 +32308,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32447,7 +32395,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32490,7 +32438,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32533,7 +32481,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32620,7 +32568,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3",
+        "C3",
         "B2.1",
         "B2.2"
       ],
@@ -32666,7 +32614,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3",
+        "C3",
         "B2.1"
       ],
       "accessibility": [
@@ -32754,7 +32702,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32797,7 +32745,7 @@
       "curriculum_expectations": [
         "C3.1",
         "C3.2",
-        "C3.3"
+        "C3"
       ],
       "accessibility": [
         "No Concerns"
@@ -32840,9 +32788,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -32886,9 +32832,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -32929,8 +32873,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -33343,7 +33286,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -33438,7 +33381,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -33490,7 +33433,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -33589,7 +33532,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -33678,7 +33621,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B2.1",
         "C2.1",
         "D2.1"
@@ -33722,7 +33665,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B2.1",
         "C2.1",
         "D2.1"
@@ -34128,8 +34071,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.1",
-        "E2.1",
-        "E3.1"
+        "E2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -34691,8 +34633,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.1",
-        "E2.1",
-        "E3.1"
+        "E2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -34736,8 +34677,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "E1.1",
-        "E2.1",
-        "E3.1"
+        "E2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -34782,8 +34722,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.1",
-        "E2.1",
-        "E3.1"
+        "E2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -34827,8 +34766,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.1",
-        "E2.1",
-        "E3.1"
+        "E2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -34873,8 +34811,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.1",
-        "E2.1",
-        "E3.1"
+        "E2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -34915,8 +34852,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "B1.1"
       ],
       "accessibility": [
@@ -34958,8 +34894,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "B1.1"
       ],
       "accessibility": [
@@ -35001,8 +34936,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "B1.1"
       ],
       "accessibility": [
@@ -35044,8 +34978,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "B1.1"
       ],
       "accessibility": [
@@ -35088,8 +35021,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "B1.1"
       ],
       "accessibility": [
@@ -35621,8 +35553,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -35799,7 +35730,6 @@
       "curriculum_expectations": [
         "B1.1",
         "B2.1",
-        "B3.1",
         "C1.1"
       ],
       "accessibility": [
@@ -35843,8 +35773,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -35886,8 +35815,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -36576,8 +36504,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -36622,9 +36549,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A1.3"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -36670,8 +36595,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -36713,9 +36637,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A1.3"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -36756,8 +36678,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -36801,8 +36722,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -36846,9 +36766,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
-        "A1.3"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -36975,8 +36893,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -37018,8 +36935,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -37065,8 +36981,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -37195,8 +37110,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -37238,8 +37152,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -37281,8 +37194,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -37323,7 +37235,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37367,7 +37279,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37412,7 +37324,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37456,7 +37368,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37500,7 +37412,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37544,7 +37456,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37589,7 +37501,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37634,7 +37546,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37679,7 +37591,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -37724,7 +37636,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -39070,8 +38982,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -39115,8 +39026,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -39160,8 +39070,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -39205,8 +39114,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -39248,8 +39156,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -39292,8 +39199,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A2.1",
-        "A2.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -39336,8 +39242,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A2.1",
-        "A2.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -39957,8 +39862,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "B3.1",
-        "B3.2"
+        "E2.6",
+        "E2.7",
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -40045,8 +39951,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "B3.1",
-        "B3.2"
+        "E2.7",
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -40088,8 +39994,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "B3.1",
-        "B3.2"
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -40216,7 +40121,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "B3.2"
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -40260,8 +40165,8 @@
       "curriculum_expectations": [
         "B2.1",
         "B2.2",
-        "B3.1",
-        "B3.2"
+        "E2.7",
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -40307,8 +40212,8 @@
         "B2.1",
         "B2.2",
         "B2.3",
-        "B3.1",
-        "B3.2"
+        "E2.2",
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -40354,8 +40259,8 @@
         "B2.1",
         "B2.2",
         "B2.3",
-        "B3.1",
-        "B3.2"
+        "E2.2",
+        "E2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -40790,7 +40695,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -41406,8 +41311,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -41449,8 +41353,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -41492,8 +41395,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -41536,8 +41438,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -41579,8 +41480,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -41622,8 +41522,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -41667,8 +41566,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -43944,8 +43842,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -43987,7 +43884,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1"
       ],
@@ -44032,7 +43929,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "B1.2",
         "D1.1"
@@ -44080,7 +43977,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1"
       ],
@@ -44128,9 +44025,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
-        "A2.2"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -44173,7 +44068,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -44220,8 +44115,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A2.1",
+        "A1",
         "B1.1",
         "C1.1"
       ],
@@ -44265,7 +44159,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -44318,7 +44212,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -44373,7 +44267,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -44425,7 +44319,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -44564,7 +44458,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -44613,7 +44507,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -44662,7 +44556,7 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -44716,7 +44610,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -44769,7 +44663,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1",
@@ -45276,7 +45170,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45322,7 +45216,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45371,7 +45265,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45420,7 +45314,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45466,7 +45360,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45514,7 +45408,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45561,7 +45455,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45608,7 +45502,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45703,7 +45597,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -45878,7 +45772,7 @@
       "curriculum_expectations": [
         "D2.1",
         "D2.2",
-        "D2.3"
+        "D2"
       ],
       "accessibility": [
         "No Concerns"
@@ -47141,10 +47035,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1",
-        "B4.1",
-        "B5.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -47193,9 +47084,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B2.1",
-        "B2.2",
-        "B3.1",
-        "B3.2"
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -47237,10 +47126,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1",
-        "B4.1",
-        "B5.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -47291,9 +47177,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1",
-        "B4.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -47341,9 +47225,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1",
-        "B4.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -47396,9 +47278,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1",
-        "B4.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -47441,9 +47321,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1",
-        "B4.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -47488,8 +47366,7 @@
       "curriculum_expectations": [
         "B2.1",
         "B2.2",
-        "B3.1",
-        "B3.2"
+        "B1.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -47531,9 +47408,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "B3.1",
-        "B3.2",
-        "B4.1"
+        "B1",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -47575,9 +47451,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B2.1",
-        "B2.2",
-        "B3.1",
-        "B3.2"
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -47667,8 +47541,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B2.1",
-        "B2.2",
-        "B3.1"
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -47803,8 +47676,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B3.1",
-        "B3.2"
+        "B2.7"
       ],
       "accessibility": [
         "No Concerns"
@@ -47938,7 +47810,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B3.1"
+        "B2.7"
       ],
       "accessibility": [
         "No Concerns"
@@ -47982,7 +47854,8 @@
       "curriculum_expectations": [
         "B2.1",
         "B2.2",
-        "B3.1"
+        "B2.3",
+        "B2.4"
       ],
       "accessibility": [
         "No Concerns"
@@ -48160,8 +48033,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B2.1",
-        "B2.2",
-        "B3.1"
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -48255,8 +48127,7 @@
       "curriculum_expectations": [
         "C1.1",
         "C2.1",
-        "C2.2",
-        "C3.1"
+        "C2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -52189,7 +52060,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
+        "A1",
         "B1.1",
         "C1.1",
         "D1.1"
@@ -52326,8 +52197,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -52372,8 +52242,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B2.1",
-        "B3.1"
+        "B2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -52460,7 +52329,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B1.2",
-        "B1.3",
+        "B1",
         "B2.1"
       ],
       "accessibility": [
@@ -52551,7 +52420,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B1.2",
-        "B1.3"
+        "B1"
       ],
       "accessibility": [
         "No Concerns"
@@ -52596,7 +52465,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B1.2",
-        "B1.3"
+        "B1"
       ],
       "accessibility": [
         "No Concerns"
@@ -52686,7 +52555,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B1.2",
-        "B1.3",
+        "B1",
         "B2.1"
       ],
       "accessibility": [
@@ -52731,7 +52600,7 @@
       "curriculum_expectations": [
         "B1.1",
         "B1.2",
-        "B1.3"
+        "B1"
       ],
       "accessibility": [
         "No Concerns"
@@ -54482,7 +54351,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -54525,8 +54394,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.2",
-        "A2.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -57326,8 +57194,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A1.2",
+        "A1",
         "D1.1"
       ],
       "accessibility": [
@@ -57412,9 +57279,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "N1.2",
-        "N1.3",
-        "F1.5"
+        "F1.5",
+        "B1.7"
       ],
       "accessibility": [
         "No Concerns"
@@ -57547,7 +57413,7 @@
         "F1.1",
         "F1.2",
         "F1.3",
-        "A1.1"
+        "A1"
       ],
       "accessibility": [
         "No Concerns"
@@ -57679,10 +57545,9 @@
       "access_type": "purchase",
       "is_paid": true,
       "curriculum_expectations": [
-        "N1.2",
-        "N1.3",
         "F1.4",
-        "F1.5"
+        "F1.5",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -59406,8 +59271,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.1",
-        "E2.1",
-        "E3.1"
+        "E2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -59495,8 +59359,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "E1.1",
-        "E2.1",
-        "E3.1"
+        "E2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -59668,8 +59531,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "E3.1",
-        "E2.1"
+        "E2.1",
+        "E2.7"
       ],
       "accessibility": [
         "No Concerns"
@@ -61196,8 +61059,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "D1.1",
-        "D2.1",
-        "D3.1"
+        "D2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -61242,8 +61104,7 @@
       "is_paid": true,
       "curriculum_expectations": [
         "D1.1",
-        "D2.1",
-        "D3.1"
+        "D2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -61290,8 +61151,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "D1.1",
-        "D2.1",
-        "D3.1"
+        "D2.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -64424,9 +64284,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C2.1",
-        "C3.1"
+        "B1",
+        "B2",
+        "B3"
       ],
       "accessibility": [
         "No Concerns"
@@ -64470,9 +64330,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.2",
-        "C2.2",
-        "C3.2"
+        "B1",
+        "B2",
+        "B3"
       ],
       "accessibility": [
         "No Concerns"
@@ -64516,9 +64376,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C2.1",
-        "C3.1"
+        "B1",
+        "B2",
+        "B3"
       ],
       "accessibility": [
         "No Concerns"
@@ -64561,8 +64421,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C2.1"
+        "B1",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -64606,8 +64466,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.2",
-        "C2.2"
+        "B1",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -64649,9 +64509,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C2.1",
-        "C3.1"
+        "B1",
+        "B2",
+        "B3"
       ],
       "accessibility": [
         "No Concerns"
@@ -64694,9 +64554,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C2.1",
-        "C3.2"
+        "B1",
+        "B2",
+        "B3"
       ],
       "accessibility": [
         "No Concerns"
@@ -64739,9 +64599,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C1.2",
-        "C2.1"
+        "B1",
+        "B2"
       ],
       "accessibility": [
         "No Concerns"
@@ -64785,9 +64644,9 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C2.1",
-        "C3.2"
+        "B1",
+        "B2",
+        "B3"
       ],
       "accessibility": [
         "No Concerns"
@@ -64831,8 +64690,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C3.2"
+        "B1",
+        "B3"
       ],
       "accessibility": [
         "No Concerns"
@@ -66827,7 +66686,7 @@
       "curriculum_expectations": [
         "B1.2",
         "B1.3",
-        "B1.4"
+        "B1"
       ],
       "accessibility": [
         "No Concerns"
@@ -70359,8 +70218,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A1.1",
-        "A4.1"
+        "A1.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -71523,8 +71381,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C4.1"
+        "C1.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -71881,8 +71738,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C1.1",
-        "C4.1"
+        "C1.1"
       ],
       "accessibility": [
         "No Concerns"
@@ -72508,7 +72364,8 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.1",
-        "B3.1"
+        "B2.1",
+        "B2.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -72685,8 +72542,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "B3.1",
-        "B3.2"
+        "B2.1",
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -72773,7 +72630,8 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "B3.3"
+        "B2.1",
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -72817,7 +72675,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B2.1",
-        "B3.4"
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -72861,7 +72719,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "B1.2",
-        "B3.5"
+        "B1.3"
       ],
       "accessibility": [
         "No Concerns"
@@ -72906,7 +72764,7 @@
       "is_paid": false,
       "curriculum_expectations": [
         "A3.1",
-        "B3.5"
+        "B2.2"
       ],
       "accessibility": [
         "No Concerns"
@@ -73254,7 +73112,7 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "C3.1"
+        "C2.7"
       ],
       "accessibility": [
         "No Concerns"
@@ -77560,7 +77418,6 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A4.1",
         "A3.1",
         "A1.1"
       ],
@@ -77599,7 +77456,6 @@
       "access_type": "free",
       "is_paid": false,
       "curriculum_expectations": [
-        "A4.1",
         "A3.1",
         "A1.1"
       ],
