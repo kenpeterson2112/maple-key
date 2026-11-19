@@ -3,7 +3,8 @@
 import { Pencil } from "lucide-react"
 import type { MaterialsSnapshot } from "@/lib/classroom-resources"
 
-const CATEGORY_DOT: Record<string, string> = {
+/** A material type's dot colour (a categorical hue: no meaning attached). */
+export const CATEGORY_DOT: Record<string, string> = {
   "math-manipulatives": "bg-hue-green",
   technology: "bg-hue-blue",
   spaces: "bg-hue-amber",
