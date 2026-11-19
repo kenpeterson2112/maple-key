@@ -48,6 +48,8 @@ export interface LoadedCurriculum {
   doc: CurriculumDoc
   /** Overall and specific codes → wording. */
   byCode: Record<string, string>
+  /** Specific codes → the curriculum's sub-heading, e.g. "Equalities and Inequalities". */
+  topicByCode: Record<string, string>
 }
 
 // One province and language today; the path carries both so adding French is
@@ -68,15 +70,19 @@ function keyOf(subject: string, grade?: string): string | null {
   return slug && grade ? `${slug}/g${grade}` : null
 }
 
-function index(doc: CurriculumDoc): Record<string, string> {
+function index(doc: CurriculumDoc): Omit<LoadedCurriculum, "doc"> {
   const byCode: Record<string, string> = {}
+  const topicByCode: Record<string, string> = {}
   for (const s of doc.strands) {
     for (const o of s.overalls) {
       byCode[o.code] = o.text
-      for (const sp of o.specifics) byCode[sp.code] = sp.text
+      for (const sp of o.specifics) {
+        byCode[sp.code] = sp.text
+        if (sp.topic) topicByCode[sp.code] = sp.topic
+      }
     }
   }
-  return byCode
+  return { byCode, topicByCode }
 }
 
 /** Fetch a subject/grade's text if it isn't loaded yet. Safe to call repeatedly. */
@@ -87,7 +93,7 @@ export function loadCurriculumText(subject: string, grade?: string): Promise<voi
   if (pending) return pending
   const p = fetchJson<CurriculumDoc>(withBasePath(`/curriculum/${PROVINCE}/${LANGUAGE}/${key}.json`))
     .then((doc) => {
-      loaded.set(key, { doc, byCode: index(doc) })
+      loaded.set(key, { doc, ...index(doc) })
       version++
       for (const l of listeners) l()
     })

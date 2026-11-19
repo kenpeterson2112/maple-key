@@ -7,7 +7,7 @@
 // Pure: takes tallies and lessons, reads no storage. `useClassProgress` in
 // context-nav.tsx feeds it.
 
-import { curriculumOutline } from "./curriculum-codes"
+import { curriculumOutline, overallCodeOf } from "./curriculum-codes"
 import {
   computeReadinessLevel,
   type LessonTally,
@@ -55,6 +55,11 @@ export interface ClassProgress {
 
 function gradeOf(grade: string | undefined): string {
   return normalizeGrades([grade ?? ""])[0] ?? ""
+}
+
+/** Is a lesson or tally (subject `s`, grade `g`) for this class? Normalises both. */
+export function isSameClass(subject: string, grade: string, s: string, g: string): boolean {
+  return sameClass(subject, gradeOf(grade), s, g)
 }
 
 function sameClass(subject: string, grade: string, s: string, g: string): boolean {
@@ -134,8 +139,15 @@ export function buildClassProgress(
   }
 
   const all = strands.flatMap((s) => s.overalls)
+  // Where the class is: the furthest overall the most recent lesson reached
+  // (the same point the next-step suggestion works from), else the first
+  // overall started but not yet secure, else the first not started.
+  const lastLesson = [...myLessons].sort((a, b) => b.timestamp - a.timestamp)[0]
+  const lastOveralls = new Set((lastLesson?.curriculumCodesCovered ?? []).map((c) => overallCodeOf(c)))
+  const reached = all.filter((o) => lastOveralls.has(o.code)).pop()
   const started = all.filter((o) => o.taught > 0)
   const frontier =
+    reached?.code ??
     started.find((o) => o.taught < o.total || o.level === "poor" || o.level === "okay")?.code ??
     all.find((o) => o.taught === 0)?.code ??
     null

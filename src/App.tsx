@@ -9,6 +9,7 @@ import OnboardingModal from "@/components/onboarding-modal"
 import ResourceOnboardingModal from "@/components/resource-onboarding-modal"
 import ClassInsightsSpace from "@/components/class-insights-space"
 import TopNav, { type TopNavSpace } from "@/components/top-nav"
+import type { NextStepHandlers } from "@/components/next-step-bar"
 import BottomTabBar from "@/components/bottom-tab-bar"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
@@ -50,7 +51,8 @@ export default function App() {
 
   // Search's results take grade/subject/strand from the global curriculum
   // filters, so the phone header's Filters badge counts those.
-  const curriculum = useGlobalFilters().state
+  const globalFilters = useGlobalFilters()
+  const curriculum = globalFilters.state
   const totalActiveFilters =
     (curriculum.grade ? 1 : 0) +
     (curriculum.subject ? 1 : 0) +
@@ -83,6 +85,26 @@ export default function App() {
       ? activeSpace
       : null
 
+  // The next-step suggestion (top nav layer 3) acts on its own class, which on
+  // the landing page may not be the one selected, so each action sets it first.
+  const nextStepHandlers: NextStepHandlers = {
+    onPlan: (subject, grade, code, label) => {
+      globalFilters.setSubject(subject)
+      globalFilters.setGrade(grade)
+      globalFilters.setTopic(`${code} ${label}`)
+      openPlanner(null)
+    },
+    onFindResources: (subject, grade, code) => {
+      globalFilters.setSubject(subject)
+      globalFilters.setGrade(grade)
+      findResources(code)
+    },
+    onQuickCheck: (lesson) => {
+      setAssessmentLesson(lesson)
+      setActiveSpace("assessment")
+    },
+  }
+
   const changeSpace = (s: TopNavSpace) => {
     // Plan always starts fresh, matching the old "Plan Lesson" button.
     if (s === "lessonplanner") openPlanner(null)
@@ -101,8 +123,7 @@ export default function App() {
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
         onEnterClass={goResources}
-        onFindResources={findResources}
-        onPlan={() => openPlanner(null)}
+        nextStepHandlers={nextStepHandlers}
         hideStrip={activeSpace === "assessment"}
       />
 
