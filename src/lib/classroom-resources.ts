@@ -1,7 +1,18 @@
+import { SUBJECTS, type Subject } from "../../shared/resource-schema"
+
+/** Which subjects a material serves. "General" is for anything that serves
+ *  every subject (a projector, sticky notes) and is never mixed with a subject.
+ *  Subjects come from schema/resource-schema.json, so a new subject is added
+ *  there, not here. */
+export type MaterialSubject = Subject | "General"
+
 export interface ClassroomResourceOption {
   id: string
   label: string
   category: string
+  /** One or more subjects, or ["General"]. Every built-in material is tagged
+   *  (classroom-resources.test.ts checks it). */
+  subjects: MaterialSubject[]
 }
 
 export interface ClassroomResourceCategory {
@@ -22,66 +33,66 @@ export const CLASSROOM_RESOURCE_CATEGORIES: ClassroomResourceCategory[] = [
 
 export const CLASSROOM_RESOURCE_OPTIONS: ClassroomResourceOption[] = [
   // Math Manipulatives
-  { id: "base-ten-blocks", label: "Base Ten Blocks", category: "math-manipulatives" },
-  { id: "cuisenaire-rods", label: "Cuisenaire Rods", category: "math-manipulatives" },
-  { id: "pattern-blocks", label: "Pattern Blocks", category: "math-manipulatives" },
-  { id: "fraction-tiles", label: "Fraction Tiles", category: "math-manipulatives" },
-  { id: "connecting-cubes", label: "Connecting Cubes", category: "math-manipulatives" },
-  { id: "geoboards", label: "Geoboards", category: "math-manipulatives" },
-  { id: "tangrams", label: "Tangrams", category: "math-manipulatives" },
-  { id: "algebra-tiles", label: "Algebra Tiles", category: "math-manipulatives" },
-  { id: "two-colour-counters", label: "Two-Colour Counters", category: "math-manipulatives" },
-  { id: "rekenreks", label: "Rekenreks", category: "math-manipulatives" },
-  { id: "geometric-solids", label: "Geometric Solids", category: "math-manipulatives" },
-  { id: "rulers-measuring", label: "Rulers & Measuring Tapes", category: "math-manipulatives" },
-  { id: "protractors", label: "Protractors", category: "math-manipulatives" },
-  { id: "dice", label: "Dice (various)", category: "math-manipulatives" },
-  { id: "spinners", label: "Spinners", category: "math-manipulatives" },
+  { id: "base-ten-blocks", label: "Base Ten Blocks", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "cuisenaire-rods", label: "Cuisenaire Rods", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "pattern-blocks", label: "Pattern Blocks", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "fraction-tiles", label: "Fraction Tiles", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "connecting-cubes", label: "Connecting Cubes", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "geoboards", label: "Geoboards", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "tangrams", label: "Tangrams", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "algebra-tiles", label: "Algebra Tiles", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "two-colour-counters", label: "Two-Colour Counters", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "rekenreks", label: "Rekenreks", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "geometric-solids", label: "Geometric Solids", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "rulers-measuring", label: "Rulers & Measuring Tapes", category: "math-manipulatives" , subjects: ["Math", "Science"] },
+  { id: "protractors", label: "Protractors", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "dice", label: "Dice (various)", category: "math-manipulatives" , subjects: ["Math"] },
+  { id: "spinners", label: "Spinners", category: "math-manipulatives" , subjects: ["Math"] },
   // Technology
-  { id: "projector", label: "Projector", category: "technology" },
-  { id: "smart-board", label: "Interactive Whiteboard", category: "technology" },
-  { id: "document-camera", label: "Document Camera", category: "technology" },
-  { id: "chromebook-cart", label: "Chromebook Cart", category: "technology" },
-  { id: "ipad-cart", label: "iPad / Tablet Cart", category: "technology" },
-  { id: "student-clickers", label: "Student Response Clickers", category: "technology" },
-  { id: "3d-printer", label: "3D Printer", category: "technology" },
-  { id: "coding-kits", label: "Coding Kits (Sphero / Micro:bit)", category: "technology" },
+  { id: "projector", label: "Projector", category: "technology" , subjects: ["General"] },
+  { id: "smart-board", label: "Interactive Whiteboard", category: "technology" , subjects: ["General"] },
+  { id: "document-camera", label: "Document Camera", category: "technology" , subjects: ["General"] },
+  { id: "chromebook-cart", label: "Chromebook Cart", category: "technology" , subjects: ["General"] },
+  { id: "ipad-cart", label: "iPad / Tablet Cart", category: "technology" , subjects: ["General"] },
+  { id: "student-clickers", label: "Student Response Clickers", category: "technology" , subjects: ["General"] },
+  { id: "3d-printer", label: "3D Printer", category: "technology" , subjects: ["Science"] },
+  { id: "coding-kits", label: "Coding Kits (Sphero / Micro:bit)", category: "technology" , subjects: ["Math", "Science"] },
   // Spaces & Furniture
-  { id: "whiteboard", label: "Whiteboard", category: "spaces" },
-  { id: "chalkboard", label: "Chalkboard", category: "spaces" },
-  { id: "bulletin-board", label: "Bulletin Board Space", category: "spaces" },
-  { id: "flexible-seating", label: "Flexible Seating", category: "spaces" },
-  { id: "standing-desks", label: "Standing Desks", category: "spaces" },
-  { id: "carpet-area", label: "Carpet / Meeting Area", category: "spaces" },
-  { id: "outdoor-classroom", label: "Outdoor Classroom", category: "spaces" },
-  { id: "maker-space", label: "Maker Space Access", category: "spaces" },
-  { id: "library-access", label: "School Library Access", category: "spaces" },
-  { id: "science-lab", label: "Science Lab Access", category: "spaces" },
+  { id: "whiteboard", label: "Whiteboard", category: "spaces" , subjects: ["General"] },
+  { id: "chalkboard", label: "Chalkboard", category: "spaces" , subjects: ["General"] },
+  { id: "bulletin-board", label: "Bulletin Board Space", category: "spaces" , subjects: ["General"] },
+  { id: "flexible-seating", label: "Flexible Seating", category: "spaces" , subjects: ["General"] },
+  { id: "standing-desks", label: "Standing Desks", category: "spaces" , subjects: ["General"] },
+  { id: "carpet-area", label: "Carpet / Meeting Area", category: "spaces" , subjects: ["Language"] },
+  { id: "outdoor-classroom", label: "Outdoor Classroom", category: "spaces" , subjects: ["Science", "Health & Physical Education"] },
+  { id: "maker-space", label: "Maker Space Access", category: "spaces" , subjects: ["Science"] },
+  { id: "library-access", label: "School Library Access", category: "spaces" , subjects: ["Language"] },
+  { id: "science-lab", label: "Science Lab Access", category: "spaces" , subjects: ["Science"] },
   // Supplies & Materials
-  { id: "graph-paper", label: "Graph Paper", category: "supplies" },
-  { id: "construction-paper", label: "Construction Paper", category: "supplies" },
-  { id: "art-supplies", label: "Art Supplies", category: "supplies" },
-  { id: "math-games", label: "Math Games / Card Games", category: "supplies" },
-  { id: "whiteboards-mini", label: "Mini Whiteboards", category: "supplies" },
-  { id: "sticky-notes", label: "Sticky Notes / Chart Paper", category: "supplies" },
-  { id: "calculators", label: "Calculators (class set)", category: "supplies" },
-  { id: "science-equipment", label: "Basic Science Equipment", category: "supplies" },
+  { id: "graph-paper", label: "Graph Paper", category: "supplies" , subjects: ["Math"] },
+  { id: "construction-paper", label: "Construction Paper", category: "supplies" , subjects: ["General"] },
+  { id: "art-supplies", label: "Art Supplies", category: "supplies" , subjects: ["General"] },
+  { id: "math-games", label: "Math Games / Card Games", category: "supplies" , subjects: ["Math"] },
+  { id: "whiteboards-mini", label: "Mini Whiteboards", category: "supplies" , subjects: ["General"] },
+  { id: "sticky-notes", label: "Sticky Notes / Chart Paper", category: "supplies" , subjects: ["General"] },
+  { id: "calculators", label: "Calculators (class set)", category: "supplies" , subjects: ["Math", "Science"] },
+  { id: "science-equipment", label: "Basic Science Equipment", category: "supplies" , subjects: ["Science"] },
   // Print Resources
-  { id: "nelson-literacy", label: "Nelson Literacy", category: "print-resources" },
-  { id: "levelled-readers", label: "Levelled Readers", category: "print-resources" },
-  { id: "nelson-math", label: "Nelson Math", category: "print-resources" },
-  { id: "math-up", label: "Math UP", category: "print-resources" },
+  { id: "nelson-literacy", label: "Nelson Literacy", category: "print-resources" , subjects: ["Language"] },
+  { id: "levelled-readers", label: "Levelled Readers", category: "print-resources" , subjects: ["Language"] },
+  { id: "nelson-math", label: "Nelson Math", category: "print-resources" , subjects: ["Math"] },
+  { id: "math-up", label: "Math UP", category: "print-resources" , subjects: ["Math"] },
   // Digital Resources
-  { id: "edwin", label: "Edwin", category: "digital-resources" },
-  { id: "knowledgehook", label: "Knowledgehook", category: "digital-resources" },
-  { id: "ixl", label: "IXL", category: "digital-resources" },
-  { id: "myon", label: "MyON", category: "digital-resources" },
+  { id: "edwin", label: "Edwin", category: "digital-resources" , subjects: ["General"] },
+  { id: "knowledgehook", label: "Knowledgehook", category: "digital-resources" , subjects: ["Math"] },
+  { id: "ixl", label: "IXL", category: "digital-resources" , subjects: ["Math", "Language"] },
+  { id: "myon", label: "MyON", category: "digital-resources" , subjects: ["Language"] },
   // Digital Tools
-  { id: "book-creator", label: "Book Creator", category: "digital-tools" },
-  { id: "pixton", label: "Pixton", category: "digital-tools" },
-  { id: "canva-education", label: "Canva for Education", category: "digital-tools" },
-  { id: "padlet", label: "Padlet", category: "digital-tools" },
-  { id: "kahoot", label: "Kahoot", category: "digital-tools" },
+  { id: "book-creator", label: "Book Creator", category: "digital-tools" , subjects: ["Language"] },
+  { id: "pixton", label: "Pixton", category: "digital-tools" , subjects: ["Language"] },
+  { id: "canva-education", label: "Canva for Education", category: "digital-tools" , subjects: ["General"] },
+  { id: "padlet", label: "Padlet", category: "digital-tools" , subjects: ["General"] },
+  { id: "kahoot", label: "Kahoot", category: "digital-tools" , subjects: ["General"] },
 ]
 
 const STORAGE_KEY = "maplekey_classroom"
@@ -114,9 +125,25 @@ export function getClassroomResourceLabels(ids: string[]): string[] {
   })
 }
 
+export function isMaterialSubject(value: unknown): value is MaterialSubject {
+  return value === "General" || (SUBJECTS as readonly unknown[]).includes(value)
+}
+
+/** A built-in material's subjects, by id; unknown ids are General. */
+export function materialSubjects(id: string): MaterialSubject[] {
+  return CLASSROOM_RESOURCE_OPTIONS.find((o) => o.id === id)?.subjects ?? ["General"]
+}
+
 export interface CustomClassroomResource {
   label: string
   category: string
+  /** Set when the teacher tags it; untagged custom materials count as General. */
+  subjects?: MaterialSubject[]
+}
+
+/** A custom material's subjects: what the teacher tagged, else General. */
+export function customMaterialSubjects(item: CustomClassroomResource): MaterialSubject[] {
+  return item.subjects && item.subjects.length > 0 ? item.subjects : ["General"]
 }
 
 export function getCustomClassroomResources(): CustomClassroomResource[] {
@@ -133,7 +160,10 @@ export function getCustomClassroomResources(): CustomClassroomResource[] {
         typeof (entry as CustomClassroomResource).label === "string" &&
         typeof (entry as CustomClassroomResource).category === "string"
       ) {
-        return [entry as CustomClassroomResource]
+        const { label, category, subjects } = entry as CustomClassroomResource
+        // Keep only valid tags, so a renamed subject can't leave a stray one behind.
+        const valid = Array.isArray(subjects) ? subjects.filter(isMaterialSubject) : []
+        return [valid.length > 0 ? { label, category, subjects: valid } : { label, category }]
       }
       return []
     })
