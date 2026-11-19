@@ -38,6 +38,15 @@ Both skills now preflight this and fail loudly (`check-links` Stage 3a,
 stops with "environment fault: control URL failed" is the preflight working, not
 a new bug.
 
+## Routines run from outside Canada — TVO Learn is unreachable
+
+Cloud sessions egress from the US, and TVO Learn (~250 records) serves Canada
+only: every TVO page redirects to `tvolearn.com/pages/restricted-content`. Both
+`check-links` and `enrich-resources` treat that as a region restriction —
+`blocked`, never `moved` or `dead`, and never enriched from the page shell. So
+TVO records stay unchecked and unenriched by these routines until a run can
+reach TVO from Canada (for example, a session on a machine in Ontario).
+
 ## One-time setup (in your Claude account)
 
 Routines live in your Claude account, not in this repo — they can't be created
@@ -127,7 +136,7 @@ a little headroom after the resource routine.
 ### Routine 3 — Resource enrichment (daily 06:00 UTC — `0 6 * * *`)
 
 **Gated on a human-reviewed pilot — do not schedule this until the 85-record
-junior Science pilot PR has been read and merged.**
+intermediate Math pilot PR has been read and merged.**
 
 Unlike the other two, this routine rewrites *existing* rows. It replaces the
 templated `usage_notes` and `instructional_modes` — 23 distinct strings across
@@ -151,7 +160,7 @@ Run the pilot **manually** first:
 
 ```
 Run the Maple Key resource-enrichment pilot. Use the `enrich-resources` skill,
-scoped to junior Science only (--subject Science --grade-band junior --limit 85).
+scoped to intermediate Math only (--subject Math --grade-band intermediate --limit 85).
 Follow the Stage 0.5 egress preflight and stop with an environment fault if the
 control fetch fails. Fetch every resource's page before writing its note — do not
 write a note for a page you could not read. Open a draft PR that includes four

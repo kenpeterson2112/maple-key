@@ -92,11 +92,19 @@ Only if the preflight succeeded. For **each** item in `plan.queue`, call
 > Tokens: LIVE (real resource content is present) · DEAD (404 / "page not
 > found" / "no longer available" / expired / domain-parking page) · MOVED (the
 > page says the content moved, or you were redirected to an unrelated page or a
-> bare homepage) · BLOCKED (a login wall or bot/security challenge hides the
-> content) · ERROR (server error or empty response).
+> bare homepage) · BLOCKED (a login wall, bot/security challenge, or "not
+> available in your area" region restriction hides the content) · ERROR
+> (server error or empty response).
 
 Rules for turning each fetch into a result:
 - Map the token to a lowercase status: `live` / `dead` / `moved` / `blocked` / `error`.
+- **A region restriction is `blocked`, never `moved` or `dead`.** TVO Learn
+  (~250 records) is only served inside Canada, and routines run from outside it:
+  every TVO page redirects to `tvolearn.com/pages/restricted-content` ("This
+  content is not available in your area"). That redirect is about where *we*
+  are, not the resource, so it is `blocked` with the reason "region-restricted"
+  — the same rule as a bot wall. Filing it as `moved` would send every TVO
+  record to the review queue on one night.
 - **WebFetch returned a cross-host redirect URL instead of content:** fetch that
   target once. If it serves the resource → `live` (set `final_url` to the
   target). If it's a homepage / 404 / unrelated page → `moved` (set `final_url`).
