@@ -31,13 +31,10 @@ interface TopNavProps {
   onChangeSpace: (space: TopNavSpace) => void
   onOpenMobileFilters?: () => void
   totalActiveFilters?: number
-  /** True while the landing page is showing. The nav then wears the brand
-   *  colour and summarises every class, whatever subject is selected. */
+  /** True while the landing page is showing (the logo reads as current). */
   isHome?: boolean
   /** Return to the landing page (the logo). */
   onGoHome?: () => void
-  /** Choosing a subject or grade from the landing page enters that class. */
-  onEnterClass?: () => void
   /** What the next-step suggestion's buttons do (layer 3). */
   nextStepHandlers: NextStepHandlers
   /** Hide the progress and next-step rows (full-screen flows such as Quick Check). */
@@ -69,7 +66,6 @@ export default function TopNav({
   totalActiveFilters = 0,
   isHome = false,
   onGoHome,
-  onEnterClass,
   nextStepHandlers,
   hideStrip = false,
 }: TopNavProps) {
@@ -81,7 +77,10 @@ export default function TopNav({
 
   const progress = useClassProgress(state.subject, state.grade)
   const color = subjectColor(state.subject)
-  const scoped = !isHome && color !== null
+  // The nav follows the selection on every page, the landing page included:
+  // brand red and a summary with no subject, the subject's colour and the
+  // class's progress once one is picked.
+  const scoped = color !== null
   // Text and fills in the bar's own colour (subject, else brand).
   const accent = scoped ? color : "var(--primary)"
   const accentText = scoped ? color : "var(--primary-strong)"
@@ -92,12 +91,8 @@ export default function TopNav({
     borderColor: `color-mix(in oklch, ${accent} 30%, var(--background))`,
   }
 
-  const choose = (apply: () => void) => {
-    apply()
-    if (isHome) onEnterClass?.()
-  }
-  const pickSubject = (v: string) => choose(() => setSubject(v))
-  const pickGrade = (v: string) => choose(() => setGrade(v))
+  const pickSubject = (v: string) => setSubject(v)
+  const pickGrade = (v: string) => setGrade(v)
 
   const showResourceFilters = activeSpace === "resources" && !!onOpenMobileFilters
   const classLabel = state.subject
@@ -209,10 +204,7 @@ export default function TopNav({
               {scoped && progress ? (
                 <SubjectStrip progress={progress} accent={accent} onOpenTrack={() => onChangeSpace("insights")} />
               ) : (
-                <OverallStrip
-                  province={state.province}
-                  note={isHome ? "Pick a subject and grade to step into a class." : noProgressReason(state.subject, state.grade)}
-                />
+                <OverallStrip province={state.province} note={noProgressReason(state.subject, state.grade)} />
               )}
             </div>
 
@@ -259,11 +251,11 @@ export default function TopNav({
         {/* Row 3: the next step (desktop; phones get it in the class sheet) */}
         {!hideStrip && (
           <div className="hidden border-b border-border bg-card md:block">
-            <div className="mx-auto max-w-[1500px] px-6 py-3">
+            <div className="mx-auto max-w-[1500px] px-6 py-2">
               <NextStepBar
                 subject={state.subject}
                 grade={state.grade}
-                acrossClasses={!scoped}
+                acrossClasses={!(scoped && progress)}
                 handlers={nextStepHandlers}
               />
             </div>

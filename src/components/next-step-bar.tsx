@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import useSWR from "swr"
 import { Lightbulb, RotateCcw, Sparkles } from "lucide-react"
 import { useClassData } from "@/components/context-strip"
@@ -71,7 +71,9 @@ function useNextStep(subject: string, grade: string, acrossClasses: boolean): Cl
       return subject && grade && getScopeSequence(subject, grade).codes.length > 0 ? stepFor(subject, grade, tallies, lessons) : null
     }
     const steps = buildOverallSummary(tallies, lessons)
-      .classes.filter((c) => getScopeSequence(c.subject, c.grade).codes.length > 0)
+      .classes.filter(
+        (c) => (!subject || c.subject === subject) && (!grade || c.grade === grade) && getScopeSequence(c.subject, c.grade).codes.length > 0,
+      )
       .map((c) => stepFor(c.subject, c.grade, tallies, lessons))
     const reteach = steps
       .filter((s) => s.step.kind === "reteach")
@@ -108,7 +110,8 @@ export default function NextStepBar({
 }: {
   subject: string
   grade: string
-  /** Summarise across every class (landing page, or no subject chosen). */
+  /** Pick across classes (narrowed by whichever of subject/grade is set) rather
+   *  than for exactly one class. */
   acrossClasses?: boolean
   /** "bar": the nav's third row. "stacked": inside the phone sheet. */
   layout?: "bar" | "stacked"
@@ -174,34 +177,16 @@ export default function NextStepBar({
   const primary = step.kind === "reteach" ? "Plan a reteach" : "Plan this lesson"
   return (
     <Shell layout={layout} icon={icon}>
-      <div className="min-w-0 flex-1">
-        <p className="font-display text-base font-semibold leading-snug text-foreground">
-          {prefix}
-          {headline}
-        </p>
-        <p className="mt-0.5 text-sm text-muted-foreground">{rationale}</p>
-      </div>
+      <Message layout={layout} headline={`${prefix}${headline}`} rationale={rationale} />
       <div className={`flex flex-wrap gap-2 ${layout === "bar" ? "flex-shrink-0 lg:flex-nowrap" : ""}`}>
-        <button
-          type="button"
-          onClick={() => handlers.onPlan(choice.subject, choice.grade, step.code, label)}
-          className="min-h-9 whitespace-nowrap rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
+        <button type="button" onClick={() => handlers.onPlan(choice.subject, choice.grade, step.code, label)} className={btn("primary", layout)}>
           {primary}
         </button>
-        <button
-          type="button"
-          onClick={() => handlers.onFindResources(choice.subject, choice.grade, step.code)}
-          className="min-h-9 whitespace-nowrap rounded-lg border border-border-strong bg-card px-3 text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
+        <button type="button" onClick={() => handlers.onFindResources(choice.subject, choice.grade, step.code)} className={btn("secondary", layout)}>
           See resources
         </button>
         {step.kind === "next" && step.unchecked && (
-          <button
-            type="button"
-            onClick={() => handlers.onQuickCheck(step.after)}
-            className="min-h-9 whitespace-nowrap rounded-lg border border-border-strong bg-card px-3 text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
+          <button type="button" onClick={() => handlers.onQuickCheck(step.after)} className={btn("secondary", layout)}>
             Quick Check first
           </button>
         )}
@@ -210,10 +195,49 @@ export default function NextStepBar({
   )
 }
 
+function btn(kind: "primary" | "secondary", layout: "bar" | "stacked"): string {
+  const size = layout === "bar" ? "min-h-8 px-2.5 text-[13px]" : "min-h-10 px-3 text-sm"
+  const look =
+    kind === "primary"
+      ? "bg-primary text-primary-foreground hover:bg-primary-hover"
+      : "border border-border-strong bg-card text-secondary-strong hover:bg-accent"
+  return `${size} ${look} whitespace-nowrap rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring`
+}
+
+/** Headline and rationale. In the nav bar they share one line, the rationale
+ *  cut short with a "Why?" toggle to read it all; stacked, both show in full. */
+function Message({ layout, headline, rationale }: { layout: "bar" | "stacked"; headline: string; rationale: string }) {
+  const [open, setOpen] = useState(false)
+  if (layout === "stacked") {
+    return (
+      <div className="min-w-0 flex-1">
+        <p className="font-display text-base font-semibold leading-snug text-foreground">{headline}</p>
+        <p className="mt-0.5 text-sm text-muted-foreground">{rationale}</p>
+      </div>
+    )
+  }
+  return (
+    <div className="flex min-w-0 flex-1 items-baseline gap-2">
+      <p className={`min-w-0 flex-1 text-sm ${open ? "" : "truncate"}`}>
+        <strong className="font-display font-semibold text-foreground">{headline}.</strong>{" "}
+        <span className="text-muted-foreground">{rationale}</span>
+      </p>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex-shrink-0 text-xs font-semibold text-secondary-strong underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        {open ? "Less" : "Why?"}
+      </button>
+    </div>
+  )
+}
+
 function Shell({ layout, icon, children }: { layout: "bar" | "stacked"; icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className={layout === "bar" ? "flex items-center gap-4" : "flex flex-col gap-3"}>
-      <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-pop-tint text-pop-strong max-md:hidden">
+    <div className={layout === "bar" ? "flex items-center gap-3" : "flex flex-col gap-3"}>
+      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-pop-tint text-pop-strong max-md:hidden [&>svg]:h-4 [&>svg]:w-4">
         {icon}
       </span>
       {children}
