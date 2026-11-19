@@ -1,26 +1,23 @@
 "use client"
 
 import { useMemo, useSyncExternalStore } from "react"
-import { BarChart3 } from "lucide-react"
 import { getAllTallies, getResultsVersion, subscribeResultsChanged, type ReadinessLevel } from "@/lib/assessment-results"
 import { getLessonLog, getLessonLogVersion, subscribeLessonLog } from "@/lib/lesson-metadata"
 import { useGlobalFilters } from "@/lib/global-filters"
 import {
   buildClassProgress,
-  buildOverallSummary,
   inSelection,
   type ClassProgress,
   type OverallProgress,
-  type OverallSummary,
 } from "@/lib/class-progress"
 import { curriculumGrades } from "@/lib/curriculum-codes"
 import { READINESS_TOKENS } from "@/components/ui/readiness-pill"
 import { PROVINCES } from "@/components/hero-personalize"
 
-// The second row of the top nav: where the class is in the subject and grade
-// the nav is set to (a gauge, a strand timeline, what needs work), or, with no
-// subject chosen, a summary across all classes. Every colour is a token; the
-// subject colour arrives as a CSS variable from top-nav.tsx.
+// Shared pieces for where a class is in the curriculum: the data hooks, the
+// gauge, the strand timeline and its legend. The top nav's second bar
+// (subject-data-bar.tsx) and the phone class sheet draw with them. Every colour
+// is a token; the subject colour arrives as a CSS variable.
 
 // ---- Data ----
 
@@ -49,25 +46,20 @@ export function useClassProgress(subject: string, grade: string): ClassProgress 
   return useMemo(() => buildClassProgress(subject, grade, tallies, lessons), [subject, grade, tallies, lessons])
 }
 
-export function useOverallSummary(): OverallSummary {
-  const { tallies, lessons } = useClassData()
-  return useMemo(() => buildOverallSummary(tallies, lessons), [tallies, lessons])
-}
-
 // ---- Shared bits ----
 
-const UNTAUGHT = "color-mix(in oklch, var(--foreground) 12%, transparent)"
+export const UNTAUGHT = "color-mix(in oklch, var(--foreground) 12%, transparent)"
 const TAUGHT_UNCHECKED = "color-mix(in oklch, var(--foreground) 38%, transparent)"
 
 function levelColor(level: ReadinessLevel | null): string {
   return level ? `var(${READINESS_TOKENS[level].token})` : TAUGHT_UNCHECKED
 }
 
-function formatDay(ts: number | null): string {
+export function formatDay(ts: number | null): string {
   return ts ? new Date(ts).toLocaleDateString("en-CA", { month: "short", day: "numeric" }) : "none yet"
 }
 
-function describeOverall(o: OverallProgress): string {
+export function describeOverall(o: OverallProgress): string {
   const checked = o.level ? `, ${READINESS_TOKENS[o.level].label.toLowerCase()}` : o.taught > 0 ? ", not checked yet" : ""
   return `${o.code} ${o.title}: ${o.taught} of ${o.total} taught${checked}`
 }
@@ -104,7 +96,7 @@ export function Gauge({ taught, total, accent, size = 104 }: { taught: number; t
  *  then what's been taught but not checked yet (grey), then nothing for what
  *  hasn't been taught. Checks happen as teaching goes, so the grey gaps sit
  *  inside the taught stretch, not after it. */
-function OverallFill({ overall: o }: { overall: OverallProgress }) {
+export function OverallFill({ overall: o }: { overall: OverallProgress }) {
   const checked = Math.min(o.checked, o.taught)
   const pct = (n: number) => `${(n / o.total) * 100}%`
   return (
@@ -188,95 +180,6 @@ export function noProgressReason(subject: string, grade: string): string {
   const grades = curriculumGrades(subject)
   if (grades.length === 0) return `${subject} isn't in the curriculum data yet.`
   return `The Ontario ${subject} curriculum here covers Grades ${grades[0]}–${grades[grades.length - 1]}.`
-}
-
-/** Desktop row 2 with a subject and grade chosen. */
-export function SubjectStrip({
-  progress,
-  accent,
-  onOpenTrack,
-}: {
-  progress: ClassProgress
-  accent: string
-  onOpenTrack: () => void
-}) {
-  const ongoing = progress.ongoingStrands.map((s) => `${s.code} (${s.label})`).join(", ")
-  return (
-    <div className="flex items-center gap-6">
-      <div className="flex flex-shrink-0 items-center gap-3">
-        <Gauge taught={progress.taught} total={progress.total} accent={accent} />
-        <div className="flex flex-col gap-0.5 text-sm">
-          <span className="text-foreground">
-            <strong>
-              {progress.taught} of {progress.total}
-            </strong>{" "}
-            taught
-          </span>
-          <span className="text-xs text-muted-foreground">
-            {progress.checked} checked · {progress.lessonCount} {progress.lessonCount === 1 ? "lesson" : "lessons"}
-          </span>
-          <span className="text-xs text-muted-foreground">Last Quick Check: {formatDay(progress.lastCheckAt)}</span>
-        </div>
-      </div>
-
-      <div className="flex min-w-0 flex-1 flex-col justify-center gap-1.5">
-        <StrandTimeline progress={progress} />
-        <div className="flex items-center justify-between gap-4 overflow-hidden">
-          <Legend />
-          {ongoing && (
-            <span className="hidden min-w-0 flex-1 truncate text-right text-xs text-muted-foreground xl:block" title={`Ongoing in every lesson: ${ongoing}`}>
-              Ongoing in every lesson: {ongoing}
-            </span>
-          )}
-        </div>
-      </div>
-
-      <button
-        type="button"
-        onClick={onOpenTrack}
-        className="flex h-16 w-20 flex-shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-border-strong bg-card text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        <BarChart3 size={22} aria-hidden="true" />
-        Analyze
-      </button>
-    </div>
-  )
-}
-
-/** Desktop row 2 across all classes (landing page, or no subject chosen). */
-export function OverallStrip({ province, note }: { province: string; note?: string }) {
-  // Narrowed to whichever of subject/grade is picked, like the landing page.
-  const { tallies, lessons, subject, grade } = useSelectedClassData()
-  const summary = useMemo(() => buildOverallSummary(tallies, lessons), [tallies, lessons])
-  const n = summary.classes.length
-  const scope = [grade && `Grade ${grade}`, subject].filter(Boolean).join(" ")
-  if (n === 0) {
-    return (
-      <p className="truncate text-sm text-foreground">
-        <span className="font-semibold">{provinceName(province)}</span>
-        <span className="text-muted-foreground">
-          {" "}· No {scope ? `${scope} ` : ""}lessons or Quick Checks yet. Plan a lesson and each class&rsquo;s progress through the curriculum shows here.
-        </span>
-      </p>
-    )
-  }
-  return (
-    <div className="flex items-center gap-x-5 overflow-hidden whitespace-nowrap text-sm text-foreground">
-      <span className="font-semibold">{provinceName(province)}</span>
-      <span className="text-muted-foreground" aria-hidden="true">·</span>
-      <span>
-        {n} {scope ? `${scope} ` : ""}
-        {n === 1 ? "class" : "classes"}
-      </span>
-      <span className="text-muted-foreground" aria-hidden="true">·</span>
-      <span>
-        {summary.lessonsThisWeek} {summary.lessonsThisWeek === 1 ? "lesson" : "lessons"} this week
-      </span>
-      <span className="text-muted-foreground" aria-hidden="true">·</span>
-      <span>Last Quick Check: {formatDay(summary.lastCheckAt)}</span>
-      {note && <span className="ml-auto min-w-0 truncate text-muted-foreground">{note}</span>}
-    </div>
-  )
 }
 
 /** Phone sheet: one row per strand, so the names have room. */
