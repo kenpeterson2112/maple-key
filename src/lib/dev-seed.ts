@@ -129,19 +129,32 @@ function frontierSplit(codes: string[], position: number): { full: string[]; par
   return { full: codes.slice(0, fullCount), partial: codes[fullCount] ?? null, none: codes.slice(fullCount + 1) }
 }
 
-// Fully covered codes land around `level` with the usual jitter; the one
-// partial code trails it — one level down and fewer recorded attempts — so it
-// visibly reads as "in progress" rather than mastered or untouched.
-function buildFrontierCounts(codes: string[], position: number, level: CentralLevel, spread: number): { byExpectation: Record<string, LevelCounts>; attempts: number } {
+// What a real class looks like partway through the year: the expectations up
+// to the frontier are taught, the rest aren't yet. Teachers check as they go,
+// not after teaching everything, so most taught expectations have results but
+// some are skipped (GAP_RATE), scattered through the taught stretch. The
+// frontier code itself trails: one level down and fewer responses, so it reads
+// as "in progress".
+const GAP_RATE = 0.2
+
+function buildFrontierCounts(
+  codes: string[],
+  position: number,
+  level: CentralLevel,
+  spread: number,
+): { byExpectation: Record<string, LevelCounts>; attempts: number; taught: string[] } {
   const { full, partial } = frontierSplit(codes, position)
   const attempts = randInt(16, 28) // class size; every student answers every code
   const byExpectation: Record<string, LevelCounts> = {}
-  for (const code of full) byExpectation[code] = generateCounts(level, spread, attempts)
+  for (const code of full) {
+    if (Math.random() < GAP_RATE) continue // taught, not checked yet
+    byExpectation[code] = generateCounts(level, spread, attempts)
+  }
   if (partial) {
     const partialLevel = Math.max(1, level - 1) as CentralLevel
     byExpectation[partial] = generateCounts(partialLevel, spread, Math.max(4, Math.round(attempts * 0.4)))
   }
-  return { byExpectation, attempts }
+  return { byExpectation, attempts, taught: partial ? [...full, partial] : full }
 }
 
 // Class Insights (class-wide). Fabricates synthetic tallies so the subject folder
@@ -160,13 +173,14 @@ export function seedGlobal({ position, level, spread, scope }: SeedOptions): voi
   let i = 0
   for (const pool of pools) {
     for (const grade of pool.grades) {
-      const { byExpectation, attempts } = buildFrontierCounts(pool.codes, position, level, spread)
+      const { byExpectation, attempts, taught } = buildFrontierCounts(pool.codes, position, level, spread)
       tallies.push({
         lessonId: `${DEV_PREFIX}${pool.subject.toLowerCase().replace(/\s+/g, "-")}-g${grade}`,
         title: `Synthetic ${pool.subject} · Grade ${grade}`,
         grade,
         subject: pool.subject,
-        codes: pool.codes,
+        // Only what's been taught so far: the rest of the year is still ahead.
+        codes: taught,
         updatedAt: now - i * 60_000,
         attempts,
         events: attempts,

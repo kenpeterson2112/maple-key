@@ -1,14 +1,20 @@
 import { useState } from "react"
-import { ChevronRight, LogOut, Settings, User, UserPlus } from "lucide-react"
+import { ChevronRight, LogOut, School, Settings, User, UserPlus } from "lucide-react"
 import { BottomSheet } from "@/components/ui/bottom-sheet"
 import { isAdmin, signOut } from "@/lib/account"
 import { withBasePath } from "@/lib/base-path"
 import { accountInitials, useAccount } from "@/lib/use-account"
 
 // The phone header's avatar and the sheet it opens: who you are, Settings,
-// Invite staff (admins) and Sign out. This replaced the old hamburger menu.
+// Classroom profile, Invite staff (admins) and Sign out. This replaced the old hamburger menu.
 
-export default function AccountSheet({ onOpenSettings }: { onOpenSettings: () => void }) {
+export default function AccountSheet({
+  onOpenSettings,
+  onOpenClassroomProfile,
+}: {
+  onOpenSettings: () => void
+  onOpenClassroomProfile: () => void
+}) {
   const account = useAccount()
   const [open, setOpen] = useState(false)
   const [signingOut, setSigningOut] = useState(false)
@@ -62,6 +68,19 @@ export default function AccountSheet({ onOpenSettings }: { onOpenSettings: () =>
           >
             <Settings size={18} aria-hidden="true" className="text-muted-foreground" />
             Settings
+            <ChevronRight size={16} aria-hidden="true" className="ml-auto text-muted-foreground" />
+          </button>
+
+          <button
+            type="button"
+            className={`${row} text-foreground`}
+            onClick={() => {
+              setOpen(false)
+              onOpenClassroomProfile()
+            }}
+          >
+            <School size={18} aria-hidden="true" className="text-muted-foreground" />
+            Classroom profile
             <ChevronRight size={16} aria-hidden="true" className="ml-auto text-muted-foreground" />
           </button>
 

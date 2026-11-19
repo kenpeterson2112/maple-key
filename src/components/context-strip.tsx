@@ -1,6 +1,7 @@
 "use client"
 
-import { useMemo, useSyncExternalStore, type CSSProperties } from "react"
+import { useMemo, useSyncExternalStore } from "react"
+import { BarChart3 } from "lucide-react"
 import { getAllTallies, getResultsVersion, subscribeResultsChanged, type ReadinessLevel } from "@/lib/assessment-results"
 import { getLessonLog, getLessonLogVersion, subscribeLessonLog } from "@/lib/lesson-metadata"
 import { useGlobalFilters } from "@/lib/global-filters"
@@ -99,6 +100,21 @@ export function Gauge({ taught, total, accent, size = 104 }: { taught: number; t
   )
 }
 
+/** Inside an overall's block: what's been checked (in its readiness colour),
+ *  then what's been taught but not checked yet (grey), then nothing for what
+ *  hasn't been taught. Checks happen as teaching goes, so the grey gaps sit
+ *  inside the taught stretch, not after it. */
+function OverallFill({ overall: o }: { overall: OverallProgress }) {
+  const checked = Math.min(o.checked, o.taught)
+  const pct = (n: number) => `${(n / o.total) * 100}%`
+  return (
+    <>
+      {checked > 0 && <div style={{ width: pct(checked), background: levelColor(o.level) }} />}
+      {o.taught > checked && <div style={{ width: pct(o.taught - checked), background: TAUGHT_UNCHECKED }} />}
+    </>
+  )
+}
+
 /** One bar per strand, sized by its expectation count, a block per overall. */
 export function StrandTimeline({
   progress,
@@ -117,7 +133,6 @@ export function StrandTimeline({
           <div className={`flex gap-0.5 ${height}`}>
             {s.overalls.map((o) => {
               const isFrontier = o.code === progress.frontier
-              const fill: CSSProperties = { width: `${(o.taught / o.total) * 100}%`, background: levelColor(o.level) }
               return (
                 <div
                   key={o.code}
@@ -125,7 +140,7 @@ export function StrandTimeline({
                   className={`flex overflow-hidden rounded-sm ${isFrontier ? "outline outline-2 outline-offset-1 outline-foreground" : ""}`}
                   style={{ flex: o.total, background: UNTAUGHT }}
                 >
-                  <div style={fill} />
+                  <OverallFill overall={o} />
                 </div>
               )
             })}
@@ -219,9 +234,10 @@ export function SubjectStrip({
       <button
         type="button"
         onClick={onOpenTrack}
-        className="flex-shrink-0 whitespace-nowrap rounded-lg px-2 py-1.5 text-sm font-semibold text-secondary-strong underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex h-16 w-20 flex-shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-border-strong bg-card text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
-        Open in Track →
+        <BarChart3 size={22} aria-hidden="true" />
+        Analyze
       </button>
     </div>
   )
@@ -283,7 +299,7 @@ export function StrandRows({ progress }: { progress: ClassProgress }) {
             <div className="flex h-2.5 gap-0.5" role="img" aria-label={s.overalls.map(describeOverall).join("; ")}>
               {s.overalls.map((o) => (
                 <div key={o.code} className="flex overflow-hidden rounded-sm" style={{ flex: o.total, background: UNTAUGHT }}>
-                  <div style={{ width: `${(o.taught / o.total) * 100}%`, background: levelColor(o.level) }} />
+                  <OverallFill overall={o} />
                 </div>
               ))}
             </div>

@@ -2,27 +2,16 @@
 
 import { useMemo } from "react"
 import {
-  ArrowRight,
-  BarChart3,
   BookOpen,
   Bookmark,
-  Compass,
-  GraduationCap,
-  Lightbulb,
-  PenLine,
-  Search,
-  Sparkles,
 } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
 import { SUBJECTS } from "@/components/hero-personalize"
-import { StrandTimeline, useSelectedClassData } from "@/components/context-strip"
-import { buildClassProgress, buildNeedsAttention, buildOverallSummary } from "@/lib/class-progress"
+import { useClassData, useSelectedClassData } from "@/components/context-strip"
+import { buildNeedsAttention } from "@/lib/class-progress"
 import { buildWeek } from "@/lib/week"
 import { useGlobalFilters } from "@/lib/global-filters"
-import { useFilteredResources } from "@/lib/use-filtered-resources"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
-import type { Filters } from "@/lib/types"
 
 export type HomeDestination = "lessonplanner" | "resources" | "insights" | "lessons"
 
@@ -33,7 +22,7 @@ interface HomeSpaceProps {
   onOpenLesson: (lesson: LessonMetadata) => void
   /** Re-open the four-step "How Maple Key Works" tour on demand. */
   onOpenTour: () => void
-  /** Open classroom materials setup. */
+  /** Open the Classroom profile (materials, lesson defaults). */
   onOpenClassroomSetup: () => void
   /** Search seeded with an expectation code (the class context is set first). */
   onFindResources: (code: string) => void
@@ -62,32 +51,14 @@ export default function HomeSpace({
   onOpenClassroomSetup,
   onFindResources,
 }: HomeSpaceProps) {
-  const { state, setGrade, setSubject } = useGlobalFilters()
+  const { setGrade, setSubject } = useGlobalFilters()
   const { bookmarkedResources } = useBookmarks()
 
-  // The count reflects curriculum context only. Sidebar facets are a Search
-  // concern and deliberately not applied here.
-  const contextFilters: Filters = useMemo(
-    () => ({
-      province: state.province,
-      grade: state.grade,
-      subject: state.subject,
-      strand: state.strand,
-      topic: "",
-      learningType: "",
-    }),
-    [state.province, state.grade, state.subject, state.strand]
-  )
-
-  const { filteredResources, isLoading } = useFilteredResources(contextFilters)
-  const matchCount = filteredResources.length
-
-  // Read once per mount — the log only changes when a lesson is generated,
-  // which unmounts this space.
   const selected = useSelectedClassData()
+  const all = useClassData()
+  const isNew = all.lessons.length === 0 && all.tallies.length === 0
   const recentLessons = useMemo(() => [...selected.lessons].sort((a, b) => b.timestamp - a.timestamp).slice(0, 3), [selected.lessons])
 
-  const hasContext = !!(state.grade || state.subject || state.province)
   const hasHistory = recentLessons.length > 0 || bookmarkedResources.length > 0
 
   return (
@@ -95,67 +66,22 @@ export default function HomeSpace({
       <div className="mx-auto w-full max-w-5xl px-4 md:px-6 py-6 md:py-8 space-y-6 md:space-y-8 motion-safe:animate-fade-in">
         <h1 className="sr-only">Home</h1>
 
-        {/* ── Teaching context ─────────────────────────────────────────── */}
-        <section
-          aria-labelledby="home-context-heading"
-          className="rounded-xl border border-border bg-card p-5 md:p-7 shadow-sm"
-        >
-          <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-            <h2 id="home-context-heading" className="font-display text-xl md:text-2xl font-semibold text-card-foreground">
-              Your classes
-            </h2>
-            {(state.subject || state.grade) && (
-              <p className="text-sm text-muted-foreground">
-                Showing {[state.grade && `Grade ${state.grade}`, state.subject && (SUBJECTS.find((o) => o.value === state.subject)?.label ?? state.subject)].filter(Boolean).join(" ")}
-                {" · "}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSubject("")
-                    setGrade("")
-                  }}
-                  className="font-semibold text-secondary-strong underline-offset-2 hover:underline"
-                >
-                  Show all
-                </button>
-              </p>
-            )}
-          </div>
-          <ClassCards onOpen={(subject, grade) => {
-            setSubject(subject)
-            setGrade(grade)
-            onNavigate("resources")
-          }} />
-
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            <button
-              type="button"
-              onClick={() => onNavigate("lessonplanner")}
-              className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
-            >
-              <Lightbulb size={16} />
-              Plan a lesson
-              <ArrowRight size={16} />
+        {/* A brand-new teacher (nothing planned or checked anywhere) gets the
+            way into the tour and the classroom profile; everyone else gets
+            straight to the week. */}
+        {isNew && (
+          <p className="text-sm text-muted-foreground">
+            New here?{" "}
+            <button type="button" onClick={onOpenTour} className="font-semibold text-secondary-strong underline-offset-2 hover:underline">
+              Take the tour
+            </button>{" "}
+            or{" "}
+            <button type="button" onClick={onOpenClassroomSetup} className="font-semibold text-secondary-strong underline-offset-2 hover:underline">
+              set up your classroom
             </button>
-
-            <button
-              type="button"
-              onClick={() => onNavigate("resources")}
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted/40"
-            >
-              <Search size={16} />
-              {isLoading
-                ? "Browse resources"
-                : `Browse ${matchCount.toLocaleString()} matching resource${matchCount === 1 ? "" : "s"}`}
-            </button>
-
-            {!hasContext && (
-              <p className="text-xs text-muted-foreground">
-                Pick a subject and grade in the bar above to narrow this to your classroom.
-              </p>
-            )}
-          </div>
-        </section>
+            , then pick a subject and grade above.
+          </p>
+        )}
 
         {/* ── This week / Needs attention ──────────────────────────────── */}
         <div className="grid gap-4 lg:grid-cols-3">
@@ -237,224 +163,8 @@ export default function HomeSpace({
           </section>
         )}
 
-        {/* ── The three pillars ────────────────────────────────────────── */}
-        <section aria-labelledby="home-spaces-heading" className="space-y-3">
-          <h2
-            id="home-spaces-heading"
-            className="text-xs font-semibold uppercase tracking-widest text-muted-foreground"
-          >
-            Where to go
-          </h2>
 
-          <div className="grid gap-4 md:grid-cols-3">
-            <DoorCard
-              icon={Compass}
-              title="Find resources"
-              body="Search Canadian classroom resources filtered by grade, subject, strand and curriculum expectation. Save the ones worth teaching."
-              action="Search resources"
-              onClick={() => onNavigate("resources")}
-            />
-            <DoorCard
-              icon={Lightbulb}
-              title="Plan a lesson"
-              body="Answer a few questions about pacing and format. Maple Key drafts a lesson around your saved resources, and you edit it until it fits."
-              action="Open the planner"
-              onClick={() => onNavigate("lessonplanner")}
-            />
-            <DoorCard
-              icon={BarChart3}
-              title="Track understanding"
-              body="Check comprehension by curriculum expectation after a lesson, and see what landed and what needs another pass."
-              action="View insights"
-              onClick={() => onNavigate("insights")}
-            />
-          </div>
-        </section>
-
-        {/* ── How it works ─────────────────────────────────────────────── */}
-        {/* The same four steps the tour modal walks through — shown here as
-            scannable copy so first-time arrival is never gated by a dialog.
-            The modal is still available from the button below. */}
-        <section aria-labelledby="home-how-heading" className="space-y-4">
-          <h2
-            id="home-how-heading"
-            className="text-xs font-semibold uppercase tracking-widest text-muted-foreground"
-          >
-            How Maple Key works
-          </h2>
-
-          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <HowStep
-              step={1}
-              icon={Search}
-              title="Find"
-              body="Filter the curated library down to your grade, subject and strand."
-            />
-            <HowStep
-              step={2}
-              icon={Bookmark}
-              title="Save"
-              body="Bookmark what fits and add materials you already use."
-            />
-            <HowStep
-              step={3}
-              icon={PenLine}
-              title="Shape"
-              body="Answer a few design questions, then edit the drafted plan."
-            />
-            <HowStep
-              step={4}
-              icon={Sparkles}
-              title="Assess"
-              body="Check understanding by expectation and plan the next lesson."
-            />
-          </ol>
-
-          <div className="flex flex-wrap items-center gap-3 pt-1">
-            <button
-              type="button"
-              onClick={onOpenTour}
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted/40"
-            >
-              <BookOpen size={15} />
-              Take the tour
-            </button>
-            <button
-              type="button"
-              onClick={onOpenClassroomSetup}
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted/40"
-            >
-              <GraduationCap size={15} />
-              Set up your classroom
-            </button>
-          </div>
-        </section>
-
-        <p className="pb-4 text-xs text-muted-foreground">
-          Your filters, bookmarks and lessons save in this browser. Signing in to sync them across
-          devices is coming soon.
-        </p>
       </div>
-    </div>
-  )
-}
-
-function DoorCard({
-  icon: Icon,
-  title,
-  body,
-  action,
-  onClick,
-}: {
-  icon: LucideIcon
-  title: string
-  body: string
-  action: string
-  onClick: () => void
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="group flex h-full flex-col items-start gap-3 rounded-xl border border-border bg-card p-5 text-left transition-colors hover:border-primary/40 hover:bg-muted/30"
-    >
-      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-        <Icon size={19} />
-      </span>
-      <span className="font-display text-base font-bold text-card-foreground">{title}</span>
-      <span className="flex-1 text-sm leading-relaxed text-muted-foreground">{body}</span>
-      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-        {action}
-        <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-      </span>
-    </button>
-  )
-}
-
-function HowStep({
-  step,
-  icon: Icon,
-  title,
-  body,
-}: {
-  step: number
-  icon: LucideIcon
-  title: string
-  body: string
-}) {
-  return (
-    <li className="rounded-lg border border-border bg-card/60 p-4">
-      <div className="flex items-center gap-2 text-primary">
-        <Icon size={16} />
-        <span className="text-xs font-semibold uppercase tracking-widest">Step {step}</span>
-      </div>
-      <p className="mt-2 font-display text-sm font-bold text-card-foreground">{title}</p>
-      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{body}</p>
-    </li>
-  )
-}
-
-/** One card per class (subject + grade) with any lesson or Quick Check, inside
- *  the top nav's selection. With a subject and grade both picked, that class
- *  always gets a card, even before it has any work. */
-function ClassCards({ onOpen }: { onOpen: (subject: string, grade: string) => void }) {
-  const { tallies, lessons, subject, grade } = useSelectedClassData()
-  const cards = useMemo(() => {
-    const classes = buildOverallSummary(tallies, lessons).classes
-    if (subject && grade && !classes.some((c) => c.subject === subject && c.grade === grade)) {
-      classes.unshift({ subject, grade })
-    }
-    return classes.map((c) => ({ ...c, progress: buildClassProgress(c.subject, c.grade, tallies, lessons) }))
-  }, [tallies, lessons, subject, grade])
-
-  if (cards.length === 0) {
-    return (
-      <p className="mt-2 text-sm text-muted-foreground">
-        {subject || grade ? "No classes match this selection yet." : "No classes yet."} Plan a lesson or run a Quick
-        Check and each class shows up here with its progress through the curriculum.
-      </p>
-    )
-  }
-
-  return (
-    <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {cards.map(({ subject, grade, progress }) => {
-        const option = SUBJECTS.find((o) => o.value === subject)
-        return (
-          <button
-            key={`${subject}|${grade}`}
-            type="button"
-            onClick={() => onOpen(subject, grade)}
-            className="flex flex-col gap-2.5 rounded-xl border border-border bg-background p-4 text-left transition-colors hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <span className="flex items-center justify-between gap-2">
-              <span className="font-display text-lg font-semibold text-foreground">
-                Grade {grade} {option?.label ?? subject}
-              </span>
-              <span
-                className="h-3 w-3 flex-shrink-0 rounded-full"
-                style={{ background: option?.color ?? "var(--primary)" }}
-                aria-hidden="true"
-              />
-            </span>
-            {progress ? (
-              <>
-                <StrandTimeline progress={progress} showLabels={false} height="h-2" />
-                <span className="flex justify-between gap-2 text-sm">
-                  <span className="text-foreground">
-                    <strong>{progress.taught}</strong> of {progress.total} taught
-                  </span>
-                  {progress.needsWork && (
-                    <span className="font-semibold text-pop-strong">{progress.needsWork.code} needs work</span>
-                  )}
-                </span>
-              </>
-            ) : (
-              <span className="text-sm text-muted-foreground">No curriculum data for this grade</span>
-            )}
-          </button>
-        )
-      })}
     </div>
   )
 }

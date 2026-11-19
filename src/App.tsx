@@ -8,6 +8,8 @@ import AssessmentModal from "@/components/assessment-modal"
 import OnboardingModal from "@/components/onboarding-modal"
 import ResourceOnboardingModal from "@/components/resource-onboarding-modal"
 import ClassInsightsSpace from "@/components/class-insights-space"
+import SettingsPage from "@/components/settings-page"
+import ClassroomProfile from "@/components/classroom-profile"
 import TopNav, { type TopNavSpace } from "@/components/top-nav"
 import type { NextStepHandlers } from "@/components/next-step-bar"
 import BottomTabBar from "@/components/bottom-tab-bar"
@@ -15,7 +17,7 @@ import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useGlobalFilters } from "@/lib/global-filters"
 
-type Space = "home" | "resources" | "lessonplanner" | "assessment" | "lessons" | "insights"
+type Space = "home" | "resources" | "lessonplanner" | "assessment" | "lessons" | "insights" | "settings" | "classroom"
 // All overlay spaces cross-fade in/out — quick and direction-neutral
 const FADE_VARIANTS = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
 const FADE_TRANSITION = { duration: 0.15, ease: "easeOut" } as const
@@ -123,6 +125,8 @@ export default function App() {
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
         nextStepHandlers={nextStepHandlers}
+        onOpenSettings={() => setActiveSpace("settings")}
+        onOpenClassroomProfile={() => setActiveSpace("classroom")}
         hideStrip={activeSpace === "assessment"}
       />
 
@@ -159,7 +163,7 @@ export default function App() {
                   }}
                   onOpenLesson={(lesson) => openPlanner(lesson)}
                   onOpenTour={() => setShowResourceTour(true)}
-                  onOpenClassroomSetup={() => setShowOnboarding(true)}
+                  onOpenClassroomSetup={() => setActiveSpace("classroom")}
                   onFindResources={findResources}
                 />
               )}
@@ -212,6 +216,15 @@ export default function App() {
                   <button onClick={goResources} className="text-sm text-muted-foreground underline">Back to resources</button>
                 </div>
               )}
+
+              {activeSpace === "settings" && (
+                <SettingsPage
+                  onOpenClassroomProfile={() => setActiveSpace("classroom")}
+                  onOpenTour={() => setShowResourceTour(true)}
+                />
+              )}
+
+              {activeSpace === "classroom" && <ClassroomProfile />}
 
               {activeSpace === "insights" && (
                 <ClassInsightsSpace onFindResources={findResources} />

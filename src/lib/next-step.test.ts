@@ -64,3 +64,8 @@ test("a check from before the last lesson doesn't trigger reteach", () => {
   if (step.kind !== "next") return
   assert.equal(step.unchecked, true)
 })
+
+test("no lessons but Quick Checks: continue after the furthest checked expectation", () => {
+  const step = buildNextStep(seq, [], [tally(1, { "B1.1": L(0, 1, 5, 5), "C1.1": L(0, 2, 6, 3) })])
+  assert.deepEqual(step, { kind: "continue", code: "C2.1", furthest: "C1.1" })
+})

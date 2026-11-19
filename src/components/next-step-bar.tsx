@@ -161,6 +161,9 @@ export default function NextStepBar({
   if (step.kind === "start") {
     headline = `Start with ${step.code} ${label}`
     rationale = `No lessons are planned for ${cls} yet, and ${step.code} comes first in ${sequence.name}.${resourcesLine}`
+  } else if (step.kind === "continue") {
+    headline = `Next: ${step.code} ${label}`
+    rationale = `Quick Checks for ${cls} reach ${step.furthest}, and ${step.code} comes next in ${sequence.name}.${resourcesLine}`
   } else if (step.kind === "reteach") {
     icon = <RotateCcw size={18} aria-hidden="true" />
     headline = `Reteach ${step.code} ${label} before moving on`
