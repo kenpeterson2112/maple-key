@@ -153,59 +153,6 @@ export function Legend() {
   )
 }
 
-/** The one overall to act on: the struggling one, else where the class is. */
-export function NextStep({
-  progress,
-  onFindResources,
-  onPlan,
-}: {
-  progress: ClassProgress
-  onFindResources?: (code: string) => void
-  onPlan?: () => void
-}) {
-  const all = progress.strands.flatMap((s) => s.overalls)
-  const target = progress.needsWork ?? all.find((o) => o.code === progress.frontier) ?? null
-  if (!target) {
-    return <p className="text-sm text-muted-foreground">Every expectation is taught and secure.</p>
-  }
-  const struggling = target === progress.needsWork
-  return (
-    <div className="flex min-w-0 flex-col gap-1.5">
-      <span className={`text-xs font-bold uppercase tracking-wide ${struggling ? "text-pop-strong" : "text-muted-foreground"}`}>
-        {struggling ? "Needs work" : "Up next"}
-      </span>
-      <span className="font-display text-base font-semibold leading-tight text-foreground line-clamp-2">
-        {target.code} {target.title}
-      </span>
-      <span className="text-xs text-muted-foreground">
-        {struggling && target.lowShare !== null
-          ? `${Math.round(target.lowShare * 100)}% at Level 1–2`
-          : `${target.taught} of ${target.total} taught`}
-      </span>
-      <div className="mt-1 flex flex-wrap gap-2">
-        {onFindResources && (
-          <button
-            type="button"
-            onClick={() => onFindResources(target.code)}
-            className="min-h-9 whitespace-nowrap rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
-          >
-            Find resources
-          </button>
-        )}
-        {onPlan && (
-          <button
-            type="button"
-            onClick={onPlan}
-            className="min-h-9 whitespace-nowrap rounded-lg border border-border-strong bg-card px-3 text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent"
-          >
-            Plan a lesson
-          </button>
-        )}
-      </div>
-    </div>
-  )
-}
-
 /** Why there's no progress view for this selection, in one line. */
 export function noProgressReason(subject: string, grade: string): string {
   if (!subject) return "Choose a subject and grade to see where your class is."
@@ -219,17 +166,15 @@ export function noProgressReason(subject: string, grade: string): string {
 export function SubjectStrip({
   progress,
   accent,
-  onFindResources,
-  onPlan,
+  onOpenTrack,
 }: {
   progress: ClassProgress
   accent: string
-  onFindResources?: (code: string) => void
-  onPlan?: () => void
+  onOpenTrack: () => void
 }) {
   const ongoing = progress.ongoingStrands.map((s) => `${s.code} (${s.label})`).join(", ")
   return (
-    <div className="flex items-stretch gap-6">
+    <div className="flex items-center gap-6">
       <div className="flex flex-shrink-0 items-center gap-3">
         <Gauge taught={progress.taught} total={progress.total} accent={accent} />
         <div className="flex flex-col gap-0.5 text-sm">
@@ -258,9 +203,13 @@ export function SubjectStrip({
         </div>
       </div>
 
-      <div className="hidden w-72 flex-shrink-0 border-l border-border-strong pl-5 lg:block">
-        <NextStep progress={progress} onFindResources={onFindResources} onPlan={onPlan} />
-      </div>
+      <button
+        type="button"
+        onClick={onOpenTrack}
+        className="flex-shrink-0 whitespace-nowrap rounded-lg px-2 py-1.5 text-sm font-semibold text-secondary-strong underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        Open in Track →
+      </button>
     </div>
   )
 }

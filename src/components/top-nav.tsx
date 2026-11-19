@@ -7,8 +7,8 @@ import MaterialsSummary from "@/components/materials-summary"
 import AccountSheet from "@/components/account-sheet"
 import { BottomSheet } from "@/components/ui/bottom-sheet"
 import { GRADES, SUBJECTS } from "@/components/hero-personalize"
+import NextStepBar, { type NextStepHandlers } from "@/components/next-step-bar"
 import {
-  NextStep,
   OverallStrip,
   StrandRows,
   StrandTimeline,
@@ -38,11 +38,9 @@ interface TopNavProps {
   onGoHome?: () => void
   /** Choosing a subject or grade from the landing page enters that class. */
   onEnterClass?: () => void
-  /** Jump to Search seeded with an expectation code. */
-  onFindResources?: (code: string) => void
-  /** Open the planner for the current class. */
-  onPlan?: () => void
-  /** Hide the progress row (full-screen flows such as Quick Check). */
+  /** What the next-step suggestion's buttons do (layer 3). */
+  nextStepHandlers: NextStepHandlers
+  /** Hide the progress and next-step rows (full-screen flows such as Quick Check). */
   hideStrip?: boolean
 }
 
@@ -55,13 +53,15 @@ const SUBJECT_OPTIONS = SUBJECTS.map((o) => (o.value ? o : { ...o, label: "All s
 const GRADE_OPTIONS = GRADES.map((o) => (o.value ? o : { ...o, label: "All grades" }))
 
 // The top nav is locked to the class being worked on (Nielsen: visibility of
-// system status, recognition over recall). Row 1 holds the subject and grade
-// pickers and the spaces; it wears the subject's colour once one is chosen, the
-// brand red on the landing page or with none. Row 2 shows where the class is:
-// a gauge, the strand timeline and what needs work, or a summary across
-// classes. Province sits in Settings: it rarely changes.
-// Phone: a 56px bar with one class chip (opening a sheet with the pickers and
-// the full picture) and a one-line progress bar under it.
+// system status, recognition over recall). Desktop has three layers:
+//   1. Settings: the subject and grade pickers and the province, in the
+//      subject's colour (brand red on the landing page or with none). The
+//      spaces sit here as quiet links; the rows below lead into them too.
+//   2. Where the class is: a gauge, the strand timeline, a link into Track; or
+//      a summary across classes.
+//   3. The next step, with its rationale (next-step-bar.tsx).
+// Phone: a 56px bar with one class chip (opening a sheet with the pickers, the
+// full picture and the next step) and a one-line progress bar under it.
 export default function TopNav({
   activeSpace,
   onChangeSpace,
@@ -70,8 +70,7 @@ export default function TopNav({
   isHome = false,
   onGoHome,
   onEnterClass,
-  onFindResources,
-  onPlan,
+  nextStepHandlers,
   hideStrip = false,
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
@@ -140,15 +139,20 @@ export default function TopNav({
               <div className="ml-2 flex items-center gap-2">
                 <ContextSelect label="Subject" value={state.subject} options={SUBJECT_OPTIONS} onChange={pickSubject} color={accentText} />
                 <ContextSelect label="Grade" value={state.grade} options={GRADE_OPTIONS} onChange={pickGrade} color={accentText} />
+                <button
+                  type="button"
+                  onClick={openSettings}
+                  title="Province is set in Settings"
+                  className="rounded-full px-2 py-1 text-sm font-semibold underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {provinceName(state.province)}
+                </button>
               </div>
-              <div className="mx-auto">
-                <SpaceToggle
-                  activeSpace={activeSpace}
-                  onChangeSpace={onChangeSpace}
-                  planBadge={bookmarkedResources.length}
-                  activeColor={accentText}
-                />
-              </div>
+              <SpaceLinks
+                activeSpace={activeSpace}
+                onChangeSpace={onChangeSpace}
+                planBadge={bookmarkedResources.length}
+              />
               <MaterialsMenu onEdit={openSettings} />
               <button
                 onClick={openSettings}
@@ -203,7 +207,7 @@ export default function TopNav({
           <div className="border-b" style={tintStyle}>
             <div className="mx-auto hidden max-w-[1500px] px-6 py-3 md:block">
               {scoped && progress ? (
-                <SubjectStrip progress={progress} accent={accent} onFindResources={onFindResources} onPlan={onPlan} />
+                <SubjectStrip progress={progress} accent={accent} onOpenTrack={() => onChangeSpace("insights")} />
               ) : (
                 <OverallStrip
                   province={state.province}
@@ -249,6 +253,20 @@ export default function TopNav({
                 )}
               </button>
             )}
+          </div>
+        )}
+
+        {/* Row 3: the next step (desktop; phones get it in the class sheet) */}
+        {!hideStrip && (
+          <div className="hidden border-b border-border bg-card md:block">
+            <div className="mx-auto max-w-[1500px] px-6 py-3">
+              <NextStepBar
+                subject={state.subject}
+                grade={state.grade}
+                acrossClasses={!scoped}
+                handlers={nextStepHandlers}
+              />
+            </div>
           </div>
         )}
       </header>
@@ -300,24 +318,24 @@ export default function TopNav({
                   Ongoing in every lesson: {progress.ongoingStrands.map((s) => `${s.code} ${s.label}`).join(", ")}
                 </p>
               )}
-              <NextStep
-                progress={progress}
-                onFindResources={
-                  onFindResources
-                    ? (code) => {
-                        setIsClassSheetOpen(false)
-                        onFindResources(code)
-                      }
-                    : undefined
-                }
-                onPlan={
-                  onPlan
-                    ? () => {
-                        setIsClassSheetOpen(false)
-                        onPlan()
-                      }
-                    : undefined
-                }
+              <NextStepBar
+                subject={state.subject}
+                grade={state.grade}
+                layout="stacked"
+                handlers={{
+                  onPlan: (...args) => {
+                    setIsClassSheetOpen(false)
+                    nextStepHandlers.onPlan(...args)
+                  },
+                  onFindResources: (...args) => {
+                    setIsClassSheetOpen(false)
+                    nextStepHandlers.onFindResources(...args)
+                  },
+                  onQuickCheck: (lesson) => {
+                    setIsClassSheetOpen(false)
+                    nextStepHandlers.onQuickCheck(lesson)
+                  },
+                }}
               />
             </>
           ) : (
@@ -470,52 +488,43 @@ function MaterialsMenu({ onEdit, compact = false }: { onEdit: () => void; compac
   )
 }
 
-function SpaceToggle({
+/** The four spaces as quiet text links on the bar. The layers below lead into
+ *  them too (the progress row opens Track, the next step opens Plan/Search),
+ *  so they no longer need to be the loudest thing on the page. */
+function SpaceLinks({
   activeSpace,
   onChangeSpace,
   planBadge = 0,
-  activeColor,
 }: {
   activeSpace: TopNavSpace | null
   onChangeSpace: (space: TopNavSpace) => void
-  /** Bookmarked-resource count shown on the Plan tab. */
+  /** Bookmarked-resource count shown on Plan. */
   planBadge?: number
-  /** Text colour of the selected tab, matching the bar. */
-  activeColor: string
 }) {
   return (
-    <div
-      role="tablist"
-      aria-label="View"
-      className="flex items-center gap-1 rounded-full bg-foreground/15 p-1"
-    >
+    <nav aria-label="Spaces" className="ml-auto flex items-center gap-1">
       {SPACE_ITEMS.map((item) => {
-        const Icon = item.icon
         const isActive = activeSpace === item.id
         const showBadge = item.id === "lessonplanner" && planBadge > 0
         return (
           <button
             key={item.id}
-            role="tab"
-            aria-selected={isActive}
+            type="button"
+            aria-current={isActive ? "page" : undefined}
             onClick={() => onChangeSpace(item.id)}
-            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-              isActive ? "bg-card shadow-sm" : "hover:bg-card/20"
+            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold underline-offset-[6px] transition-colors hover:bg-card/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              isActive ? "underline decoration-2" : ""
             }`}
-            style={isActive ? { color: activeColor } : undefined}
           >
-            <Icon size={16} />
-            <span>{item.label}</span>
+            {item.label}
             {showBadge && (
-              <span
-                className="flex h-4 min-w-4 items-center justify-center rounded-full bg-pop px-1 text-[9px] font-bold text-pop-foreground"
-              >
+              <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-pop px-1 text-[9px] font-bold text-pop-foreground">
                 {planBadge >= 10 ? "9+" : planBadge}
               </span>
             )}
           </button>
         )
       })}
-    </div>
+    </nav>
   )
 }

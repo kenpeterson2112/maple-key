@@ -1,0 +1,114 @@
+// The "next step" for a class: the next logical lesson after what the teacher
+// most recently planned, read against a scope and sequence, unless that
+// lesson's Quick Check says to reteach first. Rules only, no model call: it
+// runs on every render, costs nothing, and every claim in the rationale points
+// at data the teacher can see.
+//
+// Pure (types only): the caller passes this class's lessons and Quick Check
+// tallies and the sequence. Feeds layer 3 of the top nav.
+
+import type { LessonTally, LevelCounts } from "./assessment-results"
+import type { LessonMetadata } from "./lesson-metadata"
+
+/** An ordered teaching sequence for one subject and grade. */
+export interface ScopeSequence {
+  /** Shown in the rationale: "in Peel DSB's scope and sequence". */
+  name: string
+  /** Specific-expectation codes in the order they are taught. */
+  codes: string[]
+}
+
+export type NextStep =
+  | {
+      kind: "start"
+      code: string
+    }
+  | {
+      kind: "next"
+      code: string
+      /** The lesson it follows. */
+      after: LessonMetadata
+      /** The last lesson's codes that sit before `code` in the sequence. */
+      builtOn: string[]
+      /** True when no Quick Check since the last lesson has results on its expectations. */
+      unchecked: boolean
+    }
+  | {
+      kind: "reteach"
+      code: string
+      after: LessonMetadata
+      /** Share of responses at Level 1–2 on `code`, 0–1. */
+      lowShare: number
+      /** When those results were last recorded. */
+      checkedAt: number
+    }
+  | { kind: "done" }
+
+/** Reteach when at least this share of responses sit at Level 1–2. */
+export const RETEACH_SHARE = 0.5
+
+const total = (c: LevelCounts) => c.level1 + c.level2 + c.level3 + c.level4
+
+/** Does `code` (a specific like "C2.1" or an overall like "C2") cover `specific`? */
+function covers(code: string, specific: string): boolean {
+  return code === specific || specific.startsWith(`${code}.`)
+}
+
+export function buildNextStep(sequence: ScopeSequence, lessons: LessonMetadata[], tallies: LessonTally[]): NextStep {
+  const order = sequence.codes
+  if (order.length === 0) return { kind: "done" }
+
+  const taught = new Set<string>()
+  for (const l of lessons) for (const c of l.curriculumCodesCovered ?? []) for (const s of order) if (covers(c, s)) taught.add(s)
+  for (const t of tallies) {
+    for (const c of [...t.codes, ...Object.keys(t.byExpectation)]) for (const s of order) if (covers(c, s)) taught.add(s)
+  }
+
+  const last = [...lessons].sort((a, b) => b.timestamp - a.timestamp)[0]
+  if (!last) {
+    const first = order.find((c) => !taught.has(c))
+    return first ? { kind: "start", code: first } : { kind: "done" }
+  }
+
+  const lastSpecifics = order.filter((s) => (last.curriculumCodesCovered ?? []).some((c) => covers(c, s)))
+  // Only checks recorded after that lesson was planned speak to it: an older
+  // poor result may be exactly why the teacher planned it.
+  const since = tallies.filter((t) => t.updatedAt >= last.timestamp)
+
+  // Reteach: the last lesson's own expectations, as checked since.
+  let worst: { code: string; lowShare: number; checkedAt: number } | null = null
+  for (const code of lastSpecifics) {
+    const sum = { level1: 0, level2: 0, level3: 0, level4: 0 }
+    let checkedAt = 0
+    for (const t of since) {
+      const c = t.byExpectation[code]
+      if (!c || total(c) === 0) continue
+      sum.level1 += c.level1
+      sum.level2 += c.level2
+      sum.level3 += c.level3
+      sum.level4 += c.level4
+      checkedAt = Math.max(checkedAt, t.updatedAt)
+    }
+    const n = total(sum)
+    if (n === 0) continue
+    const lowShare = (sum.level1 + sum.level2) / n
+    if (lowShare >= RETEACH_SHARE && (!worst || lowShare > worst.lowShare)) worst = { code, lowShare, checkedAt }
+  }
+  if (worst) return { kind: "reteach", code: worst.code, after: last, lowShare: worst.lowShare, checkedAt: worst.checkedAt }
+
+  // Next: the first untaught expectation after the furthest one the last
+  // lesson reached; if the sequence is finished past that point, the earliest
+  // gap before it.
+  const furthest = Math.max(-1, ...lastSpecifics.map((c) => order.indexOf(c)))
+  const next = order.slice(furthest + 1).find((c) => !taught.has(c)) ?? order.find((c) => !taught.has(c))
+  if (!next) return { kind: "done" }
+
+  const checked = lastSpecifics.some((code) => since.some((t) => t.byExpectation[code] && total(t.byExpectation[code]) > 0))
+  return {
+    kind: "next",
+    code: next,
+    after: last,
+    builtOn: lastSpecifics.filter((c) => order.indexOf(c) < order.indexOf(next)),
+    unchecked: lastSpecifics.length > 0 && !checked,
+  }
+}

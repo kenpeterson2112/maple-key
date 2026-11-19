@@ -205,14 +205,25 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `class-dashboard.tsx`, `lessons-library.tsx`).
 - **The assessment modal and sticky footer are the highest-risk reusable pieces** —
   changes here ripple through the Acorn remote.
-- **The top nav is the class context** (`top-nav.tsx`, `context-strip.tsx`).
-  Row 1 holds the Subject and Grade selects and the spaces; it wears the
-  subject's colour (`--subject-*` via `SUBJECTS[].color`) once one is chosen,
-  and brand `primary` on the landing page or with none. Row 2 shows where the
-  class is: a gauge (taught of the grade's real expectation count), the strand
-  timeline coloured by `signal-*` readiness, and the overall that needs work,
-  all from `buildClassProgress` (`src/lib/class-progress.ts`). Province is in
-  Settings, not the nav. The class context has **one store**,
+- **The top nav is the class context** (`top-nav.tsx`, `context-strip.tsx`,
+  `next-step-bar.tsx`). Desktop has three layers:
+  1. **Settings:** the Subject and Grade selects and the province (a link to
+     Settings), in the subject's colour (`--subject-*` via `SUBJECTS[].color`),
+     brand `primary` on the landing page or with none. The four spaces sit here
+     as quiet text links; the layers below lead into them too.
+  2. **Where the class is:** a gauge (taught of the grade's real expectation
+     count), the strand timeline coloured by `signal-*` readiness with "now"
+     at the overall the last lesson reached, and a link into Track. All from
+     `buildClassProgress` (`src/lib/class-progress.ts`).
+  3. **Next step with rationale:** rules only, no model call
+     (`src/lib/next-step.ts`, unit-tested): reteach when a Quick Check since
+     the last lesson has ≥50% at Level 1–2 on its expectations, else the next
+     untaught expectation after the last lesson in the scope and sequence
+     (`src/lib/scope-sequence.ts`: a file in `src/data/sequences/` if one exists
+     for the subject and grade, else the curriculum order). Every clause of
+     the rationale must point at data the teacher can see.
+
+  Province is in Settings. The class context has **one store**,
   `src/lib/global-filters.ts` (province, grade, subject, strand, plus the
   session-only planner topic); never keep a second copy in a component or
   `App.tsx`. Strand is a Search-only filter, picked in that page's header.
