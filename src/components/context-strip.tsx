@@ -3,9 +3,11 @@
 import { useMemo, useSyncExternalStore, type CSSProperties } from "react"
 import { getAllTallies, getResultsVersion, subscribeResultsChanged, type ReadinessLevel } from "@/lib/assessment-results"
 import { getLessonLog, getLessonLogVersion, subscribeLessonLog } from "@/lib/lesson-metadata"
+import { useGlobalFilters } from "@/lib/global-filters"
 import {
   buildClassProgress,
   buildOverallSummary,
+  inSelection,
   type ClassProgress,
   type OverallProgress,
   type OverallSummary,
@@ -28,6 +30,17 @@ export function useClassData() {
   const tallies = useMemo(() => getAllTallies(), [resultsVersion])
   const lessons = useMemo(() => getLessonLog(), [lessonVersion])
   return { tallies, lessons }
+}
+
+/** Tallies and lessons inside the top nav's subject/grade selection ("all"
+ *  where a picker is empty). The landing page's widgets read this. */
+export function useSelectedClassData() {
+  const { tallies, lessons } = useClassData()
+  const { state } = useGlobalFilters()
+  return useMemo(() => {
+    const keep = (x: { subject: string; grade: string }) => inSelection(state.subject, state.grade, x.subject, x.grade)
+    return { tallies: tallies.filter(keep), lessons: lessons.filter(keep), subject: state.subject, grade: state.grade }
+  }, [tallies, lessons, state.subject, state.grade])
 }
 
 export function useClassProgress(subject: string, grade: string): ClassProgress | null {
@@ -216,14 +229,28 @@ export function SubjectStrip({
 
 /** Desktop row 2 across all classes (landing page, or no subject chosen). */
 export function OverallStrip({ province, note }: { province: string; note?: string }) {
-  const summary = useOverallSummary()
+  // Narrowed to whichever of subject/grade is picked, like the landing page.
+  const { tallies, lessons, subject, grade } = useSelectedClassData()
+  const summary = useMemo(() => buildOverallSummary(tallies, lessons), [tallies, lessons])
   const n = summary.classes.length
+  const scope = [grade && `Grade ${grade}`, subject].filter(Boolean).join(" ")
+  if (n === 0) {
+    return (
+      <p className="text-sm text-foreground">
+        <span className="font-semibold">{provinceName(province)}</span>
+        <span className="text-muted-foreground">
+          {" "}· No {scope ? `${scope} ` : ""}lessons or Quick Checks yet. Plan a lesson and each class&rsquo;s progress through the curriculum shows here.
+        </span>
+      </p>
+    )
+  }
   return (
     <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-foreground">
       <span className="font-semibold">{provinceName(province)}</span>
       <span className="text-muted-foreground" aria-hidden="true">·</span>
       <span>
-        {n} {n === 1 ? "class" : "classes"}
+        {n} {scope ? `${scope} ` : ""}
+        {n === 1 ? "class" : "classes"}
       </span>
       <span className="text-muted-foreground" aria-hidden="true">·</span>
       <span>

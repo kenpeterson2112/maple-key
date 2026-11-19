@@ -122,7 +122,6 @@ export default function App() {
         onChangeSpace={changeSpace}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
-        onEnterClass={goResources}
         nextStepHandlers={nextStepHandlers}
         hideStrip={activeSpace === "assessment"}
       />

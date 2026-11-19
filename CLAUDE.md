@@ -209,7 +209,7 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `next-step-bar.tsx`). Desktop has three layers:
   1. **Settings:** the Subject and Grade selects and the province (a link to
      Settings), in the subject's colour (`--subject-*` via `SUBJECTS[].color`),
-     brand `primary` on the landing page or with none. The four spaces sit here
+     brand `primary` with none (on every page, the landing page included). The four spaces sit here
      as quiet text links; the layers below lead into them too.
   2. **Where the class is:** a gauge (taught of the grade's real expectation
      count), the strand timeline coloured by `signal-*` readiness with "now"
@@ -222,6 +222,10 @@ Tailwind v4 default 4px scale. Common steps used in this app:
      (`src/lib/scope-sequence.ts`: a file in `src/data/sequences/` if one exists
      for the subject and grade, else the curriculum order). Every clause of
      the rationale must point at data the teacher can see.
+
+  The landing page follows the same selection: Your classes, This week, Needs
+  attention and Pick up where you left off show only what matches the subject
+  and grade picked (`useSelectedClassData`), and an empty picker means all.
 
   Province is in Settings. The class context has **one store**,
   `src/lib/global-filters.ts` (province, grade, subject, strand, plus the

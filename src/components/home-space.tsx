@@ -14,15 +14,14 @@ import {
   Sparkles,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
-import MapleKeyIcon from "@/components/ui/maple-key-icon"
 import { SUBJECTS } from "@/components/hero-personalize"
-import { StrandTimeline, useClassData } from "@/components/context-strip"
+import { StrandTimeline, useSelectedClassData } from "@/components/context-strip"
 import { buildClassProgress, buildNeedsAttention, buildOverallSummary } from "@/lib/class-progress"
 import { buildWeek } from "@/lib/week"
 import { useGlobalFilters } from "@/lib/global-filters"
 import { useFilteredResources } from "@/lib/use-filtered-resources"
 import { useBookmarks } from "@/lib/bookmarks-context"
-import { getLessonLog, type LessonMetadata } from "@/lib/lesson-metadata"
+import type { LessonMetadata } from "@/lib/lesson-metadata"
 import type { Filters } from "@/lib/types"
 
 export type HomeDestination = "lessonplanner" | "resources" | "insights" | "lessons"
@@ -85,40 +84,43 @@ export default function HomeSpace({
 
   // Read once per mount — the log only changes when a lesson is generated,
   // which unmounts this space.
-  const recentLessons = useMemo(() => getLessonLog().slice(0, 3), [])
+  const selected = useSelectedClassData()
+  const recentLessons = useMemo(() => [...selected.lessons].sort((a, b) => b.timestamp - a.timestamp).slice(0, 3), [selected.lessons])
 
   const hasContext = !!(state.grade || state.subject || state.province)
   const hasHistory = recentLessons.length > 0 || bookmarkedResources.length > 0
 
   return (
     <div className="h-full overflow-y-auto bg-background">
-      <div className="mx-auto w-full max-w-5xl px-4 md:px-6 py-8 md:py-12 space-y-10 md:space-y-12 motion-safe:animate-fade-in">
-        {/* ── Hero ─────────────────────────────────────────────────────── */}
-        <header className="space-y-4">
-          <div className="flex items-center gap-2 text-primary">
-            <MapleKeyIcon className="h-6 w-6" />
-            <span className="text-xs font-semibold uppercase tracking-widest">Maple Key</span>
-          </div>
-
-          <h1 className="font-display text-3xl font-semibold md:text-5xl leading-tight tracking-tight text-foreground">
-            Let's get planning.
-          </h1>
-
-          <p className="max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
-            Tell Maple Key what you teach. It finds Canadian classroom resources matched to your
-            curriculum expectations, drafts a lesson around the ones you pick, and tracks what your
-            students understood so the next lesson starts in the right place.
-          </p>
-        </header>
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-6 py-6 md:py-8 space-y-6 md:space-y-8 motion-safe:animate-fade-in">
+        <h1 className="sr-only">Home</h1>
 
         {/* ── Teaching context ─────────────────────────────────────────── */}
         <section
           aria-labelledby="home-context-heading"
           className="rounded-xl border border-border bg-card p-5 md:p-7 shadow-sm"
         >
-          <h2 id="home-context-heading" className="font-display text-xl md:text-2xl font-semibold text-card-foreground">
-            Your classes
-          </h2>
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+            <h2 id="home-context-heading" className="font-display text-xl md:text-2xl font-semibold text-card-foreground">
+              Your classes
+            </h2>
+            {(state.subject || state.grade) && (
+              <p className="text-sm text-muted-foreground">
+                Showing {[state.grade && `Grade ${state.grade}`, state.subject && (SUBJECTS.find((o) => o.value === state.subject)?.label ?? state.subject)].filter(Boolean).join(" ")}
+                {" · "}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubject("")
+                    setGrade("")
+                  }}
+                  className="font-semibold text-secondary-strong underline-offset-2 hover:underline"
+                >
+                  Show all
+                </button>
+              </p>
+            )}
+          </div>
           <ClassCards onOpen={(subject, grade) => {
             setSubject(subject)
             setGrade(grade)
@@ -392,23 +394,24 @@ function HowStep({
   )
 }
 
-/** One card per subject and grade with any lesson or Quick Check. */
+/** One card per class (subject + grade) with any lesson or Quick Check, inside
+ *  the top nav's selection. With a subject and grade both picked, that class
+ *  always gets a card, even before it has any work. */
 function ClassCards({ onOpen }: { onOpen: (subject: string, grade: string) => void }) {
-  const { tallies, lessons } = useClassData()
-  const cards = useMemo(
-    () =>
-      buildOverallSummary(tallies, lessons).classes.map((c) => ({
-        ...c,
-        progress: buildClassProgress(c.subject, c.grade, tallies, lessons),
-      })),
-    [tallies, lessons],
-  )
+  const { tallies, lessons, subject, grade } = useSelectedClassData()
+  const cards = useMemo(() => {
+    const classes = buildOverallSummary(tallies, lessons).classes
+    if (subject && grade && !classes.some((c) => c.subject === subject && c.grade === grade)) {
+      classes.unshift({ subject, grade })
+    }
+    return classes.map((c) => ({ ...c, progress: buildClassProgress(c.subject, c.grade, tallies, lessons) }))
+  }, [tallies, lessons, subject, grade])
 
   if (cards.length === 0) {
     return (
       <p className="mt-2 text-sm text-muted-foreground">
-        No classes yet. Plan a lesson or run a Quick Check and each class shows up here with its progress
-        through the curriculum.
+        {subject || grade ? "No classes match this selection yet." : "No classes yet."} Plan a lesson or run a Quick
+        Check and each class shows up here with its progress through the curriculum.
       </p>
     )
   }
@@ -467,7 +470,7 @@ function subjectLabel(subject: string): string {
 
 /** Mon–Fri of the current week: lessons planned and Quick Checks recorded. */
 function ThisWeek({ onOpenLesson }: { onOpenLesson: (lesson: LessonMetadata) => void }) {
-  const { tallies, lessons } = useClassData()
+  const { tallies, lessons } = useSelectedClassData()
   const days = useMemo(() => buildWeek(lessons, tallies), [lessons, tallies])
   const empty = days.every((d) => d.lessons.length === 0 && d.checks.length === 0)
 
@@ -537,7 +540,7 @@ function ThisWeek({ onOpenLesson }: { onOpenLesson: (lesson: LessonMetadata) => 
 
 /** The overall expectations classes are struggling with most, across classes. */
 function NeedsAttention({ onFindResources }: { onFindResources: (subject: string, grade: string, code: string) => void }) {
-  const { tallies, lessons } = useClassData()
+  const { tallies, lessons } = useSelectedClassData()
   const items = useMemo(() => buildNeedsAttention(tallies, lessons), [tallies, lessons])
 
   return (

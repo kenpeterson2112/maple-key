@@ -57,6 +57,14 @@ function gradeOf(grade: string | undefined): string {
   return normalizeGrades([grade ?? ""])[0] ?? ""
 }
 
+/** Does a lesson or tally fall inside a selection? An empty subject or grade
+ *  means "all", so the landing page's widgets can follow the top nav's pickers. */
+export function inSelection(selSubject: string, selGrade: string, s: string, g: string): boolean {
+  if (selSubject && normalizeSubject(s ?? "") !== normalizeSubject(selSubject)) return false
+  if (selGrade && gradeOf(g) !== gradeOf(selGrade)) return false
+  return true
+}
+
 /** Is a lesson or tally (subject `s`, grade `g`) for this class? Normalises both. */
 export function isSameClass(subject: string, grade: string, s: string, g: string): boolean {
   return sameClass(subject, gradeOf(grade), s, g)
