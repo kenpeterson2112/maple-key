@@ -34,7 +34,7 @@ file moves but the names stay the same.
 
 ### Color tokens: "Crisp orchard"
 
-Bright autumn: **apple red** primary, **teal** secondary, **goldenrod** pop, on a
+Bright autumn: **rust** primary, **teal** secondary, **goldenrod** pop, on a
 warm near-white. Dark mode is **warm cocoa**, not greyscale. The values live in
 `src/index.css` as OKLCH; the hex below is what each one renders as (the CSS
 comments carry the same hex, and `pnpm check:contrast` fails if they drift).
@@ -45,11 +45,11 @@ comments carry the same hex, and `pnpm check:contrast` fails if they drift).
 | `foreground` | `#2A1E1A` | `#F5EDE6` | body text and headings |
 | `card` / `card-foreground` | `#FFFFFF` / `#2A1E1A` | `#262019` / `#F5EDE6` | cards, panels |
 | `popover` / `popover-foreground` | `#FFFFFF` / `#2A1E1A` | `#2D2620` / `#F5EDE6` | popovers, menus |
-| `primary` | `#D93A26` | `#FF5A43` | main actions, brand fills; text on background/card only |
-| `primary-hover` | `#C2301D` | `#FF7360` | hover/pressed state of a `primary` fill |
-| `primary-strong` | `#B82C1A` | `#FF7360` | red text/icons on muted or any tint |
+| `primary` | `#B45A3A` | `#E68360` | main actions, brand fills; text on background/card only |
+| `primary-hover` | `#A55031` | `#EE9373` | hover/pressed state of a `primary` fill |
+| `primary-strong` | `#A14D2F` | `#EE9373` | rust text/icons on muted or any tint |
 | `primary-foreground` | `#FFFFFF` | `#1C1714` | text on a `primary` fill |
-| `primary-tint` | `#FDE7E3` | `#3D211C` | selected chips and rows |
+| `primary-tint` | `#FFEBE4` | `#3C241C` | selected chips and rows |
 | `secondary` | `#109A7E` | `#2DD4AE` | teal fills, outline borders, active-tab indicator |
 | `secondary-strong` | `#0D6E5A` | `#5FE3C3` | teal text and links |
 | `secondary-foreground` | `#06231C` | `#0B2A23` | text on a `secondary` fill |
@@ -208,9 +208,22 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - **The top nav is the class context** (`top-nav.tsx`, `context-strip.tsx`,
   `next-step-bar.tsx`). Desktop has three layers:
   1. **Settings:** the Subject and Grade selects and the province (a link to
-     Settings), in the subject's colour (`--subject-*` via `SUBJECTS[].color`),
-     brand `primary` with none (on every page, the landing page included). The four spaces sit here
-     as quiet text links; the layers below lead into them too.
+     Settings) on a bar in the subject's colour (`--subject-*` via
+     `SUBJECTS[].color`), brand `primary` with none (on every page, the landing
+     page included). The four spaces sit here as quiet text links; the layers
+     below lead into them too.
+     - **The bar** is that colour mixed 30% into the page,
+       `color-mix(in oklab, <colour> 30%, var(--background))`, with its text in
+       `--foreground`. Mix in OKLab, not OKLCH: OKLCH swings the hue through the
+       background's hue (blue turns maroon in dark mode). Don't fill the bar at
+       full strength; the subject colours are deep in light mode and bright in
+       dark, so `--foreground` fails on them. `pnpm check:contrast` checks
+       `--foreground` on every subject's bar (`<token>/30@background`).
+     - **The logo** is the stacked lockup (samara over the wordmark),
+       `ui/maple-key-logo.tsx`, straight on the bar with no tile, in one flat
+       colour: the bar's `--foreground`, so dark in light mode and light in dark
+       mode. `public/maple-key-lockup.png` is alpha only, used as a CSS mask over
+       `currentColor`. 64px tall in the 80px desktop bar, 48px on phones.
   2. **Where the class is:** a gauge (taught of the grade's real expectation
      count), the strand timeline coloured by `signal-*` readiness with "now"
      at the overall the last lesson reached, and a link into Track. All from

@@ -19,7 +19,7 @@ import {
 } from "@/components/context-strip"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useGlobalFilters } from "@/lib/global-filters"
-import { withBasePath } from "@/lib/base-path"
+import MapleKeyLogo from "@/components/ui/maple-key-logo"
 import { readMaterialsSnapshot } from "@/lib/classroom-resources"
 import { SPACE_ITEMS, type TopNavSpace } from "@/lib/nav-items"
 
@@ -54,8 +54,8 @@ const GRADE_OPTIONS = GRADES.map((o) => (o.value ? o : { ...o, label: "All grade
 
 // The top nav is locked to the class being worked on (Nielsen: visibility of
 // system status, recognition over recall). Desktop has three layers:
-//   1. Settings: the subject and grade pickers and the province, in the
-//      subject's colour (brand red on the landing page or with none). The
+//   1. Settings: the subject and grade pickers and the province, on a bar
+//      in the subject's colour (brand rust with none). The
 //      spaces sit here as quiet links; the rows below lead into them too.
 //   2. Where the class is: a gauge, the strand timeline, a link into Track; or
 //      a summary across classes.
@@ -82,17 +82,23 @@ export default function TopNav({
   const progress = useClassProgress(state.subject, state.grade)
   const color = subjectColor(state.subject)
   // The nav follows the selection on every page, the landing page included:
-  // brand red and a summary with no subject, the subject's colour and the
+  // brand rust and a summary with no subject, the subject's colour and the
   // class's progress once one is picked.
   const scoped = color !== null
   // Text and fills in the bar's own colour (subject, else brand).
   const accent = scoped ? color : "var(--primary)"
   const accentText = scoped ? color : "var(--primary-strong)"
-  const barStyle: CSSProperties | undefined = scoped ? { background: color, color: "var(--subject-foreground)" } : undefined
-  const barClass = scoped ? "" : "bg-primary text-primary-foreground"
+  // The bar is that colour mixed 30% into the page, with the logo and links in
+  // --foreground (dark in light mode, light in dark mode). Mixed in OKLab so the
+  // hue stays true; OKLCH would swing it through the background's hue.
+  // `pnpm check:contrast` checks --foreground on every subject's bar.
+  const barStyle: CSSProperties = {
+    background: `color-mix(in oklab, ${accent} 30%, var(--background))`,
+    color: "var(--foreground)",
+  }
   const tintStyle: CSSProperties = {
-    background: `color-mix(in oklch, ${accent} 9%, var(--background))`,
-    borderColor: `color-mix(in oklch, ${accent} 30%, var(--background))`,
+    background: `color-mix(in oklab, ${accent} 9%, var(--background))`,
+    borderColor: `color-mix(in oklab, ${accent} 30%, var(--background))`,
   }
 
   const pickSubject = (v: string) => setSubject(v)
@@ -105,23 +111,16 @@ export default function TopNav({
       ? `Grade ${state.grade}`
       : "All classes"
 
+  // The lockup sits straight on the bar, no tile, in the bar's text colour.
   const logo = (size: "sm" | "lg") => (
     <button
       type="button"
       onClick={onGoHome}
       aria-label="Maple Key home"
       aria-current={isHome ? "page" : undefined}
-      className={`flex flex-shrink-0 items-center justify-center rounded-xl bg-card shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-        size === "lg" ? "h-12 w-12" : "h-10 w-10"
-      }`}
+      className="flex flex-shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
-      <img
-        src={withBasePath("/maple-key-logo.png")}
-        alt=""
-        width={785}
-        height={673}
-        className={size === "lg" ? "h-10 w-auto object-contain" : "h-8 w-auto object-contain"}
-      />
+      <MapleKeyLogo className={size === "lg" ? "h-16" : "h-12"} />
     </button>
   )
 
@@ -129,15 +128,14 @@ export default function TopNav({
     <>
       <header className="z-50 flex-shrink-0 pt-[env(safe-area-inset-top)]" style={barStyle}>
         {/* Row 1 */}
-        <div className={barClass} style={barStyle}>
+        <div style={barStyle}>
           <div className="mx-auto max-w-[1500px] px-4 md:px-6">
             {/* Desktop */}
             {/* Each desktop layer has a fixed height, so the page below never shifts
                 as data loads or the selection changes. */}
-            <div className="hidden h-16 items-center gap-3 md:flex">
+            <div className="hidden h-20 items-center gap-3 md:flex">
               {logo("lg")}
-              <span className="hidden whitespace-nowrap font-display text-xl font-bold xl:inline">Maple Key</span>
-              <div className="ml-2 flex items-center gap-2">
+              <div className="ml-3 flex items-center gap-2">
                 <ContextSelect label="Subject" value={state.subject} options={SUBJECT_OPTIONS} onChange={pickSubject} color={accentText} />
                 <ContextSelect label="Grade" value={state.grade} options={GRADE_OPTIONS} onChange={pickGrade} color={accentText} />
                 <button
@@ -157,7 +155,7 @@ export default function TopNav({
               <MaterialsMenu onEdit={onOpenClassroomProfile} />
               <button
                 onClick={openSettings}
-                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-card/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-card/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 title="Settings"
                 aria-label="Settings"
               >
@@ -509,7 +507,7 @@ function SpaceLinks({
             type="button"
             aria-current={isActive ? "page" : undefined}
             onClick={() => onChangeSpace(item.id)}
-            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold underline-offset-[6px] transition-colors hover:bg-card/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold underline-offset-[6px] transition-colors hover:bg-card/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               isActive ? "underline decoration-2" : ""
             }`}
           >

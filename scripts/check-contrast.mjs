@@ -38,7 +38,8 @@ const SUBJECTS = ["math", "science", "fsl", "language", "social", "health", "art
 
 // [foreground token, background tokens, minimum ratio, what the pair is for]
 // A background written "token/10" means that token at 10% opacity over --card,
-// blended in OKLab the way Tailwind's opacity modifier does.
+// blended in OKLab the way Tailwind's opacity modifier does. "token/30@background"
+// blends over another token instead (the top bar's color-mix over the page).
 const PAIRS = [
   ["foreground", [...LIGHT_SURFACES, ...TINTS], TEXT, "body text"],
   ["card-foreground", ["card"], TEXT, "text on cards"],
@@ -60,6 +61,9 @@ const PAIRS = [
   ["success", ["background", "card", "success-tint"], TEXT, "status text"],
   ["success-foreground", ["success"], TEXT, "text on a success fill"],
   ["destructive", ["destructive/10"], TEXT, "error text on its own tint"],
+  // The top bar (top-nav.tsx): the subject colour, or primary with none, mixed
+  // 30% into the page, with the logo and nav in --foreground.
+  ["foreground", ["primary", ...SUBJECTS].map((t) => `${t}/30@background`), TEXT, "logo and nav on the top bar"],
   ...SUBJECTS.flatMap((s) => [
     ["subject-foreground", [s], TEXT, "text on a subject fill"],
     [s, ["background", "card", `${s}/10`], TEXT, "subject label text"],
@@ -156,10 +160,11 @@ const log = (s) => !quiet && console.log(s)
 for (const [mode, map] of Object.entries(modes)) {
   const lab = (name) => oklchToLab(resolve(map, name))
   const rgb = (spec) => {
-    const [name, pct] = spec.split("/")
-    if (!pct) return labToRgb(lab(name))
+    const [name, mix] = spec.split("/")
+    if (!mix) return labToRgb(lab(name))
+    const [pct, base = "card"] = mix.split("@")
     const t = Number(pct) / 100
-    const [fg, bg] = [lab(name), lab("card")]
+    const [fg, bg] = [lab(name), lab(base)]
     return labToRgb(fg.map((v, i) => v * t + bg[i] * (1 - t)))
   }
   log(`\n${mode.toUpperCase()}`)
