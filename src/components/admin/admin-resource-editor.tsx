@@ -5,6 +5,7 @@ import { X } from "lucide-react"
 import type { GradeLevel, Resource, Subject } from "@/lib/types"
 import { SUBJECTS, isValidGradeLevel } from "../../../shared/resource-schema"
 import { diffFields, type AdminEditableFields } from "@/lib/admin-changes"
+import { expectationCodeProblems } from "../../../shared/curriculum-check"
 
 interface AdminResourceEditorProps {
   // The untouched record from resources.json — diffs are computed against it.
@@ -53,7 +54,12 @@ export default function AdminResourceEditor({ original, effective, onSave, onClo
   const [isCollection, setIsCollection] = useState(Boolean(effective.is_collection))
   const [suppressed, setSuppressed] = useState(Boolean(effective.suppressed))
 
+  // Codes must exist in the curriculum for this subject and these grades; the
+  // push endpoint and CI enforce the same rule, so stop it here first.
+  const codeProblems = expectationCodeProblems(subject, textToGrades(grades), textToList(expectations))
+
   const handleSave = () => {
+    if (codeProblems.length > 0) return
     const fields = diffFields(original, {
       topic_title: title,
       description,
@@ -148,6 +154,16 @@ export default function AdminResourceEditor({ original, effective, onSave, onClo
               <input className={FIELD_CLASS} value={expectations} onChange={(e) => setExpectations(e.target.value)} />
             </div>
           </div>
+          {codeProblems.length > 0 && (
+            <div role="alert" className="rounded-lg bg-destructive/10 px-3 py-2 text-xs text-destructive">
+              <p className="font-semibold">Fix the expectation codes before saving:</p>
+              <ul className="mt-1 list-disc pl-4">
+                {codeProblems.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div>
             <label className={LABEL_CLASS}>Tags (comma-separated)</label>
             <input
@@ -178,7 +194,8 @@ export default function AdminResourceEditor({ original, effective, onSave, onClo
           </button>
           <button
             onClick={handleSave}
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90"
+            disabled={codeProblems.length > 0}
+            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Save changes
           </button>

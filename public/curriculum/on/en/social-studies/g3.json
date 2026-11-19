@@ -4,12 +4,12 @@
  "subject": "Social Studies",
  "grade": "3",
  "course_name": "Social Studies",
+ "course_code": null,
  "source": {
   "publisher": "Ontario Ministry of Education",
   "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/g3-ss",
   "course_codename": "sshg___grade_2__copy_",
-  "last_modified": "2026-02-03T18:59:37.6201522Z",
-  "fetched_at": "2026-11-19T04:42:14Z"
+  "last_modified": "2026-02-03T18:59:37.6201522Z"
  },
  "strands": [
   {

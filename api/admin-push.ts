@@ -10,6 +10,7 @@ import {
   isInVocabulary,
   isValidGradeLevel,
 } from "../shared/resource-schema.js"
+import { expectationCodeProblems } from "../shared/curriculum-check.js"
 
 /**
  * Admin Database Manager "push" endpoint.
@@ -297,6 +298,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const { resources, applied, missing, removed } = applyChanges(data.resources, changes)
     if (applied.length === 0) {
       return res.status(409).json({ error: `None of the changed ids exist on ${BASE_BRANCH} — refresh and retry.` })
+    }
+
+    // No orphan expectation codes: check each edited record as it will be
+    // written, since changing only subject or grade can strand existing codes.
+    const edited = new Set(Object.entries(changes).filter(([, c]) => c.action === "edit").map(([id]) => id))
+    for (const r of resources) {
+      if (!edited.has(r.id as string)) continue
+      const problems = expectationCodeProblems(
+        r.subject as string,
+        (r.grade_level as (string | number)[]) ?? [],
+        (r.curriculum_expectations as string[]) ?? [],
+      )
+      if (problems.length > 0) {
+        return res.status(400).json({ error: `${r.id}: ${problems.join(" ")}` })
+      }
     }
     const content = JSON.stringify({ ...data, resources }, null, 2) + "\n"
 

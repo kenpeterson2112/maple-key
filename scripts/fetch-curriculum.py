@@ -52,19 +52,26 @@ LANGS = {"en": "en-CA", "fr": "fr-CA"}
 PROVINCE = "on"
 
 # Subject (the app's vocabulary in schema/resource-schema.json) → how to find
-# its grade courses. `curriculum` is the L1 codename the courses are part_of;
-# `name` narrows a shared L1 (Social Studies / History / Geography share one);
-# `program` picks an FSL language program. Slugs are file-system names.
+# its grade courses. `curriculum` is the L1 codename the elementary courses are
+# part_of; `name` narrows a shared L1 (Social Studies / History / Geography
+# share one); `program` picks an FSL language program. `secondary` maps a
+# Grade 9-12 grade to the Ontario course code that stands for it (secondary is
+# organised by course: Grade 9 Math is MTH1W). Slugs are file-system names.
 SUBJECTS: dict[str, dict] = {
-    "Math": {"slug": "math", "curriculum": "elementary___mathematics___digital", "grades": range(1, 9)},
-    "Science": {"slug": "science", "curriculum": "elementary___science_and_technology__digital_", "grades": range(1, 9)},
-    "Language": {"slug": "language", "curriculum": "elementary___language___francais__2006____digital_", "grades": range(1, 9)},
-    "Health & Physical Education": {"slug": "health-pe", "curriculum": "elementary___health_and_physical_education", "grades": range(1, 9)},
-    "FSL": {"slug": "fsl", "curriculum": "elementary___french_as_a_second_language__digital_", "program": "core_french", "grades": range(4, 9)},
+    "Math": {"slug": "math", "curriculum": "elementary___mathematics___digital", "grades": range(1, 9), "secondary": {9: "MTH1W"}},
+    "Science": {"slug": "science", "curriculum": "elementary___science_and_technology__digital_", "grades": range(1, 9), "secondary": {9: "SNC1W"}},
+    "Language": {"slug": "language", "curriculum": "elementary___language___francais__2006____digital_", "grades": range(1, 9), "secondary": {9: "ENL1W"}},
+    "Health & Physical Education": {"slug": "health-pe", "curriculum": "elementary___health_and_physical_education", "grades": range(1, 9), "secondary": {9: "PPL1O"}},
+    "FSL": {"slug": "fsl", "curriculum": "elementary___french_as_a_second_language__digital_", "program": "core_french", "grades": range(4, 9), "secondary": {9: "FSF1D"}},
     "Social Studies": {"slug": "social-studies", "curriculum": "elementary___social_studies__history_and_geography_685274f", "name": "Social Studies", "grades": range(1, 7)},
     "History": {"slug": "history", "curriculum": "elementary___social_studies__history_and_geography_685274f", "name": "History", "grades": range(7, 9)},
-    "Geography": {"slug": "geography", "curriculum": "elementary___social_studies__history_and_geography_685274f", "name": "Geography", "grades": range(7, 9)},
+    "Geography": {"slug": "geography", "curriculum": "elementary___social_studies__history_and_geography_685274f", "name": "Geography", "grades": range(7, 9), "secondary": {9: "CGC1W"}},
 }
+
+
+def grades_of(spec: dict) -> list[int]:
+    return [*spec["grades"], *sorted(spec.get("secondary", {}))]
+
 
 session = requests.Session()
 session.headers["User-Agent"] = "curriculum-fetch/1.0"
@@ -110,7 +117,13 @@ def list_courses(lang: str) -> list[dict]:
 
 def find_course(courses: list[dict], spec: dict, grade: int) -> dict:
     matches = []
+    course_code = spec.get("secondary", {}).get(grade)
     for c in courses:
+        if course_code:
+            # The course page itself, not its PDF twin (slug "<code>-pdf").
+            if (val(c, "code") or "") == course_code and val(c, "course_slug") == course_code.lower():
+                matches.append(c)
+            continue
         if spec["curriculum"] not in (val(c, "part_of") or []):
             continue
         if [g["codename"] for g in val(c, "site___grade") or []] != [f"n{grade}"]:
@@ -204,6 +217,7 @@ def build(subject: str, grade: int, courses: list[dict], lang: str) -> dict:
         "subject": subject,
         "grade": str(grade),
         "course_name": val(course, "name"),
+        "course_code": val(course, "code") or None,
         "source": {
             "publisher": "Ontario Ministry of Education",
             "url": f"{SITE}/{'en' if lang == 'en' else 'fr'}/curriculum/{curriculum_slug(l1)}/grades/{slug}" if curriculum_slug(l1) else SITE,
@@ -262,7 +276,7 @@ def main() -> None:
     for subject, spec in SUBJECTS.items():
         if args.subject and subject != args.subject:
             continue
-        for grade in spec["grades"]:
+        for grade in grades_of(spec):
             if args.grade and grade != args.grade:
                 continue
             doc = build(subject, grade, courses, args.lang)

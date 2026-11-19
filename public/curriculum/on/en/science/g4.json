@@ -4,12 +4,12 @@
  "subject": "Science",
  "grade": "4",
  "course_name": "Science and Technology",
+ "course_code": null,
  "source": {
   "publisher": "Ontario Ministry of Education",
   "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sci-tech/grades/grade-4",
   "course_codename": "sci___tech___grade_4",
-  "last_modified": "2023-03-17T14:21:29.0125545Z",
-  "fetched_at": "2026-11-19T04:42:12Z"
+  "last_modified": "2023-03-17T14:21:29.0125545Z"
  },
  "strands": [
   {
