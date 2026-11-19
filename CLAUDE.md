@@ -221,7 +221,9 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   success criteria, differentiation, CRRP and equity framing, reflection
   checkpoint, and the output rules). The prompt in `api/generate-lesson.ts` and
   its manual-fallback copy in `src/components/lesson-planner/lesson-export.ts`
-  implement it; change all three together.
+  implement it; change all three together. Stages are **step lists, not
+  paragraphs** (the style rules live once in `shared/lesson-prompt.ts`); the
+  model is `LESSON_MODEL` (env), compared with `scripts/compare-lesson-models.mjs`.
 - Planning-question answer formats use a **closed enum** — extend the enum,
   don't introduce free-form formats.
 - Resource curation is a **three-agent waterfall** (Researcher → review →

@@ -13,7 +13,7 @@
     "validate:schema": "python3 scripts/check-schema-sync.py && python3 scripts/validate-resources.py"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.52.0",
+    "@anthropic-ai/sdk": "^1.9.0",
     "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-popover": "^1.1.4",
     "@supabase/supabase-js": "^2.119.0",

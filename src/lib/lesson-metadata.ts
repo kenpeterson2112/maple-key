@@ -7,6 +7,8 @@ export interface TemplateSection {
   id: string
   label: string
   subtitle: string
+  /** One sentence on what happens in this stage. Absent on lessons saved before stage summaries. */
+  summary?: string
   content: string
   callout?: string
 }
@@ -27,6 +29,10 @@ export interface LessonArtifact {
 }
 
 export interface LessonFullContent {
+  /** One sentence per stage; read in order they summarize the lesson. See LESSON_SPEC.md. */
+  mindsOnSummary?: string
+  actionSummary?: string
+  consolidationSummary?: string
   mindsOnContent: string
   mindsOnDifferentiation: string
   actionContent: string

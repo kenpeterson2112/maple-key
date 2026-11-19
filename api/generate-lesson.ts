@@ -15,11 +15,51 @@ import {
 } from "./_lib/limits.js"
 import { provinceLabel } from "./_lib/provinces.js"
 import { clampContinuation, formatContinuationBlock } from "../shared/lesson-continuation.js"
+import { normalizeLessonLines } from "../shared/lesson-lines.js"
+import {
+  ASSESSMENT_NOTE_EXAMPLE,
+  DIFFERENTIATION_EXAMPLE,
+  STEPS_EXAMPLE,
+  SUMMARY_EXAMPLE,
+  lessonStyleRules,
+} from "../shared/lesson-prompt.js"
 
 // The lesson shape and rules below are specified in LESSON_SPEC.md at the repo
 // root. Change the spec and this prompt together (and the manual-fallback copy
 // in src/components/lesson-planner/lesson-export.ts).
-const LESSON_MODEL = "claude-haiku-4-5-20251001"
+const DEFAULT_LESSON_MODEL = "claude-haiku-4-5-20251001"
+
+type Effort = "low" | "medium" | "high"
+
+/**
+ * Models the lesson call may run on, chosen with the LESSON_MODEL env var (so a
+ * Vercel Preview can try one without a code change). Anything else falls back
+ * to the default.
+ *
+ * The 5.5 models always think, and thinking counts against max_tokens, so they
+ * get more room and an explicit effort (LESSON_EFFORT overrides it). "low" keeps
+ * a one-shot plan quick; the plan itself is short by design (LESSON_SPEC.md).
+ * `fallbacks`: Sonnet and Opus 5.5 can decline a request outright; with this on,
+ * the API re-runs a declined request on a fallback model inside the same call.
+ */
+const LESSON_MODELS: Record<string, { maxTokens: number; effort?: Effort; fallbacks?: boolean }> = {
+  "claude-haiku-4-5-20251001": { maxTokens: 5500 },
+  "claude-haiku-5-5": { maxTokens: 16000, effort: "low" },
+  "claude-sonnet-5-5": { maxTokens: 16000, effort: "low", fallbacks: true },
+  "claude-opus-5-5": { maxTokens: 16000, effort: "low", fallbacks: true },
+}
+
+function resolveLessonModel(): { model: string; maxTokens: number; effort?: Effort; fallbacks?: boolean } {
+  const requested = process.env.LESSON_MODEL?.trim()
+  const model = requested && LESSON_MODELS[requested] ? requested : DEFAULT_LESSON_MODEL
+  const config = LESSON_MODELS[model]
+  const effortOverride = process.env.LESSON_EFFORT?.trim()
+  const effort =
+    config.effort && (effortOverride === "low" || effortOverride === "medium" || effortOverride === "high")
+      ? effortOverride
+      : config.effort
+  return { model, ...config, effort }
+}
 
 /** A quick check is a fast readiness signal, not a diagnostic — keep it short. */
 const MAX_ASSESSMENT_QUESTIONS = 5
@@ -112,6 +152,9 @@ interface LessonPlanResponse {
   learningGoal: string
   successCriteria: string[]
   curriculumCodesCovered: string[]
+  mindsOnSummary?: string
+  actionSummary?: string
+  consolidationSummary?: string
   mindsOnContent: string
   mindsOnDifferentiation: string
   actionContent: string
@@ -128,7 +171,7 @@ interface LessonPlanResponse {
   artifacts?: LessonArtifact[]
   excludedResources?: { title: string; reason: string }[]
   assessmentQuestions?: AssessmentQuestion[]
-  sections?: Array<{ id: string; label: string; subtitle: string; content: string; callout?: string }>
+  sections?: Array<{ id: string; label: string; subtitle: string; summary?: string; content: string; callout?: string }>
 }
 
 /**
@@ -176,10 +219,10 @@ function extractJson(text: string): string {
   return best || unfenced
 }
 
-function collectText(content: Anthropic.ContentBlock[]): string {
+function collectText(content: Array<{ type: string; text?: string }>): string {
   return content
-    .filter((b): b is Anthropic.TextBlock => b.type === "text")
-    .map((b) => b.text)
+    .filter((b) => b.type === "text")
+    .map((b) => b.text ?? "")
     .join("\n")
 }
 
@@ -218,6 +261,7 @@ const TEMPLATE_GUIDANCE: Record<string, string> = {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!guardRequest(req, res)) return
   const client = new Anthropic()
+  const lessonModel = resolveLessonModel()
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" })
   }
@@ -336,10 +380,24 @@ Before finalizing your response, re-check every single artifact entry: if "name"
     ? templateSections
         .map(
           (s) =>
-            `  { "id": "${s.id}", "label": "${s.label}", "subtitle": "${s.subtitle}", "content": "...", "callout": "${s.calloutLabel} strategies or notes for this phase" }`,
+            `  { "id": "${s.id}", "label": "${s.label}", "subtitle": "${s.subtitle}", "summary": ${SUMMARY_EXAMPLE}, "content": ${STEPS_EXAMPLE}, "callout": ${s.calloutLabel === "Assessment Note" ? ASSESSMENT_NOTE_EXAMPLE : DIFFERENTIATION_EXAMPLE} }`,
         )
         .join(",\n")
     : ""
+
+  const styleRules = isThreePart
+    ? lessonStyleRules(
+        `"mindsOnSummary", "actionSummary" and "consolidationSummary"`,
+        `"mindsOnContent", "actionContent" and "consolidationContent"`,
+        `"mindsOnDifferentiation" and "actionDifferentiation"`,
+        `"consolidationAssessment"`,
+      )
+    : lessonStyleRules(
+        `The sections' "summary" values`,
+        `Every section's "content"`,
+        `Every section's "callout" (except the last section's)`,
+        `The last section's "callout"`,
+      )
 
   const topicFocus = topic ? `\nTopic focus: build this lesson around "${topic}".` : ""
 
@@ -368,20 +426,23 @@ You will also write "assessmentQuestions": a SHORT auto-graded formative quick c
 - Prefer "multiple-choice"; use "true-false" only when it genuinely tests the idea better. Multiple-choice: exactly 4 options with exactly one correct answer; "correctIndex" is the 0-based index of the correct option; distractors must be plausible.
 - Every question needs a one-sentence "explanation" of the correct answer. Do NOT write open-ended or free-text questions, and do NOT write more than one question for the same expectation.
 
-${isThreePart ? `Return a JSON object with exactly these fields (string values are plain text, no markdown):
+${isThreePart ? `Return a JSON object with exactly these fields (plain text, no markdown):
 {
   "title": "Creative lesson title",
   "learningGoal": "One student-facing sentence describing what students will learn today",
   "successCriteria": ["I can ...", "I can ...", "I can ..."],
   "curriculumCodesCovered": ["code1", "code2"],
-  "mindsOnContent": "Hook/activation activity description (2-4 sentences)",
-  "mindsOnDifferentiation": "Differentiation strategies for Minds On phase",
-  "actionContent": "Main learning activity description with any stations or tasks",
-  "actionDifferentiation": "Differentiation strategies for Action phase",
-  "consolidationContent": "Closing/consolidation activity description",
-  "consolidationAssessment": "Assessment notes — which codes may need follow-up and plan for next steps",
-  "equityFraming": "CRRP and equity framing for this lesson (2-4 sentences, see rules below)",
-  "reflectionCheckpoint": "When students self-assess against the success criteria, and the exact prompt they respond to",
+  "mindsOnSummary": ${SUMMARY_EXAMPLE},
+  "mindsOnContent": ${STEPS_EXAMPLE},
+  "mindsOnDifferentiation": ${DIFFERENTIATION_EXAMPLE},
+  "actionSummary": ${SUMMARY_EXAMPLE},
+  "actionContent": ${STEPS_EXAMPLE},
+  "actionDifferentiation": ${DIFFERENTIATION_EXAMPLE},
+  "consolidationSummary": ${SUMMARY_EXAMPLE},
+  "consolidationContent": ${STEPS_EXAMPLE},
+  "consolidationAssessment": ${ASSESSMENT_NOTE_EXAMPLE},
+  "equityFraming": "1-2 sentences of CRRP and equity framing specific to this lesson (see rules below)",
+  "reflectionCheckpoint": "When students self-assess, then the exact prompt they respond to (one line)",
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
     "classroomMaterials": ["Exact label copied from the classroom materials list above"],
@@ -397,7 +458,7 @@ ${isThreePart ? `Return a JSON object with exactly these fields (string values a
     { "code": "D1.1", "type": "multiple-choice", "prompt": "...", "options": ["a", "b", "c", "d"], "correctIndex": 0, "explanation": "..." },
     { "code": "D1.2", "type": "true-false", "prompt": "...", "correct": true, "explanation": "..." }
   ]
-}` : `Return a JSON object with exactly these fields (string values are plain text, no markdown):
+}` : `Return a JSON object with exactly these fields (plain text, no markdown):
 {
   "title": "Creative lesson title",
   "learningGoal": "One student-facing sentence describing what students will learn today",
@@ -406,8 +467,8 @@ ${isThreePart ? `Return a JSON object with exactly these fields (string values a
   "sections": [
 ${sectionsSchema}
   ],
-  "equityFraming": "CRRP and equity framing for this lesson (2-4 sentences, see rules below)",
-  "reflectionCheckpoint": "When students self-assess against the success criteria, and the exact prompt they respond to",
+  "equityFraming": "1-2 sentences of CRRP and equity framing specific to this lesson (see rules below)",
+  "reflectionCheckpoint": "When students self-assess, then the exact prompt they respond to (one line)",
   "materials": {
     "resources": ["Resource title 1", "Resource title 2"],
     "classroomMaterials": ["Exact label copied from the classroom materials list above"],
@@ -424,9 +485,7 @@ ${sectionsSchema}
 
 "successCriteria" must have 2-3 items written as student-facing "I can..." statements. "curriculumCodesCovered" and every assessment question "code" must be codes from the list provided above; never cite an expectation code you were not given. (The one exception is the concept-label fallback for quick-check questions described above, used only when "curriculumCodesCovered" is empty.)
 
-"equityFraming" applies Culturally Responsive and Relevant Pedagogy (CRRP) to THIS lesson in 2-4 sentences: how it connects to students' identities, cultures, languages, and lived experiences; whose perspectives or knowledge it brings in (including First Nations, Métis, and Inuit perspectives where they genuinely fit the content, never as a token add-on); and how it removes barriers so every student can reach the success criteria. Be specific to this content. A statement that would fit any lesson is not acceptable.
-
-"reflectionCheckpoint" is one moment, usually during the final phase, where students judge their own progress against the success criteria. Say when it happens, then give the exact student-facing prompt. It is a self-assessment, not another quiz question.
+${styleRules}
 
 "materials.preparation" must never be empty — always include at least one concrete step (e.g. what to print, pre-load, set up, or test before class). "materials.classroomMaterials" must list ONLY items from the classroom materials list above that this lesson actually uses, copied verbatim with the exact labels given — never invent or rename one, and never list anything that was not in that list; return an empty array if the lesson uses none (or none were provided). "excludedResources" may be an empty array if all provided resources fit the lesson.
 
@@ -435,18 +494,41 @@ ${sectionsSchema}
 ${reproducibleLanguageBlock}`
 
   try {
-    const message = await client.messages.create({
-      model: LESSON_MODEL,
-      max_tokens: 5500,
-      messages: [{ role: "user", content: userPrompt }],
+    const params = {
+      model: lessonModel.model,
+      max_tokens: lessonModel.maxTokens,
+      messages: [{ role: "user" as const, content: userPrompt }],
       system: [
         {
-          type: "text",
+          type: "text" as const,
           text: systemPrompt,
-          cache_control: { type: "ephemeral" },
+          cache_control: { type: "ephemeral" as const },
         },
       ],
-    })
+      ...(lessonModel.effort ? { output_config: { effort: lessonModel.effort } } : {}),
+    }
+    const message = lessonModel.fallbacks
+      ? await client.beta.messages.create({
+          ...params,
+          betas: ["server-side-fallback-2026-07-01"],
+          fallbacks: "default",
+        })
+      : await client.messages.create(params)
+
+    // Every fallback declined too. Nothing to parse, and retrying won't help.
+    if (message.stop_reason === "refusal") {
+      console.log(JSON.stringify({
+        event: "lesson_generation_refused",
+        ts: new Date().toISOString(),
+        model: message.model,
+        grade,
+        subject,
+        category: message.stop_details?.category ?? null,
+      }))
+      return res.status(422).json({
+        error: "The AI model declined to write this lesson. Try rewording the topic or your notes.",
+      })
+    }
 
     const rawText = collectText(message.content)
 
@@ -470,6 +552,7 @@ ${reproducibleLanguageBlock}`
         lessonLength,
         reproducibleLanguage: reproducibleLanguage ?? "English",
         planningAnswersCount: planningAnswers?.length ?? 0,
+        model: message.model,
         stop: message.stop_reason,
         tokensIn: message.usage?.input_tokens ?? 0,
         tokensOut: message.usage?.output_tokens ?? 0,
@@ -479,6 +562,9 @@ ${reproducibleLanguageBlock}`
       }))
       return res.status(500).json({ error: "Claude returned malformed JSON. Please try again." })
     }
+
+    // Stages arrive as arrays of steps; the app stores one step per line.
+    normalizeLessonLines(lesson as unknown as Record<string, unknown>)
 
     // Defensive cap — the prompt asks for 3-5, but never let a quick check balloon.
     if (Array.isArray(lesson.assessmentQuestions) && lesson.assessmentQuestions.length > MAX_ASSESSMENT_QUESTIONS) {
@@ -505,6 +591,7 @@ ${reproducibleLanguageBlock}`
       planningAnswersCount: planningAnswers?.length ?? 0,
       excludedCount: lesson.excludedResources?.length ?? 0,
       assessmentQuestionsCount: lesson.assessmentQuestions?.length ?? 0,
+      model: message.model,
       stop: message.stop_reason,
       tokensIn: message.usage?.input_tokens ?? 0,
       tokensOut: message.usage?.output_tokens ?? 0,

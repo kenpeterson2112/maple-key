@@ -37,6 +37,7 @@ import {
   usePlanningQuestions,
   type PlanningAnswer,
 } from "@/components/lesson-planner/planning-questions"
+import { normalizeLessonLines } from "../../shared/lesson-lines"
 import GeneratedLessonView, { type LessonContentPatch } from "@/components/lesson-planner/generated-lesson"
 import SetupSteps, { WIZARD_STEPS } from "@/components/lesson-planner/setup-steps"
 import PreviousLessonPicker from "@/components/lesson-planner/previous-lesson-picker"
@@ -129,6 +130,9 @@ export default function LessonPlannerModal({
   const [lessonTitle, setLessonTitle] = useState(lesson?.title ?? "")
   const [coveredCodes, setCoveredCodes] = useState<string[]>(lesson?.curriculumCodesCovered ?? [])
   const [mindsOnContent, setMindsOnContent] = useState(fc?.mindsOnContent ?? lesson?.lessonContent?.mindsOn ?? "")
+  const [mindsOnSummary, setMindsOnSummary] = useState(fc?.mindsOnSummary ?? "")
+  const [actionSummary, setActionSummary] = useState(fc?.actionSummary ?? "")
+  const [consolidationSummary, setConsolidationSummary] = useState(fc?.consolidationSummary ?? "")
   const [mindsOnDifferentiation, setMindsOnDifferentiation] = useState(fc?.mindsOnDifferentiation ?? "")
   const [actionContent, setActionContent] = useState(fc?.actionContent ?? lesson?.lessonContent?.action ?? "")
   const [actionDifferentiation, setActionDifferentiation] = useState(fc?.actionDifferentiation ?? "")
@@ -308,9 +312,14 @@ export default function LessonPlannerModal({
    * into draft state and logs it to the lesson library.
    */
   const applyLessonData = (data: LessonResponseData) => {
+    // A pasted or imported response may carry the stages as arrays of steps.
+    normalizeLessonLines(data as Record<string, unknown>)
     setLessonTitle(data.title ?? "")
     setCoveredCodes(data.curriculumCodesCovered ?? [])
     setMindsOnContent(data.mindsOnContent ?? "")
+    setMindsOnSummary(data.mindsOnSummary ?? "")
+    setActionSummary(data.actionSummary ?? "")
+    setConsolidationSummary(data.consolidationSummary ?? "")
     setMindsOnDifferentiation(data.mindsOnDifferentiation ?? "")
     setActionContent(data.actionContent ?? "")
     setActionDifferentiation(data.actionDifferentiation ?? "")
@@ -347,6 +356,9 @@ export default function LessonPlannerModal({
       },
       fullContent: {
         mindsOnContent: data.mindsOnContent ?? "",
+        mindsOnSummary: data.mindsOnSummary ?? "",
+        actionSummary: data.actionSummary ?? "",
+        consolidationSummary: data.consolidationSummary ?? "",
         mindsOnDifferentiation: data.mindsOnDifferentiation ?? "",
         actionContent: data.actionContent ?? "",
         actionDifferentiation: data.actionDifferentiation ?? "",
@@ -520,6 +532,9 @@ export default function LessonPlannerModal({
       materialsPreparation,
       materialsContent,
       mindsOnContent,
+      mindsOnSummary,
+      actionSummary,
+      consolidationSummary,
       mindsOnDifferentiation,
       actionContent,
       actionDifferentiation,
@@ -547,6 +562,9 @@ export default function LessonPlannerModal({
         reflectionCheckpoint,
         coveredCodes,
         mindsOnContent,
+        mindsOnSummary,
+        actionSummary,
+        consolidationSummary,
         mindsOnDifferentiation,
         actionContent,
         actionDifferentiation,
@@ -627,6 +645,9 @@ export default function LessonPlannerModal({
   /** Inline edits on the generated plan arrive as a patch of changed fields. */
   const handleLessonContentChange = (patch: LessonContentPatch) => {
     if (patch.mindsOnContent !== undefined) setMindsOnContent(patch.mindsOnContent)
+    if (patch.mindsOnSummary !== undefined) setMindsOnSummary(patch.mindsOnSummary)
+    if (patch.actionSummary !== undefined) setActionSummary(patch.actionSummary)
+    if (patch.consolidationSummary !== undefined) setConsolidationSummary(patch.consolidationSummary)
     if (patch.mindsOnDifferentiation !== undefined) setMindsOnDifferentiation(patch.mindsOnDifferentiation)
     if (patch.actionContent !== undefined) setActionContent(patch.actionContent)
     if (patch.actionDifferentiation !== undefined) setActionDifferentiation(patch.actionDifferentiation)
@@ -740,6 +761,9 @@ export default function LessonPlannerModal({
                 equityFraming={equityFraming}
                 reflectionCheckpoint={reflectionCheckpoint}
                 mindsOnContent={mindsOnContent}
+                mindsOnSummary={mindsOnSummary}
+                actionSummary={actionSummary}
+                consolidationSummary={consolidationSummary}
                 mindsOnDifferentiation={mindsOnDifferentiation}
                 actionContent={actionContent}
                 actionDifferentiation={actionDifferentiation}
