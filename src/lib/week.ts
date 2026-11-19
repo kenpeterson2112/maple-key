@@ -26,8 +26,12 @@ export function weekStart(now: number): number {
   return d.getTime()
 }
 
-export function buildWeek(lessons: LessonMetadata[], tallies: LessonTally[], now = Date.now()): WeekDay[] {
+/** Build a Mon–Fri week. `weekOffset` steps whole weeks from the one holding
+ *  `now` (-1 is last week); `isToday` still marks the real today. */
+export function buildWeek(lessons: LessonMetadata[], tallies: LessonTally[], now = Date.now(), weekOffset = 0): WeekDay[] {
   const monday = new Date(weekStart(now))
+  // setDate rather than adding 7×24h, so a daylight-saving change can't shift the week.
+  monday.setDate(monday.getDate() + weekOffset * 7)
   const today = new Date(now)
   today.setHours(0, 0, 0, 0)
   const days: WeekDay[] = []
@@ -47,4 +51,19 @@ export function buildWeek(lessons: LessonMetadata[], tallies: LessonTally[], now
     })
   }
   return days
+}
+
+/** A time during the school day (9:00–14:00), `days` school days before `now`
+ *  (weekends skipped). Today's slot is never later than `now`. `salt` varies
+ *  the hour so a day's checks don't all share one timestamp. */
+export function schoolDaysAgo(now: number, days: number, salt = 0): number {
+  const d = new Date(now)
+  const weekend = () => d.getDay() === 0 || d.getDay() === 6
+  while (weekend()) d.setDate(d.getDate() - 1) // a weekend counts from Friday
+  for (let left = days; left > 0; ) {
+    d.setDate(d.getDate() - 1)
+    if (!weekend()) left--
+  }
+  d.setHours(9 + (salt % 6), (salt * 7) % 60, 0, 0)
+  return Math.min(d.getTime(), now - (salt + 1) * 60_000)
 }

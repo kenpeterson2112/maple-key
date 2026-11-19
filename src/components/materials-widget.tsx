@@ -15,13 +15,13 @@ import {
 } from "@/lib/classroom-resources"
 import { groupMaterials, listMyMaterials, suggestionsFor, type MyMaterial } from "@/lib/materials-for-subject"
 
-// The landing page's Materials widget: what the teacher has in their room,
-// browsable in place, ordered for the class in the top nav (Math puts the
+// The landing page's Materials widget: what the teacher has in their room, as
+// a wrapping tag cloud browsable in place, ordered for the class in the top nav (Math puts the
 // manipulatives first, Language the books and reading spaces, Science the lab),
 // with quick adds for that subject. It replaces the header's Materials button.
 // Edits happen in the Classroom profile; the widget only adds from suggestions.
 
-// Short names for the type filters, so they fit one row in a narrow column.
+// Short names for the type filters, so they stay compact as they wrap.
 const SHORT_LABEL: Record<string, string> = {
   "math-manipulatives": "Manipulatives",
   technology: "Tech",
@@ -53,7 +53,6 @@ export default function MaterialsWidget({ onEdit }: { onEdit: () => void }) {
   const shown = category === "all" ? all : all.filter((m) => m.category === category)
   const groups = useMemo(() => groupMaterials(shown, subject, subjectLabel), [shown, subject, subjectLabel])
   const suggestions = useMemo(() => suggestionsFor(subject, ids, 6), [subject, ids])
-  const fits = subject ? all.filter((m) => m.subjects.includes(subject)).length : 0
 
   // Only the types the teacher actually has, so every filter shows something.
   const presentCategories = CLASSROOM_RESOURCE_CATEGORIES.filter((c) => all.some((m) => m.category === c.id))
@@ -62,15 +61,6 @@ export default function MaterialsWidget({ onEdit }: { onEdit: () => void }) {
   }, [category, presentCategories])
 
   const add = (id: string) => setClassroomResources([...ids, id])
-
-  const summary =
-    all.length === 0
-      ? "Tell Maple Key what's in your room, and lessons plan around what you have."
-      : subject
-        ? fits > 0
-          ? `${fits} of your ${all.length} fit ${subjectLabel}, so they come first.`
-          : `None of yours are tagged for ${subjectLabel} yet. Add some below.`
-        : "Everything in your room, by type. Pick a subject to see what fits it first."
 
   return (
     <section aria-labelledby="home-materials-heading" className="flex min-w-0 flex-col gap-3 rounded-xl border border-border bg-card p-5 shadow-sm">
@@ -90,7 +80,11 @@ export default function MaterialsWidget({ onEdit }: { onEdit: () => void }) {
           </button>
         )}
       </div>
-      <p className="-mt-1 text-sm text-muted-foreground">{summary}</p>
+      {all.length === 0 && (
+        <p className="-mt-1 text-sm text-muted-foreground">
+          Tell Maple Key what's in your room, and lessons plan around what you have.
+        </p>
+      )}
 
       {all.length === 0 && (
         <button
@@ -103,7 +97,7 @@ export default function MaterialsWidget({ onEdit }: { onEdit: () => void }) {
       )}
 
       {presentCategories.length > 1 && (
-        <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1" role="group" aria-label="Show materials of type">
+        <div className="flex flex-wrap gap-1.5" role="group" aria-label="Show materials of type">
           <FilterChip label="All" count={all.length} active={category === "all"} onClick={() => setCategory("all")} />
           {presentCategories.map((c) => (
             <FilterChip
@@ -120,19 +114,19 @@ export default function MaterialsWidget({ onEdit }: { onEdit: () => void }) {
       )}
 
       {groups.length > 0 && (
-        <div className="-mx-2 max-h-80 overflow-y-auto px-2">
+        <div>
           {groups.map((g) => (
             <div key={g.id} className="py-1.5">
               <h3
-                className="mb-1 flex items-baseline justify-between font-sans text-xs font-semibold uppercase tracking-wide"
+                className="mb-1.5 flex items-baseline justify-between font-sans text-xs font-semibold uppercase tracking-wide"
                 style={{ color: g.id === "subject" ? color : "var(--muted-foreground)" }}
               >
                 {g.label}
                 <span className="font-normal normal-case tracking-normal text-muted-foreground">{g.items.length}</span>
               </h3>
-              <ul className="flex flex-col">
+              <ul className="flex flex-wrap gap-1.5">
                 {g.items.map((m) => (
-                  <MaterialRow key={m.key} material={m} detail={g.id === "other" ? subjectsText(m) : undefined} />
+                  <MaterialTag key={m.key} material={m} detail={g.id === "other" ? subjectsText(m) : undefined} />
                 ))}
               </ul>
             </div>
@@ -168,15 +162,19 @@ function subjectsText(m: MyMaterial): string {
   return m.subjects.map((s) => SUBJECTS.find((o) => o.value === s)?.label ?? s).join(", ")
 }
 
-function MaterialRow({ material: m, detail }: { material: MyMaterial; detail?: string }) {
+/** One material as a tag: its type's dot and its name, wrapping with the rest. */
+function MaterialTag({ material: m, detail }: { material: MyMaterial; detail?: string }) {
   return (
-    <li className="flex items-center gap-2.5 rounded-lg px-1 py-1.5 text-sm">
+    <li
+      className="flex min-h-7 max-w-full items-center gap-1.5 rounded-full border border-border bg-muted px-2.5 text-xs text-foreground"
+      title={detail ? `${m.label}: ${detail}` : undefined}
+    >
       <span className={`size-2 flex-shrink-0 rounded-full ${CATEGORY_DOT[m.category] ?? "bg-muted-foreground"}`} aria-hidden="true" />
-      <span className="min-w-0 flex-1 truncate text-foreground">
+      <span className="min-w-0 truncate">
         {m.label}
-        {m.custom && <span className="ml-1.5 text-xs text-muted-foreground">(yours)</span>}
+        {m.custom && <span className="ml-1 text-muted-foreground">(yours)</span>}
+        {detail && <span className="sr-only">, for {detail}</span>}
       </span>
-      {detail && <span className="max-w-1/2 flex-shrink-0 truncate text-xs text-muted-foreground">{detail}</span>}
     </li>
   )
 }

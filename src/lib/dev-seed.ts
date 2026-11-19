@@ -10,6 +10,7 @@ import { seedTallies, clearLessonTally, clearAllResults, type LevelCounts, type 
 import { LEVEL_ORDER } from "./assessment-types"
 import type { LessonMetadata } from "./lesson-metadata"
 import { curriculumGrades, expectationCodes } from "./curriculum-codes"
+import { schoolDaysAgo } from "./week"
 
 export type CentralLevel = 1 | 2 | 3 | 4
 
@@ -157,6 +158,9 @@ function buildFrontierCounts(
   return { byExpectation, attempts, taught: partial ? [...full, partial] : full }
 }
 
+// How many school days back the synthetic checks are spread over (three weeks).
+const SPREAD_SCHOOL_DAYS = 15
+
 // Class Insights (class-wide). Fabricates synthetic tallies so the subject folder
 // tabs populate, each subject seeded as its own sequential frontier (covered →
 // partial → not covered) through its ordered code list, for every grade the
@@ -181,7 +185,10 @@ export function seedGlobal({ position, level, spread, scope }: SeedOptions): voi
         subject: pool.subject,
         // Only what's been taught so far: the rest of the year is still ahead.
         codes: taught,
-        updatedAt: now - i * 60_000,
+        // Spread over the last few school weeks, as real checks would be.
+        // Stamping them all "now" piled every class's check onto today in the
+        // landing page's This week.
+        updatedAt: schoolDaysAgo(now, i % SPREAD_SCHOOL_DAYS, i),
         attempts,
         events: attempts,
         byExpectation,
@@ -212,6 +219,9 @@ export function seedForLesson(lesson: LessonMetadata, { level, spread }: LevelSp
   const codes = (lesson.curriculumCodesCovered ?? []).filter(Boolean)
   if (codes.length === 0) return
   const { byExpectation, attempts } = buildCounts(codes, level, spread)
+  // A check follows its lesson (an hour on), not the moment of seeding, so
+  // seeding a whole library doesn't stack every check on today.
+  const updatedAt = Math.min(Date.now(), Math.max(lesson.timestamp, 0) + 60 * 60_000)
   seedTallies([
     {
       lessonId: lesson.id,
@@ -219,7 +229,7 @@ export function seedForLesson(lesson: LessonMetadata, { level, spread }: LevelSp
       grade: lesson.grade,
       subject: lesson.subject,
       codes,
-      updatedAt: Date.now(),
+      updatedAt,
       attempts,
       events: attempts,
       byExpectation,
