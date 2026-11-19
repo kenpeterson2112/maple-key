@@ -1,0 +1,374 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Math",
+ "grade": "4",
+ "course_name": "Mathematics",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-math/grades/g4-math",
+  "course_codename": "ele___math___grade_4",
+  "last_modified": "2023-03-17T14:33:34.2644087Z",
+  "fetched_at": "2026-11-19T04:42:11Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Social-Emotional Learning (SEL) Skills in Mathematics and the Mathematical Processes",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Social-Emotional Learning (SEL) Skills and the Mathematical Processes",
+     "text": "apply, to the best of their ability, a variety of social-emotional learning skills to support their use of the mathematical processes and their learning in connection with the expectations in the other five strands of the mathematics curriculum",
+     "specifics": []
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Number",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Number Sense",
+     "text": "demonstrate an understanding of numbers and make connections to the way numbers are used in everyday life",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Whole Numbers",
+       "text": "read, represent , compose , and decompose whole numbers up to and including 10 000, using appropriate tools and strategies, and describe various ways they are used in everyday life"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Whole Numbers",
+       "text": "compare and order whole numbers up to and including 10 000, in various contexts"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Whole Numbers",
+       "text": "round whole numbers to the nearest ten, hundred, or thousand, in various contexts"
+      },
+      {
+       "code": "B1.4",
+       "topic": "Fractions and Decimals",
+       "text": "represent fractions from halves to tenths using drawings , tools, and standard fractional notation , and explain the meanings of the denominator and the numerator"
+      },
+      {
+       "code": "B1.5",
+       "topic": "Fractions and Decimals",
+       "text": "use drawings and models to represent, compare, and order fractions representing the individual portions that result from two different fair-share scenarios involving any combination of 2, 3, 4, 5, 6, 8, and 10 sharers"
+      },
+      {
+       "code": "B1.6",
+       "topic": "Fractions and Decimals",
+       "text": "count to 10 by halves, thirds, fourths, fifths, sixths, eighths, and tenths, with and without the use of tools"
+      },
+      {
+       "code": "B1.7",
+       "topic": "Fractions and Decimals",
+       "text": "read, represent, compare, and order decimal tenths, in various contexts"
+      },
+      {
+       "code": "B1.8",
+       "topic": "Fractions and Decimals",
+       "text": "round decimal numbers to the nearest whole number, in various contexts"
+      },
+      {
+       "code": "B1.9",
+       "topic": "Fractions and Decimals",
+       "text": "describe relationships and show equivalences among fractions and decimal tenths, in various contexts"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Operations",
+     "text": "use knowledge of numbers and operations to solve mathematical problems encountered in everyday life",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Properties and Relationships",
+       "text": "use the properties of operations, and the relationships between addition, subtraction, multiplication, and division, to solve problems involving whole numbers, including those requiring more than one operation, and check calculations"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Math Facts",
+       "text": "recall and demonstrate multiplication facts for 1 × 1 to 10 × 10, and related division facts"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Mental Math",
+       "text": "use mental math strategies to multiply whole numbers by 10, 100, and 1000, divide whole numbers by 10, and add and subtract decimal tenths, and explain the strategies used"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Addition and Subtraction",
+       "text": "represent and solve problems involving the addition and subtraction of whole numbers that add up to no more than 10 000 and of decimal tenths, using appropriate tools and strategies, including algorithms"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Multiplication and Division",
+       "text": "represent and solve problems involving the multiplication of two- or three-digit whole numbers by one-digit whole numbers and by 10, 100, and 1000, using appropriate tools, including arrays"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Multiplication and Division",
+       "text": "represent and solve problems involving the division of two- or three-digit whole numbers by one-digit whole numbers, expressing any remainder as a fraction when appropriate, using appropriate tools, including arrays"
+      },
+      {
+       "code": "B2.7",
+       "topic": "Multiplication and Division",
+       "text": "represent the relationship between the repeated addition of a unit fraction and the multiplication of that unit fraction by a whole number, using tools, drawings, and standard fractional notation"
+      },
+      {
+       "code": "B2.8",
+       "topic": "Multiplication and Division",
+       "text": "show simple multiplicative relationships involving whole-number rates , using various tools and drawings"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Algebra",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Patterns and Relationships",
+     "text": "identify, describe, extend, create, and make predictions about a variety of patterns, including those found in real-life contexts",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Patterns",
+       "text": "identify and describe repeating and growing patterns , including patterns found in real-life contexts"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Patterns",
+       "text": "create and translate repeating and growing patterns using various representations , including tables of values and graphs"
+      },
+      {
+       "code": "C1.3",
+       "topic": "Patterns",
+       "text": "determine pattern rules and use them to extend patterns, make and justify predictions, and identify missing elements in repeating and growing patterns"
+      },
+      {
+       "code": "C1.4",
+       "topic": "Patterns",
+       "text": "create and describe patterns to illustrate relationships among whole numbers and decimal tenths"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Equations and Inequalities",
+     "text": "demonstrate an understanding of variables, expressions, equalities, and inequalities, and apply this understanding in various contexts",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Variables",
+       "text": "identify and use symbols as variables in expressions and equations"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Equalities and Inequalities",
+       "text": "solve equations that involve whole numbers up to 50 in various contexts, and verify solutions"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Equalities and Inequalities",
+       "text": "solve inequalities that involve addition and subtraction of whole numbers up to 20, and verify and graph the solutions"
+      }
+     ]
+    },
+    {
+     "code": "C3",
+     "title": "Coding",
+     "text": "solve problems and create computational representations of mathematical situations using coding concepts and skills",
+     "specifics": [
+      {
+       "code": "C3.1",
+       "topic": "Coding Skills",
+       "text": "solve problems and create computational representations of mathematical situations by writing and executing code , including code that involves sequential , concurrent , repeating , and nested events"
+      },
+      {
+       "code": "C3.2",
+       "topic": "Coding Skills",
+       "text": "read and alter existing code, including code that involves sequential, concurrent, repeating, and nested events, and describe how changes to the code affect the outcomes"
+      }
+     ]
+    },
+    {
+     "code": "C4",
+     "title": "Mathematical Modelling",
+     "text": "apply the process of mathematical modelling to represent, analyse, make predictions, and provide insight into real-life situations This overall expectation has no specific expectations. Mathematical modelling is an iterative and interconnected process that is applied to various contexts, allowing students to bring in learning from other strands. Students’ demonstration of the process of mathematical modelling, as they apply concepts and skills learned in other strands, is assessed and evaluated. Read more about the mathematical modelling process .",
+     "specifics": []
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Data",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Data Literacy",
+     "text": "manage, analyse, and use data to make convincing arguments and informed decisions, in various contexts drawn from real life",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Data Collection and Organization",
+       "text": "describe the difference between qualitative and quantitative data , and describe situations where each would be used"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Data Collection and Organization",
+       "text": "collect data from different primary and secondary sources to answer questions of interest that involve comparing two or more sets of data, and organize the data in frequency tables and stem-and-leaf plots"
+      },
+      {
+       "code": "D1.3",
+       "topic": "Data Visualization",
+       "text": "select from among a variety of graphs, including multiple-bar graphs , the type of graph best suited to represent various sets of data; display the data in the graphs with proper sources, titles, and labels, and appropriate scales; and justify their choice of graphs"
+      },
+      {
+       "code": "D1.4",
+       "topic": "Data Visualization",
+       "text": "create an infographic about a data set, representing the data in appropriate ways, including in frequency tables, stem-and-leaf plots, and multiple-bar graphs, and incorporating any other relevant information that helps to tell a story about the data"
+      },
+      {
+       "code": "D1.5",
+       "topic": "Data Analysis",
+       "text": "determine the mean and the median and identify the mode (s), if any, for various data sets involving whole numbers, and explain what each of these measures indicates about the data"
+      },
+      {
+       "code": "D1.6",
+       "topic": "Data Analysis",
+       "text": "analyse different sets of data presented in various ways, including in stem-and-leaf plots and multiple-bar graphs, by asking and answering questions about the data and drawing conclusions, then make convincing arguments and informed decisions"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Probability",
+     "text": "describe the likelihood that events will happen, and use that information to make predictions",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Probability",
+       "text": "use mathematical language, including the terms “impossible”, “unlikely”, “equally likely”, “likely”, and “certain”, to describe the likelihood of events happening, represent this likelihood on a probability line , and use it to make predictions and informed decisions"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Probability",
+       "text": "make and test predictions about the likelihood that the mean, median, and mode(s) of a data set will be the same for data collected from different populations"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Spatial Sense",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Geometric and Spatial Reasoning",
+     "text": "describe and represent shape, location, and movement by applying geometric properties and spatial relationships in order to navigate the world around them",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Geometric Reasoning",
+       "text": "identify geometric properties of rectangles , including the number of right angles , parallel and perpendicular sides, and lines of symmetry"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Location and Movement",
+       "text": "plot and read coordinates in the first quadrant of a Cartesian plane , and describe the translations that move a point from one coordinate to another"
+      },
+      {
+       "code": "E1.3",
+       "topic": "Location and Movement",
+       "text": "describe and perform translations and reflections on a grid , and predict the results of these transformations"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Measurement",
+     "text": "compare, estimate, and determine measurements in various contexts",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "The Metric System",
+       "text": "explain the relationships between grams and kilograms as metric units of mass , and between litres and millilitres as metric units of capacity , and use benchmarks for these units to estimate mass and capacity"
+      },
+      {
+       "code": "E2.2",
+       "topic": "The Metric System",
+       "text": "use metric prefixes to describe the relative size of different metric units, and choose appropriate units and tools to measure length, mass, and capacity"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Time",
+       "text": "solve problems involving elapsed time by applying the relationships between different units of time"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Angles",
+       "text": "identify angles and classify them as right , straight , acute , or obtuse"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Area",
+       "text": "use the row and column structure of an array to measure the areas of rectangles and to show that the area of any rectangle can be found by multiplying its side lengths"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Area",
+       "text": "apply the formula for the area of a rectangle to find the unknown measurement when given two of the three"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "F",
+   "label": "Financial Literacy",
+   "overalls": [
+    {
+     "code": "F1",
+     "title": "Money and Finances",
+     "text": "demonstrate the knowledge and skills needed to make informed financial decisions",
+     "specifics": [
+      {
+       "code": "F1.1",
+       "topic": "Money Concepts",
+       "text": "identify various methods of payment that can be used to purchase goods and services"
+      },
+      {
+       "code": "F1.2",
+       "topic": "Money Concepts",
+       "text": "estimate and calculate the cost of transactions involving multiple items priced in whole-dollar amounts, not including sales tax, and the amount of change needed when payment is made in cash, using mental math"
+      },
+      {
+       "code": "F1.3",
+       "topic": "Financial Management",
+       "text": "explain the concepts of spending , saving , earning , investing , and donating , and identify key factors to consider when making basic decisions related to each"
+      },
+      {
+       "code": "F1.4",
+       "topic": "Financial Management",
+       "text": "explain the relationship between spending and saving, and describe how spending and saving behaviours may differ from one person to another"
+      },
+      {
+       "code": "F1.5",
+       "topic": "Consumer and Civic Awareness",
+       "text": "describe some ways of determining whether something is reasonably priced and therefore a good purchase"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

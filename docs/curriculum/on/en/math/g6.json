@@ -1,0 +1,389 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Math",
+ "grade": "6",
+ "course_name": "Mathematics",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-math/grades/g6-math",
+  "course_codename": "ele___math___grade_6",
+  "last_modified": "2023-03-17T14:35:07.1607801Z",
+  "fetched_at": "2026-11-19T04:42:11Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Social-Emotional Learning (SEL) Skills in Mathematics and the Mathematical Processes",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Social-Emotional Learning (SEL) Skills and the Mathematical Processes",
+     "text": "apply, to the best of their ability, a variety of social-emotional learning skills to support their use of the mathematical processes and their learning in connection with the expectations in the other five strands of the mathematics curriculum",
+     "specifics": []
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Number",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Number Sense",
+     "text": "demonstrate an understanding of numbers and make connections to the way numbers are used in everyday life",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "Rational Numbers",
+       "text": "read and represent whole numbers up to and including one million, using appropriate tools and strategies, and describe various ways they are used in everyday life"
+      },
+      {
+       "code": "B1.2",
+       "topic": "Rational Numbers",
+       "text": "read and represent integers , using a variety of tools and strategies, including horizontal and vertical number lines"
+      },
+      {
+       "code": "B1.3",
+       "topic": "Rational Numbers",
+       "text": "compare and order integers, decimal numbers , and fractions , separately and in combination, in various contexts"
+      },
+      {
+       "code": "B1.4",
+       "topic": "Fractions, Decimals, and Percents",
+       "text": "read, represent, compare, and order decimal numbers up to thousandths, in various contexts"
+      },
+      {
+       "code": "B1.5",
+       "topic": "Fractions, Decimals, and Percents",
+       "text": "round decimal numbers, both terminating and repeating , to the nearest tenth, hundredth, or whole number, as applicable, in various contexts"
+      },
+      {
+       "code": "B1.6",
+       "topic": "Fractions, Decimals, and Percents",
+       "text": "describe relationships and show equivalences among fractions and decimal numbers up to thousandths, using appropriate tools and drawings, in various contexts"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Operations",
+     "text": "use knowledge of numbers and operations to solve mathematical problems encountered in everyday life",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "Properties and Relationships",
+       "text": "use the properties of operations, and the relationships between operations, to solve problems involving whole numbers, decimal numbers, fractions, ratios , rates , and whole number percents , including those requiring multiple steps or multiple operations"
+      },
+      {
+       "code": "B2.2",
+       "topic": "Math Facts",
+       "text": "understand the divisibility rules and use them to determine whether numbers are divisible by 2, 3, 4, 5, 6, 8, 9, and 10"
+      },
+      {
+       "code": "B2.3",
+       "topic": "Mental Math",
+       "text": "use mental math strategies to calculate percents of whole numbers, including 1%, 5%, 10%, 15%, 25%, and 50%, and explain the strategies used"
+      },
+      {
+       "code": "B2.4",
+       "topic": "Addition and Subtraction",
+       "text": "represent and solve problems involving the addition and subtraction of whole numbers and decimal numbers, using estimation and algorithms"
+      },
+      {
+       "code": "B2.5",
+       "topic": "Addition and Subtraction",
+       "text": "add and subtract fractions with like and unlike denominators , using appropriate tools, in various contexts"
+      },
+      {
+       "code": "B2.6",
+       "topic": "Multiplication and Division",
+       "text": "represent composite numbers as a product of their prime factors , including through the use of factor trees"
+      },
+      {
+       "code": "B2.7",
+       "topic": "Multiplication and Division",
+       "text": "represent and solve problems involving the multiplication of three-digit whole numbers by decimal tenths, using algorithms"
+      },
+      {
+       "code": "B2.8",
+       "topic": "Multiplication and Division",
+       "text": "represent and solve problems involving the division of three-digit whole numbers by decimal tenths, using appropriate tools, strategies, and algorithms, and expressing remainders as appropriate"
+      },
+      {
+       "code": "B2.9",
+       "topic": "Multiplication and Division",
+       "text": "multiply whole numbers by proper fractions , using appropriate tools and strategies"
+      },
+      {
+       "code": "B2.10",
+       "topic": "Multiplication and Division",
+       "text": "divide whole numbers by proper fractions, using appropriate tools and strategies"
+      },
+      {
+       "code": "B2.11",
+       "topic": "Multiplication and Division",
+       "text": "represent and solve problems involving the division of decimal numbers up to thousandths by whole numbers up to 10, using appropriate tools and strategies"
+      },
+      {
+       "code": "B2.12",
+       "topic": "Multiplication and Division",
+       "text": "solve problems involving ratios, including percents and rates, using appropriate tools and strategies"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "C",
+   "label": "Algebra",
+   "overalls": [
+    {
+     "code": "C1",
+     "title": "Patterns and Relationships",
+     "text": "identify, describe, extend, create, and make predictions about a variety of patterns, including those found in real-life contexts",
+     "specifics": [
+      {
+       "code": "C1.1",
+       "topic": "Patterns",
+       "text": "identify and describe repeating , growing , and shrinking patterns , including patterns found in real-life contexts, and specify which growing patterns are linear"
+      },
+      {
+       "code": "C1.2",
+       "topic": "Patterns",
+       "text": "create and translate repeating, growing, and shrinking patterns using various representations, including tables of values , graphs , and, for linear growing patterns, algebraic expressions and equations"
+      },
+      {
+       "code": "C1.3",
+       "topic": "Patterns",
+       "text": "determine pattern rules and use them to extend patterns, make and justify predictions, and identify missing elements in repeating, growing, and shrinking patterns, and use algebraic representations of the pattern rules to solve for unknown values in linear growing patterns"
+      },
+      {
+       "code": "C1.4",
+       "topic": "Patterns",
+       "text": "create and describe patterns to illustrate relationships among whole numbers and decimal numbers"
+      }
+     ]
+    },
+    {
+     "code": "C2",
+     "title": "Equations and Inequalities",
+     "text": "demonstrate an understanding of variables, expressions, equalities, and inequalities, and apply this understanding in various contexts",
+     "specifics": [
+      {
+       "code": "C2.1",
+       "topic": "Variables and Expressions",
+       "text": "add monomials with a degree of 1 that involve whole numbers, using tools"
+      },
+      {
+       "code": "C2.2",
+       "topic": "Variables and Expressions",
+       "text": "evaluate algebraic expressions that involve whole numbers and decimal tenths"
+      },
+      {
+       "code": "C2.3",
+       "topic": "Equalities and Inequalities",
+       "text": "solve equations that involve multiple terms and whole numbers in various contexts, and verify solutions"
+      },
+      {
+       "code": "C2.4",
+       "topic": "Equalities and Inequalities",
+       "text": "solve inequalities that involve two operations and whole numbers up to 100 and verify and graph the solutions"
+      }
+     ]
+    },
+    {
+     "code": "C3",
+     "title": "Coding",
+     "text": "solve problems and create computational representations of mathematical situations using coding concepts and skills",
+     "specifics": [
+      {
+       "code": "C3.1",
+       "topic": "Coding Skills",
+       "text": "solve problems and create computational representations of mathematical situations by writing and executing efficient code , including code that involves conditional statements and other control structures"
+      },
+      {
+       "code": "C3.2",
+       "topic": "Coding Skills",
+       "text": "read and alter existing code, including code that involves conditional statements and other control structures, and describe how changes to the code affect the outcomes and the efficiency of the code"
+      }
+     ]
+    },
+    {
+     "code": "C4",
+     "title": "Mathematical Modelling",
+     "text": "apply the process of mathematical modelling to represent, analyse, make predictions, and provide insight into real-life situations This overall expectation has no specific expectations. Mathematical modelling is an iterative and interconnected process that is applied to various contexts, allowing students to bring in learning from other strands. Students’ demonstration of the process of mathematical modelling, as they apply concepts and skills learned in other strands, is assessed and evaluated. Read more about the mathematical modelling process .",
+     "specifics": []
+    }
+   ]
+  },
+  {
+   "code": "D",
+   "label": "Data",
+   "overalls": [
+    {
+     "code": "D1",
+     "title": "Data Literacy",
+     "text": "manage, analyse, and use data to make convincing arguments and informed decisions, in various contexts drawn from real life",
+     "specifics": [
+      {
+       "code": "D1.1",
+       "topic": "Data Collection and Organization",
+       "text": "describe the difference between discrete and continuous data , and provide examples of each"
+      },
+      {
+       "code": "D1.2",
+       "topic": "Data Collection and Organization",
+       "text": "collect qualitative data and discrete and continuous quantitative data to answer questions of interest about a population , and organize the sets of data as appropriate, including using intervals"
+      },
+      {
+       "code": "D1.3",
+       "topic": "Data Visualization",
+       "text": "select from among a variety of graphs, including histograms and broken-line graphs , the type of graph best suited to represent various sets of data; display the data in the graphs with proper sources, titles, and labels, and appropriate scales; and justify their choice of graphs"
+      },
+      {
+       "code": "D1.4",
+       "topic": "Data Visualization",
+       "text": "create an infographic about a data set, representing the data in appropriate ways, including in tables, histograms, and broken-line graphs, and incorporating any other relevant information that helps to tell a story about the data"
+      },
+      {
+       "code": "D1.5",
+       "topic": "Data Analysis",
+       "text": "determine the range as a measure of spread and the measures of central tendency for various data sets, and use this information to compare two or more data sets"
+      },
+      {
+       "code": "D1.6",
+       "topic": "Data Analysis",
+       "text": "analyse different sets of data presented in various ways, including in histograms and broken-line graphs and in misleading graphs , by asking and answering questions about the data, challenging preconceived notions, and drawing conclusions, then make convincing arguments and informed decisions"
+      }
+     ]
+    },
+    {
+     "code": "D2",
+     "title": "Probability",
+     "text": "describe the likelihood that events will happen, and use that information to make predictions",
+     "specifics": [
+      {
+       "code": "D2.1",
+       "topic": "Probability",
+       "text": "use fractions, decimals, and percents to express the probability of events happening, represent this probability on a probability line , and use it to make predictions and informed decisions"
+      },
+      {
+       "code": "D2.2",
+       "topic": "Probability",
+       "text": "determine and compare the theoretical and experimental probabilities of two independent events happening"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "E",
+   "label": "Spatial Sense",
+   "overalls": [
+    {
+     "code": "E1",
+     "title": "Geometric and Spatial Reasoning",
+     "text": "describe and represent shape, location, and movement by applying geometric properties and spatial relationships in order to navigate the world around them",
+     "specifics": [
+      {
+       "code": "E1.1",
+       "topic": "Geometric Reasoning",
+       "text": "create lists of the geometric properties of various types of quadrilaterals , including the properties of the diagonals , rotational symmetry , and line symmetry"
+      },
+      {
+       "code": "E1.2",
+       "topic": "Geometric Reasoning",
+       "text": "construct three-dimensional objects when given their top, front, and side views"
+      },
+      {
+       "code": "E1.3",
+       "topic": "Location and Movement",
+       "text": "plot and read coordinates in all four quadrants of a Cartesian plane , and describe the translations that move a point from one coordinate to another"
+      },
+      {
+       "code": "E1.4",
+       "topic": "Location and Movement",
+       "text": "describe and perform combinations of translations, reflections , and rotations up to 360° on a grid , and predict the results of these transformations"
+      }
+     ]
+    },
+    {
+     "code": "E2",
+     "title": "Measurement",
+     "text": "compare, estimate, and determine measurements in various contexts",
+     "specifics": [
+      {
+       "code": "E2.1",
+       "topic": "The Metric System",
+       "text": "measure length, area, mass , and capacity using the appropriate metric units , and solve problems that require converting smaller units to larger ones and vice versa"
+      },
+      {
+       "code": "E2.2",
+       "topic": "Angles",
+       "text": "use a protractor to measure and construct angles up to 360°, and state the relationship between angles that are measured clockwise and those that are measured counterclockwise"
+      },
+      {
+       "code": "E2.3",
+       "topic": "Angles",
+       "text": "use the properties of supplementary angles , complementary angles , opposite angles , and interior and exterior angles to solve for unknown angle measures"
+      },
+      {
+       "code": "E2.4",
+       "topic": "Area and Surface Area",
+       "text": "determine the areas of trapezoids , rhombuses , kites , and composite polygons by decomposing them into shapes with known areas"
+      },
+      {
+       "code": "E2.5",
+       "topic": "Area and Surface Area",
+       "text": "create and use nets to demonstrate the relationship between the faces of prisms and pyramids and their surface areas"
+      },
+      {
+       "code": "E2.6",
+       "topic": "Area and Surface Area",
+       "text": "determine the surface areas of prisms and pyramids by calculating the areas of their two-dimensional faces and adding them together"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "F",
+   "label": "Financial Literacy",
+   "overalls": [
+    {
+     "code": "F1",
+     "title": "Money and Finances",
+     "text": "demonstrate the knowledge and skills needed to make informed financial decisions",
+     "specifics": [
+      {
+       "code": "F1.1",
+       "topic": "Money Concepts",
+       "text": "describe the advantages and disadvantages of various methods of payment that can be used to purchase goods and services"
+      },
+      {
+       "code": "F1.2",
+       "topic": "Financial Management",
+       "text": "identify different types of financial goals , including earning and saving goals, and outline some key steps in achieving them"
+      },
+      {
+       "code": "F1.3",
+       "topic": "Financial Management",
+       "text": "identify and describe various factors that may help or interfere with reaching financial goals"
+      },
+      {
+       "code": "F1.4",
+       "topic": "Consumer and Civic Awareness",
+       "text": "explain the concept of interest rates , and identify types of interest rates and fees associated with different accounts and loans offered by various banks and other financial institutions"
+      },
+      {
+       "code": "F1.5",
+       "topic": "Consumer and Civic Awareness",
+       "text": "describe trading , lending , borrowing , and donating as different ways to distribute financial and other resources among individuals and organizations"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,245 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "Geography",
+ "grade": "8",
+ "course_name": "Geography",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/g8-geo",
+  "course_codename": "geography___grade_7__copy_",
+  "last_modified": "2026-02-03T19:04:32.4854449Z",
+  "fetched_at": "2026-11-19T04:42:14Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Global Settlement: Patterns and Sustainability",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Application: Interrelationships between Settlement and the Environment",
+     "text": "analyse some significant interrelationships between Earth’s physical features and processes and human settlement patterns , and some ways in which the physical environment and issues of sustainability may affect settlement in the future ( FOCUS ON: Interrelationships )",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "analyse some of the ways in which the physical environment (e.g., climate , landforms , soil type, vegetation, natural resources) has influenced settlement patterns in different countries and/or regions around the world (e.g., how climate, vegetation, and natural resources have influenced settlement patterns in Brazil; how landforms have influenced settlement patterns in Japan; how landforms, climate, and soil types have affected settlement patterns in Egypt)"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "analyse how processes related to the physical environment may affect human settlements in the future (e.g., the impact of rising sea levels on coastal cities as polar ice caps melt, of desertification , of earthquakes in increasingly populous regions, of increasingly violent tropical storms as a result of climate change )"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "describe possible features of a sustainable community in the future (e.g., energy-efficient buildings, use of renewable sources of energy, a comprehensive public transportation system, community gardens, roof gardens, green canopy, naturalized parks with native species, programs for waste and water recycling) , and analyse some challenges associated with creating such a community (e.g., cost, population growth, increasing urbanization , continued dependence on fossil fuels )"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Inquiry: Human Settlements and Sustainability",
+     "text": "use the geographic inquiry process to investigate issues related to the interrelationship between human settlement and sustainability from a geographic perspective ( FOCUS ON: Geographic Perspective; Interrelationships )",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into issues related to the interrelationship between human settlement and sustainability from a geographic perspective (e.g., social, economic, and environmental perspectives on land-reclamation projects in the Netherlands or Japan; social, economic, political, and environmental perspectives on land-use conflicts in Brazil, Mexico, or Kenya, or on the global trend towards increased urbanization)"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "gather and organize data and information from a variety of sources and using various technologies to investigate issues related to the interrelationship between human settlement and sustainability from a geographic perspective (e.g., aerial photographs of Japanese sea walls prior to the earthquake and tsunami of 2011, photographs of or documentaries on the flooding and resulting damage caused by the tsunami, government and international data on the costs of flood-control in Japan before the tsunami and emergency measures following it, articles by or information on the website of environmental advocacy groups on the long-term effects of the tsunami)"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "analyse and construct various print and digital maps as part of their investigations into issues related to the interrelationship between human settlement and sustainability, with a focus on investigating the spatial boundaries of the issue (e.g., use GIS to construct maps that include major cities in the developed and developing world to show how population density has changed over the past twenty years; analyse population density maps to determine where most people live on a global scale; construct a land-use map to illustrate the extent to which San Francisco has reclaimed or adapted land; analyse maps to explore possible land-use conflicts in a community; analyse thematic maps to determine the loss of green space in and around an urban centre over the past fifteen years)"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "interpret and analyse data and information relevant to their investigations, using various tools and spatial technologies (e.g., interpret photographs to determine possible land-use conflicts that could arise in relation to a proposed housing or industrial development project; use a graphic organizer to help them explore various perspectives on the construction of a new airport; use online and computer-based geographic software applications to determine population shifts from rural to urban areas)"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about issues related to the interrelationship between human settlement and sustainability"
+      },
+      {
+       "code": "A2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary (e.g., settlement patterns , population distribution , population density , land use, sustainable development, land reclamation, migration ) and formats appropriate for specific audiences (e.g., a play about the impact of urbanization on rural communities; a website that focuses on issues associated with creating more sustainable communities; a photo essay on a land-use conflict in a specific region ; a report, song, or poem that addresses the impact of different kinds of human settlement on the environment; a story about sustainable communities of the future)"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Understanding Geographic Context: Settlement Patterns and Trends",
+     "text": "demonstrate an understanding of significant patterns and trends related to human settlement and of ways in which human settlement affects the environment ( FOCUS ON: Patterns and Trends; Spatial Significance )",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "identify significant spatial patterns in human settlement on a global scale (e.g., linear , scattered , and clustered patterns in populations in different regions; global patterns in population density and/or distribution)"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "identify and describe some ways in which the physical environment can influence the general location and patterns of human settlements (e.g., the impact of factors such as climate, soil, and topography on the location of agricultural settlements; the impact of physical features on urban development; the importance of water for transportation, irrigation, industry, personal use; the existence of natural resources and the development of resource towns; the type of buildings erected in an area prone to earthquakes)"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "identify significant land-use issues (e.g., competition for land for agriculture, industry, housing, transportation, recreation, wilderness areas; land claims by indigenous groups; development in ecologically sensitive areas) , and describe responses of various groups to these issues (e.g., municipal , state/provincial/regional, and/or national governments; local residents; environmental, indigenous, or grassroots groups; non-governmental organizations )"
+      },
+      {
+       "code": "A3.4",
+       "topic": "",
+       "text": "identify and describe significant current trends in human settlement (e.g., the global trend of increased migration from rural to urban areas; trends in some countries of people moving from major cities to smaller towns; loss of natural habitat as human settlement expands; urban sprawl; land reclamation )"
+      },
+      {
+       "code": "A3.5",
+       "topic": "",
+       "text": "describe various ways in which human settlement has affected the environment (e.g., water pollution from industry, agriculture, human waste; air pollution from vehicle and industrial emissions; soil contamination from pesticides, industrial byproducts, garbage dumps; deforestation and loss of habitat from expanding settlement; loss of agricultural land to urban sprawl; light pollution from large cities; disruption of migratory routes of different species; desertification from unsustainable agricultural practices)"
+      },
+      {
+       "code": "A3.6",
+       "topic": "",
+       "text": "describe some practices that individuals and communities have adopted to help make human settlements more sustainable (e.g., reducing water use, increasing recycling and composting, limiting the construction of housing on land that could be used for agriculture, using public transit, planting and maintaining trees)"
+      },
+      {
+       "code": "A3.7",
+       "topic": "",
+       "text": "demonstrate the ability to analyse and construct choropleth maps on topics related to human settlement (e.g., population density, availability or use of agricultural land, spending on transportation)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Global Inequalities: Economic Development and Quality of Life",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Application: Global Inequalities in Quality of Life",
+     "text": "analyse some interrelationships among factors that contribute to global inequalities, with a focus on inequalities in quality of life , and assess various responses to these inequalities ( FOCUS ON: Interrelationships )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "analyse some interrelationships among factors that can contribute to quality of life (e.g., lack of access to clean water leads to an increase in water-borne diseases and to high death rates overall as well as high infant mortality rates ; a country that has equal access to education for all will have higher literacy rates and will most likely have higher employment rates, a lower fertility rate and birth rate , and better maternal health)"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "analyse how various factors have affected the economies of specific developed and developing countries around the world (e.g., with reference to foreign ownership of natural resources in Nigeria or Indonesia; colonial legacy in South Africa or Haiti; the debt load in Honduras or the United States; government expenditures in France or Mali) , and explain the interrelationship between these factors and quality of life in some of these countries (e.g., war in Sudan has consumed economic resources and has led to a refugee crisis and extremely poor quality of life in refugee camps in Darfur; expenditures on education, health care, and social services in Norway have contributed to that country’s ranking at the top of the Human Development Index [HDI] )"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "assess the effectiveness of various programs and policies aimed at improving the quality of life in various countries (e.g., with reference to governmental and non-governmental programs to provide clean water, improve literacy rates, provide drugs for people with HIV/AIDS, reduce the spread of malaria, reduce violence against women, reduce child labour or the use of child soldiers, promote fair trade , or develop alternative income programs)"
+      },
+      {
+       "code": "B1.4",
+       "topic": "",
+       "text": "assess the effectiveness of media in improving the quality of life in some countries/regions around the world (e.g., with reference to the success of various print or television advertisements for aid organizations; the use of celebrity spokespeople; journalists raising awareness of natural disasters, refugees, famine in different parts of the world; the broadcast of fundraisers such as Live Aid; the production of songs or music videos by Northern Lights or Band Aid)"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Inquiry: Development and Quality of Life Issues",
+     "text": "use the geographic inquiry process to investigate issues related to global development and quality of life from a geographic perspective ( FOCUS ON: Geographic Perspective )",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into issues related to global development and quality of life from a geographic perspective (e.g., the social, political, and economic impact of educating girls or of the AIDS pandemic in sub-Saharan Africa; the social, political, economic, and/or environmental implications of fair trade; social, political, economic, and/or environmental considerations relating to the increase in foreign ownership of natural resources; the social, political, and economic impact of foreign debt or of forgiving a country’s foreign debt)"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "gather and organize data and information from a variety of sources and using various technologies to investigate issues related to global development and quality of life from a geographic perspective (e.g., demographic data from the United Nations on specific countries; demographic maps and other information from the websites of intergovernmental organizations on population trends; information and data from a national government on poverty and education rates and on government expenditures in that country; articles from development agencies on children’s quality of life in a specific country; images showing housing in different regions; information from a website of a corporation doing business in a developing country)"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "analyse and construct digital and print maps as part of their investigations into issues related to global development and quality of life (e.g., analyse issue-based maps to help them investigate spatial patterns in HDI rankings; construct an issue-based map using GIS to help them explore the correlation between life expectancy and literacy rates; analyse flow maps to help them determine trade patterns between countries; construct an annotated map to show foreign ownership and use of agricultural land in Africa or Asia)"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "interpret and analyse data and information relevant to their investigations, using various tools and spatial technologies (e.g., interpret the data in multiple bar graphs to determine the per capita gross domestic product and literacy rate in countries where there is a high level of child labour; interpret information from GIS as part of their investigation into shifts in population in developing countries; analyse images to help them determine differences in quality of life for various groups in the same country; use a graphic organizer to help them interpret different perspectives on their topic)"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about issues related to global development and quality of life"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary (e.g., demography, per capita, quality of life, developed/developing countries, gross national product [GNP] , gross domestic product [GDP] , literacy rate, correlation, exploitation, competition, fair trade) and formats appropriate for specific audiences (e.g., create an interactive presentation on foreign debt in Africa, using an electronic white board; use GIS in a presentation on the impact of desertification ; create a photo essay with accompanying text or oral comments on conditions in a city in the developing world; write an article for the school newspaper on the impact of water privatization)"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Understanding Geographic Context: Global Economic Development and Quality of Life",
+     "text": "demonstrate an understanding of significant patterns in and factors affecting economic development and quality of life in different regions of the world ( FOCUS ON: Spatial Significance; Patterns and Trends )",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "",
+       "text": "identify and describe the significance of several indicators that are commonly used to measure quality of life on a global scale (e.g., infant mortality, fertility rate, life expectancy, birth rate , death rate , doubling time , access to medical care, access to clean water, literacy rate and access to education, poverty rate, per capita income , GDP, GDP per capita, unemployment rates, national debt)"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "compare findings with respect to selected quality of life indicators in some developing and more developed countries (e.g., infant and maternal mortality rates, literacy rates for men and women, and per capita GDP in Australia, Mali, and Bangladesh)"
+      },
+      {
+       "code": "B3.3",
+       "topic": "",
+       "text": "demonstrate the ability to analyse and construct scatter graphs , both on paper and using a graphing program, when studying global development and/or quality of life (e.g., construct a scatter graph to illustrate the correlation between literacy rates and life expectancy for selected countries; analyse a scatter graph to gather data on infant mortality and the availability of clean water in selected countries)"
+      },
+      {
+       "code": "B3.4",
+       "topic": "",
+       "text": "demonstrate the ability to analyse and construct population pyramids , both on paper and using a graphing program, when studying demographic patterns and trends in developed and developing countries (e.g., use data from population pyramids to compare the life expectancy of men and women within a developing country or of populations in developed and developing countries; construct a population pyramid to predict future population trends for a country )"
+      },
+      {
+       "code": "B3.5",
+       "topic": "",
+       "text": "identify various groups and organizations that work to improve quality of life (e.g., Free the Children, International Planned Parenthood Federation, Médecins sans frontières/Doctors without Borders, Right to Play, Water for People) , and describe their focus"
+      },
+      {
+       "code": "B3.6",
+       "topic": "",
+       "text": "identify different types of economic systems (e.g., traditional , command , market , mixed ) , and describe their characteristics"
+      },
+      {
+       "code": "B3.7",
+       "topic": "",
+       "text": "explain how the four main economic sectors (i.e., primary , secondary , tertiary , and quaternary ) are related to global development (e.g., countries where most people work in the primary sector tend to rank lower on the HDI than countries with more balanced economies or those where more people work in the tertiary and quaternary sectors)"
+      },
+      {
+       "code": "B3.8",
+       "topic": "",
+       "text": "identify and describe various factors that can contribute to economic development (e.g., access to economic and natural resources, patterns of trade, colonial legacy, corruption, government expenditures, debt load, foreign ownership of resources , war or political instability)"
+      },
+      {
+       "code": "B3.9",
+       "topic": "",
+       "text": "describe the spatial distribution of wealth, both globally and within selected countries/regions (e.g., the concentration of global wealth in North America, Europe, and parts of the Middle East; changing patterns of global wealth as a result of emerging economies such as Russia, China, and India; the concentration of the world’s poorest nations in Africa; patterns of rural poverty and urban wealth)"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

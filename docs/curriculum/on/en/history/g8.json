@@ -1,0 +1,255 @@
+{
+ "province": "ON",
+ "language": "en",
+ "subject": "History",
+ "grade": "8",
+ "course_name": "History (effective beginning in the 2026–27 school year)",
+ "source": {
+  "publisher": "Ontario Ministry of Education",
+  "url": "https://www.dcp.edu.gov.on.ca/en/curriculum/elementary-sshg/grades/history-g8",
+  "course_codename": "hist___grade_7__2025___copy_",
+  "last_modified": "2026-02-20T21:28:35.1688228Z",
+  "fetched_at": "2026-11-19T04:42:14Z"
+ },
+ "strands": [
+  {
+   "code": "A",
+   "label": "Creating Canada, 1850–1890",
+   "overalls": [
+    {
+     "code": "A1",
+     "title": "Application: Peoples in the New Nation",
+     "text": "assess the impact of some key social, economic, and political factors, including social, economic, and/or political inequalities, on various groups and communities, including First Nations , Métis , and Inuit communities, and on the creation and expansion of the Dominion of Canada, between 1850 and 1890 ( FOCUS ON: Cause and Consequence; Historical Perspective )",
+     "specifics": [
+      {
+       "code": "A1.1",
+       "topic": "",
+       "text": "evaluate the importance of various internal and external factors that played a role in the creation of the Dominion of Canada and the expansion of its territory"
+      },
+      {
+       "code": "A1.2",
+       "topic": "",
+       "text": "assess the impact that limitations with respect to legal status, rights , and privileges had on First Nations, Métis, and Inuit individuals and/or communities in Canada between 1850 and 1890"
+      },
+      {
+       "code": "A1.3",
+       "topic": "",
+       "text": "assess the impact that differences in legal status and in the distribution of rights and privileges had on various settler /newcomer groups and individuals in Canada between 1850 and 1890"
+      },
+      {
+       "code": "A1.4",
+       "topic": "",
+       "text": "analyze some of the actions taken by various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities, in Canada between 1850 and 1890 to improve their lives"
+      }
+     ]
+    },
+    {
+     "code": "A2",
+     "title": "Inquiry: Perspectives in the New Nation",
+     "text": "use the historical inquiry process to investigate perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada between 1850 and 1890 ( FOCUS ON: Historical Significance; Historical Perspective )",
+     "specifics": [
+      {
+       "code": "A2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada between 1850 and 1890"
+      },
+      {
+       "code": "A2.2",
+       "topic": "",
+       "text": "gather and organize information and evidence about perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada during this period, using a variety of primary sources and secondary sources"
+      },
+      {
+       "code": "A2.3",
+       "topic": "",
+       "text": "assess the credibility of sources and information relevant to their investigations"
+      },
+      {
+       "code": "A2.4",
+       "topic": "",
+       "text": "analyse and construct maps as part of their investigations into some significant events, developments, and/or issues in Canada during this period, with a focus on exploring their spatial boundaries"
+      },
+      {
+       "code": "A2.5",
+       "topic": "",
+       "text": "interpret and analyse information and evidence relevant to their investigations, using a variety of tools"
+      },
+      {
+       "code": "A2.6",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about perspectives of different groups and communities , including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues in Canada during this period"
+      },
+      {
+       "code": "A2.7",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary and formats appropriate for specific audiences"
+      }
+     ]
+    },
+    {
+     "code": "A3",
+     "title": "Understanding Historical Context: Events and Their Consequences",
+     "text": "describe various significant people, events, and developments in Canada between 1850 and 1890, including the Indian Act , treaties between Indigenous nations and the Crown, and the residential school system, and explain their impact ( FOCUS ON: Historical Significance; Cause and Consequence )",
+     "specifics": [
+      {
+       "code": "A3.1",
+       "topic": "",
+       "text": "identify factors contributing to some key events or developments that occurred in and/or affected Canada between 1850 and 1890, and explain the historical significance of some of these events for different individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities"
+      },
+      {
+       "code": "A3.2",
+       "topic": "",
+       "text": "identify some key events across Canada between 1850 and 1890 that shaped the experiences of Black people in Canada and explain the impact on Black individuals and communities and on the broader Canadian society"
+      },
+      {
+       "code": "A3.3",
+       "topic": "",
+       "text": "describe key political and legal developments that affected First Nations, Métis, and Inuit people during this period, including treaties, government policies, and the Indian Act and other legislation, and explain some of their short- and long-term consequences"
+      },
+      {
+       "code": "A3.4",
+       "topic": "",
+       "text": "identify some key factors that contributed to the establishment of the residential school system, and explain the impact of this system on Indigenous individuals and communities"
+      },
+      {
+       "code": "A3.5",
+       "topic": "",
+       "text": "identify key political and legal changes that occurred in and/or affected Canada during this period, and explain the impact of some of these changes on various non-Indigenous individuals, groups, and/or communities"
+      },
+      {
+       "code": "A3.6",
+       "topic": "",
+       "text": "identify key social and economic changes that occurred in and/or affected Canada during this period, and explain the impact of some of those changes on various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities"
+      },
+      {
+       "code": "A3.7",
+       "topic": "",
+       "text": "describe significant instances of cooperation and conflict in Canada during this period"
+      },
+      {
+       "code": "A3.8",
+       "topic": "",
+       "text": "identify a variety of significant individuals and groups in Canada during this period, and explain their contributions to heritage and/or identities in Canada"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "B",
+   "label": "Canada, 1890–1914: A Changing Society",
+   "overalls": [
+    {
+     "code": "B1",
+     "title": "Application: Canada – Past and Present",
+     "text": "analyse key similarities and differences between Canada in 1890–1914 and in the present day, with reference to the experiences of, major challenges facing, and actions taken by various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities ( FOCUS ON: Continuity and Change; Historical Perspective )",
+     "specifics": [
+      {
+       "code": "B1.1",
+       "topic": "",
+       "text": "analyse key similarities and differences in the experiences of various groups and communities, including First Nations, Métis, and Inuit communities, in present-day Canada and the same groups/communities in Canada between 1890 and 1914"
+      },
+      {
+       "code": "B1.2",
+       "topic": "",
+       "text": "analyse some ways in which challenges affected First Nations, Métis, and Inuit individuals, families, and communities during this period, with specific reference to treaties, the Indian Act , the reserve system, and the residential school system and how some of these challenges continue to affect Indigenous peoples today"
+      },
+      {
+       "code": "B1.3",
+       "topic": "",
+       "text": "analyse some of the challenges facing various non-Indigenous individuals, groups, and/or communities in Canada between 1890 and 1914, and compare some of these challenges with those facing present-day Canadians"
+      },
+      {
+       "code": "B1.4",
+       "topic": "",
+       "text": "analyse actions taken by various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities, in Canada between 1890 and 1914 to improve their lives, and compare these actions to those taken by similar groups today"
+      }
+     ]
+    },
+    {
+     "code": "B2",
+     "title": "Inquiry: Perspectives on a Changing Society",
+     "text": "use the historical inquiry process to investigate perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada between 1890 and 1914 ( FOCUS ON: Historical Significance; Historical Perspective )",
+     "specifics": [
+      {
+       "code": "B2.1",
+       "topic": "",
+       "text": "formulate questions to guide investigations into perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada between 1890 and 1914"
+      },
+      {
+       "code": "B2.2",
+       "topic": "",
+       "text": "gather and organize information and evidence about perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada during this period, using a variety of primary sources and secondary sources"
+      },
+      {
+       "code": "B2.3",
+       "topic": "",
+       "text": "assess the credibility of sources and information relevant to their investigations"
+      },
+      {
+       "code": "B2.4",
+       "topic": "",
+       "text": "analyse and construct maps as part of their investigations into some significant events, developments, and/or issues that affected Canada and/or people in Canada during this period, with a focus on exploring their spatial boundaries"
+      },
+      {
+       "code": "B2.5",
+       "topic": "",
+       "text": "interpret and analyse information and evidence relevant to their investigations, using a variety of tools"
+      },
+      {
+       "code": "B2.6",
+       "topic": "",
+       "text": "evaluate evidence and draw conclusions about perspectives of different groups and communities, including First Nations, Métis, and/or Inuit communities, on some significant events, developments, and/or issues that affected Canada and/or people in Canada during this period"
+      },
+      {
+       "code": "B2.7",
+       "topic": "",
+       "text": "communicate the results of their inquiries using appropriate vocabulary and formats appropriate for specific audiences"
+      }
+     ]
+    },
+    {
+     "code": "B3",
+     "title": "Understanding Historical Context: Events and Their Consequences",
+     "text": "describe various significant people, issues, events, and developments in Canada between 1890 and 1914, including the residential school system , and explain their impact ( FOCUS ON: Historical Significance; Cause and Consequence )",
+     "specifics": [
+      {
+       "code": "B3.1",
+       "topic": "",
+       "text": "identify factors contributing to some key issues, events, and/or developments that specifically affected First Nations, Métis, and Inuit in Canada between 1890 and 1914, and explain the historical significance of some of these issues, events, and/or developments for different individuals and/or communities"
+      },
+      {
+       "code": "B3.2",
+       "topic": "",
+       "text": "identify factors contributing to some key issues, events, and/or developments that specifically affected Black individuals and communities in Canada between 1890 and 1914 and explain the historical significance of some of these issues, events, and/or developments for various Black individuals and/or communities across Canada"
+      },
+      {
+       "code": "B3.3",
+       "topic": "",
+       "text": "identify factors contributing to some key events and/or developments that occurred in and/or affected Canada between 1890 and 1914, and explain the historical significance of some of these events and/or developments for various non-Indigenous individuals, groups, and/or communities"
+      },
+      {
+       "code": "B3.4",
+       "topic": "",
+       "text": "identify key political and legal changes that occurred in and/or affected Canada during this period, and explain the impact of some of these changes on various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities"
+      },
+      {
+       "code": "B3.5",
+       "topic": "",
+       "text": "identify key social and economic changes that occurred in and/or affected Canada during this period, and explain the impact of some of these changes on various individuals, groups, and/or communities, including First Nations, Métis, and Inuit individuals and/or communities"
+      },
+      {
+       "code": "B3.6",
+       "topic": "",
+       "text": "describe significant examples of cooperation and conflict in Canada during this period"
+      },
+      {
+       "code": "B3.7",
+       "topic": "",
+       "text": "identify a variety of significant individuals and groups in Canada during this period, and explain their contributions to heritage and/or identities in Canada"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
