@@ -14,10 +14,10 @@ import {
   Sparkles,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
-import InlinePicker from "@/components/inline-picker"
 import MapleKeyIcon from "@/components/ui/maple-key-icon"
-import { GRADES, PROVINCES, SUBJECTS } from "@/components/hero-personalize"
-import { getStrandOptions } from "@/lib/get-strand-options"
+import { SUBJECTS } from "@/components/hero-personalize"
+import { StrandTimeline, useClassData } from "@/components/context-strip"
+import { buildClassProgress, buildOverallSummary } from "@/lib/class-progress"
 import { useGlobalFilters } from "@/lib/global-filters"
 import { useFilteredResources } from "@/lib/use-filtered-resources"
 import { useBookmarks } from "@/lib/bookmarks-context"
@@ -45,10 +45,9 @@ interface HomeSpaceProps {
  * in priority order:
  *
  *  1. Say what Maple Key is, in the display face, without a modal gate.
- *  2. Capture teaching context once, in the "I teach …" sentence, writing
- *     straight to the global filters every other space already reads. This is
- *     the only place that context is asked for on arrival — the planner's own
- *     class step and the header cluster both reflect it afterwards.
+ *  2. Show every class the teacher has worked on, with how far through its
+ *     curriculum it is; a card opens that class. The subject and grade are
+ *     otherwise chosen in the top nav, and nothing has to be picked to start.
  *  3. Offer the real entry points (plan / find / track / revisit) and, for a
  *     returning teacher, pick up their last lesson and saved resources.
  *
@@ -60,7 +59,7 @@ export default function HomeSpace({
   onOpenTour,
   onOpenClassroomSetup,
 }: HomeSpaceProps) {
-  const { state, setProvince, setGrade, setSubject, setStrand } = useGlobalFilters()
+  const { state, setGrade, setSubject } = useGlobalFilters()
   const { bookmarkedResources } = useBookmarks()
 
   // The count reflects curriculum context only. Sidebar facets are a Search
@@ -84,7 +83,6 @@ export default function HomeSpace({
   // which unmounts this space.
   const recentLessons = useMemo(() => getLessonLog().slice(0, 3), [])
 
-  const strandOptions = getStrandOptions(state.subject, state.grade)
   const hasContext = !!(state.grade || state.subject || state.province)
   const hasHistory = recentLessons.length > 0 || bookmarkedResources.length > 0
 
@@ -114,51 +112,14 @@ export default function HomeSpace({
           aria-labelledby="home-context-heading"
           className="rounded-xl border border-border bg-card p-5 md:p-7 shadow-sm"
         >
-          <h2 id="home-context-heading" className="sr-only">
-            Your teaching context
+          <h2 id="home-context-heading" className="font-display text-xl md:text-2xl font-semibold text-card-foreground">
+            Your classes
           </h2>
-
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-2 font-display text-xl md:text-3xl font-semibold tracking-tight text-card-foreground leading-tight">
-            <span>I teach</span>
-            <InlinePicker
-              value={state.grade}
-              placeholder="any grade"
-              options={GRADES}
-              onChange={setGrade}
-              ariaLabel="Choose grade"
-            />
-            <InlinePicker
-              value={state.subject}
-              placeholder="any subject"
-              options={SUBJECTS}
-              onChange={setSubject}
-              ariaLabel="Choose subject"
-            />
-            <span>in</span>
-            <InlinePicker
-              value={state.province}
-              placeholder="anywhere in Canada"
-              options={PROVINCES}
-              onChange={setProvince}
-              ariaLabel="Choose province"
-            />
-            {state.subject && (
-              <>
-                {/* Hidden below md, where the strand picker wraps to its own
-                    line and the separator would dangle at a line end. */}
-                <span className="hidden md:inline text-muted-foreground" aria-hidden>
-                  ·
-                </span>
-                <InlinePicker
-                  value={state.strand}
-                  placeholder="any strand"
-                  options={strandOptions}
-                  onChange={setStrand}
-                  ariaLabel="Choose strand"
-                />
-              </>
-            )}
-          </div>
+          <ClassCards onOpen={(subject, grade) => {
+            setSubject(subject)
+            setGrade(grade)
+            onNavigate("resources")
+          }} />
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <button
@@ -184,7 +145,7 @@ export default function HomeSpace({
 
             {!hasContext && (
               <p className="text-xs text-muted-foreground">
-                Set a grade and subject to narrow this to your classroom.
+                Pick a subject and grade in the bar above to narrow this to your classroom.
               </p>
             )}
           </div>
@@ -412,5 +373,69 @@ function HowStep({
       <p className="mt-2 font-display text-sm font-bold text-card-foreground">{title}</p>
       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{body}</p>
     </li>
+  )
+}
+
+/** One card per subject and grade with any lesson or Quick Check. */
+function ClassCards({ onOpen }: { onOpen: (subject: string, grade: string) => void }) {
+  const { tallies, lessons } = useClassData()
+  const cards = useMemo(
+    () =>
+      buildOverallSummary(tallies, lessons).classes.map((c) => ({
+        ...c,
+        progress: buildClassProgress(c.subject, c.grade, tallies, lessons),
+      })),
+    [tallies, lessons],
+  )
+
+  if (cards.length === 0) {
+    return (
+      <p className="mt-2 text-sm text-muted-foreground">
+        No classes yet. Plan a lesson or run a Quick Check and each class shows up here with its progress
+        through the curriculum.
+      </p>
+    )
+  }
+
+  return (
+    <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {cards.map(({ subject, grade, progress }) => {
+        const option = SUBJECTS.find((o) => o.value === subject)
+        return (
+          <button
+            key={`${subject}|${grade}`}
+            type="button"
+            onClick={() => onOpen(subject, grade)}
+            className="flex flex-col gap-2.5 rounded-xl border border-border bg-background p-4 text-left transition-colors hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <span className="flex items-center justify-between gap-2">
+              <span className="font-display text-lg font-semibold text-foreground">
+                Grade {grade} {option?.label ?? subject}
+              </span>
+              <span
+                className="h-3 w-3 flex-shrink-0 rounded-full"
+                style={{ background: option?.color ?? "var(--primary)" }}
+                aria-hidden="true"
+              />
+            </span>
+            {progress ? (
+              <>
+                <StrandTimeline progress={progress} showLabels={false} height="h-2" />
+                <span className="flex justify-between gap-2 text-sm">
+                  <span className="text-foreground">
+                    <strong>{progress.taught}</strong> of {progress.total} taught
+                  </span>
+                  {progress.needsWork && (
+                    <span className="font-semibold text-pop-strong">{progress.needsWork.code} needs work</span>
+                  )}
+                </span>
+              </>
+            ) : (
+              <span className="text-sm text-muted-foreground">No curriculum data for this grade</span>
+            )}
+          </button>
+        )
+      })}
+    </div>
   )
 }

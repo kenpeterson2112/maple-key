@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import HomeSpace from "@/components/home-space"
 import ResourcesSpace from "@/components/resources-space"
@@ -10,13 +10,6 @@ import ResourceOnboardingModal from "@/components/resource-onboarding-modal"
 import ClassInsightsSpace from "@/components/class-insights-space"
 import TopNav, { type TopNavSpace } from "@/components/top-nav"
 import BottomTabBar from "@/components/bottom-tab-bar"
-import type { Filters } from "@/lib/types"
-import {
-  clearPrefs,
-  getPrefs,
-  inferProvinceFromTimeZone,
-  setPrefs,
-} from "@/lib/personalization"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useGlobalFilters } from "@/lib/global-filters"
@@ -26,21 +19,7 @@ type Space = "home" | "resources" | "lessonplanner" | "assessment" | "lessons" |
 const FADE_VARIANTS = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
 const FADE_TRANSITION = { duration: 0.15, ease: "easeOut" } as const
 
-const EMPTY_FILTERS: Filters = {
-  province: "",
-  grade: "",
-  subject: "",
-  strand: "",
-  topic: "",
-  learningType: "",
-}
-
 export default function App() {
-  const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS)
-  const [inferred, setInferred] = useState(false)
-  const [hydrated, setHydrated] = useState(false)
-  const skipPersistOnce = useRef(true)
-
   const [sidebarFilters, setSidebarFilters] = useState<{ modality: string[]; cost: string[]; accessibility: string[]; readiness: string[] }>({
     modality: [],
     cost: [],
@@ -65,42 +44,8 @@ export default function App() {
 
   const { bookmarkedResources } = useBookmarks()
 
-  useEffect(() => {
-    const prefs = getPrefs()
-    setFilters({
-      ...EMPTY_FILTERS,
-      province: prefs.province,
-      grade: prefs.grade,
-      subject: prefs.subject,
-      strand: prefs.strand,
-    })
-    setInferred(prefs.inferred)
-    setHydrated(true)
-  }, [])
-
-  useEffect(() => {
-    if (!hydrated) return
-    if (skipPersistOnce.current) {
-      skipPersistOnce.current = false
-      return
-    }
-    setPrefs({
-      province: filters.province,
-      grade: filters.grade,
-      subject: filters.subject,
-      strand: filters.strand ?? "",
-    })
-    setInferred(false)
-  }, [filters.province, filters.grade, filters.subject, filters.strand, hydrated])
-
   const handleSidebarFilterChange = (filterGroup: string, selectedItems: string[]) => {
     setSidebarFilters((prev) => ({ ...prev, [filterGroup as keyof typeof prev]: selectedItems }))
-  }
-
-  const handleResetInferred = () => {
-    clearPrefs()
-    setFilters({ ...EMPTY_FILTERS, province: inferProvinceFromTimeZone(), grade: "", subject: "", strand: "" })
-    setInferred(true)
   }
 
   // Search's results take grade/subject/strand from the global curriculum
@@ -113,6 +58,10 @@ export default function App() {
     Object.values(sidebarFilters).reduce((sum, arr) => sum + arr.length, 0)
 
   const goResources = () => setActiveSpace("resources")
+  const findResources = (code: string) => {
+    setSearchSeed({ query: code, nonce: Date.now() })
+    setActiveSpace("resources")
+  }
 
   // Every way into the planner goes through here so a start step from one entry
   // (e.g. the results-page Plan button) never leaks into the next.
@@ -124,18 +73,7 @@ export default function App() {
     setActiveSpace("lessonplanner")
   }
 
-  const handleOnboardingComplete = () => {
-    setShowOnboarding(false)
-    const prefs = getPrefs()
-    setFilters((f) => ({
-      ...f,
-      province: prefs.province,
-      grade: prefs.grade,
-      subject: prefs.subject,
-      strand: prefs.strand,
-    }))
-    setInferred(false)
-  }
+  const handleOnboardingComplete = () => setShowOnboarding(false)
 
   const topNavSpace: TopNavSpace | null =
     activeSpace === "lessonplanner" ||
@@ -162,19 +100,19 @@ export default function App() {
         onChangeSpace={changeSpace}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
+        onEnterClass={goResources}
+        onFindResources={findResources}
+        onPlan={() => openPlanner(null)}
+        hideStrip={activeSpace === "assessment"}
       />
 
       <div className="relative flex-1 min-h-0 overflow-hidden">
         {/* Resources discovery page — always-on landing layer */}
         <ResourcesSpace
-          filters={filters}
-          setFilters={setFilters}
           sidebarFilters={sidebarFilters}
           onSidebarFilterChange={handleSidebarFilterChange}
           resultCount={resultCount}
           onCountChange={setResultCount}
-          inferred={inferred}
-          onReset={handleResetInferred}
           isMobileFiltersOpen={isMobileFiltersOpen}
           onCloseMobileFilters={() => setIsMobileFiltersOpen(false)}
           searchSeed={searchSeed}
@@ -219,8 +157,6 @@ export default function App() {
                   onClose={goResources}
                   onBack={goResources}
                   onOpenLibrary={() => setActiveSpace("lessons")}
-                  filters={filters}
-                  setFilters={setFilters}
                   sidebarFilters={sidebarFilters}
                   onSidebarFilterChange={handleSidebarFilterChange}
                 />
@@ -257,12 +193,7 @@ export default function App() {
               )}
 
               {activeSpace === "insights" && (
-                <ClassInsightsSpace
-                  onFindResources={(code) => {
-                    setSearchSeed({ query: code, nonce: Date.now() })
-                    setActiveSpace("resources")
-                  }}
-                />
+                <ClassInsightsSpace onFindResources={findResources} />
               )}
             </motion.div>
           )}

@@ -64,8 +64,6 @@ interface LessonPlannerModalProps {
   lesson?: LessonMetadata | null
   /** Guided-wizard step to open on (index into WIZARD_STEPS). Read once on mount. */
   initialWizardStep?: number
-  filters: Filters
-  setFilters: (filters: Filters) => void
   sidebarFilters: SidebarFilters
   onSidebarFilterChange: (group: string, items: string[]) => void
   /** "Continue from this lesson": a fresh plan that builds on this earlier one. */
@@ -91,8 +89,6 @@ export default function LessonPlannerModal({
   asSpace = false,
   lesson = null,
   initialWizardStep = 0,
-  filters,
-  setFilters,
   sidebarFilters,
   continueFrom: continueFromProp = null,
   onContinueLesson,
@@ -244,25 +240,10 @@ export default function LessonPlannerModal({
   const isWizard = setupMode === "wizard"
   const isLastWizardStep = wizardStep === WIZARD_STEPS.length - 1
 
-  // Class-context step shares one PlanContextBar over two stores: province/grade/
-  // subject/strand live in the persisted global filters (also driving the full
-  // discovery surface), while free-text topic lives in the App-level filters.
-  // Each ChipPicker changes exactly one field per call, so we route by diff.
-  const classContextFilters: Filters = {
-    ...filters,
-    province: globalFilters.state.province,
-    grade: globalFilters.state.grade,
-    subject: globalFilters.state.subject,
-    strand: globalFilters.state.strand,
-    topic: filters.topic,
-  }
-  const handleClassContextChange = (next: Filters) => {
-    if (next.province !== globalFilters.state.province) globalFilters.setProvince(next.province)
-    if (next.grade !== globalFilters.state.grade) globalFilters.setGrade(next.grade)
-    if (next.subject !== globalFilters.state.subject) globalFilters.setSubject(next.subject)
-    if (next.strand !== globalFilters.state.strand) globalFilters.setStrand(next.strand)
-    if (next.topic !== filters.topic) setFilters({ ...filters, topic: next.topic })
-  }
+  // Class-context step edits the one shared class context (global-filters.ts),
+  // the same one the top nav shows.
+  const classContextFilters: Filters = globalFilters.filters
+  const handleClassContextChange = globalFilters.setFilters
 
   // Explicit class context for the two generation calls. Only non-empty fields
   // are sent, so the API keeps its resources[0]/Ontario fallbacks when a teacher
@@ -273,7 +254,7 @@ export default function LessonPlannerModal({
       ? { grade: globalFilters.state.grade.split(",").filter(Boolean)[0] ?? "" }
       : {}),
     ...(globalFilters.state.subject ? { subject: globalFilters.state.subject } : {}),
-    ...(filters.topic ? { topic: filters.topic } : {}),
+    ...(globalFilters.state.topic ? { topic: globalFilters.state.topic } : {}),
   }
 
   // Header "Follows" link: the saved lesson's own back-link, else the one this

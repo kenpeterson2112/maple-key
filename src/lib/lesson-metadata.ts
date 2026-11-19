@@ -78,6 +78,26 @@ export interface LessonMetadata {
   continuesFrom?: { id: string; title: string }
 }
 
+// Change notification, so views that stay mounted (the top nav's progress
+// strip) re-read the log when a lesson is saved. Same pattern as
+// subscribeResultsChanged in assessment-results.ts.
+let lessonLogVersion = 0
+const lessonLogListeners = new Set<() => void>()
+
+function notifyLessonLogChanged(): void {
+  lessonLogVersion++
+  for (const listener of lessonLogListeners) listener()
+}
+
+export function subscribeLessonLog(listener: () => void): () => void {
+  lessonLogListeners.add(listener)
+  return () => lessonLogListeners.delete(listener)
+}
+
+export function getLessonLogVersion(): number {
+  return lessonLogVersion
+}
+
 export function logLesson(meta: Omit<LessonMetadata, "id" | "timestamp">): LessonMetadata {
   const entry: LessonMetadata = {
     id: `lesson_${Date.now()}`,
@@ -91,6 +111,7 @@ export function logLesson(meta: Omit<LessonMetadata, "id" | "timestamp">): Lesso
   } catch {
     // Storage quota exceeded — silently skip
   }
+  notifyLessonLogChanged()
   return entry
 }
 
@@ -116,6 +137,7 @@ export function updateLessonFullContent(
   } catch {
     // quota
   }
+  notifyLessonLogChanged()
 }
 
 export function getLessonLog(): LessonMetadata[] {

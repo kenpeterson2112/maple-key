@@ -1,6 +1,6 @@
 "use client"
 
-import { User, Mail, Globe, School, FlaskConical, LogOut, UserPlus, Monitor, Sun, Moon, type LucideIcon } from "lucide-react"
+import { User, Mail, Globe, MapPin, School, FlaskConical, LogOut, UserPlus, Monitor, Sun, Moon, type LucideIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { isAdmin, loadProfile, signOut, type Profile } from "@/lib/account"
@@ -9,6 +9,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 import ClassroomResourcesPicker from "@/components/classroom-resources-picker"
 import { isSandboxMode, setSandboxMode } from "@/lib/assessment-results"
 import { getThemePreference, setThemePreference, type ThemePreference } from "@/lib/theme"
+import { useGlobalFilters } from "@/lib/global-filters"
+import { PROVINCES } from "@/components/hero-personalize"
 import {
   getClassroomResources,
   setClassroomResources,
@@ -29,6 +31,7 @@ const THEME_OPTIONS: { value: ThemePreference; label: string; icon: LucideIcon }
 ]
 
 export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
+  const { state: { province }, setProvince } = useGlobalFilters()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   // Signed-in account, if any: fills name/email and shows Sign out.
@@ -119,6 +122,27 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-3 py-2 bg-card border-2 border-border rounded-xl text-foreground text-sm focus:outline-none focus:border-ring transition-colors"
               />
+            </div>
+
+            {/* Province sets the curriculum everything else follows. It rarely
+                changes, so it lives here rather than in the top nav. */}
+            <div className="space-y-1.5">
+              <label htmlFor="settings-province" className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                <MapPin size={14} className="text-foreground" />
+                Province
+              </label>
+              <select
+                id="settings-province"
+                value={province}
+                onChange={(e) => setProvince(e.target.value)}
+                className="w-full px-3 py-2 bg-card border-2 border-border rounded-xl text-foreground text-sm focus:outline-none focus:border-ring transition-colors cursor-pointer"
+              >
+                {PROVINCES.map((p) => (
+                  <option key={p.value || "any"} value={p.value}>
+                    {p.value ? p.label : "Anywhere in Canada"}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="space-y-1.5">

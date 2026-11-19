@@ -205,8 +205,19 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `class-dashboard.tsx`, `lessons-library.tsx`).
 - **The assessment modal and sticky footer are the highest-risk reusable pieces** —
   changes here ripple through the Acorn remote.
+- **The top nav is the class context** (`top-nav.tsx`, `context-strip.tsx`).
+  Row 1 holds the Subject and Grade selects and the spaces; it wears the
+  subject's colour (`--subject-*` via `SUBJECTS[].color`) once one is chosen,
+  and brand `primary` on the landing page or with none. Row 2 shows where the
+  class is: a gauge (taught of the grade's real expectation count), the strand
+  timeline coloured by `signal-*` readiness, and the overall that needs work,
+  all from `buildClassProgress` (`src/lib/class-progress.ts`). Province is in
+  Settings, not the nav. The class context has **one store**,
+  `src/lib/global-filters.ts` (province, grade, subject, strand, plus the
+  session-only planner topic); never keep a second copy in a component or
+  `App.tsx`. Strand is a Search-only filter, picked in that page's header.
 - **Phone shell (below `md`).**
-  - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`), the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
+  - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`) with a one-line progress row under it once a subject is chosen, the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The header's class chip opens a bottom sheet with the Subject/Grade selects and the full progress breakdown. The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
   - **Tab bar:** it hides while the on-screen keyboard is up and during Quick Check.
   - **Nav items:** desktop's pill toggle and the tab bar both read the four spaces from `src/lib/nav-items.ts`.
   - **Account:** the header avatar opens `account-sheet.tsx` (Settings, Invite staff, Sign out). There is no hamburger menu.
