@@ -143,6 +143,14 @@ export default function App() {
                   onOpenTour={() => setShowResourceTour(true)}
                   onOpenClassroomSetup={() => setActiveSpace("classroom")}
                   onFindResources={findResources}
+                  onPlanExpectation={(code, label) => {
+                    globalFilters.setTopic(`${code} ${label}`)
+                    openPlanner(null)
+                  }}
+                  onQuickCheck={(lesson) => {
+                    setAssessmentLesson(lesson)
+                    setActiveSpace("assessment")
+                  }}
                 />
               )}
 

@@ -7,6 +7,7 @@ import {
 } from "lucide-react"
 import { SUBJECTS } from "@/components/hero-personalize"
 import MaterialsWidget from "@/components/materials-widget"
+import WhatsNextWidget from "@/components/whats-next-widget"
 import { useClassData, useSelectedClassData } from "@/components/context-strip"
 import { buildNeedsAttention } from "@/lib/class-progress"
 import { buildWeek } from "@/lib/week"
@@ -27,6 +28,10 @@ interface HomeSpaceProps {
   onOpenClassroomSetup: () => void
   /** Search seeded with an expectation code (the class context is set first). */
   onFindResources: (code: string) => void
+  /** Open the planner seeded with an expectation (the class context is set first). */
+  onPlanExpectation: (code: string, label: string) => void
+  /** Run a Quick Check on a saved lesson. */
+  onQuickCheck: (lesson: LessonMetadata) => void
 }
 
 /**
@@ -51,8 +56,10 @@ export default function HomeSpace({
   onOpenTour,
   onOpenClassroomSetup,
   onFindResources,
+  onPlanExpectation,
+  onQuickCheck,
 }: HomeSpaceProps) {
-  const { setGrade, setSubject } = useGlobalFilters()
+  const { state: filters, setGrade, setSubject } = useGlobalFilters()
   const { bookmarkedResources } = useBookmarks()
 
   const selected = useSelectedClassData()
@@ -84,7 +91,7 @@ export default function HomeSpace({
           </p>
         )}
 
-        {/* ── This week / Needs attention / Materials ──────────────────── */}
+        {/* ── This week, Needs attention / What's next, Materials ──────── */}
         <div className="grid gap-4 lg:grid-cols-3">
           <ThisWeek onOpenLesson={onOpenLesson} />
           <NeedsAttention
@@ -94,9 +101,30 @@ export default function HomeSpace({
               onFindResources(code)
             }}
           />
-          {/* Right-hand column of the second row; What's next takes the two
-              columns beside it. */}
-          <div className="lg:col-start-3">
+          {/* Each suggestion acts on its own class, which may not be the one
+              picked, so each action sets the class first. */}
+          <div className="lg:col-span-2">
+            <WhatsNextWidget
+              subject={filters.subject}
+              grade={filters.grade}
+              handlers={{
+                onPlan: (subject, grade, code, label) => {
+                  setSubject(subject)
+                  setGrade(grade)
+                  onPlanExpectation(code, label)
+                },
+                onFindResources: (subject, grade, code) => {
+                  setSubject(subject)
+                  setGrade(grade)
+                  onFindResources(code)
+                },
+                onQuickCheck,
+                onPlanBlank: () => onNavigate("lessonplanner"),
+                onOpenTrack: () => onNavigate("insights"),
+              }}
+            />
+          </div>
+          <div>
             <MaterialsWidget onEdit={onOpenClassroomSetup} />
           </div>
         </div>
