@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useId, useMemo, useRef, useState } from "react"
 import useSWR from "swr"
 import { Lightbulb, RotateCcw, Sparkles } from "lucide-react"
 import { useClassData } from "@/components/context-strip"
@@ -125,7 +125,7 @@ export default function NextStepBar({
     if (!acrossClasses) return null
     return (
       <Shell layout={layout} icon={<Sparkles size={18} aria-hidden="true" />}>
-        <p className="text-sm text-foreground">
+        <p className={`text-sm text-foreground ${layout === "bar" ? "truncate" : ""}`}>
           <strong className="font-display font-semibold">Plan a lesson to get a next step.</strong>{" "}
           <span className="text-muted-foreground">
             Once a class has a lesson, Maple Key suggests what comes next in the curriculum, or what to reteach.
@@ -142,7 +142,7 @@ export default function NextStepBar({
   if (step.kind === "done") {
     return (
       <Shell layout={layout} icon={<Sparkles size={18} aria-hidden="true" />}>
-        <p className="text-sm text-foreground">
+        <p className={`text-sm text-foreground ${layout === "bar" ? "truncate" : ""}`}>
           <strong className="font-display font-semibold">{prefix}Every expectation has been taught.</strong>{" "}
           <span className="text-muted-foreground">Track shows where the class is secure and where to revisit.</span>
         </p>
@@ -208,6 +208,24 @@ function btn(kind: "primary" | "secondary", layout: "bar" | "stacked"): string {
  *  cut short with a "Why?" toggle to read it all; stacked, both show in full. */
 function Message({ layout, headline, rationale }: { layout: "bar" | "stacked"; headline: string; rationale: string }) {
   const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const panelId = useId()
+
+  // Close on Escape or a click anywhere outside the line and its panel.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false)
+    const onDown = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener("keydown", onKey)
+    document.addEventListener("mousedown", onDown)
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.removeEventListener("mousedown", onDown)
+    }
+  }, [open])
+
   if (layout === "stacked") {
     return (
       <div className="min-w-0 flex-1">
@@ -217,8 +235,8 @@ function Message({ layout, headline, rationale }: { layout: "bar" | "stacked"; h
     )
   }
   return (
-    <div className="flex min-w-0 flex-1 items-baseline gap-2">
-      <p className={`min-w-0 flex-1 text-sm ${open ? "" : "truncate"}`}>
+    <div ref={ref} className="flex min-w-0 flex-1 items-baseline gap-2">
+      <p className="min-w-0 flex-1 truncate text-sm">
         <strong className="font-display font-semibold text-foreground">{headline}.</strong>{" "}
         <span className="text-muted-foreground">{rationale}</span>
       </p>
@@ -226,17 +244,31 @@ function Message({ layout, headline, rationale }: { layout: "bar" | "stacked"; h
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
+        aria-controls={panelId}
         className="flex-shrink-0 text-xs font-semibold text-secondary-strong underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         {open ? "Less" : "Why?"}
       </button>
+      {/* Floats over the page rather than growing the bar, so the nav keeps
+          its height. Anchored to the bar (Shell is the positioned parent). */}
+      {open && (
+        <div
+          id={panelId}
+          role="region"
+          aria-label="Why this next step"
+          className="absolute left-0 right-0 top-full z-40 mt-1 rounded-xl border border-border bg-popover p-4 text-sm text-popover-foreground shadow-lg"
+        >
+          <p className="font-display font-semibold">{headline}</p>
+          <p className="mt-1 text-muted-foreground">{rationale}</p>
+        </div>
+      )}
     </div>
   )
 }
 
 function Shell({ layout, icon, children }: { layout: "bar" | "stacked"; icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className={layout === "bar" ? "flex items-center gap-3" : "flex flex-col gap-3"}>
+    <div className={layout === "bar" ? "relative flex items-center gap-3" : "flex flex-col gap-3"}>
       <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-pop-tint text-pop-strong max-md:hidden [&>svg]:h-4 [&>svg]:w-4">
         {icon}
       </span>

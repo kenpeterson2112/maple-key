@@ -147,7 +147,7 @@ export function StrandTimeline({
 export function Legend() {
   const levels: ReadinessLevel[] = ["poor", "okay", "good", "great"]
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+    <div className="flex flex-shrink-0 items-center gap-x-3 whitespace-nowrap text-xs text-muted-foreground">
       {levels.map((l) => (
         <span key={l} className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-sm" style={{ background: levelColor(l) }} aria-hidden="true" />
@@ -206,10 +206,10 @@ export function SubjectStrip({
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-1.5">
         <StrandTimeline progress={progress} />
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+        <div className="flex items-center justify-between gap-4 overflow-hidden">
           <Legend />
           {ongoing && (
-            <span className="min-w-0 max-w-full truncate text-xs text-muted-foreground" title={`Ongoing in every lesson: ${ongoing}`}>
+            <span className="hidden min-w-0 flex-1 truncate text-right text-xs text-muted-foreground xl:block" title={`Ongoing in every lesson: ${ongoing}`}>
               Ongoing in every lesson: {ongoing}
             </span>
           )}
@@ -236,7 +236,7 @@ export function OverallStrip({ province, note }: { province: string; note?: stri
   const scope = [grade && `Grade ${grade}`, subject].filter(Boolean).join(" ")
   if (n === 0) {
     return (
-      <p className="text-sm text-foreground">
+      <p className="truncate text-sm text-foreground">
         <span className="font-semibold">{provinceName(province)}</span>
         <span className="text-muted-foreground">
           {" "}· No {scope ? `${scope} ` : ""}lessons or Quick Checks yet. Plan a lesson and each class&rsquo;s progress through the curriculum shows here.
@@ -245,7 +245,7 @@ export function OverallStrip({ province, note }: { province: string; note?: stri
     )
   }
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-foreground">
+    <div className="flex items-center gap-x-5 overflow-hidden whitespace-nowrap text-sm text-foreground">
       <span className="font-semibold">{provinceName(province)}</span>
       <span className="text-muted-foreground" aria-hidden="true">·</span>
       <span>
@@ -258,7 +258,7 @@ export function OverallStrip({ province, note }: { province: string; note?: stri
       </span>
       <span className="text-muted-foreground" aria-hidden="true">·</span>
       <span>Last Quick Check: {formatDay(summary.lastCheckAt)}</span>
-      {note && <span className="text-muted-foreground lg:ml-auto">{note}</span>}
+      {note && <span className="ml-auto min-w-0 truncate text-muted-foreground">{note}</span>}
     </div>
   )
 }

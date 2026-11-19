@@ -128,9 +128,11 @@ export default function TopNav({
         <div className={barClass} style={barStyle}>
           <div className="mx-auto max-w-[1500px] px-4 md:px-6">
             {/* Desktop */}
-            <div className="hidden items-center gap-3 py-2.5 md:flex">
+            {/* Each desktop layer has a fixed height, so the page below never shifts
+                as data loads or the selection changes. */}
+            <div className="hidden h-16 items-center gap-3 md:flex">
               {logo("lg")}
-              <span className="font-display text-xl font-bold max-lg:hidden">Maple Key</span>
+              <span className="hidden whitespace-nowrap font-display text-xl font-bold xl:inline">Maple Key</span>
               <div className="ml-2 flex items-center gap-2">
                 <ContextSelect label="Subject" value={state.subject} options={SUBJECT_OPTIONS} onChange={pickSubject} color={accentText} />
                 <ContextSelect label="Grade" value={state.grade} options={GRADE_OPTIONS} onChange={pickGrade} color={accentText} />
@@ -200,7 +202,7 @@ export default function TopNav({
         {/* Row 2: where the class is */}
         {!hideStrip && (
           <div className="border-b" style={tintStyle}>
-            <div className="mx-auto hidden max-w-[1500px] px-6 py-3 md:block">
+            <div className="mx-auto hidden h-20 max-w-[1500px] items-center overflow-hidden px-6 md:flex [&>*]:w-full">
               {scoped && progress ? (
                 <SubjectStrip progress={progress} accent={accent} onOpenTrack={() => onChangeSpace("insights")} />
               ) : (
@@ -213,7 +215,7 @@ export default function TopNav({
               <button
                 type="button"
                 onClick={() => setIsClassSheetOpen(true)}
-                className="flex w-full flex-col gap-1.5 px-4 py-2 text-left md:hidden"
+                className="flex h-14 w-full flex-col justify-center gap-1.5 px-4 text-left md:hidden"
                 aria-label={
                   progress
                     ? `${progress.taught} of ${progress.total} expectations taught${progress.frontier ? `, now on ${progress.frontier}` : ""}. Show progress`
@@ -251,7 +253,7 @@ export default function TopNav({
         {/* Row 3: the next step (desktop; phones get it in the class sheet) */}
         {!hideStrip && (
           <div className="hidden border-b border-border bg-card md:block">
-            <div className="mx-auto max-w-[1500px] px-6 py-2">
+            <div className="mx-auto flex h-12 max-w-[1500px] items-center px-6 [&>*]:w-full">
               <NextStepBar
                 subject={state.subject}
                 grade={state.grade}
