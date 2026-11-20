@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import HomeSpace from "@/components/home-space"
 import ResourcesSpace from "@/components/resources-space"
@@ -15,8 +15,8 @@ import BottomTabBar from "@/components/bottom-tab-bar"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import { useGlobalFilters } from "@/lib/global-filters"
+import { hasAddress, parseSpaceRoute, serializeSpaceRoute, type Space } from "@/lib/space-route"
 
-type Space = "home" | "resources" | "lessonplanner" | "assessment" | "lessons" | "insights" | "settings" | "classroom"
 // All overlay spaces cross-fade in/out — quick and direction-neutral
 const FADE_VARIANTS = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
 const FADE_TRANSITION = { duration: 0.15, ease: "easeOut" } as const
@@ -30,7 +30,9 @@ export default function App() {
   })
   const [resultCount, setResultCount] = useState(0)
 
-  const [activeSpace, setActiveSpace] = useState<Space>("home")
+  // The space follows the address (space-route.ts), so Back and Forward move
+  // between spaces. A deep link or a reload lands where the address says.
+  const [activeSpace, setActiveSpace] = useState<Space>(() => parseSpaceRoute(window.location.hash).space)
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [showResourceTour, setShowResourceTour] = useState(false)
@@ -60,21 +62,46 @@ export default function App() {
     (curriculum.strand ? 1 : 0) +
     Object.values(sidebarFilters).reduce((sum, arr) => sum + arr.length, 0)
 
-  const goResources = () => setActiveSpace("resources")
+  // Every space change goes through here. Spaces with an address push a history
+  // entry; Quick Check has none, so it sits over the current entry.
+  const navigate = (space: Space) => {
+    setActiveSpace(space)
+    if (!hasAddress(space)) return
+    const hash = serializeSpaceRoute({ space })
+    if (hash === window.location.hash) return
+    window.history.pushState(null, "", hash || window.location.pathname + window.location.search)
+  }
+
+  const goResources = () => navigate("resources")
   const findResources = (code: string) => {
     setSearchSeed({ query: code, nonce: Date.now() })
-    setActiveSpace("resources")
+    navigate("resources")
   }
 
   // Every way into the planner goes through here so a start step from one entry
   // (e.g. the results-page Plan button) never leaks into the next.
-  const openPlanner = (lesson: LessonMetadata | null, startStep = 0, continueFrom: LessonMetadata | null = null) => {
+  const resetPlanner = (lesson: LessonMetadata | null, startStep = 0, continueFrom: LessonMetadata | null = null) => {
     setPlannerLesson(lesson)
     setPlannerStartStep(startStep)
     setPlannerContinueFrom(lesson ? null : continueFrom)
     setPlannerKey((k) => k + 1)
-    setActiveSpace("lessonplanner")
   }
+  const openPlanner = (lesson: LessonMetadata | null, startStep = 0, continueFrom: LessonMetadata | null = null) => {
+    resetPlanner(lesson, startStep, continueFrom)
+    navigate("lessonplanner")
+  }
+
+  // Back, Forward, or a hash typed into the address bar. Planner state isn't
+  // serialised, so Plan reached this way opens a fresh planner.
+  useEffect(() => {
+    const onPopState = () => {
+      const { space } = parseSpaceRoute(window.location.hash)
+      if (space === "lessonplanner") resetPlanner(null)
+      setActiveSpace(space)
+    }
+    window.addEventListener("popstate", onPopState)
+    return () => window.removeEventListener("popstate", onPopState)
+  }, [])
 
   const handleOnboardingComplete = () => setShowOnboarding(false)
 
@@ -89,7 +116,7 @@ export default function App() {
   const changeSpace = (s: TopNavSpace) => {
     // Plan always starts fresh, matching the old "Plan Lesson" button.
     if (s === "lessonplanner") openPlanner(null)
-    else setActiveSpace(s)
+    else navigate(s)
   }
 
   return (
@@ -99,12 +126,12 @@ export default function App() {
       <TopNav
         activeSpace={topNavSpace}
         isHome={activeSpace === "home"}
-        onGoHome={() => setActiveSpace("home")}
+        onGoHome={() => navigate("home")}
         onChangeSpace={changeSpace}
         onOpenMobileFilters={() => setIsMobileFiltersOpen(true)}
         totalActiveFilters={totalActiveFilters}
-        onOpenSettings={() => setActiveSpace("settings")}
-        onOpenClassroomProfile={() => setActiveSpace("classroom")}
+        onOpenSettings={() => navigate("settings")}
+        onOpenClassroomProfile={() => navigate("classroom")}
         hideStrip={activeSpace === "assessment"}
       />
 
@@ -137,11 +164,11 @@ export default function App() {
                 <HomeSpace
                   onNavigate={(destination) => {
                     if (destination === "lessonplanner") openPlanner(null)
-                    else setActiveSpace(destination)
+                    else navigate(destination)
                   }}
                   onOpenLesson={(lesson) => openPlanner(lesson)}
                   onOpenTour={() => setShowResourceTour(true)}
-                  onOpenClassroomSetup={() => setActiveSpace("classroom")}
+                  onOpenClassroomSetup={() => navigate("classroom")}
                   onFindResources={findResources}
                   onPlanExpectation={(code, label) => {
                     globalFilters.setTopic(`${code} ${label}`)
@@ -149,7 +176,7 @@ export default function App() {
                   }}
                   onQuickCheck={(lesson) => {
                     setAssessmentLesson(lesson)
-                    setActiveSpace("assessment")
+                    navigate("assessment")
                   }}
                 />
               )}
@@ -167,7 +194,7 @@ export default function App() {
                   bookmarkedResources={bookmarkedResources}
                   onClose={goResources}
                   onBack={goResources}
-                  onOpenLibrary={() => setActiveSpace("lessons")}
+                  onOpenLibrary={() => navigate("lessons")}
                   sidebarFilters={sidebarFilters}
                   onSidebarFilterChange={handleSidebarFilterChange}
                 />
@@ -205,7 +232,7 @@ export default function App() {
 
               {activeSpace === "settings" && (
                 <SettingsPage
-                  onOpenClassroomProfile={() => setActiveSpace("classroom")}
+                  onOpenClassroomProfile={() => navigate("classroom")}
                   onOpenTour={() => setShowResourceTour(true)}
                 />
               )}
