@@ -234,7 +234,7 @@ Tailwind v4 default 4px scale. Common steps used in this app:
        class's "N/M taught" sits at the end beside the Details toggle, never
        before the strands. Clicking the bar slides a drawer open: every
        overall expectation in strand columns, then the gauge, totals, legend
-       and **Analyze** (to Track) on one line pinned to the bottom. The
+       and **Analyze** (to Progress) on one line pinned to the bottom. The
        timeline and the columns share one grid (`strandGrid` in
        `subject-data-bar.tsx`), so each strand's details sit straight under it.
        An overall opens in place to fill its strand's column with its specific
@@ -249,7 +249,7 @@ Tailwind v4 default 4px scale. Common steps used in this app:
        sets the subject and grade. With no classes yet, one plain prompt to pick
        a subject and grade. No summary stats here: they repeat the widgets.
      - **Phones** keep a one-line progress row that opens the class sheet; the
-       sheet carries the strand rows and "Analyze in Track".
+       sheet carries the strand rows and "Open Progress".
 
   **The landing page** is This week across the top (Mon–Fri of lessons
   planned and Quick Checks recorded, with previous / next week and a way back
@@ -323,14 +323,25 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `src/lib/global-filters.ts` (province, grade, subject, strand, plus the
   session-only planner topic); never keep a second copy in a component or
   `App.tsx`. **Every space follows the top nav, always:** no space keeps its
-  own subject or grade or falls back to one (Track still falls back to the
-  first subject with data; `PROGRESS_SPEC.md` fixes it). Strand is a
+  own subject or grade or falls back to one. Strand is a
   Search-only filter, picked in that page's header.
-- **Track is being rebuilt as Progress.** `PROGRESS_SPEC.md` holds the agreed
-  design and the PR order (space addresses, specific-level data and one rules
-  module, the Progress page, the header bar's strand links replacing its
-  drop-down, Lesson History moving to Lessons). Read it before touching Track,
-  the header's second bar, the phone class sheet or `triage.ts`.
+- **Every space has an address** (`src/lib/space-route.ts`): `#plan`,
+  `#search`, `#progress`, `#lessons`, `#settings`, `#classroom`; changing
+  space pushes a history entry, so Back works. Quick Check has none. New
+  hashes must not start with main.tsx's standalone ones (`#account`,
+  `#district`, `#admin`, `#activity=`).
+- **Progress** (`progress-space.tsx`, was Track) is the class's place in the
+  curriculum down to the specific expectations, and a launchpad into
+  planning. It shows exactly the nav's subject and grade (nothing picked: the
+  teacher's subjects as cards), reads `buildClassProgress` and the gap rule,
+  and offers actions by state, never by verdict. `#progress/B`, `/B2`,
+  `/B2.3` deep-link to a strand, an overall (opened) or a specific (marked);
+  scrolling replaces the address with the strand in view, and every action
+  first points the address at its row, so Back returns there. Overalls start
+  collapsed except the frontier and any with a gap. `PROGRESS_SPEC.md` holds
+  the rest of the plan (the header bar's strand links replacing its drop-down,
+  Lesson History moving to Lessons); read it before touching the header's
+  second bar or the phone class sheet.
 - **Phone shell (below `md`).**
   - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`) with a one-line progress row under it once a subject is chosen, the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The header's class chip opens a bottom sheet with the Subject/Grade selects and the full progress breakdown. The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
   - **Tab bar:** it hides while the on-screen keyboard is up and during Quick Check.

@@ -53,7 +53,7 @@ const GRADE_OPTIONS = GRADES.map((o) => (o.value ? o : { ...o, label: "All grade
 //      quiet links, the province (a globe with its abbreviation) and the gear,
 //      on a bar in the subject's colour (brand rust with none).
 //   2. Subject data (subject-data-bar.tsx): the subject's curriculum timeline
-//      by strand, opening into details with Analyze (to Track); or, with no
+//      by strand, opening into details with Analyze (to Progress); or, with no
 //      class picked, the teacher's classes as chips.
 // Suggestions and materials live on the landing page as widgets, not here.
 // Phone: a 56px bar with one class chip (opening a sheet with the pickers and
@@ -196,7 +196,7 @@ export default function TopNav({
                 grade={state.grade}
                 progress={progress}
                 accent={accent}
-                onOpenTrack={() => onChangeSpace("insights")}
+                onOpenProgress={() => onChangeSpace("progress")}
                 onPickClass={(subject, grade) => {
                   setSubject(subject)
                   setGrade(grade)
@@ -291,12 +291,12 @@ export default function TopNav({
                 type="button"
                 onClick={() => {
                   setIsClassSheetOpen(false)
-                  onChangeSpace("insights")
+                  onChangeSpace("progress")
                 }}
                 className="flex h-11 items-center justify-center gap-2 rounded-xl border border-border-strong bg-card text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <BarChart3 size={18} aria-hidden="true" />
-                Analyze in Track
+                Open Progress
               </button>
               {progress.ongoingStrands.length > 0 && (
                 <p className="-mt-2 text-xs text-muted-foreground">
@@ -468,7 +468,7 @@ function SheetSelect({
 }
 
 /** The four spaces as quiet text links on the bar. The progress row leads into
- *  Track too, so they don't need to be the loudest thing on the page. */
+ *  Progress too, so they don't need to be the loudest thing on the page. */
 function SpaceLinks({
   activeSpace,
   onChangeSpace,

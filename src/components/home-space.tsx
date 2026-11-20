@@ -12,7 +12,7 @@ import { useGlobalFilters } from "@/lib/global-filters"
 import { useBookmarks } from "@/lib/bookmarks-context"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 
-export type HomeDestination = "lessonplanner" | "resources" | "insights" | "lessons"
+export type HomeDestination = "lessonplanner" | "resources" | "progress" | "lessons"
 
 interface HomeSpaceProps {
   /** Navigate to one of the four working spaces. */
@@ -112,7 +112,7 @@ export default function HomeSpace({
                 },
                 onQuickCheck,
                 onPlanBlank: () => onNavigate("lessonplanner"),
-                onOpenTrack: () => onNavigate("insights"),
+                onOpenProgress: () => onNavigate("progress"),
               }}
             />
             <NeedsAttention

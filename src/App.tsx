@@ -7,7 +7,7 @@ import LessonsLibrary from "@/components/lessons-library"
 import AssessmentModal from "@/components/assessment-modal"
 import OnboardingModal from "@/components/onboarding-modal"
 import ResourceOnboardingModal from "@/components/resource-onboarding-modal"
-import ClassInsightsSpace from "@/components/class-insights-space"
+import ProgressSpace from "@/components/progress-space"
 import SettingsPage from "@/components/settings-page"
 import ClassroomProfile from "@/components/classroom-profile"
 import TopNav, { type TopNavSpace } from "@/components/top-nav"
@@ -33,6 +33,8 @@ export default function App() {
   // The space follows the address (space-route.ts), so Back and Forward move
   // between spaces. A deep link or a reload lands where the address says.
   const [activeSpace, setActiveSpace] = useState<Space>(() => parseSpaceRoute(window.location.hash).space)
+  // Where on Progress to land: a strand, overall or specific code (#progress/B2.3).
+  const [progressAnchor, setProgressAnchor] = useState<string | undefined>(() => parseSpaceRoute(window.location.hash).anchor)
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [showResourceTour, setShowResourceTour] = useState(false)
@@ -64,10 +66,11 @@ export default function App() {
 
   // Every space change goes through here. Spaces with an address push a history
   // entry; Quick Check has none, so it sits over the current entry.
-  const navigate = (space: Space) => {
+  const navigate = (space: Space, anchor?: string) => {
     setActiveSpace(space)
+    setProgressAnchor(space === "progress" ? anchor : undefined)
     if (!hasAddress(space)) return
-    const hash = serializeSpaceRoute({ space })
+    const hash = serializeSpaceRoute({ space, anchor })
     if (hash === window.location.hash) return
     window.history.pushState(null, "", hash || window.location.pathname + window.location.search)
   }
@@ -95,9 +98,10 @@ export default function App() {
   // serialised, so Plan reached this way opens a fresh planner.
   useEffect(() => {
     const onPopState = () => {
-      const { space } = parseSpaceRoute(window.location.hash)
+      const { space, anchor } = parseSpaceRoute(window.location.hash)
       if (space === "lessonplanner") resetPlanner(null)
       setActiveSpace(space)
+      setProgressAnchor(anchor)
     }
     window.addEventListener("popstate", onPopState)
     return () => window.removeEventListener("popstate", onPopState)
@@ -108,7 +112,7 @@ export default function App() {
   const topNavSpace: TopNavSpace | null =
     activeSpace === "lessonplanner" ||
     activeSpace === "resources" ||
-    activeSpace === "insights" ||
+    activeSpace === "progress" ||
     activeSpace === "lessons"
       ? activeSpace
       : null
@@ -239,8 +243,20 @@ export default function App() {
 
               {activeSpace === "classroom" && <ClassroomProfile />}
 
-              {activeSpace === "insights" && (
-                <ClassInsightsSpace onFindResources={findResources} />
+              {activeSpace === "progress" && (
+                <ProgressSpace
+                  anchor={progressAnchor}
+                  onPlanExpectation={(code, label) => {
+                    globalFilters.setTopic(`${code} ${label}`)
+                    openPlanner(null)
+                  }}
+                  onFindResources={findResources}
+                  onOpenLesson={(lesson) => openPlanner(lesson)}
+                  onQuickCheck={(lesson) => {
+                    setAssessmentLesson(lesson)
+                    navigate("assessment")
+                  }}
+                />
               )}
             </motion.div>
           )}

@@ -16,7 +16,7 @@ import { PROVINCES } from "@/components/hero-personalize"
 
 // Shared pieces for where a class is in the curriculum: the data hooks, the
 // gauge, the strand timeline and its legend. The top nav's second bar
-// (subject-data-bar.tsx) and the phone class sheet draw with them. Every colour
+// (subject-data-bar.tsx), the phone class sheet and Progress draw with them. Every colour
 // is a token; the subject colour arrives as a CSS variable.
 
 // ---- Data ----
@@ -151,10 +151,14 @@ export function StrandTimeline({
   )
 }
 
-export function Legend() {
+/** `wrap` lets the keys flow onto more lines (Progress on a phone); the header
+ *  drawer keeps them on one. */
+export function Legend({ wrap = false }: { wrap?: boolean } = {}) {
   const levels: ReadinessLevel[] = ["poor", "okay", "good", "great"]
   return (
-    <div className="flex flex-shrink-0 items-center gap-x-3 whitespace-nowrap text-xs text-muted-foreground">
+    <div
+      className={`flex items-center gap-x-3 text-xs text-muted-foreground ${wrap ? "flex-wrap gap-y-1 [&>span]:whitespace-nowrap" : "flex-shrink-0 whitespace-nowrap"}`}
+    >
       {levels.map((l) => (
         <span key={l} className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-sm" style={{ background: levelColor(l) }} aria-hidden="true" />

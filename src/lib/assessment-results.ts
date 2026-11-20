@@ -1,6 +1,6 @@
 import type { LessonMetadata } from "./lesson-metadata"
 import type { ProficiencyLevel } from "./assessment-types"
-import { overallCodeOf, overallTitle, groupByOverall, groupByStrand, strandLabel, isExpectationCode } from "./curriculum-codes"
+import { overallCodeOf, groupByOverall } from "./curriculum-codes"
 
 const STORAGE_KEY = "maplekey_assessment_results"
 // Parallel "sandbox" store + on/off flag. When sandbox mode is on, every read/write
@@ -378,109 +378,4 @@ export function addEvidenceFrom(target: Evidence, tally: LessonTally, code: stri
   const events = tally.eventsByExpectation?.[code]
   if (typeof events === "number" && !tally.hasUntrackedResponses) target.events += events
   else target.known = false
-}
-
-function addEvidenceInto(target: Evidence, src: Evidence): void {
-  target.responses += src.responses
-  target.events += src.events
-  if (!src.known) target.known = false
-}
-
-// ---- Coverage tree (taught vs assessed) ----
-export interface SpecificCoverage {
-  code: string
-  counts: LevelCounts // empty if not yet assessed
-  assessed: boolean
-  evidence: Evidence // how much independent evidence `counts` rests on
-}
-
-export interface CoverageNode {
-  code: string // overall code (e.g. "D1") or strand code (e.g. "D")
-  label: string
-  specifics: SpecificCoverage[]
-  bands: LevelCounts // sum of assessed specifics' counts
-  coverageFraction: number // assessedCount / specifics.length, 0 when empty
-  evidence: Evidence // sum of assessed specifics' evidence
-}
-
-// Build one node per overall expectation that appears in `tally.codes`
-// (taught) or `tally.byExpectation` (assessed) across the given tallies.
-// Each node's `specifics` lists every taught code under that overall, marking
-// which ones have recorded assessment data — the basis for the orb
-// dashboard's coverage-based fill.
-export function buildOverallCoverage(tallies: LessonTally[], subject: string, grade?: string): CoverageNode[] {
-  const taught = new Set<string>()
-  const assessed: Record<string, LevelCounts> = {}
-  const evidence: Record<string, Evidence> = {}
-  for (const t of tallies) {
-    for (const code of t.codes) if (isExpectationCode(code)) taught.add(code)
-    for (const [code, counts] of Object.entries(t.byExpectation)) {
-      if (!isExpectationCode(code)) continue
-      taught.add(code)
-      addInto((assessed[code] ??= emptyCounts()), counts)
-      addEvidenceFrom((evidence[code] ??= emptyEvidence()), t, code, counts)
-    }
-  }
-
-  const out: CoverageNode[] = []
-  for (const [overall, codes] of Object.entries(groupByOverall([...taught]))) {
-    const specifics: SpecificCoverage[] = [...codes]
-      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-      .map((code) => ({
-        code,
-        counts: assessed[code] ?? emptyCounts(),
-        assessed: code in assessed,
-        evidence: evidence[code] ?? emptyEvidence(),
-      }))
-    const bands = emptyCounts()
-    const nodeEvidence = emptyEvidence()
-    let assessedCount = 0
-    for (const spec of specifics) {
-      if (spec.assessed) {
-        addInto(bands, spec.counts)
-        addEvidenceInto(nodeEvidence, spec.evidence)
-        assessedCount++
-      }
-    }
-    out.push({
-      code: overall,
-      label: overallTitle(subject, overall, grade),
-      specifics,
-      bands,
-      coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
-      evidence: nodeEvidence,
-    })
-  }
-  return out.sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
-}
-
-// Groups overall coverage nodes into strand-level nodes via groupByStrand.
-export function buildStrandCoverage(overallNodes: CoverageNode[], subject: string, grade?: string): CoverageNode[] {
-  const groups = groupByStrand(overallNodes.map((n) => n.code))
-  const byCode = new Map(overallNodes.map((n) => [n.code, n]))
-
-  const out: CoverageNode[] = []
-  for (const [strand, overalls] of Object.entries(groups)) {
-    const children = overalls.map((code) => byCode.get(code)).filter((n): n is CoverageNode => !!n)
-    const specifics = children.flatMap((n) => n.specifics)
-    const bands = emptyCounts()
-    const nodeEvidence = emptyEvidence()
-    let assessedCount = 0
-    for (const spec of specifics) {
-      if (spec.assessed) {
-        addInto(bands, spec.counts)
-        addEvidenceInto(nodeEvidence, spec.evidence)
-        assessedCount++
-      }
-    }
-    out.push({
-      code: strand,
-      label: strandLabel(subject, strand, grade),
-      specifics,
-      bands,
-      coverageFraction: specifics.length > 0 ? assessedCount / specifics.length : 0,
-      evidence: nodeEvidence,
-    })
-  }
-  return out.sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
 }

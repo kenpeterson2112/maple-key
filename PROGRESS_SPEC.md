@@ -324,11 +324,13 @@ browser at desktop and 375×667, light and dark.
    `buildClassProgress`. `expectation-status.ts` plus tests. Needs attention,
    `needsWork` and What's next's gap check moved onto it, and What's next's
    "review lesson" wording replaced (decision 8).
-3. **The Progress page and the rename.** `progress-space.tsx`, every state in
+3. ✅ **The Progress page and the rename.** `progress-space.tsx`, every state in
    the table above, rows, actions, deep links, scrollspy, phone layout, the
    `"insights"` → `"progress"` rename, copy changes, old files deleted.
 4. **The header bar and phone shell.** Strand links, the drop-down removed,
-   the phone row and slim sheet.
+   the phone row and slim sheet. The bar's scrollspy highlight
+   (`aria-current="location"` on the strand in view) lands here too, since it
+   needs the strand links; Progress already tracks the strand in view.
 5. **Lessons.** Quick Check summary per lesson, "Earlier Quick Checks", the
    responses-vs-checks label fix.
 6. **CLAUDE.md.** Fold the shipped rules in (the nav's second bar, phone shell,

@@ -31,7 +31,7 @@ import { recentClasses } from "@/lib/recent-classes"
 //     timeline, one equal-width labelled section per strand. Clicking it slides
 //     open a drawer with every overall expectation in columns that line up
 //     with the strands above (each opens in place to its specifics), then the
-//     totals, legend and an Analyze button (to Track) along the bottom.
+//     totals, legend and an Analyze button (to Progress) along the bottom.
 //   - Otherwise: the subjects the teacher has worked on, by grade, as chips
 //     (most recent first); picking one sets the subject and grade, and the bar
 //     becomes its timeline.
@@ -43,13 +43,13 @@ interface Props {
   progress: ClassProgress | null
   /** The subject's colour token, e.g. "var(--subject-math)". */
   accent: string
-  onOpenTrack: () => void
+  onOpenProgress: () => void
   onPickClass: (subject: string, grade: string) => void
 }
 
-export default function SubjectDataBar({ subject, grade, progress, accent, onOpenTrack, onPickClass }: Props) {
+export default function SubjectDataBar({ subject, grade, progress, accent, onOpenProgress, onPickClass }: Props) {
   if (!progress) return <ClassChips subject={subject} grade={grade} onPick={onPickClass} />
-  return <Timeline subject={subject} grade={grade} progress={progress} accent={accent} onOpenTrack={onOpenTrack} />
+  return <Timeline subject={subject} grade={grade} progress={progress} accent={accent} onOpenProgress={onOpenProgress} />
 }
 
 // ---- Timeline (a subject and grade picked) ----
@@ -59,13 +59,13 @@ function Timeline({
   grade,
   progress,
   accent,
-  onOpenTrack,
+  onOpenProgress,
 }: {
   subject: string
   grade: string
   progress: ClassProgress
   accent: string
-  onOpenTrack: () => void
+  onOpenProgress: () => void
 }) {
   const [open, setOpen] = useState(false)
   // The overall whose specific expectations fill its strand's column, if any.
@@ -172,9 +172,9 @@ function Timeline({
                 onExpand={setExpanded}
                 onCollapse={collapse}
                 reduceMotion={!!reduceMotion}
-                onOpenTrack={() => {
+                onOpenProgress={() => {
                   setOpen(false)
-                  onOpenTrack()
+                  onOpenProgress()
                 }}
               />
             </div>
@@ -251,7 +251,7 @@ function Details({
   onExpand,
   onCollapse,
   reduceMotion,
-  onOpenTrack,
+  onOpenProgress,
 }: {
   subject: string
   grade: string
@@ -262,7 +262,7 @@ function Details({
   onExpand: (code: string) => void
   onCollapse: (code: string) => void
   reduceMotion: boolean
-  onOpenTrack: () => void
+  onOpenProgress: () => void
 }) {
   const ongoing = progress.ongoingStrands.map((s) => `${s.code} ${s.label}`).join(", ")
   // Fetch the wording as soon as the drawer opens, so it's there by the time
@@ -337,7 +337,7 @@ function Details({
           <Legend />
           <button
             type="button"
-            onClick={onOpenTrack}
+            onClick={onOpenProgress}
             className="flex min-h-10 flex-shrink-0 items-center gap-2 rounded-xl border border-border-strong bg-card px-4 text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <BarChart3 size={18} aria-hidden="true" />
