@@ -8,9 +8,7 @@ import SubjectDataBar from "@/components/subject-data-bar"
 import { BottomSheet } from "@/components/ui/bottom-sheet"
 import { GRADES, PROVINCES, SUBJECTS } from "@/components/hero-personalize"
 import {
-  StrandRows,
   StrandTimeline,
-  Gauge,
   noProgressReason,
   provinceName,
   useClassProgress,
@@ -37,6 +35,8 @@ interface TopNavProps {
   onOpenClassroomProfile: () => void
   /** Hide the progress row (full-screen flows such as Quick Check). */
   hideStrip?: boolean
+  /** Open Progress, optionally at a strand code (the bar's strand links). */
+  onOpenProgress: (anchor?: string) => void
 }
 
 // Subject → its colour token. One value per subject does every job (CLAUDE.md).
@@ -53,11 +53,11 @@ const GRADE_OPTIONS = GRADES.map((o) => (o.value ? o : { ...o, label: "All grade
 //      quiet links, the province (a globe with its abbreviation) and the gear,
 //      on a bar in the subject's colour (brand rust with none).
 //   2. Subject data (subject-data-bar.tsx): the subject's curriculum timeline
-//      by strand, opening into details with Analyze (to Progress); or, with no
-//      class picked, the teacher's classes as chips.
+//      by strand, each strand a link into Progress; or, with no class picked,
+//      the teacher's classes as chips.
 // Suggestions and materials live on the landing page as widgets, not here.
 // Phone: a 56px bar with one class chip (opening a sheet with the pickers and
-// the full picture) and a one-line progress bar under it.
+// a way into Progress) and a one-line progress bar under it that opens Progress.
 export default function TopNav({
   activeSpace,
   onChangeSpace,
@@ -68,6 +68,7 @@ export default function TopNav({
   onOpenSettings,
   onOpenClassroomProfile,
   hideStrip = false,
+  onOpenProgress,
 }: TopNavProps) {
   const { bookmarkedResources } = useBookmarks()
   const { state, setSubject, setGrade, setProvince } = useGlobalFilters()
@@ -195,8 +196,7 @@ export default function TopNav({
                 subject={state.subject}
                 grade={state.grade}
                 progress={progress}
-                accent={accent}
-                onOpenProgress={() => onChangeSpace("progress")}
+                onOpenProgress={onOpenProgress}
                 onPickClass={(subject, grade) => {
                   setSubject(subject)
                   setGrade(grade)
@@ -204,15 +204,16 @@ export default function TopNav({
               />
             </div>
 
-            {/* Phone: one line, tap for the sheet. Nothing on the landing page. */}
+            {/* Phone: one line, tap for Progress (or the sheet, with no
+                curriculum data to show). Nothing on the landing page. */}
             {scoped && (
               <button
                 type="button"
-                onClick={() => setIsClassSheetOpen(true)}
+                onClick={() => (progress ? onOpenProgress() : setIsClassSheetOpen(true))}
                 className="flex h-14 w-full flex-col justify-center gap-1.5 px-4 text-left md:hidden"
                 aria-label={
                   progress
-                    ? `${progress.taught} of ${progress.total} expectations taught${progress.frontier ? `, now on ${progress.frontier}` : ""}. Show progress`
+                    ? `${progress.taught} of ${progress.total} expectations taught${progress.frontier ? `, now on ${progress.frontier}` : ""}. Open Progress`
                     : noProgressReason(state.subject, state.grade)
                 }
               >
@@ -249,7 +250,7 @@ export default function TopNav({
         open={isClassSheetOpen}
         onOpenChange={setIsClassSheetOpen}
         title="Your class"
-        description="Choose the subject and grade, and see where the class is."
+        description="Choose the subject and grade."
       >
         <div className="flex flex-col gap-5 p-5">
           <div className="grid grid-cols-2 gap-3">
@@ -271,39 +272,17 @@ export default function TopNav({
           </p>
 
           {progress ? (
-            <>
-              <div className="flex items-center gap-3 rounded-2xl p-3" style={tintStyle}>
-                <Gauge taught={progress.taught} total={progress.total} accent={color ?? "var(--primary)"} size={88} />
-                <div className="flex flex-col gap-0.5 text-sm text-foreground">
-                  <span>
-                    <strong>
-                      {progress.taught} of {progress.total}
-                    </strong>{" "}
-                    expectations taught
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {progress.checked} checked · {progress.lessonCount} {progress.lessonCount === 1 ? "lesson" : "lessons"}
-                  </span>
-                </div>
-              </div>
-              <StrandRows progress={progress} />
-              <button
-                type="button"
-                onClick={() => {
-                  setIsClassSheetOpen(false)
-                  onChangeSpace("progress")
-                }}
-                className="flex h-11 items-center justify-center gap-2 rounded-xl border border-border-strong bg-card text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <BarChart3 size={18} aria-hidden="true" />
-                Open Progress
-              </button>
-              {progress.ongoingStrands.length > 0 && (
-                <p className="-mt-2 text-xs text-muted-foreground">
-                  Ongoing in every lesson: {progress.ongoingStrands.map((s) => `${s.code} ${s.label}`).join(", ")}
-                </p>
-              )}
-            </>
+            <button
+              type="button"
+              onClick={() => {
+                setIsClassSheetOpen(false)
+                onOpenProgress()
+              }}
+              className="flex h-11 items-center justify-center gap-2 rounded-xl border border-border-strong bg-card text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <BarChart3 size={18} aria-hidden="true" />
+              Open Progress · {progress.taught} of {progress.total} taught
+            </button>
           ) : (
             <p className="text-sm text-muted-foreground">{noProgressReason(state.subject, state.grade)}</p>
           )}

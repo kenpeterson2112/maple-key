@@ -16,7 +16,7 @@ import { PROVINCES } from "@/components/hero-personalize"
 
 // Shared pieces for where a class is in the curriculum: the data hooks, the
 // gauge, the strand timeline and its legend. The top nav's second bar
-// (subject-data-bar.tsx), the phone class sheet and Progress draw with them. Every colour
+// (subject-data-bar.tsx), the phone progress row and Progress draw with them. Every colour
 // is a token; the subject colour arrives as a CSS variable.
 
 // ---- Data ----
@@ -184,35 +184,4 @@ export function noProgressReason(subject: string, grade: string): string {
   const grades = curriculumGrades(subject)
   if (grades.length === 0) return `${subject} isn't in the curriculum data yet.`
   return `The Ontario ${subject} curriculum here covers Grades ${grades[0]}–${grades[grades.length - 1]}.`
-}
-
-/** Phone sheet: one row per strand, so the names have room. */
-export function StrandRows({ progress }: { progress: ClassProgress }) {
-  return (
-    <ul className="flex flex-col gap-3">
-      {progress.strands.map((s) => {
-        const hasFrontier = s.overalls.some((o) => o.code === progress.frontier)
-        return (
-          <li key={s.code} className={`flex flex-col gap-1.5 ${hasFrontier ? "-mx-2 rounded-xl bg-pop-tint px-2 py-2" : ""}`}>
-            <div className="flex items-baseline justify-between gap-3 text-sm">
-              <span className="min-w-0 font-semibold text-foreground">
-                {s.code} {s.label}
-                {hasFrontier && <span className="ml-1.5 text-xs font-semibold text-pop-strong">now on {progress.frontier}</span>}
-              </span>
-              <span className="flex-shrink-0 text-muted-foreground">
-                {s.taught}/{s.total}
-              </span>
-            </div>
-            <div className="flex h-2.5 gap-0.5" role="img" aria-label={s.overalls.map(describeOverall).join("; ")}>
-              {s.overalls.map((o) => (
-                <div key={o.code} className="flex overflow-hidden rounded-sm" style={{ flex: o.total, background: UNTAUGHT }}>
-                  <OverallFill overall={o} />
-                </div>
-              ))}
-            </div>
-          </li>
-        )
-      })}
-    </ul>
-  )
 }

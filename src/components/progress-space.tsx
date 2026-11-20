@@ -31,6 +31,7 @@ import {
 import { useCurriculumText } from "@/lib/curriculum-text"
 import type { ExpectationStatus } from "@/lib/expectation-status"
 import { useGlobalFilters } from "@/lib/global-filters"
+import { setProgressStrand } from "@/lib/progress-location"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { recentClasses } from "@/lib/recent-classes"
 import { useResourceCounter } from "@/lib/use-resource-counter"
@@ -46,7 +47,8 @@ import { useResourceCounter } from "@/lib/use-resource-counter"
 //   shows and offer neutral actions.
 // - Addresses: #progress/B (strand), /B2 (overall, opened), /B2.3 (specific,
 //   its overall opened and the row marked). Scrolling past strands replaces
-//   the address, so Back doesn't step through them.
+//   the address, so Back doesn't step through them. The strand in view is
+//   shared with the header bar (progress-location.ts), which marks it.
 
 export interface ProgressHandlers {
   /** Open a fresh planner seeded with the expectation. */
@@ -56,7 +58,13 @@ export interface ProgressHandlers {
   onQuickCheck: (lesson: LessonMetadata) => void
 }
 
-export default function ProgressSpace({ anchor, ...handlers }: ProgressHandlers & { anchor?: string }) {
+/** Where to land: an anchor code, and a counter that changes on every jump. */
+export interface ProgressTarget {
+  anchor?: string
+  nonce: number
+}
+
+export default function ProgressSpace({ target, ...handlers }: ProgressHandlers & { target: ProgressTarget }) {
   const { state } = useGlobalFilters()
   const { subject, grade } = state
   const progress = useClassProgress(subject, grade)
@@ -86,7 +94,7 @@ export default function ProgressSpace({ anchor, ...handlers }: ProgressHandlers 
           grade={grade}
           accent={meta?.color ?? "var(--primary)"}
           progress={progress}
-          anchor={anchor}
+          target={target}
           handlers={handlers}
         />
       ) : subject && grade ? (
@@ -217,14 +225,14 @@ function ProgressMap({
   grade,
   accent,
   progress,
-  anchor,
+  target,
   handlers,
 }: {
   subject: string
   grade: string
   accent: string
   progress: ClassProgress
-  anchor: string | undefined
+  target: ProgressTarget
   handlers: ProgressHandlers
 }) {
   const text = useCurriculumText(subject, grade)
@@ -253,22 +261,33 @@ function ProgressMap({
     })
   const allOpen = overalls.every((o) => expanded.has(o.code))
 
-  // A deep link opens its target and scrolls to it. A code this class doesn't
-  // have (after a class switch) lands at the top with nothing marked.
+  // A deep link opens its target and scrolls to it: at once on arrival,
+  // smoothly for a jump while the page is open (the header bar's strands). A
+  // code this class doesn't have (after a class switch) lands at the top with
+  // nothing marked.
+  const arrived = useRef(false)
   useEffect(() => {
-    const target = anchor ? resolveAnchor(progress, anchor) : null
-    if (!target) {
+    const smooth = arrived.current && !prefersReducedMotion()
+    arrived.current = true
+    const spot = target.anchor ? resolveAnchor(progress, target.anchor) : null
+    if (!spot) {
       setHighlight(null)
       scrollRef.current?.scrollTo({ top: 0 })
       return
     }
-    if (target.overall) setExpanded((prev) => (prev.has(target.overall!) ? prev : new Set(prev).add(target.overall!)))
-    setHighlight(target.specific ?? target.overall ?? null)
-    const id = domId(target.specific ?? target.overall ?? target.strand)
-    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "start" }))
-    // Only a new address moves the page; live data updates don't.
+    if (spot.overall) setExpanded((prev) => (prev.has(spot.overall!) ? prev : new Set(prev).add(spot.overall!)))
+    setHighlight(spot.specific ?? spot.overall ?? null)
+    setInView(spot.strand)
+    jumpLock.current = Date.now() + 1000
+    const id = domId(spot.specific ?? spot.overall ?? spot.strand)
+    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" }))
+    // Only a new jump moves the page; live data updates don't.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [anchor])
+  }, [target.nonce])
+
+  // Tell the header bar which strand is in view, and stop when Progress closes.
+  useEffect(() => setProgressStrand(inView || null), [inView])
+  useEffect(() => () => setProgressStrand(null), [])
 
   // Scrollspy: the strand in view drives the phone's strand select and the
   // address (replaced, never pushed).
@@ -277,6 +296,16 @@ function ProgressMap({
     if (!root) return
     const visible = new Set<string>()
     const order = progress.strands.map((s) => s.code)
+    const evaluate = () => {
+      if (Date.now() < jumpLock.current) return
+      // At the very bottom, the last strand on screen is the one being read.
+      const atBottom = root.scrollTop + root.clientHeight >= root.scrollHeight - 2
+      const top = atBottom ? [...order].reverse().find((c) => visible.has(c)) : order.find((c) => visible.has(c))
+      if (!top) return
+      setInView(top)
+      const here = currentAnchor()
+      if (!here || strandOf(here) !== top) markHere(top)
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -284,14 +313,7 @@ function ProgressMap({
           if (e.isIntersecting) visible.add(code)
           else visible.delete(code)
         }
-        if (Date.now() < jumpLock.current) return
-        // At the very bottom, the last strand on screen is the one being read.
-        const atBottom = root.scrollTop + root.clientHeight >= root.scrollHeight - 2
-        const top = atBottom ? [...order].reverse().find((c) => visible.has(c)) : order.find((c) => visible.has(c))
-        if (!top) return
-        setInView(top)
-        const here = currentAnchor()
-        if (!here || strandOf(here) !== top) markHere(top)
+        evaluate()
       },
       { root, rootMargin: "0px 0px -65% 0px" },
     )
@@ -299,7 +321,24 @@ function ProgressMap({
       const el = document.getElementById(domId(code))
       if (el) observer.observe(el)
     }
-    return () => observer.disconnect()
+    // A jump's lock holds against the page's own scrolling; the teacher's own
+    // scrolling ends it, and every scroll re-checks the strand in view.
+    let frame = 0
+    const onScroll = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(evaluate)
+    }
+    const release = () => {
+      jumpLock.current = 0
+    }
+    root.addEventListener("scroll", onScroll, { passive: true })
+    for (const type of ["wheel", "touchstart", "keydown"] as const) root.addEventListener(type, release, { passive: true })
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(frame)
+      root.removeEventListener("scroll", onScroll)
+      for (const type of ["wheel", "touchstart", "keydown"] as const) root.removeEventListener(type, release)
+    }
   }, [progress.strands])
 
   const jumpTo = (code: string) => {
