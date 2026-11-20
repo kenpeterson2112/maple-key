@@ -80,8 +80,8 @@ export function OverallReadinessPill({ data, subject, grade }: { data: OverallCo
       <Popover.Trigger asChild>
         <button
           type="button"
-          onMouseEnter={openNow}
-          onMouseLeave={closeSoon}
+          onPointerEnter={(e) => e.pointerType === "mouse" && openNow()}
+          onPointerLeave={(e) => e.pointerType === "mouse" && closeSoon()}
           className="flex items-center gap-1 px-2 py-0.5 rounded-full border outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
           style={pillSurface(v)}
           aria-label={`${data.overall} ${overallLabel(subject, data.overall, grade)} — ${READINESS_TOKENS[data.level].label}`}
@@ -98,8 +98,8 @@ export function OverallReadinessPill({ data, subject, grade }: { data: OverallCo
               sideOffset={6}
               align="start"
               onOpenAutoFocus={(e) => e.preventDefault()}
-              onMouseEnter={openNow}
-              onMouseLeave={closeSoon}
+              onPointerEnter={(e) => e.pointerType === "mouse" && openNow()}
+              onPointerLeave={(e) => e.pointerType === "mouse" && closeSoon()}
             >
               <motion.div
                 initial={{ opacity: 0, y: -4, scale: 0.97 }}

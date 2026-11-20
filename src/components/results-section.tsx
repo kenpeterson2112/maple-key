@@ -110,22 +110,25 @@ export default function ResultsSection({
 
   return (
     <div className="flex h-full w-full flex-col">
-      {/* Search bar + count + per-page dropdown — all on one sticky row */}
-      <div className="flex-shrink-0 px-3 md:px-6 pt-3 md:pt-4 pb-2 flex items-center gap-3">
-        <div className="relative flex-1 min-w-0 max-w-md">
-          <div className="relative flex items-center rounded-xl border border-border bg-card px-3 py-2 shadow-sm transition-colors focus-within:border-ring">
+      {/* Search bar + count + per-page dropdown: one row from sm up; on phones
+          the search gets the full width and the count sits under it. */}
+      <div className="flex-shrink-0 px-3 md:px-6 pt-3 md:pt-4 pb-2 flex flex-wrap items-center gap-x-3 gap-y-2">
+        <div className="relative flex-1 min-w-0 max-w-md max-sm:basis-full max-sm:max-w-none">
+          <div className="relative flex min-h-11 items-center rounded-xl border border-border-strong bg-card px-3 shadow-sm transition-colors focus-within:border-ring focus-within:ring-2 focus-within:ring-ring">
             <Search size={16} className="mr-2 flex-shrink-0 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search within results…"
+              aria-label="Search within results"
               value={searchQuery}
               onChange={handleSearchChange}
-              className="min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder-muted-foreground outline-none"
+              className="min-h-10 min-w-0 flex-1 bg-transparent text-sm text-foreground placeholder-muted-foreground outline-none"
             />
             {searchQuery.length > 0 && (
               <button
                 onClick={handleClearSearch}
-                className="rounded-full p-0.5 transition-colors hover:bg-primary-tint"
+                className="-mr-2 flex size-10 items-center justify-center rounded-full transition-colors hover:bg-primary-tint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-label="Clear search"
                 title="Clear search"
               >
                 <X size={14} className="text-muted-foreground" />
@@ -148,19 +151,19 @@ export default function ResultsSection({
               Showing {showingFrom}–{showingTo} of {sortedResources.length} results
             </span>
             <span className="sm:hidden whitespace-nowrap">{sortedResources.length} results</span>
-            <div className="flex items-center gap-1.5">
+            <label className="flex items-center gap-1.5">
               <span className="whitespace-nowrap">Per page:</span>
               <select
                 value={pageSize}
                 onChange={(e) => { setPageSize(Number(e.target.value)); setPage(1) }}
-                className="rounded-lg border border-border bg-card px-2 py-1 text-xs text-muted-foreground cursor-pointer hover:border-primary/50 transition-colors"
+                className="min-h-9 rounded-lg border border-border-strong bg-card px-2 text-xs text-foreground cursor-pointer hover:border-primary/50 transition-colors focus-visible:outline-none keyboard:focus-visible:ring-2 keyboard:focus-visible:ring-ring"
               >
                 <option value={10}>10</option>
                 <option value={25}>25</option>
                 <option value={50}>50</option>
                 <option value={0}>All</option>
               </select>
-            </div>
+            </label>
           </div>
         )}
 

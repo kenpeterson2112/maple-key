@@ -382,6 +382,7 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `keyboard:` variant (`src/index.css`, fed by `src/lib/input-modality.ts`)
   shows it unless the last input was a mouse or touch. Never remove a ring
   outright.
+- **Hover-to-open popovers open on hover for a mouse only** (`onPointerEnter` with `e.pointerType === "mouse"`, as the readiness pills and the card's teaching tips do). With plain `onMouseEnter`, a tap fires the emulated hover (open) and then the click (toggle shut), so on a phone nothing opens.
 - **Phone menus and filters use `ui/bottom-sheet.tsx`.** It's a Radix Dialog with a Framer slide-up. It closes on backdrop tap, Escape, the close button, or a swipe down on its handle; the swipe starts only on the handle, so the body scrolls freely. It takes a `footer` for a pinned primary action (the filters sheet's "Show N results").
 
 ## Architecture notes for Claude Code
