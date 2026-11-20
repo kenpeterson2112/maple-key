@@ -309,7 +309,7 @@ export interface AttentionItem {
 /**
  * The overall expectations with the largest gaps, across every class: more
  * than half the responses at Level 1–2 (expectation-status.ts), ranked by that
- * share, discounted for thin evidence. Feeds the landing page's "Needs attention".
+ * share, discounted for thin evidence. Feeds the landing page's "Gaps".
  */
 export function buildNeedsAttention(tallies: LessonTally[], lessons: LessonMetadata[], limit = 5): AttentionItem[] {
   const items: AttentionItem[] = []

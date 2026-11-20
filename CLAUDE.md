@@ -88,7 +88,7 @@ the materials dots. Never use a hue for state or emphasis.
 - **Secondary action, link, selected option, info panel:** the teal `secondary` family.
 - **Success, added, approved, correct:** `success`.
 - **Error, delete, incorrect:** `destructive`.
-- **Assessment accent, differentiation callouts, warnings, star ratings, "needs work":** goldenrod `pop` (`pop-tint` panel, `pop-strong` text, `pop` fill with `pop-foreground`).
+- **Assessment accent, differentiation callouts, warnings, star ratings, gaps:** goldenrod `pop` (`pop-tint` panel, `pop-strong` text, `pop` fill with `pop-foreground`).
 - **Proficiency and readiness levels:** `signal-*`.
 - **Subjects:** `subject-*`.
 - **Categories with no meaning:** `hue-*`.
@@ -252,37 +252,47 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 
   **The landing page** is This week across the top (Mon–Fri of lessons
   planned and Quick Checks recorded, with previous / next week and a way back
-  to today), then What's next with **Needs attention** as a slim bar under
+  to today), then **Where the class is** with **Gaps** as a slim bar under
   it, beside Materials.
 
-  **The What's next widget** (`whats-next-widget.tsx`, on the landing page
-  beside Materials) carries the next step with its rationale; it was a third
-  header bar. With a subject and grade picked it's that class's step; otherwise
-  up to three across the teacher's classes, gaps first (largest first), then
-  each class's next lesson, most recently active first. Each suggestion acts on
-  its own class, so its buttons set the subject and grade first. The labels
-  name the expectation: "Plan the B1.2 lesson", "Plan a B1.1 lesson",
-  "Browse 32 B1.1 resources" (or "Search for B1.2 resources" when none are
-  tagged), "Run a Quick Check first". The rules have no model call
-  (`src/lib/next-step.ts`, unit-tested): a gap first when a Quick Check since
-  the last lesson has one on its expectations, else the next untaught expectation after the
-  last lesson in the scope and sequence (`src/lib/scope-sequence.ts`: a file in
-  `src/data/sequences/` if one exists for the subject and grade, else the
-  curriculum order). Every clause of the rationale must point at data the
-  teacher can see.
+  **The Where the class is widget** (`whats-next-widget.tsx`, on the landing
+  page beside Materials) shows where a class sits in the curriculum, with the
+  facts behind it; it was a third header bar. With a subject and grade picked
+  it's that class; otherwise up to three across the teacher's classes, gaps
+  first (largest first), then the rest, most recently active first. Each card
+  acts on its own class, so its buttons set the subject and grade first.
+  Headlines state position, not orders: "A gap on B1.2 …", "B1.3 … follows
+  your last lesson", "B1.1 … is first in the Ontario curriculum order". The
+  options name the expectation: "Plan a B1.2 lesson", "Browse 32 B1.1
+  resources" (or "Search for B1.2 resources" when none are tagged), "Run a
+  Quick Check". The position has no model call (`src/lib/next-step.ts`,
+  unit-tested): a gap when a Quick Check since the last lesson has one on its
+  expectations, else the expectation after the last lesson in the scope and
+  sequence (`src/lib/scope-sequence.ts`: a file in `src/data/sequences/` if
+  one exists for the subject and grade, else the curriculum order). Every
+  clause must point at data the teacher can see. **Don't add rules here:**
+  districts will overlay their own scope and sequence, which overrides any
+  order we'd suggest.
 
-  **Describe gaps, never prescribe moves.** No label, heading or hint says
-  "re-teach", "small group" or "move on": teachers won't welcome being told
-  what to do. Say what the data shows ("7 of 10 responses were at Level 1–2 on
-  B1.2") and offer neutral actions (plan, find resources, Quick Check). A
-  **gap** has one definition, `src/lib/expectation-status.ts` (unit-tested):
-  more than half the responses at Level 1–2, which is exactly where the
-  readiness colour stops reading on-track. The header bar's "needs work", Needs
-  attention, What's next and Progress all use it; gaps resting on thin evidence
-  rank lower and carry a hedge. Never write a second threshold.
+  **Show where the class is; never tell the teacher what to do.** Make gaps
+  obvious and natural to find, and offer options, not instructions:
+  - No "re-teach", "small group", "move on", "next up", "start with",
+    "first", "before moving on" or "needs work". Say what the data shows
+    ("7 of 10 responses were at Level 1–2 on B1.2").
+  - Actions are options of **equal weight** (all outlined, `OPTION` in
+    `progress-space.tsx` and `whats-next-widget.tsx`); none is filled in as
+    the thing to do. The gap (the `pop` warning and its words) is what stands
+    out.
+  - A **gap** has one definition, `src/lib/expectation-status.ts`
+    (unit-tested): more than half the responses at Level 1–2, which is exactly
+    where the readiness colour stops reading on-track. The header bar's "Gap on
+    B1", Gaps, Where the class is and Progress all use it; gaps resting on thin
+    evidence rank lower and carry a hedge. Never write a second threshold.
+  - The curriculum's own order is fine to show (strands, overalls, "now" at
+    the last lesson); it's directions that go.
 
-  The landing page follows the same selection: This week, Needs attention,
-  What's next and Pick up where you left off show only what matches the subject and grade
+  The landing page follows the same selection: This week, Gaps,
+  Where the class is and Pick up where you left off show only what matches the subject and grade
   picked (`useSelectedClassData`), and an empty picker means all. A teacher has
   one class on the go, shown in the nav, so the page doesn't repeat it as cards.
   The strand timeline splits each overall into checked (readiness colour),
@@ -307,7 +317,7 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   yet, so art supplies are General.
 
   **The Materials widget** (`materials-widget.tsx`, on the landing page beside
-  What's next) replaces the header's Materials button. It shows what the
+  Where the class is) replaces the header's Materials button. It shows what the
   teacher has as a wrapping tag cloud (never a sideways scroll), browsable in
   place with type filters, under the heading alone (no subtitle), arranged
   by `groupMaterials` (`src/lib/materials-for-subject.ts`, unit-tested): with a

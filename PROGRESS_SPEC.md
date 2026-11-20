@@ -2,6 +2,10 @@
 
 **Status:** **built** (PRs 1–6 shipped 2026-11-20). The rules now live in
 CLAUDE.md; this file stays as the design record and the reasoning behind it.
+Since then (2026-11-20): "What's next" was renamed **Where the class is** and
+"Needs attention" **Gaps**, and their wording and buttons stopped directing
+("Next up", "Run a Quick Check first", "needs work" went; every action is an
+equal-weight option). This file keeps the old names where it records history.
 
 ## Why
 

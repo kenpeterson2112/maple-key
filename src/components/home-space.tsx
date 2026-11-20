@@ -88,7 +88,7 @@ export default function HomeSpace({
           </p>
         )}
 
-        {/* ── This week; What's next with Needs attention under it; Materials ── */}
+        {/* ── This week; Where the class is with Gaps under it; Materials ── */}
         {/* grid-cols-1 is minmax(0, 1fr): without it a phone's single column
             grows to its widest content and every card runs off the screen. */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -324,8 +324,9 @@ function ThisWeek({ onOpenLesson }: { onOpenLesson: (lesson: LessonMetadata) => 
   )
 }
 
-/** The overall expectations classes are struggling with most, across classes:
- *  a slim bar under What's next, one line per expectation. */
+/** Gaps: the overall expectations with more than half the responses at Level
+ *  1–2, across classes, largest first. A slim bar under "Where the class is",
+ *  one line per expectation; it states the gap and offers resources. */
 function NeedsAttention({ onFindResources }: { onFindResources: (subject: string, grade: string, code: string) => void }) {
   const { tallies, lessons } = useSelectedClassData()
   const items = useMemo(() => buildNeedsAttention(tallies, lessons, 3), [tallies, lessons])
@@ -334,10 +335,10 @@ function NeedsAttention({ onFindResources }: { onFindResources: (subject: string
     <section aria-labelledby="home-attention-heading" className="flex flex-col gap-2 rounded-xl bg-pop-tint px-4 py-3">
       <h2 id="home-attention-heading" className="flex items-center gap-2 font-display text-sm font-semibold text-foreground">
         <AlertTriangle size={16} className="flex-shrink-0 text-pop-strong" aria-hidden="true" />
-        Needs attention
+        Gaps
         {items.length === 0 && (
           <span className="font-sans font-normal text-foreground">
-            · Nothing flagged. A Quick Check with a class at Level 1–2 shows up here.
+            · None right now. A Quick Check with more than half the class at Level 1–2 shows up here.
           </span>
         )}
       </h2>

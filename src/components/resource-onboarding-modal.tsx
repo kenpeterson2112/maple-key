@@ -50,9 +50,9 @@ const STEPS: {
     icon: <BarChart3 size={28} />,
     iconBg: "bg-success/10",
     iconColor: "text-success",
-    title: "Deliver & Plan What's Next",
-    body: "After the lesson, review outcomes and check understanding by expectation. Maple Key surfaces what landed and what needs reinforcement — so your next lesson starts exactly where your students are.",
-    detail: "Assessment by expectation feeds directly into the next planning cycle.",
+    title: "Teach & See Where the Class Is",
+    body: "After the lesson, run a Quick Check by expectation. Maple Key shows where the class is in the curriculum and where the gaps are, so you can plan from what your students showed.",
+    detail: "What comes next is your call. Quick Check results sit beside your planning.",
   },
 ]
 

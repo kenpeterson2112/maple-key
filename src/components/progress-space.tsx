@@ -402,7 +402,7 @@ function ProgressMap({
             <button
               type="button"
               onClick={() => setExpanded(allOpen ? new Set() : new Set(overalls.map((o) => o.code)))}
-              className={`${SECONDARY} self-start md:self-end`}
+              className={`${OPTION} self-start md:self-end`}
             >
               {allOpen ? "Collapse all" : "Expand all"}
             </button>
@@ -640,16 +640,15 @@ function LessonLinks({ lessons, ctx }: { lessons: CoveringLesson[]; ctx: RowCont
 }
 
 // ---- What a row offers (by state, never by verdict) ----
+// Options of equal weight: none is filled in as the thing to do. The teacher
+// decides; the row's facts (and the gap, when there is one) are what stand out.
 
-const PRIMARY =
-  "flex min-h-10 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring max-md:w-full"
-const SECONDARY =
+const OPTION =
   "flex min-h-10 items-center justify-center gap-1.5 rounded-lg border border-border-strong bg-card px-3 text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring max-md:w-full"
 
 interface Action {
   label: string
   icon: ReactNode
-  primary: boolean
   run: () => void
 }
 
@@ -672,31 +671,31 @@ function Actions({
   // A Quick Check needs a lesson to check: the newest covering one still in the log.
   const checkable = lessons.map((l) => (l.inLog ? ctx.lessonById.get(l.id) : undefined)).find(Boolean)
 
-  const plan = (text: string, primary: boolean): Action => ({
-    label: text,
+  const plan: Action = {
+    label: `Plan a ${code} lesson`,
     icon: <ArrowRight size={14} aria-hidden="true" />,
-    primary,
     run: () => handlers.onPlanExpectation(code, label),
-  })
-  const find = (text: string): Action => ({
-    label: text,
+  }
+  const find: Action = {
+    label: resources,
     icon: <Search size={14} aria-hidden="true" />,
-    primary: false,
     run: () => handlers.onFindResources(code),
-  })
-  const check = (lesson: LessonMetadata, primary: boolean): Action => ({
-    label: `Run a Quick Check on “${lesson.title || "Untitled lesson"}”`,
-    icon: <ClipboardCheck size={14} aria-hidden="true" />,
-    primary,
-    run: () => handlers.onQuickCheck(lesson),
-  })
+  }
+  const check: Action[] = checkable
+    ? [
+        {
+          label: `Run a Quick Check on “${checkable.title || "Untitled lesson"}”`,
+          icon: <ClipboardCheck size={14} aria-hidden="true" />,
+          run: () => handlers.onQuickCheck(checkable),
+        },
+      ]
+    : []
 
   let actions: Action[]
-  if (status.state === "not-taught") actions = [plan(`Plan the ${code} lesson`, true), find(resources)]
-  else if (status.state === "taught") actions = checkable ? [check(checkable, true), plan(`Plan a ${code} lesson`, false)] : [plan(`Plan a ${code} lesson`, true)]
-  else if (status.gap)
-    actions = [plan(`Plan a ${code} lesson`, true), find(n ? resources : `Find ${code} resources`), ...(checkable ? [check(checkable, false)] : [])]
-  else actions = [find(resources)]
+  if (status.state === "not-taught") actions = [plan, find]
+  else if (status.state === "taught") actions = [plan, ...check, find]
+  else if (status.gap) actions = [plan, find, ...check]
+  else actions = [find]
 
   return (
     <div className="flex flex-wrap gap-2 max-md:flex-col">
@@ -709,7 +708,7 @@ function Actions({
             markHere(code)
             a.run()
           }}
-          className={a.primary ? PRIMARY : SECONDARY}
+          className={OPTION}
           style={TEXT_WRAP}
         >
           {a.label}

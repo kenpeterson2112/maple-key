@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
-import { AlertTriangle, ArrowRight, ClipboardCheck, Lightbulb, Search, Sparkles } from "lucide-react"
+import { AlertTriangle, ArrowRight, ClipboardCheck, MapPin, Search, Sparkles } from "lucide-react"
 import { useClassData } from "@/components/context-strip"
 import { SUBJECTS } from "@/components/hero-personalize"
 import { buildNextStep, type NextStep, type ScopeSequence } from "@/lib/next-step"
@@ -13,17 +13,21 @@ import { useCurriculumText } from "@/lib/curriculum-text"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
 import { useResourceCounter } from "@/lib/use-resource-counter"
 
-// The landing page's What's next widget: suggestions and next steps, each with
-// the reason for it and the way to act on it. It replaces the old third header
-// bar. The suggestion comes from rules over the class's own lessons and Quick
-// Checks and a scope and sequence (src/lib/next-step.ts); the rationale only
-// states things the teacher can see elsewhere in the app.
+// The landing page's "Where the class is" widget: where each class stands in
+// the curriculum and any gap, each with the facts behind it and options to act
+// on (plan, find resources, run a Quick Check). It replaces the old third
+// header bar. The position comes from the class's own lessons and Quick Checks
+// and a scope and sequence (src/lib/next-step.ts); every sentence states
+// things the teacher can see elsewhere in the app.
 //
-// With a subject and grade picked, it's that class's next step. Otherwise it
-// looks across the teacher's classes (narrowed by whichever picker is set):
-// gaps first, largest first, then each class's next lesson, most recently
-// active first, up to three. A gap is described, never prescribed: no
-// "re-teach" in any label (PROGRESS_SPEC.md, decision 8).
+// It describes; it never directs. No "next up", "start with", "first" or
+// "before moving on", and every action carries the same weight: the teacher
+// decides (PROGRESS_SPEC.md, decision 8; CLAUDE.md). A district's own scope
+// and sequence, when there is one, sets the order it refers to.
+//
+// With a subject and grade picked, it's that class. Otherwise it looks across
+// the teacher's classes (narrowed by whichever picker is set): gaps first,
+// largest first, then the rest, most recently active first, up to three.
 
 export interface NextStepHandlers {
   /** Open the planner for this class, seeded with the expectation. */
@@ -117,12 +121,12 @@ function describe(c: ClassStep, label: string, n: number | null): Wording | null
       resourcesLabel,
     }
   }
-  const planLabel = `Plan the ${step.code} lesson`
+  const planLabel = `Plan a ${step.code} lesson`
   if (step.kind === "start") {
     return {
       kind: "next",
-      headline: `Start with ${step.code} ${label}`,
-      rationale: `No lessons are planned for ${cls} yet, and ${step.code} comes first in ${sequence.name}.${tagged}`,
+      headline: `${step.code} ${label} is first in ${sequence.name}`,
+      rationale: `No lessons are planned for ${cls} yet.${tagged}`,
       planLabel,
       resourcesLabel,
     }
@@ -130,8 +134,8 @@ function describe(c: ClassStep, label: string, n: number | null): Wording | null
   if (step.kind === "continue") {
     return {
       kind: "next",
-      headline: `Next up: ${step.code} ${label}`,
-      rationale: `Quick Checks for ${cls} reach ${step.furthest}, and ${step.code} comes next in ${sequence.name}.${tagged}`,
+      headline: `${step.code} ${label} follows ${step.furthest}`,
+      rationale: `Quick Checks for ${cls} reach ${step.furthest}, and ${step.code} follows it in ${sequence.name}.${tagged}`,
       planLabel,
       resourcesLabel,
     }
@@ -139,11 +143,11 @@ function describe(c: ClassStep, label: string, n: number | null): Wording | null
   const covered = step.builtOn.length > 0 ? `, covering ${listCodes(step.builtOn)}` : ""
   return {
     kind: "next",
-    headline: `Next up: ${step.code} ${label}`,
+    headline: `${step.code} ${label} follows your last lesson`,
     rationale:
       `Your last lesson was “${step.after.title || "Untitled lesson"}” (${day(step.after.timestamp)})${covered}. ` +
-      `${step.code} comes next in ${sequence.name}.${tagged}` +
-      (step.unchecked ? " That lesson hasn't been checked yet: a Quick Check first would confirm the class is ready." : ""),
+      `${step.code} follows it in ${sequence.name}.${tagged}` +
+      (step.unchecked ? " That lesson hasn't had a Quick Check yet." : ""),
     planLabel,
     resourcesLabel,
   }
@@ -158,7 +162,7 @@ export default function WhatsNextWidget({ subject, grade, handlers }: { subject:
   return (
     <section aria-labelledby="home-next-heading" className="flex min-w-0 flex-col gap-4 rounded-xl border border-border bg-card p-5 shadow-sm">
       <h2 id="home-next-heading" className="font-display text-xl font-semibold text-card-foreground">
-        What&rsquo;s next
+        Where the class is
       </h2>
 
       {done ? (
@@ -171,8 +175,8 @@ export default function WhatsNextWidget({ subject, grade, handlers }: { subject:
       ) : steps.length === 0 ? (
         <Empty
           icon={<Sparkles size={18} aria-hidden="true" />}
-          headline="Plan a lesson to get a next step."
-          body="Once a class has a lesson, Maple Key suggests what comes next in the curriculum, and shows any gaps."
+          headline="Plan a lesson to see where the class is."
+          body="Once a class has a lesson, this shows where it sits in the curriculum, and any gaps."
           action={{ label: "Plan a lesson", onClick: handlers.onPlanBlank }}
         />
       ) : (
@@ -213,7 +217,7 @@ function Suggestion({
         className={`flex size-8 flex-shrink-0 items-center justify-center rounded-full ${w.kind === "gap" ? "bg-card text-pop-strong" : "bg-card text-secondary-strong"}`}
         aria-hidden="true"
       >
-        {w.kind === "gap" ? <AlertTriangle size={16} /> : <Lightbulb size={16} />}
+        {w.kind === "gap" ? <AlertTriangle size={16} /> : <MapPin size={16} />}
       </span>
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         {showClass && (
@@ -224,25 +228,22 @@ function Suggestion({
         )}
         <p className={`font-display font-semibold leading-snug text-foreground ${featured ? "text-lg" : "text-base"}`}>{w.headline}</p>
         {featured && <p className="text-sm text-foreground">{w.rationale}</p>}
+        {/* Options of equal weight: none is picked out as the thing to do. */}
         <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => handlers.onPlan(choice.subject, choice.grade, step.code, label)}
-            className="flex min-h-10 items-center gap-1.5 rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
+          <button type="button" onClick={() => handlers.onPlan(choice.subject, choice.grade, step.code, label)} className={OPTION}>
             {w.planLabel}
             <ArrowRight size={14} aria-hidden="true" />
           </button>
           {featured && (
-            <button type="button" onClick={() => handlers.onFindResources(choice.subject, choice.grade, step.code)} className={SECONDARY}>
+            <button type="button" onClick={() => handlers.onFindResources(choice.subject, choice.grade, step.code)} className={OPTION}>
               <Search size={14} aria-hidden="true" />
               {w.resourcesLabel}
             </button>
           )}
           {featured && quickCheck && (
-            <button type="button" onClick={() => handlers.onQuickCheck(quickCheck)} className={SECONDARY}>
+            <button type="button" onClick={() => handlers.onQuickCheck(quickCheck)} className={OPTION}>
               <ClipboardCheck size={14} aria-hidden="true" />
-              Run a Quick Check first
+              Run a Quick Check
             </button>
           )}
         </div>
@@ -251,7 +252,7 @@ function Suggestion({
   )
 }
 
-const SECONDARY =
+const OPTION =
   "flex min-h-10 items-center gap-1.5 rounded-lg border border-border-strong bg-card px-3 text-sm font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
 
 function Empty({
@@ -271,7 +272,7 @@ function Empty({
       <div className="flex min-w-0 flex-col items-start gap-2">
         <p className="font-display text-base font-semibold text-foreground">{headline}</p>
         <p className="text-sm text-foreground">{body}</p>
-        <button type="button" onClick={action.onClick} className={SECONDARY}>
+        <button type="button" onClick={action.onClick} className={OPTION}>
           {action.label}
         </button>
       </div>
