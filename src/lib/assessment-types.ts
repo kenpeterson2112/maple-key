@@ -81,36 +81,36 @@ export function sanitizeQuestions(raw: unknown): AssessmentQuestion[] {
 }
 
 // ---- Proficiency levels (Growing Success, Ontario Ministry of Education) ----
-// Level 4: surpassing the standard
-// Level 3: meeting the provincial standard
-// Level 2: approaching the standard
-// Level 1: needs critical attention
+// Labelled in the achievement chart's own words, which describe what students
+// showed rather than judge or direct (CLAUDE.md: show where the class is):
+// Level 1 limited, Level 2 some, Level 3 considerable (the provincial
+// standard), Level 4 a high degree.
 export type ProficiencyLevel = "level1" | "level2" | "level3" | "level4"
 
 export const LEVEL_ORDER: ProficiencyLevel[] = ["level1", "level2", "level3", "level4"]
 
 export const LEVEL_META: Record<ProficiencyLevel, { label: string; phrase: string; barClass: string; textClass: string }> = {
   level1: {
-    label: "Needs critical attention",
-    phrase: "demonstrate limited understanding and need critical support",
+    label: "Level 1 (limited)",
+    phrase: "demonstrate limited understanding",
     barClass: "bg-signal-1",
     textClass: "text-signal-1-foreground",
   },
   level2: {
-    label: "Approaching the standard",
-    phrase: "show some understanding but are still approaching the standard",
+    label: "Level 2 (some)",
+    phrase: "demonstrate some understanding",
     barClass: "bg-signal-2",
     textClass: "text-signal-2-foreground",
   },
   level3: {
-    label: "Meeting the provincial standard",
-    phrase: "demonstrate understanding that meets the provincial standard",
+    label: "Level 3 (considerable)",
+    phrase: "demonstrate considerable understanding, the provincial standard",
     barClass: "bg-signal-3",
     textClass: "text-signal-3-foreground",
   },
   level4: {
-    label: "Surpassing the standard",
-    phrase: "demonstrate understanding that surpasses the provincial standard",
+    label: "Level 4 (high degree)",
+    phrase: "demonstrate a high degree of understanding",
     barClass: "bg-signal-4",
     textClass: "text-signal-4-foreground",
   },

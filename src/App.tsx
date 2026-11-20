@@ -84,6 +84,13 @@ export default function App() {
   }
 
   const goResources = () => navigate("resources")
+  // Quick Check has no address of its own, so the address still names the
+  // space it was opened from: go back there, with no new history entry.
+  const closeQuickCheck = () => {
+    const { space, anchor } = parseSpaceRoute(window.location.hash)
+    setActiveSpace(space)
+    setProgressTarget((t) => ({ anchor, nonce: t.nonce + 1 }))
+  }
   const findResources = (code: string) => {
     setSearchSeed({ query: code, nonce: Date.now() })
     navigate("resources")
@@ -225,7 +232,7 @@ export default function App() {
                   isOpen
                   asSpace
                   lesson={assessmentLesson}
-                  onClose={goResources}
+                  onClose={closeQuickCheck}
                 />
               )}
 
@@ -239,7 +246,7 @@ export default function App() {
                   >
                     Open Lesson Planner
                   </button>
-                  <button onClick={goResources} className="text-sm text-muted-foreground underline">Back to resources</button>
+                  <button onClick={closeQuickCheck} className="text-sm text-muted-foreground underline">Back</button>
                 </div>
               )}
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronRight, ChevronDown } from "lucide-react"
+import { AlertTriangle, ChevronRight, ChevronDown } from "lucide-react"
 import {
   describeCode,
   overallTitle,
@@ -12,13 +12,18 @@ import {
 import { useCurriculumText } from "@/lib/curriculum-text"
 import { LEVEL_ORDER, LEVEL_META, type ProficiencyLevel } from "@/lib/assessment-types"
 import { READINESS_TOKENS, pillSurface, pillText } from "@/components/ui/readiness-pill"
+import { isGap } from "@/lib/expectation-status"
 import {
   computeReadinessLevel,
   type AggregatedResults,
   type LevelCounts,
   type OverallAggregate,
-  type ReadinessLevel,
 } from "@/lib/assessment-results"
+
+// Quick Check results: the class's levels by strand, overall and specific
+// expectation. Like Progress, it keeps the curriculum's own order and flags a
+// gap with the shared rule (expectation-status.ts); it describes, it never
+// ranks by urgency or tells the teacher what to do (CLAUDE.md).
 
 function total(counts: LevelCounts): number {
   return counts.level1 + counts.level2 + counts.level3 + counts.level4
@@ -39,19 +44,7 @@ function sumCounts(items: LevelCounts[]): LevelCounts {
   return out
 }
 
-// Sort order: highest share of level1 (most urgent), lowest share of level4, first.
-function urgencyScore(counts: LevelCounts): number {
-  const t = total(counts)
-  if (t === 0) return -1
-  return counts.level1 / t - counts.level4 / t
-}
-
-const SHORT_LABEL: Record<ProficiencyLevel, string> = {
-  level1: "needs critical attention",
-  level2: "approaching",
-  level3: "meeting",
-  level4: "surpassing",
-}
+const byCode = (a: string, b: string) => a.localeCompare(b, undefined, { numeric: true })
 
 // Text color for the percentage labels rendered inside each bar segment. The
 // signal fills are the same in both modes, so these are too: white reads best
@@ -63,18 +56,9 @@ const ON_BAR_TEXT: Record<ProficiencyLevel, string> = {
   level4: "text-white",
 }
 
-// Same signal scale as the readiness pills (READINESS_TOKENS); only the
-// "poor" label differs here.
-const READINESS_META: Record<ReadinessLevel, { label: string; token: string }> = {
-  great: { label: "Excelling", token: READINESS_TOKENS.great.token },
-  good: { label: "Strong", token: READINESS_TOKENS.good.token },
-  okay: { label: "Developing", token: READINESS_TOKENS.okay.token },
-  poor: { label: "Needs attention", token: READINESS_TOKENS.poor.token },
-}
-
 function ReadinessBadge({ counts }: { counts: LevelCounts }) {
   if (total(counts) === 0) return <span className="text-[11px] font-medium text-muted-foreground">No data</span>
-  const meta = READINESS_META[computeReadinessLevel(counts)]
+  const meta = READINESS_TOKENS[computeReadinessLevel(counts)]
   return (
     <span
       className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold flex-shrink-0"
@@ -122,9 +106,20 @@ function LevelSummary({ counts }: { counts: LevelCounts }) {
     <p className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px]">
       {entries.map((level) => (
         <span key={level} className={`font-medium ${LEVEL_META[level].textClass}`}>
-          {counts[level]}&nbsp;{SHORT_LABEL[level]}
+          {counts[level]} at {LEVEL_META[level].label}
         </span>
       ))}
+    </p>
+  )
+}
+
+/** A gap, in the same words as Progress: "7 of 10 responses at Level 1–2". */
+function GapNote({ counts }: { counts: LevelCounts }) {
+  if (!isGap(counts)) return null
+  return (
+    <p className="flex items-center gap-1 text-xs font-semibold text-foreground">
+      <AlertTriangle size={14} className="flex-shrink-0 text-pop-strong" aria-hidden="true" />
+      {counts.level1 + counts.level2} of {total(counts)} responses at Level 1–2
     </p>
   )
 }
@@ -142,6 +137,7 @@ function SpecificRow({ code, counts, subject, grade }: { code: string; counts: L
         </p>
       </div>
       <Bar counts={counts} />
+      <GapNote counts={counts} />
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <LevelSummary counts={counts} />
       </div>
@@ -164,11 +160,15 @@ function OverallRow({
   subject: string
   grade?: string
 }) {
-  const specifics = Object.entries(agg.specifics).sort(([a], [b]) => a.localeCompare(b))
+  const specifics = Object.entries(agg.specifics).sort(([a], [b]) => byCode(a, b))
   return (
     <div className={nested ? "rounded-lg border border-border bg-card overflow-hidden" : "rounded-xl border border-border bg-card overflow-hidden"}>
-      <button onClick={onToggle} className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left">
-        <div className="flex items-center gap-2 min-w-0 flex-1">
+      <button
+        onClick={onToggle}
+        aria-expanded={expanded}
+        className="w-full flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+      >
+        <div className="flex items-center gap-2 min-w-0 flex-1 max-sm:basis-full">
           {expanded ? (
             <ChevronDown size={16} className="text-muted-foreground flex-shrink-0" />
           ) : (
@@ -179,20 +179,36 @@ function OverallRow({
           </span>
           <span className="text-sm font-semibold text-foreground truncate">{overallTitle(subject, agg.overall, grade)}</span>
         </div>
-        <div className="flex items-center gap-3 flex-shrink-0">
+        <div className="flex items-center gap-3 flex-shrink-0 max-sm:w-full">
           <span className="text-[11px] text-muted-foreground">
             {total(agg.bands)} {total(agg.bands) === 1 ? "response" : "responses"}
           </span>
-          <div className="w-32 sm:w-44"><Bar counts={agg.bands} /></div>
+          <div className="w-32 sm:w-44 max-sm:w-auto max-sm:min-w-0 max-sm:flex-1"><Bar counts={agg.bands} /></div>
           <ReadinessBadge counts={agg.bands} />
         </div>
       </button>
 
-      {expanded && specifics.length > 0 && (
+      {isGap(agg.bands) && (
+        <div className="px-4 pb-3">
+          <GapNote counts={agg.bands} />
+        </div>
+      )}
+
+      {expanded && (
         <div className="border-t border-border divide-y divide-border bg-muted">
           {specifics.map(([code, counts]) => (
             <SpecificRow key={code} code={code} counts={counts} subject={subject} grade={grade} />
           ))}
+          {/* An option, not a suggestion: the full picture for this overall. */}
+          <div className="px-4 py-2.5">
+            <a
+              href={`#progress/${encodeURIComponent(agg.overall)}`}
+              className="inline-flex min-h-8 items-center gap-1 rounded text-xs font-semibold text-secondary-strong underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              See {agg.overall} on Progress
+              <ChevronRight size={14} aria-hidden="true" />
+            </a>
+          </div>
         </div>
       )}
     </div>
@@ -222,7 +238,7 @@ function StrandAccordion({
 
   const strands = Array.from(groups.entries())
     .map(([code, children]) => ({ code, children, bands: sumCounts(children.map((c) => c.bands)) }))
-    .sort((a, b) => urgencyScore(b.bands) - urgencyScore(a.bands) || a.code.localeCompare(b.code))
+    .sort((a, b) => byCode(a.code, b.code))
 
   return (
     <div className="space-y-3">
@@ -231,8 +247,12 @@ function StrandAccordion({
         const isOpen = expanded.has(key)
         return (
           <div key={key} className="rounded-xl border border-border bg-card overflow-hidden">
-            <button onClick={() => toggle(key)} className="w-full flex items-center justify-between gap-3 px-4 py-4 text-left">
-              <div className="flex items-center gap-2 min-w-0 flex-1">
+            <button
+              onClick={() => toggle(key)}
+              aria-expanded={isOpen}
+              className="w-full flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+            >
+              <div className="flex items-center gap-2 min-w-0 flex-1 max-sm:basis-full">
                 {isOpen ? (
                   <ChevronDown size={16} className="text-muted-foreground flex-shrink-0" />
                 ) : (
@@ -243,14 +263,20 @@ function StrandAccordion({
                 </span>
                 <span className="text-sm font-semibold text-foreground truncate">{strandLabel(subject, strand.code, grade)}</span>
               </div>
-              <div className="flex items-center gap-3 flex-shrink-0">
+              <div className="flex items-center gap-3 flex-shrink-0 max-sm:w-full">
                 <span className="text-[11px] text-muted-foreground">
                   {total(strand.bands)} {total(strand.bands) === 1 ? "response" : "responses"}
                 </span>
-                <div className="w-32 sm:w-44"><Bar counts={strand.bands} thick /></div>
+                <div className="w-32 sm:w-44 max-sm:w-auto max-sm:min-w-0 max-sm:flex-1"><Bar counts={strand.bands} thick /></div>
                 <ReadinessBadge counts={strand.bands} />
               </div>
             </button>
+
+            {isGap(strand.bands) && (
+              <div className="px-4 pb-3">
+                <GapNote counts={strand.bands} />
+              </div>
+            )}
 
             {isOpen && (
               <div className="border-t border-border bg-muted px-2 py-2 space-y-2">
@@ -301,9 +327,7 @@ export default function ClassDashboard({
     })
   }
 
-  const overalls = Object.values(data.overall).sort(
-    (a, b) => urgencyScore(b.bands) - urgencyScore(a.bands) || a.overall.localeCompare(b.overall)
-  )
+  const overalls = Object.values(data.overall).sort((a, b) => byCode(a.overall, b.overall))
   const hasStrandData = overalls.some((agg) => hasStrandLabel(subject, strandCodeOf(agg.overall), grade))
 
   return (
