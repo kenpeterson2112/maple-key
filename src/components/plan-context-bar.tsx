@@ -21,8 +21,11 @@ export default function PlanContextBar({ filters, setFilters }: PlanContextBarPr
     : [{ value: "", label: "Any strand" }]
   const provinceLabel = PROVINCES.find((p) => p.value === filters.province)?.label ?? "Any province"
 
+  // Wraps rather than scrolling sideways: on a phone the strand, topic and
+  // district badge sat off-screen behind a horizontal scroll. Every control is
+  // a 40px target.
   return (
-    <div className="flex items-center gap-2 overflow-x-auto pb-1">
+    <div className="flex flex-wrap items-center gap-2">
       <ChipPicker
         value={filters.province || ""}
         options={PROVINCES.map((p) => (p.value === "" ? { ...p, label: "Any province" } : p))}
@@ -78,20 +81,20 @@ function ChipPicker({
 }) {
   const [open, setOpen] = useState(false)
 
-  const baseClasses = "inline-flex flex-shrink-0 items-center gap-1 rounded-full px-3 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+  const baseClasses = "inline-flex min-h-10 flex-shrink-0 items-center gap-1 rounded-full px-3.5 text-sm font-semibold whitespace-nowrap transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
   const variantClasses =
     variant === "solid"
       ? "bg-primary-tint text-primary-strong hover:bg-primary-tint"
       : variant === "outline-set"
-        ? "border border-border-strong text-foreground hover:border-primary hover:text-primary"
-        : "border border-dashed border-border-strong text-muted-foreground hover:border-primary hover:text-primary"
+        ? "border border-border-strong text-foreground hover:border-primary hover:text-primary-strong"
+        : "border border-dashed border-border-strong text-muted-foreground hover:border-primary hover:text-primary-strong"
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <button type="button" aria-label={ariaLabel} aria-haspopup="listbox" className={`${baseClasses} ${variantClasses}`}>
           <span>{display}</span>
-          <ChevronDown size={13} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+          <ChevronDown size={14} aria-hidden="true" className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
         </button>
       </Popover.Trigger>
       <AnimatePresence>
@@ -118,7 +121,7 @@ function ChipPicker({
                           onChange(opt.value)
                           setOpen(false)
                         }}
-                        className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-medium transition-colors duration-150 ${
+                        className={`flex min-h-10 w-full items-center justify-between rounded-xl px-3 text-left text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
                           isSelected ? "bg-primary-tint text-primary-strong" : "text-foreground hover:bg-muted"
                         }`}
                       >
@@ -147,7 +150,7 @@ function TopicInput({ value, onChange }: { value: string; onChange: (value: stri
       onChange={(e) => onChange(e.target.value)}
       placeholder="Topic (e.g. fractions)"
       aria-label="Topic you're teaching (optional)"
-      className="inline-flex h-[34px] w-40 flex-shrink-0 rounded-full border border-dashed border-border-strong bg-transparent px-3 text-sm font-medium text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+      className="inline-flex h-10 w-44 min-w-0 flex-shrink-0 rounded-full border border-dashed border-border-strong bg-transparent px-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 max-sm:order-last max-sm:w-full"
     />
   )
 }
@@ -159,7 +162,7 @@ function DistrictBadge() {
         <button
           type="button"
           aria-label="District settings active — tap for details"
-          className="ml-auto flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-secondary-strong transition-colors hover:bg-secondary-tint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+          className="ml-auto flex size-10 flex-shrink-0 items-center justify-center rounded-full text-secondary-strong transition-colors hover:bg-secondary-tint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
         >
           <Building2 size={16} aria-hidden="true" />
         </button>
