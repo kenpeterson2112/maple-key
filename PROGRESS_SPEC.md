@@ -1,6 +1,6 @@
 # PROGRESS_SPEC.md — the Progress page (was "Track")
 
-**Status:** agreed design, **not built yet** (2026-11-19). Build it in the PRs
+**Status:** agreed design, **not built yet** (2026-11-19; revised 2026-11-20: no prescriptive moves, open questions settled). Build it in the PRs
 listed under [Delivery plan](#delivery-plan), one at a time. When a part ships,
 move its rules into CLAUDE.md and mark it done here.
 
@@ -32,6 +32,11 @@ These came from the product owner. Don't reopen them.
    specifics are clickable on Progress itself.
 7. **Progress is a launchpad into planning**, not a report you read and leave.
    Every expectation row carries actions in What's next's wording.
+8. **Describe gaps, don't prescribe moves** (2026-11-20). No "re-teach",
+   "small group" or "move on" anywhere: teachers won't welcome being told to
+   re-teach. The app still makes the gaps and the next steps obvious, by saying
+   what the data shows ("6 of 10 responses at Level 1–2 on B2.3") and offering
+   options. The teacher decides what to do about it.
 
 ## Principles
 
@@ -42,9 +47,9 @@ These came from the product owner. Don't reopen them.
   **taught, not checked** (grey), **not yet taught**. The bar, Progress, the
   phone row, Needs attention and What's next all read it, so their numbers
   always agree.
-- **One set of rules for "what to do here":** one module classifies every
-  expectation (see [Rules](#one-set-of-rules)). Today there are three
-  definitions of "struggling".
+- **One definition of a gap:** one module describes every expectation (see
+  [Rules](#3-one-set-of-rules)). Today there are three definitions of
+  "struggling", and three of them prescribe a move.
 - **Every space has an address**, so the browser's Back button works between
   Progress and Plan.
 
@@ -54,12 +59,12 @@ These came from the product owner. Don't reopen them.
 |---|---|---|
 | Track page | `src/components/class-insights-space.tsx` (heading "Class Insights", nav label "Track") | Falls back to `allSubjects[0]` and the first grade with data when the nav's choice has no tallies, which breaks decision 1. Reads tallies only, so "taught, not checked" (lessons without a Quick Check) is invisible and its numbers disagree with the bar. A narrow `max-w-3xl` column. |
 | Orb breakdown | `curriculum-orb-dashboard.tsx` + `curriculum-orb-detail-modal.tsx` + `ui/proficiency-orb.tsx` | Coverage built from tallies only (`buildOverallCoverage`). Detail lives in a modal (decision 5). |
-| Triage card | `assessment-triage.tsx` + `src/lib/triage.ts` | A second "what to do" engine with its own thresholds. Its ideas are worth keeping: moves (re-teach / small group / move on / check it) and **evidence strength** hedging ("rests on 2 answer sets"). |
+| Triage card | `assessment-triage.tsx` + `src/lib/triage.ts` | A second "what to do" engine with its own thresholds, and it prescribes moves (re-teach / small group / move on), which decision 8 rules out. Worth keeping: **evidence strength** hedging ("rests on 2 answer sets"). |
 | Lesson History | bottom of `class-insights-space.tsx` | Moves to Lessons (decision 3). |
 | Header drop-down | `Details`, `OverallRow` in `subject-data-bar.tsx` | Goes (decisions 5, 6). |
 | Phone class sheet | `top-nav.tsx` (`BottomSheet` with `StrandRows`, "Analyze in Track") | Duplicates Progress. It slims to the pickers plus one link. |
 | Space switching | `App.tsx` (`useState<Space>`) | Spaces are in-memory state with no URL, so Back doesn't move between spaces. |
-| What's next | `whats-next-widget.tsx`, `src/lib/next-step.ts` | Keeps its job. Its reteach rule must come from the shared classifier. |
+| What's next | `whats-next-widget.tsx`, `src/lib/next-step.ts` | Keeps its job, gap first. Its gap rule must come from the shared module, and its "review lesson" wording goes (decision 8). |
 | Needs attention | `home-space.tsx`, `buildNeedsAttention` in `class-progress.ts` | Uses readiness level (`poor`/`okay`), a third definition of "struggling". |
 
 ## Target design
@@ -143,29 +148,33 @@ Today "struggling" means three different things:
 | `buildNeedsAttention` / `needsWork` | Readiness level `poor` or `okay` (`computeReadinessLevel`) |
 
 Build one module, `src/lib/expectation-status.ts` (pure, unit-tested), that
-classifies any specific or overall:
+describes any specific or overall. It reports what the data shows; it never
+picks a move (decision 8):
 
 ```ts
-type Move = "teach" | "check" | "reteach" | "small-group" | "advance"
 interface ExpectationStatus {
   state: "not-taught" | "taught" | "checked"
   level: ReadinessLevel | null  // colour only (signal-*); keep computeReadinessLevel
-  move: Move
+  gap: boolean                  // checked, and Level 1–2 ≥ 50% of responses
+  lowShare: number | null       // share at Level 1–2
   evidence: EvidenceStrength
-  hedge?: string                // "Based on 2 answer sets: check again before acting."
+  hedge?: string                // "Based on 2 answer sets: check again before relying on it."
 }
 ```
 
-- Progress rows, Needs attention, the bar's "needs work" and What's next's
-  re-teach decision all call it.
+- **A gap is Level 1–2 ≥ 50%**, What's next's threshold today. One rule, no
+  bands: no "small group" middle tier, no "move on" verdict.
+- Progress rows, Needs attention, the bar's "needs work" and What's next's gap
+  check all call it.
 - What's next keeps its own *window*: only checks since the last lesson count
-  for its re-teach.
+  for its gap.
 - `triage.ts` and `assessment-triage.tsx` are deleted once nothing uses them.
-  Move `classifyMove`'s logic and the evidence weighting in; don't lose the
-  hedging.
-- **Needs a decision before this PR** ([Open questions](#open-questions) #1):
-  which threshold means "re-teach". CLAUDE.md currently documents What's next's
-  rule (Level 1–2 ≥ 50%); if it changes, update CLAUDE.md.
+  `classifyMove` goes with them; move the evidence weighting and the hedging in.
+- **What's next's copy changes in this PR.** "Plan a B1.1 review lesson" becomes
+  "Plan a B1.1 lesson", with the gap carried by the rationale ("6 of 10
+  responses at Level 1–2 on B1.1 in Tuesday's Quick Check"). No "re-teach" or
+  "review" verdict in any label. Update CLAUDE.md's What's next paragraph to
+  match.
 
 ### 4. The Progress page
 
@@ -207,7 +216,7 @@ strands (Math's A), and the legend (`Legend`).
   - expand/collapse for its specifics: a button with `aria-expanded` and
     `aria-controls`, motion-safe
 - **Default expansion:** collapsed, except the frontier overall and any overall
-  whose move is re-teach or small group. An "Expand all / Collapse all" control
+  with a gap. An "Expand all / Collapse all" control
   per page. A deep link expands its target.
 - **Specific row:** code, full wording, state, a four-band level bar
   (`signal-1..4`) with counts, evidence with hedge, last checked, covering
@@ -218,15 +227,18 @@ strands (Math's A), and the legend (`Legend`).
   smoothly (`motion-safe`) and replaces the hash.
 
 **Actions** (overall and specific rows alike; the labels name the code, as What's
-next does):
+next does). Rows are arranged by state, never by a verdict:
 
-| Move | Primary | Secondary |
+| State | What the row says | Actions |
 |---|---|---|
-| teach (not taught) | "Plan the B2.3 lesson" | "Browse N B2.3 resources" / "Search for B2.3 resources" |
-| check (taught, not checked) | "Run a Quick Check on ‹lesson›" when a covering lesson is in the log; otherwise omit it | "Plan the B2.3 lesson" (another pass) |
-| reteach | "Plan a B2.3 review lesson" | "Find resources" |
-| small-group | "Plan a small-group lesson for B2.3" (seeds the planner's topic the same way) | "Find resources" |
-| advance | none (quiet) | "Browse resources" |
+| Not yet taught | "Not yet taught" | "Plan the B2.3 lesson", "Browse N B2.3 resources" / "Search for B2.3 resources" |
+| Taught, not checked | "Taught, not checked" and the covering lessons | "Run a Quick Check on ‹lesson›" when a covering lesson is in the log (otherwise omit it), "Plan a B2.3 lesson" |
+| Checked, with a gap | The gap first, in words: "6 of 10 responses at Level 1–2 · last checked Nov 14", plus the hedge if evidence is thin | "Plan a B2.3 lesson", "Find B2.3 resources", "Run a Quick Check on ‹lesson›" |
+| Checked, no gap | The readiness label, quietly | "Browse B2.3 resources" |
+
+- A gap row is visibly flagged (the readiness colour and the words), so the
+  gaps are easy to find by scanning. The words describe; they never say
+  "re-teach", "small group" or "move on".
 
 - Wire them exactly as the landing page does: `onPlanExpectation(code, label)`
   sets the global planner topic to `"<code> <label>"` and opens a fresh planner.
@@ -308,8 +320,8 @@ browser at desktop and 375×667, light and dark.
    UI change.
 2. **Data and rules.** Specifics, evidence and covering lessons in
    `buildClassProgress`. `expectation-status.ts` plus tests. Needs attention,
-   `needsWork` and What's next's re-teach moved onto it. Settle open question
-   #1 first.
+   `needsWork` and What's next's gap check moved onto it, and What's next's
+   "review lesson" wording replaced (decision 8).
 3. **The Progress page and the rename.** `progress-space.tsx`, every state in
    the table above, rows, actions, deep links, scrollspy, phone layout, the
    `"insights"` → `"progress"` rename, copy changes, old files deleted.
@@ -337,6 +349,9 @@ browser at desktop and 375×667, light and dark.
   colour, and the "now" marker moves.
 - A thin-evidence result shows its hedge, and doesn't rank above a
   well-evidenced one.
+- No copy anywhere says "re-teach", "reteach", "small group" or "move on"
+  (`grep -rniE "re-?teach|small.group|move on" src` finds only identifiers
+  being deleted).
 - Long content holds: Language Grade 8 with every overall expanded, no
   truncation or overflow.
 - Keyboard: every strand link, expand toggle and action is reachable and shows
@@ -346,14 +361,10 @@ browser at desktop and 375×667, light and dark.
 
 ## Open questions
 
-Settle these before the PR that needs them.
+All settled with the product owner on 2026-11-20:
 
-1. **What counts as "re-teach"?** (Before PR 2.) Options: Level 1–2 ≥ 50%
-   (What's next today) or Level 1 ≥ 50% with a separate "small group" band
-   (triage today). Recommendation: re-teach at Level 1–2 ≥ 50%; small group
-   when Level 1–2 is 20–50%; move on when Level 3–4 ≥ 75%. Readiness colours
-   stay as they are.
-2. **Default expansion** on Progress: is "frontier plus anything needing
-   re-teach or small group" right, or should every overall start open?
-3. **"Run a Quick Check" with no covering lesson in the log:** omit the action
-   (this spec), or offer "Plan a lesson with a Quick Check"?
+1. **What counts as "re-teach"?** Nothing: the app doesn't prescribe moves
+   (decision 8). A *gap* is Level 1–2 ≥ 50%, and it's described, not acted on.
+2. **Default expansion:** frontier plus every overall with a gap; the rest
+   collapsed.
+3. **"Run a Quick Check" with no covering lesson in the log:** omit the action.
