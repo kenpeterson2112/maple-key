@@ -2,6 +2,7 @@
 
 import { createPortal } from "react-dom"
 import { useEffect, useMemo, useRef, useState } from "react"
+import { useFocusTrap } from "@/lib/use-focus-trap"
 import { X, CheckCircle, XCircle, HelpCircle, ClipboardCheck, Loader2, Info, BarChart3 } from "lucide-react"
 import { describeCode } from "@/lib/curriculum-codes"
 import { useCurriculumText } from "@/lib/curriculum-text"
@@ -81,6 +82,9 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
 
   const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const scrollBodyRef = useRef<HTMLDivElement>(null)
+  // As a popup it's a modal dialog: focus stays inside until it closes.
+  const panelRef = useRef<HTMLDivElement>(null)
+  useFocusTrap(panelRef, isOpen && !asSpace)
 
   const MAX_GROUP_SIZE = 500
   const getGroupCount = (): number => {
@@ -246,10 +250,12 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
     >
       {!asSpace && <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />}
       <div
+        ref={panelRef}
+        {...(asSpace ? {} : { role: "dialog", "aria-modal": true, "aria-labelledby": "quick-check-title", tabIndex: -1 })}
         className={
           asSpace
             ? "w-full h-full flex flex-col overflow-hidden"
-            : "relative bg-card rounded-2xl shadow-2xl w-full max-w-2xl max-h-dialog flex flex-col overflow-hidden"
+            : "relative bg-card rounded-2xl shadow-2xl w-full max-w-2xl max-h-dialog flex flex-col overflow-hidden outline-none"
         }
       >
         {/* Header */}
@@ -259,7 +265,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
               <ClipboardCheck size={18} className="text-pop-strong" />
             </div>
             <div>
-              <h2 className="font-bold text-foreground text-base">Quick Check</h2>
+              <h2 id="quick-check-title" className="font-bold text-foreground text-base">Quick Check</h2>
               <p className="text-xs text-muted-foreground leading-tight">{lesson.title}</p>
             </div>
           </div>
