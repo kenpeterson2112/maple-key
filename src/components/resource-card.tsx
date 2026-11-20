@@ -31,6 +31,8 @@ import { getSubjectTheme } from "@/lib/subject-theme"
 
 // Tips affordance — keeps usage_notes prose off the card face but rewards the
 // hover/tap with the full note. Same hover-into-panel pattern as the pill.
+// Hover opens it for a mouse only: on touch, the emulated hover opened it and
+// the tap's click then toggled it shut, so a tap did nothing.
 function TipsPopover({ notes }: { notes: string }) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
@@ -47,9 +49,9 @@ function TipsPopover({ notes }: { notes: string }) {
       <Popover.Trigger asChild>
         <button
           type="button"
-          onMouseEnter={openNow}
-          onMouseLeave={closeSoon}
-          className="flex items-center justify-center w-5 h-5 rounded-full text-muted-foreground hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-ring/40 transition-colors"
+          onPointerEnter={(e) => e.pointerType === "mouse" && openNow()}
+          onPointerLeave={(e) => e.pointerType === "mouse" && closeSoon()}
+          className="flex size-10 sm:size-7 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
           aria-label="Teaching tips"
           title="Teaching tips"
         >
@@ -64,8 +66,8 @@ function TipsPopover({ notes }: { notes: string }) {
               sideOffset={6}
               align="start"
               onOpenAutoFocus={(e) => e.preventDefault()}
-              onMouseEnter={openNow}
-              onMouseLeave={closeSoon}
+              onPointerEnter={(e) => e.pointerType === "mouse" && openNow()}
+              onPointerLeave={(e) => e.pointerType === "mouse" && closeSoon()}
             >
               <motion.div
                 initial={{ opacity: 0, y: -4, scale: 0.97 }}
@@ -208,11 +210,12 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
               )}
               <button
                 onClick={handleToggleSave}
-                className={`py-1 px-3 text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 hover:scale-105 transform ${
+                className={`min-h-10 sm:min-h-8 px-3 text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isSaved
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-success-tint text-success"
                     : "bg-muted/60 text-foreground hover:bg-muted"
                 }`}
+                aria-pressed={isSaved}
                 aria-label={isSaved ? "Remove from plan" : "Add to plan"}
               >
                 {isSaved ? "Added" : "Add"}
@@ -277,7 +280,7 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
             <div className="ml-auto flex items-center gap-1.5">
               <button
                 onClick={() => setShowFlagModal(true)}
-                className="p-1 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors duration-200"
+                className="flex size-10 sm:size-8 items-center justify-center rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="Report an issue with this resource"
                 title="Report an issue"
               >
@@ -288,7 +291,8 @@ export default function CompactResourceCard({ resource, codeProgress }: { resour
                   if (resource.url) window.open(resource.url, "_blank", "noopener,noreferrer")
                 }}
                 disabled={!resource.url}
-                className={`flex-shrink-0 py-1 px-3 ${theme.badge} text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 hover:scale-105 transform ${
+                aria-label={`View ${resource.topic_title} (opens in a new tab)`}
+                className={`flex-shrink-0 min-h-10 sm:min-h-8 px-3 ${theme.badge} text-xs font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   !resource.url ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >

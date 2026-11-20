@@ -6,6 +6,18 @@
    where the browser keeps :focus-visible after a click. */
 @custom-variant keyboard (&:where(:root:not([data-input="pointer"]) *));
 
+/* Overlays on phones. A dialog's backdrop pads the screen edges and the safe
+   areas (notch, home indicator), and its panel is never taller than what's
+   visible: dvh follows the phone's address bar where vh doesn't. Used by
+   ui/overlay.tsx and the Radix dialogs. */
+@utility overlay-pad {
+  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
+    max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+}
+@utility max-h-dialog {
+  max-height: calc(100dvh - max(1rem, env(safe-area-inset-top)) - max(1rem, env(safe-area-inset-bottom)));
+}
+
 /* Crisp orchard palette. Rust primary, teal secondary, goldenrod pop.
    Every value is the OKLCH form of the sRGB hex in its comment and converts
    back to exactly that hex. Contrast is checked by scripts/check-contrast.mjs

@@ -38,7 +38,7 @@ export default function MaterialsEditorModal({ isOpen, onClose, onSaved }: Mater
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => { if (!open) onClose() }}>
-      <SheetContent side="top" className="bg-muted border-b-2 border-border max-h-[85vh] overflow-y-auto z-[70]">
+      <SheetContent side="top" className="bg-muted border-b-2 border-border max-h-[85dvh] overflow-y-auto z-[70] pt-[env(safe-area-inset-top)]">
         <SheetHeader className="pb-3 border-b border-border">
           <SheetTitle className="text-xl font-bold text-foreground flex items-center gap-2">
             <School size={18} className="text-foreground" />

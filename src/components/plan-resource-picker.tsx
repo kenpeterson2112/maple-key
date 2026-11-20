@@ -167,7 +167,7 @@ export default function PlanResourcePicker({
               searchOpen ? "flex min-h-0 flex-1 flex-col px-5 pt-3" : "flex items-center px-5",
             )}
           >
-            <div className={cn("flex w-full flex-wrap items-center gap-x-3 gap-y-2", searchOpen ? "py-1" : "py-4")}>
+            <div className={cn("flex w-full flex-wrap items-center gap-x-3 gap-y-2", searchOpen ? "py-1" : "py-2")}>
               <Search className="h-4 w-4 flex-shrink-0 text-muted-foreground" aria-hidden="true" />
               <input
                 value={searchQuery}
@@ -178,7 +178,7 @@ export default function PlanResourcePicker({
                 onFocus={() => setSearchOpen(true)}
                 placeholder="Search the resource library…"
                 aria-label="Search the resource library"
-                className="min-w-[150px] flex-1 border-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+                className="min-h-10 min-w-[150px] flex-1 border-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
               />
               {searchOpen && (
                 <button

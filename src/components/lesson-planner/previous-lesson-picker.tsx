@@ -62,7 +62,7 @@ export default function PreviousLessonPicker({ lessons, selected, onSelect }: Pr
               <p className="text-sm font-semibold text-foreground">
                 Build on a previous lesson? <span className="font-normal text-muted-foreground">(optional)</span>
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground max-sm:hidden">
                 Pick one you've taught and the new lesson will pick up where it left off.
               </p>
             </>
@@ -71,7 +71,7 @@ export default function PreviousLessonPicker({ lessons, selected, onSelect }: Pr
         <Popover.Trigger asChild>
           <button
             type="button"
-            className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-card px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
+            className="inline-flex min-h-10 items-center gap-1 rounded-full border border-primary/40 bg-card px-3 text-xs font-semibold text-primary-strong hover:bg-primary-tint transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {selected ? "Change" : "Choose a lesson"}
             <ChevronDown size={14} className={cn("transition-transform", open && "rotate-180")} />
@@ -81,7 +81,7 @@ export default function PreviousLessonPicker({ lessons, selected, onSelect }: Pr
           <button
             type="button"
             onClick={() => onSelect(null)}
-            className="p-1 rounded-full text-muted-foreground hover:bg-muted transition-colors flex-shrink-0"
+            className="flex size-10 items-center justify-center rounded-full text-muted-foreground hover:bg-muted transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label="Start fresh instead"
             title="Start fresh instead"
           >

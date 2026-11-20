@@ -126,8 +126,12 @@ export default function SetupSteps({
   // Unified setup nav: the Guided/All-options toggle and the stage progress are
   // one decision, so they live in one strip. Guided expands the four stages
   // (highlighting as you advance); All options collapses them to a single page.
+  // Phones get a compact version: the toggle and "Step 3 of 5 · Format" on one
+  // line, then a slim five-part bar whose finished parts jump back, so the step
+  // itself keeps the screen (375×667 has little to spare under the nav).
   const setupNav = (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+    <div className="flex flex-col gap-1.5 md:flex-row md:flex-wrap md:items-center md:gap-x-3 md:gap-y-2">
+     <div className="flex items-center justify-between gap-3 md:contents">
       <div className="inline-flex flex-shrink-0 rounded-lg border-2 border-border p-0.5 bg-card" role="group" aria-label="Setup layout">
         {([["wizard", "Guided"], ["full", "All options"]] as const).map(([mode, label]) => {
           const selected = setupMode === mode
@@ -137,8 +141,8 @@ export default function SetupSteps({
               type="button"
               onClick={() => onSetupModeChange(mode)}
               aria-pressed={selected}
-              className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
-                selected ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-primary"
+              className={`min-h-9 px-3 text-xs font-semibold rounded-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                selected ? "bg-secondary-tint text-secondary-strong shadow-sm" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {label}
@@ -147,8 +151,37 @@ export default function SetupSteps({
         })}
       </div>
 
+      {isWizard && (
+        <p className="text-xs font-semibold text-foreground md:hidden" aria-hidden="true">
+          Step {wizardStep + 1} of {WIZARD_STEPS.length} · {WIZARD_STEPS[wizardStep].label}
+        </p>
+      )}
+     </div>
+
       {isWizard ? (
-        <nav aria-label="Setup steps" className="flex flex-wrap items-center gap-1.5">
+        <>
+        <nav aria-label="Setup steps" className="flex items-stretch gap-1 md:hidden">
+          {WIZARD_STEPS.map((s, i) => {
+            const done = i < wizardStep
+            const current = i === wizardStep
+            return (
+              <button
+                key={s.label}
+                type="button"
+                onClick={() => done && onGoToStep(i)}
+                disabled={!done}
+                aria-current={current ? "step" : undefined}
+                aria-label={`Step ${i + 1}: ${s.label}${done ? ", done. Go back to it" : current ? ", current" : ""}`}
+                className="flex h-8 flex-1 items-center rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default"
+              >
+                <span
+                  className={`block h-1.5 w-full rounded-full ${current ? "bg-primary" : done ? "bg-secondary" : "bg-border-strong"}`}
+                />
+              </button>
+            )
+          })}
+        </nav>
+        <nav aria-label="Setup steps" className="hidden md:flex flex-wrap items-center gap-1.5">
           {WIZARD_STEPS.map((s, i) => {
             const done = i < wizardStep
             const current = i === wizardStep
@@ -160,9 +193,9 @@ export default function SetupSteps({
                 disabled={!done}
                 aria-current={current ? "step" : undefined}
                 aria-label={`Step ${i + 1}: ${s.label}`}
-                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${
+                className={`inline-flex min-h-8 items-center gap-1 rounded-full px-2.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   current
-                    ? "bg-primary/10 text-primary ring-1 ring-inset ring-ring/30"
+                    ? "bg-primary-tint text-primary-strong"
                     : done
                     ? "text-secondary-strong hover:bg-accent cursor-pointer"
                     : "text-muted-foreground"
@@ -178,6 +211,7 @@ export default function SetupSteps({
             )
           })}
         </nav>
+        </>
       ) : (
         <span className="text-xs font-medium text-muted-foreground">Everything on one page</span>
       )}
@@ -234,7 +268,7 @@ export default function SetupSteps({
             <button
               type="button"
               onClick={() => onGoToStep(row.step)}
-              className="flex-shrink-0 flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-primary transition-colors mt-0.5"
+              className="-my-1.5 flex min-h-10 flex-shrink-0 items-center gap-1 rounded-lg px-2 text-xs font-semibold text-secondary-strong transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label={`Edit ${row.label}`}
             >
               <Pencil size={12} />
@@ -391,7 +425,7 @@ export default function SetupSteps({
               step={5}
               value={lessonMinutes}
               onChange={(e) => onLessonLengthChange(`${e.target.value} minutes`)}
-              className="w-full accent-primary"
+              className="h-10 w-full cursor-pointer accent-primary"
               aria-label="Lesson length in minutes"
             />
             <div className="flex justify-between text-xs text-muted-foreground mt-1">

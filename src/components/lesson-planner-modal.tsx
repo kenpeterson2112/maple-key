@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useMemo } from "react"
+import Overlay from "@/components/ui/overlay"
 import {
   X,
   Loader2,
@@ -115,6 +116,8 @@ export default function LessonPlannerModal({
   const [materialsTick, setMaterialsTick] = useState(0)
   const [isGenerating, setIsGenerating] = useState(false)
   const [lessonGenerated, setLessonGenerated] = useState(!!lesson)
+  // A plan generated in this visit (vs a saved one reopened): drives the success banner.
+  const [justGenerated, setJustGenerated] = useState(false)
 
   // Setup layout: guided one-step-at-a-time wizard vs. everything on one page.
   const [setupMode, setSetupModeState] = useState<LessonSetupMode>(getLessonSetupMode())
@@ -359,6 +362,7 @@ export default function LessonPlannerModal({
     })
     setLatestLesson(logged)
     setLessonGenerated(true)
+    setJustGenerated(true)
     clearBookmarks()
     const bundledQs = sanitizeQuestions(data.assessmentQuestions)
     if (import.meta.env.DEV) {
@@ -705,7 +709,9 @@ export default function LessonPlannerModal({
 
       {/* Content */}
       <div className={asSpace ? "w-full h-full bg-background flex flex-col overflow-hidden" : "relative w-[95vw] h-[90vh] bg-muted rounded-3xl shadow-2xl flex flex-col overflow-hidden"}>
-        {/* Header */}
+        {/* Header. On phones during setup it would be an icon alone (the title
+            is hidden there), so the space goes to the step instead. */}
+        <div className={asSpace && !lessonGenerated ? "flex-shrink-0 max-md:hidden" : "flex-shrink-0"}>
         <PageHeader
           icon={Lightbulb}
           title={lessonGenerated ? "Your Lesson Plan" : "Generate Lesson Plan"}
@@ -726,9 +732,10 @@ export default function LessonPlannerModal({
             </button>
           )}
         </PageHeader>
+        </div>
 
         {/* Content */}
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-6 lg:p-8">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
           {isGenerating && !lessonGenerated ? (
             <LessonBuildingLoader />
           ) : (
@@ -789,6 +796,7 @@ export default function LessonPlannerModal({
                     : undefined
                 }
                 follows={followsInfo}
+                justGenerated={justGenerated}
               />
             ) : showQuestionsStep ? (
               <>
@@ -846,7 +854,7 @@ export default function LessonPlannerModal({
         </div>
 
         {!lessonGenerated && showQuestionsStep && (
-          <div className="sticky bottom-0 border-t-2 border-border bg-card px-6 py-4">
+          <div className="sticky bottom-0 border-t-2 border-border bg-card px-4 py-3 sm:px-6 sm:py-4">
             <div className={`${contentWidthClass} mx-auto`}>
               <button
                 onClick={handleQuestionsSubmit}
@@ -859,7 +867,7 @@ export default function LessonPlannerModal({
         )}
 
         {!lessonGenerated && !showQuestionsStep && !isGenerating && !isWizard && (
-          <div className="hidden md:block sticky bottom-0 border-t-2 border-border bg-card px-6 py-4">
+          <div className="hidden md:block sticky bottom-0 border-t-2 border-border bg-card px-4 py-3 sm:px-6 sm:py-4">
             <div className={`${contentWidthClass} mx-auto space-y-3`}>
               {generateErrorPanel}
               {frenchHandoutsNotice}
@@ -869,7 +877,7 @@ export default function LessonPlannerModal({
         )}
 
         {!lessonGenerated && !showQuestionsStep && !isGenerating && isWizard && (
-          <div className="sticky bottom-0 border-t-2 border-border bg-card px-6 py-4">
+          <div className="sticky bottom-0 border-t-2 border-border bg-card px-4 py-3 sm:px-6 sm:py-4">
             <div className={`${contentWidthClass} mx-auto space-y-3`}>
               {isLastWizardStep && generateErrorPanel}
               {isLastWizardStep && frenchHandoutsNotice}
@@ -927,19 +935,18 @@ export default function LessonPlannerModal({
       />
 
       {showFeedbackDialog && (
-        <div className="fixed inset-0 z-[300] flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setShowFeedbackDialog(false)} />
-          <div className="relative bg-card rounded-2xl shadow-2xl p-6 max-w-md mx-4">
+        <Overlay onClose={() => setShowFeedbackDialog(false)} labelledBy="planner-feedback-title" closeOnBackdrop z="z-[300]">
+          <div className="relative bg-card rounded-2xl shadow-2xl p-6 max-w-md max-h-dialog overflow-y-auto">
             <button
               onClick={() => setShowFeedbackDialog(false)}
-              className="absolute top-4 right-4 p-1 hover:bg-muted rounded-full transition-colors"
-              aria-label="Close dialog"
+              className="absolute top-2 right-2 flex size-10 items-center justify-center rounded-full transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label="Close"
             >
               <X size={20} className="text-muted-foreground" />
             </button>
             <div className="text-center pt-2">
               <MessageSquareText size={40} className="text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-foreground mb-3">Feedback Form</h3>
+              <h3 id="planner-feedback-title" className="text-lg font-semibold text-foreground mb-3">Feedback Form</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Feedback form under construction. Please mail us at{" "}
                 <a href="mailto:feedback@maplekey.ca" className="text-primary hover:underline font-medium">
@@ -948,7 +955,7 @@ export default function LessonPlannerModal({
               </p>
             </div>
           </div>
-        </div>
+        </Overlay>
       )}
     </div>
   )

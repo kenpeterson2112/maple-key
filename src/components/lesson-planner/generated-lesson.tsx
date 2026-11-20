@@ -111,6 +111,8 @@ export interface GeneratedLessonViewProps {
   onPlanNext?: () => void
   /** The lesson this one continues from. `onOpen` is absent once it has dropped out of the log. */
   follows?: { title: string; onOpen?: () => void } | null
+  /** True only right after this plan was generated; a saved lesson reopened from Lessons says nothing. */
+  justGenerated?: boolean
 }
 
 /**
@@ -170,6 +172,7 @@ export default function GeneratedLessonView({
   onPlanAnother,
   onPlanNext,
   follows,
+  justGenerated = false,
 }: GeneratedLessonViewProps) {
   const mindsOnTime = Math.round(lessonMinutes * 0.17)
   const actionTime = Math.round(lessonMinutes * 0.58)
@@ -177,11 +180,13 @@ export default function GeneratedLessonView({
 
   return (
     <>
-      {/* SUCCESS BANNER */}
-      <div className="bg-success-tint border border-success/40 rounded-lg p-4 flex items-center gap-3">
-        <CheckCircle size={24} className="text-success flex-shrink-0" />
-        <span className="text-success font-medium">Lesson plan generated successfully!</span>
-      </div>
+      {/* SUCCESS BANNER: only for a plan just generated, not one reopened later. */}
+      {justGenerated && (
+        <div role="status" className="bg-success-tint border border-success/40 rounded-lg p-4 flex items-center gap-3">
+          <CheckCircle size={24} className="text-success flex-shrink-0" />
+          <span className="text-success font-medium">Lesson plan generated successfully!</span>
+        </div>
+      )}
 
       {/* LESSON HEADER */}
       <div className="bg-card rounded-xl border-2 border-border p-5">
@@ -803,7 +808,7 @@ export default function GeneratedLessonView({
         <p className="text-sm text-muted-foreground">Did you like this lesson? Do you have feedback?</p>
         <button
           onClick={onOpenFeedback}
-          className="text-sm font-semibold text-primary hover:underline"
+          className="min-h-10 rounded-lg px-2 text-sm font-semibold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           Submit Feedback
         </button>

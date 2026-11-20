@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useId, useState } from "react"
+import Overlay from "@/components/ui/overlay"
 import { X, Send, CheckCircle } from "lucide-react"
 import { addFlag, FLAG_REASON_LABELS, type FlagReason } from "@/lib/flags-data"
 
@@ -14,6 +15,7 @@ interface FlagModalProps {
 const FLAG_REASONS = Object.keys(FLAG_REASON_LABELS) as FlagReason[]
 
 export default function FlagModal({ isOpen, onClose, resourceId, resourceTitle }: FlagModalProps) {
+  const titleId = useId()
   const [reason, setReason] = useState<FlagReason | null>(null)
   const [details, setDetails] = useState("")
   const [showSuccess, setShowSuccess] = useState(false)
@@ -45,18 +47,18 @@ export default function FlagModal({ isOpen, onClose, resourceId, resourceTitle }
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-[200] flex items-center justify-center p-4">
-      <div className="bg-card rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+    <Overlay onClose={handleClose} labelledBy={titleId}>
+      <div className="bg-card rounded-2xl shadow-2xl w-full max-w-md max-h-dialog overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-card border-b border-border p-6 flex items-start justify-between rounded-t-2xl">
           <div>
-            <h2 className="text-2xl font-bold text-foreground">Report an issue</h2>
+            <h2 id={titleId} className="text-2xl font-bold text-foreground">Report an issue</h2>
             <p className="text-sm text-muted-foreground mt-1 line-clamp-1">{resourceTitle}</p>
           </div>
           <button
             onClick={handleClose}
-            className="p-2 hover:bg-muted rounded-lg transition-colors"
-            aria-label="Close modal"
+            className="flex size-10 flex-shrink-0 items-center justify-center hover:bg-muted rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label="Close"
           >
             <X className="w-5 h-5 text-muted-foreground" />
           </button>
@@ -121,6 +123,6 @@ export default function FlagModal({ isOpen, onClose, resourceId, resourceTitle }
           )}
         </div>
       </div>
-    </div>
+    </Overlay>
   )
 }

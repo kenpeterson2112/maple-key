@@ -199,7 +199,8 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 
 ### Component patterns
 
-- Primitives live (and will grow) in **`src/components/ui/`** (seed: `sheet.tsx`).
+- Primitives live (and will grow) in **`src/components/ui/`** (seed: `sheet.tsx`;
+  a modal that isn't a Radix dialog uses `ui/overlay.tsx`).
   Phase B migrates this to **`src/design-system/`** as the canonical location.
 - Feature components live in `src/components/` (e.g. `assessment-modal.tsx`,
   `class-dashboard.tsx`, `lessons-library.tsx`).
@@ -371,6 +372,8 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - **Phone shell (below `md`).**
   - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`) with a one-line progress row under it once a subject is chosen, the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The header's class chip opens a bottom sheet with the Subject/Grade selects and an "Open Progress" button. The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
   - **Tab bar:** it hides while the on-screen keyboard is up and during Quick Check.
+  - **Planner:** during setup the planner's page header (an icon alone on phones) is hidden below `md`, and the setup nav collapses to the Guided/All options toggle with "Step 3 of 5 · Format" beside it and a slim five-part bar whose finished parts jump back (`setup-steps.tsx`); the step chips are `md` and up. Body and footers pad 16px on phones. A saved lesson reopened from Lessons shows no "generated successfully" banner (`justGenerated`).
+  - **Touch targets:** controls a teacher taps in class are at least 40px tall (44 for the main ones), whatever they look like: pad the hit area rather than enlarge the visual (`-my-*` with `min-h-10`). WCAG's 24px is the floor, not the goal.
   - **Nav items:** desktop's pill toggle and the tab bar both read the four spaces from `src/lib/nav-items.ts`.
   - **Account:** the header avatar opens `account-sheet.tsx` (Settings, Classroom profile, Invite staff, Sign out). There is no hamburger menu.
   - **Safe areas:** with `viewport-fit=cover`, the header pads the top inset, the tab bar the bottom one, and the app root the sides.
@@ -380,6 +383,7 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `keyboard:` variant (`src/index.css`, fed by `src/lib/input-modality.ts`)
   shows it unless the last input was a mouse or touch. Never remove a ring
   outright.
+- **Hover-to-open popovers open on hover for a mouse only** (`onPointerEnter` with `e.pointerType === "mouse"`, as the readiness pills and the card's teaching tips do). With plain `onMouseEnter`, a tap fires the emulated hover (open) and then the click (toggle shut), so on a phone nothing opens.
 - **Phone menus and filters use `ui/bottom-sheet.tsx`.** It's a Radix Dialog with a Framer slide-up. It closes on backdrop tap, Escape, the close button, or a swipe down on its handle; the swipe starts only on the handle, so the body scrolls freely. It takes a `footer` for a pinned primary action (the filters sheet's "Show N results").
 
 ## Architecture notes for Claude Code
@@ -504,8 +508,14 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - **Mobile sticky footers** (the planner's Next / Generate bar) are `sticky bottom-0`
   inside the space's scroll container, above the tab bar. Test on real viewport
   heights (375×667 is the tight one), not just desktop devtools.
-- **`fixed inset-0` overlays** (assessment modal, drawers): currently not
-  viewport-safe on mobile. Phase C will switch to `dvh` + `safe-area-inset`.
+- **Overlays must cover the nav and fit the phone.** Each space renders in a
+  `z-10` layer under the `z-50` top nav, so a `fixed` overlay drawn inside a
+  space sits *under* the nav and tab bar (Quick Check's header was hidden this
+  way). Hand-rolled dialogs use `ui/overlay.tsx` (portals to `<body>`, pads the
+  safe areas with `overlay-pad`, Escape closes, `role="dialog"`); Radix
+  dialogs portal already. Panels use `max-h-dialog` (a `dvh` height that
+  follows the address bar; `vh` doesn't) with their own scroll. The bottom
+  sheet already does this. Not done yet: focus trapping in `ui/overlay.tsx`.
 - **Performance:** very few `React.memo` / `useMemo` callsites today
   (~5 files). Hot re-render paths sit in `assessment-modal.tsx` and
   `class-dashboard.tsx`.

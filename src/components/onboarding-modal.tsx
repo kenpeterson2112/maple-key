@@ -40,7 +40,7 @@ export default function OnboardingModal({ open, onComplete }: OnboardingModalPro
           onPointerDownOutside={preventClose}
           onEscapeKeyDown={preventClose}
           onInteractOutside={preventClose}
-          className="fixed left-1/2 top-1/2 z-50 w-[92vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 bg-background border-2 border-border rounded-2xl shadow-2xl max-h-[90vh] overflow-hidden flex flex-col data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+          className="fixed left-1/2 top-1/2 z-50 w-[92vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 bg-background border-2 border-border rounded-2xl shadow-2xl max-h-dialog overflow-hidden flex flex-col data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
         >
           <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-border">
             <div className="flex items-center gap-2">
