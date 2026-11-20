@@ -16,9 +16,8 @@ import {
 import { SUBJECTS } from "@/components/hero-personalize"
 import DevSeedControl from "@/components/dev/dev-seed-control"
 import PageHeader from "@/components/page-header"
-import EvidenceCapsule from "@/components/ui/evidence-capsule"
 import { READINESS_TOKENS } from "@/components/ui/readiness-pill"
-import { isSandboxMode, type Evidence, type LevelCounts } from "@/lib/assessment-results"
+import { isSandboxMode, type Evidence } from "@/lib/assessment-results"
 import {
   buildClassProgress,
   inSelection,
@@ -498,7 +497,7 @@ function OverallRow({ overall: o, open, onToggle, ctx }: { overall: OverallProgr
           </button>
         </h3>
         <div className="flex flex-col gap-3 pl-6">
-          <Facts id={factsId} status={o.status} counts={o.counts} evidence={o.evidence} lastCheckedAt={o.lastCheckedAt} lessons={o.lessons} ctx={ctx} />
+          <Facts id={factsId} status={o.status} evidence={o.evidence} lastCheckedAt={o.lastCheckedAt} lessons={o.lessons} ctx={ctx} />
           <Actions code={o.code} label={o.title} status={o.status} lessons={o.lessons} ctx={ctx} />
         </div>
       </div>
@@ -541,7 +540,6 @@ function SpecificRow({
           </p>
           <Facts
             status={sp.status}
-            counts={sp.counts}
             evidence={sp.evidence}
             lastCheckedAt={sp.lastCheckedAt}
             lessons={sp.lessons}
@@ -556,10 +554,17 @@ function SpecificRow({
 
 // ---- What a row says ----
 
+/** "105 responses · 8 answer sets", in the words Lessons uses (tally-summary.ts):
+ *  just the responses when the answer sets are unknown or one per response. */
+function describeEvidenceCount(e: Evidence): string {
+  const responses = `${e.responses} ${e.responses === 1 ? "response" : "responses"}`
+  if (!e.known || e.events === e.responses) return responses
+  return `${responses} · ${e.events} answer ${e.events === 1 ? "set" : "sets"}`
+}
+
 function Facts({
   id,
   status,
-  counts,
   evidence,
   lastCheckedAt,
   lessons,
@@ -567,7 +572,6 @@ function Facts({
 }: {
   id?: string
   status: ExpectationStatus
-  counts: LevelCounts
   evidence: Evidence
   lastCheckedAt: number | null
   lessons: CoveringLesson[]
@@ -591,13 +595,13 @@ function Facts({
           </span>
         )}
         <span>Last checked {formatDay(lastCheckedAt)}</span>
+        <span className="text-muted-foreground">{describeEvidenceCount(evidence)}</span>
       </>
     )
   }
   return (
     <div id={id} className="flex flex-col gap-2 text-sm text-foreground">
       <p className="flex flex-wrap items-center gap-x-3 gap-y-1">{summary}</p>
-      {status.state === "checked" && <EvidenceCapsule bands={counts} evidence={evidence} size="sm" className="max-w-xs" />}
       {status.hedge && <p className="text-xs text-muted-foreground">{status.hedge}</p>}
       {lessons.length > 0 && <LessonLinks lessons={lessons} ctx={ctx} />}
     </div>
