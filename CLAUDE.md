@@ -202,6 +202,10 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - Primitives live (and will grow) in **`src/components/ui/`** (seed: `sheet.tsx`;
   a modal that isn't a Radix dialog uses `ui/overlay.tsx`).
   Phase B migrates this to **`src/design-system/`** as the canonical location.
+- **Bars are CSS:** a flex row of segments inside a `rounded-full
+  overflow-hidden` track, or square-ended blocks. Never an SVG stretched with
+  `preserveAspectRatio="none"`: it squashes round ends into points (the old
+  evidence capsule on Progress, removed for exactly that).
 - Feature components live in `src/components/` (e.g. `assessment-modal.tsx`,
   `class-dashboard.tsx`, `lessons-library.tsx`).
 - **The assessment modal and sticky footer are the highest-risk reusable pieces** —
