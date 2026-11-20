@@ -4,6 +4,7 @@ import type React from "react"
 import { useEffect, useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import { Search, X, Plus, Compass, Lightbulb } from "lucide-react"
+import Overlay from "@/components/ui/overlay"
 import ResourceCard from "./resource-card"
 import type { Filters } from "@/lib/types"
 import { useBookmarks } from "@/lib/bookmarks-context"
@@ -276,11 +277,12 @@ export default function ResultsSection({
       </div>
 
       {showSubmitDialog && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="relative mx-4 w-full max-w-md rounded-2xl bg-card p-6 shadow-2xl">
+        <Overlay onClose={() => setShowSubmitDialog(false)} closeOnBackdrop>
+          <div className="relative w-full max-w-md max-h-dialog overflow-y-auto rounded-2xl bg-card p-6 shadow-2xl">
             <button
               onClick={() => setShowSubmitDialog(false)}
-              className="absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-muted"
+              className="absolute right-2 top-2 flex size-10 items-center justify-center rounded-full transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label="Close"
             >
               <X size={20} className="text-muted-foreground" />
             </button>
@@ -291,7 +293,7 @@ export default function ResultsSection({
               </p>
             </div>
           </div>
-        </div>
+        </Overlay>
       )}
     </div>
   )

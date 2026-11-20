@@ -199,7 +199,8 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 
 ### Component patterns
 
-- Primitives live (and will grow) in **`src/components/ui/`** (seed: `sheet.tsx`).
+- Primitives live (and will grow) in **`src/components/ui/`** (seed: `sheet.tsx`;
+  a modal that isn't a Radix dialog uses `ui/overlay.tsx`).
   Phase B migrates this to **`src/design-system/`** as the canonical location.
 - Feature components live in `src/components/` (e.g. `assessment-modal.tsx`,
   `class-dashboard.tsx`, `lessons-library.tsx`).
@@ -507,8 +508,14 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - **Mobile sticky footers** (the planner's Next / Generate bar) are `sticky bottom-0`
   inside the space's scroll container, above the tab bar. Test on real viewport
   heights (375×667 is the tight one), not just desktop devtools.
-- **`fixed inset-0` overlays** (assessment modal, drawers): currently not
-  viewport-safe on mobile. Phase C will switch to `dvh` + `safe-area-inset`.
+- **Overlays must cover the nav and fit the phone.** Each space renders in a
+  `z-10` layer under the `z-50` top nav, so a `fixed` overlay drawn inside a
+  space sits *under* the nav and tab bar (Quick Check's header was hidden this
+  way). Hand-rolled dialogs use `ui/overlay.tsx` (portals to `<body>`, pads the
+  safe areas with `overlay-pad`, Escape closes, `role="dialog"`); Radix
+  dialogs portal already. Panels use `max-h-dialog` (a `dvh` height that
+  follows the address bar; `vh` doesn't) with their own scroll. The bottom
+  sheet already does this. Not done yet: focus trapping in `ui/overlay.tsx`.
 - **Performance:** very few `React.memo` / `useMemo` callsites today
   (~5 files). Hot re-render paths sit in `assessment-modal.tsx` and
   `class-dashboard.tsx`.

@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useId, useState } from "react"
+import Overlay from "@/components/ui/overlay"
 import { X, Printer, Link2, Check, ExternalLink, GraduationCap } from "lucide-react"
 import type { LessonArtifact } from "@/lib/lesson-metadata"
 import { openPrintWindow, escapeHtml, nl2br, PRINT_ON_LOAD_SCRIPT } from "@/lib/print-html"
@@ -39,6 +40,7 @@ const PRINT_STRINGS = {
 } as const
 
 export default function ArtifactOrganizerModal({ artifact, lessonTitle, language = "English", onClose, onSave }: Props) {
+  const titleId = useId()
   const isFrench = language === "French"
   const initial = artifact.organizer?.fields ?? {}
   const [title, setTitle] = useState(initial.title ?? artifact.name)
@@ -149,13 +151,13 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="bg-card rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <Overlay onClose={handleSaveAndClose} labelledBy={titleId}>
+      <div className="bg-card rounded-xl shadow-xl w-full max-w-2xl max-h-dialog overflow-y-auto">
         <div className="flex items-center justify-between p-4 border-b border-border">
-          <h3 className="text-lg font-semibold text-foreground">Editable Graphic Organizer</h3>
+          <h3 id={titleId} className="text-lg font-semibold text-foreground">Editable Graphic Organizer</h3>
           <button
             onClick={handleSaveAndClose}
-            className="p-1.5 hover:bg-muted rounded-lg transition-colors"
+            className="hover:bg-muted flex size-10 flex-shrink-0 items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label="Close organizer"
           >
             <X size={18} className="text-muted-foreground" />
@@ -261,7 +263,7 @@ export default function ArtifactOrganizerModal({ artifact, lessonTitle, language
           </button>
         </div>
       </div>
-    </div>
+    </Overlay>
   )
 }
 

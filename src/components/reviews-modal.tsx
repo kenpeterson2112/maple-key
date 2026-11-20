@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useId, useState } from "react"
+import Overlay from "@/components/ui/overlay"
 import { X, MessageSquare, Star, Send, CheckCircle } from "lucide-react"
 import { getReviewsForResource, addReview, type Review } from "@/lib/reviews-data"
 
@@ -21,6 +22,7 @@ const USAGE_TAGS = [
 ]
 
 export default function ReviewsModal({ isOpen, onClose, resourceId, resourceTitle }: ReviewsModalProps) {
+  const titleId = useId()
   const [showForm, setShowForm] = useState(false)
   const [rating, setRating] = useState(0)
   const [hoveredRating, setHoveredRating] = useState(0)
@@ -69,18 +71,18 @@ export default function ReviewsModal({ isOpen, onClose, resourceId, resourceTitl
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-[200] flex items-center justify-center p-4">
-      <div className="bg-card rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <Overlay onClose={onClose} labelledBy={titleId}>
+      <div className="bg-card rounded-2xl shadow-2xl w-full max-w-2xl max-h-dialog overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-card border-b border-border p-6 flex items-start justify-between rounded-t-2xl">
           <div>
-            <h2 className="text-2xl font-bold text-foreground">Reviews</h2>
+            <h2 id={titleId} className="text-2xl font-bold text-foreground">Reviews</h2>
             <p className="text-sm text-muted-foreground mt-1 line-clamp-1">{resourceTitle}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-muted rounded-lg transition-colors"
-            aria-label="Close modal"
+            className="hover:bg-muted flex size-10 flex-shrink-0 items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label="Close"
           >
             <X className="w-5 h-5 text-muted-foreground" />
           </button>
@@ -252,6 +254,6 @@ export default function ReviewsModal({ isOpen, onClose, resourceId, resourceTitl
           )}
         </div>
       </div>
-    </div>
+    </Overlay>
   )
 }

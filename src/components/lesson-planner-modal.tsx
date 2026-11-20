@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useMemo } from "react"
+import Overlay from "@/components/ui/overlay"
 import {
   X,
   Loader2,
@@ -934,19 +935,18 @@ export default function LessonPlannerModal({
       />
 
       {showFeedbackDialog && (
-        <div className="fixed inset-0 z-[300] flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setShowFeedbackDialog(false)} />
-          <div className="relative bg-card rounded-2xl shadow-2xl p-6 max-w-md mx-4">
+        <Overlay onClose={() => setShowFeedbackDialog(false)} labelledBy="planner-feedback-title" closeOnBackdrop z="z-[300]">
+          <div className="relative bg-card rounded-2xl shadow-2xl p-6 max-w-md max-h-dialog overflow-y-auto">
             <button
               onClick={() => setShowFeedbackDialog(false)}
-              className="absolute top-4 right-4 p-1 hover:bg-muted rounded-full transition-colors"
-              aria-label="Close dialog"
+              className="absolute top-2 right-2 flex size-10 items-center justify-center rounded-full transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label="Close"
             >
               <X size={20} className="text-muted-foreground" />
             </button>
             <div className="text-center pt-2">
               <MessageSquareText size={40} className="text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-foreground mb-3">Feedback Form</h3>
+              <h3 id="planner-feedback-title" className="text-lg font-semibold text-foreground mb-3">Feedback Form</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Feedback form under construction. Please mail us at{" "}
                 <a href="mailto:feedback@maplekey.ca" className="text-primary hover:underline font-medium">
@@ -955,7 +955,7 @@ export default function LessonPlannerModal({
               </p>
             </div>
           </div>
-        </div>
+        </Overlay>
       )}
     </div>
   )

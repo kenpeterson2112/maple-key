@@ -1,5 +1,6 @@
 "use client"
 
+import { createPortal } from "react-dom"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { X, CheckCircle, XCircle, HelpCircle, ClipboardCheck, Loader2, Info, BarChart3 } from "lucide-react"
 import { describeCode } from "@/lib/curriculum-codes"
@@ -233,14 +234,14 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
     setPhase("administer")
   }
 
-  return (
+  const view = (
     <div
       className={
         asSpace
           ? // Fills the space under the top nav, which stays visible (it pads the
             // top safe area); a fixed overlay here hid its own header under the nav.
             "absolute inset-0 z-[60] bg-card flex flex-col overflow-hidden"
-          : "fixed inset-0 z-[60] flex items-center justify-center p-4"
+          : "fixed inset-0 z-[60] flex items-center justify-center overlay-pad"
       }
     >
       {!asSpace && <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />}
@@ -248,7 +249,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         className={
           asSpace
             ? "w-full h-full flex flex-col overflow-hidden"
-            : "relative bg-card rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
+            : "relative bg-card rounded-2xl shadow-2xl w-full max-w-2xl max-h-dialog flex flex-col overflow-hidden"
         }
       >
         {/* Header */}
@@ -541,6 +542,9 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
       </div>
     </div>
   )
+  // As a popup (from the planner) it renders into <body>, so it covers the top
+  // nav and tab bar; as a space it fills the area under the nav.
+  return asSpace ? view : createPortal(view, document.body)
 }
 
 function CodeHeader({ code, subject, grade }: { code: string | null; subject: string; grade?: string }) {
