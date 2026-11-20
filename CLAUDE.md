@@ -205,6 +205,18 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `class-dashboard.tsx`, `lessons-library.tsx`).
 - **The assessment modal and sticky footer are the highest-risk reusable pieces** —
   changes here ripple through the Acorn remote.
+- **Quick Check** (`assessment-modal.tsx`, results in `class-dashboard.tsx`)
+  follows the same rules as Progress: results keep the curriculum's own order
+  (never sorted by how badly a class did), flag a gap with the shared rule in
+  the same words ("7 of 10 responses at Level 1–2"), and label levels in the
+  achievement chart's words (`LEVEL_META`: "Level 1 (limited)" … "Level 4
+  (high degree)"; readiness pills from `READINESS_TOKENS`). As a space it
+  fills the area under the top nav (`absolute inset-0`, not `fixed`: a fixed
+  overlay hid its own header under the nav), pads the bottom safe area (the
+  tab bar is hidden), and its footer puts the count above one row of 44px
+  buttons on phones. It has no address, so
+  closing it returns to the space in the address (`closeQuickCheck` in
+  `App.tsx`), e.g. back to the Progress row it was opened from.
 - **The top nav is the class context** (`top-nav.tsx`, `context-strip.tsx`).
   It is **exactly two bars**; don't add a third. Suggestions and materials
   live on the landing page as widgets, not in the header.

@@ -237,7 +237,9 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
     <div
       className={
         asSpace
-          ? "fixed inset-0 z-[60] bg-card flex flex-col overflow-hidden"
+          ? // Fills the space under the top nav, which stays visible (it pads the
+            // top safe area); a fixed overlay here hid its own header under the nav.
+            "absolute inset-0 z-[60] bg-card flex flex-col overflow-hidden"
           : "fixed inset-0 z-[60] flex items-center justify-center p-4"
       }
     >
@@ -250,7 +252,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         }
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-muted">
+        <div className="flex items-center justify-between px-4 py-4 sm:px-6 border-b border-border bg-muted">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-pop-tint flex items-center justify-center">
               <ClipboardCheck size={18} className="text-pop-strong" />
@@ -260,8 +262,12 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
               <p className="text-xs text-muted-foreground leading-tight">{lesson.title}</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-border rounded-lg transition-colors text-muted-foreground">
-            <X size={18} />
+          <button
+            onClick={onClose}
+            aria-label="Close Quick Check"
+            className="flex size-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
 
@@ -276,7 +282,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
         </div>
 
         {/* Body */}
-        <div ref={scrollBodyRef} className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
+        <div ref={scrollBodyRef} className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 space-y-5">
           {phase === "loading" && (
             <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
               <Loader2 size={28} className="animate-spin text-pop" />
@@ -397,16 +403,19 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                 </div>
                 <DevSeedControl scope={{ kind: "lesson", lesson }} onChanged={() => setRecordedCount((n) => n + 1)} />
               </div>
-              <div className="inline-flex rounded-lg border border-border bg-card p-0.5 text-xs font-medium">
+              {/* Selected options are teal (CLAUDE.md: which colour, by job). */}
+              <div className="inline-flex rounded-lg border border-border-strong bg-card p-0.5 text-xs font-semibold">
                 <button
                   onClick={() => setDashView("lesson")}
-                  className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "lesson" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}
+                  aria-pressed={dashView === "lesson"}
+                  className={`min-h-9 px-3 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${dashView === "lesson" ? "bg-secondary-tint text-secondary-strong" : "text-muted-foreground hover:bg-muted"}`}
                 >
                   This lesson
                 </button>
                 <button
                   onClick={() => setDashView("all")}
-                  className={`px-3 py-1.5 rounded-md transition-colors ${dashView === "all" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}
+                  aria-pressed={dashView === "all"}
+                  className={`min-h-9 px-3 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${dashView === "all" ? "bg-secondary-tint text-secondary-strong" : "text-muted-foreground hover:bg-muted"}`}
                 >
                   Grade {lesson.grade} {lesson.subject}
                 </button>
@@ -416,11 +425,11 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
           )}
         </div>
 
-        {/* Footer */}
-        <div className="border-t border-border bg-muted">
+        {/* Footer. Full screen, the tab bar is hidden, so it clears the home indicator. */}
+        <div className="border-t border-border bg-muted" style={asSpace ? SAFE_BOTTOM : undefined}>
           {/* Group response picker — expands when "Group" is active */}
           {phase === "administer" && showGroupPicker && (
-            <div className="px-6 pt-4 pb-2">
+            <div className="px-4 pt-4 pb-2 sm:px-6">
               <div className="rounded-xl border border-border bg-card p-3">
                 <p className="mb-2 text-xs font-semibold text-foreground">
                   How many students gave these same answers?
@@ -468,23 +477,24 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
             </div>
           )}
 
-          {/* Main footer row */}
-          <div className="flex items-center justify-between gap-3 px-6 py-4">
+          {/* Main footer row. Phones: the count on its own line, the buttons
+              sharing the row below it at a full 44px. */}
+          <div className="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
             {phase === "dashboard" ? (
               <>
                 <span className="text-sm text-muted-foreground">
                   {dashboardData ? `${dashboardData.attempts} ${dashboardData.attempts === 1 ? "response" : "responses"} recorded` : ""}
                 </span>
-                <div className="flex items-center gap-2">
+                <div className={FOOTER_BUTTONS}>
                   <button
                     onClick={onClose}
-                    className="rounded-xl border border-border px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-card"
+                    className="min-h-11 max-sm:flex-auto whitespace-nowrap max-sm:px-3 rounded-xl border border-border-strong px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-card"
                   >
                     Done
                   </button>
                   <button
                     onClick={goAdminister}
-                    className="rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                    className="min-h-11 max-sm:flex-auto whitespace-nowrap max-sm:px-3 rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
                   >
                     Record another student
                   </button>
@@ -496,21 +506,22 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   {answeredCount} of {totalCount} answered
                   {recordedCount > 0 && ` · ${recordedCount} ${recordedCount === 1 ? "response" : "responses"} recorded`}
                 </span>
-                <div className="flex items-center gap-2">
+                <div className={FOOTER_BUTTONS}>
                   <button
                     onClick={() => setPhase("dashboard")}
                     disabled={phase === "loading"}
-                    className="rounded-xl border border-border px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-card disabled:opacity-50"
+                    className="min-h-11 max-sm:flex-auto whitespace-nowrap max-sm:px-3 rounded-xl border border-border-strong px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-card disabled:opacity-50"
                   >
                     View results
                   </button>
                   <button
                     onClick={() => { setShowGroupPicker((v) => !v); resetGroupPicker() }}
                     disabled={!canRecord}
-                    className={`rounded-xl border px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                    aria-pressed={showGroupPicker}
+                    className={`min-h-11 max-sm:flex-auto whitespace-nowrap max-sm:px-3 rounded-xl border px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
                       showGroupPicker
                         ? "border-foreground bg-foreground text-background"
-                        : "border-border text-muted-foreground hover:bg-card"
+                        : "border-border-strong text-foreground hover:bg-card"
                     }`}
                   >
                     Group
@@ -518,7 +529,7 @@ export default function AssessmentModal({ isOpen, onClose, lesson, asSpace = fal
                   <button
                     onClick={() => handleRecord(1)}
                     disabled={!canRecord}
-                    className="rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
+                    className="min-h-11 max-sm:flex-auto whitespace-nowrap max-sm:px-3 rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Record &amp; next
                   </button>
@@ -717,3 +728,8 @@ function SelfRatingCard({
     </div>
   )
 }
+
+// As a space, Quick Check runs with the tab bar hidden, so its footer pads for
+// the home indicator itself.
+const SAFE_BOTTOM = { paddingBottom: "env(safe-area-inset-bottom)" } as const
+const FOOTER_BUTTONS = "flex items-center gap-2 max-sm:w-full"
