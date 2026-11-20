@@ -337,9 +337,15 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `/B2.3` deep-link to a strand, an overall (opened) or a specific (marked);
   scrolling replaces the address with the strand in view, and every action
   first points the address at its row, so Back returns there. Overalls start
-  collapsed except the frontier and any with a gap. `PROGRESS_SPEC.md` holds
-  the rest of the plan (Lesson History moving to Lessons); read it before
-  touching Lessons' Quick Check summaries.
+  collapsed except the frontier and any with a gap. `PROGRESS_SPEC.md` is the
+  design record (all six PRs shipped).
+- **Lessons carries the Quick Check history** (`lessons-library.tsx`, from
+  `src/lib/tally-summary.ts`, unit-tested). Each card shows its last check,
+  "N responses · M answer sets" (responses are students, `attempts`; answer
+  sets are Record presses, `events`; never call either "checks"), a four-level
+  bar and the readiness label. **Earlier Quick Checks** lists checks whose
+  lesson has left the 20-entry log, by their snapshot title. Both follow the
+  nav's subject and grade and update live.
 - **Phone shell (below `md`).**
   - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`) with a one-line progress row under it once a subject is chosen, the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The header's class chip opens a bottom sheet with the Subject/Grade selects and an "Open Progress" button. The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
   - **Tab bar:** it hides while the on-screen keyboard is up and during Quick Check.

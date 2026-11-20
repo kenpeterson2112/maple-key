@@ -1,8 +1,7 @@
 # PROGRESS_SPEC.md — the Progress page (was "Track")
 
-**Status:** agreed design, **not built yet** (2026-11-19; revised 2026-11-20: no prescriptive moves, open questions settled). Build it in the PRs
-listed under [Delivery plan](#delivery-plan), one at a time. When a part ships,
-move its rules into CLAUDE.md and mark it done here.
+**Status:** **built** (PRs 1–6 shipped 2026-11-20). The rules now live in
+CLAUDE.md; this file stays as the design record and the reasoning behind it.
 
 ## Why
 
@@ -331,9 +330,9 @@ browser at desktop and 375×667, light and dark.
    the phone row and slim sheet. The bar's scrollspy highlight
    (`aria-current="location"` on the strand in view) lands here too, since it
    needs the strand links; Progress already tracks the strand in view.
-5. **Lessons.** Quick Check summary per lesson, "Earlier Quick Checks", the
+5. ✅ **Lessons.** Quick Check summary per lesson, "Earlier Quick Checks", the
    responses-vs-checks label fix.
-6. **CLAUDE.md.** Fold the shipped rules in (the nav's second bar, phone shell,
+6. ✅ **CLAUDE.md.** Fold the shipped rules in (the nav's second bar, phone shell,
    the Progress page, the rules module) and retire this file's finished parts.
    Do this in each PR as it lands if that's easier.
 
