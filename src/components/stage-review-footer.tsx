@@ -15,13 +15,13 @@ export default function StageReviewFooter({ approved, onApprove, onEdit }: Props
   if (approved) {
     return (
       <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-        <span className="inline-flex items-center gap-1.5 rounded-lg bg-success-tint px-3 py-1.5 text-sm font-medium text-success">
+        <span className="inline-flex min-h-10 items-center gap-1.5 rounded-lg bg-success-tint px-3 text-sm font-medium text-success">
           <Check size={16} />
           Approved
         </span>
         <button
           onClick={onEdit}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-primary/30 px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:bg-primary-tint"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-border-strong bg-card px-4 text-sm font-semibold text-primary-strong transition-colors hover:bg-primary-tint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Pencil size={14} />
           Edit
@@ -34,14 +34,14 @@ export default function StageReviewFooter({ approved, onApprove, onEdit }: Props
     <div className="mt-4 flex items-center gap-2 border-t border-border pt-4">
       <button
         onClick={onApprove}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-success px-4 py-2 text-sm font-medium text-success-foreground transition-colors hover:bg-success/90"
+        className="inline-flex min-h-11 items-center gap-1.5 rounded-lg bg-success px-4 text-sm font-semibold text-success-foreground transition-colors hover:bg-success/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <Check size={16} />
         Approve
       </button>
       <button
         onClick={onEdit}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+        className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-border-strong bg-card px-4 text-sm font-semibold text-primary-strong transition-colors hover:bg-primary-tint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <Pencil size={16} />
         Edit

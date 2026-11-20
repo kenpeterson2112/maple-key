@@ -371,6 +371,8 @@ Tailwind v4 default 4px scale. Common steps used in this app:
 - **Phone shell (below `md`).**
   - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`) with a one-line progress row under it once a subject is chosen, the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The header's class chip opens a bottom sheet with the Subject/Grade selects and an "Open Progress" button. The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
   - **Tab bar:** it hides while the on-screen keyboard is up and during Quick Check.
+  - **Planner:** during setup the planner's page header (an icon alone on phones) is hidden below `md`, and the setup nav collapses to the Guided/All options toggle with "Step 3 of 5 · Format" beside it and a slim five-part bar whose finished parts jump back (`setup-steps.tsx`); the step chips are `md` and up. Body and footers pad 16px on phones. A saved lesson reopened from Lessons shows no "generated successfully" banner (`justGenerated`).
+  - **Touch targets:** controls a teacher taps in class are at least 40px tall (44 for the main ones), whatever they look like: pad the hit area rather than enlarge the visual (`-my-*` with `min-h-10`). WCAG's 24px is the floor, not the goal.
   - **Nav items:** desktop's pill toggle and the tab bar both read the four spaces from `src/lib/nav-items.ts`.
   - **Account:** the header avatar opens `account-sheet.tsx` (Settings, Classroom profile, Invite staff, Sign out). There is no hamburger menu.
   - **Safe areas:** with `viewport-fit=cover`, the header pads the top inset, the tab bar the bottom one, and the app root the sides.
