@@ -328,23 +328,31 @@ function ContextSelect({
   onChange: (value: string) => void
   color: string
 }) {
+  const current = options.find((o) => o.value === value)?.label ?? ""
   return (
     <label className="relative flex items-center">
       <span className="sr-only">{label}</span>
+      {/* The pill's own text is transparent and the value is drawn centred on
+          top. Centring the select's text instead (text-align-last) also
+          centres the options in Chrome's open menu, which reads badly. */}
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        // Equal padding both sides (the chevron sits in the right-hand one), so
-        // the value reads centred in the pill.
-        className="h-10 cursor-pointer appearance-none rounded-full bg-card px-9 text-center text-sm font-bold shadow-sm focus-visible:outline-none keyboard:focus-visible:ring-2 keyboard:focus-visible:ring-ring"
-        style={{ color, textAlignLast: "center" }}
+        className="h-10 cursor-pointer appearance-none rounded-full bg-card px-9 text-sm font-bold text-transparent shadow-sm focus-visible:outline-none keyboard:focus-visible:ring-2 keyboard:focus-visible:ring-ring"
       >
         {options.map((o) => (
-          <option key={o.value || "all"} value={o.value} className="text-foreground">
+          <option key={o.value || "all"} value={o.value} className="text-left font-normal text-foreground">
             {o.label}
           </option>
         ))}
       </select>
+      <span
+        className="pointer-events-none absolute inset-0 flex items-center justify-center truncate px-9 text-sm font-bold"
+        style={{ color }}
+        aria-hidden="true"
+      >
+        {current}
+      </span>
       <ChevronDown size={14} className="pointer-events-none absolute right-3" style={{ color }} aria-hidden="true" />
     </label>
   )
