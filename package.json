@@ -10,7 +10,8 @@
     "check:contrast": "node scripts/check-contrast.mjs",
     "preview": "vite preview",
     "test": "node --experimental-strip-types --no-warnings --import ./scripts/ts-resolve.mjs --test \"src/**/*.test.ts\"",
-    "validate:schema": "python3 scripts/check-schema-sync.py && python3 scripts/validate-resources.py"
+    "validate:schema": "python3 scripts/check-schema-sync.py && python3 scripts/validate-resources.py",
+    "coverage:gaps": "python3 scripts/coverage-gaps.py"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.9.0",
