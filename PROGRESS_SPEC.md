@@ -327,7 +327,7 @@ browser at desktop and 375×667, light and dark.
 3. ✅ **The Progress page and the rename.** `progress-space.tsx`, every state in
    the table above, rows, actions, deep links, scrollspy, phone layout, the
    `"insights"` → `"progress"` rename, copy changes, old files deleted.
-4. **The header bar and phone shell.** Strand links, the drop-down removed,
+4. ✅ **The header bar and phone shell.** Strand links, the drop-down removed,
    the phone row and slim sheet. The bar's scrollspy highlight
    (`aria-current="location"` on the strand in view) lands here too, since it
    needs the strand links; Progress already tracks the strand in view.

@@ -34,7 +34,11 @@ export default function App() {
   // between spaces. A deep link or a reload lands where the address says.
   const [activeSpace, setActiveSpace] = useState<Space>(() => parseSpaceRoute(window.location.hash).space)
   // Where on Progress to land: a strand, overall or specific code (#progress/B2.3).
-  const [progressAnchor, setProgressAnchor] = useState<string | undefined>(() => parseSpaceRoute(window.location.hash).anchor)
+  // `nonce` changes on every jump, so the same strand clicked twice still scrolls.
+  const [progressTarget, setProgressTarget] = useState<{ anchor?: string; nonce: number }>(() => ({
+    anchor: parseSpaceRoute(window.location.hash).anchor,
+    nonce: 0,
+  }))
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [showResourceTour, setShowResourceTour] = useState(false)
@@ -66,13 +70,17 @@ export default function App() {
 
   // Every space change goes through here. Spaces with an address push a history
   // entry; Quick Check has none, so it sits over the current entry.
+  // A jump within Progress (the header bar's strand links) replaces the entry,
+  // so Back doesn't step through strands.
   const navigate = (space: Space, anchor?: string) => {
+    const withinProgress = space === "progress" && activeSpace === "progress"
     setActiveSpace(space)
-    setProgressAnchor(space === "progress" ? anchor : undefined)
+    setProgressTarget((t) => ({ anchor: space === "progress" ? anchor : undefined, nonce: t.nonce + 1 }))
     if (!hasAddress(space)) return
     const hash = serializeSpaceRoute({ space, anchor })
-    if (hash === window.location.hash) return
-    window.history.pushState(null, "", hash || window.location.pathname + window.location.search)
+    const url = hash || window.location.pathname + window.location.search
+    if (withinProgress) window.history.replaceState(window.history.state, "", url)
+    else if (hash !== window.location.hash) window.history.pushState(null, "", url)
   }
 
   const goResources = () => navigate("resources")
@@ -101,7 +109,7 @@ export default function App() {
       const { space, anchor } = parseSpaceRoute(window.location.hash)
       if (space === "lessonplanner") resetPlanner(null)
       setActiveSpace(space)
-      setProgressAnchor(anchor)
+      setProgressTarget((t) => ({ anchor, nonce: t.nonce + 1 }))
     }
     window.addEventListener("popstate", onPopState)
     return () => window.removeEventListener("popstate", onPopState)
@@ -136,6 +144,7 @@ export default function App() {
         totalActiveFilters={totalActiveFilters}
         onOpenSettings={() => navigate("settings")}
         onOpenClassroomProfile={() => navigate("classroom")}
+        onOpenProgress={(anchor) => navigate("progress", anchor)}
         hideStrip={activeSpace === "assessment"}
       />
 
@@ -245,7 +254,7 @@ export default function App() {
 
               {activeSpace === "progress" && (
                 <ProgressSpace
-                  anchor={progressAnchor}
+                  target={progressTarget}
                   onPlanExpectation={(code, label) => {
                     globalFilters.setTopic(`${code} ${label}`)
                     openPlanner(null)

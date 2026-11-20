@@ -231,16 +231,14 @@ Tailwind v4 default 4px scale. Common steps used in this app:
        labelled with its code, name and taught count; names wrap to two lines
        rather than truncating. The blocks are coloured by `signal-*`
        readiness, with "now" at the overall the last lesson reached. The
-       class's "N/M taught" sits at the end beside the Details toggle, never
-       before the strands. Clicking the bar slides a drawer open: every
-       overall expectation in strand columns, then the gauge, totals, legend
-       and **Analyze** (to Progress) on one line pinned to the bottom. The
-       timeline and the columns share one grid (`strandGrid` in
-       `subject-data-bar.tsx`), so each strand's details sit straight under it.
-       An overall opens in place to fill its strand's column with its specific
-       expectations (wording, readiness, responses), with an X to go back.
-       Escape steps back one level (specifics, then the drawer); an outside
-       click or the bar closes it.
+       class's "N/M taught" and **Open Progress ›** sit at the end, never
+       before the strands. **Each strand is a link** (its own tab stop) into
+       Progress at that strand (`#progress/B`); the overall slivers inside are
+       too small to click (WCAG 2.5.8), so they're visual, with a tooltip.
+       There is no drop-down: detail lives on Progress. On Progress the strand
+       in view gets `aria-current="location"` and a highlight
+       (`src/lib/progress-location.ts`), and a strand link there scrolls
+       instead of adding a history entry.
        All from `buildClassProgress` (`src/lib/class-progress.ts`).
      - **Otherwise** (no subject, no grade, or no curriculum data): the
        subjects the teacher has worked on (subject and grade) as chips under
@@ -248,8 +246,9 @@ Tailwind v4 default 4px scale. Common steps used in this app:
        (`src/lib/recent-classes.ts`), each with a taught meter. Picking one
        sets the subject and grade. With no classes yet, one plain prompt to pick
        a subject and grade. No summary stats here: they repeat the widgets.
-     - **Phones** keep a one-line progress row that opens the class sheet; the
-       sheet carries the strand rows and "Open Progress".
+     - **Phones** keep a one-line progress row that opens Progress. The class
+       sheet is just the Subject and Grade selects, the province note and one
+       "Open Progress" button.
 
   **The landing page** is This week across the top (Mon–Fri of lessons
   planned and Quick Checks recorded, with previous / next week and a way back
@@ -339,11 +338,10 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   scrolling replaces the address with the strand in view, and every action
   first points the address at its row, so Back returns there. Overalls start
   collapsed except the frontier and any with a gap. `PROGRESS_SPEC.md` holds
-  the rest of the plan (the header bar's strand links replacing its drop-down,
-  Lesson History moving to Lessons); read it before touching the header's
-  second bar or the phone class sheet.
+  the rest of the plan (Lesson History moving to Lessons); read it before
+  touching Lessons' Quick Check summaries.
 - **Phone shell (below `md`).**
-  - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`) with a one-line progress row under it once a subject is chosen, the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The header's class chip opens a bottom sheet with the Subject/Grade selects and the full progress breakdown. The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
+  - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`) with a one-line progress row under it once a subject is chosen, the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The header's class chip opens a bottom sheet with the Subject/Grade selects and an "Open Progress" button. The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
   - **Tab bar:** it hides while the on-screen keyboard is up and during Quick Check.
   - **Nav items:** desktop's pill toggle and the tab bar both read the four spaces from `src/lib/nav-items.ts`.
   - **Account:** the header avatar opens `account-sheet.tsx` (Settings, Classroom profile, Invite staff, Sign out). There is no hamburger menu.
