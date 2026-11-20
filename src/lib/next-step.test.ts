@@ -34,13 +34,20 @@ test("an overall code on a lesson covers its specifics", () => {
   assert.equal(step.kind === "next" && step.code, "D1.1")
 })
 
-test("reteach when the last lesson's check is mostly Level 1–2", () => {
+test("a gap when the last lesson's check is mostly Level 1–2", () => {
   const step = buildNextStep(seq, [lesson("last", 2, ["C2.1", "C2.2"])], [tally(3, { "C2.1": L(5, 5, 4, 2), "C2.2": L(9, 6, 3, 2) })])
-  assert.equal(step.kind, "reteach")
-  if (step.kind !== "reteach") return
+  assert.equal(step.kind, "gap")
+  if (step.kind !== "gap") return
   assert.equal(step.code, "C2.2")
   assert.equal(step.lowShare, 0.75)
+  assert.equal(step.low, 15)
+  assert.equal(step.responses, 20)
   assert.equal(step.checkedAt, 3)
+})
+
+test("exactly half at Level 1–2 is not a gap (it still reads as on track)", () => {
+  const step = buildNextStep(seq, [lesson("last", 2, ["C2.1"])], [tally(3, { "C2.1": L(3, 2, 3, 2) })])
+  assert.equal(step.kind, "next")
 })
 
 test("a secure check moves on and is no longer unchecked", () => {
@@ -58,7 +65,7 @@ test("past the end of the sequence, go back to the earliest gap; all taught is d
   assert.equal(done.kind, "done")
 })
 
-test("a check from before the last lesson doesn't trigger reteach", () => {
+test("a check from before the last lesson doesn't count as a gap", () => {
   const step = buildNextStep(seq, [lesson("last", 5, ["C2.1"])], [tally(3, { "C2.1": L(9, 6, 3, 2) })])
   assert.equal(step.kind, "next")
   if (step.kind !== "next") return

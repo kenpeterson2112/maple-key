@@ -2,7 +2,7 @@
 
 import { useMemo } from "react"
 import useSWR from "swr"
-import { ArrowRight, ClipboardCheck, Lightbulb, RotateCcw, Search, Sparkles } from "lucide-react"
+import { AlertTriangle, ArrowRight, ClipboardCheck, Lightbulb, Search, Sparkles } from "lucide-react"
 import { useClassData } from "@/components/context-strip"
 import { SUBJECTS } from "@/components/hero-personalize"
 import { buildNextStep, type NextStep, type ScopeSequence } from "@/lib/next-step"
@@ -25,8 +25,9 @@ import { normalizeGrades } from "@/lib/utils"
 //
 // With a subject and grade picked, it's that class's next step. Otherwise it
 // looks across the teacher's classes (narrowed by whichever picker is set):
-// reteaches first, worst first, then each class's next lesson, most recently
-// active first, up to three.
+// gaps first, largest first, then each class's next lesson, most recently
+// active first, up to three. A gap is described, never prescribed: no
+// "re-teach" in any label (PROGRESS_SPEC.md, decision 8).
 
 export interface NextStepHandlers {
   /** Open the planner for this class, seeded with the expectation. */
@@ -86,10 +87,10 @@ function useNextSteps(subject: string, grade: string): { steps: ClassStep[]; one
       .filter((c) => (!subject || c.subject === subject) && (!grade || c.grade === grade) && hasSequence(c.subject, c.grade))
       .map((c) => stepFor(c.subject, c.grade, tallies, lessons))
       .filter((s) => s.step.kind !== "done" && s.step.kind !== "start")
-    const lowShare = (s: ClassStep) => (s.step.kind === "reteach" ? s.step.lowShare : 0)
-    const reteach = steps.filter((s) => s.step.kind === "reteach").sort((a, b) => lowShare(b) - lowShare(a))
-    const rest = steps.filter((s) => s.step.kind !== "reteach")
-    return { steps: [...reteach, ...rest].slice(0, MAX_ACROSS), oneClass: false }
+    const lowShare = (s: ClassStep) => (s.step.kind === "gap" ? s.step.lowShare : 0)
+    const gaps = steps.filter((s) => s.step.kind === "gap").sort((a, b) => lowShare(b) - lowShare(a))
+    const rest = steps.filter((s) => s.step.kind !== "gap")
+    return { steps: [...gaps, ...rest].slice(0, MAX_ACROSS), oneClass: false }
   }, [subject, grade, tallies, lessons])
 }
 
@@ -110,10 +111,10 @@ function subjectMeta(subject: string) {
 }
 
 interface Wording {
-  kind: "reteach" | "next"
+  kind: "gap" | "next"
   headline: string
   rationale: string
-  /** The main action's label (what used to be "Plan a reteach" / "Plan this lesson"). */
+  /** The main action's label. */
   planLabel: string
   /** The resources action's label (what used to be "See resources"). */
   resourcesLabel: string
@@ -128,12 +129,12 @@ function describe(c: ClassStep, label: string, n: number | null): Wording | null
     n === null ? "" : n === 0 ? ` No resources are tagged ${step.code} yet.` : ` ${n} ${n === 1 ? "resource is" : "resources are"} tagged ${step.code}.`
   const resourcesLabel = n ? `Browse ${n} ${step.code} resource${n === 1 ? "" : "s"}` : `Search for ${step.code} resources`
 
-  if (step.kind === "reteach") {
+  if (step.kind === "gap") {
     return {
-      kind: "reteach",
-      headline: `Revisit ${step.code} ${label} before moving on`,
-      rationale: `The Quick Check on ${day(step.checkedAt)} had ${Math.round(step.lowShare * 100)}% of responses at Level 1–2 on ${step.code}, from “${step.after.title || "your last lesson"}”.${tagged}`,
-      planLabel: `Plan a ${step.code} review lesson`,
+      kind: "gap",
+      headline: `A gap on ${step.code} ${label}`,
+      rationale: `In the Quick Check on ${day(step.checkedAt)}, ${step.low} of ${step.responses} responses were at Level 1–2 on ${step.code}, from “${step.after.title || "your last lesson"}”.${tagged}`,
+      planLabel: `Plan a ${step.code} lesson`,
       resourcesLabel,
     }
   }
@@ -185,14 +186,14 @@ export default function WhatsNextWidget({ subject, grade, handlers }: { subject:
         <Empty
           icon={<Sparkles size={18} aria-hidden="true" />}
           headline="Every expectation has been taught."
-          body="Track shows where the class is secure and where to revisit."
+          body="Track shows where the class is secure and where the gaps are."
           action={{ label: "See where the class is in Track", onClick: handlers.onOpenTrack }}
         />
       ) : steps.length === 0 ? (
         <Empty
           icon={<Sparkles size={18} aria-hidden="true" />}
           headline="Plan a lesson to get a next step."
-          body="Once a class has a lesson, Maple Key suggests what comes next in the curriculum, or what to revisit."
+          body="Once a class has a lesson, Maple Key suggests what comes next in the curriculum, and shows any gaps."
           action={{ label: "Plan a lesson", onClick: handlers.onPlanBlank }}
         />
       ) : (
@@ -228,12 +229,12 @@ function Suggestion({
   const quickCheck = step.kind === "next" && step.unchecked ? step.after : null
 
   return (
-    <li className={`flex gap-3 rounded-xl p-4 ${w.kind === "reteach" ? "bg-pop-tint" : "bg-muted"}`}>
+    <li className={`flex gap-3 rounded-xl p-4 ${w.kind === "gap" ? "bg-pop-tint" : "bg-muted"}`}>
       <span
-        className={`flex size-8 flex-shrink-0 items-center justify-center rounded-full ${w.kind === "reteach" ? "bg-card text-pop-strong" : "bg-card text-secondary-strong"}`}
+        className={`flex size-8 flex-shrink-0 items-center justify-center rounded-full ${w.kind === "gap" ? "bg-card text-pop-strong" : "bg-card text-secondary-strong"}`}
         aria-hidden="true"
       >
-        {w.kind === "reteach" ? <RotateCcw size={16} /> : <Lightbulb size={16} />}
+        {w.kind === "gap" ? <AlertTriangle size={16} /> : <Lightbulb size={16} />}
       </span>
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         {showClass && (

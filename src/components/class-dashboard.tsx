@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronRight, ChevronDown, Flag } from "lucide-react"
+import { ChevronRight, ChevronDown } from "lucide-react"
 import {
   describeCode,
   overallTitle,
@@ -144,13 +144,6 @@ function SpecificRow({ code, counts, subject, grade }: { code: string; counts: L
       <Bar counts={counts} />
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <LevelSummary counts={counts} />
-        <button
-          type="button"
-          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-secondary-strong transition-colors hover:bg-accent flex-shrink-0"
-        >
-          <Flag size={12} />
-          Flag for re-teaching
-        </button>
       </div>
     </div>
   )

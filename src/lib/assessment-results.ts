@@ -369,8 +369,9 @@ function totalOfCounts(counts: LevelCounts): number {
   return counts.level1 + counts.level2 + counts.level3 + counts.level4
 }
 
-// Fold one tally's contribution for `code` into `target`.
-function addEvidenceFrom(target: Evidence, tally: LessonTally, code: string, counts: LevelCounts): void {
+// Fold one tally's contribution for `code` into `target`. Shared with
+// class-progress.ts so every surface counts evidence the same way.
+export function addEvidenceFrom(target: Evidence, tally: LessonTally, code: string, counts: LevelCounts): void {
   const responses = totalOfCounts(counts)
   if (responses === 0) return
   target.responses += responses

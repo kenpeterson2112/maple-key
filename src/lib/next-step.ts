@@ -1,6 +1,8 @@
 // The "next step" for a class: the next logical lesson after what the teacher
 // most recently planned, read against a scope and sequence, unless that
-// lesson's Quick Check says to reteach first. Rules only, no model call: it
+// lesson's Quick Check shows a gap, which comes first. It describes the gap and
+// leaves the teacher to decide what to do (PROGRESS_SPEC.md, decision 8). The
+// gap rule is the shared one (expectation-status.ts). Rules only, no model call: it
 // runs on every render, costs nothing, and every claim in the rationale points
 // at data the teacher can see.
 //
@@ -8,6 +10,7 @@
 // tallies and the sequence. Feeds layer 3 of the top nav.
 
 import type { LessonTally, LevelCounts } from "./assessment-results"
+import { isGap } from "./expectation-status"
 import type { LessonMetadata } from "./lesson-metadata"
 
 /** An ordered teaching sequence for one subject and grade. */
@@ -41,18 +44,19 @@ export type NextStep =
       unchecked: boolean
     }
   | {
-      kind: "reteach"
+      /** A Quick Check since the last lesson shows a gap on one of its expectations. */
+      kind: "gap"
       code: string
       after: LessonMetadata
       /** Share of responses at Level 1–2 on `code`, 0–1. */
       lowShare: number
+      /** Responses at Level 1–2, and all responses, on `code`. */
+      low: number
+      responses: number
       /** When those results were last recorded. */
       checkedAt: number
     }
   | { kind: "done" }
-
-/** Reteach when at least this share of responses sit at Level 1–2. */
-export const RETEACH_SHARE = 0.5
 
 const total = (c: LevelCounts) => c.level1 + c.level2 + c.level3 + c.level4
 
@@ -87,8 +91,8 @@ export function buildNextStep(sequence: ScopeSequence, lessons: LessonMetadata[]
   // poor result may be exactly why the teacher planned it.
   const since = tallies.filter((t) => t.updatedAt >= last.timestamp)
 
-  // Reteach: the last lesson's own expectations, as checked since.
-  let worst: { code: string; lowShare: number; checkedAt: number } | null = null
+  // A gap: the last lesson's own expectations, as checked since.
+  let worst: { code: string; lowShare: number; low: number; responses: number; checkedAt: number } | null = null
   for (const code of lastSpecifics) {
     const sum = { level1: 0, level2: 0, level3: 0, level4: 0 }
     let checkedAt = 0
@@ -102,11 +106,12 @@ export function buildNextStep(sequence: ScopeSequence, lessons: LessonMetadata[]
       checkedAt = Math.max(checkedAt, t.updatedAt)
     }
     const n = total(sum)
-    if (n === 0) continue
-    const lowShare = (sum.level1 + sum.level2) / n
-    if (lowShare >= RETEACH_SHARE && (!worst || lowShare > worst.lowShare)) worst = { code, lowShare, checkedAt }
+    if (n === 0 || !isGap(sum)) continue
+    const low = sum.level1 + sum.level2
+    const lowShare = low / n
+    if (!worst || lowShare > worst.lowShare) worst = { code, lowShare, low, responses: n, checkedAt }
   }
-  if (worst) return { kind: "reteach", code: worst.code, after: last, lowShare: worst.lowShare, checkedAt: worst.checkedAt }
+  if (worst) return { kind: "gap", after: last, ...worst }
 
   // Next: the first untaught expectation after the furthest one the last
   // lesson reached; if the sequence is finished past that point, the earliest

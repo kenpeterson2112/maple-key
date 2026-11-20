@@ -9,14 +9,27 @@
 
 import { curriculumOutline, overallCodeOf } from "./curriculum-codes"
 import {
+  addEvidenceFrom,
   computeReadinessLevel,
+  emptyEvidence,
+  type Evidence,
   type LessonTally,
   type LevelCounts,
   type ReadinessLevel,
 } from "./assessment-results"
+import { describeExpectation, gapRank, type ExpectationStatus } from "./expectation-status"
 import type { LessonMetadata } from "./lesson-metadata"
 import { normalizeSubject } from "./subjects"
 import { normalizeGrades } from "./utils"
+
+/** A lesson that covered an expectation, from the lesson log or a Quick Check. */
+export interface CoveringLesson {
+  id: string
+  title: string
+  timestamp: number
+  /** False when only a Quick Check tally remembers it (the lesson log keeps 20): not openable. */
+  inLog: boolean
+}
 
 export interface SpecificProgress {
   code: string
@@ -26,6 +39,16 @@ export interface SpecificProgress {
   level: ReadinessLevel | null
   /** Quick Check responses recorded against it. */
   responses: number
+  /** Responses by level, summed across Quick Checks; zeros when unchecked. */
+  counts: LevelCounts
+  /** How many answer sets those responses rest on. */
+  evidence: Evidence
+  /** When a Quick Check last recorded it; null when never. */
+  lastCheckedAt: number | null
+  /** Lessons that covered it, newest first. */
+  lessons: CoveringLesson[]
+  /** State, gap and hedge, from the shared rules (expectation-status.ts). */
+  status: ExpectationStatus
 }
 
 export interface OverallProgress {
@@ -40,6 +63,13 @@ export interface OverallProgress {
   lowShare: number | null
   /** Each specific expectation under it, in curriculum order. */
   specifics: SpecificProgress[]
+  /** Responses by level across its specifics. */
+  counts: LevelCounts
+  evidence: Evidence
+  lastCheckedAt: number | null
+  /** Lessons that covered it or any of its specifics, newest first. */
+  lessons: CoveringLesson[]
+  status: ExpectationStatus
 }
 
 export interface StrandProgress {
@@ -59,7 +89,7 @@ export interface ClassProgress {
   checked: number
   /** The overall the class is working on: the first one started but not yet secure. */
   frontier: string | null
-  /** The checked overall with the largest share at Level 1–2, if any is struggling. */
+  /** The overall with the largest gap (expectation-status.ts), if any has one. */
   needsWork: OverallProgress | null
   lessonCount: number
   lastCheckAt: number | null
@@ -94,6 +124,17 @@ function add(a: LevelCounts, b: LevelCounts): void {
 }
 
 const total = (c: LevelCounts) => c.level1 + c.level2 + c.level3 + c.level4
+const zero = (): LevelCounts => ({ level1: 0, level2: 0, level3: 0, level4: 0 })
+
+function mergeEvidence(target: Evidence, src: Evidence): void {
+  target.responses += src.responses
+  target.events += src.events
+  if (!src.known) target.known = false
+}
+
+function newestFirst(list: Iterable<CoveringLesson>): CoveringLesson[] {
+  return [...list].sort((a, b) => b.timestamp - a.timestamp)
+}
 
 export function buildClassProgress(
   subject: string,
@@ -110,13 +151,34 @@ export function buildClassProgress(
 
   const taught = new Set<string>()
   const counts: Record<string, LevelCounts> = {}
-  for (const l of myLessons) for (const c of l.curriculumCodesCovered ?? []) taught.add(c)
+  const evidence: Record<string, Evidence> = {}
+  const lastChecked: Record<string, number> = {}
+  // Covering lessons by code. A lesson in the log wins over a tally's snapshot.
+  const covering: Record<string, Map<string, CoveringLesson>> = {}
+  const cover = (code: string, l: CoveringLesson) => {
+    const m = (covering[code] ??= new Map())
+    if (!m.get(l.id)?.inLog) m.set(l.id, l)
+  }
+  const inLog = new Set(myLessons.map((l) => l.id))
+  for (const l of myLessons) {
+    for (const c of l.curriculumCodesCovered ?? []) {
+      taught.add(c)
+      cover(c, { id: l.id, title: l.title, timestamp: l.timestamp, inLog: true })
+    }
+  }
   for (const t of myTallies) {
-    for (const c of t.codes) taught.add(c)
+    const snapshot: CoveringLesson = { id: t.lessonId, title: t.title, timestamp: t.updatedAt, inLog: inLog.has(t.lessonId) }
+    for (const c of t.codes) {
+      taught.add(c)
+      if (!snapshot.inLog) cover(c, snapshot)
+    }
     for (const [c, lc] of Object.entries(t.byExpectation)) {
       if (total(lc) === 0) continue
       taught.add(c)
-      add((counts[c] ??= { level1: 0, level2: 0, level3: 0, level4: 0 }), lc)
+      add((counts[c] ??= zero()), lc)
+      addEvidenceFrom((evidence[c] ??= emptyEvidence()), t, c, lc)
+      lastChecked[c] = Math.max(lastChecked[c] ?? 0, t.updatedAt)
+      if (!snapshot.inLog) cover(c, snapshot)
     }
   }
 
@@ -125,33 +187,57 @@ export function buildClassProgress(
   for (const s of outline) {
     const overalls: OverallProgress[] = s.overalls
       .filter((o) => o.specifics.length > 0)
-      .map((o) => {
-        const sum = { level1: 0, level2: 0, level3: 0, level4: 0 }
+      .map((o): OverallProgress => {
+        const sum = zero()
+        const ev = emptyEvidence()
         let checked = 0
         for (const code of o.specifics) {
           if (counts[code]) {
             add(sum, counts[code])
+            mergeEvidence(ev, evidence[code])
             checked++
           }
         }
         const n = total(sum)
+        const specifics = o.specifics.map((code): SpecificProgress => {
+          const c = counts[code] ?? zero()
+          const e = evidence[code] ?? emptyEvidence()
+          const r = total(c)
+          return {
+            code,
+            taught: taught.has(code),
+            level: r > 0 ? computeReadinessLevel(c) : null,
+            responses: r,
+            counts: c,
+            evidence: e,
+            lastCheckedAt: lastChecked[code] ?? null,
+            lessons: newestFirst(covering[code]?.values() ?? []),
+            status: describeExpectation({ taught: taught.has(code), counts: c, evidence: e }),
+          }
+        })
+        const lessonsById = new Map<string, CoveringLesson>()
+        for (const l of [...(covering[o.code]?.values() ?? []), ...specifics.flatMap((sp) => sp.lessons)]) {
+          if (!lessonsById.get(l.id)?.inLog) lessonsById.set(l.id, l)
+        }
+        const taughtCount = o.specifics.filter((c) => taught.has(c)).length
+        const lastCheckedAt = specifics.reduce<number | null>(
+          (max, sp) => (sp.lastCheckedAt !== null && (max === null || sp.lastCheckedAt > max) ? sp.lastCheckedAt : max),
+          null,
+        )
         return {
           code: o.code,
           title: o.title,
           total: o.specifics.length,
-          taught: o.specifics.filter((c) => taught.has(c)).length,
+          taught: taughtCount,
           checked,
           level: n > 0 ? computeReadinessLevel(sum) : null,
           lowShare: n > 0 ? (sum.level1 + sum.level2) / n : null,
-          specifics: o.specifics.map((code) => {
-            const r = counts[code] ? total(counts[code]) : 0
-            return {
-              code,
-              taught: taught.has(code),
-              level: r > 0 ? computeReadinessLevel(counts[code]) : null,
-              responses: r,
-            }
-          }),
+          specifics,
+          counts: sum,
+          evidence: ev,
+          lastCheckedAt,
+          lessons: newestFirst(lessonsById.values()),
+          status: describeExpectation({ taught: taughtCount > 0, counts: sum, evidence: ev }),
         }
       })
     if (overalls.length === 0) {
@@ -177,9 +263,7 @@ export function buildClassProgress(
   // happen as teaching goes, with gaps, so the first gap isn't where the class is.
   const furthestTaught = all.filter((o) => o.taught > 0).pop()
   const frontier = reached?.code ?? furthestTaught?.code ?? all[0]?.code ?? null
-  const struggling = all
-    .filter((o) => o.lowShare !== null && (o.level === "poor" || o.level === "okay"))
-    .sort((a, b) => (b.lowShare ?? 0) - (a.lowShare ?? 0))
+  const struggling = all.filter((o) => o.status.gap).sort((a, b) => gapRank(b.status) - gapRank(a.status))
 
   return {
     strands,
@@ -223,9 +307,9 @@ export interface AttentionItem {
 }
 
 /**
- * The overall expectations classes are struggling with most, across every
- * class: checked, rolled up to "Needs Support" or "Developing", ranked by the
- * share of responses at Level 1–2. Feeds the landing page's "Needs attention".
+ * The overall expectations with the largest gaps, across every class: more
+ * than half the responses at Level 1–2 (expectation-status.ts), ranked by that
+ * share, discounted for thin evidence. Feeds the landing page's "Needs attention".
  */
 export function buildNeedsAttention(tallies: LessonTally[], lessons: LessonMetadata[], limit = 5): AttentionItem[] {
   const items: AttentionItem[] = []
@@ -234,9 +318,9 @@ export function buildNeedsAttention(tallies: LessonTally[], lessons: LessonMetad
     if (!progress) continue
     for (const s of progress.strands) {
       for (const o of s.overalls) {
-        if (o.lowShare !== null && (o.level === "poor" || o.level === "okay")) items.push({ subject, grade, overall: o })
+        if (o.status.gap) items.push({ subject, grade, overall: o })
       }
     }
   }
-  return items.sort((a, b) => (b.overall.lowShare ?? 0) - (a.overall.lowShare ?? 0)).slice(0, limit)
+  return items.sort((a, b) => gapRank(b.overall.status) - gapRank(a.overall.status)).slice(0, limit)
 }
