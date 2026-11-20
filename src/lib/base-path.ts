@@ -5,7 +5,8 @@
  * `BASE_URL` always has a trailing slash, so we trim it before joining
  * with paths that already start with "/".
  */
-const BASE = import.meta.env.BASE_URL ?? "/"
+// `?.`: outside Vite (node --test) there is no import.meta.env.
+const BASE = import.meta.env?.BASE_URL ?? "/"
 
 export const BASE_PATH = BASE.replace(/\/$/, "")
 

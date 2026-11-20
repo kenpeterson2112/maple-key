@@ -155,15 +155,17 @@ picks a move (decision 8):
 interface ExpectationStatus {
   state: "not-taught" | "taught" | "checked"
   level: ReadinessLevel | null  // colour only (signal-*); keep computeReadinessLevel
-  gap: boolean                  // checked, and Level 1–2 ≥ 50% of responses
+  gap: boolean                  // checked, and more than half the responses at Level 1–2
   lowShare: number | null       // share at Level 1–2
   evidence: EvidenceStrength
   hedge?: string                // "Based on 2 answer sets: check again before relying on it."
 }
 ```
 
-- **A gap is Level 1–2 ≥ 50%**, What's next's threshold today. One rule, no
-  bands: no "small group" middle tier, no "move on" verdict.
+- **A gap is more than half the responses at Level 1–2.** That's exactly where
+  `computeReadinessLevel` stops reading "good", so a gap is never drawn in an
+  on-track colour. (What's next used ≥ 50%; exactly half is no longer a gap.)
+  One rule, no bands: no "small group" middle tier, no "move on" verdict.
 - Progress rows, Needs attention, the bar's "needs work" and What's next's gap
   check all call it.
 - What's next keeps its own *window*: only checks since the last lesson count
@@ -315,10 +317,10 @@ One PR each, in order. Each must pass `pnpm typecheck`, `pnpm test`,
 `pnpm check:contrast`, `pnpm build` and the hex grep, and be checked in a
 browser at desktop and 375×667, light and dark.
 
-1. **Space addresses.** `space-route.ts` plus tests, `App.tsx` on it, Back and
+1. ✅ **Space addresses.** `space-route.ts` plus tests, `App.tsx` on it, Back and
    Forward between spaces, no collision with the standalone hashes. No visible
    UI change.
-2. **Data and rules.** Specifics, evidence and covering lessons in
+2. ✅ **Data and rules.** Specifics, evidence and covering lessons in
    `buildClassProgress`. `expectation-status.ts` plus tests. Needs attention,
    `needsWork` and What's next's gap check moved onto it, and What's next's
    "review lesson" wording replaced (decision 8).
@@ -364,7 +366,7 @@ browser at desktop and 375×667, light and dark.
 All settled with the product owner on 2026-11-20:
 
 1. **What counts as "re-teach"?** Nothing: the app doesn't prescribe moves
-   (decision 8). A *gap* is Level 1–2 ≥ 50%, and it's described, not acted on.
+   (decision 8). A *gap* is more than half at Level 1–2, and it's described, not acted on.
 2. **Default expansion:** frontier plus every overall with a gap; the rest
    collapsed.
 3. **"Run a Quick Check" with no covering lesson in the log:** omit the action.
