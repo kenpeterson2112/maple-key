@@ -312,7 +312,15 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   Province is in Settings and behind the nav's globe. The class context has **one store**,
   `src/lib/global-filters.ts` (province, grade, subject, strand, plus the
   session-only planner topic); never keep a second copy in a component or
-  `App.tsx`. Strand is a Search-only filter, picked in that page's header.
+  `App.tsx`. **Every space follows the top nav, always:** no space keeps its
+  own subject or grade or falls back to one (Track still falls back to the
+  first subject with data; `PROGRESS_SPEC.md` fixes it). Strand is a
+  Search-only filter, picked in that page's header.
+- **Track is being rebuilt as Progress.** `PROGRESS_SPEC.md` holds the agreed
+  design and the PR order (space addresses, specific-level data and one rules
+  module, the Progress page, the header bar's strand links replacing its
+  drop-down, Lesson History moving to Lessons). Read it before touching Track,
+  the header's second bar, the phone class sheet or `triage.ts`.
 - **Phone shell (below `md`).**
   - **Layout:** the app is one full-height flex column (`App.tsx`): a 56px header (`top-nav.tsx`) with a one-line progress row under it once a subject is chosen, the space, then the bottom tab bar (`bottom-tab-bar.tsx`). The header's class chip opens a bottom sheet with the Subject/Grade selects and the full progress breakdown. The tab bar is a real row, not a fixed overlay, so pages need no bottom padding and a `sticky bottom-0` footer inside a space lands just above it.
   - **Tab bar:** it hides while the on-screen keyboard is up and during Quick Check.
