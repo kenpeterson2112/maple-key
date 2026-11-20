@@ -512,10 +512,12 @@ Tailwind v4 default 4px scale. Common steps used in this app:
   `z-10` layer under the `z-50` top nav, so a `fixed` overlay drawn inside a
   space sits *under* the nav and tab bar (Quick Check's header was hidden this
   way). Hand-rolled dialogs use `ui/overlay.tsx` (portals to `<body>`, pads the
-  safe areas with `overlay-pad`, Escape closes, `role="dialog"`); Radix
-  dialogs portal already. Panels use `max-h-dialog` (a `dvh` height that
-  follows the address bar; `vh` doesn't) with their own scroll. The bottom
-  sheet already does this. Not done yet: focus trapping in `ui/overlay.tsx`.
+  safe areas with `overlay-pad`, Escape closes, `role="dialog"`, and keeps
+  focus inside with `useFocusTrap` from `src/lib/use-focus-trap.ts`: the
+  dialog takes focus on open, Tab wraps, focus returns to the opener); Radix
+  dialogs portal and trap already. Panels use `max-h-dialog` (a `dvh` height
+  that follows the address bar; `vh` doesn't) with their own scroll. The
+  bottom sheet already does this.
 - **Performance:** very few `React.memo` / `useMemo` callsites today
   (~5 files). Hot re-render paths sit in `assessment-modal.tsx` and
   `class-dashboard.tsx`.
