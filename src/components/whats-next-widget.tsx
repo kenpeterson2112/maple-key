@@ -1,7 +1,6 @@
 "use client"
 
 import { useMemo } from "react"
-import useSWR from "swr"
 import { AlertTriangle, ArrowRight, ClipboardCheck, Lightbulb, Search, Sparkles } from "lucide-react"
 import { useClassData } from "@/components/context-strip"
 import { SUBJECTS } from "@/components/hero-personalize"
@@ -12,10 +11,7 @@ import { recentClasses } from "@/lib/recent-classes"
 import { overallCodeOf, overallTitle } from "@/lib/curriculum-codes"
 import { useCurriculumText } from "@/lib/curriculum-text"
 import type { LessonMetadata } from "@/lib/lesson-metadata"
-import type { Resource } from "@/lib/types"
-import { withBasePath } from "@/lib/base-path"
-import { fetchJson } from "@/lib/fetch-json"
-import { normalizeGrades } from "@/lib/utils"
+import { useResourceCounter } from "@/lib/use-resource-counter"
 
 // The landing page's What's next widget: suggestions and next steps, each with
 // the reason for it and the way to act on it. It replaces the old third header
@@ -38,8 +34,8 @@ export interface NextStepHandlers {
   onQuickCheck: (lesson: LessonMetadata) => void
   /** Open the planner with nothing chosen (no class has a lesson yet). */
   onPlanBlank: () => void
-  /** Open Track (every expectation taught). */
-  onOpenTrack: () => void
+  /** Open Progress (every expectation taught). */
+  onOpenProgress: () => void
 }
 
 interface ClassStep {
@@ -52,23 +48,6 @@ interface ClassStep {
 const MAX_ACROSS = 3
 
 // ---- Data ----
-
-/** How many active resources a class has tagged with a code (or under it, for an overall). */
-function useResourceCounter() {
-  const { data } = useSWR<{ resources: Resource[] }>(withBasePath("/resources.json"), fetchJson, { revalidateOnFocus: false })
-  return useMemo(() => {
-    const resources = (data?.resources ?? []).filter((r) => !r.is_collection && !r.suppressed)
-    return (subject: string, grade: string, code: string): number | null => {
-      if (!data) return null
-      return resources.filter(
-        (r) =>
-          r.subject === subject &&
-          normalizeGrades(r.grade_level).includes(grade) &&
-          (r.curriculum_expectations ?? []).some((c) => c === code || c.startsWith(`${code}.`)),
-      ).length
-    }
-  }, [data])
-}
 
 function stepFor(subject: string, grade: string, tallies: Parameters<typeof buildNextStep>[2], lessons: LessonMetadata[]): ClassStep {
   const sequence = getScopeSequence(subject, grade)
@@ -186,8 +165,8 @@ export default function WhatsNextWidget({ subject, grade, handlers }: { subject:
         <Empty
           icon={<Sparkles size={18} aria-hidden="true" />}
           headline="Every expectation has been taught."
-          body="Track shows where the class is secure and where the gaps are."
-          action={{ label: "See where the class is in Track", onClick: handlers.onOpenTrack }}
+          body="Progress shows where the class is secure and where the gaps are."
+          action={{ label: "See the class's progress", onClick: handlers.onOpenProgress }}
         />
       ) : steps.length === 0 ? (
         <Empty

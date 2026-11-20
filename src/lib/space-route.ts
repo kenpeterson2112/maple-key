@@ -6,14 +6,14 @@
 // the hash moves into or out of one of them. None of these hashes may start
 // with those prefixes; the tests check it.
 
-/** Every space App.tsx can show. "insights" becomes "progress" in the rename (spec §4). */
+/** Every space App.tsx can show. */
 export type Space =
   | "home"
   | "resources"
   | "lessonplanner"
   | "assessment"
   | "lessons"
-  | "insights"
+  | "progress"
   | "settings"
   | "classroom"
 
@@ -29,7 +29,7 @@ const HASH_BY_SPACE: Partial<Record<Space, string>> = {
   home: "",
   lessonplanner: "plan",
   resources: "search",
-  insights: "progress",
+  progress: "progress",
   lessons: "lessons",
   settings: "settings",
   classroom: "classroom",
@@ -51,7 +51,7 @@ export function parseSpaceRoute(hash: string): SpaceRoute {
   const head = slash === -1 ? raw : raw.slice(0, slash)
   const space = SPACE_BY_HASH.get(head)
   if (!space) return { space: "home" }
-  if (space !== "insights" || slash === -1) return { space }
+  if (space !== "progress" || slash === -1) return { space }
   let anchor: string
   try {
     anchor = decodeURIComponent(raw.slice(slash + 1))
@@ -65,6 +65,6 @@ export function parseSpaceRoute(hash: string): SpaceRoute {
 export function serializeSpaceRoute(route: SpaceRoute): string {
   const hash = HASH_BY_SPACE[route.space]
   if (!hash) return ""
-  if (route.space === "insights" && route.anchor) return `#${hash}/${encodeURIComponent(route.anchor)}`
+  if (route.space === "progress" && route.anchor) return `#${hash}/${encodeURIComponent(route.anchor)}`
   return `#${hash}`
 }

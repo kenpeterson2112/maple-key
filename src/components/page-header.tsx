@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react"
 import type { ReactNode } from "react"
 
-// Shared top-of-page header for every nav space (Resources, Lessons, Insights,
+// Shared top-of-page header for every nav space (Resources, Lessons, Progress,
 // Lesson Planner): an icon-in-a-circle, the page title, and right-aligned
 // page-specific controls (children). The class context (subject, grade) is
 // chosen in the top nav, not here; province is in Settings.

@@ -7,7 +7,7 @@ const TABLE: [Space, string][] = [
   ["home", ""],
   ["lessonplanner", "#plan"],
   ["resources", "#search"],
-  ["insights", "#progress"],
+  ["progress", "#progress"],
   ["lessons", "#lessons"],
   ["settings", "#settings"],
   ["classroom", "#classroom"],
@@ -40,11 +40,11 @@ test("Quick Check has no address", () => {
 test("Progress carries a strand, overall or specific anchor", () => {
   for (const anchor of ["B", "B2", "B2.3"]) {
     const hash = `#progress/${anchor}`
-    assert.deepEqual(parseSpaceRoute(hash), { space: "insights", anchor })
-    assert.equal(serializeSpaceRoute({ space: "insights", anchor }), hash)
+    assert.deepEqual(parseSpaceRoute(hash), { space: "progress", anchor })
+    assert.equal(serializeSpaceRoute({ space: "progress", anchor }), hash)
   }
-  assert.deepEqual(parseSpaceRoute("#progress/"), { space: "insights" })
-  assert.deepEqual(parseSpaceRoute("#progress/%E0%A4%A"), { space: "insights" })
+  assert.deepEqual(parseSpaceRoute("#progress/"), { space: "progress" })
+  assert.deepEqual(parseSpaceRoute("#progress/%E0%A4%A"), { space: "progress" })
 })
 
 test("other spaces ignore an anchor", () => {
