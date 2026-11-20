@@ -5,7 +5,7 @@ import { withBasePath } from "@/lib/base-path"
 import { fetchJson } from "@/lib/fetch-json"
 import { normalizeGrades } from "@/lib/utils"
 
-// Shared by What's next and Progress, so "Browse 13 B1.2 resources" counts the
+// Shared by Where the class is and Progress, so "Browse 13 B1.2 resources" counts the
 // same everywhere.
 
 /** How many active resources a class has tagged with a code (or under it, for an overall). */

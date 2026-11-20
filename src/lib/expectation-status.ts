@@ -1,6 +1,6 @@
 // One description of where a class stands on an expectation (specific or
-// overall), shared by every surface: the header bar's "needs work", Needs
-// attention, What's next and Progress. So their numbers always agree.
+// overall), shared by every surface: the header bar's "Gap on …", Gaps,
+// Where the class is, and Progress. So their numbers always agree.
 //
 // It describes; it never prescribes (PROGRESS_SPEC.md, decision 8). There is
 // no "re-teach", "small group" or "move on" here: a teacher reads the gap and

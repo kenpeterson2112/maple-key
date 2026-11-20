@@ -232,7 +232,7 @@ export default function TopNav({
                         </>
                       )}
                       {progress.needsWork && (
-                        <span className="ml-auto font-semibold text-pop-strong">{progress.needsWork.code} needs work</span>
+                        <span className="ml-auto font-semibold text-pop-strong">Gap on {progress.needsWork.code}</span>
                       )}
                     </span>
                     <StrandTimeline progress={progress} showLabels={false} height="h-2" />

@@ -145,7 +145,7 @@ export default function SettingsPage({ onOpenClassroomProfile, onOpenTour }: Set
                 Province
               </label>
               <p className="mb-2 text-xs text-muted-foreground">
-                Sets the curriculum the expectations, progress and next steps follow.
+                Sets the curriculum the expectations and progress follow.
               </p>
               <select
                 id="settings-province"
